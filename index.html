@@ -22,7 +22,7 @@
 
         .header {
             position: fixed;
-            top: 20px;
+            top: 15px;
             right: 20px;
             z-index: 1000;
         }
@@ -31,14 +31,14 @@
             background: rgba(107, 114, 128, 0.9);
             color: #fff;
             border: none;
-            padding: 12px;
+            padding: 10px;
             border-radius: 50%;
-            font-size: 18px;
+            font-size: 16px;
             cursor: pointer;
             transition: all 0.3s;
             backdrop-filter: blur(10px);
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -51,40 +51,38 @@
 
         .hero {
             text-align: center;
-            padding: 80px 20px 60px;
+            padding: 60px 20px 50px;
             background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
         }
 
         .hero h1 {
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 900;
-            background: linear-gradient(45deg, #ff6b35, #4a7c59, #6b7280);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
+            color: #ff6b35;
+            margin-bottom: 25px;
         }
 
         .hero p {
-            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-            color: #b0b0b0;
-            max-width: 700px;
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            color: #fff;
+            max-width: 900px;
             margin: 0 auto 40px;
-            line-height: 1.6;
+            line-height: 1.4;
+            font-weight: bold;
         }
 
         .profile-section {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 40px 0;
+            margin: 30px 0;
         }
 
         .profile-image {
-            width: 150px;
-            height: 150px;
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
-            background: linear-gradient(45deg, #ff6b35, #4a7c59);
+            background: linear-gradient(45deg, #ff6b35, #ff8c5a);
             padding: 4px;
             margin-bottom: 20px;
         }
@@ -109,7 +107,7 @@
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
         }
 
@@ -121,29 +119,21 @@
         .projects-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 60px 20px;
+            padding: 50px 20px;
         }
 
         .section-title {
             text-align: center;
             font-size: clamp(2rem, 4vw, 2.8rem);
-            color: #ff6b35;
-            margin-bottom: 15px;
-            font-weight: 900;
+            color: #fff;
+            margin-bottom: 60px;
+            font-weight: bold;
             line-height: 1.2;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-            color: #4a7c59;
-            margin-bottom: 50px;
-            font-weight: 600;
         }
 
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
             margin-bottom: 80px;
         }
@@ -157,6 +147,7 @@
             border: 2px solid transparent;
             overflow: hidden;
             backdrop-filter: blur(10px);
+            text-align: center;
         }
 
         .project-card:hover {
@@ -190,10 +181,10 @@
         }
 
         .project-title {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: bold;
             color: var(--accent-color);
-            margin-bottom: 12px;
+            margin-bottom: 15px;
         }
 
         .project-description {
@@ -226,34 +217,49 @@
         .nutrition { --accent-color: #4a7c59; }
         .business { --accent-color: #6b7280; }
 
-        /* Chat Section */
+        /* Chat Section - Enhanced */
         .chat-section {
             background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-            padding: 80px 20px;
+            padding: 100px 20px;
             position: relative;
         }
 
         .chat-container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             text-align: center;
+        }
+
+        .chat-title {
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            color: #ff6b35;
+            margin-bottom: 30px;
+            font-weight: 900;
+            line-height: 1.2;
+        }
+
+        .chat-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            color: #b0b0b0;
+            margin-bottom: 50px;
+            font-weight: 500;
         }
 
         .chat-intro {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 30px;
-            margin-bottom: 40px;
+            gap: 40px;
+            margin-bottom: 50px;
             flex-wrap: wrap;
         }
 
         .chat-avatar {
-            width: 120px;
-            height: 120px;
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
             background: linear-gradient(45deg, #ff6b35, #4a7c59);
-            padding: 4px;
+            padding: 5px;
             position: relative;
         }
 
@@ -268,49 +274,50 @@
 
         .chat-bubble {
             background: rgba(255, 107, 53, 0.1);
-            border: 2px solid #ff6b35;
-            border-radius: 20px;
-            padding: 20px;
-            max-width: 400px;
+            border: 3px solid #ff6b35;
+            border-radius: 25px;
+            padding: 30px;
+            max-width: 500px;
             position: relative;
         }
 
         .chat-bubble::before {
             content: '';
             position: absolute;
-            left: -12px;
+            left: -15px;
             top: 50%;
             transform: translateY(-50%);
             width: 0;
             height: 0;
-            border-top: 10px solid transparent;
-            border-bottom: 10px solid transparent;
-            border-right: 12px solid #ff6b35;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid #ff6b35;
         }
 
         .chat-text {
             color: #fff;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             line-height: 1.5;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            font-weight: 500;
         }
 
         .chat-cta {
             background: linear-gradient(45deg, #ff6b35, #ff8c5a);
             color: #fff;
             border: none;
-            padding: 15px 35px;
-            border-radius: 30px;
-            font-size: 16px;
+            padding: 20px 45px;
+            border-radius: 35px;
+            font-size: 18px;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
         }
 
         .chat-cta:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(255, 107, 53, 0.4);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.5);
         }
 
         /* Chat Fullscreen */
@@ -506,7 +513,7 @@
             }
         }
 
-        /* Projects List Section */
+        /* Projects List Section - Updated */
         .projects-list-section {
             background: #000;
             padding: 80px 20px;
@@ -553,9 +560,13 @@
             flex: 1;
         }
 
-        .project-emoji {
-            font-size: 1.5rem;
-            margin-right: 15px;
+        .project-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 20px;
+            background-size: cover;
+            background-position: center;
         }
 
         .project-name {
@@ -698,7 +709,7 @@
             .header {
                 position: static;
                 text-align: center;
-                padding: 20px;
+                padding: 15px;
             }
 
             .projects-grid {
@@ -708,7 +719,7 @@
 
             .chat-intro {
                 flex-direction: column;
-                gap: 20px;
+                gap: 30px;
             }
 
             .chat-bubble {
@@ -727,6 +738,10 @@
 
             .project-info {
                 margin-bottom: 10px;
+            }
+
+            .project-info > div {
+                justify-content: center !important;
             }
 
             .social-links {
@@ -755,6 +770,10 @@
             .message-bubble {
                 max-width: 85%;
             }
+
+            .chat-title {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
@@ -781,8 +800,7 @@
     </div>
 
     <div class="projects-container" id="projects">
-        <h2 class="section-title">🚀 Trasforma la Tua Vita</h2>
-        <p class="section-subtitle">✨ Scopri Dove Puoi Migliorare Oggi</p>
+        <h2 class="section-title">Trasforma la Tua Vita - Scopri Dove Puoi Migliorare Oggi Stesso</h2>
         
         <div class="projects-grid">
             <div class="project-card fitness" onclick="openProject('https://www.personaltrainerverona.it')">
@@ -797,13 +815,6 @@
                 <div class="project-title">Tribù Studio</div>
                 <div class="project-description">Uno studio privato a Verona dove essere seguito in modo esclusivo</div>
                 <button class="project-btn">Visita Studio</button>
-            </div>
-
-            <div class="project-card nutrition" onclick="openProject('https://pastosano.netlify.app/')">
-                <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1546554664-1dcb322d46d7?w=400&h=300&fit=crop');"></div>
-                <div class="project-title">Pasto Sano</div>
-                <div class="project-description">Pasti sani e bilanciati per rimanere in forma senza perdere tempo a cucinare</div>
-                <button class="project-btn">Ordina Ora</button>
             </div>
 
             <div class="project-card nutrition" onclick="openProject('https://mealprep-planner.vercel.app/')">
@@ -829,8 +840,8 @@
 
             <div class="project-card fitness" onclick="openProject('https://tribucoach.vercel.app/')">
                 <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop');"></div>
-                <div class="project-title">Lifestyle Coach</div>
-                <div class="project-description">Coaching ibrido con supporto personalizzato per corpo e mente</div>
+                <div class="project-title">Lifestyle Fitness Coach</div>
+                <div class="project-description"><strong>La Soluzione Completa per il Tuo Cambiamento...perché dieta e allenamento non bastano!</strong></div>
                 <button class="project-btn">Inizia Percorso</button>
             </div>
         </div>
@@ -838,6 +849,9 @@
 
     <div class="chat-section">
         <div class="chat-container">
+            <h2 class="chat-title">Vuoi Sapere Come Trasformare Completamente la Tua Vita?</h2>
+            <p class="chat-subtitle">Scrivimi le tue domande, ti svelerò i segreti per il cambiamento totale!</p>
+            
             <div class="chat-intro">
                 <div class="chat-avatar">
                     <div class="chat-avatar-content"></div>
@@ -845,10 +859,10 @@
                 <div class="chat-bubble">
                     <div class="chat-text">
                         <strong>Ciao! Sono Andrea 👋</strong><br>
-                        Raccontami i tuoi obiettivi, ti guiderò verso la soluzione giusta per te!
+                        Dimmi quali sono i tuoi obiettivi e ti guiderò verso la trasformazione che desideri!
                     </div>
                     <button class="chat-cta" onclick="openChat()">
-                        <i class="fas fa-comments"></i> Inizia Conversazione
+                        <i class="fas fa-comments"></i> Inizia la Trasformazione
                     </button>
                 </div>
             </div>
@@ -890,13 +904,13 @@
 
     <div class="projects-list-section">
         <div class="projects-list-container">
-            <h2 class="projects-list-title">🎯 I Miei Progetti per Te</h2>
+            <h2 class="projects-list-title">Le Mie Aree di Competenza</h2>
             <p class="projects-list-subtitle">Scegli il percorso più adatto ai tuoi obiettivi</p>
             
             <div class="project-list-item" style="--item-color: #ff6b35;" onclick="openProject('https://www.personaltrainerverona.it')">
                 <div class="project-info">
                     <div style="display: flex; align-items: center;">
-                        <span class="project-emoji">💪</span>
+                        <div class="project-icon" style="background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop&crop=center');"></div>
                         <div>
                             <div class="project-name">Personal Training</div>
                             <div class="project-tagline">Trasforma il tuo corpo con allenamenti su misura</div>
@@ -909,7 +923,7 @@
             <div class="project-list-item" style="--item-color: #ff6b35;" onclick="openProject('https://www.tribustudio.it')">
                 <div class="project-info">
                     <div style="display: flex; align-items: center;">
-                        <span class="project-emoji">🏢</span>
+                        <div class="project-icon" style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop&crop=center');"></div>
                         <div>
                             <div class="project-name">Tribù Studio</div>
                             <div class="project-tagline">Allenamento esclusivo nel mio studio privato</div>
@@ -919,23 +933,10 @@
                 <button class="project-cta">Visita Studio</button>
             </div>
 
-            <div class="project-list-item" style="--item-color: #4a7c59;" onclick="openProject('https://pastosano.netlify.app/')">
-                <div class="project-info">
-                    <div style="display: flex; align-items: center;">
-                        <span class="project-emoji">🥗</span>
-                        <div>
-                            <div class="project-name">Pasto Sano</div>
-                            <div class="project-tagline">Mangia sano senza cucinare</div>
-                        </div>
-                    </div>
-                </div>
-                <button class="project-cta">Ordina</button>
-            </div>
-
             <div class="project-list-item" style="--item-color: #4a7c59;" onclick="openProject('https://mealprep-planner.vercel.app/')">
                 <div class="project-info">
                     <div style="display: flex; align-items: center;">
-                        <span class="project-emoji">📱</span>
+                        <div class="project-icon" style="background-image: url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=200&h=200&fit=crop&crop=center');"></div>
                         <div>
                             <div class="project-name">MealPrep Planner</div>
                             <div class="project-tagline">Organizza i tuoi pasti settimanali</div>
@@ -948,7 +949,7 @@
             <div class="project-list-item" style="--item-color: #6b7280;" onclick="openProject('https://upstarter-tf9x.vercel.app/')">
                 <div class="project-info">
                     <div style="display: flex; align-items: center;">
-                        <span class="project-emoji">🚀</span>
+                        <div class="project-icon" style="background-image: url('https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=200&h=200&fit=crop&crop=center');"></div>
                         <div>
                             <div class="project-name">Upstart</div>
                             <div class="project-tagline">Testa il potenziale della tua idea</div>
@@ -961,7 +962,7 @@
             <div class="project-list-item" style="--item-color: #6b7280;" onclick="openProject('https://github.com/Padu76/andrea-ebook-store')">
                 <div class="project-info">
                     <div style="display: flex; align-items: center;">
-                        <span class="project-emoji">📚</span>
+                        <div class="project-icon" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=center');"></div>
                         <div>
                             <div class="project-name">eBook Fitness</div>
                             <div class="project-tagline">Guide complete per il benessere</div>
@@ -974,7 +975,7 @@
             <div class="project-list-item" style="--item-color: #ff6b35;" onclick="openProject('https://tribucoach.vercel.app/')">
                 <div class="project-info">
                     <div style="display: flex; align-items: center;">
-                        <span class="project-emoji">🧠</span>
+                        <div class="project-icon" style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=200&h=200&fit=crop&crop=center');"></div>
                         <div>
                             <div class="project-name">Lifestyle Coach</div>
                             <div class="project-tagline">Mindset vincente per risultati duraturi</div>
@@ -1013,9 +1014,6 @@
     </div>
 
     <script>
-        // Claude API Configuration
-        const CLAUDE_API_URL = 'https://api.anthropic.com/v1/messages';
-        
         // Chat functions
         function openChat() {
             document.getElementById('chatFullscreen').style.display = 'flex';
@@ -1113,9 +1111,11 @@
             
             const responses = {
                 'personal training': 'Perfetto! Il personal training è la mia specialità. Posso aiutarti sia in presenza nel mio Tribù Studio a Verona, sia online. Quali sono i tuoi obiettivi specifici? Vuoi perdere peso, aumentare massa muscolare, o migliorare la forma fisica generale?',
-                'dieta': 'Ottima domanda! Per l\'alimentazione ho due soluzioni: Pasto Sano per pasti pronti e bilanciati, e MealPrep Planner per organizzare i tuoi pasti. Dipende se preferisci cucinare o avere tutto pronto. Qual è la tua situazione attuale con l\'alimentazione?',
+                'dieta': 'Ottima domanda! Per l\'alimentazione ho il MealPrep Planner per organizzare i tuoi pasti settimanali. È perfetto per chi vuole una strategia alimentare strutturata. Qual è la tua situazione attuale con l\'alimentazione?',
                 'business': 'Interessante! Con Upstart aiuto gli imprenditori a validare e sviluppare le loro idee. Hai già un\'idea di business o stai ancora cercando l\'ispirazione? Posso aiutarti con strategia, team building e validazione del mercato.',
-                'mindset': 'Il mindset è fondamentale! Senza la giusta mentalità, allenamento e dieta non bastano. Il mio Lifestyle Coach unisce supporto umano e tecnologia per aiutarti a sviluppare abitudini vincenti. Qual è la tua sfida più grande in questo momento?'
+                'mindset': 'Il mindset è fondamentale! Senza la giusta mentalità, allenamento e dieta non bastano. Il mio Lifestyle Coach ti aiuta a sviluppare abitudini vincenti e la mentalità per risultati duraturi. Qual è la tua sfida più grande in questo momento?',
+                'trasformazione': 'La trasformazione completa è esattamente quello che faccio! Non si tratta solo di fitness, ma di cambiare la tua vita a 360°: corpo, mente, alimentazione e obiettivi. Dimmi, in quale area senti di aver bisogno di più supporto?',
+                'cambiare vita': 'Cambiare vita è possibile! L\'importante è avere la strategia giusta e il supporto di chi ci è già passato. Io ti posso guidare in ogni aspetto: fisico, mentale e professionale. Da dove vuoi iniziare la tua trasformazione?'
             };
             
             const lowerMessage = userMessage.toLowerCase();
