@@ -54,7 +54,7 @@
 
         .hero {
             text-align: center;
-            padding: 60px 20px 50px;
+            padding: 40px 20px 30px; /* RIDOTTO PADDING */
             background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
         }
 
@@ -62,68 +62,23 @@
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 900;
             color: #ff6b35;
-            margin-bottom: 25px;
+            margin-bottom: 20px; /* RIDOTTO MARGINE */
         }
 
         .hero p {
             font-size: clamp(1.3rem, 3.5vw, 1.8rem);
             color: #fff;
             max-width: 900px;
-            margin: 0 auto 40px;
+            margin: 0 auto 30px; /* RIDOTTO MARGINE */
             line-height: 1.5;
             font-weight: bold;
-        }
-
-        /* 🌟 SOCIAL PROOF LIVE STATS */
-        .live-stats-hero {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin: 20px 0 30px;
-            flex-wrap: wrap;
-        }
-
-        .hero-stat {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 107, 53, 0.1);
-            border: 1px solid rgba(255, 107, 53, 0.3);
-            padding: 10px 20px;
-            border-radius: 25px;
-            backdrop-filter: blur(10px);
-        }
-
-        .hero-stat-number {
-            color: #ff6b35;
-            font-weight: bold;
-            font-size: 1.1rem;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .hero-stat-label {
-            color: #ccc;
-            font-size: 0.9rem;
-        }
-
-        .live-indicator-hero {
-            width: 6px;
-            height: 6px;
-            background: #4ade80;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.1); }
         }
 
         .profile-section {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 30px 0;
+            margin: 20px 0; /* RIDOTTO MARGINE */
         }
 
         .profile-image {
@@ -384,93 +339,6 @@
             box-shadow: 0 18px 45px rgba(255, 107, 53, 0.5);
         }
 
-        /* 📊 TESTIMONIALS SECTION */
-        .testimonials-live {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 40px 20px;
-            margin: 60px 0;
-            text-align: center;
-        }
-
-        .testimonials-title {
-            color: #ff6b35;
-            font-size: 1.8rem;
-            margin-bottom: 30px;
-            font-weight: bold;
-        }
-
-        .testimonials-carousel {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .testimonial-card {
-            background: rgba(26, 26, 26, 0.8);
-            border-left: 4px solid #ff6b35;
-            border-radius: 15px;
-            padding: 25px;
-            max-width: 320px;
-            text-align: left;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            background: rgba(26, 26, 26, 1);
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
-        }
-
-        .testimonial-text {
-            color: #e0e0e0;
-            font-style: italic;
-            margin-bottom: 15px;
-            line-height: 1.5;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .testimonial-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #ff6b35, #ff8533);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-
-        .testimonial-info {
-            flex: 1;
-        }
-
-        .testimonial-name {
-            font-weight: bold;
-            color: #ff6b35;
-            font-size: 0.9rem;
-        }
-
-        .testimonial-details {
-            color: #888;
-            font-size: 0.8rem;
-        }
-
-        .testimonial-rating {
-            color: #fbbf24;
-            font-size: 0.8rem;
-        }
-
         /* 🤖 IMPROVED CHAT FULLSCREEN */
         .chat-fullscreen {
             position: fixed;
@@ -569,6 +437,11 @@
             background: #4ade80;
             border-radius: 50%;
             animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
         }
 
         .chat-close {
@@ -1064,21 +937,6 @@
                 font-size: 2.5rem;
             }
             
-            .live-stats-hero {
-                flex-direction: column;
-                align-items: center;
-                gap: 15px;
-            }
-            
-            .testimonials-carousel {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .testimonial-card {
-                max-width: 100%;
-            }
-            
             .chat-messages {
                 padding: 20px 15px;
             }
@@ -1160,31 +1018,13 @@
         <h1>Andrea Padoan</h1>
         <p>Il tuo partner per corpo, mente e business.<br>Scopri i miei progetti e trova la soluzione perfetta per te.</p>
         
-        <!-- 🌟 LIVE STATS HERO -->
-        <div class="live-stats-hero">
-            <div class="hero-stat">
-                <span class="live-indicator-hero"></span>
-                <span class="hero-stat-number" id="heroClientsCount">526</span>
-                <span class="hero-stat-label">+ clienti trasformati</span>
-            </div>
-            <div class="hero-stat">
-                <span class="hero-stat-number">4.9⭐</span>
-                <span class="hero-stat-label">Google Reviews</span>
-            </div>
-            <div class="hero-stat">
-                <span class="live-indicator-hero"></span>
-                <span class="hero-stat-number" id="heroActiveNow">12</span>
-                <span class="hero-stat-label">online ora</span>
-            </div>
-        </div>
-        
         <div class="profile-section">
             <div class="profile-image">
                 <div class="profile-content"></div>
             </div>
         </div>
 
-        <button class="main-cta" onclick="scrollToProjects()">
+        <button class="main-cta" onclick="openChat()">
             <i class="fas fa-rocket"></i> Inizia il tuo percorso
         </button>
     </div>
@@ -1233,48 +1073,6 @@
                 <div class="project-title">MealPrep Planner</div>
                 <div class="project-description">Web app per pianificare e organizzare i tuoi pasti settimanali</div>
                 <button class="project-btn">Prova Gratis</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- 📊 TESTIMONIALS LIVE SECTION -->
-    <div class="testimonials-live">
-        <h3 class="testimonials-title">💬 Cosa Dicono i Miei Clienti</h3>
-        <div class="testimonials-carousel" id="testimonialsCarousel">
-            <div class="testimonial-card">
-                <div class="testimonial-text">"Andrea mi ha trasformato completamente! In 6 mesi ho perso 15kg e ho più energia di quando ne avevo 20."</div>
-                <div class="testimonial-author">
-                    <div class="testimonial-avatar">MR</div>
-                    <div class="testimonial-info">
-                        <div class="testimonial-name">Maria Rossi</div>
-                        <div class="testimonial-details">Manager, 34 anni</div>
-                    </div>
-                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
-                </div>
-            </div>
-            
-            <div class="testimonial-card">
-                <div class="testimonial-text">"Finalmente un personal trainer che capisce le mie esigenze. Risultati visibili dal primo mese!"</div>
-                <div class="testimonial-author">
-                    <div class="testimonial-avatar">LB</div>
-                    <div class="testimonial-info">
-                        <div class="testimonial-name">Luca Bianchi</div>
-                        <div class="testimonial-details">Imprenditore, 28 anni</div>
-                    </div>
-                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
-                </div>
-            </div>
-            
-            <div class="testimonial-card">
-                <div class="testimonial-text">"Le miniclassi sono fantastiche! Gruppo motivante e Andrea sempre presente per correzioni."</div>
-                <div class="testimonial-author">
-                    <div class="testimonial-avatar">SV</div>
-                    <div class="testimonial-info">
-                        <div class="testimonial-name">Sofia Verdi</div>
-                        <div class="testimonial-details">Architetto, 45 anni</div>
-                    </div>
-                    <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
-                </div>
             </div>
         </div>
     </div>
@@ -1804,41 +1602,3 @@
                 chatSection.style.transition = 'all 0.8s ease';
                 observer.observe(chatSection);
             }
-
-            const testimonialCards = document.querySelectorAll('.testimonial-card');
-            testimonialCards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(30px)';
-                
-                setTimeout(() => {
-                    card.style.transition = 'all 0.6s ease';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, 500 + index * 200);
-            });
-
-            const socialLinks = document.querySelectorAll('.social-link');
-            socialLinks.forEach((link, index) => {
-                setTimeout(() => {
-                    link.style.transform = 'translateY(-10px) scale(1.1)';
-                    setTimeout(() => {
-                        link.style.transform = 'translateY(0) scale(1)';
-                    }, 300);
-                }, 2500 + index * 200);
-            });
-
-            const heroStats = document.querySelectorAll('.hero-stat');
-            heroStats.forEach((stat, index) => {
-                stat.style.opacity = '0';
-                stat.style.transform = 'translateY(20px)';
-                
-                setTimeout(() => {
-                    stat.style.transition = 'all 0.5s ease';
-                    stat.style.opacity = '1';
-                    stat.style.transform = 'translateY(0)';
-                }, 800 + index * 150);
-            });
-        }
-    </script>
-</body>
-</html>
