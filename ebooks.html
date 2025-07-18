@@ -84,9 +84,12 @@
 
         .ebooks-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
             margin-bottom: 80px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .ebook-card {
@@ -100,7 +103,7 @@
         }
 
         .ebook-card:hover {
-            transform: translateY(-15px) scale(1.02);
+            transform: translateY(-15px) scale(1.05);
             border-color: rgba(255,102,0,0.8);
             box-shadow: 0 25px 50px rgba(255,102,0,0.3);
             background: rgba(26, 26, 26, 1);
@@ -109,7 +112,7 @@
         .ebook-image {
             position: relative;
             overflow: hidden;
-            height: 250px;
+            height: 320px;
             background: linear-gradient(135deg, var(--ebook-color), rgba(0,0,0,0.7));
             display: flex;
             align-items: center;
@@ -124,17 +127,17 @@
             right: 0;
             bottom: 0;
             background: linear-gradient(135deg, var(--ebook-color) 0%, transparent 60%);
-            opacity: 0.3;
+            opacity: 0.2;
             z-index: 1;
         }
 
         .ebook-cover {
             position: relative;
             z-index: 2;
-            width: 140px;
-            height: 180px;
+            width: 200px;
+            height: 260px;
             border-radius: 12px;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
             transition: transform 0.3s ease;
             overflow: hidden;
         }
@@ -312,6 +315,13 @@
         }
 
         /* Mobile responsive */
+        @media (max-width: 1200px) {
+            .ebooks-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+            }
+        }
+
         @media (max-width: 768px) {
             .header {
                 position: static;
@@ -327,6 +337,15 @@
             .ebook-card {
                 max-width: 400px;
                 margin: 0 auto;
+            }
+
+            .ebook-image {
+                height: 280px;
+            }
+
+            .ebook-cover {
+                width: 160px;
+                height: 220px;
             }
 
             .hero h1 {
