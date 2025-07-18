@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Andrea Padoan - Il tuo partner per corpo, mente e business</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -21,28 +22,31 @@
 
         .header {
             position: fixed;
-            top: 0;
+            top: 20px;
             right: 20px;
             z-index: 1000;
-            padding: 20px 0;
         }
 
         .dashboard-btn {
             background: rgba(107, 114, 128, 0.9);
             color: #fff;
             border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 12px;
-            font-weight: bold;
+            padding: 12px;
+            border-radius: 50%;
+            font-size: 18px;
             cursor: pointer;
             transition: all 0.3s;
             backdrop-filter: blur(10px);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .dashboard-btn:hover {
             background: #6b7280;
-            transform: translateY(-2px);
+            transform: translateY(-2px) scale(1.1);
         }
 
         .hero {
@@ -69,13 +73,32 @@
             line-height: 1.6;
         }
 
+        .main-cta {
+            background: linear-gradient(45deg, #ff6b35, #ff8c5a);
+            color: #fff;
+            padding: 18px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+        }
+
+        .main-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 107, 53, 0.4);
+        }
+
         .projects-container {
             position: relative;
             width: 100%;
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 60px 20px;
-            min-height: 800px;
+            padding: 80px 20px;
+            min-height: 900px;
         }
 
         .center-profile {
@@ -83,11 +106,11 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 200px;
-            height: 200px;
+            width: 220px;
+            height: 220px;
             border-radius: 50%;
             background: linear-gradient(45deg, #ff6b35, #4a7c59);
-            padding: 4px;
+            padding: 5px;
             z-index: 10;
         }
 
@@ -105,11 +128,11 @@
         }
 
         .profile-image {
-            width: 120px;
-            height: 120px;
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
             background: linear-gradient(45deg, #333, #555);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             background-image: url('./images/andrea-profile.jpg');
             background-size: cover;
             background-position: center;
@@ -117,7 +140,7 @@
         }
 
         .profile-name {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: bold;
             text-align: center;
             color: #fff;
@@ -125,32 +148,32 @@
 
         .project-item {
             position: absolute;
-            width: 180px;
-            height: 240px;
-            background: #1a1a1a;
-            border-radius: 15px;
-            padding: 15px;
+            width: 200px;
+            height: 260px;
+            background: rgba(26, 26, 26, 0.95);
+            border-radius: 20px;
+            padding: 20px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             border: 2px solid transparent;
             overflow: hidden;
+            backdrop-filter: blur(10px);
         }
 
         .project-item:hover {
-            transform: scale(1.05);
+            transform: scale(1.08);
             border-color: var(--accent-color);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            background: rgba(26, 26, 26, 1);
         }
 
         .project-image {
             width: 100%;
-            height: 90px;
-            border-radius: 10px;
-            background: var(--accent-color);
-            margin-bottom: 12px;
+            height: 100px;
+            border-radius: 15px;
+            margin-bottom: 15px;
             background-size: cover;
             background-position: center;
-            opacity: 0.9;
             position: relative;
             overflow: hidden;
         }
@@ -162,25 +185,25 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, var(--accent-color) 0%, transparent 50%);
-            opacity: 0.3;
+            background: linear-gradient(135deg, var(--accent-color) 0%, transparent 60%);
+            opacity: 0.4;
             z-index: 1;
         }
 
         .project-title {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: bold;
             color: var(--accent-color);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             line-height: 1.2;
         }
 
         .project-description {
-            font-size: 11px;
-            color: #b0b0b0;
-            line-height: 1.4;
-            margin-bottom: 12px;
-            height: 45px;
+            font-size: 12px;
+            color: #c0c0c0;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            height: 50px;
             overflow: hidden;
             display: -webkit-box;
             -webkit-line-clamp: 3;
@@ -191,12 +214,12 @@
             background: var(--accent-color);
             color: #000;
             border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 12px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 13px;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.3s;
             width: 100%;
         }
 
@@ -205,7 +228,7 @@
             transform: translateY(-2px);
         }
 
-        /* Posizionamento progetti in cerchio */
+        /* Posizionamento progetti in cerchio perfetto */
         .project-1 { 
             top: 0; 
             left: 50%; 
@@ -214,20 +237,21 @@
         }
 
         .project-2 { 
-            top: 15%; 
-            right: 5%;
+            top: 12%; 
+            right: 8%;
             --accent-color: #ff6b35;
         }
 
         .project-3 { 
-            top: 45%; 
+            top: 50%; 
             right: 0;
+            transform: translateY(-50%);
             --accent-color: #4a7c59;
         }
 
         .project-4 { 
-            bottom: 15%; 
-            right: 5%;
+            bottom: 12%; 
+            right: 8%;
             --accent-color: #4a7c59;
         }
 
@@ -239,22 +263,22 @@
         }
 
         .project-6 { 
-            bottom: 15%; 
-            left: 5%;
+            bottom: 12%; 
+            left: 8%;
             --accent-color: #6b7280;
         }
 
         .project-7 { 
-            top: 45%; 
+            top: 50%; 
             left: 0;
+            transform: translateY(-50%);
             --accent-color: #ff6b35;
         }
 
         /* Brochure Section */
         .brochure-section {
             background: #1a1a1a;
-            padding: 60px 20px;
-            margin-top: 60px;
+            padding: 80px 20px;
         }
 
         .brochure-container {
@@ -266,33 +290,33 @@
         .brochure-title {
             font-size: 2.5rem;
             color: #ff6b35;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             font-weight: 900;
         }
 
         .brochure-subtitle {
             color: #b0b0b0;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             font-size: 1.2rem;
         }
 
         .brochure-images {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
         }
 
         .brochure-page {
             background: #fff;
-            border-radius: 15px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            transition: transform 0.4s ease;
         }
 
         .brochure-page:hover {
-            transform: translateY(-10px);
+            transform: translateY(-15px) rotateY(5deg);
         }
 
         .brochure-page img {
@@ -301,47 +325,30 @@
             display: block;
         }
 
-        .brochure-cta {
-            background: linear-gradient(45deg, #ff6b35, #ff8c5a);
-            color: #fff;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 30px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.2s;
-            margin: 0 10px;
-        }
-
-        .brochure-cta:hover {
-            transform: translateY(-3px);
-        }
-
         /* Social Section */
         .social-section {
             background: #000;
-            padding: 40px 20px;
+            padding: 60px 20px;
             text-align: center;
         }
 
         .social-title {
             color: #ff6b35;
-            font-size: 1.8rem;
-            margin-bottom: 30px;
+            font-size: 2rem;
+            margin-bottom: 40px;
             font-weight: bold;
         }
 
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 30px;
             flex-wrap: wrap;
         }
 
         .social-link {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             background: #1a1a1a;
             border-radius: 50%;
             display: flex;
@@ -349,16 +356,34 @@
             justify-content: center;
             text-decoration: none;
             color: #fff;
-            font-size: 24px;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
+            font-size: 28px;
+            transition: all 0.4s ease;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--social-color);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
         }
 
         .social-link:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px) scale(1.1);
             border-color: var(--social-color);
-            background: var(--social-color);
-            color: #000;
+            color: #fff;
+        }
+
+        .social-link:hover::before {
+            opacity: 1;
         }
 
         .social-link.instagram {
@@ -379,38 +404,41 @@
 
         .contact-section {
             text-align: center;
-            padding: 40px 20px;
-            background: #1a1a1a;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
         }
 
         .contact-section h2 {
             color: #ff6b35;
             margin-bottom: 20px;
-            font-size: 2rem;
+            font-size: 2.2rem;
         }
 
         .contact-section p {
             color: #b0b0b0;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             max-width: 500px;
             margin-left: auto;
             margin-right: auto;
+            font-size: 1.1rem;
         }
 
         .contact-btn {
             background: linear-gradient(45deg, #ff6b35, #4a7c59);
             color: #fff;
-            padding: 15px 30px;
+            padding: 18px 40px;
             border: none;
-            border-radius: 30px;
+            border-radius: 35px;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: all 0.3s;
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
         }
 
         .contact-btn:hover {
             transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 107, 53, 0.4);
         }
 
         /* Mobile responsive */
@@ -430,18 +458,27 @@
                 position: static;
                 transform: none;
                 margin: 0 auto 40px;
+                width: 180px;
+                height: 180px;
+            }
+
+            .profile-image {
+                width: 120px;
+                height: 120px;
             }
 
             .project-item {
                 position: static;
                 width: 100%;
-                max-width: 300px;
-                margin: 0 auto 20px;
+                max-width: 320px;
+                margin: 0 auto 25px;
                 transform: none !important;
+                height: auto;
+                min-height: 240px;
             }
 
             .project-item:hover {
-                transform: translateY(-5px) !important;
+                transform: translateY(-8px) !important;
             }
 
             .projects-grid {
@@ -459,28 +496,38 @@
             }
 
             .social-links {
-                gap: 15px;
+                gap: 20px;
             }
 
             .social-link {
-                width: 50px;
-                height: 50px;
-                font-size: 20px;
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+
+            .main-cta {
+                padding: 15px 30px;
+                font-size: 16px;
             }
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <button class="dashboard-btn" onclick="openDashboard()">📊 Dashboard</button>
+        <button class="dashboard-btn" onclick="openDashboard()" title="Dashboard">
+            <i class="fas fa-cog"></i>
+        </button>
     </div>
 
     <div class="hero">
         <h1>Andrea Padoan</h1>
         <p>Il tuo partner per corpo, mente e business. Scopri i miei progetti e trova la soluzione perfetta per te.</p>
+        <button class="main-cta" onclick="scrollToProjects()">
+            <i class="fas fa-rocket"></i> Inizia il tuo percorso
+        </button>
     </div>
 
-    <div class="projects-container">
+    <div class="projects-container" id="projects">
         <div class="center-profile">
             <div class="profile-content">
                 <div class="profile-image"></div>
@@ -492,7 +539,7 @@
             <div class="project-item project-1" onclick="openProject('https://www.personaltrainerverona.it')">
                 <div class="project-image" style="background-image: url('./images/andrea-personal-training.jpg');"></div>
                 <div class="project-title">Personal Training</div>
-                <div class="project-description">Ti aiuto a trasformare il tuo corpo</div>
+                <div class="project-description">Ti aiuto a trasformare il tuo corpo con allenamenti personalizzati</div>
                 <button class="project-btn">Prenota Sessione</button>
             </div>
 
@@ -520,7 +567,7 @@
             <div class="project-item project-5" onclick="openProject('https://upstarter-tf9x.vercel.app/')">
                 <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=300&fit=crop');"></div>
                 <div class="project-title">Upstart</div>
-                <div class="project-description">Testa quanto potenziale ha la tua idea</div>
+                <div class="project-description">Testa quanto potenziale ha la tua idea di business</div>
                 <button class="project-btn">Consulenza Gratuita</button>
             </div>
 
@@ -547,16 +594,11 @@
             
             <div class="brochure-images">
                 <div class="brochure-page">
-                    <img src="./images/tribu-brochure-front.jpg" alt="Tribù Studio - Fronte" onerror="this.style.display='none'">
+                    <img src="./images/tribu-brochure-front.jpg" alt="Tribù Studio - Fronte" onerror="this.parentElement.style.display='none'">
                 </div>
                 <div class="brochure-page">
-                    <img src="./images/tribu-brochure-back.jpg" alt="Tribù Studio - Retro" onerror="this.style.display='none'">
+                    <img src="./images/tribu-brochure-back.jpg" alt="Tribù Studio - Retro" onerror="this.parentElement.style.display='none'">
                 </div>
-            </div>
-            
-            <div style="margin-top: 30px;">
-                <button class="brochure-cta" onclick="openProject('https://www.tribustudio.it')">Visita Tribù Studio</button>
-                <button class="brochure-cta" onclick="openProject('https://www.personaltrainerverona.it')">Personal Training</button>
             </div>
         </div>
     </div>
@@ -564,17 +606,27 @@
     <div class="social-section">
         <h2 class="social-title">Seguimi sui Social</h2>
         <div class="social-links">
-            <a href="https://www.instagram.com/andreapadoancoach/" target="_blank" class="social-link instagram">📷</a>
-            <a href="https://www.facebook.com/andreapadoanpersonaltrainer" target="_blank" class="social-link facebook">📘</a>
-            <a href="https://www.tiktok.com/@andreapadoanpt" target="_blank" class="social-link tiktok">🎵</a>
-            <a href="https://www.youtube.com/@andreapadoanlifestyle" target="_blank" class="social-link youtube">📺</a>
+            <a href="https://www.instagram.com/andreapadoancoach/" target="_blank" class="social-link instagram" title="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/andreapadoanpersonaltrainer" target="_blank" class="social-link facebook" title="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.tiktok.com/@andreapadoanpt" target="_blank" class="social-link tiktok" title="TikTok">
+                <i class="fab fa-tiktok"></i>
+            </a>
+            <a href="https://www.youtube.com/@andreapadoanlifestyle" target="_blank" class="social-link youtube" title="YouTube">
+                <i class="fab fa-youtube"></i>
+            </a>
         </div>
     </div>
 
     <div class="contact-section">
         <h2>Hai domande?</h2>
         <p>Contattami per scoprire quale progetto è più adatto a te e ai tuoi obiettivi.</p>
-        <button class="contact-btn" onclick="openContact()">Contattami Ora</button>
+        <button class="contact-btn" onclick="openContact()">
+            <i class="fas fa-envelope"></i> Contattami Ora
+        </button>
     </div>
 
     <script>
@@ -591,51 +643,72 @@
         }
 
         function openDashboard() {
-            // Qui aggiungeremo l'autenticazione e il collegamento al CRM
             const password = prompt('Inserisci la password per accedere alla dashboard:');
-            if (password === 'tribu2024') { // Cambia questa password
+            if (password === 'tribu2024') {
                 window.open('https://airtable.com/your-dashboard-link', '_blank');
             } else if (password !== null) {
                 alert('Password non corretta');
             }
         }
 
-        // Animation on load
+        function scrollToProjects() {
+            document.getElementById('projects').scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'center'
+            });
+        }
+
+        // Animations on load
         window.addEventListener('load', function() {
+            // Animate projects with staggered delay
             const projects = document.querySelectorAll('.project-item');
             projects.forEach((project, index) => {
+                project.style.opacity = '0';
+                project.style.transform = 'scale(0.8) rotate(10deg)';
+                
                 setTimeout(() => {
-                    project.style.opacity = '0';
-                    project.style.transform = 'scale(0.8)';
-                    project.style.transition = 'all 0.6s ease';
-                    
-                    setTimeout(() => {
-                        project.style.opacity = '1';
-                        project.style.transform = 'scale(1)';
-                    }, 100);
-                }, index * 100);
+                    project.style.transition = 'all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                    project.style.opacity = '1';
+                    project.style.transform = 'scale(1) rotate(0deg)';
+                }, 300 + index * 150);
             });
 
-            // Social icons animation
+            // Animate social icons
             const socialLinks = document.querySelectorAll('.social-link');
             socialLinks.forEach((link, index) => {
                 setTimeout(() => {
-                    link.style.transform = 'translateY(-5px)';
+                    link.style.transform = 'translateY(-10px) scale(1.1)';
                     setTimeout(() => {
-                        link.style.transform = 'translateY(0)';
-                    }, 200);
-                }, 2000 + index * 100);
+                        link.style.transform = 'translateY(0) scale(1)';
+                    }, 300);
+                }, 3000 + index * 200);
+            });
+
+            // Animate profile on scroll
+            const profile = document.querySelector('.center-profile');
+            let isAnimating = false;
+            
+            window.addEventListener('scroll', () => {
+                if (!isAnimating) {
+                    isAnimating = true;
+                    profile.style.transform = 'translate(-50%, -50%) rotate(360deg) scale(1.1)';
+                    
+                    setTimeout(() => {
+                        profile.style.transform = 'translate(-50%, -50%) rotate(0deg) scale(1)';
+                        isAnimating = false;
+                    }, 600);
+                }
             });
         });
 
-        // Interactive effects
+        // Enhanced interactive effects
         document.querySelectorAll('.project-item').forEach(item => {
             item.addEventListener('mouseenter', function() {
-                this.style.transform = 'scale(1.05)';
+                this.style.transform = 'scale(1.08) rotateY(5deg)';
             });
             
             item.addEventListener('mouseleave', function() {
-                this.style.transform = 'scale(1)';
+                this.style.transform = 'scale(1) rotateY(0deg)';
             });
         });
     </script>
