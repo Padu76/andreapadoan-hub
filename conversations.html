@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TribuCoach - Conversazioni | Chat Complete & Timeline</title>
+    <title>Andrea Padoan - Conversazioni | Chat Complete & Timeline</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
@@ -845,8 +845,8 @@
     <!-- Login Screen -->
     <div class="login-container" id="loginScreen">
         <div class="login-box">
-            <div class="login-title">💬 TribuCoach Conversazioni</div>
-            <div class="login-subtitle">Chat Complete & Timeline Messaggi</div>
+            <div class="login-title">💬 Andrea Padoan Conversazioni</div>
+            <div class="login-subtitle">Personal Trainer & Lifestyle Coach - Chat Complete & Timeline</div>
             <input type="password" id="passwordInput" class="login-input" placeholder="Inserisci password" autocomplete="current-password">
             <button onclick="login()" class="login-btn">Accedi alle Conversazioni</button>
             <div id="errorMessage" class="error-message" style="display: none;"></div>
@@ -859,10 +859,10 @@
         <header class="header">
             <div class="header-content">
                 <div class="logo">
-                    <div class="logo-icon">TC</div>
+                    <div class="logo-icon">AP</div>
                     <div class="logo-text">
-                        <h1>TribuCoach Conversazioni</h1>
-                        <p>Chat Complete & Timeline Messaggi</p>
+                        <h1>Andrea Padoan Conversazioni</h1>
+                        <p>Personal Trainer & Lifestyle Coach - Chat Complete & Timeline</p>
                     </div>
                 </div>
 
@@ -1029,54 +1029,34 @@
             document.getElementById('passwordInput').value = '';
         }
 
-        // Enter key for login
         document.addEventListener('keypress', function(e) {
             if (e.key === 'Enter' && !isLoggedIn) {
                 login();
             }
         });
 
-        // Initialize Dashboard
         function initDashboard() {
-            console.log('🚀 Initializing Conversations Dashboard...');
-            
-            // Load conversations data
+            console.log('🚀 Initializing Andrea Padoan Conversations Dashboard...');
             loadConversationsData();
-            
-            // Set up auto-refresh every 30 seconds
             refreshInterval = setInterval(() => {
-                if (isLoggedIn) {
-                    refreshData();
-                }
+                if (isLoggedIn) refreshData();
             }, 30000);
-
-            // Set up event listeners
             setupEventListeners();
         }
 
-        // Setup Event Listeners
         function setupEventListeners() {
-            // Search input
             document.getElementById('searchInput').addEventListener('input', handleSearch);
-            
-            // Filters
             document.getElementById('statusFilter').addEventListener('change', applyFilters);
             document.getElementById('periodFilter').addEventListener('change', applyFilters);
         }
 
-        // Load Conversations Data from Airtable
         async function loadConversationsData() {
             console.log('📊 Loading conversations from Airtable...');
-            
             try {
                 updateConnectionStatus('loading', 'Caricamento conversazioni...');
-                
-                // Call conversations API
                 const response = await fetch('/api/conversations', {
                     method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
+                    headers: { 'Content-Type': 'application/json' }
                 });
                 
                 if (response.ok) {
@@ -1088,7 +1068,6 @@
                 } else {
                     throw new Error(`API Error: ${response.status}`);
                 }
-                
             } catch (error) {
                 console.error('❌ Error loading conversations:', error);
                 updateConnectionStatus('error', 'Errore connessione');
@@ -1096,11 +1075,9 @@
             }
         }
 
-        // Update connection status
         function updateConnectionStatus(status, message) {
             const statusElement = document.getElementById('connectionStatus');
             const statusIndicator = statusElement.parentElement;
-            
             statusElement.textContent = message;
             
             const dot = statusIndicator.querySelector('.status-dot');
@@ -1126,7 +1103,6 @@
             }
         }
 
-        // Show error state
         function showErrorState() {
             const container = document.getElementById('conversationsList');
             container.innerHTML = `
@@ -1141,7 +1117,6 @@
             `;
         }
 
-        // Render Conversations List
         function renderConversationsList(filteredData = null) {
             const data = filteredData || conversationsData;
             const container = document.getElementById('conversationsList');
@@ -1164,7 +1139,6 @@
                 const lastMessage = conv.messages && conv.messages.length > 0 
                     ? conv.messages[conv.messages.length - 1].content 
                     : 'Nessun messaggio';
-                
                 const timeAgo = getTimeAgo(conv.timestamp);
                 const hasContact = conv.name && conv.phone;
                 
@@ -1195,23 +1169,17 @@
             }).join('');
         }
 
-        // Select Conversation
         function selectConversation(conversationId) {
             selectedConversation = conversationsData.find(conv => conv.id === conversationId);
-            
             if (!selectedConversation) return;
 
-            // Update active state
             document.querySelectorAll('.conversation-item').forEach(item => {
                 item.classList.remove('active');
             });
             event.currentTarget.classList.add('active');
-
-            // Render conversation detail
             renderConversationDetail();
         }
 
-        // Render Conversation Detail
         function renderConversationDetail() {
             if (!selectedConversation) return;
 
@@ -1220,17 +1188,13 @@
             const contentElement = document.getElementById('conversationContent');
             const whatsappBtn = document.getElementById('whatsappBtn');
 
-            // Update header
             titleElement.textContent = selectedConversation.name || 'Utente Anonimo';
             actionsElement.style.display = 'flex';
 
-            // Update WhatsApp button
             const whatsappMessage = generateWhatsAppMessage(selectedConversation);
             whatsappBtn.href = `https://wa.me/3478881515?text=${encodeURIComponent(whatsappMessage)}`;
 
-            // Render content
             contentElement.innerHTML = `
-                <!-- Contact Info -->
                 <div class="contact-info">
                     <div class="contact-title">
                         <i class="fas fa-address-card"></i>
@@ -1261,15 +1225,12 @@
                         <span class="field-value">${selectedConversation.messages ? selectedConversation.messages.length : 0}</span>
                     </div>
                 </div>
-
-                <!-- Chat Timeline -->
                 <div class="chat-timeline">
                     ${renderChatTimeline()}
                 </div>
             `;
         }
 
-        // Render Chat Timeline
         function renderChatTimeline() {
             if (!selectedConversation.messages || selectedConversation.messages.length === 0) {
                 return `
@@ -1288,11 +1249,11 @@
                 return `
                     <div class="timeline-message ${isUser ? 'user' : 'ai'}">
                         <div class="message-avatar ${isUser ? 'avatar-user' : 'avatar-ai'}">
-                            ${isUser ? 'U' : 'AI'}
+                            ${isUser ? 'U' : 'AP'}
                         </div>
                         <div class="message-content">
                             <div class="message-header">
-                                <span class="message-sender">${isUser ? (selectedConversation.name || 'Utente') : 'Andrea (AI)'}</span>
+                                <span class="message-sender">${isUser ? (selectedConversation.name || 'Utente') : 'Andrea Padoan'}</span>
                                 <span class="message-time">${timeFormatted}</span>
                             </div>
                             <div class="message-text">${escapeHtml(message.content)}</div>
@@ -1344,7 +1305,6 @@
                 business: `Ciao ${name}! Vedo che ti interessa il business coaching. Facciamo una call! 🚀`,
                 lifestyle: `Ciao ${name}! Il lifestyle coaching può davvero trasformare la tua vita. Parliamone! ✨`
             };
-            
             return templates[conversation.interest] || `Ciao ${name}! Grazie per il tuo interesse. Come posso aiutarti?`;
         }
 
@@ -1373,12 +1333,10 @@
 
             let filteredData = [...conversationsData];
 
-            // Apply status filter
             if (statusFilter !== 'all') {
                 filteredData = filteredData.filter(conv => conv.status === statusFilter);
             }
 
-            // Apply period filter
             if (periodFilter !== 'all') {
                 const now = new Date();
                 let cutoffDate;
@@ -1400,7 +1358,6 @@
                 }
             }
 
-            // Apply search filter
             if (searchTerm) {
                 filteredData = filteredData.filter(conv => {
                     return (conv.name && conv.name.toLowerCase().includes(searchTerm)) ||
@@ -1414,7 +1371,6 @@
 
         function filterByTag(tag) {
             let filteredData;
-            
             switch(tag) {
                 case 'hot':
                     filteredData = conversationsData.filter(conv => conv.isHot);
@@ -1425,7 +1381,6 @@
                 default:
                     filteredData = conversationsData;
             }
-            
             renderConversationsList(filteredData);
         }
 
@@ -1437,31 +1392,24 @@
 
         function markAsContacted() {
             if (!selectedConversation) return;
-            
-            // TODO: Update status in Airtable
             selectedConversation.status = 'contacted';
             renderConversationDetail();
             renderConversationsList();
-            
             console.log('📞 Marked as contacted:', selectedConversation.id);
         }
 
         function exportConversation() {
             if (!selectedConversation) return;
-            
-            // TODO: Generate and download conversation export
             console.log('📊 Exporting conversation:', selectedConversation.id);
             alert('Feature in sviluppo: Export conversazione singola');
         }
 
         function exportConversations() {
-            // TODO: Generate and download all conversations export
             console.log('📊 Exporting all conversations');
             alert('Feature in sviluppo: Export tutte le conversazioni');
         }
 
-        // Initialize on page load
-        console.log('💬 TribuCoach Conversations Dashboard loaded successfully');
+        console.log('💬 Andrea Padoan Conversations Dashboard loaded successfully');
     </script>
 </body>
 </html>
