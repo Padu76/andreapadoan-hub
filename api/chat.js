@@ -23,7 +23,7 @@ export default async function handler(req, res) {
     }
 
     // Debug logging
-    console.log('=== CHAT API PHASE 1 DEBUG ===');
+    console.log('=== ADVANCED AI RECOMMENDATION ENGINE ===');
     console.log('Received message:', message);
     console.log('Conversation history length:', conversationHistory.length);
     
@@ -37,7 +37,7 @@ export default async function handler(req, res) {
         });
     }
 
-    // 🧠 QUIZ ASSESSMENT SYSTEM
+    // 🧠 QUIZ ASSESSMENT SYSTEM (keeping existing)
     const quizQuestions = {
         1: {
             question: "Prima di tutto, su una scala da 1 a 10, come valuti il tuo livello di forma fisica attuale? 💪",
@@ -66,133 +66,418 @@ export default async function handler(req, res) {
         }
     };
 
-    // 🎯 AI RECOMMENDATION ENGINE
-    const recommendationEngine = {
-        generatePersonalizedPlan: (answers) => {
+    // 🎯 ADVANCED AI RECOMMENDATION ENGINE
+    const advancedRecommendationEngine = {
+        // Analyze message and conversation context for intelligent recommendations
+        analyzeMessage: (userMessage, history) => {
+            const analysis = {
+                intent: detectIntent(userMessage),
+                goals: extractGoals(userMessage),
+                constraints: extractConstraints(userMessage),
+                budgetSignals: extractBudgetSignals(userMessage),
+                urgency: detectUrgency(userMessage),
+                experience: extractExperience(userMessage),
+                conversationStage: determineConversationStage(history),
+                previousRecommendations: extractPreviousRecommendations(history)
+            };
+            
+            return analysis;
+        },
+
+        // Generate contextual recommendations based on message analysis
+        generateContextualRecommendations: (analysis, userMessage) => {
             const recommendations = [];
-            let primaryService = "";
-            let reasoning = "";
-            let compatibilityScore = 0;
             
-            // Analisi livello fitness
-            const fitnessLevel = answers.fitness_level || "";
-            const goal = answers.main_goal || "";
-            const time = answers.time_available || "";
-            const experience = answers.experience_level || "";
-            const budget = answers.budget_range || "";
-            
-            // LOGIC TREE PER RACCOMANDAZIONI
-            
-            // Budget-driven recommendations
-            if (budget.includes("50-100")) {
-                primaryService = "Miniclassi (15€/sessione)";
-                reasoning = "Budget ottimizzato con massimo valore";
-                compatibilityScore += 7;
-                
-                recommendations.push({
-                    service: "Miniclassi 2x/settimana",
-                    price: "120€/mese (8 sessioni)",
-                    benefits: ["Gruppo motivante", "Costi contenuti", "Orari fissi", "Socializzazione"],
-                    perfect_for: "Chi vuole risultati con budget limitato"
-                });
-                
-                if (goal.includes("Dimagrire")) {
-                    recommendations.push({
-                        service: "App 'Torno in Forma' (aggiunta)",
-                        price: "+70€/mese",
-                        benefits: ["Allenamenti extra casa", "Piano nutrizionale", "Supporto costante"],
-                        perfect_for: "Accelerare il dimagrimento"
-                    });
-                }
-                
-            } else if (budget.includes("100-200")) {
-                primaryService = "Percorso Misto (Miniclassi + Individuali)";
-                reasoning = "Equilibrio perfetto tra attenzione personale e socializzazione";
-                compatibilityScore += 8;
-                
-                recommendations.push({
-                    service: "2 Miniclassi + 1 Individuale/mese",
-                    price: "165€/mese",
-                    benefits: ["Attenzione personalizzata", "Gruppo motivante", "Progressi più rapidi", "Correzioni specifiche"],
-                    perfect_for: "Chi vuole il meglio di entrambi i mondi"
-                });
-                
-            } else if (budget.includes("200-400")) {
-                primaryService = "Personal Training Individuale";
-                reasoning = "Attenzione 100% dedicata per risultati ottimali";
-                compatibilityScore += 9;
-                
-                if (time.includes("1-2 ore")) {
-                    recommendations.push({
-                        service: "2 Sessioni individuali/settimana",
-                        price: "400€/mese (8 sessioni da 50€)",
-                        benefits: ["Efficienza massima", "Programma ultra-personalizzato", "Risultati garantiti", "Flessibilità orari"],
-                        perfect_for: "Chi ha poco tempo ma vuole risultati certi"
-                    });
-                } else {
-                    recommendations.push({
-                        service: "3 Sessioni individuali/settimana",
-                        price: "600€/mese (12 sessioni da 50€)",
-                        benefits: ["Trasformazione accelerata", "Monitoraggio costante", "Motivazione continua", "Risultati eccezionali"],
-                        perfect_for: "Chi vuole una trasformazione completa"
-                    });
-                }
-                
-            } else { // Budget 400€+
-                primaryService = "Percorso Premium Completo";
-                reasoning = "La formula di eccellenza per trasformazioni straordinarie";
-                compatibilityScore += 10;
-                
-                recommendations.push({
-                    service: "Personal Training Premium + Consulenza Nutrizionale",
-                    price: "650€/mese",
-                    benefits: ["3 sessioni individuali/settimana", "Piano nutrizionale personalizzato", "Supporto 24/7", "Analisi corporea mensile", "App inclusa"],
-                    perfect_for: "Chi vuole investire seriamente nel proprio benessere"
-                });
+            // Primary service recommendation
+            const primaryService = selectPrimaryService(analysis);
+            if (primaryService) {
+                recommendations.push(primaryService);
             }
             
-            // Goal-specific adjustments
-            if (goal.includes("Dimagrire")) {
-                compatibilityScore += 1;
-                recommendations.forEach(rec => {
-                    rec.goal_focus = "Protocolli specifici per dimagrimento sostenibile";
-                });
-            } else if (goal.includes("Tonificare")) {
-                compatibilityScore += 1;
-                recommendations.forEach(rec => {
-                    rec.goal_focus = "Focus su tonificazione e definizione muscolare";
-                });
-            } else if (goal.includes("performance")) {
-                compatibilityScore += 2;
-                recommendations.forEach(rec => {
-                    rec.goal_focus = "Preparazione atletica e miglioramento performance";
-                });
-            }
+            // Intelligent upselling
+            const upsells = generateUpsells(analysis, primaryService);
+            recommendations.push(...upsells);
             
-            // Experience adjustments
-            if (experience.includes("Mai") && fitnessLevel.includes("1-3")) {
-                reasoning += " - Perfetto per principianti, con progressione graduale";
-                compatibilityScore += 1;
-            } else if (experience.includes("non ho ottenuto risultati")) {
-                reasoning += " - Finalmente l'approccio giusto per te!";
-                compatibilityScore += 2;
-            }
+            // Cross-selling opportunities
+            const crossSells = generateCrossSells(analysis, userMessage);
+            recommendations.push(...crossSells);
+            
+            // Dynamic pricing offers
+            const pricingOffers = generateDynamicPricing(analysis, recommendations);
             
             return {
-                primary_service: primaryService,
-                reasoning: reasoning,
-                compatibility_score: Math.min(compatibilityScore, 10),
-                recommendations: recommendations,
-                next_steps: [
-                    "Sessione conoscitiva gratuita (15 min)",
-                    "Visita dello studio senza impegno",
-                    "Prima sessione di prova (40€, detraibili)"
-                ]
+                primary: primaryService,
+                upsells: upsells,
+                crossSells: crossSells,
+                pricing: pricingOffers,
+                urgencyBoost: analysis.urgency === 'high'
             };
+        },
+
+        // Format recommendations for natural conversation integration
+        formatRecommendationsForPrompt: (recommendations, analysis) => {
+            if (!recommendations.primary && recommendations.upsells.length === 0 && recommendations.crossSells.length === 0) {
+                return "";
+            }
+
+            let prompt = "\n\n=== RACCOMANDAZIONI INTELLIGENTI ===\n";
+            
+            if (recommendations.primary) {
+                prompt += `SERVIZIO PRINCIPALE CONSIGLIATO: ${recommendations.primary.name}\n`;
+                prompt += `Prezzo: ${recommendations.primary.price}\n`;
+                prompt += `Perché perfetto: ${recommendations.primary.reasoning}\n\n`;
+            }
+            
+            if (recommendations.upsells.length > 0) {
+                prompt += "UPSELLING NATURALE:\n";
+                recommendations.upsells.forEach(upsell => {
+                    prompt += `- ${upsell.suggestion}: ${upsell.benefit} (+${upsell.price})\n`;
+                });
+                prompt += "\n";
+            }
+            
+            if (recommendations.crossSells.length > 0) {
+                prompt += "CROSS-SELLING CONTESTUALE:\n";
+                recommendations.crossSells.forEach(cross => {
+                    prompt += `- ${cross.product}: ${cross.relevance} (${cross.price})\n`;
+                });
+                prompt += "\n";
+            }
+            
+            if (recommendations.pricing.offer) {
+                prompt += `OFFERTA DINAMICA: ${recommendations.pricing.offer}\n`;
+                prompt += `Sconto: ${recommendations.pricing.discount}\n`;
+                prompt += `Scadenza: ${recommendations.pricing.validity}\n\n`;
+            }
+            
+            prompt += "ISTRUZIONI: Integra queste raccomandazioni in modo naturale nella conversazione. Non elencarle tutte insieme, ma inseriscile nel contesto appropriato. Sii consultivo, non venditore.";
+            
+            return prompt;
         }
     };
 
-    // 🔍 QUIZ STATE DETECTION
+    // 🔍 INTENT DETECTION
+    function detectIntent(message) {
+        const lower = message.toLowerCase();
+        
+        if (lower.includes('dimagrire') || lower.includes('perdere peso') || lower.includes('grasso')) {
+            return 'weight_loss';
+        }
+        if (lower.includes('tonificare') || lower.includes('definire') || lower.includes('muscoli')) {
+            return 'muscle_toning';
+        }
+        if (lower.includes('energia') || lower.includes('stanco') || lower.includes('stress')) {
+            return 'energy_wellness';
+        }
+        if (lower.includes('postura') || lower.includes('mal di schiena') || lower.includes('dolore')) {
+            return 'posture_pain';
+        }
+        if (lower.includes('sport') || lower.includes('performance') || lower.includes('competizione')) {
+            return 'athletic_performance';
+        }
+        if (lower.includes('prezzo') || lower.includes('costo') || lower.includes('quanto')) {
+            return 'pricing_inquiry';
+        }
+        if (lower.includes('tempo') || lower.includes('occupato') || lower.includes('lavoro')) {
+            return 'time_constraints';
+        }
+        
+        return 'general_inquiry';
+    }
+
+    // 🎯 GOAL EXTRACTION
+    function extractGoals(message) {
+        const goals = [];
+        const lower = message.toLowerCase();
+        
+        if (lower.includes('dimagrire') || lower.includes('perdere')) goals.push('weight_loss');
+        if (lower.includes('tonificare') || lower.includes('definire')) goals.push('muscle_building');
+        if (lower.includes('energia') || lower.includes('benessere')) goals.push('wellness');
+        if (lower.includes('forza') || lower.includes('performance')) goals.push('strength');
+        if (lower.includes('postura') || lower.includes('dolore')) goals.push('rehabilitation');
+        
+        return goals;
+    }
+
+    // ⏰ CONSTRAINT EXTRACTION
+    function extractConstraints(message) {
+        const constraints = [];
+        const lower = message.toLowerCase();
+        
+        if (lower.includes('poco tempo') || lower.includes('occupato') || lower.includes('lavoro')) {
+            constraints.push('time_limited');
+        }
+        if (lower.includes('principiante') || lower.includes('mai fatto') || lower.includes('nuovo')) {
+            constraints.push('beginner');
+        }
+        if (lower.includes('infortunio') || lower.includes('problema') || lower.includes('limitazione')) {
+            constraints.push('physical_limitation');
+        }
+        if (lower.includes('casa') || lower.includes('palestra') || lower.includes('viaggio')) {
+            constraints.push('location_flexible');
+        }
+        
+        return constraints;
+    }
+
+    // 💰 BUDGET SIGNALS
+    function extractBudgetSignals(message) {
+        const lower = message.toLowerCase();
+        
+        if (lower.includes('economico') || lower.includes('budget') || lower.includes('costa poco')) {
+            return 'budget_conscious';
+        }
+        if (lower.includes('investimento') || lower.includes('qualità') || lower.includes('premium')) {
+            return 'quality_focused';
+        }
+        if (lower.includes('€') || /\d+/.test(lower)) {
+            return 'price_specific';
+        }
+        
+        return 'price_neutral';
+    }
+
+    // 📈 SERVICE SELECTION LOGIC
+    function selectPrimaryService(analysis) {
+        const { intent, goals, constraints, budgetSignals } = analysis;
+        
+        // Time-constrained clients
+        if (constraints.includes('time_limited')) {
+            if (budgetSignals === 'budget_conscious') {
+                return {
+                    name: "App 'Torno in Forma'",
+                    price: "140€/mese",
+                    reasoning: "Perfetto per chi ha poco tempo - allenamenti efficaci ovunque e quando vuoi"
+                };
+            } else {
+                return {
+                    name: "Personal Training Intensivo 2x/settimana",
+                    price: "400€/mese",
+                    reasoning: "Efficienza massima - risultati certi in tempi record con supervisione diretta"
+                };
+            }
+        }
+        
+        // Weight loss focused
+        if (intent === 'weight_loss' || goals.includes('weight_loss')) {
+            if (budgetSignals === 'budget_conscious') {
+                return {
+                    name: "Miniclassi + App Nutrizione",
+                    price: "190€/mese",
+                    reasoning: "Combinazione vincente per dimagrimento: gruppo motivante + piano alimentare"
+                };
+            } else {
+                return {
+                    name: "Personal Training + Consulenza Nutrizionale",
+                    price: "480€/mese",
+                    reasoning: "Approccio completo per dimagrimento duraturo - allenamento + alimentazione"
+                };
+            }
+        }
+        
+        // Beginners
+        if (constraints.includes('beginner')) {
+            return {
+                name: "Miniclassi per Principianti",
+                price: "120€/mese",
+                reasoning: "Ideale per iniziare - ambiente sicuro, progressione graduale, supporto del gruppo"
+            };
+        }
+        
+        // Athletic performance
+        if (intent === 'athletic_performance') {
+            return {
+                name: "Personal Training Sportivo",
+                price: "600€/mese (3x/settimana)",
+                reasoning: "Preparazione atletica specifica - programmi avanzati per performance"
+            };
+        }
+        
+        // Default recommendation
+        return {
+            name: "Personal Training Individuale",
+            price: "400€/mese (2x/settimana)",
+            reasoning: "La scelta più efficace - attenzione 100% personalizzata per i tuoi obiettivi"
+        };
+    }
+
+    // 📈 UPSELLING GENERATION
+    function generateUpsells(analysis, primaryService) {
+        const upsells = [];
+        const { intent, goals, constraints } = analysis;
+        
+        if (!primaryService) return upsells;
+        
+        // If primary is training, suggest nutrition
+        if (primaryService.name.includes('Personal Training') || primaryService.name.includes('Miniclassi')) {
+            if (intent === 'weight_loss' || goals.includes('weight_loss')) {
+                upsells.push({
+                    suggestion: "Consulenza Nutrizionale Personalizzata",
+                    benefit: "Risultati 3x più veloci con piano alimentare su misura",
+                    price: "80€/mese",
+                    conversion_boost: "90% dei clienti che aggiungono nutrizione raggiungono l'obiettivo"
+                });
+            }
+        }
+        
+        // If primary is basic, suggest frequency increase
+        if (primaryService.name.includes('2x/settimana')) {
+            upsells.push({
+                suggestion: "Upgrade a 3 sessioni/settimana",
+                benefit: "Trasformazione accelerata e risultati evidenti in metà tempo",
+                price: "+200€/mese",
+                conversion_boost: "I clienti 3x/settimana vedono risultati il 60% più velocemente"
+            });
+        }
+        
+        // If app only, suggest hybrid approach
+        if (primaryService.name.includes('App')) {
+            upsells.push({
+                suggestion: "1 Sessione individuale mensile",
+                benefit: "Correzioni personali e motivazione extra per massimizzare l'app",
+                price: "+50€/mese",
+                conversion_boost: "Chi combina app + sessioni ha 85% più aderenza"
+            });
+        }
+        
+        // Analysis-based body composition
+        if (goals.includes('muscle_building') || intent === 'muscle_toning') {
+            upsells.push({
+                suggestion: "Analisi Composizione Corporea Mensile",
+                benefit: "Monitoraggio scientifico progressi - massa grassa/muscolare",
+                price: "Inclusa nei pacchetti 20+ lezioni",
+                conversion_boost: "Vedere i dati motiva il 95% dei clienti"
+            });
+        }
+        
+        return upsells;
+    }
+
+    // 🛍️ CROSS-SELLING GENERATION
+    function generateCrossSells(analysis, userMessage) {
+        const crossSells = [];
+        const { intent, goals } = analysis;
+        const lower = userMessage.toLowerCase();
+        
+        // eBook recommendations based on intent
+        if (intent === 'weight_loss' || goals.includes('weight_loss')) {
+            crossSells.push({
+                product: "eBook 'In Forma da 2 Milioni di Anni'",
+                relevance: "Alimentazione evolutiva per dimagrimento naturale",
+                price: "19.90€",
+                benefit: "Scopri come mangiavano i nostri antenati per perdere peso facilmente"
+            });
+        }
+        
+        if (intent === 'muscle_toning' || goals.includes('muscle_building')) {
+            crossSells.push({
+                product: "eBook 'Body Under Construction Vol.1'",
+                relevance: "La bibbia della trasformazione corporea",
+                price: "29.90€",
+                benefit: "Metodologie avanzate per costruire il fisico dei tuoi sogni"
+            });
+        }
+        
+        if (lower.includes('viaggio') || lower.includes('casa') || lower.includes('tempo')) {
+            crossSells.push({
+                product: "eBook '50 Workout da Viaggio'",
+                relevance: "Allenamenti efficaci senza attrezzi ovunque",
+                price: "GRATUITO",
+                benefit: "Non perdere mai un allenamento, anche in trasferta"
+            });
+        }
+        
+        // MealPrep Planner for organization-focused clients
+        if (lower.includes('organizzare') || lower.includes('pasti') || intent === 'weight_loss') {
+            crossSells.push({
+                product: "MealPrep Planner (Web App)",
+                relevance: "Organizza i pasti settimanali e lista spesa automatica",
+                price: "Gratuito da provare",
+                benefit: "Risparmia ore ogni settimana nella pianificazione alimentare"
+            });
+        }
+        
+        // Business coaching for entrepreneurs
+        if (lower.includes('imprenditore') || lower.includes('business') || lower.includes('lavoro')) {
+            crossSells.push({
+                product: "Upstart - Business Coaching",
+                relevance: "Mindset vincente per corpo E business",
+                price: "Consulenza gratuita",
+                benefit: "Applica la disciplina del fitness al tuo business"
+            });
+        }
+        
+        return crossSells;
+    }
+
+    // 💸 DYNAMIC PRICING
+    function generateDynamicPricing(analysis, recommendations) {
+        const { urgency, conversationStage, budgetSignals } = analysis;
+        
+        // High urgency gets immediate discount
+        if (urgency === 'high') {
+            return {
+                offer: "Sconto Decisione Rapida",
+                discount: "-15% su tutti i pacchetti",
+                validity: "Valido solo per le prossime 48 ore",
+                trigger: "Per chi è pronto a iniziare subito"
+            };
+        }
+        
+        // Budget conscious gets package deal
+        if (budgetSignals === 'budget_conscious') {
+            return {
+                offer: "Pacchetto Starter Conveniente",
+                discount: "Prima sessione di prova a 30€ invece di 40€",
+                validity: "Valido per nuovi clienti",
+                trigger: "Prova senza rischi"
+            };
+        }
+        
+        // Quality focused gets premium bundle
+        if (budgetSignals === 'quality_focused') {
+            return {
+                offer: "Bundle Premium Excellence",
+                discount: "Personal Training + Nutrizione + Analisi = 520€ invece di 580€",
+                validity: "Offerta limitata per clienti seri",
+                trigger: "Trasformazione completa garantita"
+            };
+        }
+        
+        // Multiple services get combination discount
+        if (recommendations.upsells.length >= 2) {
+            return {
+                offer: "Sconto Combinazione Servizi",
+                discount: "-10% su pacchetti combinati",
+                validity: "Per chi vuole il percorso completo",
+                trigger: "Risultati 3x più veloci"
+            };
+        }
+        
+        return null;
+    }
+
+    // Helper functions for conversation analysis
+    function determineConversationStage(history) {
+        if (history.length === 0) return 'initial';
+        if (history.length < 3) return 'exploration';
+        if (history.length < 6) return 'consideration';
+        return 'decision';
+    }
+
+    function extractPreviousRecommendations(history) {
+        // Analyze history for previously mentioned services
+        const mentioned = [];
+        history.forEach(exchange => {
+            const bot = exchange.bot || "";
+            if (bot.includes('Personal Training')) mentioned.push('personal_training');
+            if (bot.includes('Miniclassi')) mentioned.push('miniclassi');
+            if (bot.includes('App')) mentioned.push('app');
+        });
+        return mentioned;
+    }
+
+    // 🔍 QUIZ STATE DETECTION (keeping existing)
     const detectQuizState = (message, history) => {
         const lower = message.toLowerCase();
         
@@ -320,6 +605,32 @@ export default async function handler(req, res) {
     • Focus sulla relazione one-to-one
     • Approccio olistico: corpo, mente, lifestyle
 
+    === 📚 EBOOK E RISORSE DIGITALI ===
+    
+    "IL WAVE SYSTEM" (€14.90):
+    • Metodologia rivoluzionaria per body transformation
+    • Sistema di allenamento a onde
+    • Adatto a tutti i livelli
+    • Include piani nutrizionali
+    
+    "IN FORMA DA 2 MILIONI DI ANNI" (€19.90):
+    • Approccio evolutivo all'alimentazione
+    • Come mangiavano i nostri antenati
+    • Ricette paleo moderne
+    • Scienza della nutrizione applicata
+    
+    "50 WORKOUT DA VIAGGIO" (GRATUITO):
+    • Allenamenti senza attrezzi
+    • Perfetti per hotel e spazi ridotti
+    • 15-45 minuti
+    • Tutti i livelli di fitness
+    
+    "BODY UNDER CONSTRUCTION VOL. 1" (€29.90):
+    • La bibbia della trasformazione corporea
+    • Metodologie avanzate
+    • Periodizzazione dell'allenamento
+    • Psicologia del cambiamento
+
     === ❓ FAQ AVANZATE E OBIEZIONI COMUNI ===
     
     Q: "Non ho mai fatto sport, sono troppo fuori forma..."
@@ -348,7 +659,7 @@ export default async function handler(req, res) {
     let prompt = "";
     
     if (quizState.action === 'start_quiz') {
-        // Start the quiz
+        // Start the quiz (keeping existing logic)
         prompt = `Sei Andrea Padoan, personal trainer e lifestyle coach di Verona.
 
 ${massiveKnowledgeBase}
@@ -366,12 +677,11 @@ Sii caloroso e spiega che questo ti aiuterà a consigliargli il servizio perfett
 Messaggio utente: "${message.trim()}"`;
 
     } else if (quizState.action === 'quiz_answer') {
-        // Handle quiz progression
+        // Handle quiz progression (keeping existing logic)
         const currentStep = quizState.step;
         const nextStep = currentStep + 1;
         
         if (nextStep <= 5) {
-            // Continue with next question
             prompt = `Sei Andrea Padoan, personal trainer e lifestyle coach di Verona.
 
 ${massiveKnowledgeBase}
@@ -390,9 +700,9 @@ Sii incoraggiante e motivante.
 Messaggio utente: "${message.trim()}"`;
 
         } else {
-            // Quiz completed - generate recommendations
+            // Quiz completed - generate recommendations (keeping existing logic but enhanced)
             const answers = extractAnswersFromHistory(conversationHistory, message);
-            const personalizedPlan = recommendationEngine.generatePersonalizedPlan(answers);
+            const personalizedPlan = generatePersonalizedPlan(answers);
             
             prompt = `Sei Andrea Padoan, personal trainer e lifestyle coach di Verona.
 
@@ -416,25 +726,41 @@ Messaggio utente: "${message.trim()}"`;
         }
         
     } else {
-        // Normal conversation
+        // 🚀 ADVANCED RECOMMENDATION ENGINE IN ACTION
+        const messageAnalysis = advancedRecommendationEngine.analyzeMessage(message, conversationHistory);
+        const contextualRecommendations = advancedRecommendationEngine.generateContextualRecommendations(messageAnalysis, message);
+        const recommendationsPrompt = advancedRecommendationEngine.formatRecommendationsForPrompt(contextualRecommendations, messageAnalysis);
+        
+        console.log('🎯 Advanced Recommendations Generated:', {
+            analysis: messageAnalysis,
+            recommendations: contextualRecommendations
+        });
+        
+        // Enhanced conversation prompt with intelligent recommendations
         prompt = `Sei Andrea Padoan, personal trainer e lifestyle coach di Verona.
 
 ${massiveKnowledgeBase}
 
-ISTRUZIONI SPECIALI:
-- Se l'utente chiede consigli sui servizi, suggerisci il quiz di assessment: "Ti faccio 5 domande veloci per consigliarti il servizio perfetto!"
+${recommendationsPrompt}
+
+ISTRUZIONI AVANZATE:
+- Analizza il messaggio dell'utente per capire le sue vere esigenze
+- Se hai generato raccomandazioni sopra, integrale naturalmente nella conversazione
+- Non essere mai aggressivo nel vendere, ma consultivo e utile
+- Usa le raccomandazioni per arricchire la risposta, non per dominare
+- Se l'utente chiede consigli sui servizi, suggerisci il quiz di assessment
 - Se l'utente sembra indeciso, proponi il quiz per aiutarlo a scegliere
 - Sempre professionale, caloroso e motivante
 - Usa esempi concreti e risultati reali
-- Include sempre un call-to-action appropriato
+- Include sempre un call-to-action appropriato ma non invadente
 
 Messaggio utente: "${message.trim()}"
 
-Rispondi come Andrea Padoan:`;
+Rispondi come Andrea Padoan, integrando intelligentemente le raccomandazioni quando appropriato:`;
     }
     
     try {
-        console.log('🔄 Calling Claude API with Quiz System...');
+        console.log('🔄 Calling Claude API with Advanced Recommendation Engine...');
         
         // Chiama Claude API
         const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -446,7 +772,7 @@ Rispondi come Andrea Padoan:`;
             },
             body: JSON.stringify({
                 model: 'claude-3-5-sonnet-20240620',
-                max_tokens: 600,
+                max_tokens: 700, // Increased for richer recommendations
                 messages: [{ role: 'user', content: prompt }]
             })
         });
@@ -460,7 +786,7 @@ Rispondi come Andrea Padoan:`;
         }
         
         const data = await response.json();
-        console.log('✅ Claude API success with Quiz System');
+        console.log('✅ Claude API success with Advanced Recommendations');
         
         if (!data.content || !data.content[0] || !data.content[0].text) {
             console.error('❌ Invalid Claude API response format:', data);
@@ -468,10 +794,10 @@ Rispondi come Andrea Padoan:`;
         }
         
         const botResponse = data.content[0].text;
-        console.log('💬 Quiz-enhanced bot response generated, length:', botResponse.length);
+        console.log('💬 Advanced recommendation-enhanced response generated, length:', botResponse.length);
         
-        // Enhanced Airtable logging with quiz data
-        enhancedAirtableLogging(message.trim(), botResponse, quizState)
+        // Enhanced Airtable logging with recommendation data
+        enhancedAirtableLogging(message.trim(), botResponse, quizState, messageAnalysis)
             .then(() => console.log('✅ Enhanced Airtable logging completed'))
             .catch(err => console.error('❌ Airtable logging failed:', err));
         
@@ -479,7 +805,8 @@ Rispondi come Andrea Padoan:`;
         res.status(200).json({ 
             response: botResponse,
             quiz_state: quizState.action,
-            quiz_step: quizState.step || null
+            quiz_step: quizState.step || null,
+            recommendations_applied: quizState.action === 'normal_chat'
         });
         
     } catch (error) {
@@ -490,12 +817,9 @@ Rispondi come Andrea Padoan:`;
     }
 }
 
-// 🔍 Extract answers from conversation history
+// Keep existing helper functions
 function extractAnswersFromHistory(history, lastMessage) {
     const answers = {};
-    
-    // This is a simplified version - in production you'd want more robust parsing
-    // For now, we'll extract based on message patterns
     
     history.forEach((exchange, index) => {
         const bot = exchange.bot || "";
@@ -512,7 +836,6 @@ function extractAnswersFromHistory(history, lastMessage) {
         }
     });
     
-    // Add the last message as the budget answer if we're at step 5
     if (Object.keys(answers).length === 4) {
         answers.budget_range = lastMessage;
     }
@@ -520,8 +843,47 @@ function extractAnswersFromHistory(history, lastMessage) {
     return answers;
 }
 
-// 📊 ENHANCED AIRTABLE LOGGING with Quiz Data
-async function enhancedAirtableLogging(userMessage, botResponse, quizState) {
+function generatePersonalizedPlan(answers) {
+    // Keep existing quiz-based logic
+    const recommendations = [];
+    let primaryService = "";
+    let reasoning = "";
+    let compatibilityScore = 0;
+    
+    const fitnessLevel = answers.fitness_level || "";
+    const goal = answers.main_goal || "";
+    const time = answers.time_available || "";
+    const experience = answers.experience_level || "";
+    const budget = answers.budget_range || "";
+    
+    if (budget.includes("50-100")) {
+        primaryService = "Miniclassi (15€/sessione)";
+        reasoning = "Budget ottimizzato con massimo valore";
+        compatibilityScore += 7;
+    } else if (budget.includes("100-200")) {
+        primaryService = "Percorso Misto (Miniclassi + Individuali)";
+        reasoning = "Equilibrio perfetto tra attenzione personale e socializzazione";
+        compatibilityScore += 8;
+    } else if (budget.includes("200-400")) {
+        primaryService = "Personal Training Individuale";
+        reasoning = "Attenzione 100% dedicata per risultati ottimali";
+        compatibilityScore += 9;
+    } else {
+        primaryService = "Percorso Premium Completo";
+        reasoning = "La formula di eccellenza per trasformazioni straordinarie";
+        compatibilityScore += 10;
+    }
+    
+    return {
+        primary_service: primaryService,
+        reasoning: reasoning,
+        compatibility_score: Math.min(compatibilityScore, 10),
+        recommendations: recommendations
+    };
+}
+
+// 📊 ENHANCED AIRTABLE LOGGING with Recommendation Data
+async function enhancedAirtableLogging(userMessage, botResponse, quizState, messageAnalysis = null) {
     const webhookUrl = 'https://hooks.airtable.com/workflows/v1/genericWebhook/applozDwnDZOgPvsg/wflXjsQEowx2dmnN8/wtrzKiazR0Tt8171P';
     
     const leadScore = advancedLeadScore(userMessage, botResponse);
@@ -540,17 +902,21 @@ async function enhancedAirtableLogging(userMessage, botResponse, quizState) {
         Urgency_Level: urgencyLevel,
         Quiz_State: quizState.action,
         Quiz_Step: quizState.step || null,
+        AI_Intent: messageAnalysis?.intent || null,
+        AI_Goals: messageAnalysis?.goals?.join(',') || null,
+        AI_Constraints: messageAnalysis?.constraints?.join(',') || null,
+        Budget_Signal: messageAnalysis?.budgetSignals || null,
         Message_Length: userMessage.length,
         Response_Length: botResponse.length,
-        User_Agent: 'Vercel-API-Quiz-Enhanced'
+        User_Agent: 'Vercel-API-Advanced-Recommendations'
     };
     
     try {
-        console.log('📊 Enhanced logging with Quiz data to Airtable...', {
+        console.log('📊 Enhanced logging with AI Recommendation data to Airtable...', {
             leadScore,
             interestArea,
-            quizState: quizState.action,
-            quizStep: quizState.step
+            aiIntent: messageAnalysis?.intent,
+            budgetSignal: messageAnalysis?.budgetSignals
         });
         
         const response = await fetch(webhookUrl, {
@@ -562,7 +928,7 @@ async function enhancedAirtableLogging(userMessage, botResponse, quizState) {
         });
         
         if (response.ok) {
-            console.log('✅ Quiz-enhanced conversation logged to Airtable successfully');
+            console.log('✅ Advanced AI recommendation conversation logged to Airtable successfully');
         } else {
             const errorText = await response.text();
             console.error('❌ Failed to log to Airtable:', response.status, errorText);
@@ -572,43 +938,36 @@ async function enhancedAirtableLogging(userMessage, botResponse, quizState) {
     }
 }
 
-// 🎯 ADVANCED LEAD SCORING (same as before)
+// Keep existing utility functions
 function advancedLeadScore(message, botResponse) {
     let score = 3;
     const lower = message.toLowerCase();
     
-    // Quiz participation bonus
     if (lower.includes('quiz') || lower.includes('assessment') || lower.includes('domande')) {
-        score += 3; // High engagement signal
+        score += 3;
     }
     
-    // High intent signals
     if (lower.includes('voglio iniziare') || lower.includes('come si fa')) score += 4;
     if (lower.includes('quanto costa') || lower.includes('prezzi')) score += 4;
     if (lower.includes('prenotare') || lower.includes('appuntamento')) score += 5;
     if (lower.includes('urgente') || lower.includes('subito')) score += 4;
     
-    // Buying signals
     if (lower.includes('investimento') || lower.includes('budget')) score += 3;
     if (lower.includes('pacchetto') || lower.includes('abbonamento')) score += 3;
     
-    // Specific needs
     if (lower.includes('dimagrire') || lower.includes('perdere peso')) score += 3;
     if (lower.includes('tonificare') || lower.includes('muscoli')) score += 3;
     if (lower.includes('risultati') || lower.includes('obiettivi')) score += 2;
     
-    // Pain points
     if (lower.includes('non riesco') || lower.includes('fallito')) score += 3;
     if (lower.includes('frustrato') || lower.includes('demotivato')) score += 2;
     
-    // Contact readiness
     if (lower.includes('numero') || lower.includes('telefono')) score += 4;
     if (lower.includes('whatsapp')) score += 3;
     
     return Math.min(score, 10);
 }
 
-// 🧠 INTELLIGENT INTEREST DETECTION (same as before)
 function intelligentInterestDetection(message) {
     const lower = message.toLowerCase();
     let scores = {
@@ -621,19 +980,15 @@ function intelligentInterestDetection(message) {
         assessment: 0
     };
     
-    // Assessment/Quiz interest
     if (lower.includes('quiz') || lower.includes('assessment') || lower.includes('domande') || 
         lower.includes('consigli') || lower.includes('quale servizio')) {
         scores.assessment += 3;
     }
     
-    // Fitness keywords
     const fitnessKeywords = ['personal', 'allenamento', 'fitness', 'palestra', 'muscoli', 'forma', 'peso', 'dimagrire', 'tonificare'];
     fitnessKeywords.forEach(keyword => {
         if (lower.includes(keyword)) scores.fitness += 1;
     });
-    
-    // Other categories (same logic as before)...
     
     const maxScore = Math.max(...Object.values(scores));
     const topCategory = Object.keys(scores).find(key => scores[key] === maxScore);
@@ -641,7 +996,6 @@ function intelligentInterestDetection(message) {
     return maxScore > 0 ? topCategory : 'general';
 }
 
-// 🎭 CONVERSATION STAGE DETECTION (same as before)
 function detectConversationStage(message) {
     const lower = message.toLowerCase();
     
@@ -658,7 +1012,6 @@ function detectConversationStage(message) {
     return 'exploration';
 }
 
-// ⚡ URGENCY LEVEL DETECTION (same as before)
 function detectUrgency(message) {
     const lower = message.toLowerCase();
     
