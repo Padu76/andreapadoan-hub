@@ -414,7 +414,7 @@ export default async function handler(req, res) {
                     prompt += "\n";
                 }
                 
-                if (recommendations.pricing.offer) {
+                if (recommendations.pricing && recommendations.pricing.offer) {
                     prompt += `OFFERTA DINAMICA: ${recommendations.pricing.offer}\n`;
                     prompt += `Sconto: ${recommendations.pricing.discount}\n`;
                     prompt += `Scadenza: ${recommendations.pricing.validity}\n\n`;
@@ -709,7 +709,7 @@ export default async function handler(req, res) {
             };
         }
         
-        if (recommendations.upsells && recommendations.upsells.length >= 2) {
+        if (recommendations && recommendations.upsells && recommendations.upsells.length >= 2) {
             return {
                 offer: "Sconto Combinazione Servizi",
                 discount: "-10% su pacchetti combinati",
