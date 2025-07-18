@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TribuCoach Dashboard 2.0 | Customer Intelligence</title>
+    <title>Andrea Padoan Dashboard | Personal Trainer & Lifestyle Coach</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -792,8 +792,8 @@
     <!-- Login Screen -->
     <div class="login-container" id="loginScreen">
         <div class="login-box">
-            <div class="login-title">🎯 TribuCoach Dashboard 2.0</div>
-            <div class="login-subtitle">Advanced Customer Intelligence & AI Insights</div>
+            <div class="login-title">🎯 Andrea Padoan Dashboard</div>
+            <div class="login-subtitle">Personal Trainer & Lifestyle Coach Analytics</div>
             <input type="password" id="passwordInput" class="login-input" placeholder="Inserisci password" autocomplete="current-password">
             <button onclick="login()" class="login-btn">Accedi alla Dashboard</button>
             <div id="errorMessage" class="error-message" style="display: none;"></div>
@@ -806,10 +806,10 @@
         <header class="header">
             <div class="header-content">
                 <div class="logo">
-                    <div class="logo-icon">TC</div>
+                    <div class="logo-icon">AP</div>
                     <div class="logo-text">
-                        <h1>TribuCoach Dashboard 2.0</h1>
-                        <p>Advanced Customer Intelligence & Real-Time Analytics</p>
+                        <h1>Andrea Padoan Dashboard</h1>
+                        <p>Personal Trainer & Lifestyle Coach Analytics</p>
                     </div>
                 </div>
 
@@ -1052,7 +1052,7 @@
 
         // Initialize Dashboard
         function initDashboard() {
-            console.log('🚀 Initializing TribuCoach Dashboard 2.0...');
+            console.log('🚀 Initializing Andrea Padoan Dashboard...');
             
             // Start refresh timer
             startRefreshTimer();
@@ -1075,7 +1075,7 @@
             try {
                 updateConnectionStatus('loading', 'Caricamento dati...');
                 
-                // Call dashboard API (conversations endpoint for overview)
+                // Call conversations API for overview data
                 const response = await fetch('/api/conversations', {
                     method: 'GET',
                     headers: {
@@ -1095,7 +1095,7 @@
                 
             } catch (error) {
                 console.error('❌ Error loading data:', error);
-                updateConnectionStatus('error', 'Errore connessione');
+                updateConnectionStatus('error', 'Errore connessione API');
                 showErrorState();
             }
         }
@@ -1216,7 +1216,7 @@
             if (conversionRate > 20) {
                 insights.push({
                     title: "🎯 Conversion Rate Ottimale",
-                    text: `Il tasso di conversione del ${conversionRate}% è sopra la media. Continua così!`
+                    text: `Il tasso di conversione del ${conversionRate}% è sopra la media del settore fitness. Ottimo lavoro!`
                 });
             }
             
@@ -1224,14 +1224,14 @@
             if (hotLeads > 0) {
                 insights.push({
                     title: "🔥 Lead ad Alta Priorità",
-                    text: `Hai ${hotLeads} lead caldi. Contattali entro 24h per massimizzare le conversioni.`
+                    text: `Hai ${hotLeads} lead caldi. Contattali entro 24h per massimizzare le conversioni nel personal training.`
                 });
             }
             
             if (totalConversations > 10) {
                 insights.push({
-                    title: "📈 Crescita Costante",
-                    text: `${totalConversations} conversazioni totali mostrano un interesse crescente nei tuoi servizi.`
+                    title: "📈 Crescita del Brand",
+                    text: `${totalConversations} conversazioni totali mostrano un interesse crescente nei tuoi servizi di coaching.`
                 });
             }
             
@@ -1318,8 +1318,8 @@
                 container.innerHTML = `
                     <div class="error-state">
                         <i class="fas fa-exclamation-triangle"></i>
-                        <h3>Connessione API non disponibile</h3>
-                        <p>Verifica la configurazione API</p>
+                        <h3>API non disponibile</h3>
+                        <p>Verifica che /api/conversations sia configurato in Vercel</p>
                         <button class="action-btn" onclick="refreshData()" style="margin-top: 15px;">
                             <i class="fas fa-retry"></i> Riprova
                         </button>
@@ -1334,10 +1334,10 @@
             document.getElementById('hotLeads').textContent = '!';
             
             // Update change indicators
-            document.getElementById('conversationsChange').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Errore dati';
-            document.getElementById('leadsChange').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Errore dati';
-            document.getElementById('conversionChange').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Errore dati';
-            document.getElementById('hotLeadsChange').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Errore dati';
+            document.getElementById('conversationsChange').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Errore API';
+            document.getElementById('leadsChange').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Errore API';
+            document.getElementById('conversionChange').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Errore API';
+            document.getElementById('hotLeadsChange').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Errore API';
         }
 
         // Update Dashboard with real data
@@ -1625,7 +1625,8 @@
         // Utility functions
         function getTimeAgo(timestamp) {
             const now = new Date();
-            const diff = now - new Date(timestamp);
+            const time = new Date(timestamp);
+            const diff = now - time;
             const minutes = Math.floor(diff / 60000);
             const hours = Math.floor(diff / 3600000);
             const days = Math.floor(diff / 86400000);
@@ -1636,14 +1637,15 @@
         }
 
         function generateWhatsAppMessage(lead) {
+            const name = lead.name || 'Andrea';
             const templates = {
-                fitness: `Ciao ${lead.name || 'Andrea'}! Ho visto le tue domande sul fitness. Parliamone! 💪`,
-                nutrition: `Ciao ${lead.name || 'Andrea'}! Interessato alla nutrizione? Ti aiuto volentieri! 🥗`,
-                business: `Ciao ${lead.name || 'Andrea'}! Vedo che ti interessa il business coaching. Facciamo una call! 🚀`,
-                lifestyle: `Ciao ${lead.name || 'Andrea'}! Il lifestyle coaching può davvero trasformare la tua vita. Parliamone! ✨`
+                fitness: `Ciao ${name}! Ho visto le tue domande sul fitness. Parliamone! 💪`,
+                nutrition: `Ciao ${name}! Interessato alla nutrizione? Ti aiuto volentieri! 🥗`,
+                business: `Ciao ${name}! Vedo che ti interessa il business coaching. Facciamo una call! 🚀`,
+                lifestyle: `Ciao ${name}! Il lifestyle coaching può davvero trasformare la tua vita. Parliamone! ✨`
             };
             
-            return templates[lead.interest] || `Ciao ${lead.name || 'Andrea'}! Grazie per il tuo interesse. Come posso aiutarti?`;
+            return templates[lead.interest] || `Ciao ${name}! Grazie per il tuo interesse. Come posso aiutarti?`;
         }
 
         function escapeHtml(text) {
@@ -1671,18 +1673,15 @@
 
         function exportQuestions() {
             console.log('📊 Exporting questions analysis');
-            // Future: Generate CSV export of questions data
             alert('Feature coming soon: Export delle domande più frequenti in formato CSV');
         }
 
         function toggleChartType() {
-            // Future: Switch between doughnut and bar chart
             console.log('📈 Toggling chart type');
         }
 
         function changeTrendPeriod(period) {
             console.log('📅 Changing trend period to:', period);
-            // Future: Load different time periods
         }
 
         // Refresh timer
@@ -1709,7 +1708,7 @@
         }
 
         // Initialize on page load
-        console.log('🎯 TribuCoach Dashboard 2.0 loaded successfully - REAL DATA MODE');
+        console.log('🎯 Andrea Padoan Dashboard loaded successfully - REAL DATA MODE');
     </script>
 </body>
 </html>
