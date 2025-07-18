@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TribuCoach - Conversazioni | Chat Complete & Timeline</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+
+        /* Login Screen */
+        .login-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+
+        .login-box {
+            background: rgba(26, 26, 26, 0.95);
+            padding: 50px;
+            border-radius: 20px;
+            border: 2px solid #ff6b35;
+            backdrop-filter: blur(20px);
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 25px 50px rgba(255, 107, 53, 0.3);
+        }
+
+        .login-title {
+            color: #ff6b35;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .login-subtitle {
+            color: #ccc;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 18px 25px;
+            border: 2px solid #333;
+            border-radius: 15px;
+            background: #1a1a1a;
+            color: #fff;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .login-input:focus {
+            border-color: #ff6b35;
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .login-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #ff6b35, #ff8533);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 107, 53, 0.5);
+        }
+
+        .error-message {
+            color: #ff4444;
+            margin-top: 20px;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* Dashboard Layout */
+        .dashboard {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .dashboard.active {
+            display: block;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 3px solid #ff6b35;
+            padding: 25px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ff6b35, #ff8533);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.6rem;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        .logo-text h1 {
+            color: #ff6b35;
+            font-size: 1.6rem;
+            font-weight: bold;
+        }
+
+        .logo-text p {
+            color: #888;
+            font-size: 1rem;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            gap: 5px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 5px;
+        }
+
+        .nav-tab {
+            background: transparent;
+            border: none;
+            color: #888;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-tab:hover {
+            background: rgba(255, 107, 53, 0.1);
+            color: #ff6b35;
+        }
+
+        .nav-tab.active {
+            background: #ff6b35;
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .refresh-btn {
+            background: rgba(255, 107, 53, 0.1);
+            border: 2px solid #ff6b35;
+            color: #ff6b35;
+            padding: 12px 25px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .refresh-btn:hover {
+            background: #ff6b35;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(74, 222, 128, 0.1);
+            border: 1px solid #4ade80;
+            color: #4ade80;
+            padding: 8px 15px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4ade80;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .logout-btn {
+            background: rgba(255, 68, 68, 0.1);
+            border: 2px solid #ff4444;
+            color: #ff4444;
+            padding: 12px 18px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .logout-btn:hover {
+            background: #ff4444;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 40px 25px;
+        }
+
+        /* Page Header */
+        .page-header {
+            margin-bottom: 40px;
+        }
+
+        .page-title {
+            color: #fff;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .page-subtitle {
+            color: #888;
+            font-size: 1.2rem;
+        }
+
+        /* Filters & Controls */
+        .controls-section {
+            background: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            align-items: end;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .control-label {
+            color: #ccc;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .control-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 12px 15px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .control-input:focus {
+            border-color: #ff6b35;
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.3);
+            outline: none;
+        }
+
+        .control-select {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 12px 15px;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .control-select:focus {
+            border-color: #ff6b35;
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.3);
+            outline: none;
+        }
+
+        .control-select option {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .filter-btn {
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid #ff6b35;
+            color: #ff6b35;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: #ff6b35;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Conversations Grid */
+        .conversations-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            height: calc(100vh - 300px);
+            min-height: 600px;
+        }
+
+        /* Conversations List */
+        .conversations-list {
+            background: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow-y: auto;
+        }
+
+        .list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #333;
+        }
+
+        .list-title {
+            color: #ff6b35;
+            font-size: 1.4rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .list-count {
+            background: rgba(255, 107, 53, 0.2);
+            color: #ff6b35;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .conversation-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .conversation-item:hover {
+            border-color: #ff6b35;
+            background: rgba(255, 107, 53, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .conversation-item.active {
+            border-color: #ff6b35;
+            background: rgba(255, 107, 53, 0.1);
+            box-shadow: 0 5px 20px rgba(255, 107, 53, 0.2);
+        }
+
+        .conversation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .conversation-user {
+            flex: 1;
+        }
+
+        .user-name {
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .user-contact {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .conversation-meta {
+            text-align: right;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .conversation-time {
+            margin-bottom: 4px;
+        }
+
+        .conversation-status {
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .status-new { background: rgba(74, 222, 128, 0.2); color: #4ade80; }
+        .status-active { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
+        .status-contacted { background: rgba(96, 165, 250, 0.2); color: #60a5fa; }
+        .status-completed { background: rgba(156, 163, 175, 0.2); color: #9ca3af; }
+
+        .conversation-preview {
+            color: #ccc;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            background: rgba(0,0,0,0.2);
+            padding: 10px;
+            border-radius: 8px;
+            border-left: 3px solid #ff6b35;
+        }
+
+        .conversation-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(255, 107, 53, 0.2);
+            color: #ff6b35;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .tag.hot { background: rgba(255, 68, 68, 0.2); color: #ff4444; animation: glow 2s ease-in-out infinite alternate; }
+        .tag.has-contact { background: rgba(74, 222, 128, 0.2); color: #4ade80; }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 5px rgba(255, 68, 68, 0.5); }
+            to { box-shadow: 0 0 15px rgba(255, 68, 68, 0.8); }
+        }
+
+        /* Conversation Detail */
+        .conversation-detail {
+            background: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #333;
+        }
+
+        .detail-title {
+            color: #ff6b35;
+            font-size: 1.4rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .detail-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .action-btn {
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid #ff6b35;
+            color: #ff6b35;
+            padding: 10px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-btn:hover {
+            background: #ff6b35;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .action-btn.whatsapp {
+            background: rgba(37, 211, 102, 0.1);
+            border-color: #25D366;
+            color: #25D366;
+        }
+
+        .action-btn.whatsapp:hover {
+            background: #25D366;
+            color: white;
+        }
+
+        /* Chat Timeline */
+        .chat-timeline {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .timeline-message {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .avatar-user {
+            background: linear-gradient(135deg, #60a5fa, #3b82f6);
+            color: white;
+        }
+
+        .avatar-ai {
+            background: linear-gradient(135deg, #ff6b35, #ff8533);
+            color: white;
+        }
+
+        .message-content {
+            flex: 1;
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .message-sender {
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .message-time {
+            color: #888;
+            font-size: 0.8rem;
+        }
+
+        .message-text {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 15px;
+            color: #e0e0e0;
+            line-height: 1.5;
+            border-left: 3px solid transparent;
+        }
+
+        .timeline-message.user .message-text {
+            border-left-color: #60a5fa;
+            background: rgba(96, 165, 250, 0.1);
+        }
+
+        .timeline-message.ai .message-text {
+            border-left-color: #ff6b35;
+            background: rgba(255, 107, 53, 0.1);
+        }
+
+        /* Contact Info Panel */
+        .contact-info {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .contact-title {
+            color: #ff6b35;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-field {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-field:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .field-label {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .field-value {
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .field-value.missing {
+            color: #888;
+            font-style: italic;
+        }
+
+        /* Empty State */
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 400px;
+            color: #888;
+            text-align: center;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            color: #ccc;
+            margin-bottom: 10px;
+        }
+
+        /* Loading State */
+        .loading-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
+            color: #888;
+        }
+
+        .loading-state i {
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+            font-size: 2rem;
+            color: #ff6b35;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .conversations-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .conversation-detail {
+                height: 500px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .controls-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-tabs {
+                overflow-x: auto;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+
+            .nav-tabs::-webkit-scrollbar {
+                display: none;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .main-content {
+                padding: 25px 20px;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .conversations-list,
+            .conversation-detail {
+                padding: 20px;
+            }
+        }
+
+        /* Custom Scrollbar */
+        .chat-timeline::-webkit-scrollbar,
+        .conversations-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-timeline::-webkit-scrollbar-track,
+        .conversations-list::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .chat-timeline::-webkit-scrollbar-thumb,
+        .conversations-list::-webkit-scrollbar-thumb {
+            background: #ff6b35;
+            border-radius: 3px;
+        }
+
+        .chat-timeline::-webkit-scrollbar-thumb:hover,
+        .conversations-list::-webkit-scrollbar-thumb:hover {
+            background: #ff8533;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div class="login-container" id="loginScreen">
+        <div class="login-box">
+            <div class="login-title">💬 TribuCoach Conversazioni</div>
+            <div class="login-subtitle">Chat Complete & Timeline Messaggi</div>
+            <input type="password" id="passwordInput" class="login-input" placeholder="Inserisci password" autocomplete="current-password">
+            <button onclick="login()" class="login-btn">Accedi alle Conversazioni</button>
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+        </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div class="dashboard" id="mainDashboard">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">TC</div>
+                    <div class="logo-text">
+                        <h1>TribuCoach Conversazioni</h1>
+                        <p>Chat Complete & Timeline Messaggi</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Tabs -->
+                <nav class="nav-tabs">
+                    <a href="./dashboard.html" class="nav-tab">
+                        <i class="fas fa-chart-bar"></i> Overview
+                    </a>
+                    <a href="./conversations.html" class="nav-tab active">
+                        <i class="fas fa-comments"></i> Conversazioni
+                    </a>
+                    <a href="./leads.html" class="nav-tab">
+                        <i class="fas fa-users"></i> Lead CRM
+                    </a>
+                    <a href="./analytics.html" class="nav-tab">
+                        <i class="fas fa-chart-line"></i> Analytics
+                    </a>
+                </nav>
+
+                <div class="header-actions">
+                    <div class="status-indicator">
+                        <div class="status-dot"></div>
+                        <span id="connectionStatus">Connesso ad Airtable</span>
+                    </div>
+                    <button class="refresh-btn" onclick="refreshData()">
+                        <i class="fas fa-sync-alt"></i> Aggiorna
+                    </button>
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title">
+                    <i class="fas fa-comments"></i>
+                    Conversazioni Complete
+                </h1>
+                <p class="page-subtitle">Timeline dettagliata di tutte le chat con raccolta contatti e analytics</p>
+            </div>
+
+            <!-- Controls Section -->
+            <div class="controls-section">
+                <div class="controls-grid">
+                    <div class="control-group">
+                        <label class="control-label">Cerca conversazioni</label>
+                        <input type="text" class="control-input" id="searchInput" placeholder="Nome, telefono o messaggio...">
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Filtra per stato</label>
+                        <select class="control-select" id="statusFilter">
+                            <option value="all">Tutti gli stati</option>
+                            <option value="new">🆕 Nuove</option>
+                            <option value="active">🟡 Attive</option>
+                            <option value="contacted">📞 Contattate</option>
+                            <option value="completed">✅ Completate</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Periodo</label>
+                        <select class="control-select" id="periodFilter">
+                            <option value="today">Oggi</option>
+                            <option value="week">Ultima settimana</option>
+                            <option value="month">Ultimo mese</option>
+                            <option value="all">Tutte</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Azioni rapide</label>
+                        <div class="filter-buttons">
+                            <button class="filter-btn" onclick="filterByTag('hot')">🔥 Hot</button>
+                            <button class="filter-btn" onclick="filterByTag('has-contact')">📞 Con contatto</button>
+                            <button class="filter-btn" onclick="exportConversations()">📊 Export</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conversations Grid -->
+            <div class="conversations-grid">
+                <!-- Conversations List -->
+                <div class="conversations-list">
+                    <div class="list-header">
+                        <div class="list-title">
+                            <i class="fas fa-list"></i>
+                            Lista Conversazioni
+                            <span class="list-count" id="conversationCount">0</span>
+                        </div>
+                    </div>
+                    <div id="conversationsList">
+                        <div class="loading-state">
+                            <i class="fas fa-spinner"></i>
+                            Caricamento conversazioni da Airtable...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conversation Detail -->
+                <div class="conversation-detail">
+                    <div class="detail-header">
+                        <div class="detail-title">
+                            <i class="fas fa-comment-dots"></i>
+                            <span id="detailTitle">Seleziona una conversazione</span>
+                        </div>
+                        <div class="detail-actions" id="detailActions" style="display: none;">
+                            <a href="#" class="action-btn whatsapp" id="whatsappBtn" target="_blank">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                            <button class="action-btn" onclick="markAsContacted()">
+                                <i class="fas fa-phone"></i> Contattato
+                            </button>
+                            <button class="action-btn" onclick="exportConversation()">
+                                <i class="fas fa-download"></i> Export
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="conversationContent">
+                        <div class="empty-state">
+                            <i class="fas fa-comments"></i>
+                            <h3>Nessuna conversazione selezionata</h3>
+                            <p>Seleziona una conversazione dalla lista per vedere la timeline completa</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Global variables
+        let conversationsData = [];
+        let selectedConversation = null;
+        let isLoggedIn = false;
+        let refreshInterval;
+
+        // Authentication
+        function login() {
+            const password = document.getElementById('passwordInput').value;
+            const errorDiv = document.getElementById('errorMessage');
+            
+            if (password === 'tribu2024') {
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('mainDashboard').classList.add('active');
+                isLoggedIn = true;
+                initDashboard();
+                errorDiv.style.display = 'none';
+            } else {
+                errorDiv.textContent = 'Password non corretta';
+                errorDiv.style.display = 'block';
+                document.getElementById('passwordInput').value = '';
+            }
+        }
+
+        function logout() {
+            isLoggedIn = false;
+            clearInterval(refreshInterval);
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('mainDashboard').classList.remove('active');
+            document.getElementById('passwordInput').value = '';
+        }
+
+        // Enter key for login
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !isLoggedIn) {
+                login();
+            }
+        });
+
+        // Initialize Dashboard
+        function initDashboard() {
+            console.log('🚀 Initializing Conversations Dashboard...');
+            
+            // Load conversations data
+            loadConversationsData();
+            
+            // Set up auto-refresh every 30 seconds
+            refreshInterval = setInterval(() => {
+                if (isLoggedIn) {
+                    refreshData();
+                }
+            }, 30000);
+
+            // Set up event listeners
+            setupEventListeners();
+        }
+
+        // Setup Event Listeners
+        function setupEventListeners() {
+            // Search input
+            document.getElementById('searchInput').addEventListener('input', handleSearch);
+            
+            // Filters
+            document.getElementById('statusFilter').addEventListener('change', applyFilters);
+            document.getElementById('periodFilter').addEventListener('change', applyFilters);
+        }
+
+        // Load Conversations Data from Airtable
+        async function loadConversationsData() {
+            console.log('📊 Loading conversations from Airtable...');
+            
+            try {
+                updateConnectionStatus('loading', 'Caricamento conversazioni...');
+                
+                // Call conversations API
+                const response = await fetch('/api/conversations', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    conversationsData = data.conversations || [];
+                    console.log('✅ Conversations loaded successfully:', conversationsData);
+                    updateConnectionStatus('connected', 'Connesso ad Airtable');
+                    renderConversationsList();
+                } else {
+                    throw new Error(`API Error: ${response.status}`);
+                }
+                
+            } catch (error) {
+                console.error('❌ Error loading conversations:', error);
+                updateConnectionStatus('error', 'Errore connessione');
+                showErrorState();
+            }
+        }
+
+        // Update connection status
+        function updateConnectionStatus(status, message) {
+            const statusElement = document.getElementById('connectionStatus');
+            const statusIndicator = statusElement.parentElement;
+            
+            statusElement.textContent = message;
+            
+            const dot = statusIndicator.querySelector('.status-dot');
+            switch(status) {
+                case 'connected':
+                    statusIndicator.style.background = 'rgba(74, 222, 128, 0.1)';
+                    statusIndicator.style.borderColor = '#4ade80';
+                    statusIndicator.style.color = '#4ade80';
+                    dot.style.background = '#4ade80';
+                    break;
+                case 'loading':
+                    statusIndicator.style.background = 'rgba(251, 191, 36, 0.1)';
+                    statusIndicator.style.borderColor = '#fbbf24';
+                    statusIndicator.style.color = '#fbbf24';
+                    dot.style.background = '#fbbf24';
+                    break;
+                case 'error':
+                    statusIndicator.style.background = 'rgba(248, 113, 113, 0.1)';
+                    statusIndicator.style.borderColor = '#f87171';
+                    statusIndicator.style.color = '#f87171';
+                    dot.style.background = '#f87171';
+                    break;
+            }
+        }
+
+        // Show error state
+        function showErrorState() {
+            const container = document.getElementById('conversationsList');
+            container.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Errore di connessione</h3>
+                    <p>Impossibile caricare le conversazioni da Airtable</p>
+                    <button class="filter-btn" onclick="refreshData()" style="margin-top: 15px;">
+                        <i class="fas fa-retry"></i> Riprova
+                    </button>
+                </div>
+            `;
+        }
+
+        // Render Conversations List
+        function renderConversationsList(filteredData = null) {
+            const data = filteredData || conversationsData;
+            const container = document.getElementById('conversationsList');
+            const countElement = document.getElementById('conversationCount');
+            
+            countElement.textContent = data.length;
+
+            if (data.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-comments"></i>
+                        <h3>Nessuna conversazione trovata</h3>
+                        <p>Le conversazioni appariranno qui quando ci saranno nuove chat</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = data.map(conv => {
+                const lastMessage = conv.messages && conv.messages.length > 0 
+                    ? conv.messages[conv.messages.length - 1].content 
+                    : 'Nessun messaggio';
+                
+                const timeAgo = getTimeAgo(conv.timestamp);
+                const hasContact = conv.name && conv.phone;
+                
+                return `
+                    <div class="conversation-item" onclick="selectConversation('${conv.id}')">
+                        <div class="conversation-header">
+                            <div class="conversation-user">
+                                <div class="user-name">${escapeHtml(conv.name || 'Utente Anonimo')}</div>
+                                <div class="user-contact">
+                                    ${conv.phone ? `📱 ${conv.phone}` : '📱 Non fornito'}
+                                    ${conv.email ? ` • ✉️ ${conv.email}` : ''}
+                                </div>
+                            </div>
+                            <div class="conversation-meta">
+                                <div class="conversation-time">${timeAgo}</div>
+                                <div class="conversation-status status-${conv.status || 'new'}">${getStatusLabel(conv.status)}</div>
+                            </div>
+                        </div>
+                        <div class="conversation-preview">"${escapeHtml(lastMessage.substring(0, 100))}..."</div>
+                        <div class="conversation-tags">
+                            ${conv.isHot ? '<span class="tag hot">🔥 HOT</span>' : ''}
+                            ${hasContact ? '<span class="tag has-contact">📞 Contatto</span>' : ''}
+                            ${conv.interest ? `<span class="tag">${escapeHtml(conv.interest)}</span>` : ''}
+                            <span class="tag">${conv.messages ? conv.messages.length : 0} messaggi</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Select Conversation
+        function selectConversation(conversationId) {
+            selectedConversation = conversationsData.find(conv => conv.id === conversationId);
+            
+            if (!selectedConversation) return;
+
+            // Update active state
+            document.querySelectorAll('.conversation-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+
+            // Render conversation detail
+            renderConversationDetail();
+        }
+
+        // Render Conversation Detail
+        function renderConversationDetail() {
+            if (!selectedConversation) return;
+
+            const titleElement = document.getElementById('detailTitle');
+            const actionsElement = document.getElementById('detailActions');
+            const contentElement = document.getElementById('conversationContent');
+            const whatsappBtn = document.getElementById('whatsappBtn');
+
+            // Update header
+            titleElement.textContent = selectedConversation.name || 'Utente Anonimo';
+            actionsElement.style.display = 'flex';
+
+            // Update WhatsApp button
+            const whatsappMessage = generateWhatsAppMessage(selectedConversation);
+            whatsappBtn.href = `https://wa.me/3478881515?text=${encodeURIComponent(whatsappMessage)}`;
+
+            // Render content
+            contentElement.innerHTML = `
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <div class="contact-title">
+                        <i class="fas fa-address-card"></i>
+                        Informazioni Contatto
+                    </div>
+                    <div class="contact-field">
+                        <span class="field-label">Nome:</span>
+                        <span class="field-value ${!selectedConversation.name ? 'missing' : ''}">${escapeHtml(selectedConversation.name) || 'Non fornito'}</span>
+                    </div>
+                    <div class="contact-field">
+                        <span class="field-label">Telefono:</span>
+                        <span class="field-value ${!selectedConversation.phone ? 'missing' : ''}">${selectedConversation.phone || 'Non fornito'}</span>
+                    </div>
+                    <div class="contact-field">
+                        <span class="field-label">Email:</span>
+                        <span class="field-value ${!selectedConversation.email ? 'missing' : ''}">${selectedConversation.email || 'Non fornito'}</span>
+                    </div>
+                    <div class="contact-field">
+                        <span class="field-label">Interesse:</span>
+                        <span class="field-value">${escapeHtml(selectedConversation.interest) || 'Generale'}</span>
+                    </div>
+                    <div class="contact-field">
+                        <span class="field-label">Stato:</span>
+                        <span class="field-value">${getStatusLabel(selectedConversation.status)}</span>
+                    </div>
+                    <div class="contact-field">
+                        <span class="field-label">Messaggi:</span>
+                        <span class="field-value">${selectedConversation.messages ? selectedConversation.messages.length : 0}</span>
+                    </div>
+                </div>
+
+                <!-- Chat Timeline -->
+                <div class="chat-timeline">
+                    ${renderChatTimeline()}
+                </div>
+            `;
+        }
+
+        // Render Chat Timeline
+        function renderChatTimeline() {
+            if (!selectedConversation.messages || selectedConversation.messages.length === 0) {
+                return `
+                    <div class="empty-state">
+                        <i class="fas fa-comment-slash"></i>
+                        <h3>Nessun messaggio</h3>
+                        <p>La cronologia dei messaggi apparirà qui</p>
+                    </div>
+                `;
+            }
+
+            return selectedConversation.messages.map(message => {
+                const isUser = message.role === 'user';
+                const timeFormatted = formatMessageTime(message.timestamp);
+                
+                return `
+                    <div class="timeline-message ${isUser ? 'user' : 'ai'}">
+                        <div class="message-avatar ${isUser ? 'avatar-user' : 'avatar-ai'}">
+                            ${isUser ? 'U' : 'AI'}
+                        </div>
+                        <div class="message-content">
+                            <div class="message-header">
+                                <span class="message-sender">${isUser ? (selectedConversation.name || 'Utente') : 'Andrea (AI)'}</span>
+                                <span class="message-time">${timeFormatted}</span>
+                            </div>
+                            <div class="message-text">${escapeHtml(message.content)}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Utility Functions
+        function getTimeAgo(timestamp) {
+            const now = new Date();
+            const time = new Date(timestamp);
+            const diff = now - time;
+            const minutes = Math.floor(diff / 60000);
+            const hours = Math.floor(diff / 3600000);
+            const days = Math.floor(diff / 86400000);
+            
+            if (minutes < 60) return `${minutes}m fa`;
+            if (hours < 24) return `${hours}h fa`;
+            return `${days}g fa`;
+        }
+
+        function formatMessageTime(timestamp) {
+            return new Date(timestamp).toLocaleString('it-IT', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        function getStatusLabel(status) {
+            const labels = {
+                'new': '🆕 Nuova',
+                'active': '🟡 Attiva',
+                'contacted': '📞 Contattata',
+                'completed': '✅ Completata'
+            };
+            return labels[status] || '🆕 Nuova';
+        }
+
+        function generateWhatsAppMessage(conversation) {
+            const name = conversation.name || 'Andrea';
+            const templates = {
+                fitness: `Ciao ${name}! Ho visto le tue domande sul fitness. Parliamone! 💪`,
+                nutrition: `Ciao ${name}! Interessato alla nutrizione? Ti aiuto volentieri! 🥗`,
+                business: `Ciao ${name}! Vedo che ti interessa il business coaching. Facciamo una call! 🚀`,
+                lifestyle: `Ciao ${name}! Il lifestyle coaching può davvero trasformare la tua vita. Parliamone! ✨`
+            };
+            
+            return templates[conversation.interest] || `Ciao ${name}! Grazie per il tuo interesse. Come posso aiutarti?`;
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Filter Functions
+        function handleSearch() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const filteredData = conversationsData.filter(conv => {
+                return (conv.name && conv.name.toLowerCase().includes(searchTerm)) ||
+                       (conv.phone && conv.phone.includes(searchTerm)) ||
+                       (conv.messages && conv.messages.some(msg => msg.content.toLowerCase().includes(searchTerm)));
+            });
+            renderConversationsList(filteredData);
+        }
+
+        function applyFilters() {
+            const statusFilter = document.getElementById('statusFilter').value;
+            const periodFilter = document.getElementById('periodFilter').value;
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+
+            let filteredData = [...conversationsData];
+
+            // Apply status filter
+            if (statusFilter !== 'all') {
+                filteredData = filteredData.filter(conv => conv.status === statusFilter);
+            }
+
+            // Apply period filter
+            if (periodFilter !== 'all') {
+                const now = new Date();
+                let cutoffDate;
+                
+                switch(periodFilter) {
+                    case 'today':
+                        cutoffDate = new Date(now.setHours(0, 0, 0, 0));
+                        break;
+                    case 'week':
+                        cutoffDate = new Date(now.setDate(now.getDate() - 7));
+                        break;
+                    case 'month':
+                        cutoffDate = new Date(now.setMonth(now.getMonth() - 1));
+                        break;
+                }
+                
+                if (cutoffDate) {
+                    filteredData = filteredData.filter(conv => new Date(conv.timestamp) >= cutoffDate);
+                }
+            }
+
+            // Apply search filter
+            if (searchTerm) {
+                filteredData = filteredData.filter(conv => {
+                    return (conv.name && conv.name.toLowerCase().includes(searchTerm)) ||
+                           (conv.phone && conv.phone.includes(searchTerm)) ||
+                           (conv.messages && conv.messages.some(msg => msg.content.toLowerCase().includes(searchTerm)));
+                });
+            }
+
+            renderConversationsList(filteredData);
+        }
+
+        function filterByTag(tag) {
+            let filteredData;
+            
+            switch(tag) {
+                case 'hot':
+                    filteredData = conversationsData.filter(conv => conv.isHot);
+                    break;
+                case 'has-contact':
+                    filteredData = conversationsData.filter(conv => conv.name && conv.phone);
+                    break;
+                default:
+                    filteredData = conversationsData;
+            }
+            
+            renderConversationsList(filteredData);
+        }
+
+        // Action Functions
+        function refreshData() {
+            console.log('🔄 Manual refresh triggered');
+            loadConversationsData();
+        }
+
+        function markAsContacted() {
+            if (!selectedConversation) return;
+            
+            // TODO: Update status in Airtable
+            selectedConversation.status = 'contacted';
+            renderConversationDetail();
+            renderConversationsList();
+            
+            console.log('📞 Marked as contacted:', selectedConversation.id);
+        }
+
+        function exportConversation() {
+            if (!selectedConversation) return;
+            
+            // TODO: Generate and download conversation export
+            console.log('📊 Exporting conversation:', selectedConversation.id);
+            alert('Feature in sviluppo: Export conversazione singola');
+        }
+
+        function exportConversations() {
+            // TODO: Generate and download all conversations export
+            console.log('📊 Exporting all conversations');
+            alert('Feature in sviluppo: Export tutte le conversazioni');
+        }
+
+        // Initialize on page load
+        console.log('💬 TribuCoach Conversations Dashboard loaded successfully');
+    </script>
+</body>
+</html>
