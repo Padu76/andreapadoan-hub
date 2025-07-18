@@ -601,19 +601,21 @@ export default async function handler(req, res) {
     let prompt = "";
     
     if (quizState.action === 'start_quiz') {
-        prompt = `Sei Andrea Padoan, personal trainer e lifestyle coach di Verona.
+        prompt = `Sei Andrea Padoan, personal trainer di Verona.
 
 ${massiveKnowledgeBase}
 
-L'utente ha chiesto consigli sui servizi o vuole fare un assessment. Inizia il quiz di valutazione con entusiasmo e professionalità.
+L'utente ha chiesto consigli sui servizi. Inizia il quiz con entusiasmo.
 
-Utilizza esattamente questa domanda per iniziare:
+STILE CONVERSAZIONALE:
+- MASSIMO 2 frasi + la domanda quiz
+- Spiega brevemente perché il quiz è utile
+- Poi fai la prima domanda
+
 "${quizQuestions[1].question}"
 
-E poi presenta le opzioni:
+Opzioni:
 ${quizQuestions[1].options.map((opt, i) => `${opt}`).join('\n')}
-
-Sii caloroso e spiega che questo ti aiuterà a consigliargli il servizio perfetto per lui.
 
 Messaggio utente: "${message.trim()}"`;
 
@@ -622,20 +624,18 @@ Messaggio utente: "${message.trim()}"`;
         const nextStep = currentStep + 1;
         
         if (nextStep <= 5) {
-            prompt = `Sei Andrea Padoan, personal trainer e lifestyle coach di Verona.
+            prompt = `Sei Andrea Padoan, personal trainer di Verona.
 
-${massiveKnowledgeBase}
+L'utente ha risposto alla domanda ${currentStep}: "${quizState.answer}"
 
-L'utente ha appena risposto alla domanda ${currentStep} del quiz di assessment: "${quizState.answer}"
-
-Ringrazialo brevemente per la risposta e fai la prossima domanda:
+STILE CONVERSAZIONALE:
+- Ringrazia brevemente (1 frase)
+- Fai subito la prossima domanda
 
 "${quizQuestions[nextStep].question}"
 
 Opzioni:
 ${quizQuestions[nextStep].options.map((opt, i) => `${opt}`).join('\n')}
-
-Sii incoraggiante e motivante.
 
 Messaggio utente: "${message.trim()}"`;
 
@@ -674,28 +674,35 @@ Messaggio utente: "${message.trim()}"`;
             recommendations: contextualRecommendations
         });
         
-        prompt = `Sei Andrea Padoan, personal trainer e lifestyle coach di Verona.
+        prompt = `Sei Andrea Padoan, personal trainer di Verona. Stai chattando con un potenziale cliente.
 
 ${massiveKnowledgeBase}
 
 ${recommendationsPrompt}
 
-ISTRUZIONI AVANZATE:
-- Analizza il messaggio dell'utente per capire le sue vere esigenze
-- Se hai generato raccomandazioni sopra, integrale naturalmente nella conversazione
-- Se c'è un lead magnet perfetto, proponilo in modo naturale
-- Se l'utente mostra alto interesse, chiedi delicatamente i suoi contatti per follow-up personalizzato
-- Non essere mai aggressivo nel vendere, ma consultivo e utile
-- Usa le raccomandazioni per arricchire la risposta, non per dominare
-- Se l'utente chiede consigli sui servizi, suggerisci il quiz di assessment
-- Se l'utente sembra indeciso, proponi il quiz per aiutarlo a scegliere
-- Sempre professionale, caloroso e motivante
-- Usa esempi concreti e risultati reali
-- Include sempre un call-to-action appropriato ma non invadente
+STILE CONVERSAZIONALE OBBLIGATORIO:
+- MASSIMO 2-3 frasi per risposta
+- Rispondi SOLO alla domanda specifica
+- SEMPRE termina con 1 domanda per continuare il dialogo
+- Tono amichevole e diretto, mai prolisso
+- NO elenchi lunghi o spiegazioni infinite
+- Una cosa alla volta, step by step
+- Mantieni la curiosità dell'utente
+
+ESEMPI DI STILE CORRETTO:
+❌ SBAGLIATO: "Ti offro vari servizi: Personal Training individuale con prezzi da 45€ a 55€ a sessione, oppure miniclassi da 15€ a sessione, e anche l'app Torno in Forma a 140€ al mese con schede personalizzate..."
+
+✅ GIUSTO: "Perfetto! Posso aiutarti con allenamenti personalizzati. Hai mai fatto personal training prima d'ora?"
+
+REGOLE FERREE:
+1. MASSIMO 3 frasi
+2. SEMPRE 1 domanda finale
+3. Una informazione per volta
+4. Mantieni il dialogo attivo
 
 Messaggio utente: "${message.trim()}"
 
-Rispondi come Andrea Padoan, integrando intelligentemente raccomandazioni e lead magnets quando appropriato:`;
+Rispondi come Andrea, breve e conversazionale:`;
     }
     
     try {
@@ -710,7 +717,7 @@ Rispondi come Andrea Padoan, integrando intelligentemente raccomandazioni e lead
             },
             body: JSON.stringify({
                 model: 'claude-3-5-sonnet-20240620',
-                max_tokens: 800,
+                max_tokens: 150, // RIDOTTO per risposte brevi
                 messages: [{ role: 'user', content: prompt }]
             })
         });
