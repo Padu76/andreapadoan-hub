@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TribuCoach Dashboard | Customer Intelligence</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+
+        /* Login Screen */
+        .login-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+
+        .login-box {
+            background: rgba(26, 26, 26, 0.95);
+            padding: 50px;
+            border-radius: 20px;
+            border: 2px solid #ff6b35;
+            backdrop-filter: blur(20px);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .login-title {
+            color: #ff6b35;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .login-subtitle {
+            color: #ccc;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #333;
+            border-radius: 12px;
+            background: #1a1a1a;
+            color: #fff;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .login-input:focus {
+            border-color: #ff6b35;
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .login-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #ff6b35, #ff8533);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        .error-message {
+            color: #ff4444;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        /* Dashboard Layout */
+        .dashboard {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .dashboard.active {
+            display: block;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid #ff6b35;
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #ff6b35, #ff8533);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo-text h1 {
+            color: #ff6b35;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo-text p {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .refresh-btn {
+            background: rgba(255, 107, 53, 0.1);
+            border: 2px solid #ff6b35;
+            color: #ff6b35;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .refresh-btn:hover {
+            background: #ff6b35;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .logout-btn {
+            background: rgba(255, 68, 68, 0.1);
+            border: 2px solid #ff4444;
+            color: #ff4444;
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #ff4444;
+            color: white;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        /* Overview Cards */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .overview-card {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 25px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .overview-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent-color);
+        }
+
+        .overview-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            color: #ccc;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(255, 107, 53, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+
+        .card-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .card-change {
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        .card-change.positive {
+            color: #4ade80;
+        }
+
+        .card-change.negative {
+            color: #f87171;
+        }
+
+        /* Accent Colors */
+        .overview-card:nth-child(1) { --accent-color: #ff6b35; }
+        .overview-card:nth-child(2) { --accent-color: #4ade80; }
+        .overview-card:nth-child(3) { --accent-color: #60a5fa; }
+        .overview-card:nth-child(4) { --accent-color: #a855f7; }
+
+        /* Dashboard Sections */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .dashboard-section {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s;
+        }
+
+        .dashboard-section:hover {
+            border-color: #ff6b35;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.1);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #333;
+        }
+
+        .section-title {
+            color: #ff6b35;
+            font-size: 1.3rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid #ff6b35;
+            color: #ff6b35;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .action-btn:hover {
+            background: #ff6b35;
+            color: white;
+        }
+
+        /* Lead List */
+        .lead-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .lead-item:hover {
+            border-color: #ff6b35;
+            background: rgba(255, 107, 53, 0.05);
+        }
+
+        .lead-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .lead-name {
+            font-weight: bold;
+            color: #fff;
+            font-size: 1.1rem;
+        }
+
+        .lead-time {
+            color: #888;
+            font-size: 0.8rem;
+        }
+
+        .lead-message {
+            color: #ccc;
+            margin-bottom: 15px;
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        .lead-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .whatsapp-btn:hover {
+            background: #20BA5A;
+            transform: translateY(-2px);
+        }
+
+        .interest-tag {
+            background: rgba(255, 107, 53, 0.2);
+            color: #ff6b35;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .engagement-score {
+            background: rgba(96, 165, 250, 0.2);
+            color: #60a5fa;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        /* Charts */
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-top: 20px;
+        }
+
+        /* Loading State */
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 200px;
+            color: #888;
+            font-size: 1.1rem;
+        }
+
+        .loading i {
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Question Analysis */
+        .question-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .question-text {
+            color: #ccc;
+            flex: 1;
+        }
+
+        .question-count {
+            background: rgba(255, 107, 53, 0.2);
+            color: #ff6b35;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 15px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .overview-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .main-content {
+                padding: 20px 15px;
+            }
+
+            .lead-actions {
+                justify-content: flex-start;
+            }
+
+            .card-value {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .overview-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .login-box {
+                padding: 30px 20px;
+            }
+
+            .dashboard-section {
+                padding: 20px;
+            }
+        }
+
+        /* Auto-refresh indicator */
+        .refresh-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(26, 26, 26, 0.9);
+            border: 1px solid #ff6b35;
+            border-radius: 10px;
+            padding: 10px 15px;
+            color: #ff6b35;
+            font-size: 0.8rem;
+            z-index: 1000;
+        }
+
+        .refresh-indicator.updating {
+            animation: pulse 0.5s ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div class="login-container" id="loginScreen">
+        <div class="login-box">
+            <div class="login-title">🎯 TribuCoach Dashboard</div>
+            <div class="login-subtitle">Customer Intelligence & CRM</div>
+            <input type="password" id="passwordInput" class="login-input" placeholder="Inserisci password" autocomplete="current-password">
+            <button onclick="login()" class="login-btn">Accedi alla Dashboard</button>
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+        </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div class="dashboard" id="mainDashboard">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">TC</div>
+                    <div class="logo-text">
+                        <h1>TribuCoach Dashboard</h1>
+                        <p>Customer Intelligence & Lead Management</p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="refresh-btn" onclick="refreshData()">
+                        <i class="fas fa-sync-alt"></i> Aggiorna
+                    </button>
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Overview Cards -->
+            <div class="overview-grid">
+                <div class="overview-card">
+                    <div class="card-header">
+                        <div class="card-title">Conversazioni Oggi</div>
+                        <div class="card-icon"><i class="fas fa-comments"></i></div>
+                    </div>
+                    <div class="card-value" id="todayConversations">-</div>
+                    <div class="card-change" id="conversationsChange">Caricamento...</div>
+                </div>
+
+                <div class="overview-card">
+                    <div class="card-header">
+                        <div class="card-title">Lead Attivi</div>
+                        <div class="card-icon"><i class="fas fa-users"></i></div>
+                    </div>
+                    <div class="card-value" id="activeLeads">-</div>
+                    <div class="card-change" id="leadsChange">Caricamento...</div>
+                </div>
+
+                <div class="overview-card">
+                    <div class="card-header">
+                        <div class="card-title">Tasso Conversione</div>
+                        <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                    </div>
+                    <div class="card-value" id="conversionRate">-</div>
+                    <div class="card-change" id="conversionChange">Caricamento...</div>
+                </div>
+
+                <div class="overview-card">
+                    <div class="card-header">
+                        <div class="card-title">Hot Leads</div>
+                        <div class="card-icon"><i class="fas fa-fire"></i></div>
+                    </div>
+                    <div class="card-value" id="hotLeads">-</div>
+                    <div class="card-change" id="hotLeadsChange">Caricamento...</div>
+                </div>
+            </div>
+
+            <!-- Dashboard Grid -->
+            <div class="dashboard-grid">
+                <!-- Lead Management -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <i class="fas fa-user-friends"></i>
+                            Lead Management
+                        </div>
+                        <div class="section-actions">
+                            <button class="action-btn" onclick="filterLeads('hot')">🔥 Hot</button>
+                            <button class="action-btn" onclick="filterLeads('all')">Tutti</button>
+                        </div>
+                    </div>
+                    <div id="leadsList">
+                        <div class="loading">
+                            <i class="fas fa-spinner"></i>
+                            Caricamento leads...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question Analysis -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <i class="fas fa-question-circle"></i>
+                            Analisi Domande
+                        </div>
+                        <div class="section-actions">
+                            <button class="action-btn" onclick="exportQuestions()">📊 Export</button>
+                        </div>
+                    </div>
+                    <div id="questionsAnalysis">
+                        <div class="loading">
+                            <i class="fas fa-spinner"></i>
+                            Analizzando domande...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="dashboard-grid">
+                <!-- Interest Distribution -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <i class="fas fa-chart-pie"></i>
+                            Distribuzione Interessi
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="interestChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Conversation Trends -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <i class="fas fa-chart-area"></i>
+                            Trend Conversazioni
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="trendsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Auto-refresh Indicator -->
+        <div class="refresh-indicator" id="refreshIndicator">
+            <i class="fas fa-clock"></i> Auto-refresh: 30s
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let dashboardData = {};
+        let refreshInterval;
+        let isLoggedIn = false;
+
+        // Authentication
+        function login() {
+            const password = document.getElementById('passwordInput').value;
+            const errorDiv = document.getElementById('errorMessage');
+            
+            if (password === 'tribu2024') {
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('mainDashboard').classList.add('active');
+                isLoggedIn = true;
+                initDashboard();
+                errorDiv.style.display = 'none';
+            } else {
+                errorDiv.textContent = 'Password non corretta';
+                errorDiv.style.display = 'block';
+                document.getElementById('passwordInput').value = '';
+            }
+        }
+
+        function logout() {
+            isLoggedIn = false;
+            clearInterval(refreshInterval);
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('mainDashboard').classList.remove('active');
+            document.getElementById('passwordInput').value = '';
+        }
+
+        // Enter key for login
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !isLoggedIn) {
+                login();
+            }
+        });
+
+        // Initialize Dashboard
+        function initDashboard() {
+            console.log('🚀 Initializing TribuCoach Dashboard...');
+            loadDashboardData();
+            
+            // Set up auto-refresh every 30 seconds
+            refreshInterval = setInterval(() => {
+                if (isLoggedIn) {
+                    refreshData();
+                }
+            }, 30000);
+        }
+
+        // Load Dashboard Data
+        async function loadDashboardData() {
+            console.log('📊 Loading dashboard data...');
+            
+            try {
+                // Simulate API call - Replace with real Airtable API
+                const response = await fetch('/api/dashboard');
+                
+                if (response.ok) {
+                    dashboardData = await response.json();
+                } else {
+                    // Fallback to simulated data for development
+                    dashboardData = generateSampleData();
+                }
+                
+                updateDashboard();
+                
+            } catch (error) {
+                console.error('Error loading data:', error);
+                // Use sample data as fallback
+                dashboardData = generateSampleData();
+                updateDashboard();
+            }
+        }
+
+        // Generate Sample Data (for development)
+        function generateSampleData() {
+            const sampleQuestions = [
+                "Quanto costa il personal training?",
+                "Che tipo di alimentazione consigli?",
+                "Dove si trova il vostro studio?",
+                "Posso fare allenamento online?",
+                "Quali sono i vostri orari?",
+                "Offrite consulenze business?",
+                "Quanto durano le sessioni?",
+                "Che risultati posso aspettarmi?",
+                "Avete piani per principianti?",
+                "Come funziona MealPrep Planner?"
+            ];
+
+            const interests = ['fitness', 'nutrition', 'business', 'lifestyle'];
+            const leads = [];
+            
+            // Generate sample leads
+            for (let i = 0; i < 15; i++) {
+                const interest = interests[Math.floor(Math.random() * interests.length)];
+                const question = sampleQuestions[Math.floor(Math.random() * sampleQuestions.length)];
+                const score = Math.floor(Math.random() * 100);
+                
+                leads.push({
+                    id: `lead_${i}`,
+                    name: `Lead ${i + 1}`,
+                    lastMessage: question,
+                    timestamp: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000),
+                    interest: interest,
+                    engagementScore: score,
+                    phone: '+393478881515',
+                    isHot: score > 70
+                });
+            }
+
+            return {
+                overview: {
+                    todayConversations: Math.floor(Math.random() * 50) + 20,
+                    activeLeads: leads.length,
+                    conversionRate: Math.floor(Math.random() * 30) + 15,
+                    hotLeads: leads.filter(l => l.isHot).length
+                },
+                leads: leads,
+                questions: generateQuestionAnalysis(),
+                trends: generateTrendData(),
+                interests: generateInterestData()
+            };
+        }
+
+        function generateQuestionAnalysis() {
+            return [
+                { question: "Quanto costa il personal training?", count: 25, category: 'pricing' },
+                { question: "Che tipo di alimentazione consigli?", count: 18, category: 'nutrition' },
+                { question: "Dove si trova il vostro studio?", count: 15, category: 'location' },
+                { question: "Posso fare allenamento online?", count: 12, category: 'service' },
+                { question: "Quali sono i vostri orari?", count: 10, category: 'schedule' },
+                { question: "Offrite consulenze business?", count: 8, category: 'business' },
+                { question: "Come funziona MealPrep?", count: 7, category: 'tools' },
+                { question: "Che risultati posso aspettarmi?", count: 6, category: 'results' }
+            ];
+        }
+
+        function generateTrendData() {
+            const days = [];
+            const conversations = [];
+            
+            for (let i = 6; i >= 0; i--) {
+                const date = new Date();
+                date.setDate(date.getDate() - i);
+                days.push(date.toLocaleDateString('it-IT', { weekday: 'short' }));
+                conversations.push(Math.floor(Math.random() * 30) + 10);
+            }
+            
+            return { days, conversations };
+        }
+
+        function generateInterestData() {
+            return {
+                fitness: 35,
+                nutrition: 28,
+                business: 22,
+                lifestyle: 15
+            };
+        }
+
+        // Update Dashboard
+        function updateDashboard() {
+            console.log('🔄 Updating dashboard with new data...');
+            
+            // Update overview cards
+            updateOverviewCards();
+            
+            // Update leads list
+            updateLeadsList();
+            
+            // Update questions analysis
+            updateQuestionsAnalysis();
+            
+            // Update charts
+            updateCharts();
+            
+            // Show refresh indicator
+            const indicator = document.getElementById('refreshIndicator');
+            indicator.classList.add('updating');
+            setTimeout(() => indicator.classList.remove('updating'), 500);
+        }
+
+        function updateOverviewCards() {
+            const data = dashboardData.overview;
+            
+            document.getElementById('todayConversations').textContent = data.todayConversations;
+            document.getElementById('activeLeads').textContent = data.activeLeads;
+            document.getElementById('conversionRate').textContent = data.conversionRate + '%';
+            document.getElementById('hotLeads').textContent = data.hotLeads;
+            
+            // Add trend indicators (simplified)
+            document.getElementById('conversationsChange').textContent = '+12% vs ieri';
+            document.getElementById('conversationsChange').className = 'card-change positive';
+            
+            document.getElementById('leadsChange').textContent = '+5 nuovi oggi';
+            document.getElementById('leadsChange').className = 'card-change positive';
+            
+            document.getElementById('conversionChange').textContent = '+3% vs settimana scorsa';
+            document.getElementById('conversionChange').className = 'card-change positive';
+            
+            document.getElementById('hotLeadsChange').textContent = 'Priorità alta';
+            document.getElementById('hotLeadsChange').className = 'card-change';
+        }
+
+        function updateLeadsList(filter = 'all') {
+            const container = document.getElementById('leadsList');
+            let leads = dashboardData.leads || [];
+            
+            if (filter === 'hot') {
+                leads = leads.filter(lead => lead.isHot);
+            }
+            
+            // Sort by engagement score and recent activity
+            leads.sort((a, b) => {
+                if (a.isHot !== b.isHot) return b.isHot - a.isHot;
+                return b.engagementScore - a.engagementScore;
+            });
+            
+            container.innerHTML = leads.slice(0, 10).map(lead => {
+                const timeAgo = getTimeAgo(lead.timestamp);
+                const whatsappMessage = generateWhatsAppMessage(lead);
+                const whatsappUrl = `https://wa.me/3478881515?text=${encodeURIComponent(whatsappMessage)}`;
+                
+                return `
+                    <div class="lead-item" onclick="expandLead('${lead.id}')">
+                        <div class="lead-header">
+                            <div class="lead-name">${lead.name}</div>
+                            <div class="lead-time">${timeAgo}</div>
+                        </div>
+                        <div class="lead-message">"${lead.lastMessage}"</div>
+                        <div class="lead-actions">
+                            <a href="${whatsappUrl}" target="_blank" class="whatsapp-btn" onclick="event.stopPropagation()">
+                                <i class="fab fa-whatsapp"></i> Contatta
+                            </a>
+                            <span class="interest-tag">${lead.interest}</span>
+                            <span class="engagement-score">${lead.engagementScore}% engaged</span>
+                            ${lead.isHot ? '<span class="interest-tag" style="background: rgba(255,68,68,0.2); color: #ff4444;">🔥 HOT</span>' : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateQuestionsAnalysis() {
+            const container = document.getElementById('questionsAnalysis');
+            const questions = dashboardData.questions || [];
+            
+            container.innerHTML = questions.slice(0, 8).map(q => `
+                <div class="question-item">
+                    <div class="question-text">${q.question}</div>
+                    <div class="question-count">${q.count}</div>
+                </div>
+            `).join('');
+        }
+
+        function updateCharts() {
+            updateInterestChart();
+            updateTrendsChart();
+        }
+
+        function updateInterestChart() {
+            const ctx = document.getElementById('interestChart').getContext('2d');
+            const data = dashboardData.interests;
+            
+            // Destroy existing chart if it exists
+            if (window.interestChart) {
+                window.interestChart.destroy();
+            }
+            
+            window.interestChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Fitness', 'Nutrition', 'Business', 'Lifestyle'],
+                    datasets: [{
+                        data: [data.fitness, data.nutrition, data.business, data.lifestyle],
+                        backgroundColor: ['#ff6b35', '#4ade80', '#60a5fa', '#a855f7'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { color: '#e0e0e0' }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateTrendsChart() {
+            const ctx = document.getElementById('trendsChart').getContext('2d');
+            const data = dashboardData.trends;
+            
+            // Destroy existing chart if it exists
+            if (window.trendsChart) {
+                window.trendsChart.destroy();
+            }
+            
+            window.trendsChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.days,
+                    datasets: [{
+                        label: 'Conversazioni',
+                        data: data.conversations,
+                        borderColor: '#ff6b35',
+                        backgroundColor: 'rgba(255, 107, 53, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: '#e0e0e0' } }
+                    },
+                    scales: {
+                        x: { ticks: { color: '#888' }, grid: { color: '#333' } },
+                        y: { ticks: { color: '#888' }, grid: { color: '#333' } }
+                    }
+                }
+            });
+        }
+
+        // Utility functions
+        function getTimeAgo(timestamp) {
+            const now = new Date();
+            const diff = now - new Date(timestamp);
+            const minutes = Math.floor(diff / 60000);
+            const hours = Math.floor(diff / 3600000);
+            const days = Math.floor(diff / 86400000);
+            
+            if (minutes < 60) return `${minutes}m fa`;
+            if (hours < 24) return `${hours}h fa`;
+            return `${days}g fa`;
+        }
+
+        function generateWhatsAppMessage(lead) {
+            const templates = {
+                fitness: `Ciao ${lead.name}! Ho visto le tue domande sul fitness. Parliamone! 💪`,
+                nutrition: `Ciao ${lead.name}! Interessato alla nutrizione? Ti aiuto volentieri! 🥗`,
+                business: `Ciao ${lead.name}! Vedo che ti interessa il business coaching. Facciamo una call! 🚀`,
+                lifestyle: `Ciao ${lead.name}! Il lifestyle coaching può davvero trasformare la tua vita. Parliamone! ✨`
+            };
+            
+            return templates[lead.interest] || `Ciao ${lead.name}! Grazie per il tuo interesse. Come posso aiutarti?`;
+        }
+
+        // Event handlers
+        function refreshData() {
+            console.log('🔄 Manual refresh triggered');
+            loadDashboardData();
+        }
+
+        function filterLeads(type) {
+            updateLeadsList(type);
+        }
+
+        function expandLead(leadId) {
+            console.log('👁️ Expanding lead:', leadId);
+            // Future: Open lead detail modal
+        }
+
+        function exportQuestions() {
+            console.log('📊 Exporting questions analysis');
+            // Future: Generate CSV export
+            alert('Feature coming soon: Export delle domande più frequenti');
+        }
+
+        // Initialize on page load
+        console.log('🎯 TribuCoach Dashboard loaded successfully');
+    </script>
+</body>
+</html>
