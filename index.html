@@ -1092,15 +1092,12 @@
             showTyping();
             
             try {
-                // Call actual Claude API
+                // Call your API (logging is handled server-side)
                 const response = await callClaudeAPI(message);
                 
                 // Hide typing and add response
                 hideTyping();
                 addMessage(response);
-                
-                // Log to Airtable (for lead tracking)
-                logConversation(message, response);
                 
             } catch (error) {
                 hideTyping();
@@ -1109,7 +1106,8 @@
         }
 
         // Inserisci la tua chiave Claude direttamente qui
-        const CLAUDE_API_KEY = 'sk-ant-api03-aAd90eaC7-qDgQM18GbqxSbFSBGwiF3cjl96zELP0X8A9WibLmOpoYOkS3OcVtvOkVVZlubLrMovB4RxNY63IA-PNbxAAA'; //
+        const CLAUDE_API_KEY = 'sk-ant-api03-AAd90eaC7-qDgQM18pLKU3BlbkFJh5mK3BlbkFJXXXXXXXXXXXXXXXX'; // SOSTITUISCI CON LA TUA CHIAVE COMPLETA
+        
         // Actual Claude API call
         async function callClaudeAPI(userMessage) {
             const prompt = `Tu sei Andrea Padoan, personal trainer, coach e imprenditore di Verona. 
@@ -1154,97 +1152,8 @@
             }
         }
 
-        // Log conversation to Airtable via webhook
-        async function logConversation(userMessage, botResponse) {
-            const webhookUrl = 'https://hooks.airtable.com/workflows/v1/genericWebhook/applozDwnDZOgPvsg/wflXjsQEowx2dmnN8/wtrzKiazR0Tt8171P';
-            
-            // Calculate lead score based on message content
-            const leadScore = calculateLeadScore(userMessage);
-            
-            // Determine interest area
-            const interestArea = determineInterestArea(userMessage);
-            
-            try {
-                const response = await fetch(webhookUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        User_Message: userMessage,
-                        Bot_Response: botResponse,
-                        Lead_Score: leadScore,
-                        Interest_Area: interestArea,
-                        Session_ID: generateSessionId(),
-                        User_Agent: navigator.userAgent
-                    })
-                });
-                
-                if (response.ok) {
-                    console.log('✅ Conversation logged to Airtable');
-                } else {
-                    console.error('❌ Failed to log to Airtable:', response.status);
-                }
-            } catch (error) {
-                console.error('❌ Error logging to Airtable:', error);
-            }
-        }
-
-        // Calculate lead score based on message content
-        function calculateLeadScore(message) {
-            let score = 5; // Base score
-            const lowerMessage = message.toLowerCase();
-            
-            // High interest keywords
-            if (lowerMessage.includes('voglio') || lowerMessage.includes('vorrei')) score += 2;
-            if (lowerMessage.includes('prezzo') || lowerMessage.includes('costo')) score += 2;
-            if (lowerMessage.includes('quando') || lowerMessage.includes('come')) score += 1;
-            if (lowerMessage.includes('aiuto') || lowerMessage.includes('supporto')) score += 2;
-            if (lowerMessage.includes('risultati') || lowerMessage.includes('obiettivi')) score += 2;
-            if (lowerMessage.includes('urgente') || lowerMessage.includes('subito')) score += 3;
-            
-            // Contact indicators
-            if (lowerMessage.includes('contatto') || lowerMessage.includes('chiamare')) score += 3;
-            if (lowerMessage.includes('incontro') || lowerMessage.includes('appuntamento')) score += 4;
-            
-            return Math.min(score, 10); // Max score 10
-        }
-
-        // Determine interest area based on message content
-        function determineInterestArea(message) {
-            const lowerMessage = message.toLowerCase();
-            
-            if (lowerMessage.includes('personal') || lowerMessage.includes('allenamento') || 
-                lowerMessage.includes('fitness') || lowerMessage.includes('palestra') ||
-                lowerMessage.includes('muscoli') || lowerMessage.includes('forma')) {
-                return 'fitness';
-            }
-            
-            if (lowerMessage.includes('dieta') || lowerMessage.includes('alimentazione') || 
-                lowerMessage.includes('mangiare') || lowerMessage.includes('pasti') ||
-                lowerMessage.includes('nutrizione') || lowerMessage.includes('meal')) {
-                return 'nutrition';
-            }
-            
-            if (lowerMessage.includes('business') || lowerMessage.includes('startup') || 
-                lowerMessage.includes('impresa') || lowerMessage.includes('soldi') ||
-                lowerMessage.includes('guadagno') || lowerMessage.includes('upstart')) {
-                return 'business';
-            }
-            
-            if (lowerMessage.includes('mindset') || lowerMessage.includes('motivazione') || 
-                lowerMessage.includes('coach') || lowerMessage.includes('lifestyle') ||
-                lowerMessage.includes('mente') || lowerMessage.includes('psicologia')) {
-                return 'coaching';
-            }
-            
-            return 'general';
-        }
-
-        // Generate unique session ID
-        function generateSessionId() {
-            return 'sess_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
-        }
+        // Logging is now handled server-side in /api/chat
+        // No need for client-side Airtable integration
 
         // Enter key to send message
         document.addEventListener('keydown', function(e) {
