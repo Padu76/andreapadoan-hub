@@ -82,8 +82,8 @@
         }
 
         .profile-image {
-            width: 140px;
-            height: 140px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
             background: linear-gradient(45deg, #ff6b35, #ff8c5a);
             padding: 4px;
@@ -1018,11 +1018,6 @@
             </a>
         </div>
         
-        <div style="margin-bottom: 20px;">
-            <p style="color: #ff6b35; font-weight: bold; margin-bottom: 10px;">📱 WhatsApp: 347 888 1515</p>
-            <p style="color: #ff6b35; font-weight: bold;">✉️ Email: andrea.padoan@gmail.com</p>
-        </div>
-        
         <button class="contact-btn" onclick="openContact()">
             <i class="fas fa-comments"></i> Contattami Ora
         </button>
@@ -1170,12 +1165,7 @@
         }
 
         function openDashboard() {
-            const password = prompt('Inserisci la password per accedere alla dashboard:');
-            if (password === 'tribu2024') {
-                window.open('./dashboard.html', '_blank');
-            } else if (password !== null) {
-                alert('Password non corretta');
-            }
+            window.open('./dashboard.html', '_blank');
         }
 
         function scrollToProjects() {
