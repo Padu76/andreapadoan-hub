@@ -771,7 +771,7 @@ Rispondi come Andrea, breve e conversazionale:`;
 
 // 📱 DIRECT TELEGRAM NOTIFICATION FUNCTION
 async function sendTelegramNotification(userMessage, leadScore, botResponse) {
-    const TELEGRAM_BOT_TOKEN = '8018703502:AAGBzIHugAvXGd8A7vuGRUB_prqUngyBMDU';
+   const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
     const TELEGRAM_CHAT_ID = '1602722401';
     
     try {
