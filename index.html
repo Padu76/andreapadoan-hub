@@ -904,7 +904,7 @@
                 <button class="project-btn">Consulenza Gratuita</button>
             </div>
 
-            <div class="project-card business" onclick="openProject('#ebooks')">
+            <div class="project-card business" onclick="openProject('./ebooks.html')">
                 <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop');"></div>
                 <div class="project-title">I miei eBook</div>
                 <div class="project-description">Libreria digitale con guide complete per trasformare il tuo corpo e mindset</div>
@@ -919,48 +919,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Sezione Ebook -->
-    <section class="ebooks-section" id="ebooks">
-        <div class="section-header">
-            <h2 class="section-title">I Miei Ebook</h2>
-            <p class="section-subtitle">Trasforma il tuo corpo e la tua mente con guide pratiche e programmi di allenamento testati</p>
-        </div>
-        
-        <div class="projects-grid">
-            <!-- Ebook 1: IL WAVE SYSTEM -->
-            <div class="project-card business" onclick="openProject('https://andrepad.gumroad.com/l/jl-wave-system')">
-                <div class="project-image" style="background-image: url('https://placehold.co/300x400/ff6600/ffffff?text=IL+WAVE+SYSTEM');"></div>
-                <div class="project-title">IL WAVE SYSTEM</div>
-                <div class="project-description">6 CICLI COMPLETI DI ALLENAMENTO PER RAGGIUNGERE LA TUA FORMA FISICA MAI RAGGIUNTA - €14.90</div>
-                <button class="project-btn">Acquista Ora</button>
-            </div>
-
-            <!-- Ebook 2: In Forma da 2 Milioni di Anni -->
-            <div class="project-card business" onclick="openProject('https://andrepad.gumroad.com/l/in-forma-da-2-milioni-di-anni')">
-                <div class="project-image" style="background-image: url('https://placehold.co/300x400/ff8533/ffffff?text=IN+FORMA+DA+2+MILIONI');"></div>
-                <div class="project-title">In Forma da 2 Milioni di Anni</div>
-                <div class="project-description">IL PROGRAMMA ALIMENTARE PER TRASFORMARE IL TUO CORPO IN UNA MACCHINA BRUCIA GRASSI - €19.90</div>
-                <button class="project-btn">Acquista Ora</button>
-            </div>
-
-            <!-- Ebook 3: 50 WORKOUT da viaggio -->
-            <div class="project-card business" onclick="openProject('https://andrepad.gumroad.com/l/50-workout-da-viaggio')">
-                <div class="project-image" style="background-image: url('https://placehold.co/300x400/ffaa33/ffffff?text=50+WORKOUT+VIAGGIO');"></div>
-                <div class="project-title">50 WORKOUT da viaggio</div>
-                <div class="project-description">50 ALLENAMENTI ESSENZIALI PER MANTENERTI IN FORMA OVUNQUE TU SIA - €0.00+</div>
-                <button class="project-btn">Scarica Gratis</button>
-            </div>
-
-            <!-- Ebook 4: BODY UNDER CONSTRUCTION -->
-            <div class="project-card business" onclick="openProject('https://andrepad.gumroad.com/l/body-under-construction')">
-                <div class="project-image" style="background-image: url('https://placehold.co/300x400/ff4400/ffffff?text=BODY+UNDER+CONSTRUCTION');"></div>
-                <div class="project-title">BODY UNDER CONSTRUCTION VOL: 1</div>
-                <div class="project-description">100 ALLENAMENTI, PER UNA FORMA PERFETTA 365 GIORNI ALL'ANNO - €29.90</div>
-                <button class="project-btn">Acquista Ora</button>
-            </div>
-        </div>
-    </section>
 
     <div class="chat-section">
         <div class="chat-container">
@@ -1074,7 +1032,7 @@
                 <button class="project-cta">Consulenza</button>
             </div>
 
-            <div class="project-list-item" style="--item-color: #6b7280;" onclick="openProject('#ebooks')">
+            <div class="project-list-item" style="--item-color: #6b7280;" onclick="openProject('./ebooks.html')">
                 <div class="project-info">
                     <div style="display: flex; align-items: center;">
                         <div class="project-icon" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=center');"></div>
@@ -1253,13 +1211,8 @@
         });
 
         function openProject(url) {
-            if (url && url !== '#' && !url.includes('#ebooks')) {
+            if (url && url !== '#') {
                 window.open(url, '_blank');
-            } else if (url.includes('#ebooks')) {
-                document.getElementById('ebooks').scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
-                });
             } else {
                 alert('Progetto in arrivo! Torna presto per scoprire di più.');
             }
