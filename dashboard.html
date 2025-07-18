@@ -1002,6 +1002,114 @@
     </div>
 
     <script>
+        // 🔐 LOGIN MANAGER CONDIVISO - Versione unificata
+        const LoginManager = {
+            // Chiave per localStorage
+            LOGIN_KEY: 'andrea_padoan_dashboard_session',
+            SESSION_DURATION: 8 * 60 * 60 * 1000, // 8 ore in millisecondi
+            REFRESH_INTERVAL: 5 * 60 * 1000, // 5 minuti in millisecondi
+            
+            // Imposta la sessione di login
+            setSession() {
+                const sessionData = {
+                    isLoggedIn: true,
+                    loginTime: Date.now(),
+                    lastActivity: Date.now()
+                };
+                localStorage.setItem(this.LOGIN_KEY, JSON.stringify(sessionData));
+                console.log('🔐 Sessione login impostata:', new Date().toLocaleTimeString());
+                
+                // Avvia il timer di refresh della sessione
+                this.startSessionRefresh();
+            },
+            
+            // Verifica se l'utente è loggato
+            isLoggedIn() {
+                try {
+                    const sessionData = localStorage.getItem(this.LOGIN_KEY);
+                    if (!sessionData) return false;
+                    
+                    const session = JSON.parse(sessionData);
+                    const now = Date.now();
+                    
+                    // Verifica se la sessione è scaduta
+                    if (now - session.loginTime > this.SESSION_DURATION) {
+                        console.log('⏰ Sessione scaduta dopo 8 ore');
+                        this.clearSession();
+                        return false;
+                    }
+                    
+                    // Aggiorna l'ultima attività
+                    session.lastActivity = now;
+                    localStorage.setItem(this.LOGIN_KEY, JSON.stringify(session));
+                    
+                    return session.isLoggedIn;
+                } catch (error) {
+                    console.error('❌ Errore verifica sessione:', error);
+                    this.clearSession();
+                    return false;
+                }
+            },
+            
+            // Cancella la sessione (logout)
+            clearSession() {
+                localStorage.removeItem(this.LOGIN_KEY);
+                console.log('🚪 Sessione cancellata');
+                
+                // Ferma il timer di refresh
+                if (this.refreshTimer) {
+                    clearInterval(this.refreshTimer);
+                    this.refreshTimer = null;
+                }
+            },
+            
+            // Avvia il refresh automatico della sessione
+            startSessionRefresh() {
+                // Clear existing timer
+                if (this.refreshTimer) {
+                    clearInterval(this.refreshTimer);
+                }
+                
+                this.refreshTimer = setInterval(() => {
+                    if (this.isLoggedIn()) {
+                        console.log('🔄 Sessione refreshata:', new Date().toLocaleTimeString());
+                    } else {
+                        console.log('❌ Sessione non valida durante refresh');
+                        this.forceLogout();
+                    }
+                }, this.REFRESH_INTERVAL);
+            },
+            
+            // Forza logout su tutte le pagine
+            forceLogout() {
+                this.clearSession();
+                
+                // Reindirizza alla schermata di login se non già presente
+                if (typeof logout === 'function') {
+                    logout();
+                } else {
+                    // Fallback se la funzione logout non esiste
+                    window.location.reload();
+                }
+            },
+            
+            // Controlla la sessione quando la finestra ritorna in focus
+            checkSessionOnFocus() {
+                window.addEventListener('focus', () => {
+                    if (!this.isLoggedIn()) {
+                        console.log('👁️ Sessione non valida al focus della finestra');
+                        this.forceLogout();
+                    }
+                });
+            },
+            
+            // Inizializza il sistema di login
+            init() {
+                this.checkSessionOnFocus();
+                console.log('🔐 Login Manager inizializzato');
+            }
+        };
+
         // Global variables
         let dashboardData = {};
         let refreshInterval;
@@ -1010,17 +1118,22 @@
         let currentLeadFilter = 'all';
         let chartInstances = {};
 
-        // Authentication
+        // 🔐 FUNZIONI LOGIN UNIFICATE
         function login() {
             const password = document.getElementById('passwordInput').value;
             const errorDiv = document.getElementById('errorMessage');
             
             if (password === 'tribu2024') {
+                // Usa il Login Manager condiviso
+                LoginManager.setSession();
+                
                 document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('mainDashboard').classList.add('active');
                 isLoggedIn = true;
                 initDashboard();
                 errorDiv.style.display = 'none';
+                
+                console.log('✅ Login effettuato con successo - Sessione condivisa attiva');
             } else {
                 errorDiv.textContent = 'Password non corretta';
                 errorDiv.style.display = 'block';
@@ -1029,6 +1142,9 @@
         }
 
         function logout() {
+            // Usa il Login Manager condiviso per logout globale
+            LoginManager.clearSession();
+            
             isLoggedIn = false;
             clearInterval(refreshInterval);
             clearInterval(refreshTimer);
@@ -1041,7 +1157,26 @@
                 if (chart) chart.destroy();
             });
             chartInstances = {};
+            
+            console.log('🚪 Logout effettuato - Sessione condivisa cancellata');
         }
+
+        // 🔄 AUTO-LOGIN CHECK
+        document.addEventListener('DOMContentLoaded', () => {
+            // Inizializza il Login Manager
+            LoginManager.init();
+            
+            // Controlla se l'utente è già loggato
+            if (LoginManager.isLoggedIn()) {
+                console.log('🔐 Utente già loggato - Auto-login attivato');
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('mainDashboard').classList.add('active');
+                isLoggedIn = true;
+                initDashboard();
+            } else {
+                console.log('🔐 Utente non loggato - Mostra schermata login');
+            }
+        });
 
         // Enter key for login
         document.addEventListener('keypress', function(e) {
@@ -1062,8 +1197,11 @@
             
             // Set up auto-refresh every 30 seconds
             refreshInterval = setInterval(() => {
-                if (isLoggedIn) {
+                if (isLoggedIn && LoginManager.isLoggedIn()) {
                     refreshData();
+                } else {
+                    console.log('❌ Auto-refresh saltato - sessione non valida');
+                    LoginManager.forceLogout();
                 }
             }, 30000);
         }
@@ -1708,7 +1846,7 @@
         }
 
         // Initialize on page load
-        console.log('🎯 Andrea Padoan Dashboard loaded successfully - REAL DATA MODE');
+        console.log('🎯 Andrea Padoan Dashboard loaded successfully - UNIFIED LOGIN MODE');
     </script>
 </body>
 </html>
