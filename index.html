@@ -51,26 +51,52 @@
 
         .hero {
             text-align: center;
-            padding: 60px 20px 40px;
+            padding: 80px 20px 60px;
             background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
         }
 
         .hero h1 {
-            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 900;
             background: linear-gradient(45deg, #ff6b35, #4a7c59, #6b7280);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .hero p {
-            font-size: clamp(1rem, 2vw, 1.3rem);
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
             color: #b0b0b0;
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto 40px;
             line-height: 1.6;
+        }
+
+        .profile-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 40px 0;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff6b35, #4a7c59);
+            padding: 4px;
+            margin-bottom: 20px;
+        }
+
+        .profile-content {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #000;
+            background-image: url('./images/andrea-profile.jpg');
+            background-size: cover;
+            background-position: center;
         }
 
         .main-cta {
@@ -93,66 +119,39 @@
         }
 
         .projects-container {
-            position: relative;
-            width: 100%;
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 80px 20px;
-            min-height: 900px;
+            padding: 60px 20px;
         }
 
-        .center-profile {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #ff6b35, #4a7c59);
-            padding: 5px;
-            z-index: 10;
-        }
-
-        .profile-content {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: #000;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .profile-image {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #333, #555);
-            margin-bottom: 12px;
-            background-image: url('./images/andrea-profile.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        .profile-name {
-            font-size: 18px;
-            font-weight: bold;
+        .section-title {
             text-align: center;
-            color: #fff;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            color: #ff6b35;
+            margin-bottom: 15px;
+            font-weight: 900;
+            line-height: 1.2;
         }
 
-        .project-item {
-            position: absolute;
-            width: 200px;
-            height: 260px;
+        .section-subtitle {
+            text-align: center;
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            color: #4a7c59;
+            margin-bottom: 50px;
+            font-weight: 600;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .project-card {
             background: rgba(26, 26, 26, 0.95);
             border-radius: 20px;
-            padding: 20px;
+            padding: 25px;
             cursor: pointer;
             transition: all 0.4s ease;
             border: 2px solid transparent;
@@ -160,18 +159,18 @@
             backdrop-filter: blur(10px);
         }
 
-        .project-item:hover {
-            transform: scale(1.08);
+        .project-card:hover {
+            transform: translateY(-10px);
             border-color: var(--accent-color);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
             background: rgba(26, 26, 26, 1);
         }
 
         .project-image {
             width: 100%;
-            height: 100px;
+            height: 180px;
             border-radius: 15px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             background-size: cover;
             background-position: center;
             position: relative;
@@ -191,32 +190,26 @@
         }
 
         .project-title {
-            font-size: 16px;
+            font-size: 1.3rem;
             font-weight: bold;
             color: var(--accent-color);
-            margin-bottom: 10px;
-            line-height: 1.2;
+            margin-bottom: 12px;
         }
 
         .project-description {
-            font-size: 12px;
+            font-size: 0.95rem;
             color: #c0c0c0;
-            line-height: 1.5;
-            margin-bottom: 15px;
-            height: 50px;
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
+            line-height: 1.6;
+            margin-bottom: 20px;
         }
 
         .project-btn {
             background: var(--accent-color);
             color: #000;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 25px;
             border-radius: 25px;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s;
@@ -228,106 +221,376 @@
             transform: translateY(-2px);
         }
 
-        /* Posizionamento progetti in cerchio perfetto */
-        .project-1 { 
-            top: 0; 
-            left: 50%; 
-            transform: translateX(-50%);
-            --accent-color: #ff6b35;
-        }
+        /* Colori per categorie */
+        .fitness { --accent-color: #ff6b35; }
+        .nutrition { --accent-color: #4a7c59; }
+        .business { --accent-color: #6b7280; }
 
-        .project-2 { 
-            top: 12%; 
-            right: 8%;
-            --accent-color: #ff6b35;
-        }
-
-        .project-3 { 
-            top: 50%; 
-            right: 0;
-            transform: translateY(-50%);
-            --accent-color: #4a7c59;
-        }
-
-        .project-4 { 
-            bottom: 12%; 
-            right: 8%;
-            --accent-color: #4a7c59;
-        }
-
-        .project-5 { 
-            bottom: 0; 
-            left: 50%; 
-            transform: translateX(-50%);
-            --accent-color: #6b7280;
-        }
-
-        .project-6 { 
-            bottom: 12%; 
-            left: 8%;
-            --accent-color: #6b7280;
-        }
-
-        .project-7 { 
-            top: 50%; 
-            left: 0;
-            transform: translateY(-50%);
-            --accent-color: #ff6b35;
-        }
-
-        /* Brochure Section */
-        .brochure-section {
-            background: #1a1a1a;
+        /* Chat Section */
+        .chat-section {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
             padding: 80px 20px;
+            position: relative;
         }
 
-        .brochure-container {
-            max-width: 1200px;
+        .chat-container {
+            max-width: 800px;
             margin: 0 auto;
             text-align: center;
         }
 
-        .brochure-title {
+        .chat-intro {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .chat-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff6b35, #4a7c59);
+            padding: 4px;
+            position: relative;
+        }
+
+        .chat-avatar-content {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-image: url('./images/andrea-profile.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .chat-bubble {
+            background: rgba(255, 107, 53, 0.1);
+            border: 2px solid #ff6b35;
+            border-radius: 20px;
+            padding: 20px;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .chat-bubble::before {
+            content: '';
+            position: absolute;
+            left: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-right: 12px solid #ff6b35;
+        }
+
+        .chat-text {
+            color: #fff;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .chat-cta {
+            background: linear-gradient(45deg, #ff6b35, #ff8c5a);
+            color: #fff;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+        }
+
+        .chat-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Chat Fullscreen */
+        .chat-fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 10000;
+            display: none;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            background: linear-gradient(45deg, #ff6b35, #4a7c59);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-header-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .chat-header-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-image: url('./images/andrea-profile.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .chat-header-text {
+            color: #fff;
+        }
+
+        .chat-header-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .chat-header-status {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .chat-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: #fff;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #1a1a1a;
+        }
+
+        .chat-input-container {
+            padding: 20px;
+            background: #000;
+            border-top: 1px solid #333;
+        }
+
+        .chat-input-wrapper {
+            display: flex;
+            gap: 10px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #333;
+            border-radius: 25px;
+            background: #1a1a1a;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .chat-input:focus {
+            border-color: #ff6b35;
+        }
+
+        .chat-send {
+            background: linear-gradient(45deg, #ff6b35, #ff8c5a);
+            border: none;
+            color: #fff;
+            padding: 15px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .chat-send:hover {
+            transform: scale(1.05);
+        }
+
+        .message {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message.andrea {
+            justify-content: flex-start;
+        }
+
+        .message-bubble {
+            max-width: 70%;
+            padding: 15px 20px;
+            border-radius: 20px;
+            word-wrap: break-word;
+        }
+
+        .message.user .message-bubble {
+            background: linear-gradient(45deg, #ff6b35, #ff8c5a);
+            color: #fff;
+        }
+
+        .message.andrea .message-bubble {
+            background: #2a2a2a;
+            color: #fff;
+        }
+
+        .typing-indicator {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 20px;
+            background: #2a2a2a;
+            border-radius: 20px;
+            max-width: 100px;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #ff6b35;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+            30% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Projects List Section */
+        .projects-list-section {
+            background: #000;
+            padding: 80px 20px;
+        }
+
+        .projects-list-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .projects-list-title {
+            text-align: center;
             font-size: 2.5rem;
             color: #ff6b35;
             margin-bottom: 20px;
             font-weight: 900;
         }
 
-        .brochure-subtitle {
+        .projects-list-subtitle {
+            text-align: center;
             color: #b0b0b0;
             margin-bottom: 50px;
             font-size: 1.2rem;
         }
 
-        .brochure-images {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 40px;
-            margin-bottom: 50px;
+        .project-list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px;
+            margin-bottom: 20px;
+            background: rgba(26, 26, 26, 0.8);
+            border-radius: 15px;
+            border-left: 5px solid var(--item-color);
+            transition: all 0.3s ease;
         }
 
-        .brochure-page {
-            background: #fff;
+        .project-list-item:hover {
+            background: rgba(26, 26, 26, 1);
+            transform: translateX(10px);
+        }
+
+        .project-info {
+            flex: 1;
+        }
+
+        .project-emoji {
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+
+        .project-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--item-color);
+            margin-bottom: 5px;
+        }
+
+        .project-tagline {
+            color: #b0b0b0;
+            font-size: 0.9rem;
+        }
+
+        .project-cta {
+            background: var(--item-color);
+            color: #000;
+            border: none;
+            padding: 10px 20px;
             border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-            transition: transform 0.4s ease;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
         }
 
-        .brochure-page:hover {
-            transform: translateY(-15px) rotateY(5deg);
-        }
-
-        .brochure-page img {
-            width: 100%;
-            height: auto;
-            display: block;
+        .project-cta:hover {
+            background: #fff;
+            transform: scale(1.05);
         }
 
         /* Social Section */
         .social-section {
-            background: #000;
+            background: #1a1a1a;
             padding: 60px 20px;
             text-align: center;
         }
@@ -349,7 +612,7 @@
         .social-link {
             width: 70px;
             height: 70px;
-            background: #1a1a1a;
+            background: #000;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -386,26 +649,15 @@
             opacity: 1;
         }
 
-        .social-link.instagram {
-            --social-color: #E4405F;
-        }
-
-        .social-link.facebook {
-            --social-color: #1877F2;
-        }
-
-        .social-link.tiktok {
-            --social-color: #000;
-        }
-
-        .social-link.youtube {
-            --social-color: #FF0000;
-        }
+        .social-link.instagram { --social-color: #E4405F; }
+        .social-link.facebook { --social-color: #1877F2; }
+        .social-link.tiktok { --social-color: #000; }
+        .social-link.youtube { --social-color: #FF0000; }
 
         .contact-section {
             text-align: center;
             padding: 60px 20px;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
         }
 
         .contact-section h2 {
@@ -449,50 +701,32 @@
                 padding: 20px;
             }
 
-            .projects-container {
-                min-height: auto;
-                padding: 40px 20px;
-            }
-
-            .center-profile {
-                position: static;
-                transform: none;
-                margin: 0 auto 40px;
-                width: 180px;
-                height: 180px;
-            }
-
-            .profile-image {
-                width: 120px;
-                height: 120px;
-            }
-
-            .project-item {
-                position: static;
-                width: 100%;
-                max-width: 320px;
-                margin: 0 auto 25px;
-                transform: none !important;
-                height: auto;
-                min-height: 240px;
-            }
-
-            .project-item:hover {
-                transform: translateY(-8px) !important;
-            }
-
             .projects-grid {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .brochure-images {
                 grid-template-columns: 1fr;
+                gap: 25px;
             }
 
-            .brochure-title {
-                font-size: 2rem;
+            .chat-intro {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .chat-bubble {
+                max-width: 100%;
+            }
+
+            .chat-bubble::before {
+                display: none;
+            }
+
+            .project-list-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+
+            .project-info {
+                margin-bottom: 10px;
             }
 
             .social-links {
@@ -505,9 +739,21 @@
                 font-size: 24px;
             }
 
-            .main-cta {
-                padding: 15px 30px;
-                font-size: 16px;
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .projects-list-title {
+                font-size: 2rem;
+            }
+
+            .chat-input-wrapper {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .message-bubble {
+                max-width: 85%;
             }
         }
     </style>
@@ -522,83 +768,220 @@
     <div class="hero">
         <h1>Andrea Padoan</h1>
         <p>Il tuo partner per corpo, mente e business. Scopri i miei progetti e trova la soluzione perfetta per te.</p>
+        
+        <div class="profile-section">
+            <div class="profile-image">
+                <div class="profile-content"></div>
+            </div>
+        </div>
+
         <button class="main-cta" onclick="scrollToProjects()">
             <i class="fas fa-rocket"></i> Inizia il tuo percorso
         </button>
     </div>
 
     <div class="projects-container" id="projects">
-        <div class="center-profile">
-            <div class="profile-content">
-                <div class="profile-image"></div>
-                <div class="profile-name">Andrea<br>Padoan</div>
-            </div>
-        </div>
-
+        <h2 class="section-title">🚀 Trasforma la Tua Vita</h2>
+        <p class="section-subtitle">✨ Scopri Dove Puoi Migliorare Oggi</p>
+        
         <div class="projects-grid">
-            <div class="project-item project-1" onclick="openProject('https://www.personaltrainerverona.it')">
+            <div class="project-card fitness" onclick="openProject('https://www.personaltrainerverona.it')">
                 <div class="project-image" style="background-image: url('./images/andrea-personal-training.jpg');"></div>
                 <div class="project-title">Personal Training</div>
-                <div class="project-description">Ti aiuto a trasformare il tuo corpo con allenamenti personalizzati</div>
+                <div class="project-description">Ti aiuto a trasformare il tuo corpo con allenamenti personalizzati in studio o online</div>
                 <button class="project-btn">Prenota Sessione</button>
             </div>
 
-            <div class="project-item project-2" onclick="openProject('https://www.tribustudio.it')">
+            <div class="project-card fitness" onclick="openProject('https://www.tribustudio.it')">
                 <div class="project-image" style="background-image: url('./images/tribu-studio-interior.jpg');"></div>
                 <div class="project-title">Tribù Studio</div>
-                <div class="project-description">Uno studio privato dove essere seguito in modo esclusivo</div>
+                <div class="project-description">Uno studio privato a Verona dove essere seguito in modo esclusivo</div>
                 <button class="project-btn">Visita Studio</button>
             </div>
 
-            <div class="project-item project-3" onclick="openProject('https://pastosano.netlify.app/')">
+            <div class="project-card nutrition" onclick="openProject('https://pastosano.netlify.app/')">
                 <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1546554664-1dcb322d46d7?w=400&h=300&fit=crop');"></div>
                 <div class="project-title">Pasto Sano</div>
-                <div class="project-description">Pasti sani per rimanere in forma senza perdere tempo</div>
+                <div class="project-description">Pasti sani e bilanciati per rimanere in forma senza perdere tempo a cucinare</div>
                 <button class="project-btn">Ordina Ora</button>
             </div>
 
-            <div class="project-item project-4" onclick="openProject('https://mealprep-planner.vercel.app/')">
+            <div class="project-card nutrition" onclick="openProject('https://mealprep-planner.vercel.app/')">
                 <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=400&h=300&fit=crop');"></div>
                 <div class="project-title">MealPrep Planner</div>
-                <div class="project-description">Pianifica i tuoi pasti per rimanere in forma</div>
+                <div class="project-description">Web app per pianificare e organizzare i tuoi pasti settimanali</div>
                 <button class="project-btn">Prova Gratis</button>
             </div>
 
-            <div class="project-item project-5" onclick="openProject('https://upstarter-tf9x.vercel.app/')">
+            <div class="project-card business" onclick="openProject('https://upstarter-tf9x.vercel.app/')">
                 <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=300&fit=crop');"></div>
                 <div class="project-title">Upstart</div>
-                <div class="project-description">Testa quanto potenziale ha la tua idea di business</div>
+                <div class="project-description">Testa il potenziale della tua idea di business e ricevi supporto strategico</div>
                 <button class="project-btn">Consulenza Gratuita</button>
             </div>
 
-            <div class="project-item project-6" onclick="openProject('https://github.com/Padu76/andrea-ebook-store')">
+            <div class="project-card business" onclick="openProject('https://github.com/Padu76/andrea-ebook-store')">
                 <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop');"></div>
                 <div class="project-title">I miei eBook</div>
-                <div class="project-description">I miei ebook per aiutarti a trasformare il tuo corpo</div>
+                <div class="project-description">Libreria digitale con guide complete per trasformare il tuo corpo e mindset</div>
                 <button class="project-btn">Scarica Ora</button>
             </div>
 
-            <div class="project-item project-7" onclick="openProject('https://tribucoach.vercel.app/')">
+            <div class="project-card fitness" onclick="openProject('https://tribucoach.vercel.app/')">
                 <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop');"></div>
                 <div class="project-title">Lifestyle Coach</div>
-                <div class="project-description">Senza il giusto mindset, allenamento e alimentazione non bastano</div>
+                <div class="project-description">Coaching ibrido con supporto personalizzato per corpo e mente</div>
                 <button class="project-btn">Inizia Percorso</button>
             </div>
         </div>
     </div>
 
-    <div class="brochure-section">
-        <div class="brochure-container">
-            <h2 class="brochure-title">Tribù Studio - Personal Training</h2>
-            <p class="brochure-subtitle">Aiutiamo le persone ad essere la migliore versione di sé stesse</p>
+    <div class="chat-section">
+        <div class="chat-container">
+            <div class="chat-intro">
+                <div class="chat-avatar">
+                    <div class="chat-avatar-content"></div>
+                </div>
+                <div class="chat-bubble">
+                    <div class="chat-text">
+                        <strong>Ciao! Sono Andrea 👋</strong><br>
+                        Raccontami i tuoi obiettivi, ti guiderò verso la soluzione giusta per te!
+                    </div>
+                    <button class="chat-cta" onclick="openChat()">
+                        <i class="fas fa-comments"></i> Inizia Conversazione
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Fullscreen -->
+    <div class="chat-fullscreen" id="chatFullscreen">
+        <div class="chat-header">
+            <div class="chat-header-info">
+                <div class="chat-header-avatar"></div>
+                <div class="chat-header-text">
+                    <div class="chat-header-name">Andrea Padoan</div>
+                    <div class="chat-header-status">Online ora</div>
+                </div>
+            </div>
+            <button class="chat-close" onclick="closeChat()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="chat-messages" id="chatMessages">
+            <div class="message andrea">
+                <div class="message-bubble">
+                    Ciao! Sono Andrea 👋 Dimmi pure, come posso aiutarti oggi? Che si tratti di fitness, nutrizione, business o mindset, sono qui per guidarti!
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-input-container">
+            <div class="chat-input-wrapper">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Scrivi il tuo messaggio...">
+                <button class="chat-send" onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="projects-list-section">
+        <div class="projects-list-container">
+            <h2 class="projects-list-title">🎯 I Miei Progetti per Te</h2>
+            <p class="projects-list-subtitle">Scegli il percorso più adatto ai tuoi obiettivi</p>
             
-            <div class="brochure-images">
-                <div class="brochure-page">
-                    <img src="./images/tribu-brochure-front.jpg" alt="Tribù Studio - Fronte" onerror="this.parentElement.style.display='none'">
+            <div class="project-list-item" style="--item-color: #ff6b35;" onclick="openProject('https://www.personaltrainerverona.it')">
+                <div class="project-info">
+                    <div style="display: flex; align-items: center;">
+                        <span class="project-emoji">💪</span>
+                        <div>
+                            <div class="project-name">Personal Training</div>
+                            <div class="project-tagline">Trasforma il tuo corpo con allenamenti su misura</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="brochure-page">
-                    <img src="./images/tribu-brochure-back.jpg" alt="Tribù Studio - Retro" onerror="this.parentElement.style.display='none'">
+                <button class="project-cta">Prenota Ora</button>
+            </div>
+
+            <div class="project-list-item" style="--item-color: #ff6b35;" onclick="openProject('https://www.tribustudio.it')">
+                <div class="project-info">
+                    <div style="display: flex; align-items: center;">
+                        <span class="project-emoji">🏢</span>
+                        <div>
+                            <div class="project-name">Tribù Studio</div>
+                            <div class="project-tagline">Allenamento esclusivo nel mio studio privato</div>
+                        </div>
+                    </div>
                 </div>
+                <button class="project-cta">Visita Studio</button>
+            </div>
+
+            <div class="project-list-item" style="--item-color: #4a7c59;" onclick="openProject('https://pastosano.netlify.app/')">
+                <div class="project-info">
+                    <div style="display: flex; align-items: center;">
+                        <span class="project-emoji">🥗</span>
+                        <div>
+                            <div class="project-name">Pasto Sano</div>
+                            <div class="project-tagline">Mangia sano senza cucinare</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="project-cta">Ordina</button>
+            </div>
+
+            <div class="project-list-item" style="--item-color: #4a7c59;" onclick="openProject('https://mealprep-planner.vercel.app/')">
+                <div class="project-info">
+                    <div style="display: flex; align-items: center;">
+                        <span class="project-emoji">📱</span>
+                        <div>
+                            <div class="project-name">MealPrep Planner</div>
+                            <div class="project-tagline">Organizza i tuoi pasti settimanali</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="project-cta">Prova Gratis</button>
+            </div>
+
+            <div class="project-list-item" style="--item-color: #6b7280;" onclick="openProject('https://upstarter-tf9x.vercel.app/')">
+                <div class="project-info">
+                    <div style="display: flex; align-items: center;">
+                        <span class="project-emoji">🚀</span>
+                        <div>
+                            <div class="project-name">Upstart</div>
+                            <div class="project-tagline">Testa il potenziale della tua idea</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="project-cta">Consulenza</button>
+            </div>
+
+            <div class="project-list-item" style="--item-color: #6b7280;" onclick="openProject('https://github.com/Padu76/andrea-ebook-store')">
+                <div class="project-info">
+                    <div style="display: flex; align-items: center;">
+                        <span class="project-emoji">📚</span>
+                        <div>
+                            <div class="project-name">eBook Fitness</div>
+                            <div class="project-tagline">Guide complete per il benessere</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="project-cta">Scarica</button>
+            </div>
+
+            <div class="project-list-item" style="--item-color: #ff6b35;" onclick="openProject('https://tribucoach.vercel.app/')">
+                <div class="project-info">
+                    <div style="display: flex; align-items: center;">
+                        <span class="project-emoji">🧠</span>
+                        <div>
+                            <div class="project-name">Lifestyle Coach</div>
+                            <div class="project-tagline">Mindset vincente per risultati duraturi</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="project-cta">Inizia Percorso</button>
             </div>
         </div>
     </div>
@@ -630,6 +1013,140 @@
     </div>
 
     <script>
+        // Claude API Configuration
+        const CLAUDE_API_URL = 'https://api.anthropic.com/v1/messages';
+        
+        // Chat functions
+        function openChat() {
+            document.getElementById('chatFullscreen').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            document.getElementById('chatInput').focus();
+        }
+
+        function closeChat() {
+            document.getElementById('chatFullscreen').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function scrollToBottom() {
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function addMessage(content, isUser = false) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user' : 'andrea'}`;
+            
+            const bubbleDiv = document.createElement('div');
+            bubbleDiv.className = 'message-bubble';
+            bubbleDiv.innerHTML = content;
+            
+            messageDiv.appendChild(bubbleDiv);
+            chatMessages.appendChild(messageDiv);
+            scrollToBottom();
+        }
+
+        function showTyping() {
+            const chatMessages = document.getElementById('chatMessages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message andrea';
+            typingDiv.id = 'typingIndicator';
+            
+            const typingBubble = document.createElement('div');
+            typingBubble.className = 'typing-indicator';
+            typingBubble.style.display = 'flex';
+            typingBubble.innerHTML = `
+                <div class="typing-dots">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            `;
+            
+            typingDiv.appendChild(typingBubble);
+            chatMessages.appendChild(typingDiv);
+            scrollToBottom();
+        }
+
+        function hideTyping() {
+            const typingIndicator = document.getElementById('typingIndicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message
+            addMessage(message, true);
+            input.value = '';
+            
+            // Show typing indicator
+            showTyping();
+            
+            try {
+                // Simulate API call (replace with actual Claude API)
+                const response = await simulateClaudeResponse(message);
+                
+                // Hide typing and add response
+                hideTyping();
+                addMessage(response);
+                
+                // Log to Airtable (for lead tracking)
+                logConversation(message, response);
+                
+            } catch (error) {
+                hideTyping();
+                addMessage('Mi dispiace, ho avuto un problema tecnico. Riprova tra poco o contattami direttamente!');
+            }
+        }
+
+        // Simulate Claude response (replace with actual API call)
+        async function simulateClaudeResponse(userMessage) {
+            // Simulate API delay
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            const responses = {
+                'personal training': 'Perfetto! Il personal training è la mia specialità. Posso aiutarti sia in presenza nel mio Tribù Studio a Verona, sia online. Quali sono i tuoi obiettivi specifici? Vuoi perdere peso, aumentare massa muscolare, o migliorare la forma fisica generale?',
+                'dieta': 'Ottima domanda! Per l\'alimentazione ho due soluzioni: Pasto Sano per pasti pronti e bilanciati, e MealPrep Planner per organizzare i tuoi pasti. Dipende se preferisci cucinare o avere tutto pronto. Qual è la tua situazione attuale con l\'alimentazione?',
+                'business': 'Interessante! Con Upstart aiuto gli imprenditori a validare e sviluppare le loro idee. Hai già un\'idea di business o stai ancora cercando l\'ispirazione? Posso aiutarti con strategia, team building e validazione del mercato.',
+                'mindset': 'Il mindset è fondamentale! Senza la giusta mentalità, allenamento e dieta non bastano. Il mio Lifestyle Coach unisce supporto umano e tecnologia per aiutarti a sviluppare abitudini vincenti. Qual è la tua sfida più grande in questo momento?'
+            };
+            
+            const lowerMessage = userMessage.toLowerCase();
+            
+            for (let key in responses) {
+                if (lowerMessage.includes(key)) {
+                    return responses[key];
+                }
+            }
+            
+            return 'Ciao! Grazie per avermi scritto. Posso aiutarti con fitness, nutrizione, business o mindset. Raccontami qual è il tuo obiettivo principale e ti guiderò verso la soluzione migliore per te! 💪';
+        }
+
+        // Log conversation to Airtable (for lead tracking)
+        async function logConversation(userMessage, botResponse) {
+            // This would integrate with Airtable API
+            console.log('Logging conversation:', {
+                timestamp: new Date().toISOString(),
+                userMessage,
+                botResponse,
+                userAgent: navigator.userAgent
+            });
+        }
+
+        // Enter key to send message
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && document.getElementById('chatFullscreen').style.display === 'flex') {
+                sendMessage();
+            }
+        });
+
         function openProject(url) {
             if (url && url !== '#') {
                 window.open(url, '_blank');
@@ -654,24 +1171,53 @@
         function scrollToProjects() {
             document.getElementById('projects').scrollIntoView({ 
                 behavior: 'smooth',
-                block: 'center'
+                block: 'start'
             });
         }
 
         // Animations on load
         window.addEventListener('load', function() {
-            // Animate projects with staggered delay
-            const projects = document.querySelectorAll('.project-item');
-            projects.forEach((project, index) => {
-                project.style.opacity = '0';
-                project.style.transform = 'scale(0.8) rotate(10deg)';
+            // Animate project cards
+            const projectCards = document.querySelectorAll('.project-card');
+            projectCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(50px)';
                 
                 setTimeout(() => {
-                    project.style.transition = 'all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-                    project.style.opacity = '1';
-                    project.style.transform = 'scale(1) rotate(0deg)';
-                }, 300 + index * 150);
+                    card.style.transition = 'all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 200 + index * 100);
             });
+
+            // Animate project list items
+            const listItems = document.querySelectorAll('.project-list-item');
+            listItems.forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateX(-50px)';
+                
+                setTimeout(() => {
+                    item.style.transition = 'all 0.6s ease';
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateX(0)';
+                }, 1000 + index * 150);
+            });
+
+            // Animate chat section
+            const chatSection = document.querySelector('.chat-section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            chatSection.style.opacity = '0';
+            chatSection.style.transform = 'translateY(50px)';
+            chatSection.style.transition = 'all 0.8s ease';
+            observer.observe(chatSection);
 
             // Animate social icons
             const socialLinks = document.querySelectorAll('.social-link');
@@ -681,34 +1227,7 @@
                     setTimeout(() => {
                         link.style.transform = 'translateY(0) scale(1)';
                     }, 300);
-                }, 3000 + index * 200);
-            });
-
-            // Animate profile on scroll
-            const profile = document.querySelector('.center-profile');
-            let isAnimating = false;
-            
-            window.addEventListener('scroll', () => {
-                if (!isAnimating) {
-                    isAnimating = true;
-                    profile.style.transform = 'translate(-50%, -50%) rotate(360deg) scale(1.1)';
-                    
-                    setTimeout(() => {
-                        profile.style.transform = 'translate(-50%, -50%) rotate(0deg) scale(1)';
-                        isAnimating = false;
-                    }, 600);
-                }
-            });
-        });
-
-        // Enhanced interactive effects
-        document.querySelectorAll('.project-item').forEach(item => {
-            item.addEventListener('mouseenter', function() {
-                this.style.transform = 'scale(1.08) rotateY(5deg)';
-            });
-            
-            item.addEventListener('mouseleave', function() {
-                this.style.transform = 'scale(1) rotateY(0deg)';
+                }, 2500 + index * 200);
             });
         });
     </script>
