@@ -74,7 +74,7 @@
             font-weight: bold;
         }
 
-        /* 🌟 SOCIAL PROOF LIVE STATS - NEW */
+        /* 🌟 SOCIAL PROOF LIVE STATS */
         .live-stats-hero {
             display: flex;
             justify-content: center;
@@ -302,7 +302,6 @@
             flex-wrap: wrap;
         }
 
-        /* 🤖 ENHANCED CHAT AVATAR - NEW */
         .chat-avatar {
             width: 160px;
             height: 160px;
@@ -385,7 +384,7 @@
             box-shadow: 0 18px 45px rgba(255, 107, 53, 0.5);
         }
 
-        /* 📊 TESTIMONIALS SECTION - NEW */
+        /* 📊 TESTIMONIALS SECTION */
         .testimonials-live {
             background: rgba(0, 0, 0, 0.3);
             padding: 40px 20px;
@@ -472,25 +471,27 @@
             font-size: 0.8rem;
         }
 
-        /* Chat Fullscreen - Enhanced */
+        /* 🤖 IMPROVED CHAT FULLSCREEN */
         .chat-fullscreen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #000;
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
             z-index: 10000;
             display: none;
             flex-direction: column;
         }
 
+        /* 📱 ENHANCED CHAT HEADER */
         .chat-header {
             background: linear-gradient(45deg, #ff6b35, #4a7c59);
             padding: 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
 
         .chat-header-info {
@@ -499,30 +500,49 @@
             gap: 15px;
         }
 
-        /* 🤖 ENHANCED CHAT HEADER AVATAR - NEW */
+        /* 🎭 PROMINENT ANIMATED AVATAR */
         .chat-header-avatar {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             background-image: url('./images/andrea-profile.jpg');
             background-size: cover;
             background-position: center;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            animation: headerAvatarGlow 2s ease-in-out infinite;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            animation: avatarGlow 3s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chat-header-avatar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            animation: shimmer 2s infinite;
         }
 
         .chat-header-avatar.thinking {
-            animation: headerAvatarThinking 1s ease-in-out infinite;
+            animation: avatarThinking 1s ease-in-out infinite;
         }
 
-        @keyframes headerAvatarGlow {
-            0%, 100% { box-shadow: 0 0 15px rgba(255, 255, 255, 0.3); }
-            50% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.6); }
+        .chat-header-avatar.speaking {
+            animation: avatarSpeaking 0.6s ease-in-out infinite;
         }
 
-        @keyframes headerAvatarThinking {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        @keyframes avatarThinking {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.05) rotate(1deg); }
+            75% { transform: scale(0.98) rotate(-1deg); }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         .chat-header-text {
@@ -531,7 +551,8 @@
 
         .chat-header-name {
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            margin-bottom: 2px;
         }
 
         .chat-header-status {
@@ -539,12 +560,12 @@
             opacity: 0.9;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
         }
 
         .status-dot-header {
-            width: 6px;
-            height: 6px;
+            width: 8px;
+            height: 8px;
             background: #4ade80;
             border-radius: 50%;
             animation: pulse 2s infinite;
@@ -554,113 +575,49 @@
             background: rgba(255, 255, 255, 0.2);
             border: none;
             color: #fff;
-            padding: 10px;
+            padding: 12px;
             border-radius: 50%;
             cursor: pointer;
             font-size: 18px;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.3s ease;
         }
 
         .chat-close:hover {
             background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
         }
 
+        /* 📱 CONSTRAINED CHAT MESSAGES */
         .chat-messages {
             flex: 1;
-            padding: 20px;
+            padding: 30px;
             overflow-y: auto;
             background: #1a1a1a;
-        }
-
-        .chat-input-container {
-            padding: 20px;
-            background: #000;
-            border-top: 1px solid #333;
-        }
-
-        /* 🎯 QUICK ACTIONS - NEW */
-        .quick-actions {
             display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .quick-action-btn {
-            padding: 8px 15px;
-            background: rgba(255, 107, 53, 0.1);
-            border: 1px solid #ff6b35;
-            border-radius: 20px;
-            color: #ff6b35;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-        }
-
-        .quick-action-btn:hover {
-            background: #ff6b35;
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .chat-input-wrapper {
-            display: flex;
-            gap: 10px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .chat-input {
-            flex: 1;
-            padding: 15px 20px;
-            border: 2px solid #333;
-            border-radius: 25px;
-            background: #1a1a1a;
-            color: #fff;
-            font-size: 16px;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .chat-input:focus {
-            border-color: #ff6b35;
-            box-shadow: 0 0 15px rgba(255, 107, 53, 0.3);
-        }
-
-        .chat-send {
-            background: linear-gradient(45deg, #ff6b35, #ff8c5a);
-            border: none;
-            color: #fff;
-            padding: 15px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            transition: all 0.3s;
-            display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            min-width: 50px;
         }
 
-        .chat-send:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+        .messages-container {
+            width: 100%;
+            max-width: 800px; /* CONSTRAINED WIDTH */
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
         .message {
-            margin-bottom: 20px;
             display: flex;
-            gap: 10px;
+            gap: 12px;
+            align-items: flex-start;
             opacity: 0;
             transform: translateY(20px);
-            animation: messageSlideIn 0.4s ease forwards;
+            animation: messageSlideIn 0.5s ease forwards;
         }
 
         @keyframes messageSlideIn {
@@ -671,45 +628,85 @@
         }
 
         .message.user {
-            justify-content: flex-end;
+            flex-direction: row-reverse;
         }
 
         .message.andrea {
-            justify-content: flex-start;
+            flex-direction: row;
         }
 
-        .message-bubble {
-            max-width: 70%;
-            padding: 15px 20px;
+        /* 🎭 MESSAGE AVATARS */
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+            flex-shrink: 0;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .bot-avatar {
+            background: linear-gradient(135deg, #ff6b35, #ff8533);
+            color: white;
+            background-image: url('./images/andrea-profile.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .user-avatar {
+            background: linear-gradient(135deg, #4ade80, #22d3ee);
+            color: white;
+        }
+
+        /* 💬 IMPROVED MESSAGE BUBBLES */
+        .message-content {
+            max-width: 80%;
+            padding: 16px 20px;
             border-radius: 20px;
-            word-wrap: break-word;
             position: relative;
+            word-wrap: break-word;
+            line-height: 1.5;
+            font-size: 0.95rem;
         }
 
-        .message.user .message-bubble {
-            background: linear-gradient(45deg, #ff6b35, #ff8c5a);
+        .bot-message {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 133, 51, 0.05));
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            color: #e0e0e0;
+            border-radius: 20px 20px 20px 8px;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.1);
+        }
+
+        .user-message {
+            background: linear-gradient(135deg, #ff6b35, #ff8533);
             color: #fff;
-            border-radius: 20px 20px 5px 20px;
+            border-radius: 20px 20px 8px 20px;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
         }
 
-        .message.andrea .message-bubble {
-            background: #2a2a2a;
-            color: #fff;
-            border: 1px solid rgba(255, 107, 53, 0.2);
-            border-radius: 20px 20px 20px 5px;
+        .message-time {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 8px;
+            text-align: right;
         }
 
-        /* 💬 ENHANCED TYPING INDICATOR - NEW */
+        /* 💭 ENHANCED TYPING INDICATOR */
         .typing-indicator {
             display: none;
             align-items: center;
-            gap: 10px;
-            padding: 15px 20px;
-            background: #2a2a2a;
-            border: 1px solid rgba(255, 107, 53, 0.2);
-            border-radius: 20px 20px 20px 5px;
-            max-width: 120px;
+            gap: 12px;
+            padding: 16px 20px;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 133, 51, 0.05));
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 20px 20px 20px 8px;
+            max-width: 150px;
             margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.1);
         }
 
         .typing-dots {
@@ -729,14 +726,145 @@
         .typing-dot:nth-child(2) { animation-delay: -0.16s; }
 
         @keyframes typingBounce {
-            0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
-            40% { transform: scale(1); opacity: 1; }
+            0%, 80%, 100% { 
+                transform: scale(0); 
+                opacity: 0.5; 
+            }
+            40% { 
+                transform: scale(1); 
+                opacity: 1; 
+            }
         }
 
         .typing-text {
             color: #ff6b35;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-style: italic;
+        }
+
+        /* 📝 IMPROVED INPUT AREA */
+        .chat-input-container {
+            padding: 25px 30px;
+            background: linear-gradient(135deg, #000 0%, #2a2a2a 100%);
+            border-top: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 🎯 COMPACT QUICK ACTIONS */
+        .quick-actions {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 800px;
+        }
+
+        .quick-action-btn {
+            padding: 8px 16px;
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.4);
+            border-radius: 25px;
+            color: #ff6b35;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            backdrop-filter: blur(10px);
+        }
+
+        .quick-action-btn:hover {
+            background: #ff6b35;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        /* 📝 FOCUSED INPUT */
+        .chat-input-wrapper {
+            display: flex;
+            gap: 12px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 18px 24px;
+            border: 2px solid #333;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .chat-input:focus {
+            border-color: #ff6b35;
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .chat-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .chat-send {
+            background: linear-gradient(135deg, #ff6b35, #ff8533);
+            border: none;
+            color: #fff;
+            padding: 18px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 60px;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        .chat-send:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.5);
+        }
+
+        .chat-send:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        /* 🎨 ADDITIONAL VISUAL ENHANCEMENTS */
+        .message-content strong {
+            color: #ff6b35;
+        }
+
+        .message-content em {
+            color: #4ade80;
+        }
+
+        /* Smooth scrollbar */
+        .chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: #ff6b35;
+            border-radius: 3px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb:hover {
+            background: #ff8533;
         }
 
         /* Projects List Section - Updated */
@@ -951,55 +1079,61 @@
                 max-width: 100%;
             }
             
-            .buttons {
-                flex-direction: column;
-                align-items: center;
+            .chat-messages {
+                padding: 20px 15px;
+            }
+            
+            .messages-container {
+                max-width: 100%;
+            }
+            
+            .message-content {
+                max-width: 85%;
+                padding: 14px 18px;
+                font-size: 0.9rem;
+            }
+            
+            .chat-input-container {
+                padding: 20px 15px;
+            }
+            
+            .chat-input-wrapper {
+                max-width: 100%;
+            }
+            
+            .chat-input {
+                padding: 16px 20px;
+                font-size: 16px; /* Previene zoom iOS */
+            }
+            
+            .chat-send {
+                padding: 16px 20px;
+                min-width: 55px;
+            }
+            
+            .quick-actions {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 5px;
+                max-width: 100%;
+            }
+            
+            .quick-action-btn {
+                flex-shrink: 0;
+            }
+            
+            .chat-header-avatar {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .chat-header-name {
+                font-size: 1.1rem;
             }
             
             .main-cta, .secondary-btn {
                 width: 100%;
                 max-width: 350px;
-            }
-            
-            .photo-text {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            
-            .text-content-wrapper {
-                padding: 30px 20px;
-            }
-            
-            .benefits {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            
-            .testimonials {
-                padding: 60px 20px;
-            }
-            
-            .testimonial-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                flex-direction: column;
-                gap: 30px;
-            }
-            
-            .chat-container {
-                width: 95%;
-                height: 90%;
-                margin: 20px;
-            }
-            
-            .chat-input {
-                padding: 15px 20px;
-            }
-            
-            #messageInput {
-                font-size: 16px; /* Previene zoom su iOS */
             }
             
             .contact-section div[style*="display: flex"] {
@@ -1011,12 +1145,6 @@
                 width: 100%;
                 max-width: 300px;
                 justify-content: center;
-            }
-            
-            .quick-actions {
-                justify-content: flex-start;
-                overflow-x: auto;
-                padding-bottom: 5px;
             }
         }
     </style>
@@ -1032,7 +1160,7 @@
         <h1>Andrea Padoan</h1>
         <p>Il tuo partner per corpo, mente e business.<br>Scopri i miei progetti e trova la soluzione perfetta per te.</p>
         
-        <!-- 🌟 LIVE STATS HERO - NEW -->
+        <!-- 🌟 LIVE STATS HERO -->
         <div class="live-stats-hero">
             <div class="hero-stat">
                 <span class="live-indicator-hero"></span>
@@ -1109,7 +1237,7 @@
         </div>
     </div>
 
-    <!-- 📊 TESTIMONIALS LIVE SECTION - NEW -->
+    <!-- 📊 TESTIMONIALS LIVE SECTION -->
     <div class="testimonials-live">
         <h3 class="testimonials-title">💬 Cosa Dicono i Miei Clienti</h3>
         <div class="testimonials-carousel" id="testimonialsCarousel">
@@ -1173,8 +1301,9 @@
         </div>
     </div>
 
-    <!-- Chat Fullscreen Enhanced -->
+    <!-- 🤖 IMPROVED CHAT FULLSCREEN -->
     <div class="chat-fullscreen" id="chatFullscreen">
+        <!-- 📱 ENHANCED CHAT HEADER -->
         <div class="chat-header">
             <div class="chat-header-info">
                 <div class="chat-header-avatar" id="chatHeaderAvatar"></div>
@@ -1191,23 +1320,39 @@
             </button>
         </div>
         
+        <!-- 📱 CONSTRAINED CHAT MESSAGES -->
         <div class="chat-messages" id="chatMessages">
-            <div class="message andrea">
-                <div class="message-bubble">
-                    🔥 Ciao! Sono Andrea Padoan! Dimmi pure, come posso aiutarti oggi? Che si tratti di fitness, nutrizione, business o mindset, sono qui per guidarti verso il cambiamento totale! 💪
+            <div class="messages-container" id="messagesContainer">
+                <div class="message andrea">
+                    <div class="message-avatar bot-avatar"></div>
+                    <div class="message-content bot-message">
+                        🔥 <strong>Ciao! Sono Andrea Padoan!</strong><br><br>
+                        Dimmi pure, come posso aiutarti oggi? Che si tratti di <em>fitness</em>, <em>nutrizione</em>, <em>business</em> o <em>mindset</em>, sono qui per guidarti verso il <strong>cambiamento totale</strong>! 💪
+                        <div class="message-time">Ora</div>
+                    </div>
                 </div>
             </div>
         </div>
 
+        <!-- 📝 IMPROVED INPUT AREA -->
         <div class="chat-input-container">
-            <!-- 🎯 QUICK ACTIONS - NEW -->
+            <!-- 🎯 COMPACT QUICK ACTIONS -->
             <div class="quick-actions">
-                <button class="quick-action-btn" onclick="sendQuickMessage('Fammi il quiz per scegliere il servizio giusto')">🎯 Quiz Personalizzato</button>
-                <button class="quick-action-btn" onclick="sendQuickMessage('Quali sono i tuoi prezzi?')">💰 Prezzi</button>
-                <button class="quick-action-btn" onclick="sendQuickMessage('Come funziona il personal training?')">💪 Come Funziona</button>
-                <button class="quick-action-btn" onclick="sendQuickMessage('Vorrei prenotare una sessione')">📅 Prenota</button>
+                <button class="quick-action-btn" onclick="sendQuickMessage('Fammi il quiz per scegliere il servizio giusto')">
+                    🎯 Quiz Personalizzato
+                </button>
+                <button class="quick-action-btn" onclick="sendQuickMessage('Quali sono i tuoi prezzi?')">
+                    💰 Prezzi
+                </button>
+                <button class="quick-action-btn" onclick="sendQuickMessage('Come funziona il personal training?')">
+                    💪 Come Funziona
+                </button>
+                <button class="quick-action-btn" onclick="sendQuickMessage('Vorrei prenotare una sessione')">
+                    📅 Prenota
+                </button>
             </div>
             
+            <!-- 📝 FOCUSED INPUT -->
             <div class="chat-input-wrapper">
                 <input type="text" class="chat-input" id="chatInput" placeholder="Scrivi qui la tua domanda...">
                 <button class="chat-send" onclick="sendMessage()">
@@ -1339,16 +1484,15 @@
     </div>
 
     <script>
-        // 🌟 LIVE STATS UPDATE SYSTEM - NEW
+        // 🌟 LIVE STATS UPDATE SYSTEM
         let conversationHistory = [];
+        let isTyping = false;
         
         function startLiveStatsUpdates() {
-            // Update client count every 15 seconds
             setInterval(() => {
                 updateClientCount();
             }, 15000);
             
-            // Update active users every 8 seconds
             setInterval(() => {
                 updateActiveUsers();
             }, 8000);
@@ -1358,7 +1502,7 @@
             const clientsEl = document.getElementById('heroClientsCount');
             if (clientsEl) {
                 const current = parseInt(clientsEl.textContent);
-                const increment = Math.random() < 0.3 ? 1 : 0; // 30% chance to increment
+                const increment = Math.random() < 0.3 ? 1 : 0;
                 if (increment) {
                     animateCounter(clientsEl, current, current + 1);
                 }
@@ -1369,7 +1513,7 @@
             const activeEl = document.getElementById('heroActiveNow');
             if (activeEl) {
                 const current = parseInt(activeEl.textContent);
-                const change = Math.floor(Math.random() * 5) - 2; // -2 to +2
+                const change = Math.floor(Math.random() * 5) - 2;
                 const newValue = Math.max(8, Math.min(20, current + change));
                 animateCounter(activeEl, current, newValue);
             }
@@ -1402,7 +1546,6 @@
             document.body.style.overflow = 'hidden';
             document.getElementById('chatInput').focus();
             
-            // Animate hero avatar
             const heroAvatar = document.getElementById('heroAvatar');
             if (heroAvatar) {
                 heroAvatar.classList.add('speaking');
@@ -1421,19 +1564,25 @@
         }
 
         function addMessage(content, isUser = false) {
-            const chatMessages = document.getElementById('chatMessages');
+            const messagesContainer = document.getElementById('messagesContainer');
             const messageDiv = document.createElement('div');
             messageDiv.className = `message ${isUser ? 'user' : 'andrea'}`;
             
-            const bubbleDiv = document.createElement('div');
-            bubbleDiv.className = 'message-bubble';
-            bubbleDiv.innerHTML = content;
+            const avatarDiv = document.createElement('div');
+            avatarDiv.className = `message-avatar ${isUser ? 'user-avatar' : 'bot-avatar'}`;
+            if (isUser) {
+                avatarDiv.textContent = 'TU';
+            }
             
-            messageDiv.appendChild(bubbleDiv);
-            chatMessages.appendChild(messageDiv);
+            const contentDiv = document.createElement('div');
+            contentDiv.className = `message-content ${isUser ? 'user-message' : 'bot-message'}`;
+            contentDiv.innerHTML = content + `<div class="message-time">${new Date().toLocaleTimeString('it-IT', {hour: '2-digit', minute: '2-digit'})}</div>`;
+            
+            messageDiv.appendChild(avatarDiv);
+            messageDiv.appendChild(contentDiv);
+            messagesContainer.appendChild(messageDiv);
             scrollToBottom();
             
-            // Store in conversation history
             conversationHistory.push({
                 user: isUser ? content : null,
                 bot: isUser ? null : content,
@@ -1441,12 +1590,17 @@
             });
         }
 
-        // 💬 ENHANCED TYPING INDICATOR - NEW
         function showTyping() {
-            const chatMessages = document.getElementById('chatMessages');
+            if (isTyping) return;
+            isTyping = true;
+            
+            const messagesContainer = document.getElementById('messagesContainer');
             const typingDiv = document.createElement('div');
             typingDiv.className = 'message andrea';
             typingDiv.id = 'typingIndicator';
+            
+            const avatarDiv = document.createElement('div');
+            avatarDiv.className = 'message-avatar bot-avatar';
             
             const typingBubble = document.createElement('div');
             typingBubble.className = 'typing-indicator';
@@ -1460,17 +1614,16 @@
                 <div class="typing-text">Andrea sta scrivendo...</div>
             `;
             
+            typingDiv.appendChild(avatarDiv);
             typingDiv.appendChild(typingBubble);
-            chatMessages.appendChild(typingDiv);
+            messagesContainer.appendChild(typingDiv);
             scrollToBottom();
             
-            // Animate header avatar
             const headerAvatar = document.getElementById('chatHeaderAvatar');
             if (headerAvatar) {
                 headerAvatar.classList.add('thinking');
             }
             
-            // Update status
             const statusEl = document.getElementById('chatHeaderStatus');
             if (statusEl) {
                 statusEl.innerHTML = '<span class="status-dot-header"></span>Andrea sta scrivendo...';
@@ -1478,32 +1631,32 @@
         }
 
         function hideTyping() {
+            if (!isTyping) return;
+            isTyping = false;
+            
             const typingIndicator = document.getElementById('typingIndicator');
             if (typingIndicator) {
                 typingIndicator.remove();
             }
             
-            // Remove thinking animation
             const headerAvatar = document.getElementById('chatHeaderAvatar');
             if (headerAvatar) {
                 headerAvatar.classList.remove('thinking');
             }
             
-            // Reset status
             const statusEl = document.getElementById('chatHeaderStatus');
             if (statusEl) {
                 statusEl.innerHTML = '<span class="status-dot-header"></span>Online e pronto ad aiutarti';
             }
         }
 
-        // 🎯 QUICK ACTIONS - NEW
         function sendQuickMessage(message) {
+            if (isTyping) return;
             const input = document.getElementById('chatInput');
             input.value = message;
             sendMessage();
         }
 
-        // Enhanced API call with conversation history
         async function callClaudeAPI(userMessage) {
             try {
                 const response = await fetch('/api/chat', {
@@ -1530,31 +1683,34 @@
         }
 
         async function sendMessage() {
+            if (isTyping) return;
+            
             const input = document.getElementById('chatInput');
             const message = input.value.trim();
             
             if (!message) return;
             
-            // Add user message
             addMessage(message, true);
             input.value = '';
             
-            // Show typing indicator
             showTyping();
             
             try {
-                // Call API with conversation history
                 const response = await callClaudeAPI(message);
                 
-                // Hide typing and add response
                 hideTyping();
                 addMessage(response);
                 
-                // Animate hero avatar if visible
                 const heroAvatar = document.getElementById('heroAvatar');
                 if (heroAvatar) {
                     heroAvatar.classList.add('speaking');
                     setTimeout(() => heroAvatar.classList.remove('speaking'), 2000);
+                }
+                
+                const headerAvatar = document.getElementById('chatHeaderAvatar');
+                if (headerAvatar) {
+                    headerAvatar.classList.add('speaking');
+                    setTimeout(() => headerAvatar.classList.remove('speaking'), 2000);
                 }
                 
             } catch (error) {
@@ -1563,7 +1719,6 @@
             }
         }
 
-        // Enter key to send message
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Enter' && document.getElementById('chatFullscreen').style.display === 'flex') {
                 sendMessage();
@@ -1579,14 +1734,11 @@
         }
 
         function openContact() {
-            // Mostra opzioni di contatto
             const contactOptions = confirm('Scegli come contattarmi:\n\nOK = WhatsApp\nAnnulla = Email');
             
             if (contactOptions) {
-                // WhatsApp
                 window.open('https://wa.me/393478881515?text=Ciao Andrea, ho visto il tuo sito e vorrei maggiori informazioni!', '_blank');
             } else {
-                // Email
                 window.location.href = 'mailto:andrea.padoan@gmail.com?subject=Richiesta informazioni&body=Ciao Andrea, ho visto il tuo sito e vorrei maggiori informazioni sui tuoi servizi.';
             }
         }
@@ -1602,22 +1754,16 @@
             });
         }
 
-        // 🚀 INITIALIZATION
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 Andrea Padoan Landing - FASE 2 Enhanced Loading...');
+            console.log('🚀 Andrea Padoan Landing - Chat UI Migliorata Loading...');
             
-            // Start live stats updates
             startLiveStatsUpdates();
-            
-            // Initialize animations
             initializeAnimations();
             
             console.log('✅ Enhanced features loaded successfully!');
         });
 
-        // Animations on load
         function initializeAnimations() {
-            // Animate project cards
             const projectCards = document.querySelectorAll('.project-card');
             projectCards.forEach((card, index) => {
                 card.style.opacity = '0';
@@ -1630,7 +1776,6 @@
                 }, 200 + index * 100);
             });
 
-            // Animate project list items
             const listItems = document.querySelectorAll('.project-list-item');
             listItems.forEach((item, index) => {
                 item.style.opacity = '0';
@@ -1643,7 +1788,6 @@
                 }, 1000 + index * 150);
             });
 
-            // Animate chat section
             const chatSection = document.querySelector('.chat-section');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -1661,7 +1805,6 @@
                 observer.observe(chatSection);
             }
 
-            // Animate testimonials
             const testimonialCards = document.querySelectorAll('.testimonial-card');
             testimonialCards.forEach((card, index) => {
                 card.style.opacity = '0';
@@ -1674,7 +1817,6 @@
                 }, 500 + index * 200);
             });
 
-            // Animate social icons
             const socialLinks = document.querySelectorAll('.social-link');
             socialLinks.forEach((link, index) => {
                 setTimeout(() => {
@@ -1685,7 +1827,6 @@
                 }, 2500 + index * 200);
             });
 
-            // Animate hero stats
             const heroStats = document.querySelectorAll('.hero-stat');
             heroStats.forEach((stat, index) => {
                 stat.style.opacity = '0';
