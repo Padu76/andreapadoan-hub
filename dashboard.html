@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TribuCoach Dashboard | Customer Intelligence</title>
+    <title>TribuCoach Dashboard 2.0 | Customer Intelligence</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -41,13 +41,14 @@
             border: 2px solid #ff6b35;
             backdrop-filter: blur(20px);
             text-align: center;
-            max-width: 400px;
+            max-width: 450px;
             width: 90%;
+            box-shadow: 0 25px 50px rgba(255, 107, 53, 0.3);
         }
 
         .login-title {
             color: #ff6b35;
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin-bottom: 10px;
             font-weight: bold;
         }
@@ -55,25 +56,26 @@
         .login-subtitle {
             color: #ccc;
             margin-bottom: 30px;
-            font-size: 1rem;
+            font-size: 1.1rem;
         }
 
         .login-input {
             width: 100%;
-            padding: 15px 20px;
+            padding: 18px 25px;
             border: 2px solid #333;
-            border-radius: 12px;
+            border-radius: 15px;
             background: #1a1a1a;
             color: #fff;
             font-size: 1.1rem;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             outline: none;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
         }
 
         .login-input:focus {
             border-color: #ff6b35;
-            box-shadow: 0 0 15px rgba(255, 107, 53, 0.3);
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
+            transform: translateY(-2px);
         }
 
         .login-btn {
@@ -81,23 +83,25 @@
             background: linear-gradient(135deg, #ff6b35, #ff8533);
             color: white;
             border: none;
-            padding: 15px;
-            border-radius: 12px;
-            font-size: 1.1rem;
+            padding: 18px;
+            border-radius: 15px;
+            font-size: 1.2rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s;
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
         }
 
         .login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 107, 53, 0.5);
         }
 
         .error-message {
             color: #ff4444;
-            margin-top: 15px;
-            font-size: 0.9rem;
+            margin-top: 20px;
+            font-size: 1rem;
+            font-weight: 500;
         }
 
         /* Dashboard Layout */
@@ -114,15 +118,16 @@
         .header {
             background: rgba(26, 26, 26, 0.95);
             backdrop-filter: blur(20px);
-            border-bottom: 2px solid #ff6b35;
-            padding: 20px;
+            border-bottom: 3px solid #ff6b35;
+            padding: 25px;
             position: sticky;
             top: 0;
             z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
 
         .header-content {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -132,48 +137,52 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 18px;
         }
 
         .logo-icon {
-            width: 45px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
             background: linear-gradient(135deg, #ff6b35, #ff8533);
-            border-radius: 12px;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: bold;
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
         }
 
         .logo-text h1 {
             color: #ff6b35;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: bold;
         }
 
         .logo-text p {
             color: #888;
-            font-size: 0.9rem;
+            font-size: 1rem;
         }
 
         .header-actions {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 25px;
         }
 
         .refresh-btn {
             background: rgba(255, 107, 53, 0.1);
             border: 2px solid #ff6b35;
             color: #ff6b35;
-            padding: 10px 20px;
-            border-radius: 10px;
+            padding: 12px 25px;
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s;
             font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .refresh-btn:hover {
@@ -182,45 +191,74 @@
             transform: translateY(-2px);
         }
 
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(74, 222, 128, 0.1);
+            border: 1px solid #4ade80;
+            color: #4ade80;
+            padding: 8px 15px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4ade80;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
         .logout-btn {
             background: rgba(255, 68, 68, 0.1);
             border: 2px solid #ff4444;
             color: #ff4444;
-            padding: 10px 15px;
-            border-radius: 10px;
+            padding: 12px 18px;
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s;
+            font-size: 1.1rem;
         }
 
         .logout-btn:hover {
             background: #ff4444;
             color: white;
+            transform: translateY(-2px);
         }
 
         /* Main Content */
         .main-content {
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
-            padding: 30px 20px;
+            padding: 40px 25px;
         }
 
         /* Overview Cards */
         .overview-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
         }
 
         .overview-card {
-            background: rgba(26, 26, 26, 0.8);
+            background: rgba(26, 26, 26, 0.9);
             backdrop-filter: blur(20px);
             border: 1px solid #333;
-            border-radius: 20px;
-            padding: 25px;
-            transition: all 0.3s;
+            border-radius: 25px;
+            padding: 35px;
+            transition: all 0.4s;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
         .overview-card::before {
@@ -229,53 +267,58 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 4px;
+            height: 5px;
             background: var(--accent-color);
         }
 
         .overview-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             border-color: var(--accent-color);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
 
         .card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .card-title {
             color: #ccc;
-            font-size: 0.9rem;
+            font-size: 1rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.2px;
         }
 
         .card-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
+            width: 50px;
+            height: 50px;
+            border-radius: 15px;
             background: rgba(255, 107, 53, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--accent-color);
-            font-size: 1.2rem;
+            font-size: 1.4rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .card-value {
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: bold;
             color: var(--accent-color);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
         }
 
         .card-change {
-            font-size: 0.85rem;
+            font-size: 0.95rem;
             color: #888;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
         .card-change.positive {
@@ -296,70 +339,74 @@
         .dashboard-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 40px;
+            gap: 40px;
+            margin-bottom: 50px;
         }
 
         .dashboard-section {
-            background: rgba(26, 26, 26, 0.8);
+            background: rgba(26, 26, 26, 0.9);
             backdrop-filter: blur(20px);
             border: 1px solid #333;
-            border-radius: 20px;
-            padding: 30px;
+            border-radius: 25px;
+            padding: 35px;
             transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            min-height: 500px;
         }
 
         .dashboard-section:hover {
             border-color: #ff6b35;
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.1);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.1);
         }
 
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #333;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #333;
         }
 
         .section-title {
             color: #ff6b35;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: bold;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .section-actions {
             display: flex;
-            gap: 10px;
+            gap: 12px;
         }
 
         .action-btn {
             background: rgba(255, 107, 53, 0.1);
             border: 1px solid #ff6b35;
             color: #ff6b35;
-            padding: 8px 15px;
-            border-radius: 8px;
-            font-size: 0.8rem;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-size: 0.85rem;
             cursor: pointer;
             transition: all 0.3s;
+            font-weight: 500;
         }
 
-        .action-btn:hover {
+        .action-btn:hover, .action-btn.active {
             background: #ff6b35;
             color: white;
+            transform: translateY(-2px);
         }
 
         /* Lead List */
         .lead-item {
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid #333;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 15px;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
             transition: all 0.3s;
             cursor: pointer;
         }
@@ -367,98 +414,126 @@
         .lead-item:hover {
             border-color: #ff6b35;
             background: rgba(255, 107, 53, 0.05);
+            transform: translateY(-2px);
         }
 
         .lead-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .lead-name {
             font-weight: bold;
             color: #fff;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
         }
 
         .lead-time {
             color: #888;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
         }
 
         .lead-message {
             color: #ccc;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             font-style: italic;
-            line-height: 1.4;
+            line-height: 1.5;
+            background: rgba(0,0,0,0.2);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 3px solid #ff6b35;
         }
 
         .lead-actions {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             flex-wrap: wrap;
+            align-items: center;
         }
 
         .whatsapp-btn {
             background: #25D366;
             color: white;
             border: none;
-            padding: 8px 15px;
-            border-radius: 8px;
-            font-size: 0.8rem;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 0.9rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s;
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
         }
 
         .whatsapp-btn:hover {
             background: #20BA5A;
             transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
         }
 
         .interest-tag {
             background: rgba(255, 107, 53, 0.2);
             color: #ff6b35;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.7rem;
+            padding: 6px 15px;
+            border-radius: 25px;
+            font-size: 0.75rem;
             font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .engagement-score {
             background: rgba(96, 165, 250, 0.2);
             color: #60a5fa;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.7rem;
+            padding: 6px 15px;
+            border-radius: 25px;
+            font-size: 0.75rem;
             font-weight: bold;
+        }
+
+        .hot-badge {
+            background: rgba(255, 68, 68, 0.2);
+            color: #ff4444;
+            padding: 6px 15px;
+            border-radius: 25px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 5px rgba(255, 68, 68, 0.5); }
+            to { box-shadow: 0 0 20px rgba(255, 68, 68, 0.8); }
         }
 
         /* Charts */
         .chart-container {
             position: relative;
-            height: 300px;
-            margin-top: 20px;
+            height: 350px;
+            margin-top: 25px;
         }
 
         /* Loading State */
         .loading {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 200px;
+            height: 300px;
             color: #888;
             font-size: 1.1rem;
         }
 
         .loading i {
             animation: spin 1s linear infinite;
-            margin-right: 10px;
+            margin-bottom: 15px;
+            font-size: 2rem;
+            color: #ff6b35;
         }
 
         @keyframes spin {
@@ -471,23 +546,67 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 0;
+            padding: 15px 0;
             border-bottom: 1px solid #333;
+            transition: all 0.3s;
+        }
+
+        .question-item:hover {
+            background: rgba(255, 107, 53, 0.05);
+            margin: 0 -15px;
+            padding: 15px;
+            border-radius: 10px;
         }
 
         .question-text {
             color: #ccc;
             flex: 1;
+            font-size: 0.95rem;
         }
 
         .question-count {
             background: rgba(255, 107, 53, 0.2);
             color: #ff6b35;
-            padding: 4px 12px;
-            border-radius: 20px;
+            padding: 6px 15px;
+            border-radius: 25px;
             font-size: 0.8rem;
             font-weight: bold;
-            margin-left: 15px;
+            margin-left: 20px;
+            min-width: 45px;
+            text-align: center;
+        }
+
+        /* Error State */
+        .error-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
+            color: #ff4444;
+            text-align: center;
+        }
+
+        .error-state i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        /* No Data State */
+        .no-data {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
+            color: #888;
+            text-align: center;
+        }
+
+        .no-data i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            opacity: 0.5;
         }
 
         /* Mobile Responsive */
@@ -502,11 +621,11 @@
 
             .header-content {
                 flex-direction: column;
-                gap: 15px;
+                gap: 20px;
             }
 
             .main-content {
-                padding: 20px 15px;
+                padding: 25px 20px;
             }
 
             .lead-actions {
@@ -514,7 +633,15 @@
             }
 
             .card-value {
-                font-size: 2rem;
+                font-size: 2.2rem;
+            }
+
+            .dashboard-section {
+                padding: 25px 20px;
+            }
+
+            .login-box {
+                padding: 30px 25px;
             }
         }
 
@@ -523,37 +650,70 @@
                 grid-template-columns: 1fr;
             }
 
-            .login-box {
-                padding: 30px 20px;
-            }
-
-            .dashboard-section {
-                padding: 20px;
+            .header-actions {
+                flex-direction: column;
+                gap: 15px;
             }
         }
 
         /* Auto-refresh indicator */
         .refresh-indicator {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(26, 26, 26, 0.9);
-            border: 1px solid #ff6b35;
-            border-radius: 10px;
-            padding: 10px 15px;
+            bottom: 25px;
+            right: 25px;
+            background: rgba(26, 26, 26, 0.95);
+            border: 2px solid #ff6b35;
+            border-radius: 15px;
+            padding: 12px 20px;
             color: #ff6b35;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.2);
         }
 
         .refresh-indicator.updating {
-            animation: pulse 0.5s ease-in-out;
+            animation: pulse-indicator 0.8s ease-in-out;
         }
 
-        @keyframes pulse {
+        @keyframes pulse-indicator {
             0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.1); }
             100% { transform: scale(1); }
+        }
+
+        /* AI Insights Section */
+        .ai-insights {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(59, 130, 246, 0.1));
+            border: 1px solid rgba(168, 85, 247, 0.3);
+        }
+
+        .insight-item {
+            background: rgba(168, 85, 247, 0.1);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+
+        .insight-item:hover {
+            border-color: rgba(168, 85, 247, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .insight-title {
+            color: #a855f7;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .insight-text {
+            color: #e0e0e0;
+            line-height: 1.5;
         }
     </style>
 </head>
@@ -561,8 +721,8 @@
     <!-- Login Screen -->
     <div class="login-container" id="loginScreen">
         <div class="login-box">
-            <div class="login-title">🎯 TribuCoach Dashboard</div>
-            <div class="login-subtitle">Customer Intelligence & CRM</div>
+            <div class="login-title">🎯 TribuCoach Dashboard 2.0</div>
+            <div class="login-subtitle">Advanced Customer Intelligence & AI Insights</div>
             <input type="password" id="passwordInput" class="login-input" placeholder="Inserisci password" autocomplete="current-password">
             <button onclick="login()" class="login-btn">Accedi alla Dashboard</button>
             <div id="errorMessage" class="error-message" style="display: none;"></div>
@@ -577,11 +737,15 @@
                 <div class="logo">
                     <div class="logo-icon">TC</div>
                     <div class="logo-text">
-                        <h1>TribuCoach Dashboard</h1>
-                        <p>Customer Intelligence & Lead Management</p>
+                        <h1>TribuCoach Dashboard 2.0</h1>
+                        <p>Advanced Customer Intelligence & Real-Time Analytics</p>
                     </div>
                 </div>
                 <div class="header-actions">
+                    <div class="status-indicator">
+                        <div class="status-dot"></div>
+                        <span id="connectionStatus">Connesso ad Airtable</span>
+                    </div>
                     <button class="refresh-btn" onclick="refreshData()">
                         <i class="fas fa-sync-alt"></i> Aggiorna
                     </button>
@@ -602,7 +766,9 @@
                         <div class="card-icon"><i class="fas fa-comments"></i></div>
                     </div>
                     <div class="card-value" id="todayConversations">-</div>
-                    <div class="card-change" id="conversationsChange">Caricamento...</div>
+                    <div class="card-change" id="conversationsChange">
+                        <i class="fas fa-spinner fa-spin"></i> Caricamento...
+                    </div>
                 </div>
 
                 <div class="overview-card">
@@ -611,7 +777,9 @@
                         <div class="card-icon"><i class="fas fa-users"></i></div>
                     </div>
                     <div class="card-value" id="activeLeads">-</div>
-                    <div class="card-change" id="leadsChange">Caricamento...</div>
+                    <div class="card-change" id="leadsChange">
+                        <i class="fas fa-spinner fa-spin"></i> Caricamento...
+                    </div>
                 </div>
 
                 <div class="overview-card">
@@ -620,7 +788,9 @@
                         <div class="card-icon"><i class="fas fa-chart-line"></i></div>
                     </div>
                     <div class="card-value" id="conversionRate">-</div>
-                    <div class="card-change" id="conversionChange">Caricamento...</div>
+                    <div class="card-change" id="conversionChange">
+                        <i class="fas fa-spinner fa-spin"></i> Caricamento...
+                    </div>
                 </div>
 
                 <div class="overview-card">
@@ -629,7 +799,9 @@
                         <div class="card-icon"><i class="fas fa-fire"></i></div>
                     </div>
                     <div class="card-value" id="hotLeads">-</div>
-                    <div class="card-change" id="hotLeadsChange">Caricamento...</div>
+                    <div class="card-change" id="hotLeadsChange">
+                        <i class="fas fa-spinner fa-spin"></i> Caricamento...
+                    </div>
                 </div>
             </div>
 
@@ -643,18 +815,41 @@
                             Lead Management
                         </div>
                         <div class="section-actions">
-                            <button class="action-btn" onclick="filterLeads('hot')">🔥 Hot</button>
-                            <button class="action-btn" onclick="filterLeads('all')">Tutti</button>
+                            <button class="action-btn active" onclick="filterLeads('all')" id="filterAll">Tutti</button>
+                            <button class="action-btn" onclick="filterLeads('hot')" id="filterHot">🔥 Hot</button>
+                            <button class="action-btn" onclick="filterLeads('recent')" id="filterRecent">📅 Recenti</button>
                         </div>
                     </div>
                     <div id="leadsList">
                         <div class="loading">
                             <i class="fas fa-spinner"></i>
-                            Caricamento leads...
+                            Caricamento leads da Airtable...
                         </div>
                     </div>
                 </div>
 
+                <!-- AI Insights -->
+                <div class="dashboard-section ai-insights">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <i class="fas fa-brain"></i>
+                            AI Insights
+                        </div>
+                        <div class="section-actions">
+                            <button class="action-btn" onclick="generateInsights()">🧠 Analizza</button>
+                        </div>
+                    </div>
+                    <div id="aiInsights">
+                        <div class="loading">
+                            <i class="fas fa-spinner"></i>
+                            Generando insights AI...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Grid -->
+            <div class="dashboard-grid">
                 <!-- Question Analysis -->
                 <div class="dashboard-section">
                     <div class="section-header">
@@ -673,10 +868,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Charts Section -->
-            <div class="dashboard-grid">
                 <!-- Interest Distribution -->
                 <div class="dashboard-section">
                     <div class="section-header">
@@ -684,30 +876,37 @@
                             <i class="fas fa-chart-pie"></i>
                             Distribuzione Interessi
                         </div>
+                        <div class="section-actions">
+                            <button class="action-btn" onclick="toggleChartType()">📈 Cambia Vista</button>
+                        </div>
                     </div>
                     <div class="chart-container">
                         <canvas id="interestChart"></canvas>
                     </div>
                 </div>
+            </div>
 
-                <!-- Conversation Trends -->
-                <div class="dashboard-section">
-                    <div class="section-header">
-                        <div class="section-title">
-                            <i class="fas fa-chart-area"></i>
-                            Trend Conversazioni
-                        </div>
+            <!-- Conversation Trends -->
+            <div class="dashboard-section">
+                <div class="section-header">
+                    <div class="section-title">
+                        <i class="fas fa-chart-area"></i>
+                        Trend Conversazioni (Ultimi 7 giorni)
                     </div>
-                    <div class="chart-container">
-                        <canvas id="trendsChart"></canvas>
+                    <div class="section-actions">
+                        <button class="action-btn" onclick="changeTrendPeriod('7d')" id="trend7d">7d</button>
+                        <button class="action-btn" onclick="changeTrendPeriod('30d')" id="trend30d">30d</button>
                     </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="trendsChart"></canvas>
                 </div>
             </div>
         </main>
 
         <!-- Auto-refresh Indicator -->
         <div class="refresh-indicator" id="refreshIndicator">
-            <i class="fas fa-clock"></i> Auto-refresh: 30s
+            <i class="fas fa-clock"></i> Auto-refresh: <span id="refreshTimer">30s</span>
         </div>
     </div>
 
@@ -715,7 +914,10 @@
         // Global variables
         let dashboardData = {};
         let refreshInterval;
+        let refreshTimer;
         let isLoggedIn = false;
+        let currentLeadFilter = 'all';
+        let chartInstances = {};
 
         // Authentication
         function login() {
@@ -738,9 +940,16 @@
         function logout() {
             isLoggedIn = false;
             clearInterval(refreshInterval);
+            clearInterval(refreshTimer);
             document.getElementById('loginScreen').style.display = 'flex';
             document.getElementById('mainDashboard').classList.remove('active');
             document.getElementById('passwordInput').value = '';
+            
+            // Destroy chart instances
+            Object.values(chartInstances).forEach(chart => {
+                if (chart) chart.destroy();
+            });
+            chartInstances = {};
         }
 
         // Enter key for login
@@ -752,7 +961,12 @@
 
         // Initialize Dashboard
         function initDashboard() {
-            console.log('🚀 Initializing TribuCoach Dashboard...');
+            console.log('🚀 Initializing TribuCoach Dashboard 2.0...');
+            
+            // Start refresh timer
+            startRefreshTimer();
+            
+            // Load real data from Airtable
             loadDashboardData();
             
             // Set up auto-refresh every 30 seconds
@@ -763,121 +977,116 @@
             }, 30000);
         }
 
-        // Load Dashboard Data
+        // Load Dashboard Data from Airtable
         async function loadDashboardData() {
-            console.log('📊 Loading dashboard data...');
+            console.log('📊 Loading real data from Airtable...');
             
             try {
-                // Simulate API call - Replace with real Airtable API
-                const response = await fetch('/api/dashboard');
+                // Update status
+                updateConnectionStatus('loading', 'Caricamento dati...');
+                
+                // Call dashboard API
+                const response = await fetch('/api/dashboard', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
                 
                 if (response.ok) {
                     dashboardData = await response.json();
+                    console.log('✅ Real data loaded successfully:', dashboardData);
+                    updateConnectionStatus('connected', 'Connesso ad Airtable');
+                    updateDashboard();
                 } else {
-                    // Fallback to simulated data for development
-                    dashboardData = generateSampleData();
+                    throw new Error(`API Error: ${response.status}`);
                 }
                 
-                updateDashboard();
-                
             } catch (error) {
-                console.error('Error loading data:', error);
-                // Use sample data as fallback
-                dashboardData = generateSampleData();
-                updateDashboard();
+                console.error('❌ Error loading data from Airtable:', error);
+                updateConnectionStatus('error', 'Errore connessione');
+                showErrorState();
             }
         }
 
-        // Generate Sample Data (for development)
-        function generateSampleData() {
-            const sampleQuestions = [
-                "Quanto costa il personal training?",
-                "Che tipo di alimentazione consigli?",
-                "Dove si trova il vostro studio?",
-                "Posso fare allenamento online?",
-                "Quali sono i vostri orari?",
-                "Offrite consulenze business?",
-                "Quanto durano le sessioni?",
-                "Che risultati posso aspettarmi?",
-                "Avete piani per principianti?",
-                "Come funziona MealPrep Planner?"
-            ];
-
-            const interests = ['fitness', 'nutrition', 'business', 'lifestyle'];
-            const leads = [];
+        // Update connection status
+        function updateConnectionStatus(status, message) {
+            const statusElement = document.getElementById('connectionStatus');
+            const statusIndicator = statusElement.parentElement;
             
-            // Generate sample leads
-            for (let i = 0; i < 15; i++) {
-                const interest = interests[Math.floor(Math.random() * interests.length)];
-                const question = sampleQuestions[Math.floor(Math.random() * sampleQuestions.length)];
-                const score = Math.floor(Math.random() * 100);
-                
-                leads.push({
-                    id: `lead_${i}`,
-                    name: `Lead ${i + 1}`,
-                    lastMessage: question,
-                    timestamp: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000),
-                    interest: interest,
-                    engagementScore: score,
-                    phone: '+393478881515',
-                    isHot: score > 70
-                });
+            statusElement.textContent = message;
+            
+            // Remove all status classes
+            statusIndicator.classList.remove('connected', 'loading', 'error');
+            
+            // Add current status
+            statusIndicator.classList.add(status);
+            
+            // Update indicator styles based on status
+            const dot = statusIndicator.querySelector('.status-dot');
+            switch(status) {
+                case 'connected':
+                    statusIndicator.style.background = 'rgba(74, 222, 128, 0.1)';
+                    statusIndicator.style.borderColor = '#4ade80';
+                    statusIndicator.style.color = '#4ade80';
+                    dot.style.background = '#4ade80';
+                    break;
+                case 'loading':
+                    statusIndicator.style.background = 'rgba(251, 191, 36, 0.1)';
+                    statusIndicator.style.borderColor = '#fbbf24';
+                    statusIndicator.style.color = '#fbbf24';
+                    dot.style.background = '#fbbf24';
+                    break;
+                case 'error':
+                    statusIndicator.style.background = 'rgba(248, 113, 113, 0.1)';
+                    statusIndicator.style.borderColor = '#f87171';
+                    statusIndicator.style.color = '#f87171';
+                    dot.style.background = '#f87171';
+                    break;
             }
-
-            return {
-                overview: {
-                    todayConversations: Math.floor(Math.random() * 50) + 20,
-                    activeLeads: leads.length,
-                    conversionRate: Math.floor(Math.random() * 30) + 15,
-                    hotLeads: leads.filter(l => l.isHot).length
-                },
-                leads: leads,
-                questions: generateQuestionAnalysis(),
-                trends: generateTrendData(),
-                interests: generateInterestData()
-            };
         }
 
-        function generateQuestionAnalysis() {
-            return [
-                { question: "Quanto costa il personal training?", count: 25, category: 'pricing' },
-                { question: "Che tipo di alimentazione consigli?", count: 18, category: 'nutrition' },
-                { question: "Dove si trova il vostro studio?", count: 15, category: 'location' },
-                { question: "Posso fare allenamento online?", count: 12, category: 'service' },
-                { question: "Quali sono i vostri orari?", count: 10, category: 'schedule' },
-                { question: "Offrite consulenze business?", count: 8, category: 'business' },
-                { question: "Come funziona MealPrep?", count: 7, category: 'tools' },
-                { question: "Che risultati posso aspettarmi?", count: 6, category: 'results' }
-            ];
-        }
-
-        function generateTrendData() {
-            const days = [];
-            const conversations = [];
+        // Show error state when no data available
+        function showErrorState() {
+            const sections = ['leadsList', 'questionsAnalysis', 'aiInsights'];
             
-            for (let i = 6; i >= 0; i--) {
-                const date = new Date();
-                date.setDate(date.getDate() - i);
-                days.push(date.toLocaleDateString('it-IT', { weekday: 'short' }));
-                conversations.push(Math.floor(Math.random() * 30) + 10);
-            }
+            sections.forEach(sectionId => {
+                const container = document.getElementById(sectionId);
+                container.innerHTML = `
+                    <div class="error-state">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>Connessione Airtable non disponibile</h3>
+                        <p>Verifica la configurazione API</p>
+                        <button class="action-btn" onclick="refreshData()" style="margin-top: 15px;">
+                            <i class="fas fa-retry"></i> Riprova
+                        </button>
+                    </div>
+                `;
+            });
+
+            // Update overview cards with error state
+            document.getElementById('todayConversations').textContent = '!';
+            document.getElementById('activeLeads').textContent = '!';
+            document.getElementById('conversionRate').textContent = '!';
+            document.getElementById('hotLeads').textContent = '!';
             
-            return { days, conversations };
+            // Update change indicators
+            document.getElementById('conversationsChange').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Errore dati';
+            document.getElementById('leadsChange').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Errore dati';
+            document.getElementById('conversionChange').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Errore dati';
+            document.getElementById('hotLeadsChange').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Errore dati';
         }
 
-        function generateInterestData() {
-            return {
-                fitness: 35,
-                nutrition: 28,
-                business: 22,
-                lifestyle: 15
-            };
-        }
-
-        // Update Dashboard
+        // Update Dashboard with real data
         function updateDashboard() {
-            console.log('🔄 Updating dashboard with new data...');
+            console.log('🔄 Updating dashboard with real data...');
             
+            if (!dashboardData || !dashboardData.overview) {
+                console.error('❌ No valid data to display');
+                showErrorState();
+                return;
+            }
+
             // Update overview cards
             updateOverviewCards();
             
@@ -886,6 +1095,9 @@
             
             // Update questions analysis
             updateQuestionsAnalysis();
+            
+            // Update AI insights
+            updateAIInsights();
             
             // Update charts
             updateCharts();
@@ -899,32 +1111,71 @@
         function updateOverviewCards() {
             const data = dashboardData.overview;
             
-            document.getElementById('todayConversations').textContent = data.todayConversations;
-            document.getElementById('activeLeads').textContent = data.activeLeads;
-            document.getElementById('conversionRate').textContent = data.conversionRate + '%';
-            document.getElementById('hotLeads').textContent = data.hotLeads;
+            document.getElementById('todayConversations').textContent = data.todayConversations || 0;
+            document.getElementById('activeLeads').textContent = data.activeLeads || 0;
+            document.getElementById('conversionRate').textContent = (data.conversionRate || 0) + '%';
+            document.getElementById('hotLeads').textContent = data.hotLeads || 0;
             
-            // Add trend indicators (simplified)
-            document.getElementById('conversationsChange').textContent = '+12% vs ieri';
-            document.getElementById('conversationsChange').className = 'card-change positive';
+            // Calculate and show real trends (if available)
+            const trends = dashboardData.trends || {};
             
-            document.getElementById('leadsChange').textContent = '+5 nuovi oggi';
-            document.getElementById('leadsChange').className = 'card-change positive';
-            
-            document.getElementById('conversionChange').textContent = '+3% vs settimana scorsa';
-            document.getElementById('conversionChange').className = 'card-change positive';
-            
-            document.getElementById('hotLeadsChange').textContent = 'Priorità alta';
-            document.getElementById('hotLeadsChange').className = 'card-change';
+            document.getElementById('conversationsChange').innerHTML = calculateTrend(trends.conversationsGrowth, 'Conversazioni');
+            document.getElementById('leadsChange').innerHTML = calculateTrend(trends.leadsGrowth, 'Lead');
+            document.getElementById('conversionChange').innerHTML = calculateTrend(trends.conversionGrowth, 'Conversione');
+            document.getElementById('hotLeadsChange').innerHTML = `${data.hotLeads || 0} leads ad alta priorità`;
         }
 
-        function updateLeadsList(filter = 'all') {
+        function calculateTrend(growth, label) {
+            if (growth === undefined || growth === null) {
+                return `<i class="fas fa-chart-line"></i> Dati in elaborazione...`;
+            }
+            
+            const isPositive = growth >= 0;
+            const icon = isPositive ? 'fa-arrow-up' : 'fa-arrow-down';
+            const className = isPositive ? 'positive' : 'negative';
+            const sign = isPositive ? '+' : '';
+            
+            return `<i class="fas ${icon}"></i> <span class="${className}">${sign}${growth}% vs ieri</span>`;
+        }
+
+        function updateLeadsList(filter = null) {
+            const filterToUse = filter || currentLeadFilter;
+            currentLeadFilter = filterToUse;
+            
             const container = document.getElementById('leadsList');
             let leads = dashboardData.leads || [];
             
-            if (filter === 'hot') {
-                leads = leads.filter(lead => lead.isHot);
+            if (leads.length === 0) {
+                container.innerHTML = `
+                    <div class="no-data">
+                        <i class="fas fa-users"></i>
+                        <h3>Nessun lead trovato</h3>
+                        <p>I lead appariranno qui quando ci saranno nuove conversazioni</p>
+                    </div>
+                `;
+                return;
             }
+            
+            // Apply filters
+            switch(filterToUse) {
+                case 'hot':
+                    leads = leads.filter(lead => lead.isHot);
+                    break;
+                case 'recent':
+                    const last24h = new Date(Date.now() - 24 * 60 * 60 * 1000);
+                    leads = leads.filter(lead => new Date(lead.timestamp) >= last24h);
+                    break;
+                case 'all':
+                default:
+                    // Show all leads
+                    break;
+            }
+            
+            // Update filter button states
+            document.querySelectorAll('.section-actions .action-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(`filter${filterToUse.charAt(0).toUpperCase() + filterToUse.slice(1)}`).classList.add('active');
             
             // Sort by engagement score and recent activity
             leads.sort((a, b) => {
@@ -940,17 +1191,17 @@
                 return `
                     <div class="lead-item" onclick="expandLead('${lead.id}')">
                         <div class="lead-header">
-                            <div class="lead-name">${lead.name}</div>
+                            <div class="lead-name">${escapeHtml(lead.name || 'Lead Anonimo')}</div>
                             <div class="lead-time">${timeAgo}</div>
                         </div>
-                        <div class="lead-message">"${lead.lastMessage}"</div>
+                        <div class="lead-message">"${escapeHtml(lead.lastMessage || 'Nessun messaggio')}"</div>
                         <div class="lead-actions">
-                            <a href="${whatsappUrl}" target="_blank" class="whatsapp-btn" onclick="event.stopPropagation()">
+                            <a href="${whatsappUrl}" target="_blank" class="whatsapp-btn" onclick="event.stopPropagation(); trackWhatsAppClick('${lead.id}')">
                                 <i class="fab fa-whatsapp"></i> Contatta
                             </a>
-                            <span class="interest-tag">${lead.interest}</span>
-                            <span class="engagement-score">${lead.engagementScore}% engaged</span>
-                            ${lead.isHot ? '<span class="interest-tag" style="background: rgba(255,68,68,0.2); color: #ff4444;">🔥 HOT</span>' : ''}
+                            <span class="interest-tag">${escapeHtml(lead.interest || 'generale')}</span>
+                            <span class="engagement-score">${lead.engagementScore || 0}% engaged</span>
+                            ${lead.isHot ? '<span class="hot-badge">🔥 HOT LEAD</span>' : ''}
                         </div>
                     </div>
                 `;
@@ -961,12 +1212,74 @@
             const container = document.getElementById('questionsAnalysis');
             const questions = dashboardData.questions || [];
             
+            if (questions.length === 0) {
+                container.innerHTML = `
+                    <div class="no-data">
+                        <i class="fas fa-question-circle"></i>
+                        <h3>Nessuna domanda analizzata</h3>
+                        <p>Le domande più frequenti appariranno qui</p>
+                    </div>
+                `;
+                return;
+            }
+            
             container.innerHTML = questions.slice(0, 8).map(q => `
                 <div class="question-item">
-                    <div class="question-text">${q.question}</div>
+                    <div class="question-text">${escapeHtml(q.question)}</div>
                     <div class="question-count">${q.count}</div>
                 </div>
             `).join('');
+        }
+
+        function updateAIInsights() {
+            const container = document.getElementById('aiInsights');
+            const insights = dashboardData.aiInsights || generateAIInsights();
+            
+            container.innerHTML = insights.map(insight => `
+                <div class="insight-item">
+                    <div class="insight-title">${insight.title}</div>
+                    <div class="insight-text">${insight.text}</div>
+                </div>
+            `).join('');
+        }
+
+        function generateAIInsights() {
+            const data = dashboardData;
+            const insights = [];
+            
+            // Generate insights based on real data
+            if (data.overview) {
+                if (data.overview.conversionRate > 20) {
+                    insights.push({
+                        title: "🎯 Conversion Rate Ottimale",
+                        text: `Il tasso di conversione del ${data.overview.conversionRate}% è sopra la media. Continua così!`
+                    });
+                }
+                
+                if (data.overview.hotLeads > 3) {
+                    insights.push({
+                        title: "🔥 Lead ad Alta Priorità",
+                        text: `Hai ${data.overview.hotLeads} lead caldi. Contattali entro 24h per massimizzare le conversioni.`
+                    });
+                }
+            }
+            
+            if (data.questions && data.questions.length > 0) {
+                const topQuestion = data.questions[0];
+                insights.push({
+                    title: "❓ Domanda Più Frequente",
+                    text: `"${topQuestion.question}" è stata chiesta ${topQuestion.count} volte. Considera di aggiungere una FAQ.`
+                });
+            }
+            
+            if (insights.length === 0) {
+                insights.push({
+                    title: "📊 Analisi in Corso",
+                    text: "Raccogliendo dati per generare insights personalizzati..."
+                });
+            }
+            
+            return insights;
         }
 
         function updateCharts() {
@@ -976,21 +1289,23 @@
 
         function updateInterestChart() {
             const ctx = document.getElementById('interestChart').getContext('2d');
-            const data = dashboardData.interests;
+            const data = dashboardData.interests || { fitness: 0, nutrition: 0, business: 0, lifestyle: 0 };
             
-            // Destroy existing chart if it exists
-            if (window.interestChart) {
-                window.interestChart.destroy();
+            // Destroy existing chart
+            if (chartInstances.interestChart) {
+                chartInstances.interestChart.destroy();
             }
             
-            window.interestChart = new Chart(ctx, {
+            chartInstances.interestChart = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
                     labels: ['Fitness', 'Nutrition', 'Business', 'Lifestyle'],
                     datasets: [{
                         data: [data.fitness, data.nutrition, data.business, data.lifestyle],
                         backgroundColor: ['#ff6b35', '#4ade80', '#60a5fa', '#a855f7'],
-                        borderWidth: 0
+                        borderWidth: 0,
+                        hoverBorderWidth: 3,
+                        hoverBorderColor: '#fff'
                     }]
                 },
                 options: {
@@ -999,7 +1314,18 @@
                     plugins: {
                         legend: {
                             position: 'bottom',
-                            labels: { color: '#e0e0e0' }
+                            labels: { 
+                                color: '#e0e0e0',
+                                padding: 20,
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(26, 26, 26, 0.9)',
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            borderColor: '#ff6b35',
+                            borderWidth: 1
                         }
                     }
                 }
@@ -1008,14 +1334,14 @@
 
         function updateTrendsChart() {
             const ctx = document.getElementById('trendsChart').getContext('2d');
-            const data = dashboardData.trends;
+            const data = dashboardData.trends || { days: [], conversations: [] };
             
-            // Destroy existing chart if it exists
-            if (window.trendsChart) {
-                window.trendsChart.destroy();
+            // Destroy existing chart
+            if (chartInstances.trendsChart) {
+                chartInstances.trendsChart.destroy();
             }
             
-            window.trendsChart = new Chart(ctx, {
+            chartInstances.trendsChart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: data.days,
@@ -1025,18 +1351,39 @@
                         borderColor: '#ff6b35',
                         backgroundColor: 'rgba(255, 107, 53, 0.1)',
                         fill: true,
-                        tension: 0.4
+                        tension: 0.4,
+                        pointBackgroundColor: '#ff6b35',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointRadius: 6,
+                        pointHoverRadius: 8
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { labels: { color: '#e0e0e0' } }
+                        legend: { 
+                            labels: { color: '#e0e0e0' }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(26, 26, 26, 0.9)',
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            borderColor: '#ff6b35',
+                            borderWidth: 1
+                        }
                     },
                     scales: {
-                        x: { ticks: { color: '#888' }, grid: { color: '#333' } },
-                        y: { ticks: { color: '#888' }, grid: { color: '#333' } }
+                        x: { 
+                            ticks: { color: '#888' }, 
+                            grid: { color: '#333' }
+                        },
+                        y: { 
+                            ticks: { color: '#888' }, 
+                            grid: { color: '#333' },
+                            beginAtZero: true
+                        }
                     }
                 }
             });
@@ -1057,18 +1404,25 @@
 
         function generateWhatsAppMessage(lead) {
             const templates = {
-                fitness: `Ciao ${lead.name}! Ho visto le tue domande sul fitness. Parliamone! 💪`,
-                nutrition: `Ciao ${lead.name}! Interessato alla nutrizione? Ti aiuto volentieri! 🥗`,
-                business: `Ciao ${lead.name}! Vedo che ti interessa il business coaching. Facciamo una call! 🚀`,
-                lifestyle: `Ciao ${lead.name}! Il lifestyle coaching può davvero trasformare la tua vita. Parliamone! ✨`
+                fitness: `Ciao ${lead.name || 'Andrea'}! Ho visto le tue domande sul fitness. Parliamone! 💪`,
+                nutrition: `Ciao ${lead.name || 'Andrea'}! Interessato alla nutrizione? Ti aiuto volentieri! 🥗`,
+                business: `Ciao ${lead.name || 'Andrea'}! Vedo che ti interessa il business coaching. Facciamo una call! 🚀`,
+                lifestyle: `Ciao ${lead.name || 'Andrea'}! Il lifestyle coaching può davvero trasformare la tua vita. Parliamone! ✨`
             };
             
-            return templates[lead.interest] || `Ciao ${lead.name}! Grazie per il tuo interesse. Come posso aiutarti?`;
+            return templates[lead.interest] || `Ciao ${lead.name || 'Andrea'}! Grazie per il tuo interesse. Come posso aiutarti?`;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
         }
 
         // Event handlers
         function refreshData() {
             console.log('🔄 Manual refresh triggered');
+            resetRefreshTimer();
             loadDashboardData();
         }
 
@@ -1078,17 +1432,60 @@
 
         function expandLead(leadId) {
             console.log('👁️ Expanding lead:', leadId);
-            // Future: Open lead detail modal
+            // Future: Open lead detail modal with full conversation history
+        }
+
+        function trackWhatsAppClick(leadId) {
+            console.log('📱 WhatsApp clicked for lead:', leadId);
+            // Future: Track WhatsApp engagement
+        }
+
+        function generateInsights() {
+            console.log('🧠 Generating AI insights...');
+            updateAIInsights();
         }
 
         function exportQuestions() {
             console.log('📊 Exporting questions analysis');
-            // Future: Generate CSV export
-            alert('Feature coming soon: Export delle domande più frequenti');
+            // Future: Generate CSV export of questions data
+            alert('Feature coming soon: Export delle domande più frequenti in formato CSV');
+        }
+
+        function toggleChartType() {
+            // Future: Switch between doughnut and bar chart
+            console.log('📈 Toggling chart type');
+        }
+
+        function changeTrendPeriod(period) {
+            console.log('📅 Changing trend period to:', period);
+            // Future: Load different time periods
+        }
+
+        // Refresh timer
+        function startRefreshTimer() {
+            let seconds = 30;
+            const timerElement = document.getElementById('refreshTimer');
+            
+            refreshTimer = setInterval(() => {
+                seconds--;
+                timerElement.textContent = `${seconds}s`;
+                
+                if (seconds <= 0) {
+                    seconds = 30;
+                    timerElement.textContent = '30s';
+                }
+            }, 1000);
+        }
+
+        function resetRefreshTimer() {
+            if (refreshTimer) {
+                clearInterval(refreshTimer);
+                startRefreshTimer();
+            }
         }
 
         // Initialize on page load
-        console.log('🎯 TribuCoach Dashboard loaded successfully');
+        console.log('🎯 TribuCoach Dashboard 2.0 loaded successfully - REAL DATA MODE');
     </script>
 </body>
 </html>
