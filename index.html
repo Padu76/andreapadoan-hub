@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrea Padoan - Il tuo partner per corpo, mente e business</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            right: 20px;
+            z-index: 1000;
+            padding: 20px 0;
+        }
+
+        .dashboard-btn {
+            background: rgba(107, 114, 128, 0.9);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .dashboard-btn:hover {
+            background: #6b7280;
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 20px 40px;
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff6b35, #4a7c59, #6b7280);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: #b0b0b0;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        .projects-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            min-height: 800px;
+        }
+
+        .center-profile {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff6b35, #4a7c59);
+            padding: 4px;
+            z-index: 10;
+        }
+
+        .profile-content {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #333, #555);
+            margin-bottom: 10px;
+            background-image: url('./images/andrea-profile.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .profile-name {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            color: #fff;
+        }
+
+        .project-item {
+            position: absolute;
+            width: 180px;
+            height: 240px;
+            background: #1a1a1a;
+            border-radius: 15px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            overflow: hidden;
+        }
+
+        .project-item:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 90px;
+            border-radius: 10px;
+            background: var(--accent-color);
+            margin-bottom: 12px;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.9;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--accent-color) 0%, transparent 50%);
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .project-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .project-description {
+            font-size: 11px;
+            color: #b0b0b0;
+            line-height: 1.4;
+            margin-bottom: 12px;
+            height: 45px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+
+        .project-btn {
+            background: var(--accent-color);
+            color: #000;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .project-btn:hover {
+            background: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* Posizionamento progetti in cerchio */
+        .project-1 { 
+            top: 0; 
+            left: 50%; 
+            transform: translateX(-50%);
+            --accent-color: #ff6b35;
+        }
+
+        .project-2 { 
+            top: 15%; 
+            right: 5%;
+            --accent-color: #ff6b35;
+        }
+
+        .project-3 { 
+            top: 45%; 
+            right: 0;
+            --accent-color: #4a7c59;
+        }
+
+        .project-4 { 
+            bottom: 15%; 
+            right: 5%;
+            --accent-color: #4a7c59;
+        }
+
+        .project-5 { 
+            bottom: 0; 
+            left: 50%; 
+            transform: translateX(-50%);
+            --accent-color: #6b7280;
+        }
+
+        .project-6 { 
+            bottom: 15%; 
+            left: 5%;
+            --accent-color: #6b7280;
+        }
+
+        .project-7 { 
+            top: 45%; 
+            left: 0;
+            --accent-color: #ff6b35;
+        }
+
+        /* Brochure Section */
+        .brochure-section {
+            background: #1a1a1a;
+            padding: 60px 20px;
+            margin-top: 60px;
+        }
+
+        .brochure-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .brochure-title {
+            font-size: 2.5rem;
+            color: #ff6b35;
+            margin-bottom: 30px;
+            font-weight: 900;
+        }
+
+        .brochure-subtitle {
+            color: #b0b0b0;
+            margin-bottom: 40px;
+            font-size: 1.2rem;
+        }
+
+        .brochure-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .brochure-page {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .brochure-page:hover {
+            transform: translateY(-10px);
+        }
+
+        .brochure-page img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .brochure-cta {
+            background: linear-gradient(45deg, #ff6b35, #ff8c5a);
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin: 0 10px;
+        }
+
+        .brochure-cta:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Social Section */
+        .social-section {
+            background: #000;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .social-title {
+            color: #ff6b35;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            width: 60px;
+            height: 60px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #fff;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px);
+            border-color: var(--social-color);
+            background: var(--social-color);
+            color: #000;
+        }
+
+        .social-link.instagram {
+            --social-color: #E4405F;
+        }
+
+        .social-link.facebook {
+            --social-color: #1877F2;
+        }
+
+        .social-link.tiktok {
+            --social-color: #000;
+        }
+
+        .social-link.youtube {
+            --social-color: #FF0000;
+        }
+
+        .contact-section {
+            text-align: center;
+            padding: 40px 20px;
+            background: #1a1a1a;
+        }
+
+        .contact-section h2 {
+            color: #ff6b35;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .contact-section p {
+            color: #b0b0b0;
+            margin-bottom: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-btn {
+            background: linear-gradient(45deg, #ff6b35, #4a7c59);
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .header {
+                position: static;
+                text-align: center;
+                padding: 20px;
+            }
+
+            .projects-container {
+                min-height: auto;
+                padding: 40px 20px;
+            }
+
+            .center-profile {
+                position: static;
+                transform: none;
+                margin: 0 auto 40px;
+            }
+
+            .project-item {
+                position: static;
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto 20px;
+                transform: none !important;
+            }
+
+            .project-item:hover {
+                transform: translateY(-5px) !important;
+            }
+
+            .projects-grid {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .brochure-images {
+                grid-template-columns: 1fr;
+            }
+
+            .brochure-title {
+                font-size: 2rem;
+            }
+
+            .social-links {
+                gap: 15px;
+            }
+
+            .social-link {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <button class="dashboard-btn" onclick="openDashboard()">📊 Dashboard</button>
+    </div>
+
+    <div class="hero">
+        <h1>Andrea Padoan</h1>
+        <p>Il tuo partner per corpo, mente e business. Scopri i miei progetti e trova la soluzione perfetta per te.</p>
+    </div>
+
+    <div class="projects-container">
+        <div class="center-profile">
+            <div class="profile-content">
+                <div class="profile-image"></div>
+                <div class="profile-name">Andrea<br>Padoan</div>
+            </div>
+        </div>
+
+        <div class="projects-grid">
+            <div class="project-item project-1" onclick="openProject('https://www.personaltrainerverona.it')">
+                <div class="project-image" style="background-image: url('./images/andrea-personal-training.jpg');"></div>
+                <div class="project-title">Personal Training</div>
+                <div class="project-description">Ti aiuto a trasformare il tuo corpo</div>
+                <button class="project-btn">Prenota Sessione</button>
+            </div>
+
+            <div class="project-item project-2" onclick="openProject('https://www.tribustudio.it')">
+                <div class="project-image" style="background-image: url('./images/tribu-studio-interior.jpg');"></div>
+                <div class="project-title">Tribù Studio</div>
+                <div class="project-description">Uno studio privato dove essere seguito in modo esclusivo</div>
+                <button class="project-btn">Visita Studio</button>
+            </div>
+
+            <div class="project-item project-3" onclick="openProject('https://pastosano.netlify.app/')">
+                <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1546554664-1dcb322d46d7?w=400&h=300&fit=crop');"></div>
+                <div class="project-title">Pasto Sano</div>
+                <div class="project-description">Pasti sani per rimanere in forma senza perdere tempo</div>
+                <button class="project-btn">Ordina Ora</button>
+            </div>
+
+            <div class="project-item project-4" onclick="openProject('https://mealprep-planner.vercel.app/')">
+                <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=400&h=300&fit=crop');"></div>
+                <div class="project-title">MealPrep Planner</div>
+                <div class="project-description">Pianifica i tuoi pasti per rimanere in forma</div>
+                <button class="project-btn">Prova Gratis</button>
+            </div>
+
+            <div class="project-item project-5" onclick="openProject('https://upstarter-tf9x.vercel.app/')">
+                <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=300&fit=crop');"></div>
+                <div class="project-title">Upstart</div>
+                <div class="project-description">Testa quanto potenziale ha la tua idea</div>
+                <button class="project-btn">Consulenza Gratuita</button>
+            </div>
+
+            <div class="project-item project-6" onclick="openProject('https://github.com/Padu76/andrea-ebook-store')">
+                <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop');"></div>
+                <div class="project-title">I miei eBook</div>
+                <div class="project-description">I miei ebook per aiutarti a trasformare il tuo corpo</div>
+                <button class="project-btn">Scarica Ora</button>
+            </div>
+
+            <div class="project-item project-7" onclick="openProject('https://tribucoach.vercel.app/')">
+                <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop');"></div>
+                <div class="project-title">Lifestyle Coach</div>
+                <div class="project-description">Senza il giusto mindset, allenamento e alimentazione non bastano</div>
+                <button class="project-btn">Inizia Percorso</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="brochure-section">
+        <div class="brochure-container">
+            <h2 class="brochure-title">Tribù Studio - Personal Training</h2>
+            <p class="brochure-subtitle">Aiutiamo le persone ad essere la migliore versione di sé stesse</p>
+            
+            <div class="brochure-images">
+                <div class="brochure-page">
+                    <img src="./images/tribu-brochure-front.jpg" alt="Tribù Studio - Fronte" onerror="this.style.display='none'">
+                </div>
+                <div class="brochure-page">
+                    <img src="./images/tribu-brochure-back.jpg" alt="Tribù Studio - Retro" onerror="this.style.display='none'">
+                </div>
+            </div>
+            
+            <div style="margin-top: 30px;">
+                <button class="brochure-cta" onclick="openProject('https://www.tribustudio.it')">Visita Tribù Studio</button>
+                <button class="brochure-cta" onclick="openProject('https://www.personaltrainerverona.it')">Personal Training</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="social-section">
+        <h2 class="social-title">Seguimi sui Social</h2>
+        <div class="social-links">
+            <a href="https://www.instagram.com/andreapadoancoach/" target="_blank" class="social-link instagram">📷</a>
+            <a href="https://www.facebook.com/andreapadoanpersonaltrainer" target="_blank" class="social-link facebook">📘</a>
+            <a href="https://www.tiktok.com/@andreapadoanpt" target="_blank" class="social-link tiktok">🎵</a>
+            <a href="https://www.youtube.com/@andreapadoanlifestyle" target="_blank" class="social-link youtube">📺</a>
+        </div>
+    </div>
+
+    <div class="contact-section">
+        <h2>Hai domande?</h2>
+        <p>Contattami per scoprire quale progetto è più adatto a te e ai tuoi obiettivi.</p>
+        <button class="contact-btn" onclick="openContact()">Contattami Ora</button>
+    </div>
+
+    <script>
+        function openProject(url) {
+            if (url && url !== '#') {
+                window.open(url, '_blank');
+            } else {
+                alert('Progetto in arrivo! Torna presto per scoprire di più.');
+            }
+        }
+
+        function openContact() {
+            window.location.href = 'mailto:info@andreapadoan.it';
+        }
+
+        function openDashboard() {
+            // Qui aggiungeremo l'autenticazione e il collegamento al CRM
+            const password = prompt('Inserisci la password per accedere alla dashboard:');
+            if (password === 'tribu2024') { // Cambia questa password
+                window.open('https://airtable.com/your-dashboard-link', '_blank');
+            } else if (password !== null) {
+                alert('Password non corretta');
+            }
+        }
+
+        // Animation on load
+        window.addEventListener('load', function() {
+            const projects = document.querySelectorAll('.project-item');
+            projects.forEach((project, index) => {
+                setTimeout(() => {
+                    project.style.opacity = '0';
+                    project.style.transform = 'scale(0.8)';
+                    project.style.transition = 'all 0.6s ease';
+                    
+                    setTimeout(() => {
+                        project.style.opacity = '1';
+                        project.style.transform = 'scale(1)';
+                    }, 100);
+                }, index * 100);
+            });
+
+            // Social icons animation
+            const socialLinks = document.querySelectorAll('.social-link');
+            socialLinks.forEach((link, index) => {
+                setTimeout(() => {
+                    link.style.transform = 'translateY(-5px)';
+                    setTimeout(() => {
+                        link.style.transform = 'translateY(0)';
+                    }, 200);
+                }, 2000 + index * 100);
+            });
+        });
+
+        // Interactive effects
+        document.querySelectorAll('.project-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
