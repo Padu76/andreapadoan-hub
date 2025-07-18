@@ -63,11 +63,11 @@
         }
 
         .hero p {
-            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            font-size: clamp(1.3rem, 3.5vw, 1.8rem);
             color: #fff;
             max-width: 900px;
             margin: 0 auto 40px;
-            line-height: 1.4;
+            line-height: 1.5;
             font-weight: bold;
         }
 
@@ -786,7 +786,7 @@
 
     <div class="hero">
         <h1>Andrea Padoan</h1>
-        <p>Il tuo partner per corpo, mente e business. Scopri i miei progetti e trova la soluzione perfetta per te.</p>
+        <p>Il tuo partner per corpo, mente e business.<br>Scopri i miei progetti e trova la soluzione perfetta per te.</p>
         
         <div class="profile-section">
             <div class="profile-image">
@@ -1008,8 +1008,12 @@
     <div class="contact-section">
         <h2>Hai domande?</h2>
         <p>Contattami per scoprire quale progetto è più adatto a te e ai tuoi obiettivi.</p>
+        <div style="margin-bottom: 20px;">
+            <p style="color: #ff6b35; font-weight: bold; margin-bottom: 10px;">📱 WhatsApp: 347 888 1515</p>
+            <p style="color: #ff6b35; font-weight: bold;">✉️ Email: andrea.padoan@gmail.com</p>
+        </div>
         <button class="contact-btn" onclick="openContact()">
-            <i class="fas fa-envelope"></i> Contattami Ora
+            <i class="fas fa-comments"></i> Contattami Ora
         </button>
     </div>
 
@@ -1156,7 +1160,16 @@
         }
 
         function openContact() {
-            window.location.href = 'mailto:info@andreapadoan.it';
+            // Mostra opzioni di contatto
+            const contactOptions = confirm('Scegli come contattarmi:\n\nOK = WhatsApp\nAnnulla = Email');
+            
+            if (contactOptions) {
+                // WhatsApp
+                window.open('https://wa.me/393478881515?text=Ciao Andrea, ho visto il tuo sito e vorrei maggiori informazioni!', '_blank');
+            } else {
+                // Email
+                window.location.href = 'mailto:andrea.padoan@gmail.com?subject=Richiesta informazioni&body=Ciao Andrea, ho visto il tuo sito e vorrei maggiori informazioni sui tuoi servizi.';
+            }
         }
 
         function openDashboard() {
