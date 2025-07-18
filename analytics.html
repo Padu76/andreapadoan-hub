@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TribuCoach - Analytics | User Behavior & Performance</title>
+    <title>Andrea Padoan Analytics - User Behavior & Performance</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -707,25 +707,6 @@
             }
         }
 
-        /* Custom Scrollbar */
-        .analytics-section::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .analytics-section::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 3px;
-        }
-
-        .analytics-section::-webkit-scrollbar-thumb {
-            background: #ff6b35;
-            border-radius: 3px;
-        }
-
-        .analytics-section::-webkit-scrollbar-thumb:hover {
-            background: #ff8533;
-        }
-
         /* Real-time indicator */
         .realtime-indicator {
             position: fixed;
@@ -757,8 +738,8 @@
     <!-- Login Screen -->
     <div class="login-container" id="loginScreen">
         <div class="login-box">
-            <div class="login-title">📊 TribuCoach Analytics</div>
-            <div class="login-subtitle">User Behavior & Performance Dashboard</div>
+            <div class="login-title">📊 Andrea Padoan Analytics</div>
+            <div class="login-subtitle">Personal Trainer & Lifestyle Coach - User Behavior Dashboard</div>
             <input type="password" id="passwordInput" class="login-input" placeholder="Inserisci password" autocomplete="current-password">
             <button onclick="login()" class="login-btn">Accedi agli Analytics</button>
             <div id="errorMessage" class="error-message" style="display: none;"></div>
@@ -771,10 +752,10 @@
         <header class="header">
             <div class="header-content">
                 <div class="logo">
-                    <div class="logo-icon">TC</div>
+                    <div class="logo-icon">AP</div>
                     <div class="logo-text">
-                        <h1>TribuCoach Analytics</h1>
-                        <p>User Behavior & Performance Dashboard</p>
+                        <h1>Andrea Padoan Analytics</h1>
+                        <p>Personal Trainer & Lifestyle Coach - User Behavior Dashboard</p>
                     </div>
                 </div>
 
@@ -1043,47 +1024,33 @@
             document.getElementById('mainDashboard').classList.remove('active');
             document.getElementById('passwordInput').value = '';
             
-            // Destroy chart instances
             Object.values(chartInstances).forEach(chart => {
                 if (chart) chart.destroy();
             });
             chartInstances = {};
         }
 
-        // Enter key for login
         document.addEventListener('keypress', function(e) {
             if (e.key === 'Enter' && !isLoggedIn) {
                 login();
             }
         });
 
-        // Initialize Dashboard
         function initDashboard() {
-            console.log('🚀 Initializing Analytics Dashboard...');
-            
-            // Load analytics data
+            console.log('🚀 Initializing Andrea Padoan Analytics Dashboard...');
             loadAnalyticsData();
-            
-            // Set up auto-refresh every 30 seconds
             refreshInterval = setInterval(() => {
-                if (isLoggedIn) {
-                    refreshData();
-                }
+                if (isLoggedIn) refreshData();
             }, 30000);
         }
 
-        // Load Analytics Data
         async function loadAnalyticsData() {
             console.log('📊 Loading analytics data...');
-            
             try {
                 updateConnectionStatus('loading', 'Caricamento analytics...');
-                
                 const response = await fetch(`/api/analytics?period=${currentPeriod}`, {
                     method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
+                    headers: { 'Content-Type': 'application/json' }
                 });
                 
                 if (response.ok) {
@@ -1095,7 +1062,6 @@
                 } else {
                     throw new Error(`API Error: ${response.status}`);
                 }
-                
             } catch (error) {
                 console.error('❌ Error loading analytics:', error);
                 updateConnectionStatus('error', 'Errore connessione');
@@ -1103,11 +1069,9 @@
             }
         }
 
-        // Update connection status
         function updateConnectionStatus(status, message) {
             const statusElement = document.getElementById('connectionStatus');
             const statusIndicator = statusElement.parentElement;
-            
             statusElement.textContent = message;
             
             const dot = statusIndicator.querySelector('.status-dot');
@@ -1133,35 +1097,26 @@
             }
         }
 
-        // Update Dashboard
         function updateDashboard() {
             console.log('🔄 Updating dashboard with analytics data...');
-            
             if (!analyticsData || !analyticsData.overview) {
                 console.log('📝 No analytics data available');
                 showEmptyState();
                 return;
             }
-
-            // Update stats
             updateStats();
-            
-            // Update content sections
             updateContentSections();
-            
-            // Update charts
             updateCharts();
             
-            // Show realtime indicator
             const indicator = document.getElementById('realtimeIndicator');
             indicator.classList.add('updating');
             setTimeout(() => indicator.classList.remove('updating'), 500);
         }
 
         function updateStats() {
-            const overview = analyticsData.overview;
-            const engagement = analyticsData.engagement;
-            const conversion = analyticsData.conversion;
+            const overview = analyticsData.overview || {};
+            const engagement = analyticsData.engagement || {};
+            const conversion = analyticsData.conversion || {};
             
             document.getElementById('totalSessions').textContent = overview.sessions || 0;
             document.getElementById('pageViews').textContent = overview.pageViews || 0;
@@ -1169,12 +1124,10 @@
             document.getElementById('avgSessionTime').textContent = formatTime(overview.avgSessionTime || 0);
             document.getElementById('avgScrollDepth').textContent = (engagement.avgScrollDepth || 0) + '%';
             
-            // Calculate conversion rate
             const conversionRate = overview.sessions > 0 ? 
                 Math.round(((conversion.chat_opened + conversion.whatsapp_clicked) / overview.sessions) * 100) : 0;
             document.getElementById('conversionRate').textContent = conversionRate + '%';
             
-            // Update change indicators (mock data for now)
             document.getElementById('sessionsChange').innerHTML = `<i class="fas fa-arrow-up change-up"></i> +15% vs periodo precedente`;
             document.getElementById('pageViewsChange').innerHTML = `<i class="fas fa-arrow-up change-up"></i> +8% vs periodo precedente`;
             document.getElementById('bounceRateChange').innerHTML = `<i class="fas fa-arrow-down change-up"></i> -12% vs periodo precedente`;
@@ -1191,7 +1144,7 @@
 
         function updateTopSections() {
             const container = document.getElementById('topSections');
-            const sections = analyticsData.engagement.sectionsViewed || {};
+            const sections = analyticsData.engagement?.sectionsViewed || {};
             
             if (Object.keys(sections).length === 0) {
                 container.innerHTML = `
@@ -1225,7 +1178,7 @@
 
         function updateTopClicks() {
             const container = document.getElementById('topClicks');
-            const clicks = analyticsData.content.clicksByElement || {};
+            const clicks = analyticsData.content?.clicksByElement || {};
             
             if (Object.keys(clicks).length === 0) {
                 container.innerHTML = `
@@ -1300,7 +1253,6 @@
             const labels = Object.keys(timeline).sort();
             const data = labels.map(key => timeline[key].events || 0);
             
-            // Destroy existing chart
             if (chartInstances.trafficChart) {
                 chartInstances.trafficChart.destroy();
             }
@@ -1352,9 +1304,8 @@
 
         function updateDeviceChart() {
             const ctx = document.getElementById('deviceChart').getContext('2d');
-            const devices = analyticsData.devices.mobileVsDesktop || { mobile: 0, desktop: 0 };
+            const devices = analyticsData.devices?.mobileVsDesktop || { mobile: 0, desktop: 0 };
             
-            // Destroy existing chart
             if (chartInstances.deviceChart) {
                 chartInstances.deviceChart.destroy();
             }
@@ -1400,7 +1351,6 @@
             const behavior = analyticsData.behavior || {};
             
             let chartData, chartLabel;
-            
             if (currentMetric === 'scroll') {
                 chartData = behavior.scrollMilestones || {};
                 chartLabel = 'Scroll Milestones';
@@ -1408,15 +1358,13 @@
                 chartData = behavior.timeMilestones || {};
                 chartLabel = 'Time Milestones';
             } else {
-                // Default engagement chart
-                chartData = analyticsData.engagement.sectionsViewed || {};
+                chartData = analyticsData.engagement?.sectionsViewed || {};
                 chartLabel = 'Engagement per Sezione';
             }
             
             const labels = Object.keys(chartData);
             const data = Object.values(chartData);
             
-            // Destroy existing chart
             if (chartInstances.behaviorChart) {
                 chartInstances.behaviorChart.destroy();
             }
@@ -1462,7 +1410,6 @@
             });
         }
 
-        // Utility functions
         function formatTime(seconds) {
             const minutes = Math.floor(seconds / 60);
             const secs = seconds % 60;
@@ -1470,7 +1417,6 @@
         }
 
         function formatTimelineLabel(label) {
-            // Format timeline labels based on period
             const parts = label.split('-');
             if (currentPeriod === '1d') {
                 return `${parts[3] || '00'}:00`;
@@ -1481,7 +1427,6 @@
 
         function showErrorState() {
             const containers = ['topSections', 'topClicks', 'conversionFunnel'];
-            
             containers.forEach(containerId => {
                 const container = document.getElementById(containerId);
                 container.innerHTML = `
@@ -1496,7 +1441,6 @@
 
         function showEmptyState() {
             const containers = ['topSections', 'topClicks', 'conversionFunnel'];
-            
             containers.forEach(containerId => {
                 const container = document.getElementById(containerId);
                 container.innerHTML = `
@@ -1509,7 +1453,6 @@
             });
         }
 
-        // Event handlers
         function refreshData() {
             console.log('🔄 Manual refresh triggered');
             loadAnalyticsData();
@@ -1517,48 +1460,33 @@
 
         function changePeriod(period) {
             currentPeriod = period;
-            
-            // Update active button
             document.querySelectorAll('.period-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
             document.getElementById(`period${period}`).classList.add('active');
-            
-            // Reload data
             loadAnalyticsData();
         }
 
         function changeMetric(metric) {
             currentMetric = metric;
-            
-            // Update active button
             document.querySelectorAll('.timeline-container .action-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
             event.target.classList.add('active');
-            
-            // Update behavior chart
             updateBehaviorChart();
         }
 
         function changeTimelineView(view) {
-            // Update active button
             document.querySelectorAll('.analytics-section .action-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
             event.target.classList.add('active');
-            
-            // Update traffic chart (future implementation)
             console.log('📊 Changing timeline view to:', view);
         }
 
         function exportData() {
             console.log('📊 Exporting analytics data');
-            
-            // Create CSV content
             const csvContent = generateCSV();
-            
-            // Download CSV
             const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
             const link = document.createElement('a');
             const url = URL.createObjectURL(blob);
@@ -1588,8 +1516,7 @@
             return [headers, ...rows].map(row => row.join(',')).join('\n');
         }
 
-        // Initialize on page load
-        console.log('📊 TribuCoach Analytics Dashboard loaded successfully');
+        console.log('📊 Andrea Padoan Analytics Dashboard loaded successfully');
     </script>
 </body>
 </html>
