@@ -1,5 +1,5 @@
 // /api/conversations.js
-// API per recuperare conversazioni complete da Airtable
+// API per recuperare conversazioni complete da Airtable - FIXED VERSION
 
 export default async function handler(req, res) {
     // Configurazione CORS
@@ -19,19 +19,30 @@ export default async function handler(req, res) {
     try {
         // Configurazione Airtable
         const AIRTABLE_BASE_ID = process.env.AIRTABLE_BASE_ID;
-        const AIRTABLE_TABLE_NAME = process.env.AIRTABLE_TABLE_NAME || 'conversazioni';
         const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
+        // FIXED: Nome tabella corretto dal tuo Airtable
+        const AIRTABLE_TABLE_NAME = 'conversazioni';
+
+        console.log('🔧 API Debug Info:');
+        console.log('- Base ID:', AIRTABLE_BASE_ID ? 'SET ✅' : 'MISSING ❌');
+        console.log('- API Key:', AIRTABLE_API_KEY ? 'SET ✅' : 'MISSING ❌');
+        console.log('- Table Name:', AIRTABLE_TABLE_NAME);
 
         if (!AIRTABLE_BASE_ID || !AIRTABLE_API_KEY) {
             console.error('❌ Missing Airtable credentials');
             return res.status(500).json({ 
                 error: 'Airtable configuration missing',
-                conversations: []
+                conversations: [],
+                debug: {
+                    hasBaseId: !!AIRTABLE_BASE_ID,
+                    hasApiKey: !!AIRTABLE_API_KEY
+                }
             });
         }
 
         // Chiama API Airtable
         const airtableUrl = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_NAME}`;
+        console.log('📡 Calling Airtable API:', airtableUrl);
         
         const response = await fetch(airtableUrl, {
             headers: {
@@ -40,60 +51,70 @@ export default async function handler(req, res) {
             }
         });
 
+        console.log('📡 Airtable API Response Status:', response.status);
+
         if (!response.ok) {
-            throw new Error(`Airtable API error: ${response.status}`);
+            const errorText = await response.text();
+            console.error('❌ Airtable API Error:', response.status, errorText);
+            throw new Error(`Airtable API error: ${response.status} - ${errorText}`);
         }
 
         const data = await response.json();
+        console.log('📊 Raw Airtable Data:', {
+            recordCount: data.records?.length || 0,
+            firstRecord: data.records?.[0] ? Object.keys(data.records[0].fields) : 'No records'
+        });
         
         // Processa e raggruppa conversazioni per sessione
         const conversationsMap = new Map();
         
-        data.records.forEach(record => {
-            const fields = record.fields;
-            const sessionId = fields.Session_ID || `session_${record.id}`;
-            
-            if (!conversationsMap.has(sessionId)) {
-                conversationsMap.set(sessionId, {
-                    id: sessionId,
-                    name: extractName(fields.User_Message) || fields.User_Name || null,
-                    phone: extractPhone(fields.User_Message) || fields.User_Phone || null,
-                    email: extractEmail(fields.User_Message) || fields.User_Email || null,
-                    timestamp: new Date(fields.Timestamp || record.createdTime).toISOString(),
-                    status: determineStatus(fields),
-                    interest: determineInterest(fields.Interest_Area, fields.User_Message),
-                    isHot: determineIfHot(fields),
-                    messages: [],
-                    lastUpdate: new Date(fields.Timestamp || record.createdTime).toISOString()
-                });
-            }
-            
-            const conversation = conversationsMap.get(sessionId);
-            
-            // Aggiungi messaggio utente
-            if (fields.User_Message) {
-                conversation.messages.push({
-                    role: 'user',
-                    content: fields.User_Message,
-                    timestamp: new Date(fields.Timestamp || record.createdTime).toISOString()
-                });
-            }
-            
-            // Aggiungi risposta AI
-            if (fields.Bot_Response) {
-                conversation.messages.push({
-                    role: 'assistant',
-                    content: fields.Bot_Response,
-                    timestamp: new Date(fields.Timestamp || record.createdTime).toISOString()
-                });
-            }
-            
-            // Aggiorna timestamp se più recente
-            const recordTime = new Date(fields.Timestamp || record.createdTime);
-            if (recordTime > new Date(conversation.lastUpdate)) {
-                conversation.lastUpdate = recordTime.toISOString();
-            }
-        });
+        if (data.records && data.records.length > 0) {
+            data.records.forEach(record => {
+                const fields = record.fields;
+                const sessionId = fields.Session_ID || `session_${record.id}`;
+                
+                if (!conversationsMap.has(sessionId)) {
+                    conversationsMap.set(sessionId, {
+                        id: sessionId,
+                        name: extractName(fields.User_Message) || fields.User_Name || null,
+                        phone: extractPhone(fields.User_Message) || fields.User_Phone || null,
+                        email: extractEmail(fields.User_Message) || fields.User_Email || null,
+                        timestamp: new Date(fields.Timestamp || record.createdTime).toISOString(),
+                        status: determineStatus(fields),
+                        interest: determineInterest(fields.Interest_Area, fields.User_Message),
+                        isHot: determineIfHot(fields),
+                        messages: [],
+                        lastUpdate: new Date(fields.Timestamp || record.createdTime).toISOString()
+                    });
+                }
+                
+                const conversation = conversationsMap.get(sessionId);
+                
+                // Aggiungi messaggio utente
+                if (fields.User_Message) {
+                    conversation.messages.push({
+                        role: 'user',
+                        content: fields.User_Message,
+                        timestamp: new Date(fields.Timestamp || record.createdTime).toISOString()
+                    });
+                }
+                
+                // Aggiungi risposta AI
+                if (fields.Bot_Response) {
+                    conversation.messages.push({
+                        role: 'assistant',
+                        content: fields.Bot_Response,
+                        timestamp: new Date(fields.Timestamp || record.createdTime).toISOString()
+                    });
+                }
+                
+                // Aggiorna timestamp se più recente
+                const recordTime = new Date(fields.Timestamp || record.createdTime);
+                if (recordTime > new Date(conversation.lastUpdate)) {
+                    conversation.lastUpdate = recordTime.toISOString();
+                }
+            });
+        }
 
         // Converti Map in array e ordina per timestamp
         const conversations = Array.from(conversationsMap.values())
@@ -115,7 +136,11 @@ export default async function handler(req, res) {
             success: true,
             conversations: conversations,
             total: conversations.length,
-            lastUpdate: new Date().toISOString()
+            lastUpdate: new Date().toISOString(),
+            debug: {
+                airtableRecords: data.records?.length || 0,
+                processedConversations: conversations.length
+            }
         });
 
     } catch (error) {
@@ -124,7 +149,11 @@ export default async function handler(req, res) {
         res.status(500).json({
             error: 'Internal server error',
             message: error.message,
-            conversations: []
+            conversations: [],
+            debug: {
+                errorType: error.name,
+                errorMessage: error.message
+            }
         });
     }
 }
@@ -270,38 +299,3 @@ function updateContactInfo(conversation) {
         conversation.interest = determineInterest(null, allMessages);
     }
 }
-
-// Funzione per debug/test (commentata in produzione)
-/*
-function generateMockData() {
-    return {
-        success: true,
-        conversations: [
-            {
-                id: "session_123",
-                name: "Mario Rossi",
-                phone: "347 123 4567",
-                email: "mario@email.com",
-                timestamp: new Date(Date.now() - 3600000).toISOString(),
-                status: "new",
-                interest: "fitness",
-                isHot: true,
-                messages: [
-                    {
-                        role: "user",
-                        content: "Ciao, mi chiamo Mario Rossi e sono interessato al personal training",
-                        timestamp: new Date(Date.now() - 3600000).toISOString()
-                    },
-                    {
-                        role: "assistant",
-                        content: "Ciao Mario! Perfetto, sono Andrea. Ti posso aiutare con il personal training. Hai obiettivi specifici?",
-                        timestamp: new Date(Date.now() - 3500000).toISOString()
-                    }
-                ]
-            }
-        ],
-        total: 1,
-        lastUpdate: new Date().toISOString()
-    };
-}
-*/
