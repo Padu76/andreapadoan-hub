@@ -30,7 +30,7 @@ export default async function handler(req, res) {
     console.log('- CLAUDE_API_KEY length:', process.env.CLAUDE_API_KEY?.length || 0);
     console.log('- CLAUDE_API_KEY prefix:', process.env.CLAUDE_API_KEY?.substring(0, 25) || 'NOT_FOUND');
     
-    // Get Claude API key (with fallback for testing)
+    // Get Claude API key
     const claudeApiKey = process.env.CLAUDE_API_KEY;
     
     if (!claudeApiKey) {
@@ -59,7 +59,7 @@ export default async function handler(req, res) {
     try {
         console.log('🔄 Calling Claude API...');
         
-        // Chiama Claude API
+        // Chiama Claude API con modello aggiornato
         const response = await fetch('https://api.anthropic.com/v1/messages', {
             method: 'POST',
             headers: {
@@ -68,7 +68,7 @@ export default async function handler(req, res) {
                 'anthropic-version': '2023-06-01'
             },
             body: JSON.stringify({
-                model: 'claude-3-sonnet-20240229',
+                model: 'claude-3-5-sonnet-20240620',  // MODELLO AGGIORNATO
                 max_tokens: 300,
                 messages: [{ role: 'user', content: prompt }]
             })
