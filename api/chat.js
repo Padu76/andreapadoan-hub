@@ -4,30 +4,27 @@ export default async function handler(req, res) {
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     
-    // Handle preflight requests
     if (req.method === 'OPTIONS') {
         res.status(200).end();
         return;
     }
     
-    // Only allow POST requests
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method not allowed' });
     }
 
-    const { message, conversationHistory = [] } = req.body;
+    const { message, conversationHistory = [], userEmail = null, userName = null } = req.body;
     
-    // Validate input
     if (!message || typeof message !== 'string' || message.trim().length === 0) {
         return res.status(400).json({ error: 'Message is required and must be a non-empty string' });
     }
 
-    // Debug logging
-    console.log('=== ADVANCED AI RECOMMENDATION ENGINE ===');
+    console.log('=== FASE 3: AUTOMATION + LEAD MAGNETS ===');
     console.log('Received message:', message);
+    console.log('User email:', userEmail);
+    console.log('User name:', userName);
     console.log('Conversation history length:', conversationHistory.length);
     
-    // Get Claude API key
     const claudeApiKey = process.env.CLAUDE_API_KEY;
     
     if (!claudeApiKey) {
@@ -66,9 +63,280 @@ export default async function handler(req, res) {
         }
     };
 
-    // 🎯 ADVANCED AI RECOMMENDATION ENGINE
+    // 🎁 LEAD MAGNETS SYSTEM
+    const leadMagnets = {
+        // eBook gratuiti
+        freeEbooks: {
+            "50 Workout da Viaggio": {
+                title: "50 Workout da Viaggio - GRATUITO",
+                description: "Allenamenti efficaci senza attrezzi ovunque",
+                downloadUrl: "https://drive.google.com/file/d/your-ebook-id/view",
+                trigger: ["viaggio", "casa", "tempo", "hotel", "lavoro"],
+                value: "GRATUITO",
+                followUpSequence: "traveler_sequence"
+            },
+            "Guida Principianti": {
+                title: "Guida Completa per Principianti - GRATUITO", 
+                description: "Tutto quello che devi sapere per iniziare",
+                downloadUrl: "https://drive.google.com/file/d/your-beginner-guide/view",
+                trigger: ["principiante", "nuovo", "iniziare", "prima volta"],
+                value: "GRATUITO",
+                followUpSequence: "beginner_sequence"
+            },
+            "10 Errori Fitness": {
+                title: "10 Errori che Sabotano i Tuoi Risultati - GRATUITO",
+                description: "Evita gli sbagli più comuni nel fitness",
+                downloadUrl: "https://drive.google.com/file/d/your-errors-guide/view",
+                trigger: ["errori", "fallito", "risultati", "sbagliato"],
+                value: "GRATUITO", 
+                followUpSequence: "mistakes_sequence"
+            }
+        },
+        
+        // Sessioni gratuite
+        freeSessions: {
+            "Consulenza Gratuita": {
+                title: "Consulenza Strategica Gratuita (15 min)",
+                description: "Analizziamo insieme i tuoi obiettivi",
+                bookingUrl: "https://calendly.com/andrea-padoan/consulenza-gratuita",
+                trigger: ["consulenza", "gratuita", "parlare", "conoscere"],
+                value: "40€ di valore",
+                followUpSequence: "consultation_sequence"
+            },
+            "Sessione Prova": {
+                title: "Prima Sessione di Prova - 30€ invece di 40€",
+                description: "Prova il mio metodo senza rischi",
+                bookingUrl: "https://calendly.com/andrea-padoan/sessione-prova",
+                trigger: ["prova", "provare", "test", "prima volta"],
+                value: "Sconto 25%",
+                followUpSequence: "trial_sequence"
+            }
+        },
+
+        // Mini-corsi email
+        miniCourses: {
+            "7 Giorni Trasformazione": {
+                title: "Mini-Corso: 7 Giorni per Iniziare la Trasformazione",
+                description: "Email quotidiane con strategie pratiche",
+                signupUrl: "internal_email_course",
+                trigger: ["corso", "trasformazione", "imparare", "strategia"],
+                value: "7 email esclusive",
+                followUpSequence: "transformation_course"
+            }
+        }
+    };
+
+    // 📧 EMAIL AUTOMATION SEQUENCES
+    const emailSequences = {
+        beginner_sequence: [
+            {
+                day: 0,
+                subject: "🎯 Benvenuto! Ecco la tua guida per principianti",
+                content: "Ciao {name}! Grazie per aver scaricato la guida. Nei prossimi giorni ti manderò consigli esclusivi per iniziare nel modo giusto...",
+                cta: "Prenota consulenza gratuita",
+                cta_url: "https://calendly.com/andrea-padoan/consulenza-gratuita"
+            },
+            {
+                day: 3,
+                subject: "💪 I 3 errori più comuni dei principianti (da evitare)",
+                content: "Ciao {name}! Dopo 12 anni di esperienza, questi sono gli errori che vedo più spesso...",
+                cta: "Scopri il mio metodo",
+                cta_url: "https://www.personaltrainerverona.it"
+            },
+            {
+                day: 7,
+                subject: "🔥 Sei pronto per il passo successivo?",
+                content: "Ciao {name}! Come sta andando con la guida? Se vuoi accelerare i risultati...",
+                cta: "Prenota sessione di prova (30€)",
+                cta_url: "https://calendly.com/andrea-padoan/sessione-prova"
+            }
+        ],
+
+        traveler_sequence: [
+            {
+                day: 0,
+                subject: "✈️ I tuoi 50 workout da viaggio sono pronti!",
+                content: "Ciao {name}! Non perdere mai un allenamento, anche in trasferta. Ecco come...",
+                cta: "Scopri l'app Torno in Forma",
+                cta_url: "https://app.tornoinforma.it"
+            },
+            {
+                day: 5,
+                subject: "🏨 Come allenarsi in hotel (video esclusivo)",
+                content: "Ciao {name}! Ho preparato un video speciale per te...",
+                cta: "Guarda il video",
+                cta_url: "https://youtube.com/watch?v=your-video"
+            }
+        ],
+
+        consultation_sequence: [
+            {
+                day: 0,
+                subject: "📅 Conferma della tua consulenza gratuita",
+                content: "Ciao {name}! La tua consulenza è confermata. Ecco cosa preparare...",
+                cta: "Aggiungi al calendario",
+                cta_url: "calendar_link"
+            },
+            {
+                day: 1,
+                subject: "🎯 Domani ci sentiamo! Ecco 3 domande da prepararti",
+                content: "Ciao {name}! Per massimizzare il nostro tempo insieme...",
+                cta: "Accedi alla consulenza",
+                cta_url: "consultation_link"
+            }
+        ]
+    };
+
+    // 🤖 AUTOMATION ENGINE
+    const automationEngine = {
+        // Detecta se l'utente è interessato a lead magnets
+        detectLeadMagnetInterest: (message, conversationStage) => {
+            const lower = message.toLowerCase();
+            let interestedMagnets = [];
+
+            // Check eBook interests
+            Object.entries(leadMagnets.freeEbooks).forEach(([key, ebook]) => {
+                const isInterested = ebook.trigger.some(trigger => lower.includes(trigger));
+                if (isInterested) {
+                    interestedMagnets.push({
+                        type: 'ebook',
+                        magnet: ebook,
+                        key: key
+                    });
+                }
+            });
+
+            // Check free session interests
+            Object.entries(leadMagnets.freeSessions).forEach(([key, session]) => {
+                const isInterested = session.trigger.some(trigger => lower.includes(trigger));
+                if (isInterested) {
+                    interestedMagnets.push({
+                        type: 'session',
+                        magnet: session,
+                        key: key
+                    });
+                }
+            });
+
+            // Check mini-course interests
+            Object.entries(leadMagnets.miniCourses).forEach(([key, course]) => {
+                const isInterested = course.trigger.some(trigger => lower.includes(trigger));
+                if (isInterested) {
+                    interestedMagnets.push({
+                        type: 'course',
+                        magnet: course,
+                        key: key
+                    });
+                }
+            });
+
+            return interestedMagnets;
+        },
+
+        // Genera offerte di lead magnets
+        generateLeadMagnetOffer: (interestedMagnets, userProfile) => {
+            if (interestedMagnets.length === 0) return null;
+
+            // Prendi il magnet più rilevante
+            const topMagnet = interestedMagnets[0];
+            
+            return {
+                type: topMagnet.type,
+                title: topMagnet.magnet.title,
+                description: topMagnet.magnet.description,
+                value: topMagnet.magnet.value,
+                cta: topMagnet.type === 'ebook' ? 'Scarica Gratis' : 
+                     topMagnet.type === 'session' ? 'Prenota Ora' : 
+                     'Iscriviti Gratis',
+                url: topMagnet.magnet.downloadUrl || topMagnet.magnet.bookingUrl || topMagnet.magnet.signupUrl,
+                followUpSequence: topMagnet.magnet.followUpSequence
+            };
+        },
+
+        // Detecta se l'utente ha fornito email
+        extractContactInfo: (message, history) => {
+            const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
+            const phoneRegex = /(\+39\s?)?(\d{3})\s?(\d{3})\s?(\d{4})/;
+            const nameRegex = /mi chiamo ([a-zA-ZàèéìíîòóùúÀÈÉÌÍÎÒÓÙÚ\s]+)/i;
+
+            return {
+                email: message.match(emailRegex)?.[0] || null,
+                phone: message.match(phoneRegex)?.[0] || null,
+                name: message.match(nameRegex)?.[1]?.trim() || null
+            };
+        },
+
+        // Determina il follow-up appropriato
+        determineFollowUpAction: (userProfile, conversationStage, leadScore) => {
+            const actions = [];
+
+            // High-intent users get immediate follow-up
+            if (leadScore >= 8) {
+                actions.push({
+                    type: 'immediate_whatsapp',
+                    message: `🔥 LEAD CALDO: ${userProfile.name || 'Anonimo'} - Score: ${leadScore}/10`,
+                    delay: 0
+                });
+            }
+
+            // Medium-intent users get email sequence
+            if (leadScore >= 5 && userProfile.email) {
+                actions.push({
+                    type: 'email_sequence',
+                    sequence: 'nurturing_sequence',
+                    delay: 30 // minutes
+                });
+            }
+
+            // Users who asked for lead magnets get specific follow-up
+            if (userProfile.leadMagnetInterest) {
+                actions.push({
+                    type: 'email_sequence',
+                    sequence: userProfile.leadMagnetInterest.followUpSequence,
+                    delay: 10 // minutes
+                });
+            }
+
+            return actions;
+        },
+
+        // Trigger automation in external systems
+        triggerAutomation: async (automationActions, userProfile) => {
+            const results = [];
+
+            for (const action of automationActions) {
+                try {
+                    switch (action.type) {
+                        case 'immediate_whatsapp':
+                            // Webhook to Zapier/Make for WhatsApp notification
+                            await triggerWhatsAppNotification(action.message, userProfile);
+                            results.push({ type: 'whatsapp', status: 'sent' });
+                            break;
+
+                        case 'email_sequence':
+                            // Webhook to email automation platform
+                            await triggerEmailSequence(action.sequence, userProfile);
+                            results.push({ type: 'email', status: 'scheduled' });
+                            break;
+
+                        case 'calendar_booking':
+                            // Integrate with Calendly API
+                            await triggerCalendarBooking(userProfile);
+                            results.push({ type: 'calendar', status: 'invited' });
+                            break;
+                    }
+                } catch (error) {
+                    console.error(`Automation error for ${action.type}:`, error);
+                    results.push({ type: action.type, status: 'failed', error: error.message });
+                }
+            }
+
+            return results;
+        }
+    };
+
+    // 🎯 ADVANCED AI RECOMMENDATION ENGINE (keeping existing + enhanced)
     const advancedRecommendationEngine = {
-        // Analyze message and conversation context for intelligent recommendations
         analyzeMessage: (userMessage, history) => {
             const analysis = {
                 intent: detectIntent(userMessage),
@@ -78,76 +346,95 @@ export default async function handler(req, res) {
                 urgency: detectUrgency(userMessage),
                 experience: extractExperience(userMessage),
                 conversationStage: determineConversationStage(history),
-                previousRecommendations: extractPreviousRecommendations(history)
+                previousRecommendations: extractPreviousRecommendations(history),
+                // NEW: Lead magnet analysis
+                leadMagnetInterest: automationEngine.detectLeadMagnetInterest(userMessage, determineConversationStage(history)),
+                contactInfo: automationEngine.extractContactInfo(userMessage, history)
             };
             
             return analysis;
         },
 
-        // Generate contextual recommendations based on message analysis
         generateContextualRecommendations: (analysis, userMessage) => {
             const recommendations = [];
             
-            // Primary service recommendation
             const primaryService = selectPrimaryService(analysis);
             if (primaryService) {
                 recommendations.push(primaryService);
             }
             
-            // Intelligent upselling
             const upsells = generateUpsells(analysis, primaryService);
             recommendations.push(...upsells);
             
-            // Cross-selling opportunities
             const crossSells = generateCrossSells(analysis, userMessage);
             recommendations.push(...crossSells);
             
-            // Dynamic pricing offers
             const pricingOffers = generateDynamicPricing(analysis, recommendations);
+
+            // NEW: Lead magnet recommendations
+            const leadMagnetOffer = automationEngine.generateLeadMagnetOffer(analysis.leadMagnetInterest, analysis);
             
             return {
                 primary: primaryService,
                 upsells: upsells,
                 crossSells: crossSells,
                 pricing: pricingOffers,
-                urgencyBoost: analysis.urgency === 'high'
+                leadMagnet: leadMagnetOffer, // NEW
+                urgencyBoost: analysis.urgency === 'high',
+                automationTriggers: analysis.contactInfo.email ? true : false // NEW
             };
         },
 
-        // Format recommendations for natural conversation integration
         formatRecommendationsForPrompt: (recommendations, analysis) => {
-            if (!recommendations.primary && recommendations.upsells.length === 0 && recommendations.crossSells.length === 0) {
-                return "";
+            let prompt = "";
+
+            // Existing recommendations logic
+            if (recommendations.primary || recommendations.upsells.length > 0 || recommendations.crossSells.length > 0) {
+                prompt += "\n\n=== RACCOMANDAZIONI INTELLIGENTI ===\n";
+                
+                if (recommendations.primary) {
+                    prompt += `SERVIZIO PRINCIPALE CONSIGLIATO: ${recommendations.primary.name}\n`;
+                    prompt += `Prezzo: ${recommendations.primary.price}\n`;
+                    prompt += `Perché perfetto: ${recommendations.primary.reasoning}\n\n`;
+                }
+                
+                if (recommendations.upsells.length > 0) {
+                    prompt += "UPSELLING NATURALE:\n";
+                    recommendations.upsells.forEach(upsell => {
+                        prompt += `- ${upsell.suggestion}: ${upsell.benefit} (+${upsell.price})\n`;
+                    });
+                    prompt += "\n";
+                }
+                
+                if (recommendations.crossSells.length > 0) {
+                    prompt += "CROSS-SELLING CONTESTUALE:\n";
+                    recommendations.crossSells.forEach(cross => {
+                        prompt += `- ${cross.product}: ${cross.relevance} (${cross.price})\n`;
+                    });
+                    prompt += "\n";
+                }
+                
+                if (recommendations.pricing.offer) {
+                    prompt += `OFFERTA DINAMICA: ${recommendations.pricing.offer}\n`;
+                    prompt += `Sconto: ${recommendations.pricing.discount}\n`;
+                    prompt += `Scadenza: ${recommendations.pricing.validity}\n\n`;
+                }
             }
 
-            let prompt = "\n\n=== RACCOMANDAZIONI INTELLIGENTI ===\n";
-            
-            if (recommendations.primary) {
-                prompt += `SERVIZIO PRINCIPALE CONSIGLIATO: ${recommendations.primary.name}\n`;
-                prompt += `Prezzo: ${recommendations.primary.price}\n`;
-                prompt += `Perché perfetto: ${recommendations.primary.reasoning}\n\n`;
+            // NEW: Lead magnet integration
+            if (recommendations.leadMagnet) {
+                prompt += "\n=== LEAD MAGNET PERFETTO ===\n";
+                prompt += `OFFERTA GRATUITA: ${recommendations.leadMagnet.title}\n`;
+                prompt += `Descrizione: ${recommendations.leadMagnet.description}\n`;
+                prompt += `Valore: ${recommendations.leadMagnet.value}\n`;
+                prompt += `Call-to-Action: ${recommendations.leadMagnet.cta}\n\n`;
+                prompt += "ISTRUZIONI LEAD MAGNET: Proponi questa risorsa gratuita in modo naturale, spiegando come può aiutarlo immediatamente. Chiedi la sua email per inviargli il download.\n\n";
             }
-            
-            if (recommendations.upsells.length > 0) {
-                prompt += "UPSELLING NATURALE:\n";
-                recommendations.upsells.forEach(upsell => {
-                    prompt += `- ${upsell.suggestion}: ${upsell.benefit} (+${upsell.price})\n`;
-                });
-                prompt += "\n";
-            }
-            
-            if (recommendations.crossSells.length > 0) {
-                prompt += "CROSS-SELLING CONTESTUALE:\n";
-                recommendations.crossSells.forEach(cross => {
-                    prompt += `- ${cross.product}: ${cross.relevance} (${cross.price})\n`;
-                });
-                prompt += "\n";
-            }
-            
-            if (recommendations.pricing.offer) {
-                prompt += `OFFERTA DINAMICA: ${recommendations.pricing.offer}\n`;
-                prompt += `Sconto: ${recommendations.pricing.discount}\n`;
-                prompt += `Scadenza: ${recommendations.pricing.validity}\n\n`;
+
+            // Contact info request
+            if (!analysis.contactInfo.email && (recommendations.primary || recommendations.leadMagnet)) {
+                prompt += "\n=== RACCOLTA CONTATTI ===\n";
+                prompt += "Se l'utente mostra interesse, chiedi naturalmente la sua email per inviargli informazioni dettagliate o risorse gratuite.\n\n";
             }
             
             prompt += "ISTRUZIONI: Integra queste raccomandazioni in modo naturale nella conversazione. Non elencarle tutte insieme, ma inseriscile nel contesto appropriato. Sii consultivo, non venditore.";
@@ -156,7 +443,7 @@ export default async function handler(req, res) {
         }
     };
 
-    // 🔍 INTENT DETECTION
+    // Keep existing detection functions but add lead magnet logic
     function detectIntent(message) {
         const lower = message.toLowerCase();
         
@@ -185,7 +472,6 @@ export default async function handler(req, res) {
         return 'general_inquiry';
     }
 
-    // 🎯 GOAL EXTRACTION
     function extractGoals(message) {
         const goals = [];
         const lower = message.toLowerCase();
@@ -199,7 +485,6 @@ export default async function handler(req, res) {
         return goals;
     }
 
-    // ⏰ CONSTRAINT EXTRACTION
     function extractConstraints(message) {
         const constraints = [];
         const lower = message.toLowerCase();
@@ -220,7 +505,6 @@ export default async function handler(req, res) {
         return constraints;
     }
 
-    // 💰 BUDGET SIGNALS
     function extractBudgetSignals(message) {
         const lower = message.toLowerCase();
         
@@ -237,11 +521,9 @@ export default async function handler(req, res) {
         return 'price_neutral';
     }
 
-    // 📈 SERVICE SELECTION LOGIC
     function selectPrimaryService(analysis) {
         const { intent, goals, constraints, budgetSignals } = analysis;
         
-        // Time-constrained clients
         if (constraints.includes('time_limited')) {
             if (budgetSignals === 'budget_conscious') {
                 return {
@@ -258,7 +540,6 @@ export default async function handler(req, res) {
             }
         }
         
-        // Weight loss focused
         if (intent === 'weight_loss' || goals.includes('weight_loss')) {
             if (budgetSignals === 'budget_conscious') {
                 return {
@@ -275,7 +556,6 @@ export default async function handler(req, res) {
             }
         }
         
-        // Beginners
         if (constraints.includes('beginner')) {
             return {
                 name: "Miniclassi per Principianti",
@@ -284,7 +564,6 @@ export default async function handler(req, res) {
             };
         }
         
-        // Athletic performance
         if (intent === 'athletic_performance') {
             return {
                 name: "Personal Training Sportivo",
@@ -293,7 +572,6 @@ export default async function handler(req, res) {
             };
         }
         
-        // Default recommendation
         return {
             name: "Personal Training Individuale",
             price: "400€/mese (2x/settimana)",
@@ -301,14 +579,12 @@ export default async function handler(req, res) {
         };
     }
 
-    // 📈 UPSELLING GENERATION
     function generateUpsells(analysis, primaryService) {
         const upsells = [];
         const { intent, goals, constraints } = analysis;
         
         if (!primaryService) return upsells;
         
-        // If primary is training, suggest nutrition
         if (primaryService.name.includes('Personal Training') || primaryService.name.includes('Miniclassi')) {
             if (intent === 'weight_loss' || goals.includes('weight_loss')) {
                 upsells.push({
@@ -320,7 +596,6 @@ export default async function handler(req, res) {
             }
         }
         
-        // If primary is basic, suggest frequency increase
         if (primaryService.name.includes('2x/settimana')) {
             upsells.push({
                 suggestion: "Upgrade a 3 sessioni/settimana",
@@ -330,7 +605,6 @@ export default async function handler(req, res) {
             });
         }
         
-        // If app only, suggest hybrid approach
         if (primaryService.name.includes('App')) {
             upsells.push({
                 suggestion: "1 Sessione individuale mensile",
@@ -340,7 +614,6 @@ export default async function handler(req, res) {
             });
         }
         
-        // Analysis-based body composition
         if (goals.includes('muscle_building') || intent === 'muscle_toning') {
             upsells.push({
                 suggestion: "Analisi Composizione Corporea Mensile",
@@ -353,13 +626,11 @@ export default async function handler(req, res) {
         return upsells;
     }
 
-    // 🛍️ CROSS-SELLING GENERATION
     function generateCrossSells(analysis, userMessage) {
         const crossSells = [];
         const { intent, goals } = analysis;
         const lower = userMessage.toLowerCase();
         
-        // eBook recommendations based on intent
         if (intent === 'weight_loss' || goals.includes('weight_loss')) {
             crossSells.push({
                 product: "eBook 'In Forma da 2 Milioni di Anni'",
@@ -387,7 +658,6 @@ export default async function handler(req, res) {
             });
         }
         
-        // MealPrep Planner for organization-focused clients
         if (lower.includes('organizzare') || lower.includes('pasti') || intent === 'weight_loss') {
             crossSells.push({
                 product: "MealPrep Planner (Web App)",
@@ -397,7 +667,6 @@ export default async function handler(req, res) {
             });
         }
         
-        // Business coaching for entrepreneurs
         if (lower.includes('imprenditore') || lower.includes('business') || lower.includes('lavoro')) {
             crossSells.push({
                 product: "Upstart - Business Coaching",
@@ -410,11 +679,9 @@ export default async function handler(req, res) {
         return crossSells;
     }
 
-    // 💸 DYNAMIC PRICING
     function generateDynamicPricing(analysis, recommendations) {
         const { urgency, conversationStage, budgetSignals } = analysis;
         
-        // High urgency gets immediate discount
         if (urgency === 'high') {
             return {
                 offer: "Sconto Decisione Rapida",
@@ -424,7 +691,6 @@ export default async function handler(req, res) {
             };
         }
         
-        // Budget conscious gets package deal
         if (budgetSignals === 'budget_conscious') {
             return {
                 offer: "Pacchetto Starter Conveniente",
@@ -434,7 +700,6 @@ export default async function handler(req, res) {
             };
         }
         
-        // Quality focused gets premium bundle
         if (budgetSignals === 'quality_focused') {
             return {
                 offer: "Bundle Premium Excellence",
@@ -444,8 +709,7 @@ export default async function handler(req, res) {
             };
         }
         
-        // Multiple services get combination discount
-        if (recommendations.upsells.length >= 2) {
+        if (recommendations.upsells && recommendations.upsells.length >= 2) {
             return {
                 offer: "Sconto Combinazione Servizi",
                 discount: "-10% su pacchetti combinati",
@@ -457,7 +721,6 @@ export default async function handler(req, res) {
         return null;
     }
 
-    // Helper functions for conversation analysis
     function determineConversationStage(history) {
         if (history.length === 0) return 'initial';
         if (history.length < 3) return 'exploration';
@@ -466,7 +729,6 @@ export default async function handler(req, res) {
     }
 
     function extractPreviousRecommendations(history) {
-        // Analyze history for previously mentioned services
         const mentioned = [];
         history.forEach(exchange => {
             const bot = exchange.bot || "";
@@ -481,13 +743,11 @@ export default async function handler(req, res) {
     const detectQuizState = (message, history) => {
         const lower = message.toLowerCase();
         
-        // Check if user wants to start quiz
         if (lower.includes('quiz') || lower.includes('domande') || lower.includes('assessment') ||
             lower.includes('consigli') || lower.includes('quale') && lower.includes('servizio')) {
             return { action: 'start_quiz', step: 1 };
         }
         
-        // Check if we're in middle of quiz (look for A, B, C, D answers or numbers)
         if (history.length > 0) {
             const lastBotMessage = history[history.length - 1]?.bot || "";
             if (lastBotMessage.includes("scala da 1 a 10")) {
@@ -659,7 +919,6 @@ export default async function handler(req, res) {
     let prompt = "";
     
     if (quizState.action === 'start_quiz') {
-        // Start the quiz (keeping existing logic)
         prompt = `Sei Andrea Padoan, personal trainer e lifestyle coach di Verona.
 
 ${massiveKnowledgeBase}
@@ -677,7 +936,6 @@ Sii caloroso e spiega che questo ti aiuterà a consigliargli il servizio perfett
 Messaggio utente: "${message.trim()}"`;
 
     } else if (quizState.action === 'quiz_answer') {
-        // Handle quiz progression (keeping existing logic)
         const currentStep = quizState.step;
         const nextStep = currentStep + 1;
         
@@ -700,7 +958,6 @@ Sii incoraggiante e motivante.
 Messaggio utente: "${message.trim()}"`;
 
         } else {
-            // Quiz completed - generate recommendations (keeping existing logic but enhanced)
             const answers = extractAnswersFromHistory(conversationHistory, message);
             const personalizedPlan = generatePersonalizedPlan(answers);
             
@@ -726,26 +983,29 @@ Messaggio utente: "${message.trim()}"`;
         }
         
     } else {
-        // 🚀 ADVANCED RECOMMENDATION ENGINE IN ACTION
+        // 🚀 ADVANCED RECOMMENDATION ENGINE + AUTOMATION IN ACTION
         const messageAnalysis = advancedRecommendationEngine.analyzeMessage(message, conversationHistory);
         const contextualRecommendations = advancedRecommendationEngine.generateContextualRecommendations(messageAnalysis, message);
         const recommendationsPrompt = advancedRecommendationEngine.formatRecommendationsForPrompt(contextualRecommendations, messageAnalysis);
         
-        console.log('🎯 Advanced Recommendations Generated:', {
+        console.log('🎯 Advanced Recommendations + Automation Generated:', {
             analysis: messageAnalysis,
-            recommendations: contextualRecommendations
+            recommendations: contextualRecommendations,
+            leadMagnet: contextualRecommendations.leadMagnet,
+            contactInfo: messageAnalysis.contactInfo
         });
         
-        // Enhanced conversation prompt with intelligent recommendations
         prompt = `Sei Andrea Padoan, personal trainer e lifestyle coach di Verona.
 
 ${massiveKnowledgeBase}
 
 ${recommendationsPrompt}
 
-ISTRUZIONI AVANZATE:
+ISTRUZIONI AVANZATE CON AUTOMATION:
 - Analizza il messaggio dell'utente per capire le sue vere esigenze
 - Se hai generato raccomandazioni sopra, integrale naturalmente nella conversazione
+- Se c'è un lead magnet perfetto, proponilo in modo naturale
+- Se l'utente mostra alto interesse, chiedi delicatamente i suoi contatti per follow-up personalizzato
 - Non essere mai aggressivo nel vendere, ma consultivo e utile
 - Usa le raccomandazioni per arricchire la risposta, non per dominare
 - Se l'utente chiede consigli sui servizi, suggerisci il quiz di assessment
@@ -756,13 +1016,12 @@ ISTRUZIONI AVANZATE:
 
 Messaggio utente: "${message.trim()}"
 
-Rispondi come Andrea Padoan, integrando intelligentemente le raccomandazioni quando appropriato:`;
+Rispondi come Andrea Padoan, integrando intelligentemente raccomandazioni e lead magnets quando appropriato:`;
     }
     
     try {
-        console.log('🔄 Calling Claude API with Advanced Recommendation Engine...');
+        console.log('🔄 Calling Claude API with Automation + Lead Magnets...');
         
-        // Chiama Claude API
         const response = await fetch('https://api.anthropic.com/v1/messages', {
             method: 'POST',
             headers: {
@@ -772,7 +1031,7 @@ Rispondi come Andrea Padoan, integrando intelligentemente le raccomandazioni qua
             },
             body: JSON.stringify({
                 model: 'claude-3-5-sonnet-20240620',
-                max_tokens: 700, // Increased for richer recommendations
+                max_tokens: 800, // Increased for automation features
                 messages: [{ role: 'user', content: prompt }]
             })
         });
@@ -786,7 +1045,7 @@ Rispondi come Andrea Padoan, integrando intelligentemente le raccomandazioni qua
         }
         
         const data = await response.json();
-        console.log('✅ Claude API success with Advanced Recommendations');
+        console.log('✅ Claude API success with Automation');
         
         if (!data.content || !data.content[0] || !data.content[0].text) {
             console.error('❌ Invalid Claude API response format:', data);
@@ -794,19 +1053,58 @@ Rispondi come Andrea Padoan, integrando intelligentemente le raccomandazioni qua
         }
         
         const botResponse = data.content[0].text;
-        console.log('💬 Advanced recommendation-enhanced response generated, length:', botResponse.length);
+        console.log('💬 Automation-enhanced response generated, length:', botResponse.length);
         
-        // Enhanced Airtable logging with recommendation data
-        enhancedAirtableLogging(message.trim(), botResponse, quizState, messageAnalysis)
+        // 🤖 TRIGGER AUTOMATION ACTIONS
+        const messageAnalysis = advancedRecommendationEngine.analyzeMessage(message, conversationHistory);
+        const leadScore = advancedLeadScore(message, botResponse);
+        
+        // Create user profile for automation
+        const userProfile = {
+            name: messageAnalysis.contactInfo.name || userName,
+            email: messageAnalysis.contactInfo.email || userEmail,
+            phone: messageAnalysis.contactInfo.phone,
+            leadScore: leadScore,
+            intent: messageAnalysis.intent,
+            goals: messageAnalysis.goals,
+            constraints: messageAnalysis.constraints,
+            budgetSignals: messageAnalysis.budgetSignals,
+            leadMagnetInterest: messageAnalysis.leadMagnetInterest.length > 0 ? messageAnalysis.leadMagnetInterest[0] : null,
+            conversationStage: messageAnalysis.conversationStage,
+            lastMessage: message,
+            timestamp: new Date().toISOString()
+        };
+
+        // Determine and trigger automation actions
+        const automationActions = automationEngine.determineFollowUpAction(
+            userProfile, 
+            messageAnalysis.conversationStage, 
+            leadScore
+        );
+
+        // Trigger automation (async, don't wait for completion)
+        if (automationActions.length > 0) {
+            console.log('🤖 Triggering automation actions:', automationActions);
+            automationEngine.triggerAutomation(automationActions, userProfile)
+                .then(results => console.log('✅ Automation triggered:', results))
+                .catch(error => console.error('❌ Automation failed:', error));
+        }
+        
+        // Enhanced Airtable logging with automation data
+        enhancedAirtableLogging(message.trim(), botResponse, quizState, messageAnalysis, userProfile, automationActions)
             .then(() => console.log('✅ Enhanced Airtable logging completed'))
             .catch(err => console.error('❌ Airtable logging failed:', err));
         
-        // Return successful response with quiz state
+        // Return successful response with automation info
         res.status(200).json({ 
             response: botResponse,
             quiz_state: quizState.action,
             quiz_step: quizState.step || null,
-            recommendations_applied: quizState.action === 'normal_chat'
+            recommendations_applied: quizState.action === 'normal_chat',
+            lead_magnet_offered: messageAnalysis.leadMagnetInterest.length > 0,
+            automation_triggered: automationActions.length > 0,
+            lead_score: leadScore,
+            user_profile: userProfile
         });
         
     } catch (error) {
@@ -844,7 +1142,6 @@ function extractAnswersFromHistory(history, lastMessage) {
 }
 
 function generatePersonalizedPlan(answers) {
-    // Keep existing quiz-based logic
     const recommendations = [];
     let primaryService = "";
     let reasoning = "";
@@ -882,8 +1179,74 @@ function generatePersonalizedPlan(answers) {
     };
 }
 
-// 📊 ENHANCED AIRTABLE LOGGING with Recommendation Data
-async function enhancedAirtableLogging(userMessage, botResponse, quizState, messageAnalysis = null) {
+// 🤖 AUTOMATION TRIGGER FUNCTIONS
+async function triggerWhatsAppNotification(message, userProfile) {
+    // Webhook to Zapier/Make.com for WhatsApp notification to Andrea
+    const webhookUrl = process.env.WHATSAPP_WEBHOOK_URL || 'https://hooks.zapier.com/hooks/catch/your-webhook-id/';
+    
+    try {
+        const response = await fetch(webhookUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                type: 'whatsapp_notification',
+                message: message,
+                user: userProfile,
+                timestamp: new Date().toISOString()
+            })
+        });
+        
+        console.log('📱 WhatsApp notification sent:', response.status);
+    } catch (error) {
+        console.error('❌ WhatsApp notification failed:', error);
+    }
+}
+
+async function triggerEmailSequence(sequenceName, userProfile) {
+    // Webhook to email automation platform (Mailchimp, ConvertKit, etc.)
+    const webhookUrl = process.env.EMAIL_AUTOMATION_WEBHOOK_URL || 'https://hooks.zapier.com/hooks/catch/your-email-webhook/';
+    
+    try {
+        const response = await fetch(webhookUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                type: 'email_sequence',
+                sequence: sequenceName,
+                user: userProfile,
+                timestamp: new Date().toISOString()
+            })
+        });
+        
+        console.log('📧 Email sequence triggered:', response.status);
+    } catch (error) {
+        console.error('❌ Email sequence failed:', error);
+    }
+}
+
+async function triggerCalendarBooking(userProfile) {
+    // Integration with Calendly API or similar
+    const webhookUrl = process.env.CALENDAR_WEBHOOK_URL || 'https://hooks.zapier.com/hooks/catch/your-calendar-webhook/';
+    
+    try {
+        const response = await fetch(webhookUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                type: 'calendar_booking',
+                user: userProfile,
+                timestamp: new Date().toISOString()
+            })
+        });
+        
+        console.log('📅 Calendar booking triggered:', response.status);
+    } catch (error) {
+        console.error('❌ Calendar booking failed:', error);
+    }
+}
+
+// 📊 ENHANCED AIRTABLE LOGGING with Automation Data
+async function enhancedAirtableLogging(userMessage, botResponse, quizState, messageAnalysis = null, userProfile = null, automationActions = []) {
     const webhookUrl = 'https://hooks.airtable.com/workflows/v1/genericWebhook/applozDwnDZOgPvsg/wflXjsQEowx2dmnN8/wtrzKiazR0Tt8171P';
     
     const leadScore = advancedLeadScore(userMessage, botResponse);
@@ -906,17 +1269,25 @@ async function enhancedAirtableLogging(userMessage, botResponse, quizState, mess
         AI_Goals: messageAnalysis?.goals?.join(',') || null,
         AI_Constraints: messageAnalysis?.constraints?.join(',') || null,
         Budget_Signal: messageAnalysis?.budgetSignals || null,
+        // NEW: Automation fields
+        User_Name: userProfile?.name || null,
+        User_Email: userProfile?.email || null,
+        User_Phone: userProfile?.phone || null,
+        Lead_Magnet_Interest: messageAnalysis?.leadMagnetInterest?.length > 0 ? 'Yes' : 'No',
+        Lead_Magnet_Type: messageAnalysis?.leadMagnetInterest?.[0]?.type || null,
+        Automation_Triggered: automationActions.length > 0 ? 'Yes' : 'No',
+        Automation_Actions: automationActions.map(a => a.type).join(',') || null,
         Message_Length: userMessage.length,
         Response_Length: botResponse.length,
-        User_Agent: 'Vercel-API-Advanced-Recommendations'
+        User_Agent: 'Vercel-API-Automation-Phase3'
     };
     
     try {
-        console.log('📊 Enhanced logging with AI Recommendation data to Airtable...', {
+        console.log('📊 Enhanced logging with Automation data to Airtable...', {
             leadScore,
             interestArea,
-            aiIntent: messageAnalysis?.intent,
-            budgetSignal: messageAnalysis?.budgetSignals
+            userProfile: userProfile?.name || 'Anonymous',
+            automationTriggered: automationActions.length > 0
         });
         
         const response = await fetch(webhookUrl, {
@@ -928,7 +1299,7 @@ async function enhancedAirtableLogging(userMessage, botResponse, quizState, mess
         });
         
         if (response.ok) {
-            console.log('✅ Advanced AI recommendation conversation logged to Airtable successfully');
+            console.log('✅ Advanced automation conversation logged to Airtable successfully');
         } else {
             const errorText = await response.text();
             console.error('❌ Failed to log to Airtable:', response.status, errorText);
@@ -965,6 +1336,9 @@ function advancedLeadScore(message, botResponse) {
     if (lower.includes('numero') || lower.includes('telefono')) score += 4;
     if (lower.includes('whatsapp')) score += 3;
     
+    // NEW: Email provided bonus
+    if (lower.includes('@') && lower.includes('.')) score += 5;
+    
     return Math.min(score, 10);
 }
 
@@ -977,7 +1351,8 @@ function intelligentInterestDetection(message) {
         coaching: 0,
         online: 0,
         studio: 0,
-        assessment: 0
+        assessment: 0,
+        lead_magnet: 0 // NEW
     };
     
     if (lower.includes('quiz') || lower.includes('assessment') || lower.includes('domande') || 
@@ -985,9 +1360,25 @@ function intelligentInterestDetection(message) {
         scores.assessment += 3;
     }
     
+    // NEW: Lead magnet interest detection
+    if (lower.includes('gratuito') || lower.includes('gratis') || lower.includes('download') || 
+        lower.includes('ebook') || lower.includes('guida')) {
+        scores.lead_magnet += 3;
+    }
+    
     const fitnessKeywords = ['personal', 'allenamento', 'fitness', 'palestra', 'muscoli', 'forma', 'peso', 'dimagrire', 'tonificare'];
     fitnessKeywords.forEach(keyword => {
         if (lower.includes(keyword)) scores.fitness += 1;
+    });
+    
+    const nutritionKeywords = ['nutrizione', 'dieta', 'alimentazione', 'cibo', 'mangiare'];
+    nutritionKeywords.forEach(keyword => {
+        if (lower.includes(keyword)) scores.nutrition += 1;
+    });
+    
+    const businessKeywords = ['business', 'imprenditore', 'lavoro', 'azienda'];
+    businessKeywords.forEach(keyword => {
+        if (lower.includes(keyword)) scores.business += 1;
     });
     
     const maxScore = Math.max(...Object.values(scores));
@@ -1008,6 +1399,12 @@ function detectConversationStage(message) {
     if (lower.includes('prenotare') || lower.includes('appuntamento')) {
         return 'booking_intent';
     }
+    if (lower.includes('email') || lower.includes('@')) {
+        return 'contact_sharing';
+    }
+    if (lower.includes('gratuito') || lower.includes('download')) {
+        return 'lead_magnet_interest';
+    }
     
     return 'exploration';
 }
@@ -1015,14 +1412,30 @@ function detectConversationStage(message) {
 function detectUrgency(message) {
     const lower = message.toLowerCase();
     
-    if (lower.includes('urgente') || lower.includes('subito')) {
+    if (lower.includes('urgente') || lower.includes('subito') || lower.includes('oggi')) {
         return 'high';
     }
-    if (lower.includes('presto') || lower.includes('questa settimana')) {
+    if (lower.includes('presto') || lower.includes('questa settimana') || lower.includes('velocemente')) {
         return 'medium';
     }
     
     return 'low';
+}
+
+function extractExperience(message) {
+    const lower = message.toLowerCase();
+    
+    if (lower.includes('principiante') || lower.includes('mai fatto') || lower.includes('nuovo')) {
+        return 'beginner';
+    }
+    if (lower.includes('esperto') || lower.includes('anni') && lower.includes('allenamento')) {
+        return 'advanced';
+    }
+    if (lower.includes('fallito') || lower.includes('non funziona') || lower.includes('provato tutto')) {
+        return 'frustrated';
+    }
+    
+    return 'intermediate';
 }
 
 function generateSessionId() {
