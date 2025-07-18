@@ -1,96 +1,140 @@
 // /api/conversations.js
-// API per recuperare conversazioni complete da Airtable - FIXED VERSION
+// API DEBUG ESTREMA per identificare errore 500
 
 export default async function handler(req, res) {
+    console.log('🎯 API CONVERSATIONS DEBUG START');
+    
     // Configurazione CORS
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
     if (req.method === 'OPTIONS') {
+        console.log('✅ OPTIONS request handled');
         res.status(200).end();
         return;
     }
 
     if (req.method !== 'GET') {
+        console.log('❌ Method not allowed:', req.method);
         return res.status(405).json({ error: 'Method not allowed' });
     }
 
     try {
-        // Configurazione Airtable
+        console.log('🔧 Starting API conversations debug...');
+
+        // Test 1: Variabili ambiente
         const AIRTABLE_BASE_ID = process.env.AIRTABLE_BASE_ID;
         const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
-        // FIXED: Nome tabella corretto dal tuo Airtable
         const AIRTABLE_TABLE_NAME = 'conversazioni';
 
-        console.log('🔧 API Debug Info:');
-        console.log('- Base ID:', AIRTABLE_BASE_ID ? 'SET ✅' : 'MISSING ❌');
-        console.log('- API Key:', AIRTABLE_API_KEY ? 'SET ✅' : 'MISSING ❌');
-        console.log('- Table Name:', AIRTABLE_TABLE_NAME);
+        console.log('📋 Environment Variables Check:');
+        console.log('- AIRTABLE_BASE_ID exists:', !!AIRTABLE_BASE_ID);
+        console.log('- AIRTABLE_API_KEY exists:', !!AIRTABLE_API_KEY);
+        console.log('- Base ID length:', AIRTABLE_BASE_ID?.length || 0);
+        console.log('- API Key starts with:', AIRTABLE_API_KEY?.substring(0, 8) || 'undefined');
+        console.log('- Table name:', AIRTABLE_TABLE_NAME);
 
-        if (!AIRTABLE_BASE_ID || !AIRTABLE_API_KEY) {
-            console.error('❌ Missing Airtable credentials');
-            return res.status(500).json({ 
-                error: 'Airtable configuration missing',
-                conversations: [],
+        if (!AIRTABLE_BASE_ID) {
+            console.error('❌ CRITICAL: AIRTABLE_BASE_ID is missing');
+            return res.status(200).json({
+                error: 'AIRTABLE_BASE_ID missing',
+                debug: { hasBaseId: false, hasApiKey: !!AIRTABLE_API_KEY },
+                conversations: []
+            });
+        }
+
+        if (!AIRTABLE_API_KEY) {
+            console.error('❌ CRITICAL: AIRTABLE_API_KEY is missing');
+            return res.status(200).json({
+                error: 'AIRTABLE_API_KEY missing',
+                debug: { hasBaseId: !!AIRTABLE_BASE_ID, hasApiKey: false },
+                conversations: []
+            });
+        }
+
+        // Test 2: Costruzione URL
+        const airtableUrl = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_NAME}`;
+        console.log('🌐 Airtable URL:', airtableUrl);
+
+        // Test 3: Headers
+        const headers = {
+            'Authorization': `Bearer ${AIRTABLE_API_KEY}`,
+            'Content-Type': 'application/json'
+        };
+        console.log('📡 Request headers prepared');
+
+        // Test 4: Fetch Airtable
+        console.log('📡 Making request to Airtable...');
+        
+        const response = await fetch(airtableUrl, { headers });
+        
+        console.log('📡 Airtable response status:', response.status);
+        console.log('📡 Airtable response ok:', response.ok);
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('❌ Airtable API Error Details:');
+            console.error('- Status:', response.status);
+            console.error('- Status Text:', response.statusText);
+            console.error('- Error Body:', errorText);
+            
+            return res.status(200).json({
+                error: `Airtable API error: ${response.status}`,
                 debug: {
-                    hasBaseId: !!AIRTABLE_BASE_ID,
-                    hasApiKey: !!AIRTABLE_API_KEY
+                    airtableStatus: response.status,
+                    airtableError: errorText,
+                    url: airtableUrl
+                },
+                conversations: []
+            });
+        }
+
+        // Test 5: Parse Response
+        console.log('📊 Parsing Airtable response...');
+        const data = await response.json();
+        
+        console.log('📊 Airtable response structure:');
+        console.log('- Has records:', !!data.records);
+        console.log('- Records count:', data.records?.length || 0);
+        console.log('- First record fields:', data.records?.[0] ? Object.keys(data.records[0].fields) : 'No records');
+
+        // Test 6: Process Data
+        if (!data.records || data.records.length === 0) {
+            console.log('⚠️ No records found in Airtable');
+            return res.status(200).json({
+                success: true,
+                conversations: [],
+                total: 0,
+                debug: {
+                    airtableRecords: 0,
+                    message: 'No records in Airtable table'
                 }
             });
         }
 
-        // Chiama API Airtable
-        const airtableUrl = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_NAME}`;
-        console.log('📡 Calling Airtable API:', airtableUrl);
+        console.log('🔄 Processing Airtable records...');
         
-        const response = await fetch(airtableUrl, {
-            headers: {
-                'Authorization': `Bearer ${AIRTABLE_API_KEY}`,
-                'Content-Type': 'application/json'
-            }
-        });
-
-        console.log('📡 Airtable API Response Status:', response.status);
-
-        if (!response.ok) {
-            const errorText = await response.text();
-            console.error('❌ Airtable API Error:', response.status, errorText);
-            throw new Error(`Airtable API error: ${response.status} - ${errorText}`);
-        }
-
-        const data = await response.json();
-        console.log('📊 Raw Airtable Data:', {
-            recordCount: data.records?.length || 0,
-            firstRecord: data.records?.[0] ? Object.keys(data.records[0].fields) : 'No records'
-        });
+        // Simple processing for debugging
+        const conversations = [];
         
-        // Processa e raggruppa conversazioni per sessione
-        const conversationsMap = new Map();
-        
-        if (data.records && data.records.length > 0) {
-            data.records.forEach(record => {
+        data.records.forEach((record, index) => {
+            try {
                 const fields = record.fields;
-                const sessionId = fields.Session_ID || `session_${record.id}`;
+                console.log(`Processing record ${index + 1}:`, Object.keys(fields));
                 
-                if (!conversationsMap.has(sessionId)) {
-                    conversationsMap.set(sessionId, {
-                        id: sessionId,
-                        name: extractName(fields.User_Message) || fields.User_Name || null,
-                        phone: extractPhone(fields.User_Message) || fields.User_Phone || null,
-                        email: extractEmail(fields.User_Message) || fields.User_Email || null,
-                        timestamp: new Date(fields.Timestamp || record.createdTime).toISOString(),
-                        status: determineStatus(fields),
-                        interest: determineInterest(fields.Interest_Area, fields.User_Message),
-                        isHot: determineIfHot(fields),
-                        messages: [],
-                        lastUpdate: new Date(fields.Timestamp || record.createdTime).toISOString()
-                    });
-                }
+                const conversation = {
+                    id: record.id,
+                    name: fields.User_Message ? extractName(fields.User_Message) : null,
+                    phone: fields.User_Message ? extractPhone(fields.User_Message) : null,
+                    email: fields.User_Message ? extractEmail(fields.User_Message) : null,
+                    timestamp: new Date(fields.Timestamp || record.createdTime).toISOString(),
+                    status: 'new',
+                    interest: 'generale',
+                    isHot: false,
+                    messages: []
+                };
                 
-                const conversation = conversationsMap.get(sessionId);
-                
-                // Aggiungi messaggio utente
                 if (fields.User_Message) {
                     conversation.messages.push({
                         role: 'user',
@@ -99,7 +143,6 @@ export default async function handler(req, res) {
                     });
                 }
                 
-                // Aggiungi risposta AI
                 if (fields.Bot_Response) {
                     conversation.messages.push({
                         role: 'assistant',
@@ -108,194 +151,76 @@ export default async function handler(req, res) {
                     });
                 }
                 
-                // Aggiorna timestamp se più recente
-                const recordTime = new Date(fields.Timestamp || record.createdTime);
-                if (recordTime > new Date(conversation.lastUpdate)) {
-                    conversation.lastUpdate = recordTime.toISOString();
-                }
-            });
-        }
-
-        // Converti Map in array e ordina per timestamp
-        const conversations = Array.from(conversationsMap.values())
-            .map(conv => {
-                // Ordina messaggi per timestamp
-                conv.messages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+                conversations.push(conversation);
                 
-                // Aggiorna nome e contatti se trovati nei messaggi
-                updateContactInfo(conv);
-                
-                return conv;
-            })
-            .sort((a, b) => new Date(b.lastUpdate) - new Date(a.lastUpdate));
+            } catch (recordError) {
+                console.error(`❌ Error processing record ${index + 1}:`, recordError);
+            }
+        });
 
-        console.log(`✅ Processed ${conversations.length} conversations`);
+        console.log(`✅ Successfully processed ${conversations.length} conversations`);
 
-        // Restituisci dati
-        res.status(200).json({
+        // Test 7: Return Response
+        const result = {
             success: true,
             conversations: conversations,
             total: conversations.length,
             lastUpdate: new Date().toISOString(),
             debug: {
-                airtableRecords: data.records?.length || 0,
-                processedConversations: conversations.length
+                airtableRecords: data.records.length,
+                processedConversations: conversations.length,
+                apiVersion: 'debug-v1.0'
             }
-        });
+        };
+
+        console.log('📤 Sending response with', conversations.length, 'conversations');
+        
+        res.status(200).json(result);
 
     } catch (error) {
-        console.error('❌ Error in conversations API:', error);
+        console.error('💥 CRITICAL ERROR in conversations API:');
+        console.error('Error name:', error.name);
+        console.error('Error message:', error.message);
+        console.error('Error stack:', error.stack);
         
-        res.status(500).json({
+        res.status(200).json({
             error: 'Internal server error',
             message: error.message,
-            conversations: [],
             debug: {
                 errorType: error.name,
-                errorMessage: error.message
-            }
+                errorMessage: error.message,
+                timestamp: new Date().toISOString()
+            },
+            conversations: []
         });
     }
 }
 
-// Funzioni di utilità per processare i dati
-
+// Utility functions - simplified for debugging
 function extractName(message) {
     if (!message) return null;
-    
-    // Pattern per trovare nomi nelle conversazioni
     const patterns = [
         /mi chiamo ([a-zA-ZàèéìíîòóùúÀÈÉÌÍÎÒÓÙÚ\s]+)/i,
-        /sono ([a-zA-ZàèéìíîòóùúÀÈÉÌÍÎÒÓÙÚ\s]+)/i,
-        /il mio nome è ([a-zA-ZàèéìíîòóùúÀÈÉÌÍÎÒÓÙÚ\s]+)/i,
-        /nome: ([a-zA-ZàèéìíîòóùúÀÈÉÌÍÎÒÓÙÚ\s]+)/i
+        /sono ([a-zA-ZàèéìíîòóùúÀÈÉÌÍÎÒÓÙÚ\s]+)/i
     ];
     
     for (const pattern of patterns) {
         const match = message.match(pattern);
-        if (match && match[1]) {
-            return match[1].trim();
-        }
+        if (match && match[1]) return match[1].trim();
     }
-    
     return null;
 }
 
 function extractPhone(message) {
     if (!message) return null;
-    
-    // Pattern per trovare numeri di telefono
-    const patterns = [
-        /(\+39\s?)?(\d{3})\s?(\d{3})\s?(\d{4})/,
-        /(\+39\s?)?(\d{3})\s?(\d{4})\s?(\d{4})/,
-        /telefono[:\s]+(\+39\s?)?(\d{3})\s?(\d{3})\s?(\d{4})/i,
-        /cell[:\s]+(\+39\s?)?(\d{3})\s?(\d{3})\s?(\d{4})/i
-    ];
-    
-    for (const pattern of patterns) {
-        const match = message.match(pattern);
-        if (match) {
-            return match[0].replace(/[^\d\+]/g, '').replace(/^\+39/, '');
-        }
-    }
-    
-    return null;
+    const pattern = /(\+39\s?)?(\d{3})\s?(\d{3})\s?(\d{4})/;
+    const match = message.match(pattern);
+    return match ? match[0] : null;
 }
 
 function extractEmail(message) {
     if (!message) return null;
-    
-    // Pattern per trovare email
-    const emailPattern = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
-    const match = message.match(emailPattern);
-    
+    const pattern = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
+    const match = message.match(pattern);
     return match ? match[0] : null;
-}
-
-function determineStatus(fields) {
-    // Determina lo status della conversazione
-    if (fields.Status) {
-        return fields.Status.toLowerCase();
-    }
-    
-    // Logica per determinare status automaticamente
-    const now = new Date();
-    const timestamp = new Date(fields.Timestamp || now);
-    const hoursAgo = (now - timestamp) / (1000 * 60 * 60);
-    
-    if (hoursAgo < 2) return 'new';
-    if (hoursAgo < 24) return 'active';
-    if (hoursAgo < 72) return 'contacted';
-    return 'completed';
-}
-
-function determineInterest(interestArea, userMessage) {
-    // Determina l'area di interesse dalla conversazione
-    if (interestArea) {
-        return interestArea.toLowerCase();
-    }
-    
-    if (!userMessage) return 'generale';
-    
-    const message = userMessage.toLowerCase();
-    
-    // Keywords per determinare interesse
-    const keywords = {
-        fitness: ['fitness', 'allenamento', 'palestra', 'muscoli', 'workout', 'esercizio', 'training'],
-        nutrition: ['nutrizione', 'dieta', 'alimentazione', 'cibo', 'mangiare', 'peso', 'calorie'],
-        business: ['business', 'lavoro', 'azienda', 'marketing', 'vendite', 'coaching', 'consulenza'],
-        lifestyle: ['lifestyle', 'vita', 'benessere', 'stress', 'equilibrio', 'motivazione', 'obiettivi']
-    };
-    
-    for (const [interest, terms] of Object.entries(keywords)) {
-        if (terms.some(term => message.includes(term))) {
-            return interest;
-        }
-    }
-    
-    return 'generale';
-}
-
-function determineIfHot(fields) {
-    // Determina se è un lead caldo
-    if (fields.Is_Hot) {
-        return fields.Is_Hot === 'true' || fields.Is_Hot === true;
-    }
-    
-    // Logica per determinare hot lead
-    const message = fields.User_Message?.toLowerCase() || '';
-    
-    // Keywords che indicano interesse elevato
-    const hotKeywords = [
-        'subito', 'urgente', 'quando possiamo', 'chiamami', 'contattami',
-        'interessato', 'voglio iniziare', 'quanto costa', 'prezzo',
-        'disponibilità', 'quando', 'dove', 'come funziona'
-    ];
-    
-    return hotKeywords.some(keyword => message.includes(keyword));
-}
-
-function updateContactInfo(conversation) {
-    // Aggiorna informazioni contatto analizzando tutti i messaggi
-    const allMessages = conversation.messages.map(m => m.content).join(' ');
-    
-    // Aggiorna nome se non già presente
-    if (!conversation.name) {
-        conversation.name = extractName(allMessages);
-    }
-    
-    // Aggiorna telefono se non già presente
-    if (!conversation.phone) {
-        conversation.phone = extractPhone(allMessages);
-    }
-    
-    // Aggiorna email se non già presente
-    if (!conversation.email) {
-        conversation.email = extractEmail(allMessages);
-    }
-    
-    // Aggiorna interesse analizzando tutti i messaggi
-    if (conversation.interest === 'generale') {
-        conversation.interest = determineInterest(null, allMessages);
-    }
 }
