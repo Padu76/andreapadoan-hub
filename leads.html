@@ -1174,6 +1174,114 @@
     </div>
 
     <script>
+        // 🔐 LOGIN MANAGER CONDIVISO - Versione unificata
+        const LoginManager = {
+            // Chiave per localStorage
+            LOGIN_KEY: 'andrea_padoan_dashboard_session',
+            SESSION_DURATION: 8 * 60 * 60 * 1000, // 8 ore in millisecondi
+            REFRESH_INTERVAL: 5 * 60 * 1000, // 5 minuti in millisecondi
+            
+            // Imposta la sessione di login
+            setSession() {
+                const sessionData = {
+                    isLoggedIn: true,
+                    loginTime: Date.now(),
+                    lastActivity: Date.now()
+                };
+                localStorage.setItem(this.LOGIN_KEY, JSON.stringify(sessionData));
+                console.log('🔐 Sessione login impostata:', new Date().toLocaleTimeString());
+                
+                // Avvia il timer di refresh della sessione
+                this.startSessionRefresh();
+            },
+            
+            // Verifica se l'utente è loggato
+            isLoggedIn() {
+                try {
+                    const sessionData = localStorage.getItem(this.LOGIN_KEY);
+                    if (!sessionData) return false;
+                    
+                    const session = JSON.parse(sessionData);
+                    const now = Date.now();
+                    
+                    // Verifica se la sessione è scaduta
+                    if (now - session.loginTime > this.SESSION_DURATION) {
+                        console.log('⏰ Sessione scaduta dopo 8 ore');
+                        this.clearSession();
+                        return false;
+                    }
+                    
+                    // Aggiorna l'ultima attività
+                    session.lastActivity = now;
+                    localStorage.setItem(this.LOGIN_KEY, JSON.stringify(session));
+                    
+                    return session.isLoggedIn;
+                } catch (error) {
+                    console.error('❌ Errore verifica sessione:', error);
+                    this.clearSession();
+                    return false;
+                }
+            },
+            
+            // Cancella la sessione (logout)
+            clearSession() {
+                localStorage.removeItem(this.LOGIN_KEY);
+                console.log('🚪 Sessione cancellata');
+                
+                // Ferma il timer di refresh
+                if (this.refreshTimer) {
+                    clearInterval(this.refreshTimer);
+                    this.refreshTimer = null;
+                }
+            },
+            
+            // Avvia il refresh automatico della sessione
+            startSessionRefresh() {
+                // Clear existing timer
+                if (this.refreshTimer) {
+                    clearInterval(this.refreshTimer);
+                }
+                
+                this.refreshTimer = setInterval(() => {
+                    if (this.isLoggedIn()) {
+                        console.log('🔄 Sessione refreshata:', new Date().toLocaleTimeString());
+                    } else {
+                        console.log('❌ Sessione non valida durante refresh');
+                        this.forceLogout();
+                    }
+                }, this.REFRESH_INTERVAL);
+            },
+            
+            // Forza logout su tutte le pagine
+            forceLogout() {
+                this.clearSession();
+                
+                // Reindirizza alla schermata di login se non già presente
+                if (typeof logout === 'function') {
+                    logout();
+                } else {
+                    // Fallback se la funzione logout non esiste
+                    window.location.reload();
+                }
+            },
+            
+            // Controlla la sessione quando la finestra ritorna in focus
+            checkSessionOnFocus() {
+                window.addEventListener('focus', () => {
+                    if (!this.isLoggedIn()) {
+                        console.log('👁️ Sessione non valida al focus della finestra');
+                        this.forceLogout();
+                    }
+                });
+            },
+            
+            // Inizializza il sistema di login
+            init() {
+                this.checkSessionOnFocus();
+                console.log('🔐 Login Manager inizializzato');
+            }
+        };
+
         // Global variables
         let leadsData = [];
         let selectedLeads = new Set();
@@ -1181,17 +1289,22 @@
         let refreshInterval;
         let draggedLead = null;
 
-        // Authentication
+        // 🔐 FUNZIONI LOGIN UNIFICATE
         function login() {
             const password = document.getElementById('passwordInput').value;
             const errorDiv = document.getElementById('errorMessage');
             
             if (password === 'tribu2024') {
+                // Usa il Login Manager condiviso
+                LoginManager.setSession();
+                
                 document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('mainDashboard').classList.add('active');
                 isLoggedIn = true;
                 initDashboard();
                 errorDiv.style.display = 'none';
+                
+                console.log('✅ Login effettuato con successo - Sessione condivisa attiva');
             } else {
                 errorDiv.textContent = 'Password non corretta';
                 errorDiv.style.display = 'block';
@@ -1200,12 +1313,34 @@
         }
 
         function logout() {
+            // Usa il Login Manager condiviso per logout globale
+            LoginManager.clearSession();
+            
             isLoggedIn = false;
             clearInterval(refreshInterval);
             document.getElementById('loginScreen').style.display = 'flex';
             document.getElementById('mainDashboard').classList.remove('active');
             document.getElementById('passwordInput').value = '';
+            
+            console.log('🚪 Logout effettuato - Sessione condivisa cancellata');
         }
+
+        // 🔄 AUTO-LOGIN CHECK
+        document.addEventListener('DOMContentLoaded', () => {
+            // Inizializza il Login Manager
+            LoginManager.init();
+            
+            // Controlla se l'utente è già loggato
+            if (LoginManager.isLoggedIn()) {
+                console.log('🔐 Utente già loggato - Auto-login attivato');
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('mainDashboard').classList.add('active');
+                isLoggedIn = true;
+                initDashboard();
+            } else {
+                console.log('🔐 Utente non loggato - Mostra schermata login');
+            }
+        });
 
         // Enter key for login
         document.addEventListener('keypress', function(e) {
@@ -1219,7 +1354,12 @@
             console.log('🚀 Initializing Andrea Padoan Lead CRM Dashboard...');
             loadLeadsData();
             refreshInterval = setInterval(() => {
-                if (isLoggedIn) refreshData();
+                if (isLoggedIn && LoginManager.isLoggedIn()) {
+                    refreshData();
+                } else {
+                    console.log('❌ Auto-refresh saltato - sessione non valida');
+                    LoginManager.forceLogout();
+                }
             }, 60000);
             setupEventListeners();
         }
@@ -1238,15 +1378,17 @@
             console.log('📊 Loading leads from API...');
             try {
                 updateConnectionStatus('loading', 'Caricamento lead...');
-                const response = await fetch('/api/leads', {
+                
+                // Usa l'API conversazioni come base per i lead
+                const response = await fetch('/api/conversations', {
                     method: 'GET',
                     headers: { 'Content-Type': 'application/json' }
                 });
                 
                 if (response.ok) {
                     const data = await response.json();
-                    leadsData = data.leads || [];
-                    console.log('✅ Leads loaded successfully:', leadsData);
+                    leadsData = processConversationsAsLeads(data.conversations || []);
+                    console.log('✅ Leads processed successfully:', leadsData);
                     updateConnectionStatus('connected', 'Connesso ad Airtable');
                     updateDashboard();
                 } else {
@@ -1257,6 +1399,50 @@
                 updateConnectionStatus('error', 'Errore connessione');
                 showErrorState();
             }
+        }
+
+        // Process conversations as leads
+        function processConversationsAsLeads(conversations) {
+            return conversations.map((conv, index) => {
+                const hasContact = conv.name && conv.phone;
+                const messageCount = conv.messages ? conv.messages.length : 0;
+                
+                // Calculate lead score
+                let score = 0;
+                if (conv.name) score += 25;
+                if (conv.phone) score += 30;
+                if (conv.email) score += 20;
+                score += Math.min(messageCount * 5, 25);
+                
+                // Determine stage based on engagement
+                let stage = 'cold';
+                if (score >= 80) stage = 'customer';
+                else if (score >= 60) stage = 'hot';
+                else if (score >= 40) stage = 'warm';
+                
+                return {
+                    id: conv.id || `lead_${index}`,
+                    name: conv.name || 'Lead Anonimo',
+                    phone: conv.phone,
+                    email: conv.email,
+                    interest: conv.interest || 'generale',
+                    stage: stage,
+                    score: score,
+                    estimatedValue: stage === 'customer' ? 2000 : stage === 'hot' ? 1500 : stage === 'warm' ? 1000 : 500,
+                    isHot: conv.isHot || score >= 80,
+                    isQualified: hasContact && score >= 50,
+                    needsFollowUp: score >= 40 && score < 80,
+                    lastContact: conv.timestamp,
+                    followUpDate: needsFollowUp ? getFollowUpDate(conv.timestamp) : null,
+                    messages: conv.messages || []
+                };
+            });
+        }
+
+        function getFollowUpDate(lastContact) {
+            const date = new Date(lastContact);
+            date.setDate(date.getDate() + 3); // Follow-up dopo 3 giorni
+            return date.toISOString();
         }
 
         // Update Dashboard
@@ -1293,7 +1479,9 @@
             const pipelineValue = leadsData.reduce((sum, lead) => sum + (lead.estimatedValue || 0), 0);
             const qualified = leadsData.filter(lead => lead.isQualified).length;
             const today = new Date().toISOString().split('T')[0];
-            const followUpToday = leadsData.filter(lead => lead.followUpDate && lead.followUpDate.split('T')[0] === today).length;
+            const followUpToday = leadsData.filter(lead => 
+                lead.followUpDate && lead.followUpDate.split('T')[0] === today
+            ).length;
             
             return {
                 totalLeads: total,
@@ -1504,42 +1692,4 @@
                 nutrition: `Ciao ${name}! Interessato alla nutrizione? Posso aiutarti a raggiungere i tuoi obiettivi! 🥗`,
                 business: `Ciao ${name}! Vedo che ti interessa il business coaching. Facciamo una call! 🚀`,
                 lifestyle: `Ciao ${name}! Il lifestyle coaching può trasformare la tua vita. Parliamone! ✨`
-            };
-            return templates[lead.interest] || `Ciao ${name}! Grazie per il tuo interesse. Come posso aiutarti?`;
-        }
-
-        // Initialize mock data for testing
-        function initializeMockData() {
-            leadsData = [
-                {
-                    id: 'lead_1',
-                    name: 'Mario Rossi',
-                    phone: '347 123 4567',
-                    email: 'mario@email.com',
-                    interest: 'fitness',
-                    stage: 'hot',
-                    score: 85,
-                    estimatedValue: 1500,
-                    isHot: true,
-                    isQualified: true,
-                    needsFollowUp: false,
-                    lastContact: '2024-12-15T14:30:00Z'
-                }
-            ];
-            updateDashboard();
-        }
-
-        // Placeholder functions
-        function setupDragAndDrop() { console.log('🎯 Drag & drop setup'); }
-        function handleDragStart(event, leadId) { console.log('🎯 Drag start:', leadId); }
-        function scheduleFollowUp(leadId) { console.log('📅 Schedule follow-up:', leadId); }
-        function viewLeadDetails(leadId) { console.log('👁️ View details:', leadId); }
-        function bulkAction(action) { console.log('📦 Bulk action:', action); }
-        function addNewLead() { console.log('➕ Add new lead'); }
-        function importLeads() { console.log('📂 Import leads'); }
-        function applyFilters() { console.log('🔍 Apply filters'); }
-
-        console.log('👥 Andrea Padoan Lead CRM loaded successfully');
-    </script>
-</body>
-</html>
+            
