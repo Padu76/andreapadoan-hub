@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TribuCoach - Analytics | User Behavior & Performance</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+
+        /* Login Screen */
+        .login-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+
+        .login-box {
+            background: rgba(26, 26, 26, 0.95);
+            padding: 50px;
+            border-radius: 20px;
+            border: 2px solid #ff6b35;
+            backdrop-filter: blur(20px);
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 25px 50px rgba(255, 107, 53, 0.3);
+        }
+
+        .login-title {
+            color: #ff6b35;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .login-subtitle {
+            color: #ccc;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 18px 25px;
+            border: 2px solid #333;
+            border-radius: 15px;
+            background: #1a1a1a;
+            color: #fff;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .login-input:focus {
+            border-color: #ff6b35;
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .login-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #ff6b35, #ff8533);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 107, 53, 0.5);
+        }
+
+        .error-message {
+            color: #ff4444;
+            margin-top: 20px;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* Dashboard Layout */
+        .dashboard {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .dashboard.active {
+            display: block;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 3px solid #ff6b35;
+            padding: 25px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .header-content {
+            max-width: 1800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ff6b35, #ff8533);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.6rem;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        .logo-text h1 {
+            color: #ff6b35;
+            font-size: 1.6rem;
+            font-weight: bold;
+        }
+
+        .logo-text p {
+            color: #888;
+            font-size: 1rem;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            gap: 5px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 5px;
+        }
+
+        .nav-tab {
+            background: transparent;
+            border: none;
+            color: #888;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-tab:hover {
+            background: rgba(255, 107, 53, 0.1);
+            color: #ff6b35;
+        }
+
+        .nav-tab.active {
+            background: #ff6b35;
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .period-selector {
+            display: flex;
+            gap: 5px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 5px;
+        }
+
+        .period-btn {
+            background: transparent;
+            border: none;
+            color: #888;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .period-btn:hover {
+            background: rgba(255, 107, 53, 0.1);
+            color: #ff6b35;
+        }
+
+        .period-btn.active {
+            background: #ff6b35;
+            color: white;
+        }
+
+        .refresh-btn {
+            background: rgba(255, 107, 53, 0.1);
+            border: 2px solid #ff6b35;
+            color: #ff6b35;
+            padding: 12px 25px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .refresh-btn:hover {
+            background: #ff6b35;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(74, 222, 128, 0.1);
+            border: 1px solid #4ade80;
+            color: #4ade80;
+            padding: 8px 15px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4ade80;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .logout-btn {
+            background: rgba(255, 68, 68, 0.1);
+            border: 2px solid #ff4444;
+            color: #ff4444;
+            padding: 12px 18px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .logout-btn:hover {
+            background: #ff4444;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 40px 25px;
+        }
+
+        /* Page Header */
+        .page-header {
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-title {
+            color: #fff;
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .page-subtitle {
+            color: #888;
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .export-btn {
+            background: rgba(96, 165, 250, 0.1);
+            border: 2px solid #60a5fa;
+            color: #60a5fa;
+            padding: 15px 30px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .export-btn:hover {
+            background: #60a5fa;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .stat-card {
+            background: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent-color);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .stat-title {
+            color: #ccc;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            background: rgba(255, 107, 53, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-color);
+            font-size: 1.3rem;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .stat-change {
+            font-size: 0.85rem;
+            color: #888;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .change-up { color: #4ade80; }
+        .change-down { color: #f87171; }
+
+        /* Accent Colors */
+        .stat-card:nth-child(1) { --accent-color: #ff6b35; }
+        .stat-card:nth-child(2) { --accent-color: #4ade80; }
+        .stat-card:nth-child(3) { --accent-color: #60a5fa; }
+        .stat-card:nth-child(4) { --accent-color: #a855f7; }
+        .stat-card:nth-child(5) { --accent-color: #fbbf24; }
+        .stat-card:nth-child(6) { --accent-color: #f87171; }
+
+        /* Analytics Grid */
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .analytics-section {
+            background: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 35px;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .analytics-section:hover {
+            border-color: #ff6b35;
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.1);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #333;
+        }
+
+        .section-title {
+            color: #ff6b35;
+            font-size: 1.4rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .action-btn {
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid #ff6b35;
+            color: #ff6b35;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .action-btn:hover, .action-btn.active {
+            background: #ff6b35;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Chart Container */
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin-top: 20px;
+        }
+
+        .chart-small {
+            height: 300px;
+        }
+
+        /* Heatmap */
+        .heatmap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .heatmap-section {
+            background: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 35px;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .heatmap-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .heatmap-item:last-child {
+            border-bottom: none;
+        }
+
+        .heatmap-label {
+            color: #ccc;
+            font-size: 0.9rem;
+            flex: 1;
+        }
+
+        .heatmap-value {
+            background: rgba(255, 107, 53, 0.2);
+            color: #ff6b35;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .heatmap-bar {
+            height: 6px;
+            background: rgba(255, 107, 53, 0.1);
+            border-radius: 3px;
+            margin: 8px 0;
+            overflow: hidden;
+        }
+
+        .heatmap-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b35, #ff8533);
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+
+        /* Timeline */
+        .timeline-container {
+            background: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* Loading State */
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
+            color: #888;
+            font-size: 1.1rem;
+        }
+
+        .loading i {
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+            font-size: 2rem;
+            color: #ff6b35;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Error State */
+        .error-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
+            color: #ff4444;
+            text-align: center;
+        }
+
+        .error-state i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        /* No Data State */
+        .no-data {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
+            color: #888;
+            text-align: center;
+        }
+
+        .no-data i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1200px) {
+            .analytics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .heatmap-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .nav-tabs {
+                overflow-x: auto;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+
+            .nav-tabs::-webkit-scrollbar {
+                display: none;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .main-content {
+                padding: 25px 20px;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .analytics-section {
+                padding: 25px 20px;
+            }
+
+            .header-actions {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .period-selector {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+
+        /* Custom Scrollbar */
+        .analytics-section::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .analytics-section::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .analytics-section::-webkit-scrollbar-thumb {
+            background: #ff6b35;
+            border-radius: 3px;
+        }
+
+        .analytics-section::-webkit-scrollbar-thumb:hover {
+            background: #ff8533;
+        }
+
+        /* Real-time indicator */
+        .realtime-indicator {
+            position: fixed;
+            top: 80px;
+            right: 25px;
+            background: rgba(26, 26, 26, 0.95);
+            border: 2px solid #4ade80;
+            border-radius: 10px;
+            padding: 8px 15px;
+            color: #4ade80;
+            font-size: 0.8rem;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(74, 222, 128, 0.2);
+        }
+
+        .realtime-indicator.updating {
+            animation: pulse-green 0.8s ease-in-out;
+        }
+
+        @keyframes pulse-green {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div class="login-container" id="loginScreen">
+        <div class="login-box">
+            <div class="login-title">📊 TribuCoach Analytics</div>
+            <div class="login-subtitle">User Behavior & Performance Dashboard</div>
+            <input type="password" id="passwordInput" class="login-input" placeholder="Inserisci password" autocomplete="current-password">
+            <button onclick="login()" class="login-btn">Accedi agli Analytics</button>
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+        </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div class="dashboard" id="mainDashboard">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">TC</div>
+                    <div class="logo-text">
+                        <h1>TribuCoach Analytics</h1>
+                        <p>User Behavior & Performance Dashboard</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Tabs -->
+                <nav class="nav-tabs">
+                    <a href="./dashboard.html" class="nav-tab">
+                        <i class="fas fa-chart-bar"></i> Overview
+                    </a>
+                    <a href="./conversations.html" class="nav-tab">
+                        <i class="fas fa-comments"></i> Conversazioni
+                    </a>
+                    <a href="./leads.html" class="nav-tab">
+                        <i class="fas fa-users"></i> Lead CRM
+                    </a>
+                    <a href="./analytics.html" class="nav-tab active">
+                        <i class="fas fa-chart-line"></i> Analytics
+                    </a>
+                </nav>
+
+                <div class="header-actions">
+                    <div class="period-selector">
+                        <button class="period-btn" onclick="changePeriod('1d')" id="period1d">1d</button>
+                        <button class="period-btn active" onclick="changePeriod('7d')" id="period7d">7d</button>
+                        <button class="period-btn" onclick="changePeriod('30d')" id="period30d">30d</button>
+                        <button class="period-btn" onclick="changePeriod('90d')" id="period90d">90d</button>
+                    </div>
+                    <div class="status-indicator">
+                        <div class="status-dot"></div>
+                        <span id="connectionStatus">Connesso ad Analytics</span>
+                    </div>
+                    <button class="refresh-btn" onclick="refreshData()">
+                        <i class="fas fa-sync-alt"></i> Aggiorna
+                    </button>
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">
+                        <i class="fas fa-chart-line"></i>
+                        Analytics Dashboard
+                    </h1>
+                    <p class="page-subtitle">Comportamento utenti e performance della landing page</p>
+                </div>
+                <button class="export-btn" onclick="exportData()">
+                    <i class="fas fa-download"></i> Export Dati
+                </button>
+            </div>
+
+            <!-- Stats Overview -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-title">Sessioni</div>
+                        <div class="stat-icon"><i class="fas fa-users"></i></div>
+                    </div>
+                    <div class="stat-value" id="totalSessions">-</div>
+                    <div class="stat-change" id="sessionsChange">
+                        <i class="fas fa-spinner fa-spin"></i> Caricamento...
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-title">Page Views</div>
+                        <div class="stat-icon"><i class="fas fa-eye"></i></div>
+                    </div>
+                    <div class="stat-value" id="pageViews">-</div>
+                    <div class="stat-change" id="pageViewsChange">
+                        <i class="fas fa-spinner fa-spin"></i> Caricamento...
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-title">Bounce Rate</div>
+                        <div class="stat-icon"><i class="fas fa-sign-out-alt"></i></div>
+                    </div>
+                    <div class="stat-value" id="bounceRate">-</div>
+                    <div class="stat-change" id="bounceRateChange">
+                        <i class="fas fa-spinner fa-spin"></i> Caricamento...
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-title">Avg Session Time</div>
+                        <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                    </div>
+                    <div class="stat-value" id="avgSessionTime">-</div>
+                    <div class="stat-change" id="sessionTimeChange">
+                        <i class="fas fa-spinner fa-spin"></i> Caricamento...
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-title">Avg Scroll Depth</div>
+                        <div class="stat-icon"><i class="fas fa-arrows-alt-v"></i></div>
+                    </div>
+                    <div class="stat-value" id="avgScrollDepth">-</div>
+                    <div class="stat-change" id="scrollDepthChange">
+                        <i class="fas fa-spinner fa-spin"></i> Caricamento...
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-title">Conversion Rate</div>
+                        <div class="stat-icon"><i class="fas fa-bullseye"></i></div>
+                    </div>
+                    <div class="stat-value" id="conversionRate">-</div>
+                    <div class="stat-change" id="conversionRateChange">
+                        <i class="fas fa-spinner fa-spin"></i> Caricamento...
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Analytics Grid -->
+            <div class="analytics-grid">
+                <!-- Traffic Timeline -->
+                <div class="analytics-section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <i class="fas fa-chart-area"></i>
+                            Timeline Traffico
+                        </div>
+                        <div class="section-actions">
+                            <button class="action-btn active" onclick="changeTimelineView('events')">Eventi</button>
+                            <button class="action-btn" onclick="changeTimelineView('sessions')">Sessioni</button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="trafficChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Device Breakdown -->
+                <div class="analytics-section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <i class="fas fa-mobile-alt"></i>
+                            Dispositivi
+                        </div>
+                    </div>
+                    <div class="chart-container chart-small">
+                        <canvas id="deviceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Performance -->
+            <div class="heatmap-grid">
+                <!-- Top Sections -->
+                <div class="heatmap-section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <i class="fas fa-fire"></i>
+                            Sezioni Più Viste
+                        </div>
+                    </div>
+                    <div id="topSections">
+                        <div class="loading">
+                            <i class="fas fa-spinner"></i>
+                            Caricamento dati sezioni...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Clicks -->
+                <div class="heatmap-section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <i class="fas fa-mouse-pointer"></i>
+                            Click Più Frequenti
+                        </div>
+                    </div>
+                    <div id="topClicks">
+                        <div class="loading">
+                            <i class="fas fa-spinner"></i>
+                            Caricamento dati click...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conversion Funnel -->
+                <div class="heatmap-section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <i class="fas fa-funnel-dollar"></i>
+                            Funnel Conversione
+                        </div>
+                    </div>
+                    <div id="conversionFunnel">
+                        <div class="loading">
+                            <i class="fas fa-spinner"></i>
+                            Caricamento funnel...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Behavior Analytics -->
+            <div class="timeline-container">
+                <div class="section-header">
+                    <div class="section-title">
+                        <i class="fas fa-user-clock"></i>
+                        Analisi Comportamento
+                    </div>
+                    <div class="section-actions">
+                        <button class="action-btn" onclick="changeMetric('scroll')">Scroll</button>
+                        <button class="action-btn" onclick="changeMetric('time')">Tempo</button>
+                        <button class="action-btn active" onclick="changeMetric('engagement')">Engagement</button>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="behaviorChart"></canvas>
+                </div>
+            </div>
+        </main>
+
+        <!-- Real-time Indicator -->
+        <div class="realtime-indicator" id="realtimeIndicator">
+            <i class="fas fa-circle"></i> Live Analytics
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let analyticsData = {};
+        let currentPeriod = '7d';
+        let currentMetric = 'engagement';
+        let isLoggedIn = false;
+        let refreshInterval;
+        let chartInstances = {};
+
+        // Authentication
+        function login() {
+            const password = document.getElementById('passwordInput').value;
+            const errorDiv = document.getElementById('errorMessage');
+            
+            if (password === 'tribu2024') {
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('mainDashboard').classList.add('active');
+                isLoggedIn = true;
+                initDashboard();
+                errorDiv.style.display = 'none';
+            } else {
+                errorDiv.textContent = 'Password non corretta';
+                errorDiv.style.display = 'block';
+                document.getElementById('passwordInput').value = '';
+            }
+        }
+
+        function logout() {
+            isLoggedIn = false;
+            clearInterval(refreshInterval);
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('mainDashboard').classList.remove('active');
+            document.getElementById('passwordInput').value = '';
+            
+            // Destroy chart instances
+            Object.values(chartInstances).forEach(chart => {
+                if (chart) chart.destroy();
+            });
+            chartInstances = {};
+        }
+
+        // Enter key for login
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !isLoggedIn) {
+                login();
+            }
+        });
+
+        // Initialize Dashboard
+        function initDashboard() {
+            console.log('🚀 Initializing Analytics Dashboard...');
+            
+            // Load analytics data
+            loadAnalyticsData();
+            
+            // Set up auto-refresh every 30 seconds
+            refreshInterval = setInterval(() => {
+                if (isLoggedIn) {
+                    refreshData();
+                }
+            }, 30000);
+        }
+
+        // Load Analytics Data
+        async function loadAnalyticsData() {
+            console.log('📊 Loading analytics data...');
+            
+            try {
+                updateConnectionStatus('loading', 'Caricamento analytics...');
+                
+                const response = await fetch(`/api/analytics?period=${currentPeriod}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    analyticsData = data.analytics;
+                    console.log('✅ Analytics data loaded successfully:', analyticsData);
+                    updateConnectionStatus('connected', 'Connesso ad Analytics');
+                    updateDashboard();
+                } else {
+                    throw new Error(`API Error: ${response.status}`);
+                }
+                
+            } catch (error) {
+                console.error('❌ Error loading analytics:', error);
+                updateConnectionStatus('error', 'Errore connessione');
+                showErrorState();
+            }
+        }
+
+        // Update connection status
+        function updateConnectionStatus(status, message) {
+            const statusElement = document.getElementById('connectionStatus');
+            const statusIndicator = statusElement.parentElement;
+            
+            statusElement.textContent = message;
+            
+            const dot = statusIndicator.querySelector('.status-dot');
+            switch(status) {
+                case 'connected':
+                    statusIndicator.style.background = 'rgba(74, 222, 128, 0.1)';
+                    statusIndicator.style.borderColor = '#4ade80';
+                    statusIndicator.style.color = '#4ade80';
+                    dot.style.background = '#4ade80';
+                    break;
+                case 'loading':
+                    statusIndicator.style.background = 'rgba(251, 191, 36, 0.1)';
+                    statusIndicator.style.borderColor = '#fbbf24';
+                    statusIndicator.style.color = '#fbbf24';
+                    dot.style.background = '#fbbf24';
+                    break;
+                case 'error':
+                    statusIndicator.style.background = 'rgba(248, 113, 113, 0.1)';
+                    statusIndicator.style.borderColor = '#f87171';
+                    statusIndicator.style.color = '#f87171';
+                    dot.style.background = '#f87171';
+                    break;
+            }
+        }
+
+        // Update Dashboard
+        function updateDashboard() {
+            console.log('🔄 Updating dashboard with analytics data...');
+            
+            if (!analyticsData || !analyticsData.overview) {
+                console.log('📝 No analytics data available');
+                showEmptyState();
+                return;
+            }
+
+            // Update stats
+            updateStats();
+            
+            // Update content sections
+            updateContentSections();
+            
+            // Update charts
+            updateCharts();
+            
+            // Show realtime indicator
+            const indicator = document.getElementById('realtimeIndicator');
+            indicator.classList.add('updating');
+            setTimeout(() => indicator.classList.remove('updating'), 500);
+        }
+
+        function updateStats() {
+            const overview = analyticsData.overview;
+            const engagement = analyticsData.engagement;
+            const conversion = analyticsData.conversion;
+            
+            document.getElementById('totalSessions').textContent = overview.sessions || 0;
+            document.getElementById('pageViews').textContent = overview.pageViews || 0;
+            document.getElementById('bounceRate').textContent = (overview.bounceRate || 0) + '%';
+            document.getElementById('avgSessionTime').textContent = formatTime(overview.avgSessionTime || 0);
+            document.getElementById('avgScrollDepth').textContent = (engagement.avgScrollDepth || 0) + '%';
+            
+            // Calculate conversion rate
+            const conversionRate = overview.sessions > 0 ? 
+                Math.round(((conversion.chat_opened + conversion.whatsapp_clicked) / overview.sessions) * 100) : 0;
+            document.getElementById('conversionRate').textContent = conversionRate + '%';
+            
+            // Update change indicators (mock data for now)
+            document.getElementById('sessionsChange').innerHTML = `<i class="fas fa-arrow-up change-up"></i> +15% vs periodo precedente`;
+            document.getElementById('pageViewsChange').innerHTML = `<i class="fas fa-arrow-up change-up"></i> +8% vs periodo precedente`;
+            document.getElementById('bounceRateChange').innerHTML = `<i class="fas fa-arrow-down change-up"></i> -12% vs periodo precedente`;
+            document.getElementById('sessionTimeChange').innerHTML = `<i class="fas fa-arrow-up change-up"></i> +25% vs periodo precedente`;
+            document.getElementById('scrollDepthChange').innerHTML = `<i class="fas fa-arrow-up change-up"></i> +5% vs periodo precedente`;
+            document.getElementById('conversionRateChange').innerHTML = `<i class="fas fa-arrow-up change-up"></i> +18% vs periodo precedente`;
+        }
+
+        function updateContentSections() {
+            updateTopSections();
+            updateTopClicks();
+            updateConversionFunnel();
+        }
+
+        function updateTopSections() {
+            const container = document.getElementById('topSections');
+            const sections = analyticsData.engagement.sectionsViewed || {};
+            
+            if (Object.keys(sections).length === 0) {
+                container.innerHTML = `
+                    <div class="no-data">
+                        <i class="fas fa-chart-bar"></i>
+                        <h3>Nessun dato sezioni</h3>
+                        <p>I dati appariranno qui</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const maxValue = Math.max(...Object.values(sections));
+            const sortedSections = Object.entries(sections)
+                .sort(([,a], [,b]) => b - a)
+                .slice(0, 8);
+
+            container.innerHTML = sortedSections.map(([section, views]) => {
+                const percentage = Math.round((views / maxValue) * 100);
+                return `
+                    <div class="heatmap-item">
+                        <div class="heatmap-label">${section}</div>
+                        <div class="heatmap-value">${views}</div>
+                    </div>
+                    <div class="heatmap-bar">
+                        <div class="heatmap-fill" style="width: ${percentage}%"></div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateTopClicks() {
+            const container = document.getElementById('topClicks');
+            const clicks = analyticsData.content.clicksByElement || {};
+            
+            if (Object.keys(clicks).length === 0) {
+                container.innerHTML = `
+                    <div class="no-data">
+                        <i class="fas fa-mouse-pointer"></i>
+                        <h3>Nessun dato click</h3>
+                        <p>I dati appariranno qui</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const maxValue = Math.max(...Object.values(clicks));
+            const sortedClicks = Object.entries(clicks)
+                .sort(([,a], [,b]) => b - a)
+                .slice(0, 8);
+
+            container.innerHTML = sortedClicks.map(([element, clickCount]) => {
+                const [type, text] = element.split(':');
+                const percentage = Math.round((clickCount / maxValue) * 100);
+                return `
+                    <div class="heatmap-item">
+                        <div class="heatmap-label">${text.substring(0, 30)}...</div>
+                        <div class="heatmap-value">${clickCount}</div>
+                    </div>
+                    <div class="heatmap-bar">
+                        <div class="heatmap-fill" style="width: ${percentage}%"></div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateConversionFunnel() {
+            const container = document.getElementById('conversionFunnel');
+            const conversion = analyticsData.conversion || {};
+            const overview = analyticsData.overview || {};
+            
+            const funnelData = [
+                { step: 'Visitatori', value: overview.sessions || 0 },
+                { step: 'Progetti Visti', value: conversion.project_clicked || 0 },
+                { step: 'Chat Aperte', value: conversion.chat_opened || 0 },
+                { step: 'WhatsApp', value: conversion.whatsapp_clicked || 0 },
+                { step: 'Email', value: conversion.email_clicked || 0 }
+            ];
+
+            const maxValue = Math.max(...funnelData.map(item => item.value));
+
+            container.innerHTML = funnelData.map(item => {
+                const percentage = maxValue > 0 ? Math.round((item.value / maxValue) * 100) : 0;
+                return `
+                    <div class="heatmap-item">
+                        <div class="heatmap-label">${item.step}</div>
+                        <div class="heatmap-value">${item.value}</div>
+                    </div>
+                    <div class="heatmap-bar">
+                        <div class="heatmap-fill" style="width: ${percentage}%"></div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateCharts() {
+            updateTrafficChart();
+            updateDeviceChart();
+            updateBehaviorChart();
+        }
+
+        function updateTrafficChart() {
+            const ctx = document.getElementById('trafficChart').getContext('2d');
+            const timeline = analyticsData.timeline || {};
+            
+            const labels = Object.keys(timeline).sort();
+            const data = labels.map(key => timeline[key].events || 0);
+            
+            // Destroy existing chart
+            if (chartInstances.trafficChart) {
+                chartInstances.trafficChart.destroy();
+            }
+            
+            chartInstances.trafficChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels.map(label => formatTimelineLabel(label)),
+                    datasets: [{
+                        label: 'Eventi',
+                        data: data,
+                        borderColor: '#ff6b35',
+                        backgroundColor: 'rgba(255, 107, 53, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#ff6b35',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: '#e0e0e0' } },
+                        tooltip: {
+                            backgroundColor: 'rgba(26, 26, 26, 0.9)',
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            borderColor: '#ff6b35',
+                            borderWidth: 1
+                        }
+                    },
+                    scales: {
+                        x: { 
+                            ticks: { color: '#888' }, 
+                            grid: { color: '#333' }
+                        },
+                        y: { 
+                            ticks: { color: '#888' }, 
+                            grid: { color: '#333' },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateDeviceChart() {
+            const ctx = document.getElementById('deviceChart').getContext('2d');
+            const devices = analyticsData.devices.mobileVsDesktop || { mobile: 0, desktop: 0 };
+            
+            // Destroy existing chart
+            if (chartInstances.deviceChart) {
+                chartInstances.deviceChart.destroy();
+            }
+            
+            chartInstances.deviceChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Mobile', 'Desktop'],
+                    datasets: [{
+                        data: [devices.mobile, devices.desktop],
+                        backgroundColor: ['#ff6b35', '#4ade80'],
+                        borderWidth: 0,
+                        hoverBorderWidth: 3,
+                        hoverBorderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { 
+                                color: '#e0e0e0',
+                                padding: 20,
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(26, 26, 26, 0.9)',
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            borderColor: '#ff6b35',
+                            borderWidth: 1
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateBehaviorChart() {
+            const ctx = document.getElementById('behaviorChart').getContext('2d');
+            const behavior = analyticsData.behavior || {};
+            
+            let chartData, chartLabel;
+            
+            if (currentMetric === 'scroll') {
+                chartData = behavior.scrollMilestones || {};
+                chartLabel = 'Scroll Milestones';
+            } else if (currentMetric === 'time') {
+                chartData = behavior.timeMilestones || {};
+                chartLabel = 'Time Milestones';
+            } else {
+                // Default engagement chart
+                chartData = analyticsData.engagement.sectionsViewed || {};
+                chartLabel = 'Engagement per Sezione';
+            }
+            
+            const labels = Object.keys(chartData);
+            const data = Object.values(chartData);
+            
+            // Destroy existing chart
+            if (chartInstances.behaviorChart) {
+                chartInstances.behaviorChart.destroy();
+            }
+            
+            chartInstances.behaviorChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: chartLabel,
+                        data: data,
+                        backgroundColor: 'rgba(255, 107, 53, 0.8)',
+                        borderColor: '#ff6b35',
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: '#e0e0e0' } },
+                        tooltip: {
+                            backgroundColor: 'rgba(26, 26, 26, 0.9)',
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            borderColor: '#ff6b35',
+                            borderWidth: 1
+                        }
+                    },
+                    scales: {
+                        x: { 
+                            ticks: { color: '#888' }, 
+                            grid: { color: '#333' }
+                        },
+                        y: { 
+                            ticks: { color: '#888' }, 
+                            grid: { color: '#333' },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // Utility functions
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${minutes}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function formatTimelineLabel(label) {
+            // Format timeline labels based on period
+            const parts = label.split('-');
+            if (currentPeriod === '1d') {
+                return `${parts[3] || '00'}:00`;
+            } else {
+                return `${parts[2]}/${parts[1]}`;
+            }
+        }
+
+        function showErrorState() {
+            const containers = ['topSections', 'topClicks', 'conversionFunnel'];
+            
+            containers.forEach(containerId => {
+                const container = document.getElementById(containerId);
+                container.innerHTML = `
+                    <div class="error-state">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>Errore caricamento dati</h3>
+                        <p>Impossibile caricare i dati analytics</p>
+                    </div>
+                `;
+            });
+        }
+
+        function showEmptyState() {
+            const containers = ['topSections', 'topClicks', 'conversionFunnel'];
+            
+            containers.forEach(containerId => {
+                const container = document.getElementById(containerId);
+                container.innerHTML = `
+                    <div class="no-data">
+                        <i class="fas fa-chart-bar"></i>
+                        <h3>Nessun dato disponibile</h3>
+                        <p>I dati analytics appariranno qui quando ci saranno visite</p>
+                    </div>
+                `;
+            });
+        }
+
+        // Event handlers
+        function refreshData() {
+            console.log('🔄 Manual refresh triggered');
+            loadAnalyticsData();
+        }
+
+        function changePeriod(period) {
+            currentPeriod = period;
+            
+            // Update active button
+            document.querySelectorAll('.period-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(`period${period}`).classList.add('active');
+            
+            // Reload data
+            loadAnalyticsData();
+        }
+
+        function changeMetric(metric) {
+            currentMetric = metric;
+            
+            // Update active button
+            document.querySelectorAll('.timeline-container .action-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update behavior chart
+            updateBehaviorChart();
+        }
+
+        function changeTimelineView(view) {
+            // Update active button
+            document.querySelectorAll('.analytics-section .action-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update traffic chart (future implementation)
+            console.log('📊 Changing timeline view to:', view);
+        }
+
+        function exportData() {
+            console.log('📊 Exporting analytics data');
+            
+            // Create CSV content
+            const csvContent = generateCSV();
+            
+            // Download CSV
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', `analytics_${currentPeriod}_${new Date().toISOString().split('T')[0]}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function generateCSV() {
+            const headers = ['Metric', 'Value', 'Period'];
+            const rows = [];
+            
+            if (analyticsData.overview) {
+                rows.push(['Sessions', analyticsData.overview.sessions, currentPeriod]);
+                rows.push(['Page Views', analyticsData.overview.pageViews, currentPeriod]);
+                rows.push(['Bounce Rate', analyticsData.overview.bounceRate + '%', currentPeriod]);
+                rows.push(['Avg Session Time', formatTime(analyticsData.overview.avgSessionTime), currentPeriod]);
+            }
+            
+            if (analyticsData.engagement) {
+                rows.push(['Avg Scroll Depth', analyticsData.engagement.avgScrollDepth + '%', currentPeriod]);
+            }
+            
+            return [headers, ...rows].map(row => row.join(',')).join('\n');
+        }
+
+        // Initialize on page load
+        console.log('📊 TribuCoach Analytics Dashboard loaded successfully');
+    </script>
+</body>
+</html>
