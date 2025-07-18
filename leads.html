@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TribuCoach - Lead CRM | Advanced Lead Management</title>
+    <title>Andrea Padoan - Lead CRM | Advanced Lead Management</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
@@ -767,64 +767,6 @@
             color: #ff6b35;
         }
 
-        /* Lead Detail Modal */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            background: rgba(26, 26, 26, 0.95);
-            border: 1px solid #333;
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 800px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #333;
-        }
-
-        .modal-title {
-            color: #ff6b35;
-            font-size: 1.8rem;
-            font-weight: bold;
-        }
-
-        .modal-close {
-            background: none;
-            border: none;
-            color: #888;
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 5px;
-            border-radius: 50%;
-            transition: all 0.3s;
-        }
-
-        .modal-close:hover {
-            color: #ff6b35;
-            background: rgba(255, 107, 53, 0.1);
-        }
-
         /* Empty State */
         .empty-state {
             display: flex;
@@ -922,10 +864,6 @@
             .pipeline-column {
                 padding: 20px;
             }
-
-            .modal-content {
-                padding: 30px 20px;
-            }
         }
 
         @media (max-width: 480px) {
@@ -944,25 +882,21 @@
         }
 
         /* Custom Scrollbar */
-        .pipeline-column::-webkit-scrollbar,
-        .modal-content::-webkit-scrollbar {
+        .pipeline-column::-webkit-scrollbar {
             width: 6px;
         }
 
-        .pipeline-column::-webkit-scrollbar-track,
-        .modal-content::-webkit-scrollbar-track {
+        .pipeline-column::-webkit-scrollbar-track {
             background: rgba(255, 255, 255, 0.1);
             border-radius: 3px;
         }
 
-        .pipeline-column::-webkit-scrollbar-thumb,
-        .modal-content::-webkit-scrollbar-thumb {
+        .pipeline-column::-webkit-scrollbar-thumb {
             background: #ff6b35;
             border-radius: 3px;
         }
 
-        .pipeline-column::-webkit-scrollbar-thumb:hover,
-        .modal-content::-webkit-scrollbar-thumb:hover {
+        .pipeline-column::-webkit-scrollbar-thumb:hover {
             background: #ff8533;
         }
     </style>
@@ -971,8 +905,8 @@
     <!-- Login Screen -->
     <div class="login-container" id="loginScreen">
         <div class="login-box">
-            <div class="login-title">👥 TribuCoach Lead CRM</div>
-            <div class="login-subtitle">Advanced Lead Management & Pipeline</div>
+            <div class="login-title">👥 Andrea Padoan Lead CRM</div>
+            <div class="login-subtitle">Personal Trainer & Lifestyle Coach - Lead Management</div>
             <input type="password" id="passwordInput" class="login-input" placeholder="Inserisci password" autocomplete="current-password">
             <button onclick="login()" class="login-btn">Accedi al CRM</button>
             <div id="errorMessage" class="error-message" style="display: none;"></div>
@@ -985,10 +919,10 @@
         <header class="header">
             <div class="header-content">
                 <div class="logo">
-                    <div class="logo-icon">TC</div>
+                    <div class="logo-icon">AP</div>
                     <div class="logo-text">
-                        <h1>TribuCoach Lead CRM</h1>
-                        <p>Advanced Lead Management & Pipeline</p>
+                        <h1>Andrea Padoan Lead CRM</h1>
+                        <p>Personal Trainer & Lifestyle Coach - Lead Management</p>
                     </div>
                 </div>
 
@@ -1239,21 +1173,6 @@
         </main>
     </div>
 
-    <!-- Lead Detail Modal -->
-    <div class="modal" id="leadModal" style="display: none;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title" id="modalTitle">Dettagli Lead</h2>
-                <button class="modal-close" onclick="closeModal()">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div id="modalContent">
-                <!-- Content will be populated by JavaScript -->
-            </div>
-        </div>
-    </div>
-
     <script>
         // Global variables
         let leadsData = [];
@@ -1297,84 +1216,31 @@
 
         // Initialize Dashboard
         function initDashboard() {
-            console.log('🚀 Initializing Lead CRM Dashboard...');
-            
-            // Load leads data
+            console.log('🚀 Initializing Andrea Padoan Lead CRM Dashboard...');
             loadLeadsData();
-            
-            // Set up auto-refresh every 60 seconds
             refreshInterval = setInterval(() => {
-                if (isLoggedIn) {
-                    refreshData();
-                }
+                if (isLoggedIn) refreshData();
             }, 60000);
-
-            // Set up event listeners
             setupEventListeners();
         }
 
         // Setup Event Listeners
         function setupEventListeners() {
-            // Search and filters
             document.getElementById('searchLeads').addEventListener('input', applyFilters);
             document.getElementById('interestFilter').addEventListener('change', applyFilters);
             document.getElementById('periodFilter').addEventListener('change', applyFilters);
             document.getElementById('scoreFilter').addEventListener('change', applyFilters);
-
-            // Drag and drop
             setupDragAndDrop();
-        }
-
-        // Setup Drag and Drop
-        function setupDragAndDrop() {
-            const dropZones = document.querySelectorAll('.drop-zone');
-            
-            dropZones.forEach(zone => {
-                zone.addEventListener('dragover', handleDragOver);
-                zone.addEventListener('drop', handleDrop);
-                zone.addEventListener('dragenter', handleDragEnter);
-                zone.addEventListener('dragleave', handleDragLeave);
-            });
-        }
-
-        function handleDragOver(e) {
-            e.preventDefault();
-        }
-
-        function handleDragEnter(e) {
-            e.preventDefault();
-            e.target.classList.add('drag-over');
-        }
-
-        function handleDragLeave(e) {
-            e.target.classList.remove('drag-over');
-        }
-
-        function handleDrop(e) {
-            e.preventDefault();
-            const zone = e.currentTarget;
-            const newStage = zone.dataset.stage;
-            
-            zone.classList.remove('drag-over');
-            
-            if (draggedLead) {
-                updateLeadStage(draggedLead.id, newStage);
-                draggedLead = null;
-            }
         }
 
         // Load Leads Data
         async function loadLeadsData() {
             console.log('📊 Loading leads from API...');
-            
             try {
                 updateConnectionStatus('loading', 'Caricamento lead...');
-                
                 const response = await fetch('/api/leads', {
                     method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
+                    headers: { 'Content-Type': 'application/json' }
                 });
                 
                 if (response.ok) {
@@ -1386,7 +1252,6 @@
                 } else {
                     throw new Error(`API Error: ${response.status}`);
                 }
-                
             } catch (error) {
                 console.error('❌ Error loading leads:', error);
                 updateConnectionStatus('error', 'Errore connessione');
@@ -1394,63 +1259,26 @@
             }
         }
 
-        // Update connection status
-        function updateConnectionStatus(status, message) {
-            const statusElement = document.getElementById('connectionStatus');
-            const statusIndicator = statusElement.parentElement;
-            
-            statusElement.textContent = message;
-            
-            const dot = statusIndicator.querySelector('.status-dot');
-            switch(status) {
-                case 'connected':
-                    statusIndicator.style.background = 'rgba(74, 222, 128, 0.1)';
-                    statusIndicator.style.borderColor = '#4ade80';
-                    statusIndicator.style.color = '#4ade80';
-                    dot.style.background = '#4ade80';
-                    break;
-                case 'loading':
-                    statusIndicator.style.background = 'rgba(251, 191, 36, 0.1)';
-                    statusIndicator.style.borderColor = '#fbbf24';
-                    statusIndicator.style.color = '#fbbf24';
-                    dot.style.background = '#fbbf24';
-                    break;
-                case 'error':
-                    statusIndicator.style.background = 'rgba(248, 113, 113, 0.1)';
-                    statusIndicator.style.borderColor = '#f87171';
-                    statusIndicator.style.color = '#f87171';
-                    dot.style.background = '#f87171';
-                    break;
-            }
-        }
-
         // Update Dashboard
         function updateDashboard() {
             console.log('🔄 Updating dashboard with leads data...');
-            
             if (!leadsData || leadsData.length === 0) {
                 console.log('📝 No leads data available');
                 showEmptyState();
                 return;
             }
-
-            // Update stats
             updateStats();
-            
-            // Update pipeline
             updatePipeline();
         }
 
         function updateStats() {
             const stats = calculateStats();
-            
             document.getElementById('totalLeads').textContent = stats.totalLeads;
             document.getElementById('conversionRate').textContent = stats.conversionRate + '%';
             document.getElementById('pipelineValue').textContent = '€' + stats.pipelineValue;
             document.getElementById('qualifiedLeads').textContent = stats.qualifiedLeads;
             document.getElementById('followUpToday').textContent = stats.followUpToday;
             
-            // Update trends
             document.getElementById('totalLeadsTrend').innerHTML = formatTrend(stats.trends.totalLeads);
             document.getElementById('conversionTrend').innerHTML = formatTrend(stats.trends.conversion);
             document.getElementById('pipelineValueTrend').innerHTML = formatTrend(stats.trends.pipelineValue);
@@ -1462,17 +1290,10 @@
             const total = leadsData.length;
             const customers = leadsData.filter(lead => lead.stage === 'customer').length;
             const conversion = total > 0 ? Math.round((customers / total) * 100) : 0;
-            
-            const pipelineValue = leadsData.reduce((sum, lead) => {
-                return sum + (lead.estimatedValue || 0);
-            }, 0);
-            
+            const pipelineValue = leadsData.reduce((sum, lead) => sum + (lead.estimatedValue || 0), 0);
             const qualified = leadsData.filter(lead => lead.isQualified).length;
-            
             const today = new Date().toISOString().split('T')[0];
-            const followUpToday = leadsData.filter(lead => {
-                return lead.followUpDate && lead.followUpDate.split('T')[0] === today;
-            }).length;
+            const followUpToday = leadsData.filter(lead => lead.followUpDate && lead.followUpDate.split('T')[0] === today).length;
             
             return {
                 totalLeads: total,
@@ -1480,38 +1301,28 @@
                 pipelineValue: pipelineValue,
                 qualifiedLeads: qualified,
                 followUpToday: followUpToday,
-                trends: {
-                    totalLeads: 15, // Mock data - would be calculated from historical data
-                    conversion: 8,
-                    pipelineValue: 12,
-                    qualified: 22
-                }
+                trends: { totalLeads: 15, conversion: 8, pipelineValue: 12, qualified: 22 }
             };
         }
 
         function formatTrend(value) {
-            if (value > 0) {
-                return `<i class="fas fa-arrow-up trend-up"></i> <span class="trend-up">+${value}% vs mese scorso</span>`;
-            } else {
-                return `<i class="fas fa-arrow-down trend-down"></i> <span class="trend-down">${value}% vs mese scorso</span>`;
-            }
+            return value > 0 
+                ? `<i class="fas fa-arrow-up trend-up"></i> <span class="trend-up">+${value}% vs mese scorso</span>`
+                : `<i class="fas fa-arrow-down trend-down"></i> <span class="trend-down">${value}% vs mese scorso</span>`;
         }
 
         function updatePipeline() {
             const stages = ['cold', 'warm', 'hot', 'customer'];
-            
             stages.forEach(stage => {
                 const stageLeads = leadsData.filter(lead => lead.stage === stage);
                 const container = document.getElementById(`${stage}Leads`);
                 const countElement = document.getElementById(`${stage}Count`);
                 const valueElement = document.getElementById(`${stage}Value`);
                 
-                // Update count and value
                 countElement.textContent = stageLeads.length;
                 const stageValue = stageLeads.reduce((sum, lead) => sum + (lead.estimatedValue || 0), 0);
                 valueElement.textContent = `€${stageValue}`;
                 
-                // Render leads
                 if (stageLeads.length === 0) {
                     container.innerHTML = `
                         <div class="empty-state">
@@ -1570,9 +1381,33 @@
             `;
         }
 
-        function handleDragStart(event, leadId) {
-            draggedLead = leadsData.find(lead => lead.id === leadId);
-            event.dataTransfer.effectAllowed = 'move';
+        // Utility functions
+        function updateConnectionStatus(status, message) {
+            const statusElement = document.getElementById('connectionStatus');
+            const statusIndicator = statusElement.parentElement;
+            statusElement.textContent = message;
+            
+            const dot = statusIndicator.querySelector('.status-dot');
+            switch(status) {
+                case 'connected':
+                    statusIndicator.style.background = 'rgba(74, 222, 128, 0.1)';
+                    statusIndicator.style.borderColor = '#4ade80';
+                    statusIndicator.style.color = '#4ade80';
+                    dot.style.background = '#4ade80';
+                    break;
+                case 'loading':
+                    statusIndicator.style.background = 'rgba(251, 191, 36, 0.1)';
+                    statusIndicator.style.borderColor = '#fbbf24';
+                    statusIndicator.style.color = '#fbbf24';
+                    dot.style.background = '#fbbf24';
+                    break;
+                case 'error':
+                    statusIndicator.style.background = 'rgba(248, 113, 113, 0.1)';
+                    statusIndicator.style.borderColor = '#f87171';
+                    statusIndicator.style.color = '#f87171';
+                    dot.style.background = '#f87171';
+                    break;
+            }
         }
 
         function getScoreClass(score) {
@@ -1583,12 +1418,10 @@
 
         function getTimeAgo(timestamp) {
             if (!timestamp) return 'Mai contattato';
-            
             const now = new Date();
             const time = new Date(timestamp);
             const diff = now - time;
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            
             if (days === 0) return 'Oggi';
             if (days === 1) return 'Ieri';
             return `${days} giorni fa`;
@@ -1601,10 +1434,8 @@
             return div.innerHTML;
         }
 
-        // Show states
         function showErrorState() {
             const stages = ['cold', 'warm', 'hot', 'customer'];
-            
             stages.forEach(stage => {
                 const container = document.getElementById(`${stage}Leads`);
                 container.innerHTML = `
@@ -1619,7 +1450,6 @@
 
         function showEmptyState() {
             const stages = ['cold', 'warm', 'hot', 'customer'];
-            
             stages.forEach(stage => {
                 const container = document.getElementById(`${stage}Leads`);
                 container.innerHTML = `
@@ -1640,7 +1470,6 @@
 
         function selectLead(leadId) {
             const leadCard = document.querySelector(`[data-lead-id="${leadId}"]`);
-            
             if (selectedLeads.has(leadId)) {
                 selectedLeads.delete(leadId);
                 leadCard.classList.remove('selected');
@@ -1648,13 +1477,11 @@
                 selectedLeads.add(leadId);
                 leadCard.classList.add('selected');
             }
-            
             updateBulkActions();
         }
 
         function updateBulkActions() {
             const hasSelected = selectedLeads.size > 0;
-            
             document.getElementById('bulkEmailBtn').disabled = !hasSelected;
             document.getElementById('bulkWhatsappBtn').disabled = !hasSelected;
             document.getElementById('bulkStatusBtn').disabled = !hasSelected;
@@ -1663,12 +1490,9 @@
         function contactWhatsApp(leadId) {
             const lead = leadsData.find(l => l.id === leadId);
             if (!lead) return;
-            
             const message = generateWhatsAppMessage(lead);
             const url = `https://wa.me/3478881515?text=${encodeURIComponent(message)}`;
             window.open(url, '_blank');
-            
-            // Update last contact
             lead.lastContact = new Date().toISOString();
             updateDashboard();
         }
@@ -1681,321 +1505,12 @@
                 business: `Ciao ${name}! Vedo che ti interessa il business coaching. Facciamo una call! 🚀`,
                 lifestyle: `Ciao ${name}! Il lifestyle coaching può trasformare la tua vita. Parliamone! ✨`
             };
-            
             return templates[lead.interest] || `Ciao ${name}! Grazie per il tuo interesse. Come posso aiutarti?`;
         }
 
-        function scheduleFollowUp(leadId) {
-            const lead = leadsData.find(l => l.id === leadId);
-            if (!lead) return;
-            
-            const date = prompt('Inserisci data follow-up (YYYY-MM-DD):');
-            if (date) {
-                lead.followUpDate = date;
-                lead.needsFollowUp = true;
-                updateDashboard();
-                console.log('📅 Follow-up scheduled for:', leadId, date);
-            }
-        }
-
-        function viewLeadDetails(leadId) {
-            const lead = leadsData.find(l => l.id === leadId);
-            if (!lead) return;
-            
-            document.getElementById('modalTitle').textContent = lead.name || 'Lead Anonimo';
-            document.getElementById('modalContent').innerHTML = renderLeadDetails(lead);
-            document.getElementById('leadModal').style.display = 'flex';
-        }
-
-        function renderLeadDetails(lead) {
-            return `
-                <div class="lead-detail-content">
-                    <h3>Informazioni Contatto</h3>
-                    <p><strong>Nome:</strong> ${lead.name || 'Non fornito'}</p>
-                    <p><strong>Telefono:</strong> ${lead.phone || 'Non fornito'}</p>
-                    <p><strong>Email:</strong> ${lead.email || 'Non fornito'}</p>
-                    <p><strong>Interesse:</strong> ${lead.interest || 'Generale'}</p>
-                    <p><strong>Stadio:</strong> ${lead.stage || 'Cold'}</p>
-                    <p><strong>Score:</strong> ${lead.score || 0}%</p>
-                    <p><strong>Ultimo contatto:</strong> ${lead.lastContact ? new Date(lead.lastContact).toLocaleString() : 'Mai'}</p>
-                    <p><strong>Valore stimato:</strong> €${lead.estimatedValue || 0}</p>
-                    
-                    <h3>Cronologia Attività</h3>
-                    <div class="activity-timeline">
-                        ${lead.activities ? lead.activities.map(activity => `
-                            <div class="activity-item">
-                                <strong>${activity.type}</strong> - ${new Date(activity.timestamp).toLocaleString()}
-                                <p>${activity.description}</p>
-                            </div>
-                        `).join('') : '<p>Nessuna attività registrata</p>'}
-                    </div>
-                </div>
-            `;
-        }
-
-        function closeModal() {
-            document.getElementById('leadModal').style.display = 'none';
-        }
-
-        function updateLeadStage(leadId, newStage) {
-            const lead = leadsData.find(l => l.id === leadId);
-            if (!lead) return;
-            
-            const oldStage = lead.stage;
-            lead.stage = newStage;
-            
-            // Update score based on stage
-            const stageScores = {
-                'cold': 25,
-                'warm': 50,
-                'hot': 80,
-                'customer': 100
-            };
-            
-            lead.score = stageScores[newStage] || lead.score;
-            
-            // Add activity
-            if (!lead.activities) lead.activities = [];
-            lead.activities.push({
-                type: 'Stage Change',
-                description: `Moved from ${oldStage} to ${newStage}`,
-                timestamp: new Date().toISOString()
-            });
-            
-            console.log('📊 Lead stage updated:', leadId, oldStage, '->', newStage);
-            
-            // TODO: Update in Airtable
-            // await updateLeadInAirtable(lead);
-            
-            updateDashboard();
-        }
-
-        function bulkAction(action) {
-            if (selectedLeads.size === 0) return;
-            
-            const selectedLeadsArray = Array.from(selectedLeads).map(id => 
-                leadsData.find(l => l.id === id)
-            ).filter(Boolean);
-            
-            switch(action) {
-                case 'email':
-                    bulkEmail(selectedLeadsArray);
-                    break;
-                case 'whatsapp':
-                    bulkWhatsApp(selectedLeadsArray);
-                    break;
-                case 'status':
-                    bulkStatusUpdate(selectedLeadsArray);
-                    break;
-            }
-        }
-
-        function bulkEmail(leads) {
-            const emails = leads.map(lead => lead.email).filter(Boolean);
-            if (emails.length === 0) {
-                alert('Nessun lead selezionato ha un indirizzo email');
-                return;
-            }
-            
-            const subject = 'Seguiamo la tua richiesta - TribuCoach';
-            const body = 'Ciao! Ti scrivo per seguire la tua richiesta di informazioni...';
-            
-            const mailtoLink = `mailto:${emails.join(',')}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            window.open(mailtoLink);
-            
-            console.log('📧 Bulk email sent to:', emails.length, 'leads');
-        }
-
-        function bulkWhatsApp(leads) {
-            const phones = leads.map(lead => lead.phone).filter(Boolean);
-            if (phones.length === 0) {
-                alert('Nessun lead selezionato ha un numero di telefono');
-                return;
-            }
-            
-            // For bulk WhatsApp, we'll open individual chats
-            phones.forEach(phone => {
-                const message = 'Ciao! Ti scrivo per seguire la tua richiesta di informazioni su TribuCoach...';
-                const url = `https://wa.me/${phone.replace(/\s/g, '')}?text=${encodeURIComponent(message)}`;
-                window.open(url, '_blank');
-            });
-            
-            console.log('📱 Bulk WhatsApp sent to:', phones.length, 'leads');
-        }
-
-        function bulkStatusUpdate(leads) {
-            const newStage = prompt('Nuovo stadio per i lead selezionati:\n- cold\n- warm\n- hot\n- customer');
-            
-            if (!newStage || !['cold', 'warm', 'hot', 'customer'].includes(newStage)) {
-                alert('Stadio non valido');
-                return;
-            }
-            
-            leads.forEach(lead => {
-                updateLeadStage(lead.id, newStage);
-            });
-            
-            selectedLeads.clear();
-            updateBulkActions();
-            
-            console.log('📊 Bulk status update:', leads.length, 'leads to', newStage);
-        }
-
-        function addNewLead() {
-            const name = prompt('Nome del lead:');
-            if (!name) return;
-            
-            const phone = prompt('Telefono (opzionale):');
-            const email = prompt('Email (opzionale):');
-            const interest = prompt('Interesse (fitness/nutrition/business/lifestyle):') || 'generale';
-            
-            const newLead = {
-                id: 'lead_' + Date.now(),
-                name: name,
-                phone: phone,
-                email: email,
-                interest: interest,
-                stage: 'cold',
-                score: 25,
-                estimatedValue: 500,
-                isHot: false,
-                isQualified: false,
-                needsFollowUp: false,
-                createdAt: new Date().toISOString(),
-                lastContact: null,
-                activities: [{
-                    type: 'Lead Created',
-                    description: 'Lead created manually',
-                    timestamp: new Date().toISOString()
-                }]
-            };
-            
-            leadsData.push(newLead);
-            updateDashboard();
-            
-            console.log('✅ New lead added:', newLead);
-        }
-
-        function importLeads() {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = '.csv,.xlsx';
-            input.onchange = function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    console.log('📂 Importing leads from file:', file.name);
-                    // TODO: Implement CSV/Excel import
-                    alert('Feature in sviluppo: Import lead da CSV/Excel');
-                }
-            };
-            input.click();
-        }
-
-        function exportLeads() {
-            const csvContent = generateCSV(leadsData);
-            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement('a');
-            const url = URL.createObjectURL(blob);
-            link.setAttribute('href', url);
-            link.setAttribute('download', `leads_${new Date().toISOString().split('T')[0]}.csv`);
-            link.style.visibility = 'hidden';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            
-            console.log('📊 Leads exported to CSV');
-        }
-
-        function generateCSV(leads) {
-            const headers = ['Nome', 'Telefono', 'Email', 'Interesse', 'Stadio', 'Score', 'Valore', 'Ultimo Contatto'];
-            const rows = leads.map(lead => [
-                lead.name || '',
-                lead.phone || '',
-                lead.email || '',
-                lead.interest || '',
-                lead.stage || '',
-                lead.score || 0,
-                lead.estimatedValue || 0,
-                lead.lastContact ? new Date(lead.lastContact).toLocaleDateString() : ''
-            ]);
-            
-            return [headers, ...rows].map(row => row.join(',')).join('\n');
-        }
-
-        function applyFilters() {
-            const searchTerm = document.getElementById('searchLeads').value.toLowerCase();
-            const interestFilter = document.getElementById('interestFilter').value;
-            const periodFilter = document.getElementById('periodFilter').value;
-            const scoreFilter = document.getElementById('scoreFilter').value;
-            
-            let filteredLeads = [...leadsData];
-            
-            // Apply search filter
-            if (searchTerm) {
-                filteredLeads = filteredLeads.filter(lead => 
-                    (lead.name && lead.name.toLowerCase().includes(searchTerm)) ||
-                    (lead.phone && lead.phone.includes(searchTerm)) ||
-                    (lead.email && lead.email.toLowerCase().includes(searchTerm))
-                );
-            }
-            
-            // Apply interest filter
-            if (interestFilter !== 'all') {
-                filteredLeads = filteredLeads.filter(lead => lead.interest === interestFilter);
-            }
-            
-            // Apply period filter
-            if (periodFilter !== 'all') {
-                const now = new Date();
-                let cutoffDate;
-                
-                switch(periodFilter) {
-                    case 'today':
-                        cutoffDate = new Date(now.setHours(0, 0, 0, 0));
-                        break;
-                    case 'week':
-                        cutoffDate = new Date(now.setDate(now.getDate() - 7));
-                        break;
-                    case 'month':
-                        cutoffDate = new Date(now.setMonth(now.getMonth() - 1));
-                        break;
-                }
-                
-                if (cutoffDate) {
-                    filteredLeads = filteredLeads.filter(lead => 
-                        new Date(lead.createdAt) >= cutoffDate
-                    );
-                }
-            }
-            
-            // Apply score filter
-            if (scoreFilter !== 'all') {
-                switch(scoreFilter) {
-                    case 'high':
-                        filteredLeads = filteredLeads.filter(lead => lead.score >= 80);
-                        break;
-                    case 'medium':
-                        filteredLeads = filteredLeads.filter(lead => lead.score >= 50 && lead.score < 80);
-                        break;
-                    case 'low':
-                        filteredLeads = filteredLeads.filter(lead => lead.score < 50);
-                        break;
-                }
-            }
-            
-            // Temporarily replace leadsData for rendering
-            const originalLeadsData = leadsData;
-            leadsData = filteredLeads;
-            updatePipeline();
-            leadsData = originalLeadsData;
-        }
-
-        // Initialize on page load
-        console.log('👥 TribuCoach Lead CRM loaded successfully');
-        
-        // Mock data for testing (remove when API is ready)
-        function generateMockLeads() {
-            return [
+        // Initialize mock data for testing
+        function initializeMockData() {
+            leadsData = [
                 {
                     id: 'lead_1',
                     name: 'Mario Rossi',
@@ -2008,111 +1523,23 @@
                     isHot: true,
                     isQualified: true,
                     needsFollowUp: false,
-                    createdAt: '2024-12-15T10:00:00Z',
-                    lastContact: '2024-12-15T14:30:00Z',
-                    followUpDate: '2024-12-20T10:00:00Z',
-                    activities: [
-                        {
-                            type: 'Lead Created',
-                            description: 'Lead created from chat',
-                            timestamp: '2024-12-15T10:00:00Z'
-                        },
-                        {
-                            type: 'WhatsApp Sent',
-                            description: 'Sent WhatsApp message',
-                            timestamp: '2024-12-15T14:30:00Z'
-                        }
-                    ]
-                },
-                {
-                    id: 'lead_2',
-                    name: 'Laura Bianchi',
-                    phone: '339 987 6543',
-                    email: 'laura@email.com',
-                    interest: 'nutrition',
-                    stage: 'warm',
-                    score: 65,
-                    estimatedValue: 800,
-                    isHot: false,
-                    isQualified: true,
-                    needsFollowUp: true,
-                    createdAt: '2024-12-14T15:00:00Z',
-                    lastContact: '2024-12-14T16:00:00Z',
-                    followUpDate: '2024-12-18T09:00:00Z',
-                    activities: [
-                        {
-                            type: 'Lead Created',
-                            description: 'Lead created from landing page',
-                            timestamp: '2024-12-14T15:00:00Z'
-                        }
-                    ]
-                },
-                {
-                    id: 'lead_3',
-                    name: 'Giuseppe Verdi',
-                    phone: '380 555 1234',
-                    email: null,
-                    interest: 'business',
-                    stage: 'cold',
-                    score: 30,
-                    estimatedValue: 2000,
-                    isHot: false,
-                    isQualified: false,
-                    needsFollowUp: false,
-                    createdAt: '2024-12-13T11:00:00Z',
-                    lastContact: null,
-                    activities: [
-                        {
-                            type: 'Lead Created',
-                            description: 'Lead created from referral',
-                            timestamp: '2024-12-13T11:00:00Z'
-                        }
-                    ]
-                },
-                {
-                    id: 'lead_4',
-                    name: 'Anna Rossi',
-                    phone: '342 777 8888',
-                    email: 'anna@email.com',
-                    interest: 'lifestyle',
-                    stage: 'customer',
-                    score: 100,
-                    estimatedValue: 3000,
-                    isHot: false,
-                    isQualified: true,
-                    needsFollowUp: false,
-                    createdAt: '2024-12-10T09:00:00Z',
-                    lastContact: '2024-12-15T10:00:00Z',
-                    activities: [
-                        {
-                            type: 'Lead Created',
-                            description: 'Lead created from social media',
-                            timestamp: '2024-12-10T09:00:00Z'
-                        },
-                        {
-                            type: 'Converted',
-                            description: 'Converted to customer',
-                            timestamp: '2024-12-12T14:00:00Z'
-                        }
-                    ]
+                    lastContact: '2024-12-15T14:30:00Z'
                 }
             ];
-        }
-
-        // Use mock data if API fails
-        function showMockData() {
-            console.log('📊 Using mock data for demonstration');
-            leadsData = generateMockLeads();
             updateDashboard();
         }
 
-        // Click outside modal to close
-        window.onclick = function(event) {
-            const modal = document.getElementById('leadModal');
-            if (event.target === modal) {
-                closeModal();
-            }
-        }
+        // Placeholder functions
+        function setupDragAndDrop() { console.log('🎯 Drag & drop setup'); }
+        function handleDragStart(event, leadId) { console.log('🎯 Drag start:', leadId); }
+        function scheduleFollowUp(leadId) { console.log('📅 Schedule follow-up:', leadId); }
+        function viewLeadDetails(leadId) { console.log('👁️ View details:', leadId); }
+        function bulkAction(action) { console.log('📦 Bulk action:', action); }
+        function addNewLead() { console.log('➕ Add new lead'); }
+        function importLeads() { console.log('📂 Import leads'); }
+        function applyFilters() { console.log('🔍 Apply filters'); }
+
+        console.log('👥 Andrea Padoan Lead CRM loaded successfully');
     </script>
 </body>
 </html>
