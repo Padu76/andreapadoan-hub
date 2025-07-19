@@ -388,54 +388,27 @@ function advancedLeadScore(message, botResponse) {
 
 function intelligentInterestDetection(message) {
     const lower = message.toLowerCase();
-    let scores = {
-        fitness: 0,
-        nutrition: 0,
-        business: 0,
-        coaching: 0,
-        online: 0,
-        studio: 0,
-        assessment: 0,
-        pricing: 0
-    };
     
     // Assessment/Quiz interest
     if (lower.includes('quiz') || lower.includes('assessment') || lower.includes('domande') || 
         lower.includes('consigli') || lower.includes('quale servizio')) {
-        scores.assessment += 3;
+        return 'assessment';
     }
     
     // Pricing interest
     if (lower.includes('prezzo') || lower.includes('costa') || lower.includes('budget') ||
         lower.includes('dilazionare') || lower.includes('pagamento')) {
-        scores.pricing += 3;
+        return 'pricing';
     }
     
-    // Studio interest
-    if (lower.includes('studio') || lower.includes('tribù') || lower.includes('orari') ||
-        lower.includes('appuntamento') || lower.includes('prova')) {
-        scores.studio += 2;
+    // Nutrition interest
+    if (lower.includes('nutrizione') || lower.includes('dieta') || lower.includes('alimentazione') || 
+        lower.includes('cibo') || lower.includes('mangiare')) {
+        return 'nutrition';
     }
     
-    const fitnessKeywords = ['personal', 'allenamento', 'fitness', 'palestra', 'muscoli', 'forma', 'peso', 'dimagrire', 'tonificare'];
-    fitnessKeywords.forEach(keyword => {
-        if (lower.includes(keyword)) scores.fitness += 1;
-    });
-    
-    const nutritionKeywords = ['nutrizione', 'dieta', 'alimentazione', 'cibo', 'mangiare'];
-    nutritionKeywords.forEach(keyword => {
-        if (lower.includes(keyword)) scores.nutrition += 1;
-    });
-    
-    const businessKeywords = ['business', 'imprenditore', 'lavoro', 'azienda'];
-    businessKeywords.forEach(keyword => {
-        if (lower.includes(keyword)) scores.business += 1;
-    });
-    
-    const maxScore = Math.max(...Object.values(scores));
-    const topCategory = Object.keys(scores).find(key => scores[key] === maxScore);
-    
-    return maxScore > 0 ? topCategory : 'general';
+    // Fitness interest (default for most cases)
+    return 'fitness';
 }
 
 function detectConversationStage(message) {
@@ -450,14 +423,9 @@ function detectConversationStage(message) {
     if (lower.includes('prenotare') || lower.includes('appuntamento') || lower.includes('prova')) {
         return 'booking_intent';
     }
-    if (lower.includes('email') || lower.includes('@') || lower.includes('telefono')) {
-        return 'contact_sharing';
-    }
-    if (lower.includes('studio') || lower.includes('orari') || lower.includes('come funziona')) {
-        return 'information_gathering';
-    }
     
-    return 'exploration';
+    // Default to information_gathering for most questions
+    return 'information_gathering';
 }
 
 function generateSessionId() {
@@ -671,7 +639,7 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'Message is required and must be a non-empty string' });
     }
 
-    console.log('=== CHATBOT ANDREA PADOAN - API DIRETTA AIRTABLE ===');
+            console.log('=== CHATBOT ANDREA PADOAN - API DIRETTA AIRTABLE FIXED ===');
     console.log('Received message:', message);
     console.log('User email:', userEmail);
     console.log('User name:', userName);
