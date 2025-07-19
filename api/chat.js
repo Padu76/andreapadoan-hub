@@ -83,10 +83,10 @@ export default async function handler(req, res) {
         },
         freeSessions: {
             "Consulenza Gratuita": {
-                title: "Consulenza Strategica Gratuita (15 min)",
-                description: "Analizziamo insieme i tuoi obiettivi",
+                title: "Lezione di Prova Gratuita (30-40 min)",
+                description: "Proviamo insieme senza impegno",
                 bookingUrl: "https://calendly.com/andrea-padoan/consulenza-gratuita",
-                trigger: ["consulenza", "gratuita", "parlare", "conoscere"],
+                trigger: ["prova", "gratuita", "provare", "vedere", "conoscere"],
                 value: "40€ di valore"
             }
         }
@@ -354,14 +354,14 @@ export default async function handler(req, res) {
         if (constraints.includes('time_limited')) {
             if (budgetSignals === 'budget_conscious') {
                 return {
-                    name: "App 'Torno in Forma'",
-                    price: "140€/mese",
-                    reasoning: "Perfetto per chi ha poco tempo - allenamenti efficaci ovunque e quando vuoi"
+                    name: "Miniclassi Tribù Studio",
+                    price: "15€/lezione (pacchetto 10 lezioni)",
+                    reasoning: "Perfetto per chi ha poco tempo - orari fissi, gruppo motivante, costo contenuto"
                 };
             } else {
                 return {
-                    name: "Personal Training Intensivo 2x/settimana",
-                    price: "400€/mese",
+                    name: "Personal Training Individuale",
+                    price: "45-55€/lezione",
                     reasoning: "Efficienza massima - risultati certi in tempi record con supervisione diretta"
                 };
             }
@@ -370,30 +370,30 @@ export default async function handler(req, res) {
         if (intent === 'weight_loss' || goals.includes('weight_loss')) {
             if (budgetSignals === 'budget_conscious') {
                 return {
-                    name: "Miniclassi + App Nutrizione",
-                    price: "190€/mese",
+                    name: "Miniclassi + Consulenza Nutrizionale",
+                    price: "15€/lezione + 80€ consulenza",
                     reasoning: "Combinazione vincente per dimagrimento: gruppo motivante + piano alimentare"
                 };
             } else {
                 return {
                     name: "Personal Training + Consulenza Nutrizionale",
-                    price: "480€/mese",
-                    reasoning: "Approccio completo per dimagrimento duraturo - allenamento + alimentazione"
+                    price: "45-55€/lezione + 80€ consulenza",
+                    reasoning: "Approccio completo per dimagrimento duraturo - allenamento personalizzato + alimentazione"
                 };
             }
         }
         
         if (constraints.includes('beginner')) {
             return {
-                name: "Miniclassi per Principianti",
-                price: "120€/mese",
+                name: "Lezioni di Coppia o Miniclassi",
+                price: "25-35€/lezione (coppia) o 15€/lezione (miniclassi)",
                 reasoning: "Ideale per iniziare - ambiente sicuro, progressione graduale, supporto del gruppo"
             };
         }
         
         return {
             name: "Personal Training Individuale",
-            price: "400€/mese (2x/settimana)",
+            price: "45-55€/lezione (pacchetti da 10-30 lezioni)",
             reasoning: "La scelta più efficace - attenzione 100% personalizzata per i tuoi obiettivi"
         };
     }
@@ -409,7 +409,7 @@ export default async function handler(req, res) {
                 upsells.push({
                     suggestion: "Consulenza Nutrizionale Personalizzata",
                     benefit: "Risultati 3x più veloci con piano alimentare su misura",
-                    price: "80€/mese"
+                    price: "80€ (1h con piano personalizzato)"
                 });
             }
         }
@@ -447,16 +447,16 @@ export default async function handler(req, res) {
         if (urgency === 'high') {
             return {
                 offer: "Sconto Decisione Rapida",
-                discount: "-15% su tutti i pacchetti",
+                discount: "-10% su tutti i pacchetti da 20+ lezioni",
                 validity: "Valido solo per le prossime 48 ore"
             };
         }
         
         if (budgetSignals === 'budget_conscious') {
             return {
-                offer: "Pacchetto Starter Conveniente",
-                discount: "Prima sessione di prova a 30€ invece di 40€",
-                validity: "Valido per nuovi clienti"
+                offer: "Lezione di Prova Gratuita",
+                discount: "Prova gratuita 30-40 minuti",
+                validity: "Sempre disponibile per nuovi clienti"
             };
         }
         
@@ -509,9 +509,9 @@ export default async function handler(req, res) {
         return { action: 'normal_chat' };
     };
 
-    // ENHANCED KNOWLEDGE BASE
+    // 💪 ENHANCED KNOWLEDGE BASE - SUPER DETTAGLIATA
     const massiveKnowledgeBase = `
-    === ANDREA PADOAN - MASTER KNOWLEDGE BASE ===
+    === ANDREA PADOAN - MASTER KNOWLEDGE BASE COMPLETA ===
     
     🎯 CHI SONO - BACKGROUND COMPLETO:
     Mi chiamo Andrea Padoan, sono un Lifestyle Coach e Personal Trainer certificato di Verona.
@@ -522,77 +522,173 @@ export default async function handler(req, res) {
     Negli ultimi 12 anni ho seguito oltre 500 clienti aiutandoli a trasformare il loro corpo e la loro vita.
     La mia missione: non sono solo un trainer, sono un facilitatore di trasformazioni complete.
 
-    === 💪 PERSONAL TRAINING STUDIO - SERVIZI COMPLETI ===
+    === 🏋️ TRIBÙ STUDIO - INFORMAZIONI COMPLETE ===
+
+    DIFFERENZA FONDAMENTALE - NON SIAMO UNA PALESTRA!
+    "Presso lo studio di Personal Training gli allenamenti sono solo su appuntamento e ci si allena con un Personal trainer.
+    In base agli obiettivi che devi raggiungere verrà stesa una programmazione e ad ogni lezione il Personal Trainer ti guida passo-passo attraverso l'esecuzione corretta degli esercizi.
+    Verrà creato un percorso in base al tuo livello di partenza e ti guideremo al miglioramento della tua salute e prestazione fisica."
+
+    CARATTERISTICHE DELLO STUDIO:
+    - La lezione dura 1 ora 
+    - Consigliamo inizialmente 2 sessioni alla settimana
+    - Lavoriamo dalle 6:00 alle 21:00 
+    - Staff specializzato in diversi ambiti: posturale, tonificazione, dimagrimento, preparazione atletica
+    - Non ci sono abbonamenti annuali come in palestra
+    - Tutto su appuntamento personalizzato
+
+    === 💰 LISTINO PREZZI DETTAGLIATO E COMPLETO ===
     
-    🏋️ MODALITÀ DI ALLENAMENTO:
+    LEZIONI INDIVIDUALI (1:1):
+    • 10 lezioni → 55€/lezione (totale 550€)
+    • 20 lezioni → 50€/lezione (totale 1000€) 
+    • 30 lezioni → 45€/lezione (totale 1350€)
     
-    1. LEZIONI INDIVIDUALI (1:1) - LA FORMULA PREMIUM:
-    - Attenzione 100% dedicata a te
-    - Programma completamente personalizzato
-    - Correzione posturale in tempo reale
-    - Progressione ottimizzata per i tuoi obiettivi
-    - Flessibilità oraria massima
-    
-    2. LEZIONI DI COPPIA (2:1) - PERFETTE PER:
-    - Coppie che vogliono allenarsi insieme
-    - Amici con obiettivi simili
-    - Madre/figlia, padre/figlio
-    - Motivazione reciproca
-    - Costo dimezzato rispetto all'individuale
-    
-    3. MINICLASSI (3-5 persone) - ENERGIA DI GRUPPO:
-    - Ambiente motivante e divertente
-    - Socializzazione e supporto del gruppo
-    - Costi accessibili
-    - Orari fissi per organizzazione
-    - Possibilità di creare gruppi personalizzati
-    
-    💰 LISTINO PREZZI DETTAGLIATO:
-    
-    LEZIONI INDIVIDUALI:
-    • 10 lezioni → 55€/sessione (totale 550€) - FORMULA STARTER
-    • 20 lezioni → 50€/sessione (totale 1000€) - FORMULA COMMITMENT
-    • 30 lezioni → 45€/sessione (totale 1350€) - FORMULA TRANSFORMATION
-    
-    LEZIONI DI COPPIA:
-    • 10 lezioni → 35€/sessione per persona (totale 350€ cad.)
-    • 20 lezioni → 30€/sessione per persona (totale 600€ cad.)
-    • 30 lezioni → 25€/sessione per persona (totale 750€ cad.)
+    LEZIONI DI COPPIA (2:1):
+    • 10 lezioni → 35€/lezione a persona (totale 350€ per persona)
+    • 20 lezioni → 30€/lezione a persona (totale 600€ per persona)
+    • 30 lezioni → 25€/lezione a persona (totale 750€ per persona)
     
     MINICLASSI (3-5 persone):
-    • 10 lezioni → 15€/sessione
-    • 20 lezioni → 13€/sessione
-    • Orari fissi: Lun/Mar/Gio 17:30, Sabato 10:00
-    • Gruppo WhatsApp per coordinamento settimanale
+    • 10 lezioni → 15€/lezione
+    • Orari fissi: Lunedì, Martedì, Giovedì alle 17:30/18:00
+    • Sabato alle 10:00
+    • Gruppi di massimo 3-5 persone
     
-    EXTRA E SERVIZI AGGIUNTIVI:
+    EXTRA E SERVIZI:
     • Quota annuale tesseramento + assicurazione: 30€
-    • Analisi composizione corporea: GRATUITA per pacchetti 20+ lezioni
-    • Consulenza nutrizionale: 80€ (1h con piano personalizzato)
-    • Percorso misto (individuali + miniclass): sconto 10%
-    • Sessione di prova: 40€ (detraibili dal pacchetto)
-    
-    === 📱 APP "TORNO IN FORMA" - CONSULENZA A DISTANZA ===
-    
-    PREZZI APP "TORNO IN FORMA":
-    • 1 mese → 140€ (per testare l'approccio)
-    • 3 mesi → 250€ (risparmio 22% - CONSIGLIATO)
-    • 6 mesi → 450€ (risparmio 46% - TRASFORMAZIONE COMPLETA)
-    
-    FUNZIONALITÀ APP:
-    • Schede aggiornate ogni mese
-    • Video dimostrativi per ogni esercizio
-    • Progressione mensile programmata
-    • Consigli nutrizionali personalizzati
-    • Chat diretta con me per domande
-    • Call mensile di follow-up (30 min)
+    • Consulenza nutrizionale: 80€ (1 ora con piano personalizzato)
+    • Lezione di prova: GRATUITA (dura 30-40 minuti)
 
-    === 📞 CONTATTI E PRENOTAZIONI ===
+    === 🔄 POLITICHE E FLESSIBILITÀ ===
+
+    PERCORSI IBRIDI:
+    Sì, è possibile combinare diversi tipi di lezioni (individuali + miniclassi, ecc.)
+
+    PAGAMENTI:
+    • Si può dilazionare il pagamento
+    • I dettagli si decidono durante l'appuntamento in studio
+    • Nessun pagamento anticipato obbligatorio
+
+    FLESSIBILITÀ ORARI:
+    • È possibile cambiare giorni ed orari
+    • Molte persone lavorano a turni o vanno in trasferta
+    • Possiamo fissare le sessioni di settimana in settimana
+    • Alternative: giorni ed orari fissi se c'è disponibilità
+    • Io ho una mia agenda dove accolgo le richieste dei clienti
+
+    DISDETTE:
+    • La lezione può essere disdetta con preavviso di 12 ore
+    • Senza preavviso viene segnata come se fosse fatta
+    • Massima flessibilità per imprevisti
+
+    LEZIONE DI PROVA:
+    • Sempre disponibile e GRATUITA
+    • Dura 30-40 minuti
+    • Senza impegno
+    • Alternativa: si può partire direttamente con il percorso
+
+    === 🏢 INFORMAZIONI PRATICHE TRIBÙ STUDIO ===
+
+    ABBIGLIAMENTO:
+    • Scarpe pulite o senza scarpe con calze
+    • Portare asciugamano e borraccia
+
+    SERVIZI DISPONIBILI:
+    • Doccia: Sì, è possibile fare la doccia
+    • Animali: No, per questioni igieniche non sono ammessi
+
+    ORARI:
+    • Lunedì-Venerdì: 6:00-21:00
+    • Sabato: Sì, lavoriamo anche il sabato
+    • In genere fino alle 13:00 ma anche nel pomeriggio su richiesta
+    • Tutto in base agli appuntamenti fissati
+
+    PRESENZA ANDREA:
+    • Non sono sempre in studio
+    • Ci sono in base alle lezioni fissate
+    • Ho una mia agenda personale per le disponibilità
+
+    === 🎯 APPROCCIO OLISTICO - MINDSET CORRETTO ===
+
+    DOMANDA FREQUENTE: "Se vengo ad allenarmi perderò peso?"
+    RISPOSTA CORRETTA: "Non solo con l'allenamento... sarà fondamentale l'alimentazione ed un mindset focalizzato al cambiamento!"
+
+    I TRE PILASTRI DEL SUCCESSO:
+    1. ALLENAMENTO personalizzato e guidato
+    2. ALIMENTAZIONE corretta e sostenibile  
+    3. MINDSET focalizzato al cambiamento
+
+    FREQUENZA CONSIGLIATA:
+    • 2 volte a settimana per iniziare
+    • Progressione basata su obiettivi e disponibilità
+
+    === 📱 APP "TORNO IN FORMA" - SERVIZIO SOLO SCHEDE DIGITALI ===
+    
+    PREZZI APP (SOLO SCHEDE + UTILIZZO APP):
+    • 1 mese → 70€ 
+    • 3 mesi → 200€ (risparmio - CONSIGLIATO)
+    • 6 mesi → 380€ (risparmio maggiore - TRASFORMAZIONE COMPLETA)
+    
+    COSA INCLUDE:
+    • Scheda di allenamento mensile personalizzata in base agli obiettivi
+    • Utilizzo dell'app con database esercizi completo
+    • Video dimostrativi per ogni esercizio
+    • Possibilità di inserire i pesi utilizzati
+    • Tracciamento misurazioni corporee
+    • Monitoraggio progressi
+    
+    COSA NON INCLUDE:
+    • Chat diretta con Andrea
+    • Call mensili di follow-up
+    • Consulenza nutrizionale personalizzata
+    
+    IMPORTANTE: Questo è un servizio di sole schede digitali, diverso dal Personal Training in studio.
+
+    === 🔗 CONTATTI E PRENOTAZIONI ===
     
     WhatsApp: 347 888 1515 (PREFERITO - risposta rapida)
     Email: andrea.padoan@gmail.com
     Sito Personal Training: https://www.personaltrainerverona.it
-    Sito Tribù Studio: https://www.tribustudio.it
+    Sito Tribù Studio: https://www.tribuptstudio.it
+
+    === 📚 EBOOK E RISORSE ===
+    
+    4 EBOOK DISPONIBILI:
+    1. "IL WAVE SYSTEM" - 14.90€
+    2. "In Forma da 2 Milioni di Anni" - 19.90€ 
+    3. "50 WORKOUT da Viaggio" - GRATUITO
+    4. "BODY UNDER CONSTRUCTION VOL: 1" - 29.90€
+    
+    Store: andrepad.gumroad.com
+
+    === 🎯 ALTRI PROGETTI ===
+    
+    UPSTART: https://upstarter-tf9x.vercel.app/
+    - Validazione idee di business
+    - Consulenza strategica gratuita
+
+    MEALPREP PLANNER: https://mealprep-planner.vercel.app/
+    - Pianificazione pasti settimanali
+    - Web app gratuita
+
+    LIFESTYLE COACH: https://tribucoach.vercel.app/
+    - Mindset e cambiamento totale
+    - "La soluzione completa... perché dieta e allenamento non bastano!"
+
+    === 🔥 FRASI CHIAVE DA USARE ===
+
+    Per distinguerci dalle palestre:
+    "Non siamo una palestra, siamo uno studio di Personal Training. Qui non ci sono abbonamenti ma percorsi personalizzati su appuntamento."
+
+    Per il mindset:
+    "Il vero cambiamento non avviene solo con l'allenamento, ma serve alimentazione corretta e mindset focalizzato!"
+
+    Per la flessibilità:
+    "Capiamo che la vita è imprevisibile, per questo offriamo massima flessibilità negli orari e nelle disdette."
+
+    Per la prova:
+    "Offriamo sempre una lezione di prova gratuita di 30-40 minuti, così puoi vedere se il nostro approccio fa per te."
     `;
 
     // Detect quiz state
@@ -688,6 +784,13 @@ STILE CONVERSAZIONALE OBBLIGATORIO:
 - NO elenchi lunghi o spiegazioni infinite
 - Una cosa alla volta, step by step
 - Mantieni la curiosità dell'utente
+
+FRASI CHIAVE DA USARE QUANDO APPROPRIATE:
+- "Non siamo una palestra, siamo uno studio di Personal Training"
+- "Il vero cambiamento serve allenamento + alimentazione + mindset"
+- "Offriamo una lezione di prova gratuita di 30-40 minuti"
+- "È possibile dilazionare i pagamenti"
+- "Massima flessibilità negli orari e disdette con 12h di preavviso"
 
 ESEMPI DI STILE CORRETTO:
 ❌ SBAGLIATO: "Ti offro vari servizi: Personal Training individuale con prezzi da 45€ a 55€ a sessione, oppure miniclassi da 15€ a sessione, e anche l'app Torno in Forma a 140€ al mese con schede personalizzate..."
@@ -851,19 +954,19 @@ function generatePersonalizedPlan(answers) {
     const budget = answers.budget_range || "";
     
     if (budget.includes("50-100")) {
-        primaryService = "Miniclassi (15€/sessione)";
-        reasoning = "Budget ottimizzato con massimo valore";
+        primaryService = "Miniclassi Tribù Studio (15€/lezione)";
+        reasoning = "Budget ottimizzato con massimo valore - gruppo motivante e costi contenuti";
         compatibilityScore += 7;
     } else if (budget.includes("100-200")) {
-        primaryService = "Percorso Misto (Miniclassi + Individuali)";
-        reasoning = "Equilibrio perfetto tra attenzione personale e socializzazione";
+        primaryService = "Lezioni di Coppia (25-35€/lezione per persona)";
+        reasoning = "Equilibrio perfetto tra attenzione personale, socializzazione e costo";
         compatibilityScore += 8;
     } else if (budget.includes("200-400")) {
-        primaryService = "Personal Training Individuale";
+        primaryService = "Personal Training Individuale (45-55€/lezione)";
         reasoning = "Attenzione 100% dedicata per risultati ottimali";
         compatibilityScore += 9;
     } else {
-        primaryService = "Percorso Premium Completo";
+        primaryService = "Percorso Premium Completo con Consulenza Nutrizionale";
         reasoning = "La formula di eccellenza per trasformazioni straordinarie";
         compatibilityScore += 10;
     }
@@ -898,7 +1001,7 @@ async function enhancedAirtableLogging(userMessage, botResponse, quizState) {
         Quiz_Step: quizState.step || null,
         Message_Length: userMessage.length,
         Response_Length: botResponse.length,
-        User_Agent: 'Vercel-API-TelegramDirect'
+        User_Agent: 'Vercel-API-TelegramDirect-Enhanced'
     };
     
     try {
@@ -930,29 +1033,38 @@ function advancedLeadScore(message, botResponse) {
     let score = 3;
     const lower = message.toLowerCase();
     
+    // Quiz engagement
     if (lower.includes('quiz') || lower.includes('assessment') || lower.includes('domande')) {
         score += 3;
     }
     
+    // High intent keywords
     if (lower.includes('voglio iniziare') || lower.includes('come si fa')) score += 4;
-    if (lower.includes('quanto costa') || lower.includes('prezzi')) score += 4;
-    if (lower.includes('prenotare') || lower.includes('appuntamento')) score += 5;
+    if (lower.includes('quanto costa') || lower.includes('prezzi') || lower.includes('prezzo')) score += 4;
+    if (lower.includes('prenotare') || lower.includes('appuntamento') || lower.includes('prova')) score += 5;
     if (lower.includes('urgente') || lower.includes('subito')) score += 4;
     
-    if (lower.includes('investimento') || lower.includes('budget')) score += 3;
+    // Budget discussion
+    if (lower.includes('investimento') || lower.includes('budget') || lower.includes('dilazionare')) score += 3;
     if (lower.includes('pacchetto') || lower.includes('abbonamento')) score += 3;
     
+    // Goals discussion
     if (lower.includes('dimagrire') || lower.includes('perdere peso')) score += 3;
     if (lower.includes('tonificare') || lower.includes('muscoli')) score += 3;
     if (lower.includes('risultati') || lower.includes('obiettivi')) score += 2;
     
+    // Pain points
     if (lower.includes('non riesco') || lower.includes('fallito')) score += 3;
     if (lower.includes('frustrato') || lower.includes('demotivato')) score += 2;
     
+    // Contact intent
     if (lower.includes('numero') || lower.includes('telefono')) score += 4;
     if (lower.includes('whatsapp')) score += 3;
-    
     if (lower.includes('@') && lower.includes('.')) score += 5;
+    
+    // Studio-specific questions
+    if (lower.includes('studio') || lower.includes('tribù')) score += 2;
+    if (lower.includes('orari') || lower.includes('disponibilità')) score += 3;
     
     return Math.min(score, 10);
 }
@@ -966,12 +1078,26 @@ function intelligentInterestDetection(message) {
         coaching: 0,
         online: 0,
         studio: 0,
-        assessment: 0
+        assessment: 0,
+        pricing: 0
     };
     
+    // Assessment/Quiz interest
     if (lower.includes('quiz') || lower.includes('assessment') || lower.includes('domande') || 
         lower.includes('consigli') || lower.includes('quale servizio')) {
         scores.assessment += 3;
+    }
+    
+    // Pricing interest
+    if (lower.includes('prezzo') || lower.includes('costa') || lower.includes('budget') ||
+        lower.includes('dilazionare') || lower.includes('pagamento')) {
+        scores.pricing += 3;
+    }
+    
+    // Studio interest
+    if (lower.includes('studio') || lower.includes('tribù') || lower.includes('orari') ||
+        lower.includes('appuntamento') || lower.includes('prova')) {
+        scores.studio += 2;
     }
     
     const fitnessKeywords = ['personal', 'allenamento', 'fitness', 'palestra', 'muscoli', 'forma', 'peso', 'dimagrire', 'tonificare'];
@@ -1001,14 +1127,17 @@ function detectConversationStage(message) {
     if (lower.includes('quiz') || lower.includes('assessment')) {
         return 'quiz_engagement';
     }
-    if (lower.includes('costo') || lower.includes('prezzo')) {
+    if (lower.includes('costo') || lower.includes('prezzo') || lower.includes('budget')) {
         return 'price_inquiry';
     }
-    if (lower.includes('prenotare') || lower.includes('appuntamento')) {
+    if (lower.includes('prenotare') || lower.includes('appuntamento') || lower.includes('prova')) {
         return 'booking_intent';
     }
-    if (lower.includes('email') || lower.includes('@')) {
+    if (lower.includes('email') || lower.includes('@') || lower.includes('telefono')) {
         return 'contact_sharing';
+    }
+    if (lower.includes('studio') || lower.includes('orari') || lower.includes('come funziona')) {
+        return 'information_gathering';
     }
     
     return 'exploration';
