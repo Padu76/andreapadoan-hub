@@ -474,7 +474,7 @@ async function sendTelegramNotification(userMessage, leadScore, botResponse) {
     try {
         // Send only for high-interest users
         if (leadScore >= 7) {
-            const message = `🔥 LEAD CALDO! (VERSIONE CORRETTA)
+            const message = `🔥 LEAD CALDO! (API DIRETTA)
             
 👤 Score: ${leadScore}/10
 💬 "${userMessage.substring(0, 100)}..."
@@ -509,9 +509,16 @@ Controlla subito! 💪`;
     }
 }
 
-// 📊 ENHANCED AIRTABLE LOGGING
-async function enhancedAirtableLogging(userMessage, botResponse, quizState) {
-    const webhookUrl = 'https://hooks.airtable.com/workflows/v1/genericWebhook/applozDwnDZOgPvsg/wflXjsQEowx2dmnN8/wtrzKiazR0Tt8171P';
+// 📊 AIRTABLE API DIRETTA - SCRITTURA
+async function directAirtableLogging(userMessage, botResponse, quizState) {
+    const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
+    const AIRTABLE_BASE_ID = process.env.AIRTABLE_BASE_ID;
+    const AIRTABLE_TABLE_NAME = process.env.AIRTABLE_TABLE_NAME || 'conversazioni';
+    
+    if (!AIRTABLE_API_KEY || !AIRTABLE_BASE_ID) {
+        console.error('❌ Missing Airtable credentials');
+        return false;
+    }
     
     const leadScore = advancedLeadScore(userMessage, botResponse);
     const interestArea = intelligentInterestDetection(userMessage);
@@ -519,45 +526,65 @@ async function enhancedAirtableLogging(userMessage, botResponse, quizState) {
     const conversationStage = detectConversationStage(userMessage);
     const urgencyLevel = detectUrgency(userMessage);
     
-    const payload = {
-        User_Message: userMessage,
-        Bot_Response: botResponse,
-        Lead_Score: leadScore,
-        Interest_Area: interestArea,
-        Session_ID: sessionId,
-        Conversation_Stage: conversationStage,
-        Urgency_Level: urgencyLevel,
-        Quiz_State: quizState.action,
-        Quiz_Step: quizState.step || null,
-        Message_Length: userMessage.length,
-        Response_Length: botResponse.length,
-        User_Agent: 'Vercel-API-TelegramDirect-FIXED',
-        Version: 'FIXED-FunctionsOrdered'
+    const fields = {
+        'User_Message': userMessage,
+        'Bot_Response': botResponse,
+        'Lead_Score': leadScore,
+        'Interest_Area': interestArea,
+        'Session_ID': sessionId,
+        'Conversation_Stage': conversationStage,
+        'Urgency_Level': urgencyLevel,
+        'Quiz_State': quizState.action,
+        'Quiz_Step': quizState.step || null,
+        'Message_Length': userMessage.length,
+        'Response_Length': botResponse.length,
+        'User_Agent': 'Vercel-API-DirectAirtable',
+        'Timestamp': new Date().toISOString()
     };
     
+    const airtableUrl = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_NAME}`;
+    
     try {
-        console.log('📊 Logging to Airtable with FIXED version...', {
+        console.log('📊 Writing to Airtable with DIRECT API...', {
             leadScore,
             interestArea,
-            version: 'FIXED'
+            method: 'DIRECT_API'
         });
         
-        const response = await fetch(webhookUrl, {
+        const response = await fetch(airtableUrl, {
             method: 'POST',
-            headers: { 
+            headers: {
+                'Authorization': `Bearer ${AIRTABLE_API_KEY}`,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(payload)
+            body: JSON.stringify({
+                fields: fields
+            })
         });
         
         if (response.ok) {
-            console.log('✅ FIXED Conversation logged to Airtable successfully');
+            const result = await response.json();
+            console.log('✅ DIRECT AIRTABLE SUCCESS! Record ID:', result.id);
+            return true;
         } else {
             const errorText = await response.text();
-            console.error('❌ Failed to log to Airtable:', response.status, errorText);
+            console.error('❌ Airtable API Error:', response.status, errorText);
+            
+            // Try to parse error for better debugging
+            try {
+                const errorJson = JSON.parse(errorText);
+                if (errorJson.error && errorJson.error.message) {
+                    console.error('❌ Airtable Error Details:', errorJson.error.message);
+                }
+            } catch (parseError) {
+                console.error('❌ Could not parse Airtable error response');
+            }
+            
+            return false;
         }
     } catch (error) {
-        console.error('❌ Airtable logging error:', error);
+        console.error('❌ Airtable logging network error:', error);
+        return false;
     }
 }
 
@@ -614,7 +641,7 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'Message is required and must be a non-empty string' });
     }
 
-    console.log('=== CHATBOT ANDREA PADOAN - VERSIONE FIXED ===');
+    console.log('=== CHATBOT ANDREA PADOAN - API DIRETTA AIRTABLE ===');
     console.log('Received message:', message);
     console.log('User email:', userEmail);
     console.log('User name:', userName);
@@ -1026,7 +1053,7 @@ Rispondi come Andrea, breve e conversazionale, seguendo le REGOLE FERREE:`;
     }
     
     try {
-        console.log('🔄 Calling Claude API with FIXED prompt...');
+        console.log('🔄 Calling Claude API with DIRECT AIRTABLE...');
         
         const response = await fetch('https://api.anthropic.com/v1/messages', {
             method: 'POST',
@@ -1051,7 +1078,7 @@ Rispondi come Andrea, breve e conversazionale, seguendo le REGOLE FERREE:`;
         }
         
         const data = await response.json();
-        console.log('✅ Claude API success with FIXED behavior');
+        console.log('✅ Claude API success with DIRECT AIRTABLE');
         
         if (!data.content || !data.content[0] || !data.content[0].text) {
             console.error('❌ Invalid Claude API response format:', data);
@@ -1059,7 +1086,7 @@ Rispondi come Andrea, breve e conversazionale, seguendo le REGOLE FERREE:`;
         }
         
         const botResponse = data.content[0].text;
-        console.log('💬 FIXED Response generated, length:', botResponse.length);
+        console.log('💬 DIRECT AIRTABLE Response generated, length:', botResponse.length);
         
         // 📱 DIRECT TELEGRAM NOTIFICATION
         try {
@@ -1069,17 +1096,23 @@ Rispondi come Andrea, breve e conversazionale, seguendo le REGOLE FERREE:`;
             console.error('❌ Telegram direct notification failed:', telegramError);
         }
         
-        // Enhanced Airtable logging
-        enhancedAirtableLogging(message.trim(), botResponse, quizState)
-            .then(() => console.log('✅ Airtable logging completed'))
-            .catch(err => console.error('❌ Airtable logging failed:', err));
+        // 📊 DIRECT AIRTABLE LOGGING
+        directAirtableLogging(message.trim(), botResponse, quizState)
+            .then((success) => {
+                if (success) {
+                    console.log('✅ DIRECT Airtable logging completed successfully');
+                } else {
+                    console.log('❌ DIRECT Airtable logging failed');
+                }
+            })
+            .catch(err => console.error('❌ DIRECT Airtable logging error:', err));
         
         res.status(200).json({ 
             response: botResponse,
             quiz_state: quizState.action,
             quiz_step: quizState.step || null,
             status: 'success',
-            version: 'fixed'
+            version: 'direct_airtable'
         });
         
     } catch (error) {
