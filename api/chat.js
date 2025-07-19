@@ -518,6 +518,28 @@ async function directAirtableLogging(userMessage, botResponse, quizState) {
     const urgencyLevel = detectUrgency(userMessage);
     console.log('🔥 [DEBUG] Urgency level detected:', urgencyLevel);
     
+    // 🔧 SAFE QUIZ STATE - Only valid Airtable options
+    let safeQuizState = 'normal_chat'; // Default
+    if (quizState.action === 'start_quiz') {
+        safeQuizState = 'start_quiz';
+    } else if (quizState.action === 'quiz_answer') {
+        safeQuizState = 'quiz_answer';
+    }
+    console.log('🔥 [DEBUG] Quiz state mapping:', {
+        original: quizState.action,
+        safe: safeQuizState
+    });
+    
+    // 🔧 SAFE QUIZ STEP - Only numbers or null
+    let safeQuizStep = null;
+    if (quizState.step && typeof quizState.step === 'number') {
+        safeQuizStep = quizState.step;
+    }
+    console.log('🔥 [DEBUG] Quiz step mapping:', {
+        original: quizState.step,
+        safe: safeQuizStep
+    });
+    
     const fields = {
         'User_Message': userMessage,
         'Bot_Response': botResponse,
@@ -526,11 +548,11 @@ async function directAirtableLogging(userMessage, botResponse, quizState) {
         'Session_ID': sessionId,
         'Conversation_Stage': conversationStage,
         'Urgency_Level': urgencyLevel,
-        'Quiz_State': quizState.action,
-        'Quiz_Step': quizState.step || null,
+        'Quiz_State': safeQuizState,
+        'Quiz_Step': safeQuizStep,
         'Message_Length': userMessage.length,
         'Response_Length': botResponse.length,
-        'User_Agent': 'Vercel-API-DirectAirtable-DEBUG',
+        'User_Agent': 'Vercel-API-DirectAirtable-SAFE',
         'Timestamp': new Date().toISOString()
     };
     
@@ -680,7 +702,7 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'Message is required and must be a non-empty string' });
     }
 
-            console.log('=== CHATBOT ANDREA PADOAN - API DIRETTA AIRTABLE SUPER DEBUG ===');
+            console.log('=== CHATBOT ANDREA PADOAN - API DIRETTA AIRTABLE SAFE ===');
     console.log('Received message:', message);
     console.log('User email:', userEmail);
     console.log('User name:', userName);
