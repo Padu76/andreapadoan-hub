@@ -1,3 +1,598 @@
+// 🛠️ HELPER FUNCTIONS - DEFINITE PRIMA DI TUTTO
+function detectIntent(message) {
+    const lower = message.toLowerCase();
+    
+    if (lower.includes('dimagrire') || lower.includes('perdere peso') || lower.includes('grasso')) {
+        return 'weight_loss';
+    }
+    if (lower.includes('tonificare') || lower.includes('definire') || lower.includes('muscoli')) {
+        return 'muscle_toning';
+    }
+    if (lower.includes('energia') || lower.includes('stanco') || lower.includes('stress')) {
+        return 'energy_wellness';
+    }
+    if (lower.includes('postura') || lower.includes('mal di schiena') || lower.includes('dolore')) {
+        return 'posture_pain';
+    }
+    if (lower.includes('sport') || lower.includes('performance') || lower.includes('competizione')) {
+        return 'athletic_performance';
+    }
+    if (lower.includes('prezzo') || lower.includes('costo') || lower.includes('quanto')) {
+        return 'pricing_inquiry';
+    }
+    if (lower.includes('tempo') || lower.includes('occupato') || lower.includes('lavoro')) {
+        return 'time_constraints';
+    }
+    
+    return 'general_inquiry';
+}
+
+function extractGoals(message) {
+    const goals = [];
+    const lower = message.toLowerCase();
+    
+    if (lower.includes('dimagrire') || lower.includes('perdere')) goals.push('weight_loss');
+    if (lower.includes('tonificare') || lower.includes('definire')) goals.push('muscle_building');
+    if (lower.includes('energia') || lower.includes('benessere')) goals.push('wellness');
+    if (lower.includes('forza') || lower.includes('performance')) goals.push('strength');
+    if (lower.includes('postura') || lower.includes('dolore')) goals.push('rehabilitation');
+    
+    return goals;
+}
+
+function extractConstraints(message) {
+    const constraints = [];
+    const lower = message.toLowerCase();
+    
+    if (lower.includes('poco tempo') || lower.includes('occupato') || lower.includes('lavoro')) {
+        constraints.push('time_limited');
+    }
+    if (lower.includes('principiante') || lower.includes('mai fatto') || lower.includes('nuovo')) {
+        constraints.push('beginner');
+    }
+    if (lower.includes('infortunio') || lower.includes('problema') || lower.includes('limitazione')) {
+        constraints.push('physical_limitation');
+    }
+    if (lower.includes('casa') || lower.includes('palestra') || lower.includes('viaggio')) {
+        constraints.push('location_flexible');
+    }
+    
+    return constraints;
+}
+
+function extractBudgetSignals(message) {
+    const lower = message.toLowerCase();
+    
+    if (lower.includes('economico') || lower.includes('budget') || lower.includes('costa poco')) {
+        return 'budget_conscious';
+    }
+    if (lower.includes('investimento') || lower.includes('qualità') || lower.includes('premium')) {
+        return 'quality_focused';
+    }
+    if (lower.includes('€') || /\d+/.test(lower)) {
+        return 'price_specific';
+    }
+    
+    return 'price_neutral';
+}
+
+function detectUrgency(message) {
+    const lower = message.toLowerCase();
+    
+    if (lower.includes('urgente') || lower.includes('subito') || lower.includes('oggi')) {
+        return 'high';
+    }
+    if (lower.includes('presto') || lower.includes('questa settimana') || lower.includes('velocemente')) {
+        return 'medium';
+    }
+    
+    return 'low';
+}
+
+function extractExperience(message) {
+    const lower = message.toLowerCase();
+    
+    if (lower.includes('principiante') || lower.includes('mai fatto') || lower.includes('nuovo')) {
+        return 'beginner';
+    }
+    if (lower.includes('esperto') || lower.includes('anni') && lower.includes('allenamento')) {
+        return 'advanced';
+    }
+    if (lower.includes('fallito') || lower.includes('non funziona') || lower.includes('provato tutto')) {
+        return 'frustrated';
+    }
+    
+    return 'intermediate';
+}
+
+function determineConversationStage(history) {
+    if (history.length === 0) return 'initial';
+    if (history.length < 3) return 'exploration';
+    if (history.length < 6) return 'consideration';
+    return 'decision';
+}
+
+function detectLeadMagnetInterest(message) {
+    const lower = message.toLowerCase();
+    let interestedMagnets = [];
+
+    const leadMagnets = {
+        freeEbooks: {
+            "50 Workout da Viaggio": {
+                title: "50 Workout da Viaggio - GRATUITO",
+                description: "Allenamenti efficaci senza attrezzi ovunque",
+                downloadUrl: "https://drive.google.com/file/d/your-ebook-id/view",
+                trigger: ["viaggio", "casa", "tempo", "hotel", "lavoro"],
+                value: "GRATUITO"
+            },
+            "Guida Principianti": {
+                title: "Guida Completa per Principianti - GRATUITO", 
+                description: "Tutto quello che devi sapere per iniziare",
+                downloadUrl: "https://drive.google.com/file/d/your-beginner-guide/view",
+                trigger: ["principiante", "nuovo", "iniziare", "prima volta"],
+                value: "GRATUITO"
+            }
+        }
+    };
+
+    Object.entries(leadMagnets.freeEbooks).forEach(([key, ebook]) => {
+        const isInterested = ebook.trigger.some(trigger => lower.includes(trigger));
+        if (isInterested) {
+            interestedMagnets.push({
+                type: 'ebook',
+                magnet: ebook,
+                key: key
+            });
+        }
+    });
+
+    return interestedMagnets;
+}
+
+function extractContactInfo(message, history) {
+    const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
+    const phoneRegex = /(\+39\s?)?(\d{3})\s?(\d{3})\s?(\d{4})/;
+    const nameRegex = /mi chiamo ([a-zA-ZàèéìíîòóùúÀÈÉÌÍÎÒÓÙÚ\s]+)/i;
+
+    return {
+        email: message.match(emailRegex)?.[0] || null,
+        phone: message.match(phoneRegex)?.[0] || null,
+        name: message.match(nameRegex)?.[1]?.trim() || null
+    };
+}
+
+function selectPrimaryService(analysis) {
+    const { intent, goals, constraints, budgetSignals } = analysis;
+    
+    if (constraints.includes('time_limited')) {
+        if (budgetSignals === 'budget_conscious') {
+            return {
+                name: "Miniclassi Tribù Studio",
+                price: "15€/lezione (pacchetto 10 lezioni + 30€ tesseramento)",
+                reasoning: "Perfetto per chi ha poco tempo - orari fissi, gruppo motivante, costo contenuto"
+            };
+        } else {
+            return {
+                name: "Personal Training Individuale",
+                price: "45-60€/lezione (pacchetti da 10-30 lezioni)",
+                reasoning: "Efficienza massima - risultati certi in tempi record con supervisione diretta"
+            };
+        }
+    }
+    
+    if (intent === 'weight_loss' || goals.includes('weight_loss')) {
+        if (budgetSignals === 'budget_conscious') {
+            return {
+                name: "Miniclassi + Consulenza Nutrizionale",
+                price: "15€/lezione + 160€ prima visita nutrizionale",
+                reasoning: "Combinazione vincente per dimagrimento: gruppo motivante + piano alimentare professionale"
+            };
+        } else {
+            return {
+                name: "Personal Training + Consulenza Nutrizionale",
+                price: "45-60€/lezione + 160€ prima visita nutrizionale",
+                reasoning: "Approccio completo per dimagrimento duraturo - allenamento personalizzato + alimentazione"
+            };
+        }
+    }
+    
+    if (constraints.includes('beginner')) {
+        return {
+            name: "Lezioni di Coppia o Miniclassi",
+            price: "25-35€/lezione (coppia) o 15€/lezione (miniclassi)",
+            reasoning: "Ideale per iniziare - ambiente sicuro, progressione graduale, supporto del gruppo"
+        };
+    }
+    
+    return {
+        name: "Personal Training Individuale",
+        price: "45-60€/lezione (pacchetti da 10-30 lezioni)",
+        reasoning: "La scelta più efficace - attenzione 100% personalizzata per i tuoi obiettivi"
+    };
+}
+
+function generateUpsells(analysis, primaryService) {
+    const upsells = [];
+    const { intent, goals, constraints } = analysis;
+    
+    if (!primaryService) return upsells;
+    
+    if (primaryService.name.includes('Personal Training') || primaryService.name.includes('Miniclassi')) {
+        if (intent === 'weight_loss' || goals.includes('weight_loss')) {
+            upsells.push({
+                suggestion: "Consulenza Nutrizionale Specializzata",
+                benefit: "Risultati 3x più veloci con piano alimentare professionale",
+                price: "160€ (1h con nutrizionista + piano personalizzato)"
+            });
+        }
+    }
+    
+    return upsells;
+}
+
+function generateCrossSells(analysis, userMessage) {
+    const crossSells = [];
+    const { intent, goals } = analysis;
+    const lower = userMessage.toLowerCase();
+    
+    if (intent === 'weight_loss' || goals.includes('weight_loss')) {
+        crossSells.push({
+            product: "eBook 'In Forma da 2 Milioni di Anni'",
+            relevance: "Alimentazione evolutiva per dimagrimento naturale",
+            price: "19.90€"
+        });
+    }
+    
+    if (lower.includes('viaggio') || lower.includes('casa') || lower.includes('tempo')) {
+        crossSells.push({
+            product: "eBook '50 Workout da Viaggio'",
+            relevance: "Allenamenti efficaci senza attrezzi ovunque",
+            price: "GRATUITO"
+        });
+    }
+    
+    return crossSells;
+}
+
+function generateDynamicPricing(analysis, recommendations) {
+    const { urgency, budgetSignals } = analysis;
+    
+    if (urgency === 'high') {
+        return {
+            offer: "Sconto Decisione Rapida",
+            discount: "-10% su tutti i pacchetti da 20+ lezioni",
+            validity: "Valido solo per le prossime 48 ore"
+        };
+    }
+    
+    return null;
+}
+
+function generateLeadMagnetOffer(interestedMagnets) {
+    if (interestedMagnets.length === 0) return null;
+
+    const topMagnet = interestedMagnets[0];
+    
+    return {
+        type: topMagnet.type,
+        title: topMagnet.magnet.title,
+        description: topMagnet.magnet.description,
+        value: topMagnet.magnet.value,
+        cta: topMagnet.type === 'ebook' ? 'Scarica Gratis' : 'Prenota Ora',
+        url: topMagnet.magnet.downloadUrl || topMagnet.magnet.bookingUrl
+    };
+}
+
+function extractAnswersFromHistory(history, lastMessage) {
+    const answers = {};
+    
+    history.forEach((exchange, index) => {
+        const bot = exchange.bot || "";
+        const user = exchange.user || "";
+        
+        if (bot.includes("scala da 1 a 10")) {
+            answers.fitness_level = user;
+        } else if (bot.includes("obiettivo principale")) {
+            answers.main_goal = user;
+        } else if (bot.includes("tempo puoi dedicare")) {
+            answers.time_available = user;
+        } else if (bot.includes("personal training o seguito")) {
+            answers.experience_level = user;
+        }
+    });
+    
+    if (Object.keys(answers).length === 4) {
+        answers.budget_range = lastMessage;
+    }
+    
+    return answers;
+}
+
+function generatePersonalizedPlan(answers) {
+    const recommendations = [];
+    let primaryService = "";
+    let reasoning = "";
+    let compatibilityScore = 0;
+    
+    const fitnessLevel = answers.fitness_level || "";
+    const goal = answers.main_goal || "";
+    const time = answers.time_available || "";
+    const experience = answers.experience_level || "";
+    const budget = answers.budget_range || "";
+    
+    if (budget.includes("50-100")) {
+        primaryService = "Miniclassi Tribù Studio (15€/lezione + 30€ tesseramento)";
+        reasoning = "Budget ottimizzato con massimo valore - gruppo motivante e costi contenuti";
+        compatibilityScore += 7;
+    } else if (budget.includes("100-200")) {
+        primaryService = "Lezioni di Coppia (25-35€/lezione per persona)";
+        reasoning = "Equilibrio perfetto tra attenzione personale, socializzazione e costo";
+        compatibilityScore += 8;
+    } else if (budget.includes("200-400")) {
+        primaryService = "Personal Training Individuale (45-60€/lezione)";
+        reasoning = "Attenzione 100% dedicata per risultati ottimali";
+        compatibilityScore += 9;
+    } else {
+        primaryService = "Percorso Premium Completo con Consulenza Nutrizionale (160€)";
+        reasoning = "La formula di eccellenza per trasformazioni straordinarie";
+        compatibilityScore += 10;
+    }
+    
+    return {
+        primary_service: primaryService,
+        reasoning: reasoning,
+        compatibility_score: Math.min(compatibilityScore, 10),
+        recommendations: recommendations
+    };
+}
+
+function advancedLeadScore(message, botResponse) {
+    let score = 3;
+    const lower = message.toLowerCase();
+    
+    // Quiz engagement
+    if (lower.includes('quiz') || lower.includes('assessment') || lower.includes('domande')) {
+        score += 3;
+    }
+    
+    // High intent keywords
+    if (lower.includes('voglio iniziare') || lower.includes('come si fa')) score += 4;
+    if (lower.includes('quanto costa') || lower.includes('prezzi') || lower.includes('prezzo')) score += 4;
+    if (lower.includes('prenotare') || lower.includes('appuntamento') || lower.includes('prova')) score += 5;
+    if (lower.includes('urgente') || lower.includes('subito')) score += 4;
+    
+    // Budget discussion
+    if (lower.includes('investimento') || lower.includes('budget') || lower.includes('dilazionare')) score += 3;
+    if (lower.includes('pacchetto') || lower.includes('abbonamento')) score += 3;
+    
+    // Goals discussion
+    if (lower.includes('dimagrire') || lower.includes('perdere peso')) score += 3;
+    if (lower.includes('tonificare') || lower.includes('muscoli')) score += 3;
+    if (lower.includes('risultati') || lower.includes('obiettivi')) score += 2;
+    
+    // Pain points
+    if (lower.includes('non riesco') || lower.includes('fallito')) score += 3;
+    if (lower.includes('frustrato') || lower.includes('demotivato')) score += 2;
+    
+    // Contact intent
+    if (lower.includes('numero') || lower.includes('telefono')) score += 4;
+    if (lower.includes('whatsapp')) score += 3;
+    if (lower.includes('@') && lower.includes('.')) score += 5;
+    
+    // Studio-specific questions
+    if (lower.includes('studio') || lower.includes('tribù')) score += 2;
+    if (lower.includes('orari') || lower.includes('disponibilità')) score += 3;
+    
+    return Math.min(score, 10);
+}
+
+function intelligentInterestDetection(message) {
+    const lower = message.toLowerCase();
+    let scores = {
+        fitness: 0,
+        nutrition: 0,
+        business: 0,
+        coaching: 0,
+        online: 0,
+        studio: 0,
+        assessment: 0,
+        pricing: 0
+    };
+    
+    // Assessment/Quiz interest
+    if (lower.includes('quiz') || lower.includes('assessment') || lower.includes('domande') || 
+        lower.includes('consigli') || lower.includes('quale servizio')) {
+        scores.assessment += 3;
+    }
+    
+    // Pricing interest
+    if (lower.includes('prezzo') || lower.includes('costa') || lower.includes('budget') ||
+        lower.includes('dilazionare') || lower.includes('pagamento')) {
+        scores.pricing += 3;
+    }
+    
+    // Studio interest
+    if (lower.includes('studio') || lower.includes('tribù') || lower.includes('orari') ||
+        lower.includes('appuntamento') || lower.includes('prova')) {
+        scores.studio += 2;
+    }
+    
+    const fitnessKeywords = ['personal', 'allenamento', 'fitness', 'palestra', 'muscoli', 'forma', 'peso', 'dimagrire', 'tonificare'];
+    fitnessKeywords.forEach(keyword => {
+        if (lower.includes(keyword)) scores.fitness += 1;
+    });
+    
+    const nutritionKeywords = ['nutrizione', 'dieta', 'alimentazione', 'cibo', 'mangiare'];
+    nutritionKeywords.forEach(keyword => {
+        if (lower.includes(keyword)) scores.nutrition += 1;
+    });
+    
+    const businessKeywords = ['business', 'imprenditore', 'lavoro', 'azienda'];
+    businessKeywords.forEach(keyword => {
+        if (lower.includes(keyword)) scores.business += 1;
+    });
+    
+    const maxScore = Math.max(...Object.values(scores));
+    const topCategory = Object.keys(scores).find(key => scores[key] === maxScore);
+    
+    return maxScore > 0 ? topCategory : 'general';
+}
+
+function detectConversationStage(message) {
+    const lower = message.toLowerCase();
+    
+    if (lower.includes('quiz') || lower.includes('assessment')) {
+        return 'quiz_engagement';
+    }
+    if (lower.includes('costo') || lower.includes('prezzo') || lower.includes('budget')) {
+        return 'price_inquiry';
+    }
+    if (lower.includes('prenotare') || lower.includes('appuntamento') || lower.includes('prova')) {
+        return 'booking_intent';
+    }
+    if (lower.includes('email') || lower.includes('@') || lower.includes('telefono')) {
+        return 'contact_sharing';
+    }
+    if (lower.includes('studio') || lower.includes('orari') || lower.includes('come funziona')) {
+        return 'information_gathering';
+    }
+    
+    return 'exploration';
+}
+
+function generateSessionId() {
+    const timestamp = Date.now();
+    const random = Math.random().toString(36).substring(2, 8);
+    return `sess_${timestamp}_${random}`;
+}
+
+// 📱 DIRECT TELEGRAM NOTIFICATION FUNCTION
+async function sendTelegramNotification(userMessage, leadScore, botResponse) {
+    const TELEGRAM_BOT_TOKEN = '8018703502:AAGBzIHugAvXGd8A7vuGRUB_prqUngyBMDU';
+    const TELEGRAM_CHAT_ID = '1602722401';
+    
+    try {
+        // Send only for high-interest users
+        if (leadScore >= 7) {
+            const message = `🔥 LEAD CALDO! (VERSIONE CORRETTA)
+            
+👤 Score: ${leadScore}/10
+💬 "${userMessage.substring(0, 100)}..."
+⏰ ${new Date().toLocaleString('it-IT')}
+🌐 andreapadoan.vercel.app
+
+Controlla subito! 💪`;
+
+            const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+            
+            const response = await fetch(telegramUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: TELEGRAM_CHAT_ID,
+                    text: message
+                })
+            });
+            
+            if (response.ok) {
+                console.log('✅ Telegram notification sent successfully');
+                return true;
+            } else {
+                const error = await response.text();
+                console.error('❌ Telegram notification failed:', error);
+                return false;
+            }
+        }
+    } catch (error) {
+        console.error('❌ Telegram notification error:', error);
+        return false;
+    }
+}
+
+// 📊 ENHANCED AIRTABLE LOGGING
+async function enhancedAirtableLogging(userMessage, botResponse, quizState) {
+    const webhookUrl = 'https://hooks.airtable.com/workflows/v1/genericWebhook/applozDwnDZOgPvsg/wflXjsQEowx2dmnN8/wtrzKiazR0Tt8171P';
+    
+    const leadScore = advancedLeadScore(userMessage, botResponse);
+    const interestArea = intelligentInterestDetection(userMessage);
+    const sessionId = generateSessionId();
+    const conversationStage = detectConversationStage(userMessage);
+    const urgencyLevel = detectUrgency(userMessage);
+    
+    const payload = {
+        User_Message: userMessage,
+        Bot_Response: botResponse,
+        Lead_Score: leadScore,
+        Interest_Area: interestArea,
+        Session_ID: sessionId,
+        Conversation_Stage: conversationStage,
+        Urgency_Level: urgencyLevel,
+        Quiz_State: quizState.action,
+        Quiz_Step: quizState.step || null,
+        Message_Length: userMessage.length,
+        Response_Length: botResponse.length,
+        User_Agent: 'Vercel-API-TelegramDirect-FIXED',
+        Version: 'FIXED-FunctionsOrdered'
+    };
+    
+    try {
+        console.log('📊 Logging to Airtable with FIXED version...', {
+            leadScore,
+            interestArea,
+            version: 'FIXED'
+        });
+        
+        const response = await fetch(webhookUrl, {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+        
+        if (response.ok) {
+            console.log('✅ FIXED Conversation logged to Airtable successfully');
+        } else {
+            const errorText = await response.text();
+            console.error('❌ Failed to log to Airtable:', response.status, errorText);
+        }
+    } catch (error) {
+        console.error('❌ Airtable logging error:', error);
+    }
+}
+
+// 🔍 QUIZ STATE DETECTION
+const detectQuizState = (message, history) => {
+    const lower = message.toLowerCase();
+    
+    if (lower.includes('quiz') || lower.includes('domande') || lower.includes('assessment') ||
+        lower.includes('consigli') || lower.includes('quale') && lower.includes('servizio')) {
+        return { action: 'start_quiz', step: 1 };
+    }
+    
+    if (history.length > 0) {
+        const lastBotMessage = history[history.length - 1]?.bot || "";
+        if (lastBotMessage.includes("scala da 1 a 10")) {
+            return { action: 'quiz_answer', step: 1, answer: message };
+        }
+        if (lastBotMessage.includes("obiettivo principale")) {
+            return { action: 'quiz_answer', step: 2, answer: message };
+        }
+        if (lastBotMessage.includes("tempo puoi dedicare")) {
+            return { action: 'quiz_answer', step: 3, answer: message };
+        }
+        if (lastBotMessage.includes("personal training o seguito")) {
+            return { action: 'quiz_answer', step: 4, answer: message };
+        }
+        if (lastBotMessage.includes("budget mensile")) {
+            return { action: 'quiz_answer', step: 5, answer: message };
+        }
+    }
+    
+    return { action: 'normal_chat' };
+};
+
+// 🎯 MAIN HANDLER FUNCTION
 export default async function handler(req, res) {
     // Abilita CORS
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -19,7 +614,7 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'Message is required and must be a non-empty string' });
     }
 
-    console.log('=== CHATBOT ANDREA PADOAN - VERSIONE CORRETTA ===');
+    console.log('=== CHATBOT ANDREA PADOAN - VERSIONE FIXED ===');
     console.log('Received message:', message);
     console.log('User email:', userEmail);
     console.log('User name:', userName);
@@ -60,26 +655,6 @@ export default async function handler(req, res) {
             question: "Ultima domanda: quale budget mensile consideri sostenibile per il tuo benessere? 💰",
             options: ["A) 50-100€ (budget limitato)", "B) 100-200€ (budget moderato)", "C) 200-400€ (budget buono)", "D) 400€+ (investimento importante)"],
             key: "budget_range"
-        }
-    };
-
-    // 🎁 LEAD MAGNETS SYSTEM
-    const leadMagnets = {
-        freeEbooks: {
-            "50 Workout da Viaggio": {
-                title: "50 Workout da Viaggio - GRATUITO",
-                description: "Allenamenti efficaci senza attrezzi ovunque",
-                downloadUrl: "https://drive.google.com/file/d/your-ebook-id/view",
-                trigger: ["viaggio", "casa", "tempo", "hotel", "lavoro"],
-                value: "GRATUITO"
-            },
-            "Guida Principianti": {
-                title: "Guida Completa per Principianti - GRATUITO", 
-                description: "Tutto quello che devi sapere per iniziare",
-                downloadUrl: "https://drive.google.com/file/d/your-beginner-guide/view",
-                trigger: ["principiante", "nuovo", "iniziare", "prima volta"],
-                value: "GRATUITO"
-            }
         }
     };
 
@@ -184,303 +759,6 @@ export default async function handler(req, res) {
         }
     };
 
-    // Helper functions
-    function detectIntent(message) {
-        const lower = message.toLowerCase();
-        
-        if (lower.includes('dimagrire') || lower.includes('perdere peso') || lower.includes('grasso')) {
-            return 'weight_loss';
-        }
-        if (lower.includes('tonificare') || lower.includes('definire') || lower.includes('muscoli')) {
-            return 'muscle_toning';
-        }
-        if (lower.includes('energia') || lower.includes('stanco') || lower.includes('stress')) {
-            return 'energy_wellness';
-        }
-        if (lower.includes('postura') || lower.includes('mal di schiena') || lower.includes('dolore')) {
-            return 'posture_pain';
-        }
-        if (lower.includes('sport') || lower.includes('performance') || lower.includes('competizione')) {
-            return 'athletic_performance';
-        }
-        if (lower.includes('prezzo') || lower.includes('costo') || lower.includes('quanto')) {
-            return 'pricing_inquiry';
-        }
-        if (lower.includes('tempo') || lower.includes('occupato') || lower.includes('lavoro')) {
-            return 'time_constraints';
-        }
-        
-        return 'general_inquiry';
-    }
-
-    function extractGoals(message) {
-        const goals = [];
-        const lower = message.toLowerCase();
-        
-        if (lower.includes('dimagrire') || lower.includes('perdere')) goals.push('weight_loss');
-        if (lower.includes('tonificare') || lower.includes('definire')) goals.push('muscle_building');
-        if (lower.includes('energia') || lower.includes('benessere')) goals.push('wellness');
-        if (lower.includes('forza') || lower.includes('performance')) goals.push('strength');
-        if (lower.includes('postura') || lower.includes('dolore')) goals.push('rehabilitation');
-        
-        return goals;
-    }
-
-    function extractConstraints(message) {
-        const constraints = [];
-        const lower = message.toLowerCase();
-        
-        if (lower.includes('poco tempo') || lower.includes('occupato') || lower.includes('lavoro')) {
-            constraints.push('time_limited');
-        }
-        if (lower.includes('principiante') || lower.includes('mai fatto') || lower.includes('nuovo')) {
-            constraints.push('beginner');
-        }
-        if (lower.includes('infortunio') || lower.includes('problema') || lower.includes('limitazione')) {
-            constraints.push('physical_limitation');
-        }
-        if (lower.includes('casa') || lower.includes('palestra') || lower.includes('viaggio')) {
-            constraints.push('location_flexible');
-        }
-        
-        return constraints;
-    }
-
-    function extractBudgetSignals(message) {
-        const lower = message.toLowerCase();
-        
-        if (lower.includes('economico') || lower.includes('budget') || lower.includes('costa poco')) {
-            return 'budget_conscious';
-        }
-        if (lower.includes('investimento') || lower.includes('qualità') || lower.includes('premium')) {
-            return 'quality_focused';
-        }
-        if (lower.includes('€') || /\d+/.test(lower)) {
-            return 'price_specific';
-        }
-        
-        return 'price_neutral';
-    }
-
-    function detectUrgency(message) {
-        const lower = message.toLowerCase();
-        
-        if (lower.includes('urgente') || lower.includes('subito') || lower.includes('oggi')) {
-            return 'high';
-        }
-        if (lower.includes('presto') || lower.includes('questa settimana') || lower.includes('velocemente')) {
-            return 'medium';
-        }
-        
-        return 'low';
-    }
-
-    function extractExperience(message) {
-        const lower = message.toLowerCase();
-        
-        if (lower.includes('principiante') || lower.includes('mai fatto') || lower.includes('nuovo')) {
-            return 'beginner';
-        }
-        if (lower.includes('esperto') || lower.includes('anni') && lower.includes('allenamento')) {
-            return 'advanced';
-        }
-        if (lower.includes('fallito') || lower.includes('non funziona') || lower.includes('provato tutto')) {
-            return 'frustrated';
-        }
-        
-        return 'intermediate';
-    }
-
-    function determineConversationStage(history) {
-        if (history.length === 0) return 'initial';
-        if (history.length < 3) return 'exploration';
-        if (history.length < 6) return 'consideration';
-        return 'decision';
-    }
-
-    function detectLeadMagnetInterest(message) {
-        const lower = message.toLowerCase();
-        let interestedMagnets = [];
-
-        Object.entries(leadMagnets.freeEbooks).forEach(([key, ebook]) => {
-            const isInterested = ebook.trigger.some(trigger => lower.includes(trigger));
-            if (isInterested) {
-                interestedMagnets.push({
-                    type: 'ebook',
-                    magnet: ebook,
-                    key: key
-                });
-            }
-        });
-
-        return interestedMagnets;
-    }
-
-    function extractContactInfo(message, history) {
-        const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
-        const phoneRegex = /(\+39\s?)?(\d{3})\s?(\d{3})\s?(\d{4})/;
-        const nameRegex = /mi chiamo ([a-zA-ZàèéìíîòóùúÀÈÉÌÍÎÒÓÙÚ\s]+)/i;
-
-        return {
-            email: message.match(emailRegex)?.[0] || null,
-            phone: message.match(phoneRegex)?.[0] || null,
-            name: message.match(nameRegex)?.[1]?.trim() || null
-        };
-    }
-
-    function selectPrimaryService(analysis) {
-        const { intent, goals, constraints, budgetSignals } = analysis;
-        
-        if (constraints.includes('time_limited')) {
-            if (budgetSignals === 'budget_conscious') {
-                return {
-                    name: "Miniclassi Tribù Studio",
-                    price: "15€/lezione (pacchetto 10 lezioni + 30€ tesseramento)",
-                    reasoning: "Perfetto per chi ha poco tempo - orari fissi, gruppo motivante, costo contenuto"
-                };
-            } else {
-                return {
-                    name: "Personal Training Individuale",
-                    price: "45-60€/lezione (pacchetti da 10-30 lezioni)",
-                    reasoning: "Efficienza massima - risultati certi in tempi record con supervisione diretta"
-                };
-            }
-        }
-        
-        if (intent === 'weight_loss' || goals.includes('weight_loss')) {
-            if (budgetSignals === 'budget_conscious') {
-                return {
-                    name: "Miniclassi + Consulenza Nutrizionale",
-                    price: "15€/lezione + 160€ prima visita nutrizionale",
-                    reasoning: "Combinazione vincente per dimagrimento: gruppo motivante + piano alimentare professionale"
-                };
-            } else {
-                return {
-                    name: "Personal Training + Consulenza Nutrizionale",
-                    price: "45-60€/lezione + 160€ prima visita nutrizionale",
-                    reasoning: "Approccio completo per dimagrimento duraturo - allenamento personalizzato + alimentazione"
-                };
-            }
-        }
-        
-        if (constraints.includes('beginner')) {
-            return {
-                name: "Lezioni di Coppia o Miniclassi",
-                price: "25-35€/lezione (coppia) o 15€/lezione (miniclassi)",
-                reasoning: "Ideale per iniziare - ambiente sicuro, progressione graduale, supporto del gruppo"
-            };
-        }
-        
-        return {
-            name: "Personal Training Individuale",
-            price: "45-60€/lezione (pacchetti da 10-30 lezioni)",
-            reasoning: "La scelta più efficace - attenzione 100% personalizzata per i tuoi obiettivi"
-        };
-    }
-
-    function generateUpsells(analysis, primaryService) {
-        const upsells = [];
-        const { intent, goals, constraints } = analysis;
-        
-        if (!primaryService) return upsells;
-        
-        if (primaryService.name.includes('Personal Training') || primaryService.name.includes('Miniclassi')) {
-            if (intent === 'weight_loss' || goals.includes('weight_loss')) {
-                upsells.push({
-                    suggestion: "Consulenza Nutrizionale Specializzata",
-                    benefit: "Risultati 3x più veloci con piano alimentare professionale",
-                    price: "160€ (1h con nutrizionista + piano personalizzato)"
-                });
-            }
-        }
-        
-        return upsells;
-    }
-
-    function generateCrossSells(analysis, userMessage) {
-        const crossSells = [];
-        const { intent, goals } = analysis;
-        const lower = userMessage.toLowerCase();
-        
-        if (intent === 'weight_loss' || goals.includes('weight_loss')) {
-            crossSells.push({
-                product: "eBook 'In Forma da 2 Milioni di Anni'",
-                relevance: "Alimentazione evolutiva per dimagrimento naturale",
-                price: "19.90€"
-            });
-        }
-        
-        if (lower.includes('viaggio') || lower.includes('casa') || lower.includes('tempo')) {
-            crossSells.push({
-                product: "eBook '50 Workout da Viaggio'",
-                relevance: "Allenamenti efficaci senza attrezzi ovunque",
-                price: "GRATUITO"
-            });
-        }
-        
-        return crossSells;
-    }
-
-    function generateDynamicPricing(analysis, recommendations) {
-        const { urgency, budgetSignals } = analysis;
-        
-        if (urgency === 'high') {
-            return {
-                offer: "Sconto Decisione Rapida",
-                discount: "-10% su tutti i pacchetti da 20+ lezioni",
-                validity: "Valido solo per le prossime 48 ore"
-            };
-        }
-        
-        return null;
-    }
-
-    function generateLeadMagnetOffer(interestedMagnets) {
-        if (interestedMagnets.length === 0) return null;
-
-        const topMagnet = interestedMagnets[0];
-        
-        return {
-            type: topMagnet.type,
-            title: topMagnet.magnet.title,
-            description: topMagnet.magnet.description,
-            value: topMagnet.magnet.value,
-            cta: topMagnet.type === 'ebook' ? 'Scarica Gratis' : 'Prenota Ora',
-            url: topMagnet.magnet.downloadUrl || topMagnet.magnet.bookingUrl
-        };
-    }
-
-    // 🔍 QUIZ STATE DETECTION
-    const detectQuizState = (message, history) => {
-        const lower = message.toLowerCase();
-        
-        if (lower.includes('quiz') || lower.includes('domande') || lower.includes('assessment') ||
-            lower.includes('consigli') || lower.includes('quale') && lower.includes('servizio')) {
-            return { action: 'start_quiz', step: 1 };
-        }
-        
-        if (history.length > 0) {
-            const lastBotMessage = history[history.length - 1]?.bot || "";
-            if (lastBotMessage.includes("scala da 1 a 10")) {
-                return { action: 'quiz_answer', step: 1, answer: message };
-            }
-            if (lastBotMessage.includes("obiettivo principale")) {
-                return { action: 'quiz_answer', step: 2, answer: message };
-            }
-            if (lastBotMessage.includes("tempo puoi dedicare")) {
-                return { action: 'quiz_answer', step: 3, answer: message };
-            }
-            if (lastBotMessage.includes("personal training o seguito")) {
-                return { action: 'quiz_answer', step: 4, answer: message };
-            }
-            if (lastBotMessage.includes("budget mensile")) {
-                return { action: 'quiz_answer', step: 5, answer: message };
-            }
-        }
-        
-        return { action: 'normal_chat' };
-    };
-
     // 💪 ENHANCED KNOWLEDGE BASE COMPLETA E CORRETTA
     const massiveKnowledgeBase = `
     === ANDREA PADOAN - MASTER KNOWLEDGE BASE CORRETTA ===
@@ -570,88 +848,12 @@ export default async function handler(req, res) {
     • Senza preavviso viene segnata come se fosse fatta
     • Massima flessibilità per imprevisti
 
-    === 🏢 INFORMAZIONI PRATICHE TRIBÙ STUDIO ===
-
-    ABBIGLIAMENTO:
-    • Scarpe pulite o senza scarpe con calze
-    • Portare asciugamano e borraccia
-
-    SERVIZI DISPONIBILI:
-    • Doccia: Sì, è possibile fare la doccia
-    • Animali: No, per questioni igieniche non sono ammessi
-
-    ORARI:
-    • Lunedì-Venerdì: 6:00-21:00
-    • Sabato: Sì, lavoriamo anche il sabato
-    • In genere fino alle 13:00 ma anche nel pomeriggio su richiesta
-    • Tutto in base agli appuntamenti fissati
-
-    === 🎯 APPROCCIO OLISTICO - MINDSET CORRETTO ===
-
-    DOMANDA FREQUENTE: "Se vengo ad allenarmi perderò peso?"
-    RISPOSTA CORRETTA: "Non solo con l'allenamento... sarà fondamentale l'alimentazione ed un mindset focalizzato al cambiamento!"
-
-    I TRE PILASTRI DEL SUCCESSO:
-    1. ALLENAMENTO personalizzato e guidato
-    2. ALIMENTAZIONE corretta e sostenibile  
-    3. MINDSET focalizzato al cambiamento
-
-    FREQUENZA CONSIGLIATA:
-    • 2 volte a settimana per iniziare
-    • Progressione basata su obiettivi e disponibilità
-
-    === 📱 APP "TORNO IN FORMA" - SERVIZIO SOLO SCHEDE DIGITALI ===
-    
-    PREZZI APP (SOLO SCHEDE + UTILIZZO APP):
-    • 1 mese → 70€ 
-    • 3 mesi → 200€ (risparmio - CONSIGLIATO)
-    • 6 mesi → 380€ (risparmio maggiore - TRASFORMAZIONE COMPLETA)
-    
-    COSA INCLUDE:
-    • Scheda di allenamento mensile personalizzata in base agli obiettivi
-    • Utilizzo dell'app con database esercizi completo
-    • Video dimostrativi per ogni esercizio
-    • Possibilità di inserire i pesi utilizzati
-    • Tracciamento misurazioni corporee
-    • Monitoraggio progressi
-    
-    COSA NON INCLUDE:
-    • Chat diretta con Andrea
-    • Call mensili di follow-up
-    • Consulenza nutrizionale personalizzata
-    
-    IMPORTANTE: Questo è un servizio di sole schede digitali, diverso dal Personal Training in studio.
-
     === 🔗 CONTATTI E PRENOTAZIONI ===
     
     WhatsApp: 347 888 1515 (PREFERITO - risposta rapida)
     Email: andrea.padoan@gmail.com
     Sito Personal Training: https://www.personaltrainerverona.it
     Sito Tribù Studio: https://www.tribuptstudio.it
-
-    === 📚 EBOOK E RISORSE ===
-    
-    4 EBOOK DISPONIBILI:
-    1. "IL WAVE SYSTEM" - 14.90€
-    2. "In Forma da 2 Milioni di Anni" - 19.90€ 
-    3. "50 WORKOUT da Viaggio" - GRATUITO
-    4. "BODY UNDER CONSTRUCTION VOL: 1" - 29.90€
-    
-    Store: andrepad.gumroad.com
-
-    === 🎯 ALTRI PROGETTI ===
-    
-    UPSTART: https://upstarter-tf9x.vercel.app/
-    - Validazione idee di business
-    - Consulenza strategica gratuita
-
-    MEALPREP PLANNER: https://mealprep-planner.vercel.app/
-    - Pianificazione pasti settimanali
-    - Web app gratuita
-
-    LIFESTYLE COACH: https://tribucoach.vercel.app/
-    - Mindset e cambiamento totale
-    - "La soluzione completa... perché dieta e allenamento non bastano!"
 
     === 🔥 FRASI CHIAVE DA USARE ===
 
@@ -824,7 +1026,7 @@ Rispondi come Andrea, breve e conversazionale, seguendo le REGOLE FERREE:`;
     }
     
     try {
-        console.log('🔄 Calling Claude API with CORRECTED prompt...');
+        console.log('🔄 Calling Claude API with FIXED prompt...');
         
         const response = await fetch('https://api.anthropic.com/v1/messages', {
             method: 'POST',
@@ -835,7 +1037,7 @@ Rispondi come Andrea, breve e conversazionale, seguendo le REGOLE FERREE:`;
             },
             body: JSON.stringify({
                 model: 'claude-3-5-sonnet-20240620',
-                max_tokens: 150, // RIDOTTO per risposte brevi
+                max_tokens: 150,
                 messages: [{ role: 'user', content: prompt }]
             })
         });
@@ -849,7 +1051,7 @@ Rispondi come Andrea, breve e conversazionale, seguendo le REGOLE FERREE:`;
         }
         
         const data = await response.json();
-        console.log('✅ Claude API success with CORRECTED behavior');
+        console.log('✅ Claude API success with FIXED behavior');
         
         if (!data.content || !data.content[0] || !data.content[0].text) {
             console.error('❌ Invalid Claude API response format:', data);
@@ -857,7 +1059,7 @@ Rispondi come Andrea, breve e conversazionale, seguendo le REGOLE FERREE:`;
         }
         
         const botResponse = data.content[0].text;
-        console.log('💬 CORRECTED Response generated, length:', botResponse.length);
+        console.log('💬 FIXED Response generated, length:', botResponse.length);
         
         // 📱 DIRECT TELEGRAM NOTIFICATION
         try {
@@ -877,7 +1079,7 @@ Rispondi come Andrea, breve e conversazionale, seguendo le REGOLE FERREE:`;
             quiz_state: quizState.action,
             quiz_step: quizState.step || null,
             status: 'success',
-            version: 'corrected'
+            version: 'fixed'
         });
         
     } catch (error) {
@@ -886,283 +1088,4 @@ Rispondi come Andrea, breve e conversazionale, seguendo le REGOLE FERREE:`;
             error: 'Mi dispiace, ho avuto un problema tecnico. Contattami su WhatsApp al 347 888 1515!' 
         });
     }
-}
-
-// 📱 DIRECT TELEGRAM NOTIFICATION FUNCTION
-async function sendTelegramNotification(userMessage, leadScore, botResponse) {
-    const TELEGRAM_BOT_TOKEN = '8018703502:AAGBzIHugAvXGd8A7vuGRUB_prqUngyBMDU';
-    const TELEGRAM_CHAT_ID = '1602722401';
-    
-    try {
-        // Send only for high-interest users
-        if (leadScore >= 7) {
-            const message = `🔥 LEAD CALDO! (VERSIONE CORRETTA)
-            
-👤 Score: ${leadScore}/10
-💬 "${userMessage.substring(0, 100)}..."
-⏰ ${new Date().toLocaleString('it-IT')}
-🌐 andreapadoan.vercel.app
-
-Controlla subito! 💪`;
-
-            const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
-            
-            const response = await fetch(telegramUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    chat_id: TELEGRAM_CHAT_ID,
-                    text: message
-                })
-            });
-            
-            if (response.ok) {
-                console.log('✅ Telegram notification sent successfully');
-                return true;
-            } else {
-                const error = await response.text();
-                console.error('❌ Telegram notification failed:', error);
-                return false;
-            }
-        }
-    } catch (error) {
-        console.error('❌ Telegram notification error:', error);
-        return false;
-    }
-}
-
-// Helper functions
-function extractAnswersFromHistory(history, lastMessage) {
-    const answers = {};
-    
-    history.forEach((exchange, index) => {
-        const bot = exchange.bot || "";
-        const user = exchange.user || "";
-        
-        if (bot.includes("scala da 1 a 10")) {
-            answers.fitness_level = user;
-        } else if (bot.includes("obiettivo principale")) {
-            answers.main_goal = user;
-        } else if (bot.includes("tempo puoi dedicare")) {
-            answers.time_available = user;
-        } else if (bot.includes("personal training o seguito")) {
-            answers.experience_level = user;
-        }
-    });
-    
-    if (Object.keys(answers).length === 4) {
-        answers.budget_range = lastMessage;
-    }
-    
-    return answers;
-}
-
-function generatePersonalizedPlan(answers) {
-    const recommendations = [];
-    let primaryService = "";
-    let reasoning = "";
-    let compatibilityScore = 0;
-    
-    const fitnessLevel = answers.fitness_level || "";
-    const goal = answers.main_goal || "";
-    const time = answers.time_available || "";
-    const experience = answers.experience_level || "";
-    const budget = answers.budget_range || "";
-    
-    if (budget.includes("50-100")) {
-        primaryService = "Miniclassi Tribù Studio (15€/lezione + 30€ tesseramento)";
-        reasoning = "Budget ottimizzato con massimo valore - gruppo motivante e costi contenuti";
-        compatibilityScore += 7;
-    } else if (budget.includes("100-200")) {
-        primaryService = "Lezioni di Coppia (25-35€/lezione per persona)";
-        reasoning = "Equilibrio perfetto tra attenzione personale, socializzazione e costo";
-        compatibilityScore += 8;
-    } else if (budget.includes("200-400")) {
-        primaryService = "Personal Training Individuale (45-60€/lezione)";
-        reasoning = "Attenzione 100% dedicata per risultati ottimali";
-        compatibilityScore += 9;
-    } else {
-        primaryService = "Percorso Premium Completo con Consulenza Nutrizionale (160€)";
-        reasoning = "La formula di eccellenza per trasformazioni straordinarie";
-        compatibilityScore += 10;
-    }
-    
-    return {
-        primary_service: primaryService,
-        reasoning: reasoning,
-        compatibility_score: Math.min(compatibilityScore, 10),
-        recommendations: recommendations
-    };
-}
-
-// 📊 ENHANCED AIRTABLE LOGGING
-async function enhancedAirtableLogging(userMessage, botResponse, quizState) {
-    const webhookUrl = 'https://hooks.airtable.com/workflows/v1/genericWebhook/applozDwnDZOgPvsg/wflXjsQEowx2dmnN8/wtrzKiazR0Tt8171P';
-    
-    const leadScore = advancedLeadScore(userMessage, botResponse);
-    const interestArea = intelligentInterestDetection(userMessage);
-    const sessionId = generateSessionId();
-    const conversationStage = detectConversationStage(userMessage);
-    const urgencyLevel = detectUrgency(userMessage);
-    
-    const payload = {
-        User_Message: userMessage,
-        Bot_Response: botResponse,
-        Lead_Score: leadScore,
-        Interest_Area: interestArea,
-        Session_ID: sessionId,
-        Conversation_Stage: conversationStage,
-        Urgency_Level: urgencyLevel,
-        Quiz_State: quizState.action,
-        Quiz_Step: quizState.step || null,
-        Message_Length: userMessage.length,
-        Response_Length: botResponse.length,
-        User_Agent: 'Vercel-API-TelegramDirect-CORRECTED',
-        Version: 'CORRECTED-NoAppointments-CorrectPrices'
-    };
-    
-    try {
-        console.log('📊 Logging to Airtable with CORRECTED version...', {
-            leadScore,
-            interestArea,
-            version: 'CORRECTED'
-        });
-        
-        const response = await fetch(webhookUrl, {
-            method: 'POST',
-            headers: { 
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(payload)
-        });
-        
-        if (response.ok) {
-            console.log('✅ CORRECTED Conversation logged to Airtable successfully');
-        } else {
-            const errorText = await response.text();
-            console.error('❌ Failed to log to Airtable:', response.status, errorText);
-        }
-    } catch (error) {
-        console.error('❌ Airtable logging error:', error);
-    }
-}
-
-function advancedLeadScore(message, botResponse) {
-    let score = 3;
-    const lower = message.toLowerCase();
-    
-    // Quiz engagement
-    if (lower.includes('quiz') || lower.includes('assessment') || lower.includes('domande')) {
-        score += 3;
-    }
-    
-    // High intent keywords
-    if (lower.includes('voglio iniziare') || lower.includes('come si fa')) score += 4;
-    if (lower.includes('quanto costa') || lower.includes('prezzi') || lower.includes('prezzo')) score += 4;
-    if (lower.includes('prenotare') || lower.includes('appuntamento') || lower.includes('prova')) score += 5;
-    if (lower.includes('urgente') || lower.includes('subito')) score += 4;
-    
-    // Budget discussion
-    if (lower.includes('investimento') || lower.includes('budget') || lower.includes('dilazionare')) score += 3;
-    if (lower.includes('pacchetto') || lower.includes('abbonamento')) score += 3;
-    
-    // Goals discussion
-    if (lower.includes('dimagrire') || lower.includes('perdere peso')) score += 3;
-    if (lower.includes('tonificare') || lower.includes('muscoli')) score += 3;
-    if (lower.includes('risultati') || lower.includes('obiettivi')) score += 2;
-    
-    // Pain points
-    if (lower.includes('non riesco') || lower.includes('fallito')) score += 3;
-    if (lower.includes('frustrato') || lower.includes('demotivato')) score += 2;
-    
-    // Contact intent
-    if (lower.includes('numero') || lower.includes('telefono')) score += 4;
-    if (lower.includes('whatsapp')) score += 3;
-    if (lower.includes('@') && lower.includes('.')) score += 5;
-    
-    // Studio-specific questions
-    if (lower.includes('studio') || lower.includes('tribù')) score += 2;
-    if (lower.includes('orari') || lower.includes('disponibilità')) score += 3;
-    
-    return Math.min(score, 10);
-}
-
-function intelligentInterestDetection(message) {
-    const lower = message.toLowerCase();
-    let scores = {
-        fitness: 0,
-        nutrition: 0,
-        business: 0,
-        coaching: 0,
-        online: 0,
-        studio: 0,
-        assessment: 0,
-        pricing: 0
-    };
-    
-    // Assessment/Quiz interest
-    if (lower.includes('quiz') || lower.includes('assessment') || lower.includes('domande') || 
-        lower.includes('consigli') || lower.includes('quale servizio')) {
-        scores.assessment += 3;
-    }
-    
-    // Pricing interest
-    if (lower.includes('prezzo') || lower.includes('costa') || lower.includes('budget') ||
-        lower.includes('dilazionare') || lower.includes('pagamento')) {
-        scores.pricing += 3;
-    }
-    
-    // Studio interest
-    if (lower.includes('studio') || lower.includes('tribù') || lower.includes('orari') ||
-        lower.includes('appuntamento') || lower.includes('prova')) {
-        scores.studio += 2;
-    }
-    
-    const fitnessKeywords = ['personal', 'allenamento', 'fitness', 'palestra', 'muscoli', 'forma', 'peso', 'dimagrire', 'tonificare'];
-    fitnessKeywords.forEach(keyword => {
-        if (lower.includes(keyword)) scores.fitness += 1;
-    });
-    
-    const nutritionKeywords = ['nutrizione', 'dieta', 'alimentazione', 'cibo', 'mangiare'];
-    nutritionKeywords.forEach(keyword => {
-        if (lower.includes(keyword)) scores.nutrition += 1;
-    });
-    
-    const businessKeywords = ['business', 'imprenditore', 'lavoro', 'azienda'];
-    businessKeywords.forEach(keyword => {
-        if (lower.includes(keyword)) scores.business += 1;
-    });
-    
-    const maxScore = Math.max(...Object.values(scores));
-    const topCategory = Object.keys(scores).find(key => scores[key] === maxScore);
-    
-    return maxScore > 0 ? topCategory : 'general';
-}
-
-function detectConversationStage(message) {
-    const lower = message.toLowerCase();
-    
-    if (lower.includes('quiz') || lower.includes('assessment')) {
-        return 'quiz_engagement';
-    }
-    if (lower.includes('costo') || lower.includes('prezzo') || lower.includes('budget')) {
-        return 'price_inquiry';
-    }
-    if (lower.includes('prenotare') || lower.includes('appuntamento') || lower.includes('prova')) {
-        return 'booking_intent';
-    }
-    if (lower.includes('email') || lower.includes('@') || lower.includes('telefono')) {
-        return 'contact_sharing';
-    }
-    if (lower.includes('studio') || lower.includes('orari') || lower.includes('come funziona')) {
-        return 'information_gathering';
-    }
-    
-    return 'exploration';
-}
-
-function generateSessionId() {
-    const timestamp = Date.now();
-    const random = Math.random().toString(36).substring(2, 8);
-    return `sess_${timestamp}_${random}`;
 }
