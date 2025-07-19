@@ -19,7 +19,7 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'Message is required and must be a non-empty string' });
     }
 
-    console.log('=== FASE 3: AUTOMATION + TELEGRAM DIRETTO ===');
+    console.log('=== CHATBOT ANDREA PADOAN - VERSIONE CORRETTA ===');
     console.log('Received message:', message);
     console.log('User email:', userEmail);
     console.log('User name:', userName);
@@ -79,15 +79,6 @@ export default async function handler(req, res) {
                 downloadUrl: "https://drive.google.com/file/d/your-beginner-guide/view",
                 trigger: ["principiante", "nuovo", "iniziare", "prima volta"],
                 value: "GRATUITO"
-            }
-        },
-        freeSessions: {
-            "Consulenza Gratuita": {
-                title: "Lezione di Prova Gratuita (30-40 min)",
-                description: "Proviamo insieme senza impegno",
-                bookingUrl: "https://calendly.com/andrea-padoan/consulenza-gratuita",
-                trigger: ["prova", "gratuita", "provare", "vedere", "conoscere"],
-                value: "40€ di valore"
             }
         }
     };
@@ -322,17 +313,6 @@ export default async function handler(req, res) {
             }
         });
 
-        Object.entries(leadMagnets.freeSessions).forEach(([key, session]) => {
-            const isInterested = session.trigger.some(trigger => lower.includes(trigger));
-            if (isInterested) {
-                interestedMagnets.push({
-                    type: 'session',
-                    magnet: session,
-                    key: key
-                });
-            }
-        });
-
         return interestedMagnets;
     }
 
@@ -355,13 +335,13 @@ export default async function handler(req, res) {
             if (budgetSignals === 'budget_conscious') {
                 return {
                     name: "Miniclassi Tribù Studio",
-                    price: "15€/lezione (pacchetto 10 lezioni)",
+                    price: "15€/lezione (pacchetto 10 lezioni + 30€ tesseramento)",
                     reasoning: "Perfetto per chi ha poco tempo - orari fissi, gruppo motivante, costo contenuto"
                 };
             } else {
                 return {
                     name: "Personal Training Individuale",
-                    price: "45-55€/lezione",
+                    price: "45-60€/lezione (pacchetti da 10-30 lezioni)",
                     reasoning: "Efficienza massima - risultati certi in tempi record con supervisione diretta"
                 };
             }
@@ -371,13 +351,13 @@ export default async function handler(req, res) {
             if (budgetSignals === 'budget_conscious') {
                 return {
                     name: "Miniclassi + Consulenza Nutrizionale",
-                    price: "15€/lezione + 80€ consulenza",
-                    reasoning: "Combinazione vincente per dimagrimento: gruppo motivante + piano alimentare"
+                    price: "15€/lezione + 160€ prima visita nutrizionale",
+                    reasoning: "Combinazione vincente per dimagrimento: gruppo motivante + piano alimentare professionale"
                 };
             } else {
                 return {
                     name: "Personal Training + Consulenza Nutrizionale",
-                    price: "45-55€/lezione + 80€ consulenza",
+                    price: "45-60€/lezione + 160€ prima visita nutrizionale",
                     reasoning: "Approccio completo per dimagrimento duraturo - allenamento personalizzato + alimentazione"
                 };
             }
@@ -393,7 +373,7 @@ export default async function handler(req, res) {
         
         return {
             name: "Personal Training Individuale",
-            price: "45-55€/lezione (pacchetti da 10-30 lezioni)",
+            price: "45-60€/lezione (pacchetti da 10-30 lezioni)",
             reasoning: "La scelta più efficace - attenzione 100% personalizzata per i tuoi obiettivi"
         };
     }
@@ -407,9 +387,9 @@ export default async function handler(req, res) {
         if (primaryService.name.includes('Personal Training') || primaryService.name.includes('Miniclassi')) {
             if (intent === 'weight_loss' || goals.includes('weight_loss')) {
                 upsells.push({
-                    suggestion: "Consulenza Nutrizionale Personalizzata",
-                    benefit: "Risultati 3x più veloci con piano alimentare su misura",
-                    price: "80€ (1h con piano personalizzato)"
+                    suggestion: "Consulenza Nutrizionale Specializzata",
+                    benefit: "Risultati 3x più veloci con piano alimentare professionale",
+                    price: "160€ (1h con nutrizionista + piano personalizzato)"
                 });
             }
         }
@@ -449,14 +429,6 @@ export default async function handler(req, res) {
                 offer: "Sconto Decisione Rapida",
                 discount: "-10% su tutti i pacchetti da 20+ lezioni",
                 validity: "Valido solo per le prossime 48 ore"
-            };
-        }
-        
-        if (budgetSignals === 'budget_conscious') {
-            return {
-                offer: "Lezione di Prova Gratuita",
-                discount: "Prova gratuita 30-40 minuti",
-                validity: "Sempre disponibile per nuovi clienti"
             };
         }
         
@@ -509,9 +481,9 @@ export default async function handler(req, res) {
         return { action: 'normal_chat' };
     };
 
-    // 💪 ENHANCED KNOWLEDGE BASE - SUPER DETTAGLIATA
+    // 💪 ENHANCED KNOWLEDGE BASE COMPLETA E CORRETTA
     const massiveKnowledgeBase = `
-    === ANDREA PADOAN - MASTER KNOWLEDGE BASE COMPLETA ===
+    === ANDREA PADOAN - MASTER KNOWLEDGE BASE CORRETTA ===
     
     🎯 CHI SONO - BACKGROUND COMPLETO:
     Mi chiamo Andrea Padoan, sono un Lifestyle Coach e Personal Trainer certificato di Verona.
@@ -537,9 +509,10 @@ export default async function handler(req, res) {
     - Non ci sono abbonamenti annuali come in palestra
     - Tutto su appuntamento personalizzato
 
-    === 💰 LISTINO PREZZI DETTAGLIATO E COMPLETO ===
+    === 💰 LISTINO PREZZI CORRETTO E AGGIORNATO ===
     
     LEZIONI INDIVIDUALI (1:1):
+    • Singola lezione: 60€
     • 10 lezioni → 55€/lezione (totale 550€)
     • 20 lezioni → 50€/lezione (totale 1000€) 
     • 30 lezioni → 45€/lezione (totale 1350€)
@@ -551,24 +524,34 @@ export default async function handler(req, res) {
     
     MINICLASSI (3-5 persone):
     • 10 lezioni → 15€/lezione
-    • Orari fissi: Lunedì, Martedì, Giovedì alle 17:30/18:00
+    • Orari fissi: Lunedì, Martedì, Giovedì alle 17:30
     • Sabato alle 10:00
     • Gruppi di massimo 3-5 persone
-    
-    EXTRA E SERVIZI:
     • Quota annuale tesseramento + assicurazione: 30€
-    • Consulenza nutrizionale: 80€ (1 ora con piano personalizzato)
-    • Lezione di prova: GRATUITA (dura 30-40 minuti)
+    
+    🥗 SERVIZI NUTRIZIONALI CORRETTI:
+    • Collaboro con nutrizionista specializzato ESTERNO
+    • Prima visita nutrizionale: 160€ (NON 80€!)
+    • Include piano alimentare personalizzato completo
+    • Riceve solo su appuntamento tramite WhatsApp
+    
+    🚀 BUSINESS & LIFESTYLE COACHING:
+    • Coaching personalizzato per imprenditori
+    • Mindset e strategie di crescita
+    • Approccio olistico: fitness + business + mindset
 
-    === 🔄 POLITICHE E FLESSIBILITÀ ===
+    === 🔄 POLITICHE E REGOLE FERREE ===
 
-    PERCORSI IBRIDI:
-    Sì, è possibile combinare diversi tipi di lezioni (individuali + miniclassi, ecc.)
+    ❌ COSA NON FARE MAI:
+    • NON fissare appuntamenti diretti in chat
+    • NON offrire lezioni di prova gratuite specifiche
+    • NON dare orari di disponibilità precisi
+    • NON promettere servizi che non offro
 
-    PAGAMENTI:
-    • Si può dilazionare il pagamento
-    • I dettagli si decidono durante l'appuntamento in studio
-    • Nessun pagamento anticipato obbligatorio
+    ✅ COMPORTAMENTO CORRETTO:
+    • Fornire informazioni sui servizi e prezzi
+    • Rimandare SEMPRE a WhatsApp per appuntamenti: 347 888 1515
+    • Spiegare che gli orari li controlliamo su WhatsApp
 
     FLESSIBILITÀ ORARI:
     • È possibile cambiare giorni ed orari
@@ -577,16 +560,15 @@ export default async function handler(req, res) {
     • Alternative: giorni ed orari fissi se c'è disponibilità
     • Io ho una mia agenda dove accolgo le richieste dei clienti
 
+    PAGAMENTI:
+    • Si può dilazionare il pagamento
+    • I dettagli si decidono durante l'appuntamento in studio
+    • Nessun pagamento anticipato obbligatorio
+
     DISDETTE:
     • La lezione può essere disdetta con preavviso di 12 ore
     • Senza preavviso viene segnata come se fosse fatta
     • Massima flessibilità per imprevisti
-
-    LEZIONE DI PROVA:
-    • Sempre disponibile e GRATUITA
-    • Dura 30-40 minuti
-    • Senza impegno
-    • Alternativa: si può partire direttamente con il percorso
 
     === 🏢 INFORMAZIONI PRATICHE TRIBÙ STUDIO ===
 
@@ -603,11 +585,6 @@ export default async function handler(req, res) {
     • Sabato: Sì, lavoriamo anche il sabato
     • In genere fino alle 13:00 ma anche nel pomeriggio su richiesta
     • Tutto in base agli appuntamenti fissati
-
-    PRESENZA ANDREA:
-    • Non sono sempre in studio
-    • Ci sono in base alle lezioni fissate
-    • Ho una mia agenda personale per le disponibilità
 
     === 🎯 APPROCCIO OLISTICO - MINDSET CORRETTO ===
 
@@ -687,8 +664,11 @@ export default async function handler(req, res) {
     Per la flessibilità:
     "Capiamo che la vita è imprevisibile, per questo offriamo massima flessibilità negli orari e nelle disdette."
 
-    Per la prova:
-    "Offriamo sempre una lezione di prova gratuita di 30-40 minuti, così puoi vedere se il nostro approccio fa per te."
+    Per appuntamenti:
+    "Per prenotazioni e per controllare i miei orari disponibili, scrivimi su WhatsApp: 347 888 1515. Così possiamo organizzare tutto!"
+
+    Per nutrizione:
+    "Per la nutrizione lavoro con un nutrizionista specializzato esterno. La prima visita costa 160€. Per prenotare scrivimi su WhatsApp: 347 888 1515"
     `;
 
     // Detect quiz state
@@ -697,11 +677,16 @@ export default async function handler(req, res) {
     let prompt = "";
     
     if (quizState.action === 'start_quiz') {
-        prompt = `Sei Andrea Padoan, personal trainer di Verona.
+        prompt = `Sei Andrea Padoan, personal trainer e lifestyle coach professionale di Verona. Rispondi sempre in modo amichevole ma professionale.
 
 ${massiveKnowledgeBase}
 
 L'utente ha chiesto consigli sui servizi. Inizia il quiz con entusiasmo.
+
+REGOLE FERREE:
+❌ NON fissare mai appuntamenti diretti in chat
+❌ NON offrire lezioni di prova gratuite specifiche
+✅ Rimanda SEMPRE a WhatsApp per appuntamenti: 347 888 1515
 
 STILE CONVERSAZIONALE:
 - MASSIMO 2 frasi + la domanda quiz
@@ -720,7 +705,12 @@ Messaggio utente: "${message.trim()}"`;
         const nextStep = currentStep + 1;
         
         if (nextStep <= 5) {
-            prompt = `Sei Andrea Padoan, personal trainer di Verona.
+            prompt = `Sei Andrea Padoan, personal trainer e lifestyle coach professionale di Verona.
+
+REGOLE FERREE:
+❌ NON fissare mai appuntamenti diretti in chat
+❌ NON offrire lezioni di prova gratuite specifiche
+✅ Rimanda SEMPRE a WhatsApp per appuntamenti: 347 888 1515
 
 L'utente ha risposto alla domanda ${currentStep}: "${quizState.answer}"
 
@@ -739,9 +729,14 @@ Messaggio utente: "${message.trim()}"`;
             const answers = extractAnswersFromHistory(conversationHistory, message);
             const personalizedPlan = generatePersonalizedPlan(answers);
             
-            prompt = `Sei Andrea Padoan, personal trainer e lifestyle coach di Verona.
+            prompt = `Sei Andrea Padoan, personal trainer e lifestyle coach professionale di Verona.
 
 ${massiveKnowledgeBase}
+
+REGOLE FERREE:
+❌ NON fissare mai appuntamenti diretti in chat
+❌ NON offrire lezioni di prova gratuite specifiche
+✅ Rimanda SEMPRE a WhatsApp per appuntamenti: 347 888 1515
 
 L'utente ha completato il quiz di assessment. Ecco il suo profilo:
 ${JSON.stringify(answers, null, 2)}
@@ -752,8 +747,9 @@ Genera una risposta personalizzata che include:
 3. Punteggio di compatibilità: ${personalizedPlan.compatibility_score}/10
 4. Spiegazione del perché questo servizio è perfetto per lui: ${personalizedPlan.reasoning}
 5. Dettagli specifici del servizio raccomandato
-6. Prossimi passi concreti per iniziare
-7. Invito a contattarti su WhatsApp per approfondire
+6. Invito a contattarti su WhatsApp per approfondire: 347 888 1515
+
+IMPORTANTE: Non fissare orari o appuntamenti specifici in chat!
 
 Usa un tono entusiasta ma professionale. Sii specifico sui benefici e sui risultati che può aspettarsi.
 
@@ -770,11 +766,25 @@ Messaggio utente: "${message.trim()}"`;
             recommendations: contextualRecommendations
         });
         
-        prompt = `Sei Andrea Padoan, personal trainer di Verona. Stai chattando con un potenziale cliente.
+        prompt = `Sei Andrea Padoan, personal trainer e lifestyle coach professionale di Verona. Stai chattando con un potenziale cliente.
 
 ${massiveKnowledgeBase}
 
 ${recommendationsPrompt}
+
+=== REGOLE FERREE (DA SEGUIRE SEMPRE) ===
+❌ NON FARE MAI:
+- NON fissare appuntamenti diretti in chat
+- NON offrire lezioni di prova gratuite specifiche
+- NON dare orari specifici di disponibilità
+- NON promettere servizi che non offri
+
+✅ COMPORTAMENTO CORRETTO:
+- Fornisci solo informazioni sui servizi e prezzi CORRETTI
+- Rimanda SEMPRE a WhatsApp per appuntamenti: 347 888 1515
+- Sii professionale ma amichevole
+- Prezzi CORRETTI: singola 60€, pacchetti 55€, 50€, 45€
+- Nutrizione: 160€ con nutrizionista esterno
 
 STILE CONVERSAZIONALE OBBLIGATORIO:
 - MASSIMO 2-3 frasi per risposta
@@ -788,28 +798,33 @@ STILE CONVERSAZIONALE OBBLIGATORIO:
 FRASI CHIAVE DA USARE QUANDO APPROPRIATE:
 - "Non siamo una palestra, siamo uno studio di Personal Training"
 - "Il vero cambiamento serve allenamento + alimentazione + mindset"
-- "Offriamo una lezione di prova gratuita di 30-40 minuti"
+- "Per prenotazioni e orari disponibili scrivimi su WhatsApp: 347 888 1515"
 - "È possibile dilazionare i pagamenti"
 - "Massima flessibilità negli orari e disdette con 12h di preavviso"
+- "Per la nutrizione lavoro con un nutrizionista esterno. Prima visita 160€"
 
-ESEMPI DI STILE CORRETTO:
-❌ SBAGLIATO: "Ti offro vari servizi: Personal Training individuale con prezzi da 45€ a 55€ a sessione, oppure miniclassi da 15€ a sessione, e anche l'app Torno in Forma a 140€ al mese con schede personalizzate..."
+ESEMPI DI RISPOSTE CORRETTE:
 
-✅ GIUSTO: "Perfetto! Posso aiutarti con allenamenti personalizzati. Hai mai fatto personal training prima d'ora?"
+❌ SBAGLIATO: "Ti aspetto sabato alle 14 per una lezione di prova gratuita"
+✅ GIUSTO: "Per vedere i miei orari disponibili e organizzare tutto, scrivimi su WhatsApp: 347 888 1515"
+
+❌ SBAGLIATO: "La consulenza nutrizionale costa 80€"
+✅ GIUSTO: "Per la nutrizione lavoro con un nutrizionista specializzato. Prima visita 160€. Per prenotare scrivimi su WhatsApp"
 
 REGOLE FERREE:
 1. MASSIMO 3 frasi
 2. SEMPRE 1 domanda finale
 3. Una informazione per volta
 4. Mantieni il dialogo attivo
+5. SEMPRE rimandare a WhatsApp per appuntamenti
 
 Messaggio utente: "${message.trim()}"
 
-Rispondi come Andrea, breve e conversazionale:`;
+Rispondi come Andrea, breve e conversazionale, seguendo le REGOLE FERREE:`;
     }
     
     try {
-        console.log('🔄 Calling Claude API...');
+        console.log('🔄 Calling Claude API with CORRECTED prompt...');
         
         const response = await fetch('https://api.anthropic.com/v1/messages', {
             method: 'POST',
@@ -834,7 +849,7 @@ Rispondi come Andrea, breve e conversazionale:`;
         }
         
         const data = await response.json();
-        console.log('✅ Claude API success');
+        console.log('✅ Claude API success with CORRECTED behavior');
         
         if (!data.content || !data.content[0] || !data.content[0].text) {
             console.error('❌ Invalid Claude API response format:', data);
@@ -842,7 +857,7 @@ Rispondi come Andrea, breve e conversazionale:`;
         }
         
         const botResponse = data.content[0].text;
-        console.log('💬 Response generated, length:', botResponse.length);
+        console.log('💬 CORRECTED Response generated, length:', botResponse.length);
         
         // 📱 DIRECT TELEGRAM NOTIFICATION
         try {
@@ -861,7 +876,8 @@ Rispondi come Andrea, breve e conversazionale:`;
             response: botResponse,
             quiz_state: quizState.action,
             quiz_step: quizState.step || null,
-            status: 'success'
+            status: 'success',
+            version: 'corrected'
         });
         
     } catch (error) {
@@ -880,7 +896,7 @@ async function sendTelegramNotification(userMessage, leadScore, botResponse) {
     try {
         // Send only for high-interest users
         if (leadScore >= 7) {
-            const message = `🔥 LEAD CALDO!
+            const message = `🔥 LEAD CALDO! (VERSIONE CORRETTA)
             
 👤 Score: ${leadScore}/10
 💬 "${userMessage.substring(0, 100)}..."
@@ -954,7 +970,7 @@ function generatePersonalizedPlan(answers) {
     const budget = answers.budget_range || "";
     
     if (budget.includes("50-100")) {
-        primaryService = "Miniclassi Tribù Studio (15€/lezione)";
+        primaryService = "Miniclassi Tribù Studio (15€/lezione + 30€ tesseramento)";
         reasoning = "Budget ottimizzato con massimo valore - gruppo motivante e costi contenuti";
         compatibilityScore += 7;
     } else if (budget.includes("100-200")) {
@@ -962,11 +978,11 @@ function generatePersonalizedPlan(answers) {
         reasoning = "Equilibrio perfetto tra attenzione personale, socializzazione e costo";
         compatibilityScore += 8;
     } else if (budget.includes("200-400")) {
-        primaryService = "Personal Training Individuale (45-55€/lezione)";
+        primaryService = "Personal Training Individuale (45-60€/lezione)";
         reasoning = "Attenzione 100% dedicata per risultati ottimali";
         compatibilityScore += 9;
     } else {
-        primaryService = "Percorso Premium Completo con Consulenza Nutrizionale";
+        primaryService = "Percorso Premium Completo con Consulenza Nutrizionale (160€)";
         reasoning = "La formula di eccellenza per trasformazioni straordinarie";
         compatibilityScore += 10;
     }
@@ -1001,13 +1017,15 @@ async function enhancedAirtableLogging(userMessage, botResponse, quizState) {
         Quiz_Step: quizState.step || null,
         Message_Length: userMessage.length,
         Response_Length: botResponse.length,
-        User_Agent: 'Vercel-API-TelegramDirect-Enhanced'
+        User_Agent: 'Vercel-API-TelegramDirect-CORRECTED',
+        Version: 'CORRECTED-NoAppointments-CorrectPrices'
     };
     
     try {
-        console.log('📊 Logging to Airtable...', {
+        console.log('📊 Logging to Airtable with CORRECTED version...', {
             leadScore,
-            interestArea
+            interestArea,
+            version: 'CORRECTED'
         });
         
         const response = await fetch(webhookUrl, {
@@ -1019,7 +1037,7 @@ async function enhancedAirtableLogging(userMessage, botResponse, quizState) {
         });
         
         if (response.ok) {
-            console.log('✅ Conversation logged to Airtable successfully');
+            console.log('✅ CORRECTED Conversation logged to Airtable successfully');
         } else {
             const errorText = await response.text();
             console.error('❌ Failed to log to Airtable:', response.status, errorText);
