@@ -477,32 +477,46 @@ Controlla subito! 💪`;
     }
 }
 
-// 📊 AIRTABLE API DIRETTA - SCRITTURA
+// 📊 AIRTABLE API DIRETTA - SCRITTURA CON DEBUG COMPLETO
 async function directAirtableLogging(userMessage, botResponse, quizState) {
+    console.log('🔥 [DEBUG] Starting directAirtableLogging function');
+    
     const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
     const AIRTABLE_BASE_ID = process.env.AIRTABLE_BASE_ID;
     const AIRTABLE_TABLE_NAME = process.env.AIRTABLE_TABLE_NAME || 'conversazioni';
     
-    console.log('🔍 Airtable Credentials Check:', {
+    console.log('🔍 [DEBUG] Airtable Credentials Check:', {
         hasApiKey: !!AIRTABLE_API_KEY,
         baseId: AIRTABLE_BASE_ID,
         tableName: AIRTABLE_TABLE_NAME,
-        apiKeyPrefix: AIRTABLE_API_KEY ? AIRTABLE_API_KEY.substring(0, 10) + '...' : 'MISSING'
+        apiKeyPrefix: AIRTABLE_API_KEY ? AIRTABLE_API_KEY.substring(0, 10) + '...' : 'MISSING',
+        apiKeyLength: AIRTABLE_API_KEY ? AIRTABLE_API_KEY.length : 0
     });
     
     if (!AIRTABLE_API_KEY || !AIRTABLE_BASE_ID) {
-        console.error('❌ Missing Airtable credentials:', {
+        console.error('❌ [DEBUG] Missing Airtable credentials:', {
             hasApiKey: !!AIRTABLE_API_KEY,
             hasBaseId: !!AIRTABLE_BASE_ID
         });
         return false;
     }
     
+    console.log('🔥 [DEBUG] Calling helper functions...');
+    
     const leadScore = advancedLeadScore(userMessage, botResponse);
+    console.log('🔥 [DEBUG] Lead score calculated:', leadScore);
+    
     const interestArea = intelligentInterestDetection(userMessage);
+    console.log('🔥 [DEBUG] Interest area detected:', interestArea);
+    
     const sessionId = generateSessionId();
+    console.log('🔥 [DEBUG] Session ID generated:', sessionId);
+    
     const conversationStage = detectConversationStage(userMessage);
+    console.log('🔥 [DEBUG] Conversation stage detected:', conversationStage);
+    
     const urgencyLevel = detectUrgency(userMessage);
+    console.log('🔥 [DEBUG] Urgency level detected:', urgencyLevel);
     
     const fields = {
         'User_Message': userMessage,
@@ -516,17 +530,35 @@ async function directAirtableLogging(userMessage, botResponse, quizState) {
         'Quiz_Step': quizState.step || null,
         'Message_Length': userMessage.length,
         'Response_Length': botResponse.length,
-        'User_Agent': 'Vercel-API-DirectAirtable',
+        'User_Agent': 'Vercel-API-DirectAirtable-DEBUG',
         'Timestamp': new Date().toISOString()
     };
     
+    console.log('🔥 [DEBUG] Fields object created:', JSON.stringify(fields, null, 2));
+    
     const airtableUrl = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE_NAME}`;
+    console.log('🔥 [DEBUG] Airtable URL constructed:', airtableUrl);
+    
+    const requestPayload = {
+        fields: fields
+    };
+    console.log('🔥 [DEBUG] Request payload:', JSON.stringify(requestPayload, null, 2));
+    
+    const requestHeaders = {
+        'Authorization': `Bearer ${AIRTABLE_API_KEY}`,
+        'Content-Type': 'application/json'
+    };
+    console.log('🔥 [DEBUG] Request headers (censored):', {
+        'Authorization': `Bearer ${AIRTABLE_API_KEY.substring(0, 10)}...`,
+        'Content-Type': 'application/json'
+    });
     
     try {
+        console.log('🔥 [DEBUG] About to make fetch request...');
         console.log('📊 Writing to Airtable with DIRECT API...', {
             leadScore,
             interestArea,
-            method: 'DIRECT_API',
+            method: 'DIRECT_API_DEBUG',
             baseId: AIRTABLE_BASE_ID,
             tableName: AIRTABLE_TABLE_NAME,
             url: airtableUrl
@@ -534,20 +566,21 @@ async function directAirtableLogging(userMessage, botResponse, quizState) {
         
         const response = await fetch(airtableUrl, {
             method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${AIRTABLE_API_KEY}`,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                fields: fields
-            })
+            headers: requestHeaders,
+            body: JSON.stringify(requestPayload)
         });
         
-        console.log('📡 Airtable API Response Status:', response.status);
+        console.log('🔥 [DEBUG] Fetch completed, response received');
+        console.log('📡 [DEBUG] Airtable API Response Status:', response.status);
+        console.log('📡 [DEBUG] Airtable API Response Status Text:', response.statusText);
+        console.log('📡 [DEBUG] Airtable API Response Headers:', JSON.stringify([...response.headers.entries()]));
         
         if (response.ok) {
+            console.log('🔥 [DEBUG] Response is OK, parsing JSON...');
             const result = await response.json();
+            console.log('🔥 [DEBUG] JSON parsed successfully');
             console.log('✅ DIRECT AIRTABLE SUCCESS! Record ID:', result.id);
+            console.log('📋 [DEBUG] Full result object:', JSON.stringify(result, null, 2));
             console.log('📋 Record Details:', {
                 id: result.id,
                 createdTime: result.createdTime,
@@ -555,32 +588,40 @@ async function directAirtableLogging(userMessage, botResponse, quizState) {
             });
             return true;
         } else {
+            console.log('🔥 [DEBUG] Response NOT OK, parsing error...');
             const errorText = await response.text();
-            console.error('❌ Airtable API Error:', {
+            console.error('❌ [DEBUG] Airtable API Error Details:', {
                 status: response.status,
                 statusText: response.statusText,
-                errorBody: errorText
+                errorBody: errorText,
+                url: airtableUrl,
+                requestBodySize: JSON.stringify(requestPayload).length
             });
             
             // Try to parse error for better debugging
             try {
                 const errorJson = JSON.parse(errorText);
+                console.error('❌ [DEBUG] Parsed error JSON:', JSON.stringify(errorJson, null, 2));
                 if (errorJson.error && errorJson.error.message) {
-                    console.error('❌ Airtable Error Details:', errorJson.error.message);
+                    console.error('❌ Airtable Error Message:', errorJson.error.message);
                     if (errorJson.error.type) {
                         console.error('❌ Error Type:', errorJson.error.type);
                     }
                 }
             } catch (parseError) {
-                console.error('❌ Could not parse Airtable error response');
+                console.error('❌ [DEBUG] Could not parse Airtable error response:', parseError.message);
+                console.error('❌ [DEBUG] Raw error text:', errorText);
             }
             
             return false;
         }
     } catch (error) {
+        console.error('🔥 [DEBUG] Fetch threw an exception');
         console.error('❌ Airtable logging network error:', {
             message: error.message,
-            stack: error.stack
+            stack: error.stack,
+            name: error.name,
+            cause: error.cause
         });
         return false;
     }
@@ -639,7 +680,7 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'Message is required and must be a non-empty string' });
     }
 
-            console.log('=== CHATBOT ANDREA PADOAN - API DIRETTA AIRTABLE FIXED ===');
+            console.log('=== CHATBOT ANDREA PADOAN - API DIRETTA AIRTABLE SUPER DEBUG ===');
     console.log('Received message:', message);
     console.log('User email:', userEmail);
     console.log('User name:', userName);
