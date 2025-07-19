@@ -1343,13 +1343,8 @@
 
         // Funzione per aprire il dashboard
         function openDashboard() {
-            const password = prompt('Inserisci la password per accedere al dashboard:');
-            if (password === 'tribu2024') {
-                // Per ora apre una pagina vuota, da implementare il dashboard
-                alert('Dashboard in sviluppo! Contatta Andrea per accedere ai dati.');
-            } else if (password !== null) {
-                alert('Password non corretta.');
-            }
+            // Reindirizza direttamente alla dashboard
+            window.open('./dashboard.html', '_blank');
         }
 
         // Funzione per contatti
