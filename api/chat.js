@@ -515,8 +515,18 @@ async function directAirtableLogging(userMessage, botResponse, quizState) {
     const AIRTABLE_BASE_ID = process.env.AIRTABLE_BASE_ID;
     const AIRTABLE_TABLE_NAME = process.env.AIRTABLE_TABLE_NAME || 'conversazioni';
     
+    console.log('🔍 Airtable Credentials Check:', {
+        hasApiKey: !!AIRTABLE_API_KEY,
+        baseId: AIRTABLE_BASE_ID,
+        tableName: AIRTABLE_TABLE_NAME,
+        apiKeyPrefix: AIRTABLE_API_KEY ? AIRTABLE_API_KEY.substring(0, 10) + '...' : 'MISSING'
+    });
+    
     if (!AIRTABLE_API_KEY || !AIRTABLE_BASE_ID) {
-        console.error('❌ Missing Airtable credentials');
+        console.error('❌ Missing Airtable credentials:', {
+            hasApiKey: !!AIRTABLE_API_KEY,
+            hasBaseId: !!AIRTABLE_BASE_ID
+        });
         return false;
     }
     
@@ -548,7 +558,10 @@ async function directAirtableLogging(userMessage, botResponse, quizState) {
         console.log('📊 Writing to Airtable with DIRECT API...', {
             leadScore,
             interestArea,
-            method: 'DIRECT_API'
+            method: 'DIRECT_API',
+            baseId: AIRTABLE_BASE_ID,
+            tableName: AIRTABLE_TABLE_NAME,
+            url: airtableUrl
         });
         
         const response = await fetch(airtableUrl, {
@@ -562,19 +575,33 @@ async function directAirtableLogging(userMessage, botResponse, quizState) {
             })
         });
         
+        console.log('📡 Airtable API Response Status:', response.status);
+        
         if (response.ok) {
             const result = await response.json();
             console.log('✅ DIRECT AIRTABLE SUCCESS! Record ID:', result.id);
+            console.log('📋 Record Details:', {
+                id: result.id,
+                createdTime: result.createdTime,
+                fieldsWritten: Object.keys(result.fields || {})
+            });
             return true;
         } else {
             const errorText = await response.text();
-            console.error('❌ Airtable API Error:', response.status, errorText);
+            console.error('❌ Airtable API Error:', {
+                status: response.status,
+                statusText: response.statusText,
+                errorBody: errorText
+            });
             
             // Try to parse error for better debugging
             try {
                 const errorJson = JSON.parse(errorText);
                 if (errorJson.error && errorJson.error.message) {
                     console.error('❌ Airtable Error Details:', errorJson.error.message);
+                    if (errorJson.error.type) {
+                        console.error('❌ Error Type:', errorJson.error.type);
+                    }
                 }
             } catch (parseError) {
                 console.error('❌ Could not parse Airtable error response');
@@ -583,7 +610,10 @@ async function directAirtableLogging(userMessage, botResponse, quizState) {
             return false;
         }
     } catch (error) {
-        console.error('❌ Airtable logging network error:', error);
+        console.error('❌ Airtable logging network error:', {
+            message: error.message,
+            stack: error.stack
+        });
         return false;
     }
 }
