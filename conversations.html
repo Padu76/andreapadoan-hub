@@ -1227,6 +1227,11 @@
                     updateConnectionStatus('connected', 'Connesso ad Airtable');
                     updatePageStats();
                     renderConversationsList();
+                    
+                    // Check URL parameters after data loads
+                    setTimeout(() => {
+                        checkUrlParameters();
+                    }, 500);
                 } else {
                     throw new Error(`API Error: ${response.status}`);
                 }
@@ -1877,25 +1882,9 @@
                         if (conversationElement) {
                             conversationElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
                         }
-                    }, 500);
+                    }, 100);
                 }
             }
-        }
-
-        // Enhanced init to support URL params
-        const originalInitDashboard = initDashboard;
-        function initDashboard() {
-            originalInitDashboard();
-            
-            // Check URL parameters after data loads
-            const checkParams = () => {
-                if (conversationsData.length > 0) {
-                    checkUrlParameters();
-                } else {
-                    setTimeout(checkParams, 100);
-                }
-            };
-            checkParams();
         }
 
         // Keyboard shortcuts
