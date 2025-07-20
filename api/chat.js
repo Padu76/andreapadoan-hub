@@ -847,9 +847,9 @@ export default async function handler(req, res) {
         }
     };
 
-    // 💪 ENHANCED KNOWLEDGE BASE COMPLETA E CORRETTA
+    // 💪 ENHANCED KNOWLEDGE BASE COMPLETA E AGGIORNATA
     const massiveKnowledgeBase = `
-    === ANDREA PADOAN - MASTER KNOWLEDGE BASE CORRETTA ===
+    === ANDREA PADOAN - MASTER KNOWLEDGE BASE COMPLETA ===
     
     🎯 CHI SONO - BACKGROUND COMPLETO:
     Mi chiamo Andrea Padoan, sono un Lifestyle Coach e Personal Trainer certificato di Verona.
@@ -867,13 +867,32 @@ export default async function handler(req, res) {
     In base agli obiettivi che devi raggiungere verrà stesa una programmazione e ad ogni lezione il Personal Trainer ti guida passo-passo attraverso l'esecuzione corretta degli esercizi.
     Verrà creato un percorso in base al tuo livello di partenza e ti guideremo al miglioramento della tua salute e prestazione fisica."
 
+    📍 INDIRIZZO E POSIZIONE:
+    Via Albere 27/B, 37138 Verona VR
+    Zona Stadio
+    Google Maps: https://www.google.com/maps/dir//Via+Albere,+27%2FB,+37138+Verona+VR/@45.4321751,10.8927201,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x4781e1e545a49323:0x1f7f0cf7d32e6e09!2m2!1d10.9751207!2d45.4322047?entry=ttu&g_ep=EgoyMDI1MDcxNi4wIKXMDSoASAFQAw%3D%3D
+
+    🚗 COME RAGGIUNGERCI:
+    - PARCHEGGIO: Disponibile presso lo studio
+    - MEZZI PUBBLICI: Autobus linee 11, 12, 95
+    - AUTO: Zona Stadio, facilmente raggiungibile dal centro
+
+    ⏰ ORARI E PRENOTAZIONI:
+    - Su appuntamento tramite WhatsApp: 347 888 1515
+    - Orari flessibili dalle 6:00 alle 21:00
+    - Anche sabato mattina su richiesta
+
     CARATTERISTICHE DELLO STUDIO:
     - La lezione dura 1 ora 
     - Consigliamo inizialmente 2 sessioni alla settimana
-    - Lavoriamo dalle 6:00 alle 21:00 
     - Staff specializzato in diversi ambiti: posturale, tonificazione, dimagrimento, preparazione atletica
     - Non ci sono abbonamenti annuali come in palestra
     - Tutto su appuntamento personalizzato
+
+    🎯 TIPOLOGIE DI ALLENAMENTO DISPONIBILI:
+    1. LEZIONI INDIVIDUALI (1:1) - Massima attenzione personalizzata
+    2. LEZIONI DI COPPIA (2:1) - Perfette per allenarsi insieme 
+    3. MINICLASSI (3-5 persone) - Gruppo motivante, costi contenuti
 
     === 💰 LISTINO PREZZI CORRETTO E AGGIORNATO ===
     
@@ -918,6 +937,7 @@ export default async function handler(req, res) {
     • Fornire informazioni sui servizi e prezzi
     • Rimandare SEMPRE a WhatsApp per appuntamenti: 347 888 1515
     • Spiegare che gli orari li controlliamo su WhatsApp
+    • Fornire l'indirizzo e info su come raggiungerci quando richiesto
 
     FLESSIBILITÀ ORARI:
     • È possibile cambiare giorni ed orari
@@ -936,12 +956,75 @@ export default async function handler(req, res) {
     • Senza preavviso viene segnata come se fosse fatta
     • Massima flessibilità per imprevisti
 
+    === 🏢 INFORMAZIONI PRATICHE TRIBÙ STUDIO ===
+
+    ABBIGLIAMENTO:
+    • Scarpe pulite o senza scarpe con calze
+    • Portare asciugamano e borraccia
+
+    SERVIZI DISPONIBILI:
+    • Doccia: Sì, è possibile fare la doccia
+    • Parcheggio: Disponibile presso lo studio
+    • Animali: No, per questioni igieniche non sono ammessi
+
+    COME ARRIVARE:
+    • Indirizzo: Via Albere 27/B, 37138 Verona VR (Zona Stadio)
+    • Auto: Parcheggio disponibile
+    • Mezzi pubblici: Autobus linee 11, 12, 95
+    • Google Maps: https://www.google.com/maps/dir//Via+Albere,+27%2FB,+37138+Verona+VR/@45.4321751,10.8927201,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x4781e1e545a49323:0x1f7f0cf7d32e6e09!2m2!1d10.9751207!2d45.4322047?entry=ttu&g_ep=EgoyMDI1MDcxNi4wIKXMDSoASAFQAw%3D%3D
+
     === 🔗 CONTATTI E PRENOTAZIONI ===
     
     WhatsApp: 347 888 1515 (PREFERITO - risposta rapida)
     Email: andrea.padoan@gmail.com
     Sito Personal Training: https://www.personaltrainerverona.it
-    Sito Tribù Studio: https://www.tribuptstudio.it
+    Sito Tribù Studio: https://www.tribustudio.it
+
+    === 📚 EBOOK E RISORSE ===
+    
+    4 EBOOK DISPONIBILI:
+    1. "IL WAVE SYSTEM" - 14.90€
+    2. "In Forma da 2 Milioni di Anni" - 19.90€ 
+    3. "50 WORKOUT da Viaggio" - GRATUITO
+    4. "BODY UNDER CONSTRUCTION VOL: 1" - 29.90€
+    
+    Store: andrepad.gumroad.com
+
+    === 🎯 ALTRI PROGETTI ===
+    
+    UPSTART: https://upstarter-tf9x.vercel.app/
+    - Validazione idee di business
+    - Consulenza strategica gratuita
+
+    MEALPREP PLANNER: https://mealprep-planner.vercel.app/
+    - Pianificazione pasti settimanali
+    - Web app gratuita
+
+    LIFESTYLE COACH: https://tribucoach.vercel.app/
+    - Mindset e cambiamento totale
+    - "La soluzione completa... perché dieta e allenamento non bastano!"
+
+    === 📱 APP "TORNO IN FORMA" - SERVIZIO SOLO SCHEDE DIGITALI ===
+    
+    PREZZI APP (SOLO SCHEDE + UTILIZZO APP):
+    • 1 mese → 70€ 
+    • 3 mesi → 200€ (risparmio - CONSIGLIATO)
+    • 6 mesi → 380€ (risparmio maggiore - TRASFORMAZIONE COMPLETA)
+    
+    COSA INCLUDE:
+    • Scheda di allenamento mensile personalizzata in base agli obiettivi
+    • Utilizzo dell'app con database esercizi completo
+    • Video dimostrativi per ogni esercizio
+    • Possibilità di inserire i pesi utilizzati
+    • Tracciamento misurazioni corporee
+    • Monitoraggio progressi
+    
+    COSA NON INCLUDE:
+    • Chat diretta con Andrea
+    • Call mensili di follow-up
+    • Consulenza nutrizionale personalizzata
+    
+    IMPORTANTE: Questo è un servizio di sole schede digitali, diverso dal Personal Training in studio.
 
     === 🔥 FRASI CHIAVE DA USARE ===
 
@@ -959,6 +1042,9 @@ export default async function handler(req, res) {
 
     Per nutrizione:
     "Per la nutrizione lavoro con un nutrizionista specializzato esterno. La prima visita costa 160€. Per prenotare scrivimi su WhatsApp: 347 888 1515"
+    
+    Per la location:
+    "Lo studio si trova in Via Albere 27/B a Verona, zona Stadio. C'è parcheggio disponibile e puoi raggiungerci con gli autobus 11, 12 o 95. Ti mando la posizione: [Google Maps link]"
     `;
 
     // Detect quiz state
