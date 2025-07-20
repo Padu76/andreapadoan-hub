@@ -1309,6 +1309,11 @@
         let conversationHistory = [];
         let isTyping = false;
         let sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substring(2, 8);
+        let userInfo = {
+            name: null,
+            phone: null,
+            collected: false
+        };
 
         // ======================================
         // 🚀 ESSENTIAL FUNCTIONS
@@ -1333,11 +1338,16 @@
                 chatOverlay.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
                 
-                // Focus sull'input dopo un breve delay
-                setTimeout(() => {
-                    const input = document.getElementById('chatInput');
-                    if (input) input.focus();
-                }, 100);
+                // Se non abbiamo i dati utente, mostra il form
+                if (!userInfo.collected) {
+                    showContactForm();
+                } else {
+                    // Focus sull'input dopo un breve delay
+                    setTimeout(() => {
+                        const input = document.getElementById('chatInput');
+                        if (input) input.focus();
+                    }, 100);
+                }
                 
                 // Animazione avatar hero
                 const heroAvatar = document.getElementById('heroAvatar');
