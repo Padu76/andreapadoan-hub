@@ -82,11 +82,11 @@
         }
 
         .profile-image {
-            width: 180px;
-            height: 180px;
+            width: 220px; /* AUMENTATO da 180px */
+            height: 220px; /* AUMENTATO da 180px */
             border-radius: 50%;
             background: linear-gradient(45deg, #ff6b35, #ff8c5a);
-            padding: 4px;
+            padding: 5px; /* AUMENTATO da 4px */
             margin-bottom: 20px;
         }
 
@@ -103,7 +103,7 @@
         .main-cta {
             background: linear-gradient(45deg, #ff6b35, #ff8c5a);
             color: #fff;
-            padding: 18px 40px;
+            padding: 20px 45px; /* AUMENTATO padding per testo più lungo */
             border: none;
             border-radius: 50px;
             font-size: 18px;
@@ -112,6 +112,7 @@
             transition: all 0.3s;
             margin-bottom: 30px;
             box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+            max-width: 450px; /* AGGIUNTO per gestire testo lungo */
         }
 
         .main-cta:hover {
@@ -826,17 +827,34 @@
             transform: scale(1.05);
         }
 
-        /* Social Section */
+        /* Social Section - ENHANCED */
         .social-section {
             background: #1a1a1a;
-            padding: 60px 20px;
+            padding: 80px 20px; /* AUMENTATO da 60px */
             text-align: center;
         }
 
         .social-title {
             color: #ff6b35;
-            font-size: 2rem;
+            font-size: 2.5rem; /* AUMENTATO da 2rem */
+            margin-bottom: 20px; /* RIDOTTO per aggiungere call to action */
+            font-weight: bold;
+        }
+
+        /* NUOVA CALL TO ACTION */
+        .social-call-to-action {
+            color: #fff;
+            font-size: 1.3rem;
             margin-bottom: 40px;
+            font-weight: 600;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.4;
+        }
+
+        .social-call-to-action .highlight {
+            color: #ff6b35;
             font-weight: bold;
         }
 
@@ -937,6 +955,19 @@
                 font-size: 2.5rem;
             }
             
+            /* RESPONSIVE per immagine profilo più grande */
+            .profile-image {
+                width: 200px;
+                height: 200px;
+            }
+
+            /* RESPONSIVE per pulsante più lungo */
+            .main-cta {
+                padding: 18px 35px;
+                font-size: 16px;
+                max-width: 350px;
+            }
+            
             .chat-messages {
                 padding: 20px 15px;
             }
@@ -1004,6 +1035,16 @@
                 max-width: 300px;
                 justify-content: center;
             }
+
+            /* RESPONSIVE per sezione social */
+            .social-title {
+                font-size: 2rem;
+            }
+
+            .social-call-to-action {
+                font-size: 1.1rem;
+                padding: 0 10px;
+            }
         }
     </style>
 </head>
@@ -1025,7 +1066,7 @@
         </div>
 
         <button class="main-cta" onclick="openChat()">
-            <i class="fas fa-rocket"></i> Inizia il tuo percorso
+            <i class="fas fa-rocket"></i> Chiedimi tutte le info sui miei servizi
         </button>
     </div>
 
@@ -1037,7 +1078,7 @@
                 <div class="project-image" style="background-image: url('./images/andrea-personal-training.jpg');"></div>
                 <div class="project-title">Personal Training</div>
                 <div class="project-description">Ti aiuto a trasformare il tuo corpo con allenamenti personalizzati in studio o online</div>
-                <button class="project-btn">Prenota Sessione</button>
+                <button class="project-btn">Vedi Info</button>
             </div>
 
             <div class="project-card fitness" onclick="openProject('https://www.tribuptstudio.it')">
@@ -1049,7 +1090,7 @@
 
             <div class="project-card fitness" onclick="openProject('https://tribucoach.vercel.app/')">
                 <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop');"></div>
-                <div class="project-title">Lifestyle Fitness Coach</div>
+                <div class="project-title">Percorso Lifestyle Coaching Online</div>
                 <div class="project-description"><strong>La Soluzione Completa per il Tuo Cambiamento...perché dieta e allenamento non bastano!</strong></div>
                 <button class="project-btn">Inizia Percorso</button>
             </div>
@@ -1175,7 +1216,7 @@
                         </div>
                     </div>
                 </div>
-                <button class="project-cta">Prenota Ora</button>
+                <button class="project-cta">Vedi Info</button>
             </div>
 
             <div class="project-list-item" style="--item-color: #ff6b35;" onclick="openProject('https://www.tribuptstudio.it')">
@@ -1235,8 +1276,8 @@
                     <div style="display: flex; align-items: center;">
                         <div class="project-icon" style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=200&h=200&fit=crop&crop=center');"></div>
                         <div>
-                            <div class="project-name">Lifestyle Coach</div>
-                            <div class="project-tagline">Mindset vincente per risultati duraturi</div>
+                            <div class="project-name">Percorso Lifestyle Coaching Online</div>
+                            <div class="project-tagline">La soluzione completa per il tuo cambiamento...perché dieta e allenamento non bastano!</div>
                         </div>
                     </div>
                 </div>
@@ -1247,6 +1288,10 @@
 
     <div class="social-section">
         <h2 class="social-title">Seguimi sui Social</h2>
+        <p class="social-call-to-action">
+            Unisciti alla <span class="highlight">community di oltre 15.000 persone</span> che ogni giorno si ispirano per migliorare il proprio stile di vita! 
+            <span class="highlight">📱 Contenuti esclusivi, tips quotidiani e motivazione</span> che non trovi da nessun'altra parte.
+        </p>
         <div class="social-links">
             <a href="https://www.instagram.com/andreapadoancoach/" target="_blank" class="social-link instagram" title="Instagram">
                 <i class="fab fa-instagram"></i>
@@ -1275,10 +1320,6 @@
                 <i class="fas fa-envelope" style="font-size: 1.2rem;"></i> Invia Email
             </a>
         </div>
-        
-        <button class="contact-btn" onclick="openContact()">
-            <i class="fas fa-comments"></i> Contattami Ora
-        </button>
     </div>
 
     <script>
@@ -1563,254 +1604,4 @@
             addMessage(message, true);
             input.value = '';
             
-            // Mostra typing
-            showTyping();
             
-            try {
-                // Chiamata API
-                const response = await callClaudeAPI(message);
-                
-                // Nascondi typing e mostra risposta
-                hideTyping();
-                addMessage(response);
-                
-                // Animazioni avatar
-                animateAvatarSpeaking();
-                
-                console.log('✅ Message sent successfully');
-                
-            } catch (error) {
-                hideTyping();
-                
-                // Messaggio di errore user-friendly
-                const errorMessage = 'Mi dispiace, ho avuto un problema tecnico. Riprova tra poco o contattami direttamente su WhatsApp al 347 888 1515!';
-                addMessage(errorMessage);
-                
-                console.error('❌ Send message failed:', error);
-            }
-        }
-
-        // Animazioni avatar quando parla
-        function animateAvatarSpeaking() {
-            // Avatar hero
-            const heroAvatar = document.getElementById('heroAvatar');
-            if (heroAvatar) {
-                heroAvatar.classList.add('speaking');
-                setTimeout(() => heroAvatar.classList.remove('speaking'), 2000);
-            }
-            
-            // Avatar header chat
-            const headerAvatar = document.getElementById('chatHeaderAvatar');
-            if (headerAvatar) {
-                headerAvatar.classList.add('speaking');
-                setTimeout(() => headerAvatar.classList.remove('speaking'), 2000);
-            }
-        }
-
-        // ======================================
-        // 🎯 EVENT LISTENERS
-        // ======================================
-
-        // Enter per inviare messaggio
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                const chatOverlay = document.getElementById('chatFullscreen');
-                if (chatOverlay && chatOverlay.style.display === 'flex') {
-                    e.preventDefault();
-                    sendMessage();
-                }
-            }
-            
-            // ESC per chiudere chat
-            if (e.key === 'Escape') {
-                const chatOverlay = document.getElementById('chatFullscreen');
-                if (chatOverlay && chatOverlay.style.display === 'flex') {
-                    closeChat();
-                }
-            }
-        });
-
-        // ======================================
-        // 🌟 ANIMATIONS & UI ENHANCEMENTS
-        // ======================================
-
-        // Stats animati (se presenti)
-        function startLiveStatsUpdates() {
-            setInterval(() => {
-                updateClientCount();
-            }, 15000);
-            
-            setInterval(() => {
-                updateActiveUsers();
-            }, 8000);
-        }
-
-        function updateClientCount() {
-            const clientsEl = document.getElementById('heroClientsCount');
-            if (clientsEl) {
-                const current = parseInt(clientsEl.textContent) || 500;
-                const increment = Math.random() < 0.3 ? 1 : 0;
-                if (increment) {
-                    animateCounter(clientsEl, current, current + 1);
-                }
-            }
-        }
-
-        function updateActiveUsers() {
-            const activeEl = document.getElementById('heroActiveNow');
-            if (activeEl) {
-                const current = parseInt(activeEl.textContent) || 12;
-                const change = Math.floor(Math.random() * 5) - 2;
-                const newValue = Math.max(8, Math.min(20, current + change));
-                animateCounter(activeEl, current, newValue);
-            }
-        }
-
-        function animateCounter(element, start, end) {
-            if (start === end) return;
-            
-            const duration = 800;
-            const startTime = performance.now();
-            
-            function animate(currentTime) {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                
-                const current = Math.round(start + (end - start) * progress);
-                element.textContent = current;
-                
-                if (progress < 1) {
-                    requestAnimationFrame(animate);
-                }
-            }
-            
-            requestAnimationFrame(animate);
-        }
-
-        // Scroll smooth per progetti
-        function scrollToProjects() {
-            const projectsSection = document.getElementById('projects');
-            if (projectsSection) {
-                projectsSection.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        }
-
-        // Inizializza animazioni al caricamento
-        function initializeAnimations() {
-            // Animazione project cards
-            const projectCards = document.querySelectorAll('.project-card');
-            projectCards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(50px)';
-                
-                setTimeout(() => {
-                    card.style.transition = 'all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, 200 + index * 100);
-            });
-
-            // Animazione list items
-            const listItems = document.querySelectorAll('.project-list-item');
-            listItems.forEach((item, index) => {
-                item.style.opacity = '0';
-                item.style.transform = 'translateX(-50px)';
-                
-                setTimeout(() => {
-                    item.style.transition = 'all 0.6s ease';
-                    item.style.opacity = '1';
-                    item.style.transform = 'translateX(0)';
-                }, 1000 + index * 150);
-            });
-
-            // Intersection Observer per chat section
-            const chatSection = document.querySelector('.chat-section');
-            if (chatSection) {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.style.opacity = '1';
-                            entry.target.style.transform = 'translateY(0)';
-                        }
-                    });
-                });
-
-                chatSection.style.opacity = '0';
-                chatSection.style.transform = 'translateY(50px)';
-                chatSection.style.transition = 'all 0.8s ease';
-                observer.observe(chatSection);
-            }
-        }
-
-        // ======================================
-        // 🚀 INITIALIZATION
-        // ======================================
-
-        // Inizializzazione al caricamento della pagina
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 Andrea Padoan Landing - Loading...');
-            
-            // Avvia stats live (se elementi presenti)
-            startLiveStatsUpdates();
-            
-            // Inizializza animazioni
-            initializeAnimations();
-            
-            // Log sessione
-            console.log('✅ Landing page loaded successfully!', {
-                sessionId: sessionId,
-                timestamp: new Date().toISOString()
-            });
-            
-            // Test elementi essenziali
-            const essentialElements = [
-                'chatFullscreen',
-                'chatInput', 
-                'messagesContainer'
-            ];
-            
-            essentialElements.forEach(elementId => {
-                const element = document.getElementById(elementId);
-                if (!element) {
-                    console.warn(`⚠️ Missing essential element: ${elementId}`);
-                }
-            });
-            
-            console.log('🎯 Chat system ready!');
-        });
-
-        // ======================================
-        // 🛡️ ERROR HANDLING
-        // ======================================
-
-        // Global error handler
-        window.addEventListener('error', function(e) {
-            console.error('❌ Global error:', e.error);
-            
-            // Se l'errore è nella chat, mostra messaggio user-friendly
-            if (e.error?.message?.includes('chat') || e.error?.message?.includes('Claude')) {
-                const messagesContainer = document.getElementById('messagesContainer');
-                if (messagesContainer && isTyping) {
-                    hideTyping();
-                    addMessage('Mi dispiace, ho avuto un problema tecnico. Riprova o contattami su WhatsApp!');
-                }
-            }
-        });
-
-        // Log per debug
-        console.log('📁 Andrea Padoan Landing Script loaded');
-        console.log('🔧 Available functions:', [
-            'openProject()',
-            'openChat()', 
-            'closeChat()',
-            'sendMessage()',
-            'sendQuickMessage()',
-            'openContact()',
-            'openDashboard()'
-        ]);
-    </script>
-</body>
-</html>
