@@ -54,7 +54,7 @@
 
         .hero {
             text-align: center;
-            padding: 40px 20px 30px; /* RIDOTTO PADDING */
+            padding: 40px 20px 30px;
             background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
         }
 
@@ -62,14 +62,14 @@
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 900;
             color: #ff6b35;
-            margin-bottom: 20px; /* RIDOTTO MARGINE */
+            margin-bottom: 20px;
         }
 
         .hero p {
             font-size: clamp(1.3rem, 3.5vw, 1.8rem);
             color: #fff;
             max-width: 900px;
-            margin: 0 auto 30px; /* RIDOTTO MARGINE */
+            margin: 0 auto 30px;
             line-height: 1.5;
             font-weight: bold;
         }
@@ -78,15 +78,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 20px 0; /* RIDOTTO MARGINE */
+            margin: 20px 0;
         }
 
         .profile-image {
-            width: 220px; /* AUMENTATO da 180px */
-            height: 220px; /* AUMENTATO da 180px */
+            width: 220px;
+            height: 220px;
             border-radius: 50%;
             background: linear-gradient(45deg, #ff6b35, #ff8c5a);
-            padding: 5px; /* AUMENTATO da 4px */
+            padding: 5px;
             margin-bottom: 20px;
         }
 
@@ -103,7 +103,7 @@
         .main-cta {
             background: linear-gradient(45deg, #ff6b35, #ff8c5a);
             color: #fff;
-            padding: 20px 45px; /* AUMENTATO padding per testo più lungo */
+            padding: 20px 45px;
             border: none;
             border-radius: 50px;
             font-size: 18px;
@@ -112,7 +112,7 @@
             transition: all 0.3s;
             margin-bottom: 30px;
             box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
-            max-width: 450px; /* AGGIUNTO per gestire testo lungo */
+            max-width: 450px;
         }
 
         .main-cta:hover {
@@ -830,18 +830,17 @@
         /* Social Section - ENHANCED */
         .social-section {
             background: #1a1a1a;
-            padding: 80px 20px; /* AUMENTATO da 60px */
+            padding: 80px 20px;
             text-align: center;
         }
 
         .social-title {
             color: #ff6b35;
-            font-size: 2.5rem; /* AUMENTATO da 2rem */
-            margin-bottom: 20px; /* RIDOTTO per aggiungere call to action */
+            font-size: 2.5rem;
+            margin-bottom: 20px;
             font-weight: bold;
         }
 
-        /* NUOVA CALL TO ACTION */
         .social-call-to-action {
             color: #fff;
             font-size: 1.3rem;
@@ -931,37 +930,17 @@
             font-size: 1.1rem;
         }
 
-        .contact-btn {
-            background: linear-gradient(45deg, #ff6b35, #4a7c59);
-            color: #fff;
-            padding: 18px 40px;
-            border: none;
-            border-radius: 35px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
-        }
-
-        .contact-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(255, 107, 53, 0.4);
-        }
-
         /* Mobile responsive */
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.5rem;
             }
             
-            /* RESPONSIVE per immagine profilo più grande */
             .profile-image {
                 width: 200px;
                 height: 200px;
             }
 
-            /* RESPONSIVE per pulsante più lungo */
             .main-cta {
                 padding: 18px 35px;
                 font-size: 16px;
@@ -992,7 +971,7 @@
             
             .chat-input {
                 padding: 16px 20px;
-                font-size: 16px; /* Previene zoom iOS */
+                font-size: 16px;
             }
             
             .chat-send {
@@ -1036,7 +1015,6 @@
                 justify-content: center;
             }
 
-            /* RESPONSIVE per sezione social */
             .social-title {
                 font-size: 2rem;
             }
@@ -1604,4 +1582,254 @@
             addMessage(message, true);
             input.value = '';
             
+            // Mostra typing
+            showTyping();
             
+            try {
+                // Chiamata API
+                const response = await callClaudeAPI(message);
+                
+                // Nascondi typing e mostra risposta
+                hideTyping();
+                addMessage(response);
+                
+                // Animazioni avatar
+                animateAvatarSpeaking();
+                
+                console.log('✅ Message sent successfully');
+                
+            } catch (error) {
+                hideTyping();
+                
+                // Messaggio di errore user-friendly
+                const errorMessage = 'Mi dispiace, ho avuto un problema tecnico. Riprova tra poco o contattami direttamente su WhatsApp al 347 888 1515!';
+                addMessage(errorMessage);
+                
+                console.error('❌ Send message failed:', error);
+            }
+        }
+
+        // Animazioni avatar quando parla
+        function animateAvatarSpeaking() {
+            // Avatar hero
+            const heroAvatar = document.getElementById('heroAvatar');
+            if (heroAvatar) {
+                heroAvatar.classList.add('speaking');
+                setTimeout(() => heroAvatar.classList.remove('speaking'), 2000);
+            }
+            
+            // Avatar header chat
+            const headerAvatar = document.getElementById('chatHeaderAvatar');
+            if (headerAvatar) {
+                headerAvatar.classList.add('speaking');
+                setTimeout(() => headerAvatar.classList.remove('speaking'), 2000);
+            }
+        }
+
+        // ======================================
+        // 🎯 EVENT LISTENERS
+        // ======================================
+
+        // Enter per inviare messaggio
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const chatOverlay = document.getElementById('chatFullscreen');
+                if (chatOverlay && chatOverlay.style.display === 'flex') {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            }
+            
+            // ESC per chiudere chat
+            if (e.key === 'Escape') {
+                const chatOverlay = document.getElementById('chatFullscreen');
+                if (chatOverlay && chatOverlay.style.display === 'flex') {
+                    closeChat();
+                }
+            }
+        });
+
+        // ======================================
+        // 🌟 ANIMATIONS & UI ENHANCEMENTS
+        // ======================================
+
+        // Stats animati (se presenti)
+        function startLiveStatsUpdates() {
+            setInterval(() => {
+                updateClientCount();
+            }, 15000);
+            
+            setInterval(() => {
+                updateActiveUsers();
+            }, 8000);
+        }
+
+        function updateClientCount() {
+            const clientsEl = document.getElementById('heroClientsCount');
+            if (clientsEl) {
+                const current = parseInt(clientsEl.textContent) || 500;
+                const increment = Math.random() < 0.3 ? 1 : 0;
+                if (increment) {
+                    animateCounter(clientsEl, current, current + 1);
+                }
+            }
+        }
+
+        function updateActiveUsers() {
+            const activeEl = document.getElementById('heroActiveNow');
+            if (activeEl) {
+                const current = parseInt(activeEl.textContent) || 12;
+                const change = Math.floor(Math.random() * 5) - 2;
+                const newValue = Math.max(8, Math.min(20, current + change));
+                animateCounter(activeEl, current, newValue);
+            }
+        }
+
+        function animateCounter(element, start, end) {
+            if (start === end) return;
+            
+            const duration = 800;
+            const startTime = performance.now();
+            
+            function animate(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                const current = Math.round(start + (end - start) * progress);
+                element.textContent = current;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                }
+            }
+            
+            requestAnimationFrame(animate);
+        }
+
+        // Scroll smooth per progetti
+        function scrollToProjects() {
+            const projectsSection = document.getElementById('projects');
+            if (projectsSection) {
+                projectsSection.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        // Inizializza animazioni al caricamento
+        function initializeAnimations() {
+            // Animazione project cards
+            const projectCards = document.querySelectorAll('.project-card');
+            projectCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(50px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 200 + index * 100);
+            });
+
+            // Animazione list items
+            const listItems = document.querySelectorAll('.project-list-item');
+            listItems.forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateX(-50px)';
+                
+                setTimeout(() => {
+                    item.style.transition = 'all 0.6s ease';
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateX(0)';
+                }, 1000 + index * 150);
+            });
+
+            // Intersection Observer per chat section
+            const chatSection = document.querySelector('.chat-section');
+            if (chatSection) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }
+                    });
+                });
+
+                chatSection.style.opacity = '0';
+                chatSection.style.transform = 'translateY(50px)';
+                chatSection.style.transition = 'all 0.8s ease';
+                observer.observe(chatSection);
+            }
+        }
+
+        // ======================================
+        // 🚀 INITIALIZATION
+        // ======================================
+
+        // Inizializzazione al caricamento della pagina
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Andrea Padoan Landing - Loading...');
+            
+            // Avvia stats live (se elementi presenti)
+            startLiveStatsUpdates();
+            
+            // Inizializza animazioni
+            initializeAnimations();
+            
+            // Log sessione
+            console.log('✅ Landing page loaded successfully!', {
+                sessionId: sessionId,
+                timestamp: new Date().toISOString()
+            });
+            
+            // Test elementi essenziali
+            const essentialElements = [
+                'chatFullscreen',
+                'chatInput', 
+                'messagesContainer'
+            ];
+            
+            essentialElements.forEach(elementId => {
+                const element = document.getElementById(elementId);
+                if (!element) {
+                    console.warn(`⚠️ Missing essential element: ${elementId}`);
+                }
+            });
+            
+            console.log('🎯 Chat system ready!');
+        });
+
+        // ======================================
+        // 🛡️ ERROR HANDLING
+        // ======================================
+
+        // Global error handler
+        window.addEventListener('error', function(e) {
+            console.error('❌ Global error:', e.error);
+            
+            // Se l'errore è nella chat, mostra messaggio user-friendly
+            if (e.error?.message?.includes('chat') || e.error?.message?.includes('Claude')) {
+                const messagesContainer = document.getElementById('messagesContainer');
+                if (messagesContainer && isTyping) {
+                    hideTyping();
+                    addMessage('Mi dispiace, ho avuto un problema tecnico. Riprova o contattami su WhatsApp!');
+                }
+            }
+        });
+
+        // Log per debug
+        console.log('📁 Andrea Padoan Landing Script loaded');
+        console.log('🔧 Available functions:', [
+            'openProject()',
+            'openChat()', 
+            'closeChat()',
+            'sendMessage()',
+            'sendQuickMessage()',
+            'openContact()',
+            'openDashboard()'
+        ]);
+    </script>
+</body>
+</html>
