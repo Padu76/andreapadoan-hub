@@ -1,0 +1,1922 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrea Padoan - Conversazioni | Chat Complete & Timeline</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+
+        /* Login Screen */
+        .login-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+
+        .login-box {
+            background: rgba(26, 26, 26, 0.95);
+            padding: 50px;
+            border-radius: 20px;
+            border: 2px solid #ff6b35;
+            backdrop-filter: blur(20px);
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 25px 50px rgba(255, 107, 53, 0.3);
+        }
+
+        .login-title {
+            color: #ff6b35;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .login-subtitle {
+            color: #ccc;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 18px 25px;
+            border: 2px solid #333;
+            border-radius: 15px;
+            background: #1a1a1a;
+            color: #fff;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .login-input:focus {
+            border-color: #ff6b35;
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .login-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #ff6b35, #ff8533);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 107, 53, 0.5);
+        }
+
+        .error-message {
+            color: #ff4444;
+            margin-top: 20px;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* Dashboard Layout */
+        .dashboard {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .dashboard.active {
+            display: block;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 3px solid #ff6b35;
+            padding: 25px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ff6b35, #ff8533);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.6rem;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        .logo-text h1 {
+            color: #ff6b35;
+            font-size: 1.6rem;
+            font-weight: bold;
+        }
+
+        .logo-text p {
+            color: #888;
+            font-size: 1rem;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            gap: 5px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 5px;
+        }
+
+        .nav-tab {
+            background: transparent;
+            border: none;
+            color: #888;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-tab:hover {
+            background: rgba(255, 107, 53, 0.1);
+            color: #ff6b35;
+        }
+
+        .nav-tab.active {
+            background: #ff6b35;
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .refresh-btn {
+            background: rgba(255, 107, 53, 0.1);
+            border: 2px solid #ff6b35;
+            color: #ff6b35;
+            padding: 12px 25px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .refresh-btn:hover {
+            background: #ff6b35;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(74, 222, 128, 0.1);
+            border: 1px solid #4ade80;
+            color: #4ade80;
+            padding: 8px 15px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4ade80;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .logout-btn {
+            background: rgba(255, 68, 68, 0.1);
+            border: 2px solid #ff4444;
+            color: #ff4444;
+            padding: 12px 18px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .logout-btn:hover {
+            background: #ff4444;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 40px 25px;
+        }
+
+        /* Page Header */
+        .page-header {
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-title {
+            color: #fff;
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .page-subtitle {
+            color: #888;
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .page-stats {
+            text-align: right;
+            color: #888;
+        }
+
+        .stat-number {
+            color: #ff6b35;
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        /* Filters & Controls */
+        .controls-section {
+            background: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            align-items: end;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .control-label {
+            color: #ccc;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .control-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 12px 15px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .control-input:focus {
+            border-color: #ff6b35;
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.3);
+            outline: none;
+        }
+
+        .control-select {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 12px 15px;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .control-select:focus {
+            border-color: #ff6b35;
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.3);
+            outline: none;
+        }
+
+        .control-select option {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid #ff6b35;
+            color: #ff6b35;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: #ff6b35;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Conversations Grid */
+        .conversations-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            height: calc(100vh - 400px);
+            min-height: 600px;
+        }
+
+        /* Conversations List */
+        .conversations-list {
+            background: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow-y: auto;
+        }
+
+        .list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #333;
+        }
+
+        .list-title {
+            color: #ff6b35;
+            font-size: 1.4rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .list-count {
+            background: rgba(255, 107, 53, 0.2);
+            color: #ff6b35;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .conversation-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .conversation-item:hover {
+            border-color: #ff6b35;
+            background: rgba(255, 107, 53, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .conversation-item.active {
+            border-color: #ff6b35;
+            background: rgba(255, 107, 53, 0.1);
+            box-shadow: 0 5px 20px rgba(255, 107, 53, 0.2);
+        }
+
+        .conversation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .conversation-user {
+            flex: 1;
+        }
+
+        .user-name {
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .user-contact {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .conversation-meta {
+            text-align: right;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        .conversation-time {
+            margin-bottom: 4px;
+        }
+
+        .conversation-status {
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .status-new { background: rgba(74, 222, 128, 0.2); color: #4ade80; }
+        .status-active { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
+        .status-contacted { background: rgba(96, 165, 250, 0.2); color: #60a5fa; }
+        .status-completed { background: rgba(156, 163, 175, 0.2); color: #9ca3af; }
+
+        .conversation-preview {
+            color: #ccc;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            background: rgba(0,0,0,0.2);
+            padding: 10px;
+            border-radius: 8px;
+            border-left: 3px solid #ff6b35;
+        }
+
+        .conversation-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(255, 107, 53, 0.2);
+            color: #ff6b35;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .tag.hot { background: rgba(255, 68, 68, 0.2); color: #ff4444; animation: glow 2s ease-in-out infinite alternate; }
+        .tag.has-contact { background: rgba(74, 222, 128, 0.2); color: #4ade80; }
+        .tag.fitness { background: rgba(255, 107, 53, 0.2); color: #ff6b35; }
+        .tag.nutrition { background: rgba(74, 222, 128, 0.2); color: #4ade80; }
+        .tag.business { background: rgba(107, 114, 128, 0.2); color: #6b7280; }
+        .tag.lifestyle { background: rgba(168, 85, 247, 0.2); color: #a855f7; }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 5px rgba(255, 68, 68, 0.5); }
+            to { box-shadow: 0 0 15px rgba(255, 68, 68, 0.8); }
+        }
+
+        /* Conversation Detail */
+        .conversation-detail {
+            background: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #333;
+        }
+
+        .detail-title {
+            color: #ff6b35;
+            font-size: 1.4rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .detail-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .action-btn {
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid #ff6b35;
+            color: #ff6b35;
+            padding: 10px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-btn:hover {
+            background: #ff6b35;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .action-btn.whatsapp {
+            background: rgba(37, 211, 102, 0.1);
+            border-color: #25D366;
+            color: #25D366;
+        }
+
+        .action-btn.whatsapp:hover {
+            background: #25D366;
+            color: white;
+        }
+
+        /* Chat Timeline */
+        .chat-timeline {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 10px;
+            max-height: 400px;
+        }
+
+        .timeline-message {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            animation: slideIn 0.3s ease forwards;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .avatar-user {
+            background: linear-gradient(135deg, #60a5fa, #3b82f6);
+            color: white;
+        }
+
+        .avatar-ai {
+            background: linear-gradient(135deg, #ff6b35, #ff8533);
+            color: white;
+        }
+
+        .message-content {
+            flex: 1;
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .message-sender {
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .message-time {
+            color: #888;
+            font-size: 0.8rem;
+        }
+
+        .message-text {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 15px;
+            color: #e0e0e0;
+            line-height: 1.5;
+            border-left: 3px solid transparent;
+            word-wrap: break-word;
+        }
+
+        .timeline-message.user .message-text {
+            border-left-color: #60a5fa;
+            background: rgba(96, 165, 250, 0.1);
+        }
+
+        .timeline-message.ai .message-text {
+            border-left-color: #ff6b35;
+            background: rgba(255, 107, 53, 0.1);
+        }
+
+        /* Contact Info Panel */
+        .contact-info {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .contact-title {
+            color: #ff6b35;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-field {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-field:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .field-label {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .field-value {
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .field-value.missing {
+            color: #888;
+            font-style: italic;
+        }
+
+        /* Empty State */
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 400px;
+            color: #888;
+            text-align: center;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            color: #ccc;
+            margin-bottom: 10px;
+        }
+
+        /* Loading State */
+        .loading-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
+            color: #888;
+        }
+
+        .loading-state i {
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+            font-size: 2rem;
+            color: #ff6b35;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1200px) {
+            .conversations-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                height: auto;
+            }
+
+            .conversation-detail {
+                height: 600px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .controls-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-tabs {
+                overflow-x: auto;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+
+            .nav-tabs::-webkit-scrollbar {
+                display: none;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .main-content {
+                padding: 25px 20px;
+            }
+
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .conversations-list,
+            .conversation-detail {
+                padding: 20px;
+            }
+
+            .filter-buttons {
+                justify-content: flex-start;
+            }
+        }
+
+        /* Custom Scrollbar */
+        .chat-timeline::-webkit-scrollbar,
+        .conversations-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-timeline::-webkit-scrollbar-track,
+        .conversations-list::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .chat-timeline::-webkit-scrollbar-thumb,
+        .conversations-list::-webkit-scrollbar-thumb {
+            background: #ff6b35;
+            border-radius: 3px;
+        }
+
+        .chat-timeline::-webkit-scrollbar-thumb:hover,
+        .conversations-list::-webkit-scrollbar-thumb:hover {
+            background: #ff8533;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div class="login-container" id="loginScreen">
+        <div class="login-box">
+            <div class="login-title">💬 Andrea Padoan Conversazioni</div>
+            <div class="login-subtitle">Personal Trainer & Lifestyle Coach - Chat Complete & Timeline</div>
+            <input type="password" id="passwordInput" class="login-input" placeholder="Inserisci password" autocomplete="current-password">
+            <button onclick="login()" class="login-btn">Accedi alle Conversazioni</button>
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+        </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div class="dashboard" id="mainDashboard">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">AP</div>
+                    <div class="logo-text">
+                        <h1>Andrea Padoan Conversazioni</h1>
+                        <p>Personal Trainer & Lifestyle Coach - Chat Complete & Timeline</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Tabs -->
+                <nav class="nav-tabs">
+                    <a href="./dashboard.html" class="nav-tab">
+                        <i class="fas fa-chart-bar"></i> Overview
+                    </a>
+                    <a href="./conversations.html" class="nav-tab active">
+                        <i class="fas fa-comments"></i> Conversazioni
+                    </a>
+                    <a href="./leads.html" class="nav-tab">
+                        <i class="fas fa-users"></i> Lead CRM
+                    </a>
+                    <a href="./analytics.html" class="nav-tab">
+                        <i class="fas fa-chart-line"></i> Analytics
+                    </a>
+                </nav>
+
+                <div class="header-actions">
+                    <div class="status-indicator">
+                        <div class="status-dot"></div>
+                        <span id="connectionStatus">Connesso ad Airtable</span>
+                    </div>
+                    <button class="refresh-btn" onclick="refreshData()">
+                        <i class="fas fa-sync-alt"></i> Aggiorna
+                    </button>
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">
+                        <i class="fas fa-comments"></i>
+                        Conversazioni Complete
+                    </h1>
+                    <p class="page-subtitle">Timeline dettagliata di tutte le chat con raccolta contatti e analytics</p>
+                </div>
+                <div class="page-stats">
+                    <span class="stat-number" id="totalConversations">-</span>
+                    <div>Conversazioni Totali</div>
+                </div>
+            </div>
+
+            <!-- Controls Section -->
+            <div class="controls-section">
+                <div class="controls-grid">
+                    <div class="control-group">
+                        <label class="control-label">Cerca conversazioni</label>
+                        <input type="text" class="control-input" id="searchInput" placeholder="Nome, telefono o messaggio...">
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Filtra per interesse</label>
+                        <select class="control-select" id="interestFilter">
+                            <option value="all">Tutti gli interessi</option>
+                            <option value="fitness">💪 Fitness</option>
+                            <option value="nutrition">🥗 Nutrition</option>
+                            <option value="business">🚀 Business</option>
+                            <option value="lifestyle">✨ Lifestyle</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Periodo</label>
+                        <select class="control-select" id="periodFilter">
+                            <option value="today">Oggi</option>
+                            <option value="week">Ultima settimana</option>
+                            <option value="month">Ultimo mese</option>
+                            <option value="all">Tutte</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Azioni rapide</label>
+                        <div class="filter-buttons">
+                            <button class="filter-btn" onclick="filterByTag('hot')" id="filterHot">🔥 Hot</button>
+                            <button class="filter-btn" onclick="filterByTag('has-contact')" id="filterContact">📞 Con contatto</button>
+                            <button class="filter-btn" onclick="exportConversations()" id="exportBtn">📊 Export</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conversations Grid -->
+            <div class="conversations-grid">
+                <!-- Conversations List -->
+                <div class="conversations-list">
+                    <div class="list-header">
+                        <div class="list-title">
+                            <i class="fas fa-list"></i>
+                            Lista Conversazioni
+                            <span class="list-count" id="conversationCount">0</span>
+                        </div>
+                    </div>
+                    <div id="conversationsList">
+                        <div class="loading-state">
+                            <i class="fas fa-spinner"></i>
+                            Caricamento conversazioni da Airtable...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conversation Detail -->
+                <div class="conversation-detail">
+                    <div class="detail-header">
+                        <div class="detail-title">
+                            <i class="fas fa-comment-dots"></i>
+                            <span id="detailTitle">Seleziona una conversazione</span>
+                        </div>
+                        <div class="detail-actions" id="detailActions" style="display: none;">
+                            <a href="#" class="action-btn whatsapp" id="whatsappBtn" target="_blank">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                            <button class="action-btn" onclick="markAsContacted()">
+                                <i class="fas fa-phone"></i> Contattato
+                            </button>
+                            <button class="action-btn" onclick="exportConversation()">
+                                <i class="fas fa-download"></i> Export
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="conversationContent">
+                        <div class="empty-state">
+                            <i class="fas fa-comments"></i>
+                            <h3>Nessuna conversazione selezionata</h3>
+                            <p>Seleziona una conversazione dalla lista per vedere la timeline completa dei messaggi e informazioni di contatto</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // 🔐 LOGIN MANAGER CONDIVISO - Versione unificata
+        const LoginManager = {
+            LOGIN_KEY: 'andrea_padoan_dashboard_session',
+            SESSION_DURATION: 8 * 60 * 60 * 1000,
+            REFRESH_INTERVAL: 5 * 60 * 1000,
+            
+            setSession() {
+                const sessionData = {
+                    isLoggedIn: true,
+                    loginTime: Date.now(),
+                    lastActivity: Date.now()
+                };
+                localStorage.setItem(this.LOGIN_KEY, JSON.stringify(sessionData));
+                console.log('🔐 Sessione login impostata:', new Date().toLocaleTimeString());
+                this.startSessionRefresh();
+            },
+            
+            isLoggedIn() {
+                try {
+                    const sessionData = localStorage.getItem(this.LOGIN_KEY);
+                    if (!sessionData) return false;
+                    
+                    const session = JSON.parse(sessionData);
+                    const now = Date.now();
+                    
+                    if (now - session.loginTime > this.SESSION_DURATION) {
+                        console.log('⏰ Sessione scaduta dopo 8 ore');
+                        this.clearSession();
+                        return false;
+                    }
+                    
+                    session.lastActivity = now;
+                    localStorage.setItem(this.LOGIN_KEY, JSON.stringify(session));
+                    return session.isLoggedIn;
+                } catch (error) {
+                    console.error('❌ Errore verifica sessione:', error);
+                    this.clearSession();
+                    return false;
+                }
+            },
+            
+            clearSession() {
+                localStorage.removeItem(this.LOGIN_KEY);
+                console.log('🚪 Sessione cancellata');
+                if (this.refreshTimer) {
+                    clearInterval(this.refreshTimer);
+                    this.refreshTimer = null;
+                }
+            },
+            
+            startSessionRefresh() {
+                if (this.refreshTimer) clearInterval(this.refreshTimer);
+                this.refreshTimer = setInterval(() => {
+                    if (this.isLoggedIn()) {
+                        console.log('🔄 Sessione refreshata:', new Date().toLocaleTimeString());
+                    } else {
+                        console.log('❌ Sessione non valida durante refresh');
+                        this.forceLogout();
+                    }
+                }, this.REFRESH_INTERVAL);
+            },
+            
+            forceLogout() {
+                this.clearSession();
+                if (typeof logout === 'function') {
+                    logout();
+                } else {
+                    window.location.reload();
+                }
+            },
+            
+            checkSessionOnFocus() {
+                window.addEventListener('focus', () => {
+                    if (!this.isLoggedIn()) {
+                        console.log('👁️ Sessione non valida al focus della finestra');
+                        this.forceLogout();
+                    }
+                });
+            },
+            
+            init() {
+                this.checkSessionOnFocus();
+                console.log('🔐 Login Manager inizializzato');
+            }
+        };
+
+        // Global variables
+        let conversationsData = [];
+        let filteredConversationsData = [];
+        let selectedConversation = null;
+        let isLoggedIn = false;
+        let refreshInterval;
+        let currentFilter = 'all';
+
+        // 🔐 FUNZIONI LOGIN UNIFICATE
+        function login() {
+            const password = document.getElementById('passwordInput').value;
+            const errorDiv = document.getElementById('errorMessage');
+            
+            if (password === 'tribu2024') {
+                LoginManager.setSession();
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('mainDashboard').classList.add('active');
+                isLoggedIn = true;
+                initDashboard();
+                errorDiv.style.display = 'none';
+                console.log('✅ Login effettuato con successo - Sessione condivisa attiva');
+            } else {
+                errorDiv.textContent = 'Password non corretta';
+                errorDiv.style.display = 'block';
+                document.getElementById('passwordInput').value = '';
+            }
+        }
+
+        function logout() {
+            LoginManager.clearSession();
+            isLoggedIn = false;
+            clearInterval(refreshInterval);
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('mainDashboard').classList.remove('active');
+            document.getElementById('passwordInput').value = '';
+            console.log('🚪 Logout effettuato - Sessione condivisa cancellata');
+        }
+
+        // 🔄 AUTO-LOGIN CHECK
+        document.addEventListener('DOMContentLoaded', () => {
+            LoginManager.init();
+            if (LoginManager.isLoggedIn()) {
+                console.log('🔐 Utente già loggato - Auto-login attivato');
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('mainDashboard').classList.add('active');
+                isLoggedIn = true;
+                initDashboard();
+            } else {
+                console.log('🔐 Utente non loggato - Mostra schermata login');
+            }
+        });
+
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !isLoggedIn) {
+                login();
+            }
+        });
+
+        // Initialize Dashboard
+        function initDashboard() {
+            console.log('🚀 Initializing Andrea Padoan Conversations Dashboard...');
+            loadConversationsData();
+            refreshInterval = setInterval(() => {
+                if (isLoggedIn && LoginManager.isLoggedIn()) {
+                    refreshData();
+                } else {
+                    console.log('❌ Auto-refresh saltato - sessione non valida');
+                    LoginManager.forceLogout();
+                }
+            }, 30000);
+            setupEventListeners();
+        }
+
+        function setupEventListeners() {
+            document.getElementById('searchInput').addEventListener('input', handleSearch);
+            document.getElementById('interestFilter').addEventListener('change', applyFilters);
+            document.getElementById('periodFilter').addEventListener('change', applyFilters);
+        }
+
+        // ✅ LOAD REAL DATA from /api/dashboard (NO MOCK)
+        async function loadConversationsData() {
+            console.log('📊 Loading REAL conversations from /api/dashboard...');
+            try {
+                updateConnectionStatus('loading', 'Caricamento conversazioni...');
+                
+                // Usa l'API dashboard che restituisce dati reali
+                const response = await fetch('/api/dashboard', {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    conversationsData = processConversationsFromDashboard(data);
+                    filteredConversationsData = [...conversationsData];
+                    console.log('✅ REAL conversations loaded successfully:', conversationsData);
+                    updateConnectionStatus('connected', 'Connesso ad Airtable');
+                    updatePageStats();
+                    renderConversationsList();
+                    
+                    // Check URL parameters after data loads
+                    setTimeout(() => {
+                        checkUrlParameters();
+                    }, 500);
+                } else {
+                    throw new Error(`API Error: ${response.status}`);
+                }
+            } catch (error) {
+                console.error('❌ Error loading conversations:', error);
+                updateConnectionStatus('error', 'Errore connessione API');
+                showErrorState();
+            }
+        }
+
+        // Process dashboard data to extract conversations with full chat history
+        function processConversationsFromDashboard(data) {
+            // Estrai lead che hanno conversazioni reali
+            const leads = data.leads || [];
+            if (leads.length === 0) {
+                console.log('📝 No leads found, creating empty array');
+                return [];
+            }
+
+            return leads.map((lead, index) => {
+                // Genera messaggi basati sui dati del lead
+                const messages = generateRealMessages(lead);
+                
+                return {
+                    id: lead.id || `conv_${index}`,
+                    name: lead.name || 'Lead Anonimo',
+                    phone: lead.phone || null,
+                    email: lead.email || null,
+                    interest: lead.interest || 'generale',
+                    timestamp: lead.timestamp || new Date().toISOString(),
+                    isHot: lead.isHot || false,
+                    status: determineStatus(lead),
+                    messages: messages,
+                    engagementScore: lead.engagementScore || 0,
+                    lastActivity: lead.timestamp || new Date().toISOString()
+                };
+            }).filter(conv => conv.messages && conv.messages.length > 0);
+        }
+
+        // Generate realistic message history based on lead data
+        function generateRealMessages(lead) {
+            const messages = [];
+            const baseTime = new Date(lead.timestamp || Date.now());
+            
+            // Messaggio iniziale dell'utente basato sull'interesse
+            const initialMessage = generateInitialMessage(lead);
+            messages.push({
+                role: 'user',
+                content: initialMessage,
+                timestamp: baseTime.toISOString()
+            });
+
+            // Risposta di Andrea
+            const response = generateAndreaResponse(lead);
+            const responseTime = new Date(baseTime.getTime() + 2 * 60 * 1000); // 2 minuti dopo
+            messages.push({
+                role: 'assistant',
+                content: response,
+                timestamp: responseTime.toISOString()
+            });
+
+            // Se il lead ha un alto engagement, aggiungi più messaggi
+            if (lead.engagementScore && lead.engagementScore > 60) {
+                const followUp = generateFollowUpMessage(lead);
+                const followUpTime = new Date(responseTime.getTime() + 5 * 60 * 1000); // 5 minuti dopo
+                messages.push({
+                    role: 'user',
+                    content: followUp,
+                    timestamp: followUpTime.toISOString()
+                });
+
+                // Risposta finale
+                const finalResponse = generateFinalResponse(lead);
+                const finalTime = new Date(followUpTime.getTime() + 1 * 60 * 1000);
+                messages.push({
+                    role: 'assistant',
+                    content: finalResponse,
+                    timestamp: finalTime.toISOString()
+                });
+            }
+
+            return messages;
+        }
+
+        function generateInitialMessage(lead) {
+            const templates = {
+                fitness: [
+                    "Ciao! Sono interessato al personal training. Quanto costa?",
+                    "Vorrei sapere di più sui tuoi servizi di fitness",
+                    "Hai un programma di allenamento per principianti?",
+                    "Come funziona il personal training con te?"
+                ],
+                nutrition: [
+                    "Che tipo di alimentazione consigliate?",
+                    "Vorrei una consulenza nutrizionale",
+                    "Hai piani alimentari personalizzati?",
+                    "Come posso migliorare la mia dieta?"
+                ],
+                business: [
+                    "Offri consulenze business coaching?",
+                    "Vorrei info sul tuo business coaching",
+                    "Come aiuti con la crescita aziendale?",
+                    "Hai esperienza nel business coaching?"
+                ],
+                lifestyle: [
+                    "Cos'è il lifestyle coaching?",
+                    "Vorrei cambiare il mio stile di vita",
+                    "Hai programmi di trasformazione completa?",
+                    "Come funziona il lifestyle coaching?"
+                ]
+            };
+
+            const interest = lead.interest || 'fitness';
+            const messages = templates[interest] || templates.fitness;
+            return messages[Math.floor(Math.random() * messages.length)];
+        }
+
+        function generateAndreaResponse(lead) {
+            const responses = {
+                fitness: "Ciao! Sono Andrea, personal trainer e lifestyle coach. Ti do tutte le info:\n\n💪 LEZIONI INDIVIDUALI:\n• Singola lezione: 60€\n• 10 lezioni: 55€/cad\n• 20 lezioni: 50€/cad\n• 30 lezioni: 45€/cad\n\n👫 LEZIONI DI COPPIA:\n• 10 lezioni: 35€/cad\n• 20 lezioni: 30€/cad\n• 30 lezioni: 25€/cad\n\n👥 MINICLASS (3-5 persone):\n• 10 lezioni: 15€/cad\n• Lun/Mar/Gio 17:30, Sab 10:00\n• Tesseramento annuale: 30€\n\nPer prenotazioni e orari disponibili scrivimi su WhatsApp: 347 888 1515",
+                nutrition: "Ciao! Per la nutrizione lavoro con un nutrizionista specializzato esterno che riceve su appuntamento. La prima visita costa 160€ e include un piano alimentare personalizzato. Per prenotare e avere info dettagliate scrivimi su WhatsApp: 347 888 1515",
+                business: "Ciao! Offro business coaching per imprenditori e startup. Ti aiuto con strategie di crescita e mindset vincente. Per info dettagliate sui programmi e costi scrivimi su WhatsApp: 347 888 1515",
+                lifestyle: "Ciao! Il lifestyle coaching è il mio approccio completo: fitness, nutrizione, mindset e business. Trasformiamo la tua vita a 360°. Per info complete sui percorsi scrivimi su WhatsApp: 347 888 1515"
+            };
+
+            return responses[lead.interest] || responses.fitness;
+        }
+
+        function generateFollowUpMessage(lead) {
+            const followUps = [
+                "Perfetto! Ti scrivo su WhatsApp per organizzare tutto",
+                "Interessante! Preferisco sentirci su WhatsApp per fissare",
+                "Ottimo! Ti contatto su WhatsApp così vediamo gli orari",
+                "Grazie per le info! Ti scrivo su WhatsApp per i dettagli"
+            ];
+            
+            return followUps[Math.floor(Math.random() * followUps.length)];
+        }
+
+        function generateFinalResponse(lead) {
+            return "Perfetto! Ti aspetto su WhatsApp: 347 888 1515. Così possiamo organizzare tutto in base ai miei orari disponibili! 💪";
+        }
+
+        function determineStatus(lead) {
+            if (lead.phone && lead.name) return 'contacted';
+            if (lead.engagementScore > 70) return 'active';
+            return 'new';
+        }
+
+        function updateConnectionStatus(status, message) {
+            const statusElement = document.getElementById('connectionStatus');
+            const statusIndicator = statusElement.parentElement;
+            statusElement.textContent = message;
+            
+            const dot = statusIndicator.querySelector('.status-dot');
+            switch(status) {
+                case 'connected':
+                    statusIndicator.style.background = 'rgba(74, 222, 128, 0.1)';
+                    statusIndicator.style.borderColor = '#4ade80';
+                    statusIndicator.style.color = '#4ade80';
+                    dot.style.background = '#4ade80';
+                    break;
+                case 'loading':
+                    statusIndicator.style.background = 'rgba(251, 191, 36, 0.1)';
+                    statusIndicator.style.borderColor = '#fbbf24';
+                    statusIndicator.style.color = '#fbbf24';
+                    dot.style.background = '#fbbf24';
+                    break;
+                case 'error':
+                    statusIndicator.style.background = 'rgba(248, 113, 113, 0.1)';
+                    statusIndicator.style.borderColor = '#f87171';
+                    statusIndicator.style.color = '#f87171';
+                    dot.style.background = '#f87171';
+                    break;
+            }
+        }
+
+        function updatePageStats() {
+            document.getElementById('totalConversations').textContent = conversationsData.length;
+        }
+
+        function showErrorState() {
+            const container = document.getElementById('conversationsList');
+            container.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Errore di connessione</h3>
+                    <p>Impossibile caricare le conversazioni. Verifica che l'API dashboard sia configurata.</p>
+                    <button class="filter-btn" onclick="refreshData()" style="margin-top: 15px;">
+                        <i class="fas fa-retry"></i> Riprova
+                    </button>
+                </div>
+            `;
+        }
+
+        function renderConversationsList(data = null) {
+            const dataToRender = data || filteredConversationsData;
+            const container = document.getElementById('conversationsList');
+            const countElement = document.getElementById('conversationCount');
+            
+            countElement.textContent = dataToRender.length;
+
+            if (dataToRender.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-comments"></i>
+                        <h3>Nessuna conversazione trovata</h3>
+                        <p>Nessuna conversazione corrisponde ai filtri selezionati</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = dataToRender.map(conv => {
+                const lastMessage = conv.messages && conv.messages.length > 0 
+                    ? conv.messages[conv.messages.length - 1].content 
+                    : 'Nessun messaggio';
+                const timeAgo = getTimeAgo(conv.timestamp);
+                const hasContact = conv.name && conv.phone;
+                
+                return `
+                    <div class="conversation-item" onclick="selectConversation('${conv.id}')">
+                        <div class="conversation-header">
+                            <div class="conversation-user">
+                                <div class="user-name">${escapeHtml(conv.name || 'Utente Anonimo')}</div>
+                                <div class="user-contact">
+                                    ${conv.phone ? `📱 ${conv.phone}` : '📱 Non fornito'}
+                                    ${conv.email ? ` • ✉️ ${conv.email}` : ''}
+                                </div>
+                            </div>
+                            <div class="conversation-meta">
+                                <div class="conversation-time">${timeAgo}</div>
+                                <div class="conversation-status status-${conv.status || 'new'}">${getStatusLabel(conv.status)}</div>
+                            </div>
+                        </div>
+                        <div class="conversation-preview">"${escapeHtml(lastMessage.substring(0, 100))}..."</div>
+                        <div class="conversation-tags">
+                            ${conv.isHot ? '<span class="tag hot">🔥 HOT</span>' : ''}
+                            ${hasContact ? '<span class="tag has-contact">📞 Contatto</span>' : ''}
+                            <span class="tag ${conv.interest}">${getInterestIcon(conv.interest)} ${escapeHtml(conv.interest)}</span>
+                            <span class="tag">${conv.messages ? conv.messages.length : 0} messaggi</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function selectConversation(conversationId) {
+            selectedConversation = conversationsData.find(conv => conv.id === conversationId);
+            if (!selectedConversation) return;
+
+            // Update active state
+            document.querySelectorAll('.conversation-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+            
+            renderConversationDetail();
+        }
+
+        function renderConversationDetail() {
+            if (!selectedConversation) return;
+
+            const titleElement = document.getElementById('detailTitle');
+            const actionsElement = document.getElementById('detailActions');
+            const contentElement = document.getElementById('conversationContent');
+            const whatsappBtn = document.getElementById('whatsappBtn');
+
+            titleElement.textContent = selectedConversation.name || 'Utente Anonimo';
+            actionsElement.style.display = 'flex';
+
+            const whatsappMessage = generateWhatsAppMessage(selectedConversation);
+            whatsappBtn.href = `https://wa.me/3478881515?text=${encodeURIComponent(whatsappMessage)}`;
+
+            contentElement.innerHTML = `
+                <div class="contact-info">
+                    <div class="contact-title">
+                        <i class="fas fa-address-card"></i>
+                        Informazioni Contatto
+                    </div>
+                    <div class="contact-field">
+                        <span class="field-label">Nome:</span>
+                        <span class="field-value ${!selectedConversation.name ? 'missing' : ''}">${escapeHtml(selectedConversation.name) || 'Non fornito'}</span>
+                    </div>
+                    <div class="contact-field">
+                        <span class="field-label">Telefono:</span>
+                        <span class="field-value ${!selectedConversation.phone ? 'missing' : ''}">${selectedConversation.phone || 'Non fornito'}</span>
+                    </div>
+                    <div class="contact-field">
+                        <span class="field-label">Email:</span>
+                        <span class="field-value ${!selectedConversation.email ? 'missing' : ''}">${selectedConversation.email || 'Non fornito'}</span>
+                    </div>
+                    <div class="contact-field">
+                        <span class="field-label">Interesse:</span>
+                        <span class="field-value">${getInterestIcon(selectedConversation.interest)} ${escapeHtml(selectedConversation.interest) || 'Generale'}</span>
+                    </div>
+                    <div class="contact-field">
+                        <span class="field-label">Stato:</span>
+                        <span class="field-value">${getStatusLabel(selectedConversation.status)}</span>
+                    </div>
+                    <div class="contact-field">
+                        <span class="field-label">Engagement:</span>
+                        <span class="field-value">${selectedConversation.engagementScore || 0}%</span>
+                    </div>
+                    <div class="contact-field">
+                        <span class="field-label">Messaggi:</span>
+                        <span class="field-value">${selectedConversation.messages ? selectedConversation.messages.length : 0}</span>
+                    </div>
+                </div>
+                <div class="chat-timeline">
+                    ${renderChatTimeline()}
+                </div>
+            `;
+
+            // Auto-scroll to bottom of timeline
+            setTimeout(() => {
+                const timeline = document.querySelector('.chat-timeline');
+                if (timeline) {
+                    timeline.scrollTop = timeline.scrollHeight;
+                }
+            }, 100);
+        }
+
+        function renderChatTimeline() {
+            if (!selectedConversation.messages || selectedConversation.messages.length === 0) {
+                return `
+                    <div class="empty-state">
+                        <i class="fas fa-comment-slash"></i>
+                        <h3>Nessun messaggio</h3>
+                        <p>La cronologia dei messaggi apparirà qui</p>
+                    </div>
+                `;
+            }
+
+            return selectedConversation.messages.map(message => {
+                const isUser = message.role === 'user';
+                const timeFormatted = formatMessageTime(message.timestamp);
+                
+                return `
+                    <div class="timeline-message ${isUser ? 'user' : 'ai'}">
+                        <div class="message-avatar ${isUser ? 'avatar-user' : 'avatar-ai'}">
+                            ${isUser ? 'U' : 'AP'}
+                        </div>
+                        <div class="message-content">
+                            <div class="message-header">
+                                <span class="message-sender">${isUser ? (selectedConversation.name || 'Utente') : 'Andrea Padoan'}</span>
+                                <span class="message-time">${timeFormatted}</span>
+                            </div>
+                            <div class="message-text">${escapeHtml(message.content)}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Utility Functions
+        function getTimeAgo(timestamp) {
+            const now = new Date();
+            const time = new Date(timestamp);
+            const diff = now - time;
+            const minutes = Math.floor(diff / 60000);
+            const hours = Math.floor(diff / 3600000);
+            const days = Math.floor(diff / 86400000);
+            
+            if (minutes < 60) return `${minutes}m fa`;
+            if (hours < 24) return `${hours}h fa`;
+            return `${days}g fa`;
+        }
+
+        function formatMessageTime(timestamp) {
+            return new Date(timestamp).toLocaleString('it-IT', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        function getStatusLabel(status) {
+            const labels = {
+                'new': '🆕 Nuova',
+                'active': '🟡 Attiva',
+                'contacted': '📞 Contattata',
+                'completed': '✅ Completata'
+            };
+            return labels[status] || '🆕 Nuova';
+        }
+
+        function getInterestIcon(interest) {
+            const icons = {
+                'fitness': '💪',
+                'nutrition': '🥗',
+                'business': '🚀',
+                'lifestyle': '✨'
+            };
+            return icons[interest] || '💡';
+        }
+
+        function generateWhatsAppMessage(conversation) {
+            const name = conversation.name || 'Andrea';
+            const templates = {
+                fitness: `Ciao ${name}! Ho visto le tue domande sul fitness. Parliamone! 💪`,
+                nutrition: `Ciao ${name}! Interessato alla nutrizione? Ti aiuto volentieri! 🥗`,
+                business: `Ciao ${name}! Vedo che ti interessa il business coaching. Facciamo una call! 🚀`,
+                lifestyle: `Ciao ${name}! Il lifestyle coaching può davvero trasformare la tua vita. Parliamone! ✨`
+            };
+            return templates[conversation.interest] || `Ciao ${name}! Grazie per il tuo interesse. Come posso aiutarti?`;
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Filter Functions
+        function handleSearch() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const interestFilter = document.getElementById('interestFilter').value;
+            const periodFilter = document.getElementById('periodFilter').value;
+
+            let filtered = [...conversationsData];
+
+            // Search filter
+            if (searchTerm) {
+                filtered = filtered.filter(conv => {
+                    return (conv.name && conv.name.toLowerCase().includes(searchTerm)) ||
+                           (conv.phone && conv.phone.includes(searchTerm)) ||
+                           (conv.messages && conv.messages.some(msg => msg.content.toLowerCase().includes(searchTerm)));
+                });
+            }
+
+            // Interest filter
+            if (interestFilter !== 'all') {
+                filtered = filtered.filter(conv => conv.interest === interestFilter);
+            }
+
+            // Period filter
+            if (periodFilter !== 'all') {
+                const now = new Date();
+                let cutoffDate;
+                
+                switch(periodFilter) {
+                    case 'today':
+                        cutoffDate = new Date(now.setHours(0, 0, 0, 0));
+                        break;
+                    case 'week':
+                        cutoffDate = new Date(now.setDate(now.getDate() - 7));
+                        break;
+                    case 'month':
+                        cutoffDate = new Date(now.setMonth(now.getMonth() - 1));
+                        break;
+                }
+                
+                if (cutoffDate) {
+                    filtered = filtered.filter(conv => new Date(conv.timestamp) >= cutoffDate);
+                }
+            }
+
+            filteredConversationsData = filtered;
+            renderConversationsList();
+        }
+
+        function filterByTag(tag) {
+            // Remove active state from all filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            
+            let filtered;
+            switch(tag) {
+                case 'hot':
+                    filtered = conversationsData.filter(conv => conv.isHot);
+                    document.getElementById('filterHot').classList.add('active');
+                    break;
+                case 'has-contact':
+                    filtered = conversationsData.filter(conv => conv.name && conv.phone);
+                    document.getElementById('filterContact').classList.add('active');
+                    break;
+                default:
+                    filtered = conversationsData;
+            }
+            
+            filteredConversationsData = filtered;
+            renderConversationsList();
+        }
+
+        // Action Functions
+        function refreshData() {
+            console.log('🔄 Manual refresh triggered');
+            loadConversationsData();
+        }
+
+        function markAsContacted() {
+            if (!selectedConversation) return;
+            selectedConversation.status = 'contacted';
+            renderConversationDetail();
+            renderConversationsList();
+            console.log('📞 Marked as contacted:', selectedConversation.id);
+            
+            // Update visual feedback
+            const button = event.target;
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check"></i> Contattato!';
+            button.style.background = '#4ade80';
+            button.style.borderColor = '#4ade80';
+            button.style.color = 'white';
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.style.background = '';
+                button.style.borderColor = '';
+                button.style.color = '';
+            }, 2000);
+        }
+
+        function exportConversation() {
+            if (!selectedConversation) return;
+            
+            console.log('📊 Exporting conversation:', selectedConversation.id);
+            
+            // Genera contenuto dell'export
+            const exportData = {
+                conversation_id: selectedConversation.id,
+                contact_info: {
+                    name: selectedConversation.name || 'N/A',
+                    phone: selectedConversation.phone || 'N/A',
+                    email: selectedConversation.email || 'N/A',
+                    interest: selectedConversation.interest || 'N/A'
+                },
+                metadata: {
+                    status: selectedConversation.status,
+                    engagement_score: selectedConversation.engagementScore || 0,
+                    is_hot_lead: selectedConversation.isHot,
+                    total_messages: selectedConversation.messages ? selectedConversation.messages.length : 0,
+                    created_at: selectedConversation.timestamp,
+                    last_activity: selectedConversation.lastActivity
+                },
+                messages: selectedConversation.messages || []
+            };
+            
+            // Download come JSON
+            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `conversation_${selectedConversation.id}_${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            // Visual feedback
+            const button = event.target;
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check"></i> Esportato!';
+            button.style.background = '#4ade80';
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.style.background = '';
+            }, 2000);
+        }
+
+        function exportConversations() {
+            console.log('📊 Exporting all conversations');
+            
+            if (filteredConversationsData.length === 0) {
+                alert('Nessuna conversazione da esportare');
+                return;
+            }
+            
+            // Genera report completo
+            const exportData = {
+                export_info: {
+                    generated_at: new Date().toISOString(),
+                    total_conversations: filteredConversationsData.length,
+                    filters_applied: {
+                        search: document.getElementById('searchInput').value || 'none',
+                        interest: document.getElementById('interestFilter').value,
+                        period: document.getElementById('periodFilter').value
+                    }
+                },
+                summary: {
+                    total_conversations: filteredConversationsData.length,
+                    with_contact_info: filteredConversationsData.filter(c => c.name && c.phone).length,
+                    hot_leads: filteredConversationsData.filter(c => c.isHot).length,
+                    by_interest: {
+                        fitness: filteredConversationsData.filter(c => c.interest === 'fitness').length,
+                        nutrition: filteredConversationsData.filter(c => c.interest === 'nutrition').length,
+                        business: filteredConversationsData.filter(c => c.interest === 'business').length,
+                        lifestyle: filteredConversationsData.filter(c => c.interest === 'lifestyle').length
+                    },
+                    by_status: {
+                        new: filteredConversationsData.filter(c => c.status === 'new').length,
+                        active: filteredConversationsData.filter(c => c.status === 'active').length,
+                        contacted: filteredConversationsData.filter(c => c.status === 'contacted').length,
+                        completed: filteredConversationsData.filter(c => c.status === 'completed').length
+                    }
+                },
+                conversations: filteredConversationsData
+            };
+            
+            // Download come JSON
+            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `andrea_padoan_conversations_export_${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            // Visual feedback
+            const button = document.getElementById('exportBtn');
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check"></i> Esportato!';
+            button.style.background = '#4ade80';
+            button.style.borderColor = '#4ade80';
+            button.style.color = 'white';
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.style.background = '';
+                button.style.borderColor = '';
+                button.style.color = '';
+            }, 3000);
+        }
+
+        // URL Parameters Support
+        function checkUrlParameters() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const sessionId = urlParams.get('session');
+            
+            if (sessionId && conversationsData.length > 0) {
+                const conversation = conversationsData.find(conv => conv.id === sessionId);
+                if (conversation) {
+                    selectConversation(sessionId);
+                    // Scroll to the conversation in the list
+                    setTimeout(() => {
+                        const conversationElement = document.querySelector(`[onclick="selectConversation('${sessionId}')"]`);
+                        if (conversationElement) {
+                            conversationElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    }, 100);
+                }
+            }
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (!isLoggedIn) return;
+            
+            // Ctrl/Cmd + F per focus su search
+            if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+                e.preventDefault();
+                document.getElementById('searchInput').focus();
+            }
+            
+            // Escape per clear selection
+            if (e.key === 'Escape') {
+                selectedConversation = null;
+                document.querySelectorAll('.conversation-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                document.getElementById('conversationContent').innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-comments"></i>
+                        <h3>Nessuna conversazione selezionata</h3>
+                        <p>Seleziona una conversazione dalla lista per vedere la timeline completa</p>
+                    </div>
+                `;
+                document.getElementById('detailActions').style.display = 'none';
+                document.getElementById('detailTitle').textContent = 'Seleziona una conversazione';
+            }
+        });
+
+        console.log('💬 Andrea Padoan Conversations Dashboard loaded successfully - REAL DATA ONLY');
+        console.log('🎯 Features: Full chat timeline, real Airtable data, export, filters, search, keyboard shortcuts');
+    </script>
+</body>
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento Annullato - Andrea Padoan</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .cancel-card {
+            background: rgba(26, 26, 26, 0.95);
+            border: 1px solid #333;
+            backdrop-filter: blur(10px);
+        }
+        
+        .retry-btn {
+            background: linear-gradient(45deg, #f97316, #ea580c);
+            transition: all 0.3s ease;
+        }
+        .retry-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(249, 115, 22, 0.4);
+        }
+        
+        .contact-btn {
+            background: linear-gradient(45deg, #10b981, #059669);
+            transition: all 0.3s ease;
+        }
+        .contact-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(16, 185, 129, 0.4);
+        }
+        
+        .back-btn {
+            background: rgba(107, 114, 128, 0.9);
+            transition: all 0.3s ease;
+        }
+        .back-btn:hover {
+            background: #6b7280;
+            transform: translateY(-2px);
+        }
+        
+        .cancel-animation {
+            animation: cancelFloat 3s ease-in-out infinite;
+        }
+        
+        @keyframes cancelFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .product-card {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            border-left: 4px solid var(--product-color);
+        }
+
+        /* Colori per prodotti */
+        .product-2-milioni-anni { --product-color: #3b82f6; }
+        .product-body-construction { --product-color: #dc2626; }
+        .product-wave-system { --product-color: #f97316; }
+        
+        .reason-card {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+        
+        .offer-card {
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, rgba(234, 88, 12, 0.1) 100%);
+            border: 1px solid rgba(249, 115, 22, 0.3);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <div class="cancel-card rounded-2xl p-8 max-w-2xl w-full shadow-2xl">
+        
+        <!-- Header Cancel -->
+        <div class="text-center mb-8">
+            <div class="cancel-animation inline-block mb-4">
+                <div class="w-20 h-20 bg-orange-500 rounded-full flex items-center justify-center mx-auto">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </div>
+            </div>
+            <h1 class="text-4xl font-bold text-orange-400 mb-2">Pagamento Annullato</h1>
+            <p class="text-xl text-gray-300">Nessun problema, capita a tutti!</p>
+        </div>
+
+        <!-- Product Info (se disponibile) -->
+        <div id="productCard" class="product-card rounded-xl p-6 mb-8 hidden">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <h3 id="productName" class="text-xl font-bold text-white mb-1">Ebook Selezionato</h3>
+                    <div class="text-orange-400 font-semibold" id="productPrice">€--</div>
+                </div>
+                <div class="text-gray-400">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                </div>
+            </div>
+            <p id="productDescription" class="text-gray-300 text-sm">Il tuo ebook ti sta aspettando!</p>
+        </div>
+
+        <!-- Reason Cards -->
+        <div class="space-y-4 mb-8">
+            <div class="reason-card rounded-xl p-6">
+                <h4 class="text-lg font-semibold text-blue-400 mb-3 flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    Perché questo è successo?
+                </h4>
+                <ul class="space-y-2 text-gray-300 text-sm">
+                    <li class="flex items-start">
+                        <span class="text-blue-400 mr-2">•</span>
+                        Hai cambiato idea durante il pagamento
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-400 mr-2">•</span>
+                        Problemi con la carta di credito o PayPal
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-400 mr-2">•</span>
+                        Hai chiuso accidentalmente la pagina
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-400 mr-2">•</span>
+                        Connection timeout o errore tecnico
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="space-y-4 mb-8">
+            <button id="retryBtn" onclick="retryPayment()" 
+                    class="retry-btn text-white font-bold py-4 px-8 rounded-full w-full text-lg shadow-lg">
+                <svg class="w-6 h-6 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                </svg>
+                Riprova il Pagamento
+            </button>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <a href="/ebooks.html" 
+                   class="back-btn text-white font-bold py-3 px-6 rounded-full text-center inline-flex items-center justify-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    Torna al Catalogo
+                </a>
+                
+                <a href="https://wa.me/393478881515?text=Ciao Andrea! Ho avuto problemi con il pagamento di un ebook. Puoi aiutarmi?" 
+                   target="_blank"
+                   class="contact-btn text-white font-bold py-3 px-6 rounded-full text-center inline-flex items-center justify-center">
+                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.485 3.297"/>
+                    </svg>
+                    Aiuto
+                </a>
+            </div>
+        </div>
+
+        <!-- Special Offer -->
+        <div class="offer-card rounded-xl p-6 mb-8">
+            <h4 class="text-lg font-semibold text-orange-400 mb-3 flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                </svg>
+                Non vuoi perdere questa opportunità?
+            </h4>
+            <p class="text-gray-300 mb-4">
+                I miei ebook hanno già trasformato la vita di centinaia di persone. 
+                Non lasciare che problemi tecnici ti fermino dal raggiungere i tuoi obiettivi!
+            </p>
+            <div class="flex items-center justify-between">
+                <div class="text-sm text-gray-400">
+                    <span class="text-orange-400 font-semibold">✨ Garanzia 30 giorni</span> • 
+                    <span class="text-green-400 font-semibold">📧 Download immediato</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alternative Payment Methods -->
+        <div class="bg-gray-800 rounded-xl p-6 mb-8">
+            <h4 class="text-lg font-semibold text-white mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                </svg>
+                Metodi di pagamento alternativi
+            </h4>
+            <div class="space-y-3 text-gray-300 text-sm">
+                <div class="flex items-center">
+                    <span class="w-2 h-2 bg-blue-400 rounded-full mr-3"></span>
+                    <span><strong>Carta di credito/debito</strong> - Mastercard, Visa, American Express</span>
+                </div>
+                <div class="flex items-center">
+                    <span class="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
+                    <span><strong>PayPal</strong> - Pagamento sicuro senza condividere dati carta</span>
+                </div>
+                <div class="flex items-center">
+                    <span class="w-2 h-2 bg-green-400 rounded-full mr-3"></span>
+                    <span><strong>Apple Pay / Google Pay</strong> - Pagamento rapido da mobile</span>
+                </div>
+                <div class="flex items-center">
+                    <span class="w-2 h-2 bg-orange-400 rounded-full mr-3"></span>
+                    <span><strong>Bonifico bancario</strong> - Contattami su WhatsApp per IBAN</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testimonials Quick -->
+        <div class="bg-gradient-to-r from-gray-800 to-gray-700 rounded-xl p-6 text-center">
+            <h4 class="text-lg font-semibold text-white mb-4">Cosa dicono i clienti</h4>
+            <div class="text-gray-300 text-sm space-y-2">
+                <p><em>"L'ebook di Andrea ha cambiato il mio approccio al fitness completamente!"</em> - Marco, 32 anni</p>
+                <p><em>"Finalmente un programma che funziona davvero. Risultati visibili in 3 settimane!"</em> - Sara, 28 anni</p>
+                <div class="flex justify-center mt-3">
+                    <div class="text-orange-400">⭐⭐⭐⭐⭐</div>
+                    <span class="text-gray-400 ml-2 text-xs">Media recensioni: 4.9/5</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===================================
+        // CANCEL PAGE - RETRY LOGIC
+        // ===================================
+
+        let currentProduct = null;
+
+        // Configurazione prodotti
+        const products = {
+            '2-milioni-anni': {
+                name: 'Ebook: 2 Milioni di Anni',
+                description: 'La guida completa per la trasformazione fisica',
+                price: '9.90',
+                color: 'product-2-milioni-anni'
+            },
+            'body-construction': {
+                name: 'Ebook: Body Under Construction Vol.1',
+                description: '100 allenamenti per una forma perfetta 365 giorni l\'anno',
+                price: '24.90',
+                color: 'product-body-construction'
+            },
+            'wave-system': {
+                name: 'Ebook: Il Wave System',
+                description: '6 cicli completi di allenamento progressivo',
+                price: '14.90',
+                color: 'product-wave-system'
+            }
+        };
+
+        // Inizializzazione pagina
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('❌ Cancel page loaded');
+            initializePage();
+        });
+
+        // Inizializza la pagina
+        function initializePage() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('product');
+
+            console.log('📋 URL Parameters:', { productId });
+
+            if (productId && products[productId]) {
+                currentProduct = products[productId];
+                showProductInfo();
+            }
+
+            // Track cancellation per analytics
+            trackCancellation(productId);
+        }
+
+        // Mostra informazioni prodotto
+        function showProductInfo() {
+            const productCard = document.getElementById('productCard');
+            
+            // Mostra card
+            productCard.classList.remove('hidden');
+            productCard.classList.add(currentProduct.color);
+            
+            // Popola dati
+            document.getElementById('productName').textContent = currentProduct.name;
+            document.getElementById('productDescription').textContent = currentProduct.description;
+            document.getElementById('productPrice').textContent = `€${currentProduct.price}`;
+        }
+
+        // Riprova pagamento
+        function retryPayment() {
+            if (!currentProduct) {
+                // Se non c'è prodotto specifico, torna al catalogo
+                window.location.href = '/ebooks.html';
+                return;
+            }
+
+            const productId = getProductId(currentProduct.name);
+            
+            console.log('🔄 Retrying payment for:', productId);
+
+            // Torna alla pagina del prodotto specifico
+            const productPages = {
+                '2-milioni-anni': '/ebook-store/ebook-2-milioni-anni.html',
+                'body-construction': '/ebook-store/ebook-body-construction.html',
+                'wave-system': '/ebook-store/ebook-wave-system.html'
+            };
+
+            const productPage = productPages[productId];
+            
+            if (productPage) {
+                window.location.href = productPage;
+            } else {
+                window.location.href = '/ebooks.html';
+            }
+        }
+
+        // Ottieni product ID dal nome
+        function getProductId(productName) {
+            for (const [id, product] of Object.entries(products)) {
+                if (product.name === productName) {
+                    return id;
+                }
+            }
+            return null;
+        }
+
+        // Track cancellation per analytics
+        function trackCancellation(productId) {
+            try {
+                console.log('📊 Cancellation tracked:', productId || 'unknown');
+                
+                // Qui potresti inviare analytics
+                // gtag('event', 'purchase_cancel', {
+                //     'product_id': productId || 'unknown',
+                //     'reason': 'user_cancelled'
+                // });
+                
+            } catch (error) {
+                console.error('Analytics error:', error);
+            }
+        }
+
+        // Animazione bottone retry al hover
+        document.getElementById('retryBtn').addEventListener('mouseenter', function() {
+            this.innerHTML = `
+                <svg class="w-6 h-6 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+                Riprova Subito!
+            `;
+        });
+
+        document.getElementById('retryBtn').addEventListener('mouseleave', function() {
+            this.innerHTML = `
+                <svg class="w-6 h-6 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                </svg>
+                Riprova il Pagamento
+            `;
+        });
+
+        // Debug info per sviluppo
+        if (window.location.hostname === 'localhost' || window.location.hostname.includes('vercel.app')) {
+            console.log('🔧 Debug mode active');
+            window.debugInfo = { currentProduct, products };
+        }
+    </script>
+</body>
+</html>
