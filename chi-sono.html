@@ -98,6 +98,30 @@
             background-position: center;
         }
 
+        .intro-section {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 133, 51, 0.05));
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            border-radius: 25px;
+            padding: 50px;
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .intro-title {
+            color: #ff6b35;
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .intro-text {
+            color: #fff;
+            font-size: 1.2rem;
+            line-height: 1.7;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
         .story-section {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -147,29 +171,46 @@
         }
 
         .highlight-section {
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 133, 51, 0.05));
-            border: 2px solid rgba(255, 107, 53, 0.3);
-            border-radius: 25px;
-            padding: 50px;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.15), rgba(255, 133, 51, 0.08));
+            border: 3px solid rgba(255, 107, 53, 0.4);
+            border-radius: 30px;
+            padding: 60px;
             text-align: center;
             margin-bottom: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+            z-index: -1;
         }
 
         .highlight-title {
             color: #ff6b35;
-            font-size: 2.2rem;
-            font-weight: bold;
-            margin-bottom: 25px;
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .highlight-text {
             color: #fff;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 600;
             line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
-        .achievements-section {
+        .experience-section {
             margin-bottom: 80px;
         }
 
@@ -181,42 +222,139 @@
             margin-bottom: 50px;
         }
 
-        .achievements-grid {
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #ff6b35, #ff8533);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+            padding: 0 30px;
+        }
+
+        .timeline-item:nth-child(odd) {
+            text-align: right;
+            margin-right: 50%;
+            padding-right: 40px;
+        }
+
+        .timeline-item:nth-child(even) {
+            text-align: left;
+            margin-left: 50%;
+            padding-left: 40px;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background: #ff6b35;
+            border-radius: 50%;
+            border: 4px solid #1a1a1a;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-marker {
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-marker {
+            left: -10px;
+        }
+
+        .timeline-content {
+            background: rgba(26, 26, 26, 0.8);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 107, 53, 0.3);
+        }
+
+        .timeline-year {
+            color: #ff6b35;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .timeline-event {
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .timeline-description {
+            color: #b0b0b0;
+            font-size: 0.95rem;
+        }
+
+        .philosophy-section {
+            margin-bottom: 80px;
+        }
+
+        .philosophy-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
         }
 
-        .achievement-card {
+        .philosophy-card {
             background: rgba(26, 26, 26, 0.6);
-            border-radius: 15px;
-            padding: 30px;
+            border-radius: 20px;
+            padding: 35px;
             text-align: center;
             border: 1px solid #333;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .achievement-card:hover {
+        .philosophy-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b35, #ff8533);
+        }
+
+        .philosophy-card:hover {
             border-color: #ff6b35;
-            transform: translateY(-3px);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 107, 53, 0.2);
         }
 
-        .achievement-icon {
+        .philosophy-icon {
             color: #ff6b35;
-            font-size: 2.5rem;
+            font-size: 3rem;
+            margin-bottom: 25px;
+        }
+
+        .philosophy-title {
+            color: #fff;
+            font-size: 1.4rem;
+            font-weight: bold;
             margin-bottom: 20px;
         }
 
-        .achievement-title {
-            color: #fff;
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .achievement-text {
+        .philosophy-text {
             color: #b0b0b0;
-            font-size: 0.95rem;
+            font-size: 1rem;
+            line-height: 1.6;
         }
 
         .values-section {
@@ -244,14 +382,14 @@
         }
 
         .value-emoji {
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin-bottom: 15px;
             display: block;
         }
 
         .value-title {
             color: #ff6b35;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: bold;
             margin-bottom: 10px;
         }
@@ -261,32 +399,171 @@
             font-size: 0.9rem;
         }
 
+        .questions-section {
+            margin-bottom: 80px;
+        }
+
+        .questions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .question-card {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 133, 51, 0.05));
+            border-left: 4px solid #ff6b35;
+            padding: 25px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .question-card:hover {
+            transform: translateX(5px);
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.15), rgba(255, 133, 51, 0.08));
+        }
+
+        .question-text {
+            color: #e0e0e0;
+            font-size: 1.1rem;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        .results-section {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.8), rgba(40, 40, 40, 0.8));
+            border-radius: 25px;
+            padding: 60px;
+            margin-bottom: 80px;
+        }
+
+        .results-title {
+            color: #ff6b35;
+            font-size: 2.3rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .results-subtitle {
+            color: #fff;
+            font-size: 1.4rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .results-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .result-item {
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .result-icon {
+            color: #ff6b35;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .result-text {
+            color: #e0e0e0;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .method-section {
+            margin-bottom: 80px;
+        }
+
+        .method-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .method-step {
+            background: rgba(26, 26, 26, 0.8);
+            border-radius: 20px;
+            padding: 35px;
+            border: 2px solid rgba(255, 107, 53, 0.2);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .method-step:hover {
+            border-color: rgba(255, 107, 53, 0.5);
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #ff6b35, #ff8533);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .step-title {
+            color: #ff6b35;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            margin-top: 10px;
+        }
+
+        .step-description {
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
         .cta-section {
             background: linear-gradient(45deg, #ff6b35, #ff8c5a);
             border-radius: 25px;
-            padding: 50px;
+            padding: 60px;
             text-align: center;
             margin-bottom: 50px;
         }
 
         .cta-title {
             color: #fff;
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: bold;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .cta-text {
             color: #fff;
-            font-size: 1.2rem;
-            margin-bottom: 30px;
+            font-size: 1.3rem;
+            margin-bottom: 35px;
             opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .cta-buttons {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 25px;
             flex-wrap: wrap;
         }
 
@@ -294,44 +571,22 @@
             background: rgba(255, 255, 255, 0.2);
             color: #fff;
             border: 2px solid rgba(255, 255, 255, 0.3);
-            padding: 15px 30px;
+            padding: 18px 35px;
             border-radius: 30px;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: bold;
             text-decoration: none;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .cta-btn:hover {
             background: rgba(255, 255, 255, 0.3);
             border-color: rgba(255, 255, 255, 0.5);
-            transform: translateY(-2px);
-        }
-
-        .questions-section {
-            margin-bottom: 60px;
-        }
-
-        .questions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .question-card {
-            background: rgba(255, 107, 53, 0.05);
-            border-left: 4px solid #ff6b35;
-            padding: 20px;
-            border-radius: 10px;
-        }
-
-        .question-text {
-            color: #e0e0e0;
-            font-size: 1rem;
-            font-style: italic;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
 
         /* Mobile Responsive */
@@ -349,13 +604,30 @@
                 padding: 30px 25px;
             }
 
-            .highlight-section {
+            .highlight-section, .intro-section {
                 padding: 35px 25px;
             }
 
             .profile-image-large {
                 width: 250px;
                 height: 250px;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                margin-left: 60px !important;
+                margin-right: 0 !important;
+                text-align: left !important;
+                padding-left: 40px !important;
+                padding-right: 0 !important;
+            }
+
+            .timeline-marker {
+                left: -10px !important;
+                right: auto !important;
             }
 
             .cta-buttons {
@@ -367,6 +639,10 @@
                 width: 100%;
                 max-width: 280px;
                 justify-content: center;
+            }
+
+            .results-section, .method-section {
+                padding: 40px 25px;
             }
         }
     </style>
@@ -383,11 +659,23 @@
         <!-- Hero Section -->
         <div class="hero-section">
             <h1 class="hero-title">Chi Sono</h1>
-            <p class="hero-subtitle">Andrea Padoan - Da Manager a Personal Trainer</p>
+            <p class="hero-subtitle">Andrea Padoan - Da Manager a Lifestyle Coach</p>
             
             <div class="profile-image-large">
                 <div class="profile-content-large"></div>
             </div>
+        </div>
+
+        <!-- Intro Section -->
+        <div class="intro-section">
+            <h2 class="intro-title">La Mia Missione</h2>
+            <p class="intro-text">
+                Quello che avevo iniziato come passione, è diventato oggi il mio lavoro:<br>
+                <strong>AIUTARE LE PERSONE A STARE BENE</strong><br><br>
+                In qualità di Lifestyle Coach & Personal Trainer aiuto, sostengo e motivo i miei clienti 
+                a raggiungere i risultati di benessere fisico e mentale che desiderano, attraverso sessioni 
+                di coaching ed allenamento, formulati in base alle singole e personali caratteristiche.
+            </p>
         </div>
 
         <!-- Story Cards -->
@@ -396,12 +684,12 @@
                 <div class="story-icon">
                     <i class="fas fa-briefcase"></i>
                 </div>
-                <h3 class="story-title">La Mia Storia</h3>
+                <h3 class="story-title">La Mia Storia Professionale</h3>
                 <p class="story-text">
                     Mi chiamo Andrea Padoan, sono un Lifestyle Coach e Personal Trainer certificato. 
-                    Dopo oltre 12 anni in importanti aziende commerciali ricoprendo cariche manageriali 
-                    nel Marketing e nelle Vendite, ho capito che dovevo lavorare a qualcosa di gratificante 
-                    e salutare per me stesso ed utile per chi mi stava attorno.
+                    Dopo oltre 12 anni passati all'interno di importanti aziende commerciali e produttive, 
+                    ricoprendo cariche Manageriali nel Marketing e nelle Vendite, ho capito che dovevo lavorare 
+                    a qualcosa di gratificante e salutare per me stesso ed utile per chi mi stava attorno.
                 </p>
             </div>
 
@@ -412,8 +700,9 @@
                 <h3 class="story-title">Il Momento di Svolta</h3>
                 <p class="story-text">
                     Un giorno mi sono guardato allo specchio e dopo 30 anni ho visto ciò che non volevo diventare: 
-                    ero in sovrappeso e intuii che sarei andato incontro a piccoli problemi di salute. 
-                    In quel momento ho deciso che non volevo più percorrere quella strada.
+                    ero in <strong>sovrappeso</strong> e intuii che sarei andato incontro a piccoli problemi di salute. 
+                    In quel momento ho deciso che non volevo più percorrere quella strada e mi sono appellato al mio 
+                    passato di sportivo.
                 </p>
             </div>
 
@@ -423,8 +712,8 @@
                 </div>
                 <h3 class="story-title">Da "OFF" a "ON"</h3>
                 <p class="story-text">
-                    Sono stato anche io uno come te... che tornato a casa dal lavoro si sentiva così stanco 
-                    da premere il pulsante "OFF" sino al giorno dopo. Oggi la mia vita è cambiata. 
+                    Sono stato anche io uno come te e come tanti altri...che tornato a casa dal lavoro si sentiva 
+                    così stanco da premere il pulsante "OFF" sino al giorno dopo. Oggi la mia vita è cambiata. 
                     Dove prima la mia giornata finiva, ora inizia davvero! Il pulsante "OFF" è diventato "ON".
                 </p>
             </div>
@@ -433,67 +722,119 @@
                 <div class="story-icon">
                     <i class="fas fa-rocket"></i>
                 </div>
-                <h3 class="story-title">La Trasformazione</h3>
+                <h3 class="story-title">La Trasformazione Completa</h3>
                 <p class="story-text">
-                    Ho migliorato il mio stile di vita: potenziato la resistenza allo stress mentale e fisica, 
-                    ho imparato a costruire qualcosa ogni giorno, ho eliminato farmaci, ho raggiunto una buona 
-                    forma fisica, ho ritrovato in me una energia sepolta che rischiava di rimanere sotterrata per sempre.
+                    Ho migliorato il mio stile di vita: potenziato la resistenza allo stress mentale e la resistenza fisica; 
+                    ho imparato a costruire qualcosa ogni giorno, ho eliminato farmaci, ho raggiunto una buona forma fisica, 
+                    ho ritrovato in me una energia sepolta che rischiava di rimanere sotterrata per sempre.
                 </p>
             </div>
         </div>
 
-        <!-- Highlight Section -->
-        <div class="highlight-section">
-            <h2 class="highlight-title">La Mia Missione</h2>
-            <p class="highlight-text">
-                Quello che avevo iniziato come passione, è diventato oggi il mio lavoro:<br>
-                <strong>AIUTARE LE PERSONE A STARE BENE</strong><br><br>
-                In qualità di Lifestyle Coach & Personal Trainer aiuto, sostengo e motivo i miei clienti 
-                a raggiungere i risultati di benessere fisico e mentale che desiderano.
-            </p>
+        <!-- Experience Timeline -->
+        <div class="experience-section">
+            <h2 class="section-title">Il Mio Percorso Professionale</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2012</div>
+                        <div class="timeline-event">Apertura Primo Studio</div>
+                        <div class="timeline-description">Apertura del primo studio di Personal Training a Verona</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2015</div>
+                        <div class="timeline-event">Riconoscimento TV</div>
+                        <div class="timeline-description">Partecipazione a "Best in Town" su Real Time, selezionato tra i migliori PT di Verona</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2016-2020</div>
+                        <div class="timeline-event">Autore e Divulgatore</div>
+                        <div class="timeline-description">Pubblicazione di 3 libri e diversi articoli per riviste di benessere</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2020</div>
+                        <div class="timeline-event">Tribù Personal Training Studio</div>
+                        <div class="timeline-description">Fondazione di "Tribù Personal Training Studio" - ambiente esclusivo e personalizzato</div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">Oggi</div>
+                        <div class="timeline-event">Lifestyle Coach Completo</div>
+                        <div class="timeline-description">Specializzazione in coaching olistico: fitness, nutrizione, mindset e business</div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Achievements -->
-        <div class="achievements-section">
-            <h2 class="section-title">Traguardi & Riconoscimenti</h2>
-            <div class="achievements-grid">
-                <div class="achievement-card">
-                    <div class="achievement-icon">
-                        <i class="fas fa-dumbbell"></i>
+        <!-- Philosophy Section -->
+        <div class="philosophy-section">
+            <h2 class="section-title">La Mia Filosofia</h2>
+            <div class="philosophy-grid">
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">
+                        <i class="fas fa-user-friends"></i>
                     </div>
-                    <h3 class="achievement-title">2012</h3>
-                    <p class="achievement-text">Apertura del primo studio di Personal Training a Verona</p>
+                    <h3 class="philosophy-title">Approccio Personalizzato</h3>
+                    <p class="philosophy-text">
+                        Ogni persona è unica. Per questo motivo creo programmi completamente personalizzati 
+                        basati sulle caratteristiche, obiettivi e stile di vita di ciascun cliente.
+                    </p>
                 </div>
 
-                <div class="achievement-card">
-                    <div class="achievement-icon">
-                        <i class="fas fa-tv"></i>
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">
+                        <i class="fas fa-balance-scale"></i>
                     </div>
-                    <h3 class="achievement-title">2015</h3>
-                    <p class="achievement-text">Partecipazione a "Best in Town" su Real Time, selezionato tra i migliori PT di Verona</p>
+                    <h3 class="philosophy-title">Equilibrio Totale</h3>
+                    <p class="philosophy-text">
+                        Non credo nell'allenamento isolato. Il vero benessere nasce dall'equilibrio tra 
+                        attività fisica, alimentazione corretta, mindset positivo e abitudini sane.
+                    </p>
                 </div>
 
-                <div class="achievement-card">
-                    <div class="achievement-icon">
-                        <i class="fas fa-book"></i>
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">
+                        <i class="fas fa-chart-line"></i>
                     </div>
-                    <h3 class="achievement-title">Autore</h3>
-                    <p class="achievement-text">3 libri pubblicati e diversi articoli per riviste di benessere</p>
+                    <h3 class="philosophy-title">Risultati Sostenibili</h3>
+                    <p class="philosophy-text">
+                        Non prometto miracoli, ma risultati concreti e duraturi. Il cambiamento vero 
+                        richiede tempo, costanza e il giusto supporto professionale.
+                    </p>
                 </div>
 
-                <div class="achievement-card">
-                    <div class="achievement-icon">
-                        <i class="fas fa-users"></i>
+                <div class="philosophy-card">
+                    <div class="philosophy-icon">
+                        <i class="fas fa-heart"></i>
                     </div>
-                    <h3 class="achievement-title">Tribù</h3>
-                    <p class="achievement-text">Fondatore di "Tribù Personal Training Studio" - ambiente esclusivo e personalizzato</p>
+                    <h3 class="philosophy-title">Motivazione Autentica</h3>
+                    <p class="philosophy-text">
+                        Il mio ruolo non è solo di allenatore, ma di motivatore. Ti aiuto a trovare 
+                        la tua "perché" più profonda e a mantenerla viva durante tutto il percorso.
+                    </p>
                 </div>
             </div>
         </div>
 
         <!-- Values -->
         <div class="values-section">
-            <h2 class="section-title">I Miei Valori</h2>
+            <h2 class="section-title">I Miei Valori Fondamentali</h2>
             <div class="values-grid">
                 <div class="value-card">
                     <span class="value-emoji">💪</span>
@@ -517,6 +858,113 @@
                     <span class="value-emoji">🚀</span>
                     <h3 class="value-title">Trasformazione</h3>
                     <p class="value-text">Trasformare qualcosa in qualcos'altro - un sogno in realtà</p>
+                </div>
+
+                <div class="value-card">
+                    <span class="value-emoji">🧠</span>
+                    <h3 class="value-title">Crescita</h3>
+                    <p class="value-text">Aggiornamento continuo per migliorare abilità e conoscenze</p>
+                </div>
+
+                <div class="value-card">
+                    <span class="value-emoji">🤝</span>
+                    <h3 class="value-title">Supporto</h3>
+                    <p class="value-text">Disponibilità, flessibilità e comprensione in ogni momento</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="results-section">
+            <h2 class="results-title">Risultati che Otterrai</h2>
+            <h3 class="results-subtitle">Migliorare la Qualità della Vita, Essere Più Forti e Meno Stanchi</h3>
+            <div class="results-content">
+                <div class="result-item">
+                    <div class="result-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <p class="result-text">Mente più vigile e attenta, migliori capacità decisionali, maggior lucidità</p>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-icon">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <p class="result-text">Maggiore forza ed agilità, migliore postura, migliore respirazione</p>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-icon">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <p class="result-text">Meno mal di testa, sonno più rilassato e rigenerante</p>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-icon">
+                        <i class="fas fa-smile"></i>
+                    </div>
+                    <p class="result-text">Maggiore autostima, migliore aspetto fisico, più fiducia in se stessi</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Method Section -->
+        <div class="method-section">
+            <h2 class="section-title">Il Mio Metodo</h2>
+            <div class="method-steps">
+                <div class="method-step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Incontro Conoscitivo</h3>
+                    <p class="step-description">
+                        Partiamo da un colloquio approfondito per capire le tue esigenze, i tuoi obiettivi 
+                        e il tuo stile di vita attuale.
+                    </p>
+                </div>
+
+                <div class="method-step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Anamnesi Completa</h3>
+                    <p class="step-description">
+                        Analizziamo la composizione corporea e valutiamo il tuo stato di salute generale 
+                        per creare un profilo completo.
+                    </p>
+                </div>
+
+                <div class="method-step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Definizione Obiettivi</h3>
+                    <p class="step-description">
+                        Insieme definiamo obiettivi realistici e raggiungibili, creando un piano d'azione 
+                        personalizzato e scalabile.
+                    </p>
+                </div>
+
+                <div class="method-step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Allenamento Personalizzato</h3>
+                    <p class="step-description">
+                        Programma di allenamento su misura che può includere sovraccarichi, functional training, 
+                        attività aerobiche, in base ai tuoi obiettivi.
+                    </p>
+                </div>
+
+                <div class="method-step">
+                    <div class="step-number">5</div>
+                    <h3 class="step-title">Monitoraggio Continuo</h3>
+                    <p class="step-description">
+                        Verifichiamo regolarmente i progressi raggiunti, apportando modifiche e variazioni 
+                        per ottimizzare sempre i risultati.
+                    </p>
+                </div>
+
+                <div class="method-step">
+                    <div class="step-number">6</div>
+                    <h3 class="step-title">Supporto Motivazionale</h3>
+                    <p class="step-description">
+                        Ti accompagno nel percorso con supporto costante, motivazione e coaching per superare 
+                        ogni difficoltà e raggiungere i tuoi obiettivi.
+                    </p>
                 </div>
             </div>
         </div>
@@ -543,6 +991,15 @@
                 <div class="question-card">
                     <p class="question-text">"Desideri cambiare il tuo corpo?"</p>
                 </div>
+                <div class="question-card">
+                    <p class="question-text">"Hai fallito molte diete o non sapresti come iniziare?"</p>
+                </div>
+                <div class="question-card">
+                    <p class="question-text">"Vuoi sperimentare nuovi metodi di allenamento?"</p>
+                </div>
+                <div class="question-card">
+                    <p class="question-text">"Vuoi migliorare la tua performance nello sport che pratichi?"</p>
+                </div>
             </div>
         </div>
 
@@ -551,7 +1008,8 @@
             <h2 class="cta-title">Iniziamo Insieme il Tuo Cambiamento</h2>
             <p class="cta-text">
                 Se hai risposto SÌ ad almeno una domanda, il Personal Trainer è la figura ideale 
-                per avviare un percorso che ti porterà a migliorare salute, ottimismo, relazioni, autostima e benessere.
+                per avviare un percorso che ti porterà a migliorare salute, ottimismo, relazioni, autostima e benessere. 
+                <strong>INSIEME raggiungeremo risultati reali e concreti!</strong>
             </p>
             <div class="cta-buttons">
                 <a href="https://wa.me/3478881515?text=Ciao Andrea, ho letto la tua storia e vorrei iniziare un percorso!" 
