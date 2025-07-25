@@ -23,6 +23,7 @@
         .btn-primary-gradient {
             background-image: linear-gradient(to right, #f97316, #ea580c);
             transition: all 0.3s ease-in-out;
+            cursor: pointer;
         }
         .btn-primary-gradient:hover {
             transform: translateY(-2px);
@@ -33,6 +34,7 @@
         .btn-paypal {
             background-color: #0070ba;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
         .btn-paypal:hover {
             background-color: #005ea6;
@@ -128,12 +130,14 @@
                     </span>
                 </div>
                 
-                <!-- Payment Buttons -->
+                <!-- Payment Buttons - AGGIORNATI CON SISTEMA PAGAMENTI -->
                 <div class="space-y-4">
-                    <button class="btn-primary-gradient text-white font-bold py-4 px-8 rounded-full w-full text-lg shadow-lg">
+                    <button class="btn-primary-gradient text-white font-bold py-4 px-8 rounded-full w-full text-lg shadow-lg" 
+                            data-stripe-product="2-milioni-anni">
                         🛒 Acquista con Stripe - €19.90
                     </button>
-                    <button class="btn-paypal text-white font-bold py-4 px-8 rounded-full w-full text-lg shadow-lg">
+                    <button class="btn-paypal text-white font-bold py-4 px-8 rounded-full w-full text-lg shadow-lg"
+                            data-paypal-product="2-milioni-anni">
                         💳 Acquista con PayPal - €19.90
                     </button>
                 </div>
@@ -292,7 +296,8 @@
             </p>
             
             <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-                <button class="bg-white text-orange-600 font-bold py-4 px-8 rounded-full flex-1 hover:bg-gray-100 transition duration-300">
+                <button class="bg-white text-orange-600 font-bold py-4 px-8 rounded-full flex-1 hover:bg-gray-100 transition duration-300"
+                        data-stripe-product="2-milioni-anni">
                     🛒 Acquista Ora - €19.90
                 </button>
             </div>
@@ -337,6 +342,9 @@
             </div>
         </div>
     </footer>
+
+    <!-- COLLEGAMENTO AL SISTEMA PAGAMENTI -->
+    <script src="/payment.js"></script>
 
 </body>
 </html>
