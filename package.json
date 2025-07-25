@@ -1,0 +1,27 @@
+{
+  "name": "andrea-ebook-store",
+  "version": "1.0.0",
+  "description": "Sistema di vendita ebook automatizzato con Stripe e Vercel",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Build complete'",
+    "start": "vercel --prod"
+  },
+  "dependencies": {
+    "stripe": "^14.21.0",
+    "resend": "^3.2.0"
+  },
+  "devDependencies": {
+    "vercel": "^33.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Padu76/andrea-ebook-store.git"
+  },
+  "author": "Andrea Padoan",
+  "license": "MIT"
+}
