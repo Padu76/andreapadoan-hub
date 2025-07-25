@@ -1,11 +1,5 @@
 {
-  "name": "andrea-padoan-ebooks",
-  "version": "1.0.0",
-  "description": "Sistema pagamenti automatico per ebook Andrea Padoan",
   "dependencies": {
     "stripe": "^14.21.0"
-  },
-  "engines": {
-    "node": "18.x"
   }
 }
