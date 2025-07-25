@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In Forma da 2 Milioni di Anni - Andrea Padoan</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #f97316;
+        }
+        
+        .btn-primary-gradient {
+            background-image: linear-gradient(to right, #f97316, #ea580c);
+            transition: all 0.3s ease-in-out;
+        }
+        .btn-primary-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
+            background-image: linear-gradient(to right, #fb923c, #f97316);
+        }
+        
+        .btn-paypal {
+            background-color: #0070ba;
+            transition: all 0.3s ease;
+        }
+        .btn-paypal:hover {
+            background-color: #005ea6;
+            transform: translateY(-2px);
+        }
+        
+        .product-card {
+            background-color: #1f1f1f;
+            border: 1px solid #333;
+        }
+        
+        .price-highlight {
+            background: linear-gradient(45deg, #f97316, #ea580c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .security-badge {
+            background-color: #10b981;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .back-button {
+            background-color: #374151;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: #4b5563;
+            transform: translateX(-2px);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-gray-900 shadow-lg py-4 border-b-4 border-orange-600">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="../" class="text-3xl font-extrabold text-orange-500 hover:text-orange-400 transition duration-300 ease-in-out p-2 rounded-lg">
+                Andrea Padoan Ebook
+            </a>
+            <a href="index.html" class="back-button px-6 py-2 rounded-full font-semibold">
+                ← Torna al Catalogo
+            </a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12">
+        
+        <!-- Hero Section -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+            <!-- Copertina -->
+            <div class="flex justify-center">
+                <img src="../images/forma-2-milioni-cover.jpg" 
+                     alt="Copertina In Forma da 2 Milioni di Anni" 
+                     class="w-full max-w-md rounded-xl shadow-2xl">
+            </div>
+            
+            <!-- Info Prodotto -->
+            <div class="flex flex-col justify-center">
+                <h1 class="text-5xl md:text-6xl font-extrabold mb-6">
+                    In Forma da 2 Milioni di Anni
+                </h1>
+                
+                <p class="text-xl text-gray-300 mb-8">
+                    IL PROGRAMMA ALIMENTARE PER TRASFORMARE IL TUO CORPO IN UNA MACCHINA BRUCIA GRASSI. 
+                    Scopri i segreti ancestrali per un metabolismo efficiente.
+                </p>
+                
+                <div class="mb-8">
+                    <span class="text-6xl font-extrabold price-highlight">€19.90</span>
+                    <p class="text-gray-400 mt-2">Accesso immediato • PDF scaricabile • Aggiornamenti gratuiti</p>
+                </div>
+                
+                <!-- Security Badges -->
+                <div class="flex flex-wrap gap-2 mb-8">
+                    <span class="security-badge">
+                        🔒 Pagamento Sicuro
+                    </span>
+                    <span class="security-badge">
+                        📧 Consegna Immediata
+                    </span>
+                    <span class="security-badge">
+                        ✅ Garanzia 30 giorni
+                    </span>
+                </div>
+                
+                <!-- Payment Buttons -->
+                <div class="space-y-4">
+                    <button class="btn-primary-gradient text-white font-bold py-4 px-8 rounded-full w-full text-lg shadow-lg">
+                        🛒 Acquista con Stripe - €19.90
+                    </button>
+                    <button class="btn-paypal text-white font-bold py-4 px-8 rounded-full w-full text-lg shadow-lg">
+                        💳 Acquista con PayPal - €19.90
+                    </button>
+                </div>
+                
+                <p class="text-sm text-gray-400 mt-4 text-center">
+                    Riceverai il link di download via email entro 5 minuti dall'acquisto
+                </p>
+            </div>
+        </section>
+
+        <!-- Descrizione Dettagliata -->
+        <section class="product-card rounded-xl p-8 mb-12">
+            <h2 class="text-4xl font-bold mb-6">Cosa Scoprirai</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 text-orange-400">🔥 Principi Ancestrali</h3>
+                    <p class="text-gray-300 mb-6">
+                        Scopri come i nostri antenati mantenevano corpi snelli e forti senza palestre, 
+                        integratori o diete complicate. Un approccio naturale basato sulla biologia umana.
+                    </p>
+                    
+                    <h3 class="text-2xl font-semibold mb-4 text-orange-400">⚡ Metabolismo Efficiente</h3>
+                    <p class="text-gray-300">
+                        Trasforma il tuo corpo in una macchina brucia grassi 24/7. Tecniche comprovate 
+                        per accelerare il metabolismo in modo naturale e sostenibile.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 text-orange-400">🍎 Alimentazione Semplice</h3>
+                    <p class="text-gray-300 mb-6">
+                        Niente calcoli complicati o pasti preconfezionati. Impara a scegliere gli alimenti 
+                        giusti seguendo i principi che hanno guidato l'umanità per millenni.
+                    </p>
+                    
+                    <h3 class="text-2xl font-semibold mb-4 text-orange-400">🎯 Risultati Duraturi</h3>
+                    <p class="text-gray-300">
+                        Non una dieta temporanea, ma un nuovo stile di vita che ti accompagnerà per sempre. 
+                        Mantieni i risultati senza stress o rinunce eccessive.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Indice Contenuti -->
+        <section class="product-card rounded-xl p-8 mb-12">
+            <h2 class="text-4xl font-bold mb-6">Indice dei Contenuti</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h4 class="text-xl font-semibold text-orange-400 mb-3">📚 PARTE 1: Le Basi</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li>• La dieta dei nostri antenati</li>
+                        <li>• Perché le diete moderne falliscono</li>
+                        <li>• I 3 pilastri dell'alimentazione ancestrale</li>
+                        <li>• Come funziona il metabolismo umano</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-semibold text-orange-400 mb-3">🔥 PARTE 2: Il Metodo</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li>• Gli alimenti che accelerano il metabolismo</li>
+                        <li>• Timing ottimale dei pasti</li>
+                        <li>• Il digiuno intermittente ancestrale</li>
+                        <li>• Idratazione e detox naturale</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-semibold text-orange-400 mb-3">💪 PARTE 3: L'Implementazione</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li>• Piano alimentare settimanale</li>
+                        <li>• Ricette semplici e gustose</li>
+                        <li>• Come gestire le occasioni sociali</li>
+                        <li>• Monitoraggio dei progressi</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-semibold text-orange-400 mb-3">🎯 BONUS</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li>• Lista della spesa settimanale</li>
+                        <li>• Tabella degli alimenti consigliati</li>
+                        <li>• 10 ricette brucia grassi</li>
+                        <li>• Guida ai supplementi naturali</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonianze -->
+        <section class="mb-12">
+            <h2 class="text-4xl font-bold text-center mb-8">Cosa Dicono I Miei Clienti</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="product-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center font-bold text-xl">
+                            M
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold">Marco, 42 anni</h4>
+                            <div class="text-orange-400">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">
+                        "In 3 mesi ho perso 12 kg seguendo questo metodo. Finalmente un approccio che funziona 
+                        senza rinunce estreme. Lo consiglio a tutti!"
+                    </p>
+                </div>
+                
+                <div class="product-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center font-bold text-xl">
+                            S
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold">Sara, 35 anni</h4>
+                            <div class="text-orange-400">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">
+                        "Dopo anni di diete yo-yo, finalmente ho trovato un equilibrio. Il mio metabolismo è 
+                        rinato e mi sento piena di energia!"
+                    </p>
+                </div>
+                
+                <div class="product-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center font-bold text-xl">
+                            L
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold">Luca, 38 anni</h4>
+                            <div class="text-orange-400">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">
+                        "Semplice, pratico, efficace. Non credevo che cambiare alimentazione potesse essere 
+                        così facile. I risultati parlano da soli."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Finale -->
+        <section class="text-center bg-gradient-to-r from-orange-600 to-red-600 rounded-2xl p-12 mb-12">
+            <h2 class="text-4xl font-bold text-white mb-6">
+                Inizia Oggi la Tua Trasformazione
+            </h2>
+            <p class="text-xl text-orange-100 mb-8 max-w-2xl mx-auto">
+                Oltre 500 persone hanno già trasformato il loro corpo con questo metodo. 
+                Non aspettare, inizia anche tu oggi stesso!
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+                <button class="bg-white text-orange-600 font-bold py-4 px-8 rounded-full flex-1 hover:bg-gray-100 transition duration-300">
+                    🛒 Acquista Ora - €19.90
+                </button>
+            </div>
+            
+            <p class="text-orange-200 mt-4 text-sm">
+                💰 Garanzia 30 giorni - Se non sei soddisfatto, ti rimborsiamo completamente
+            </p>
+        </section>
+
+        <!-- Chi Sono -->
+        <section class="product-card rounded-xl p-8 text-center">
+            <img src="../images/andrea-profile.jpg" 
+                 onerror="this.onerror=null;this.src='../images/Padu_tribu040.jpg';"
+                 alt="Andrea Padoan" 
+                 class="w-32 h-32 rounded-full mx-auto mb-6 object-cover">
+            
+            <h2 class="text-3xl font-bold mb-4">Andrea Padoan</h2>
+            <p class="text-xl text-orange-400 mb-6">Personal Trainer & Nutrition Coach</p>
+            
+            <p class="text-gray-300 max-w-2xl mx-auto mb-6">
+                Con oltre 10 anni di esperienza nel settore fitness e nutrizione, ho aiutato centinaia di persone 
+                a raggiungere i loro obiettivi di forma fisica e benessere. La mia missione è rendere semplice 
+                ciò che spesso viene complicato, seguendo i principi naturali che hanno guidato l'umanità per millenni.
+            </p>
+            
+            <a href="https://wa.me/393478881515" target="_blank" 
+               class="inline-flex items-center bg-green-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-green-700 transition duration-300">
+                <img src="../images/whatsapp.png" alt="WhatsApp" class="w-6 h-6 mr-2">
+                Contattami su WhatsApp
+            </a>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 px-4 mt-12">
+        <div class="container mx-auto text-center">
+            <p class="text-sm">&copy; 2025 Andrea Padoan Personal Trainer. Tutti i diritti riservati.</p>
+            <div class="flex justify-center space-x-6 mt-4">
+                <a href="#" class="text-gray-400 hover:text-white transition duration-300">Privacy Policy</a>
+                <a href="#" class="text-gray-400 hover:text-white transition duration-300">Termini e Condizioni</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
