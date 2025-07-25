@@ -163,10 +163,10 @@
                 
                 <!-- Payment Buttons -->
                 <div class="space-y-4">
-                    <button class="btn-primary-gradient text-white font-bold py-4 px-8 rounded-full w-full text-lg shadow-lg">
+                    <button data-stripe-product="body-construction" class="btn-primary-gradient text-white font-bold py-4 px-8 rounded-full w-full text-lg shadow-lg">
                         🛒 Acquista con Stripe - €24.90
                     </button>
-                    <button class="btn-paypal text-white font-bold py-4 px-8 rounded-full w-full text-lg shadow-lg">
+                    <button data-paypal-product="body-construction" class="btn-paypal text-white font-bold py-4 px-8 rounded-full w-full text-lg shadow-lg">
                         💳 Acquista con PayPal - €24.90
                     </button>
                 </div>
@@ -448,7 +448,7 @@
             </p>
             
             <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-                <button class="bg-white text-red-600 font-bold py-4 px-8 rounded-full flex-1 hover:bg-gray-100 transition duration-300">
+                <button data-stripe-product="body-construction" class="bg-white text-red-600 font-bold py-4 px-8 rounded-full flex-1 hover:bg-gray-100 transition duration-300">
                     🛒 Acquista Ora - €24.90
                 </button>
             </div>
@@ -482,6 +482,10 @@
         </section>
 
     </main>
+
+    <!-- Include Stripe and Payment Script -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="/public/js/payment.js"></script>
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-8 px-4 mt-12">
