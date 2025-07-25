@@ -1,5 +1,10 @@
 {
+  "name": "andrea-padoan-hub",
+  "version": "1.0.0",
+  "description": "Andrea Padoan Hub - Personal Trainer & Lifestyle Coach",
   "dependencies": {
-    "stripe": "^14.21.0"
+    "stripe": "^14.21.0",
+    "@anthropic-ai/sdk": "^0.24.0",
+    "airtable": "^0.12.2"
   }
 }
