@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BODY UNDER CONSTRUCTION VOL: 1 - Andrea Padoan</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #dc2626;
+        }
+        
+        .btn-primary-gradient {
+            background-image: linear-gradient(to right, #dc2626, #b91c1c);
+            transition: all 0.3s ease-in-out;
+        }
+        .btn-primary-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(220, 38, 38, 0.4);
+            background-image: linear-gradient(to right, #ef4444, #dc2626);
+        }
+        
+        .btn-paypal {
+            background-color: #0070ba;
+            transition: all 0.3s ease;
+        }
+        .btn-paypal:hover {
+            background-color: #005ea6;
+            transform: translateY(-2px);
+        }
+        
+        .product-card {
+            background-color: #1f1f1f;
+            border: 1px solid #333;
+        }
+        
+        .price-highlight {
+            background: linear-gradient(45deg, #dc2626, #b91c1c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .security-badge {
+            background-color: #dc2626;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .premium-badge {
+            background: linear-gradient(45deg, #fbbf24, #f59e0b);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; transform: scale(1.02); }
+        }
+        
+        .back-button {
+            background-color: #374151;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: #4b5563;
+            transform: translateX(-2px);
+        }
+        
+        .construction-bg {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 50%, #1f2937 100%);
+            border-left: 4px solid #dc2626;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-gray-900 shadow-lg py-4 border-b-4 border-red-600">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="/" class="text-3xl font-extrabold text-red-500 hover:text-red-400 transition duration-300 ease-in-out p-2 rounded-lg">
+                Andrea Padoan Ebook
+            </a>
+            <a href="/ebooks.html" class="back-button px-6 py-2 rounded-full font-semibold">
+                ← Torna al Catalogo
+            </a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12">
+        
+        <!-- Hero Section -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+            <!-- Copertina -->
+            <div class="flex justify-center">
+                <img src="../images/body-construction-cover.jpg" 
+                     alt="Copertina BODY UNDER CONSTRUCTION VOL: 1" 
+                     class="w-full max-w-md rounded-xl shadow-2xl">
+            </div>
+            
+            <!-- Info Prodotto -->
+            <div class="flex flex-col justify-center">
+                <div class="mb-4">
+                    <span class="premium-badge">
+                        👑 PROGRAMMA PREMIUM
+                    </span>
+                </div>
+                
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
+                    BODY UNDER CONSTRUCTION
+                    <span class="block text-3xl md:text-4xl text-red-400">VOL: 1</span>
+                </h1>
+                
+                <p class="text-xl text-gray-300 mb-8">
+                    100 ALLENAMENTI, PER UNA FORMA PERFETTA 365 GIORNI ALL'ANNO. 
+                    La bibbia completa per costruire il corpo dei tuoi sogni.
+                </p>
+                
+                <div class="mb-8">
+                    <span class="text-6xl font-extrabold price-highlight">€24.90</span>
+                    <p class="text-gray-400 mt-2">Il programma più completo • 1 anno di allenamenti • Valore €100+</p>
+                </div>
+                
+                <!-- Security Badges -->
+                <div class="flex flex-wrap gap-2 mb-8">
+                    <span class="security-badge">
+                        🔒 Pagamento Sicuro
+                    </span>
+                    <span class="security-badge">
+                        📧 Consegna Immediata
+                    </span>
+                    <span class="security-badge">
+                        🏆 Programma Premium
+                    </span>
+                    <span class="security-badge">
+                        ⭐ Best Seller
+                    </span>
+                </div>
+                
+                <!-- Payment Buttons -->
+                <div class="space-y-4">
+                    <button class="btn-primary-gradient text-white font-bold py-4 px-8 rounded-full w-full text-lg shadow-lg">
+                        🛒 Acquista con Stripe - €24.90
+                    </button>
+                    <button class="btn-paypal text-white font-bold py-4 px-8 rounded-full w-full text-lg shadow-lg">
+                        💳 Acquista con PayPal - €24.90
+                    </button>
+                </div>
+                
+                <p class="text-sm text-gray-400 mt-4 text-center">
+                    Riceverai il link di download via email entro 5 minuti dall'acquisto
+                </p>
+            </div>
+        </section>
+
+        <!-- Perché è il Migliore -->
+        <section class="construction-bg rounded-xl p-8 mb-12">
+            <h2 class="text-4xl font-bold mb-6 text-white">Il Programma Definitivo</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-white">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 text-red-300">🏗️ Costruzione Completa</h3>
+                    <p class="mb-6">
+                        Non è solo un ebook, è un sistema completo di trasformazione fisica. 
+                        100 allenamenti diversi per non annoiarti mai e stimolare continuamente 
+                        la crescita muscolare.
+                    </p>
+                    
+                    <h3 class="text-2xl font-semibold mb-4 text-red-300">🎯 Per Ogni Obiettivo</h3>
+                    <p>
+                        Forza, massa, definizione, resistenza, atletismo. Qualunque sia il tuo 
+                        obiettivo, troverai gli allenamenti perfetti per raggiungerlo.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 text-red-300">📚 Manuale Completo</h3>
+                    <p class="mb-6">
+                        Oltre ai workout, include teoria dell'allenamento, pianificazione, 
+                        progressioni avanzate e tutto quello che serve per diventare 
+                        il tuo personal trainer.
+                    </p>
+                    
+                    <h3 class="text-2xl font-semibold mb-4 text-red-300">💰 Valore Incredibile</h3>
+                    <p>
+                        Il contenuto vale oltre €100. Stai ottenendo un programma da personal 
+                        trainer professionale al prezzo di una pizza del weekend.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- I 100 Allenamenti -->
+        <section class="product-card rounded-xl p-8 mb-12">
+            <h2 class="text-4xl font-bold mb-6">I 100 Allenamenti Suddivisi</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-gradient-to-br from-red-900 to-red-800 rounded-lg p-6 text-white">
+                    <h4 class="text-xl font-semibold mb-3">💪 FORZA</h4>
+                    <p class="text-sm mb-2"><strong>25 workout</strong></p>
+                    <p class="text-sm">
+                        Sviluppa forza massimale con progressioni sistematiche 
+                        per ogni gruppo muscolare.
+                    </p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-orange-900 to-orange-800 rounded-lg p-6 text-white">
+                    <h4 class="text-xl font-semibold mb-3">🔥 MASSA</h4>
+                    <p class="text-sm mb-2"><strong>25 workout</strong></p>
+                    <p class="text-sm">
+                        Ipertrofia muscolare con volume ottimale e tecniche 
+                        avanzate per massimizzare la crescita.
+                    </p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-blue-900 to-blue-800 rounded-lg p-6 text-white">
+                    <h4 class="text-xl font-semibold mb-3">⚡ DEFINIZIONE</h4>
+                    <p class="text-sm mb-2"><strong>25 workout</strong></p>
+                    <p class="text-sm">
+                        Allenamenti metabolici per bruciare grassi 
+                        mantenendo la massa muscolare.
+                    </p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-green-900 to-green-800 rounded-lg p-6 text-white">
+                    <h4 class="text-xl font-semibold mb-3">🏃 ATLETICO</h4>
+                    <p class="text-sm mb-2"><strong>25 workout</strong></p>
+                    <p class="text-sm">
+                        Performance atletiche: velocità, agilità, 
+                        coordinazione e potenza esplosiva.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mt-8 bg-gray-800 rounded-lg p-6">
+                <h4 class="text-2xl font-semibold text-yellow-400 mb-4">🎁 BONUS INCLUSI</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-300">
+                    <ul class="space-y-2">
+                        <li>• 10 workout di riscaldamento specifici</li>
+                        <li>• 15 routine di stretching e mobilità</li>
+                        <li>• Tabelle di periodizzazione annuale</li>
+                        <li>• Guida alla nutrizione per ogni fase</li>
+                    </ul>
+                    <ul class="space-y-2">
+                        <li>• Test di valutazione fisica completi</li>
+                        <li>• Programmi di riabilitazione base</li>
+                        <li>• Workout per donne e specifiche esigenze</li>
+                        <li>• Sezione cardio e condizionamento</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Struttura del Programma -->
+        <section class="product-card rounded-xl p-8 mb-12">
+            <h2 class="text-4xl font-bold mb-6">Struttura del Programma</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h4 class="text-xl font-semibold text-red-400 mb-3">📖 PARTE 1: Teoria</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li>• Principi dell'allenamento</li>
+                        <li>• Fisiologia dell'esercizio</li>
+                        <li>• Periodizzazione avanzata</li>
+                        <li>• Prevenzione infortuni</li>
+                        <li>• Biomeccanica dei movimenti</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-semibold text-red-400 mb-3">💪 PARTE 2: I 100 Workout</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li>• Schede dettagliate per ogni allenamento</li>
+                        <li>• Progressioni e regressioni</li>
+                        <li>• Tecniche di intensità avanzate</li>
+                        <li>• Varianti per attrezzature diverse</li>
+                        <li>• Sistema di rotazione intelligente</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-semibold text-red-400 mb-3">🎯 PARTE 3: Applicazione</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li>• Come strutturare l'anno</li>
+                        <li>• Pianificazione microcicli</li>
+                        <li>• Adattamenti per obiettivi specifici</li>
+                        <li>• Monitoring e progressioni</li>
+                        <li>• Troubleshooting comune</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Per Chi è Questo Programma -->
+        <section class="product-card rounded-xl p-8 mb-12">
+            <h2 class="text-4xl font-bold mb-6">Per Chi è Questo Programma</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 text-red-400">✅ PERFETTO SE:</h3>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">•</span>
+                            Hai almeno 6 mesi di esperienza in palestra
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">•</span>
+                            Vuoi un programma completo e strutturato
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">•</span>
+                            Sei stanco di allenamenti casuali
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">•</span>
+                            Vuoi variare continuamente gli stimoli
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">•</span>
+                            Cerchi risultati a lungo termine
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">•</span>
+                            Vuoi imparare a programmare da solo
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 text-red-400">❌ NON ADATTO SE:</h3>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-start">
+                            <span class="text-red-400 mr-2">•</span>
+                            Sei completamente principiante
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-red-400 mr-2">•</span>
+                            Cerchi solo workout da 15 minuti
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-red-400 mr-2">•</span>
+                            Non hai accesso a una palestra base
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-red-400 mr-2">•</span>
+                            Vuoi solo allenamenti a corpo libero
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-red-400 mr-2">•</span>
+                            Non sei disposto a impegnarti seriamente
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-red-400 mr-2">•</span>
+                            Cerchi risultati immediati senza fatica
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonianze -->
+        <section class="mb-12">
+            <h2 class="text-4xl font-bold text-center mb-8">Trasformazioni Reali</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="product-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center font-bold text-xl">
+                            D
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold">Davide, 31 anni</h4>
+                            <div class="text-red-400">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">
+                        "Un anno con questo programma: +15kg di massa magra, -8kg di grasso. 
+                        È letteralmente cambiato il mio corpo e la mia vita. Investimento migliore mai fatto!"
+                    </p>
+                </div>
+                
+                <div class="product-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center font-bold text-xl">
+                            C
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold">Chiara, 28 anni</h4>
+                            <div class="text-red-400">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">
+                        "Finalmente un programma serio per noi donne! Ho sviluppato una forza 
+                        che non credevo possibile. Ogni workout è una nuova sfida stimolante."
+                    </p>
+                </div>
+                
+                <div class="product-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center font-bold text-xl">
+                            P
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold">Paolo, 42 anni</h4>
+                            <div class="text-red-400">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">
+                        "A 42 anni sono più forte e definito di quando ne avevo 25. 
+                        Questo programma è una macchina da guerra. Vale ogni centesimo speso!"
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Finale -->
+        <section class="text-center bg-gradient-to-r from-red-600 to-red-800 rounded-2xl p-12 mb-12">
+            <h2 class="text-4xl font-bold text-white mb-6">
+                Costruisci il Corpo dei Tuoi Sogni
+            </h2>
+            <p class="text-xl text-red-100 mb-8 max-w-2xl mx-auto">
+                Non perdere altro tempo con programmi incompleti. Investi nel sistema 
+                più completo e scientifico per la trasformazione fisica totale.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+                <button class="bg-white text-red-600 font-bold py-4 px-8 rounded-full flex-1 hover:bg-gray-100 transition duration-300">
+                    🛒 Acquista Ora - €24.90
+                </button>
+            </div>
+            
+            <p class="text-red-200 mt-4 text-sm">
+                💰 Garanzia 60 giorni - Se non sei completamente soddisfatto, rimborso totale
+            </p>
+        </section>
+
+        <!-- Chi Sono -->
+        <section class="product-card rounded-xl p-8 text-center">
+            <img src="../images/andrea-profile.jpg" 
+                 onerror="this.onerror=null;this.src='../images/Padu_tribu040.jpg';"
+                 alt="Andrea Padoan" 
+                 class="w-32 h-32 rounded-full mx-auto mb-6 object-cover">
+            
+            <h2 class="text-3xl font-bold mb-4">Andrea Padoan</h2>
+            <p class="text-xl text-red-400 mb-6">Master Trainer & Body Transformation Specialist</p>
+            
+            <p class="text-gray-300 max-w-2xl mx-auto mb-6">
+                Ho condensato 15 anni di esperienza professionale in questo programma. 
+                È il risultato di migliaia di ore di studio, test sul campo con centinaia di clienti 
+                e perfezionamento continuo. È il programma che uso personalmente e con i miei clienti VIP.
+            </p>
+            
+            <a href="https://wa.me/393478881515" target="_blank" 
+               class="inline-flex items-center bg-red-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-red-700 transition duration-300">
+                <img src="../images/whatsapp.png" alt="WhatsApp" class="w-6 h-6 mr-2">
+                Contattami su WhatsApp
+            </a>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 px-4 mt-12">
+        <div class="container mx-auto text-center">
+            <p class="text-sm">&copy; 2025 Andrea Padoan Personal Trainer. Tutti i diritti riservati.</p>
+            <div class="flex justify-center space-x-6 mt-4">
+                <a href="#" class="text-gray-400 hover:text-white transition duration-300">Privacy Policy</a>
+                <a href="#" class="text-gray-400 hover:text-white transition duration-300">Termini e Condizioni</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
