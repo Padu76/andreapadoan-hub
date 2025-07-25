@@ -1,10 +1,6 @@
 // /api/create-stripe-checkout.js
 // API per creare sessioni Stripe Checkout automatiche - Andrea Padoan Ebooks
-
-import Stripe from 'stripe';
-
-// Inizializza Stripe
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+// Versione FETCH-ONLY senza import
 
 export default async function handler(req, res) {
     // Solo POST requests
@@ -44,15 +40,9 @@ export default async function handler(req, res) {
 
         const product = products[productId];
 
-        console.log('🛒 Creating Stripe checkout:', {
-            productId,
-            price: product.price / 100,
-            name: product.name
-        });
-
-        // Crea sessione Stripe Checkout
-        const session = await stripe.checkout.sessions.create({
-            payment_method_types: ['card', 'paypal', 'link'],
+        // Crea sessione Stripe usando fetch diretto
+        const sessionData = {
+            payment_method_types: ['card', 'paypal'],
             line_items: [
                 {
                     price_data: {
@@ -98,7 +88,6 @@ export default async function handler(req, res) {
                 description: `Acquisto ebook: ${product.name}`,
                 metadata: {
                     product_id: productId,
-                    customer_email: '{CUSTOMER_EMAIL}',
                     order_date: new Date().toISOString()
                 }
             },
@@ -109,12 +98,7 @@ export default async function handler(req, res) {
             // Opzioni avanzate
             allow_promotion_codes: true,
             automatic_tax: {
-                enabled: false, // Gestisci tasse manualmente se necessario
-            },
-            
-            // Configurazione consent collection (GDPR)
-            consent_collection: {
-                terms_of_service: 'required',
+                enabled: false
             },
             
             // Custom text
@@ -123,9 +107,27 @@ export default async function handler(req, res) {
                     message: 'Riceverai il link di download immediatamente dopo il pagamento!'
                 }
             }
+        };
+
+        // Chiamata API Stripe diretta
+        const stripeResponse = await fetch('https://api.stripe.com/v1/checkout/sessions', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${process.env.STRIPE_SECRET_KEY}`,
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: createStripeFormData(sessionData)
         });
 
-        console.log('✅ Stripe checkout session created:', {
+        if (!stripeResponse.ok) {
+            const errorText = await stripeResponse.text();
+            console.error('❌ Stripe API Error:', errorText);
+            throw new Error(`Stripe API Error: ${stripeResponse.status}`);
+        }
+
+        const session = await stripeResponse.json();
+
+        console.log('✅ Stripe checkout session created (fetch mode):', {
             sessionId: session.id,
             url: session.url
         });
@@ -143,54 +145,8 @@ export default async function handler(req, res) {
         });
 
     } catch (error) {
-        console.error('❌ Stripe Checkout API Error:', error);
+        console.error('❌ Stripe Checkout API Error (fetch mode):', error);
         
-        // Gestione errori specifici Stripe
-        if (error.type === 'StripeCardError') {
-            return res.status(400).json({
-                success: false,
-                error: 'Errore con la carta di credito',
-                details: error.message
-            });
-        }
-        
-        if (error.type === 'StripeRateLimitError') {
-            return res.status(429).json({
-                success: false,
-                error: 'Troppe richieste, riprova tra poco'
-            });
-        }
-        
-        if (error.type === 'StripeInvalidRequestError') {
-            return res.status(400).json({
-                success: false,
-                error: 'Richiesta non valida',
-                details: process.env.NODE_ENV === 'development' ? error.message : undefined
-            });
-        }
-        
-        if (error.type === 'StripeAPIError') {
-            return res.status(500).json({
-                success: false,
-                error: 'Errore del servizio di pagamento'
-            });
-        }
-        
-        if (error.type === 'StripeConnectionError') {
-            return res.status(500).json({
-                success: false,
-                error: 'Errore di connessione al servizio pagamenti'
-            });
-        }
-        
-        if (error.type === 'StripeAuthenticationError') {
-            return res.status(500).json({
-                success: false,
-                error: 'Errore di autenticazione del servizio'
-            });
-        }
-
-        // Errore generico
         return res.status(500).json({
             success: false,
             error: 'Errore nella creazione della sessione di pagamento',
@@ -199,17 +155,35 @@ export default async function handler(req, res) {
     }
 }
 
-// Funzione helper per validare i dati della richiesta
-function validateRequest(body) {
-    const { productId } = body;
+// Crea form data per Stripe API
+function createStripeFormData(data) {
+    const params = new URLSearchParams();
     
-    if (!productId) {
-        throw new Error('Product ID è richiesto');
+    // Funzione ricorsiva per convertire oggetto in form data
+    function addToFormData(obj, prefix = '') {
+        for (const [key, value] of Object.entries(obj)) {
+            const formKey = prefix ? `${prefix}[${key}]` : key;
+            
+            if (value === null || value === undefined) {
+                continue;
+            }
+            
+            if (Array.isArray(value)) {
+                value.forEach((item, index) => {
+                    if (typeof item === 'object') {
+                        addToFormData(item, `${formKey}[${index}]`);
+                    } else {
+                        params.append(`${formKey}[${index}]`, item);
+                    }
+                });
+            } else if (typeof value === 'object') {
+                addToFormData(value, formKey);
+            } else {
+                params.append(formKey, value.toString());
+            }
+        }
     }
     
-    if (typeof productId !== 'string') {
-        throw new Error('Product ID deve essere una stringa');
-    }
-    
-    return true;
+    addToFormData(data);
+    return params.toString();
 }
