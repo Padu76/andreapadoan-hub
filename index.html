@@ -26,8 +26,35 @@
         .header {
             position: fixed;
             top: 15px;
+            left: 20px;
             right: 20px;
             z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chi-sono-btn {
+            background: rgba(255, 107, 53, 0.9);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chi-sono-btn:hover {
+            background: #ff6b35;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
         }
 
         .dashboard-btn {
@@ -1028,6 +1055,10 @@
 </head>
 <body>
     <div class="header">
+        <a href="./chi-sono.html" class="chi-sono-btn" title="Chi Sono">
+            <i class="fas fa-user"></i>
+            <span>Chi Sono</span>
+        </a>
         <button class="dashboard-btn" onclick="openDashboard()" title="Dashboard">
             <i class="fas fa-cog"></i>
         </button>
@@ -1073,6 +1104,16 @@
                 <button class="project-btn">Inizia Percorso</button>
             </div>
 
+            <div class="project-card nutrition" onclick="openProject('https://mealprep-planner.vercel.app/')">
+                <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=400&h=300&fit=crop');"></div>
+                <div class="project-title">MealPrep Planner</div>
+                <div class="project-description">Web app per pianificare e organizzare i tuoi pasti settimanali</div>
+                <button class="project-btn">Prova Gratis</button>
+            </div>
+
+            <div class="project-card nutrition" onclick="openProject('https://pastosano.netlify.app/')">
+                <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop');"></div
+
             <div class="project-card business" onclick="openProject('https://upstarter-tf9x.vercel.app/')">
                 <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=300&fit=crop');"></div>
                 <div class="project-title">Upstart</div>
@@ -1080,18 +1121,18 @@
                 <button class="project-btn">Consulenza Gratuita</button>
             </div>
 
+            <div class="project-card business" onclick="openProject('https://best-trainer-mvp.vercel.app/')">
+                <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop');"></div>
+                <div class="project-title">Best-Trainer</div>
+                <div class="project-description">Centinaia di programmi di allenamento per ogni sport, formulati dai migliori personal trainer</div>
+                <button class="project-btn">Scopri Programmi</button>
+            </div>
+
             <div class="project-card business" onclick="openProject('./ebooks.html')">
                 <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop');"></div>
                 <div class="project-title">I miei eBook</div>
                 <div class="project-description">Libreria digitale con guide complete per trasformare il tuo corpo e mindset</div>
                 <button class="project-btn">Scarica Ora</button>
-            </div>
-
-            <div class="project-card nutrition" onclick="openProject('https://mealprep-planner.vercel.app/')">
-                <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=400&h=300&fit=crop');"></div>
-                <div class="project-title">MealPrep Planner</div>
-                <div class="project-description">Web app per pianificare e organizzare i tuoi pasti settimanali</div>
-                <button class="project-btn">Prova Gratis</button>
             </div>
         </div>
     </div>
@@ -1223,6 +1264,19 @@
                 <button class="project-cta">Prova Gratis</button>
             </div>
 
+            <div class="project-list-item" style="--item-color: #4a7c59;" onclick="openProject('https://pastosano.netlify.app/')">
+                <div class="project-info">
+                    <div style="display: flex; align-items: center;">
+                        <div class="project-icon" style="background-image: url('https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=200&h=200&fit=crop&crop=center');"></div>
+                        <div>
+                            <div class="project-name">Pasto Sano</div>
+                            <div class="project-tagline">Pasti sani pronti per il ritiro</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="project-cta">Ordina Ora</button>
+            </div>
+
             <div class="project-list-item" style="--item-color: #6b7280;" onclick="openProject('https://upstarter-tf9x.vercel.app/')">
                 <div class="project-info">
                     <div style="display: flex; align-items: center;">
@@ -1234,6 +1288,19 @@
                     </div>
                 </div>
                 <button class="project-cta">Consulenza</button>
+            </div>
+
+            <div class="project-list-item" style="--item-color: #6b7280;" onclick="openProject('https://best-trainer-mvp.vercel.app/')">
+                <div class="project-info">
+                    <div style="display: flex; align-items: center;">
+                        <div class="project-icon" style="background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop&crop=center');"></div>
+                        <div>
+                            <div class="project-name">Best-Trainer</div>
+                            <div class="project-tagline">Centinaia di programmi di allenamento per ogni sport</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="project-cta">Scopri Programmi</button>
             </div>
 
             <div class="project-list-item" style="--item-color: #6b7280;" onclick="openProject('./ebooks.html')">
