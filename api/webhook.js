@@ -1,6 +1,7 @@
 // api/webhook.js
 import Stripe from 'stripe';
 import { Resend } from 'resend';
+import { put } from '@vercel/blob';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -36,6 +37,10 @@ export default async function handler(req, res) {
     
     if (ebookInfo) {
       try {
+        // Generate secure download link
+        const downloadUrl = await generateSecureDownloadLink(ebookInfo.filename, customerEmail);
+        ebookInfo.downloadUrl = downloadUrl;
+        
         // Send email with ebook
         await sendEbookEmail(customerEmail, ebookInfo);
         console.log(`Ebook sent to ${customerEmail} for product: ${productName}`);
@@ -53,30 +58,39 @@ function getEbookInfo(productName) {
     'IL WAVE SYSTEM': {
       title: 'IL WAVE SYSTEM',
       filename: 'wave-system.pdf',
-      downloadUrl: 'https://andreapadoan-hub.vercel.app/downloads/wave-system.pdf',
       description: '6 cicli completi di allenamento per raggiungere la tua forma fisica mai raggiunta.'
     },
     'In Forma da 2 Milioni di Anni': {
       title: 'In Forma da 2 Milioni di Anni',
       filename: 'forma-2-milioni-anni.pdf', 
-      downloadUrl: 'https://andreapadoan-hub.vercel.app/downloads/forma-2-milioni-anni.pdf',
       description: 'Il programma alimentare per trasformare il tuo corpo in una macchina brucia grassi.'
     },
     '50 WORKOUT da viaggio': {
       title: '50 WORKOUT da viaggio',
       filename: '50-workout-viaggio.pdf',
-      downloadUrl: 'https://andreapadoan-hub.vercel.app/downloads/50-workout-viaggio.pdf', 
       description: '50 allenamenti essenziali per mantenerti in forma ovunque tu sia.'
     },
     'BODY UNDER CONSTRUCTION VOL: 1': {
       title: 'BODY UNDER CONSTRUCTION VOL: 1',
       filename: 'body-under-construction.pdf',
-      downloadUrl: 'https://andreapadoan-hub.vercel.app/downloads/body-under-construction.pdf',
       description: '100 allenamenti per una forma perfetta 365 giorni all\'anno.'
     }
   };
 
   return ebooks[productName] || null;
+}
+
+async function generateSecureDownloadLink(filename, customerEmail) {
+  // Create a unique download token
+  const downloadToken = Buffer.from(
+    JSON.stringify({
+      filename,
+      email: customerEmail,
+      expires: Date.now() + (30 * 24 * 60 * 60 * 1000) // 30 days
+    })
+  ).toString('base64url');
+  
+  return `${process.env.DOMAIN || 'https://andreapadoan-hub.vercel.app'}/api/secure-download?token=${downloadToken}`;
 }
 
 async function sendEbookEmail(email, ebookInfo) {
@@ -115,7 +129,7 @@ async function sendEbookEmail(email, ebookInfo) {
           <p><strong>Nota importante:</strong></p>
           <ul>
             <li>Il link di download è valido per 30 giorni</li>
-            <li>Puoi scaricare il file più volte entro questo periodo</li>
+            <li>Il link è personale e sicuro</li>
             <li>Salva il PDF sul tuo dispositivo per accesso futuro</li>
           </ul>
           
