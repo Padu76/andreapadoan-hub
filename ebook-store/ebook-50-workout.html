@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>50 WORKOUT da viaggio - Andrea Padoan</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #10b981;
+        }
+        
+        .btn-primary-gradient {
+            background-image: linear-gradient(to right, #10b981, #059669);
+            transition: all 0.3s ease-in-out;
+        }
+        .btn-primary-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+            background-image: linear-gradient(to right, #34d399, #10b981);
+        }
+        
+        .btn-email {
+            background-color: #6366f1;
+            transition: all 0.3s ease;
+        }
+        .btn-email:hover {
+            background-color: #4f46e5;
+            transform: translateY(-2px);
+        }
+        
+        .product-card {
+            background-color: #1f1f1f;
+            border: 1px solid #333;
+        }
+        
+        .price-highlight {
+            background: linear-gradient(45deg, #10b981, #059669);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .security-badge {
+            background-color: #10b981;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .free-badge {
+            background-color: #059669;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 1rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        .back-button {
+            background-color: #374151;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: #4b5563;
+            transform: translateX(-2px);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-gray-900 shadow-lg py-4 border-b-4 border-green-600">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="/" class="text-3xl font-extrabold text-green-500 hover:text-green-400 transition duration-300 ease-in-out p-2 rounded-lg">
+                Andrea Padoan Ebook
+            </a>
+            <a href="/ebooks.html" class="back-button px-6 py-2 rounded-full font-semibold">
+                ← Torna al Catalogo
+            </a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12">
+        
+        <!-- Hero Section -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+            <!-- Copertina -->
+            <div class="flex justify-center">
+                <img src="../images/workout-viaggio-cover.jpg" 
+                     alt="Copertina 50 WORKOUT da viaggio" 
+                     class="w-full max-w-md rounded-xl shadow-2xl">
+            </div>
+            
+            <!-- Info Prodotto -->
+            <div class="flex flex-col justify-center">
+                <div class="mb-4">
+                    <span class="free-badge">
+                        🎁 COMPLETAMENTE GRATUITO
+                    </span>
+                </div>
+                
+                <h1 class="text-5xl md:text-6xl font-extrabold mb-6">
+                    50 WORKOUT da viaggio
+                </h1>
+                
+                <p class="text-xl text-gray-300 mb-8">
+                    50 ALLENAMENTI ESSENZIALI PER MANTENERTI IN FORMA OVUNQUE TU SIA. 
+                    Nessuna scusa, nessun attrezzo necessario. Solo risultati garantiti.
+                </p>
+                
+                <div class="mb-8">
+                    <span class="text-6xl font-extrabold price-highlight">GRATIS</span>
+                    <p class="text-gray-400 mt-2">Download immediato • Nessun costo • Valore reale €19.90</p>
+                </div>
+                
+                <!-- Security Badges -->
+                <div class="flex flex-wrap gap-2 mb-8">
+                    <span class="security-badge">
+                        ✅ 100% Gratuito
+                    </span>
+                    <span class="security-badge">
+                        📧 Download Immediato
+                    </span>
+                    <span class="security-badge">
+                        🏃 Senza Attrezzi
+                    </span>
+                </div>
+                
+                <!-- Download Form -->
+                <div class="space-y-4 bg-gray-800 p-6 rounded-xl">
+                    <h3 class="text-2xl font-bold text-green-400">Scarica Subito Gratis!</h3>
+                    <p class="text-gray-300">Inserisci la tua email per ricevere immediatamente il PDF:</p>
+                    
+                    <div class="space-y-3">
+                        <input type="email" 
+                               placeholder="La tua email" 
+                               class="w-full px-4 py-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:border-green-500 focus:outline-none">
+                        
+                        <button class="btn-primary-gradient text-white font-bold py-4 px-8 rounded-full w-full text-lg shadow-lg">
+                            📥 SCARICA GRATIS ORA!
+                        </button>
+                        
+                        <button class="btn-email text-white font-bold py-4 px-8 rounded-full w-full text-lg shadow-lg">
+                            📧 Invia tramite Email
+                        </button>
+                    </div>
+                    
+                    <p class="text-xs text-gray-400 text-center">
+                        🔒 I tuoi dati sono al sicuro. Non invieremo spam.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Perché è Gratuito -->
+        <section class="product-card rounded-xl p-8 mb-12 bg-gradient-to-r from-green-900 to-green-800">
+            <h2 class="text-4xl font-bold mb-6 text-white">Perché Te Lo Regalo?</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-white">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 text-green-300">🎯 La Mia Missione</h3>
+                    <p class="mb-6">
+                        Credo che tutti abbiano diritto di mantenersi in forma, ovunque si trovino. 
+                        Questo ebook è il mio regalo per aiutarti a iniziare il tuo percorso fitness 
+                        senza barriere o scuse.
+                    </p>
+                    
+                    <h3 class="text-2xl font-semibold mb-4 text-green-300">💝 Valore Reale €19.90</h3>
+                    <p>
+                        Questi 50 workout hanno lo stesso valore e qualità degli altri miei programmi a pagamento. 
+                        È il mio modo di ringraziarti per la fiducia e aiutarti a scoprire i benefici del fitness.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 text-green-300">🌟 Nessun Impegno</h3>
+                    <p class="mb-6">
+                        Scaricalo, usalo, condividilo. Non c'è nessun costo nascosto o abbonamento. 
+                        È davvero gratis e lo sarà per sempre.
+                    </p>
+                    
+                    <h3 class="text-2xl font-semibold mb-4 text-green-300">🚀 Il Tuo Punto di Partenza</h3>
+                    <p>
+                        Considera questo ebook come l'inizio del tuo percorso. Se ti piace il mio approccio, 
+                        potrai sempre approfondire con i miei programmi più avanzati.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cosa Include -->
+        <section class="product-card rounded-xl p-8 mb-12">
+            <h2 class="text-4xl font-bold mb-6">50 Allenamenti Per Ogni Situazione</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-gray-800 rounded-lg p-6">
+                    <h4 class="text-xl font-semibold text-green-400 mb-3">🏨 In Hotel</h4>
+                    <p class="text-gray-300 text-sm mb-2"><strong>15 workout</strong></p>
+                    <p class="text-gray-300">
+                        Allenamenti perfetti per spazi ristretti. Solo il peso corporeo, 
+                        nessun rumore per i vicini.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-800 rounded-lg p-6">
+                    <h4 class="text-xl font-semibold text-green-400 mb-3">🏖️ In Spiaggia</h4>
+                    <p class="text-gray-300 text-sm mb-2"><strong>10 workout</strong></p>
+                    <p class="text-gray-300">
+                        Sfrutta la sabbia e l'ambiente naturale per allenamenti divertenti 
+                        e sfidanti.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-800 rounded-lg p-6">
+                    <h4 class="text-xl font-semibold text-green-400 mb-3">🌳 All'Aperto</h4>
+                    <p class="text-gray-300 text-sm mb-2"><strong>10 workout</strong></p>
+                    <p class="text-gray-300">
+                        Parchi, giardini, terrazze. Usa l'ambiente esterno per allenarti 
+                        con creatività.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-800 rounded-lg p-6">
+                    <h4 class="text-xl font-semibold text-green-400 mb-3">✈️ In Aereo/Treno</h4>
+                    <p class="text-gray-300 text-sm mb-2"><strong>5 workout</strong></p>
+                    <p class="text-gray-300">
+                        Esercizi discreti da fare durante viaggi lunghi per combattere 
+                        la sedentarietà.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-800 rounded-lg p-6">
+                    <h4 class="text-xl font-semibold text-green-400 mb-3">⏰ 15 Minuti</h4>
+                    <p class="text-gray-300 text-sm mb-2"><strong>10 workout</strong></p>
+                    <p class="text-gray-300">
+                        Allenamenti lampo per quando hai poco tempo ma non vuoi 
+                        saltare la sessione.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-800 rounded-lg p-6">
+                    <h4 class="text-xl font-semibold text-green-400 mb-3">🎯 BONUS</h4>
+                    <p class="text-gray-300 text-sm mb-2"><strong>Inclusi</strong></p>
+                    <p class="text-gray-300">
+                        Tabelle di progressione, timer integrati, suggerimenti per 
+                        adattare l'intensità.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Caratteristiche -->
+        <section class="product-card rounded-xl p-8 mb-12">
+            <h2 class="text-4xl font-bold mb-6">Perché Questi Workout Sono Speciali</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 text-green-400">🚫 Zero Attrezzi</h3>
+                    <p class="text-gray-300 mb-6">
+                        Ogni allenamento usa solo il peso corporeo. Niente pesi, elastici, 
+                        palle o attrezzature. Solo tu e la tua determinazione.
+                    </p>
+                    
+                    <h3 class="text-2xl font-semibold mb-4 text-green-400">⚡ Massima Efficienza</h3>
+                    <p class="text-gray-300">
+                        Da 15 a 45 minuti. Ogni secondo è ottimizzato per massimizzare il risultato 
+                        nel minor tempo possibile.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 text-green-400">🎯 Per Tutti i Livelli</h3>
+                    <p class="text-gray-300 mb-6">
+                        Ogni esercizio ha varianti facili, medie e difficili. Che tu sia 
+                        principiante o esperto, troverai la tua sfida.
+                    </p>
+                    
+                    <h3 class="text-2xl font-semibold mb-4 text-green-400">📱 Formato Pratico</h3>
+                    <p class="text-gray-300">
+                        PDF ottimizzato per smartphone. Portalo sempre con te, anche offline. 
+                        Schede chiare e facili da seguire.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonianze -->
+        <section class="mb-12">
+            <h2 class="text-4xl font-bold text-center mb-8">Chi Lo Ha Scaricato Dice...</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="product-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center font-bold text-xl">
+                            G
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold">Giulia, Travel Blogger</h4>
+                            <div class="text-green-400">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">
+                        "Perfetto per chi viaggia come me! Ho usato questi workout in 15 paesi diversi. 
+                        Non ho più scuse per saltare l'allenamento!"
+                    </p>
+                </div>
+                
+                <div class="product-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center font-bold text-xl">
+                            M
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold">Marco, Manager</h4>
+                            <div class="text-green-400">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">
+                        "Trasferte continue per lavoro. Questo ebook mi ha salvato! 15 minuti al mattino 
+                        e arrivo in ufficio carico di energia."
+                    </p>
+                </div>
+                
+                <div class="product-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center font-bold text-xl">
+                            E
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold">Elena, Mamma</h4>
+                            <div class="text-green-400">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">
+                        "Con due bambini è difficile andare in palestra. Questi workout li faccio a casa 
+                        mentre loro dormono. Pratico e efficace!"
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Finale -->
+        <section class="text-center bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl p-12 mb-12">
+            <h2 class="text-4xl font-bold text-white mb-6">
+                Scarica Subito i Tuoi 50 Workout Gratuiti
+            </h2>
+            <p class="text-xl text-green-100 mb-8 max-w-2xl mx-auto">
+                Non rimandare. Inizia oggi stesso a mantenerti in forma ovunque tu sia. 
+                È gratis e lo sarà sempre!
+            </p>
+            
+            <div class="bg-white rounded-xl p-6 max-w-md mx-auto">
+                <input type="email" 
+                       placeholder="La tua email" 
+                       class="w-full px-4 py-3 rounded-lg bg-gray-100 text-gray-800 border border-gray-300 focus:border-green-500 focus:outline-none mb-4">
+                
+                <button class="bg-green-600 text-white font-bold py-4 px-8 rounded-full w-full text-lg hover:bg-green-700 transition duration-300">
+                    📥 SCARICA GRATIS ORA!
+                </button>
+            </div>
+            
+            <p class="text-green-200 mt-4 text-sm">
+                🔒 I tuoi dati sono protetti. Riceverai solo il PDF e consigli utili sul fitness.
+            </p>
+        </section>
+
+        <!-- Chi Sono -->
+        <section class="product-card rounded-xl p-8 text-center">
+            <img src="../images/andrea-profile.jpg" 
+                 onerror="this.onerror=null;this.src='../images/Padu_tribu040.jpg';"
+                 alt="Andrea Padoan" 
+                 class="w-32 h-32 rounded-full mx-auto mb-6 object-cover">
+            
+            <h2 class="text-3xl font-bold mb-4">Andrea Padoan</h2>
+            <p class="text-xl text-green-400 mb-6">Personal Trainer & Fitness Coach</p>
+            
+            <p class="text-gray-300 max-w-2xl mx-auto mb-6">
+                Ho creato questi 50 workout durante i miei viaggi in giro per il mondo. 
+                Ho testato ogni allenamento personalmente in hotel, spiagge, parchi e aeroporti. 
+                Funzionano davvero, ovunque tu sia!
+            </p>
+            
+            <a href="https://wa.me/393478881515" target="_blank" 
+               class="inline-flex items-center bg-green-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-green-700 transition duration-300">
+                <img src="../images/whatsapp.png" alt="WhatsApp" class="w-6 h-6 mr-2">
+                Contattami su WhatsApp
+            </a>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 px-4 mt-12">
+        <div class="container mx-auto text-center">
+            <p class="text-sm">&copy; 2025 Andrea Padoan Personal Trainer. Tutti i diritti riservati.</p>
+            <div class="flex justify-center space-x-6 mt-4">
+                <a href="#" class="text-gray-400 hover:text-white transition duration-300">Privacy Policy</a>
+                <a href="#" class="text-gray-400 hover:text-white transition duration-300">Termini e Condizioni</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
