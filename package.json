@@ -2,26 +2,10 @@
   "name": "andrea-padoan-ebooks",
   "version": "1.0.0",
   "description": "Sistema pagamenti automatico per ebook Andrea Padoan",
-  "main": "index.js",
-  "scripts": {
-    "dev": "vercel dev",
-    "build": "echo 'No build step required'",
-    "start": "echo 'Static site'"
-  },
   "dependencies": {
     "stripe": "^14.21.0"
   },
-  "devDependencies": {},
-  "keywords": [
-    "ebook",
-    "payments",
-    "stripe",
-    "paypal",
-    "fitness"
-  ],
-  "author": "Andrea Padoan",
-  "license": "MIT",
   "engines": {
-    "node": ">=18.0.0"
+    "node": "18.x"
   }
 }
