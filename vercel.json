@@ -1,61 +1,13 @@
 {
-  "version": 2,
-  "buildCommand": "echo 'No build required'",
-  "outputDirectory": "./",
-  "installCommand": "npm install",
   "functions": {
-    "api/**/*.js": {
-      "runtime": "nodejs18.x"
+    "api/*.js": {
+      "maxDuration": 30
     }
   },
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
-    {
-      "src": "/ebook-store/(.*)",
-      "dest": "/ebook-store/$1"
-    },
-    {
-      "src": "/images/(.*)",
-      "dest": "/images/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
-  ],
-  "headers": [
+  "rewrites": [
     {
       "source": "/api/(.*)",
-      "headers": [
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        },
-        {
-          "key": "Access-Control-Allow-Methods",
-          "value": "GET, POST, PUT, DELETE, OPTIONS"
-        },
-        {
-          "key": "Access-Control-Allow-Headers",
-          "value": "X-Requested-With, Content-Type, Authorization"
-        }
-      ]
-    },
-    {
-      "source": "/ebook-store/(.*\\.pdf)",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/pdf"
-        },
-        {
-          "key": "Content-Disposition",
-          "value": "attachment"
-        }
-      ]
+      "destination": "/api/$1"
     }
   ]
 }
