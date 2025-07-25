@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IL WAVE SYSTEM - Andrea Padoan</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #f97316;
+        }
+        
+        .btn-primary-gradient {
+            background-image: linear-gradient(to right, #f97316, #ea580c);
+            transition: all 0.3s ease-in-out;
+        }
+        .btn-primary-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
+            background-image: linear-gradient(to right, #fb923c, #f97316);
+        }
+        
+        .btn-paypal {
+            background-color: #0070ba;
+            transition: all 0.3s ease;
+        }
+        .btn-paypal:hover {
+            background-color: #005ea6;
+            transform: translateY(-2px);
+        }
+        
+        .product-card {
+            background-color: #1f1f1f;
+            border: 1px solid #333;
+        }
+        
+        .price-highlight {
+            background: linear-gradient(45deg, #f97316, #ea580c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .security-badge {
+            background-color: #10b981;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .back-button {
+            background-color: #374151;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: #4b5563;
+            transform: translateX(-2px);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-gray-900 shadow-lg py-4 border-b-4 border-orange-600">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="/" class="text-3xl font-extrabold text-orange-500 hover:text-orange-400 transition duration-300 ease-in-out p-2 rounded-lg">
+                Andrea Padoan Ebook
+            </a>
+            <a href="/ebooks.html" class="back-button px-6 py-2 rounded-full font-semibold">
+                ← Torna al Catalogo
+            </a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12">
+        
+        <!-- Hero Section -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+            <!-- Copertina -->
+            <div class="flex justify-center">
+                <img src="../images/wave-system-cover.jpg" 
+                     alt="Copertina IL WAVE SYSTEM" 
+                     class="w-full max-w-md rounded-xl shadow-2xl">
+            </div>
+            
+            <!-- Info Prodotto -->
+            <div class="flex flex-col justify-center">
+                <h1 class="text-5xl md:text-6xl font-extrabold mb-6">
+                    IL WAVE SYSTEM
+                </h1>
+                
+                <p class="text-xl text-gray-300 mb-8">
+                    6 CICLI COMPLETI DI ALLENAMENTO PER RAGGIUNGERE LA TUA FORMA FISICA MAI RAGGIUNTA. 
+                    Un sistema progressivo che ti porta dal livello base a risultati straordinari.
+                </p>
+                
+                <div class="mb-8">
+                    <span class="text-6xl font-extrabold price-highlight">€14.90</span>
+                    <p class="text-gray-400 mt-2">Accesso immediato • PDF scaricabile • 6 mesi di allenamenti</p>
+                </div>
+                
+                <!-- Security Badges -->
+                <div class="flex flex-wrap gap-2 mb-8">
+                    <span class="security-badge">
+                        🔒 Pagamento Sicuro
+                    </span>
+                    <span class="security-badge">
+                        📧 Consegna Immediata
+                    </span>
+                    <span class="security-badge">
+                        💪 Progressione Garantita
+                    </span>
+                </div>
+                
+                <!-- Payment Buttons -->
+                <div class="space-y-4">
+                    <button class="btn-primary-gradient text-white font-bold py-4 px-8 rounded-full w-full text-lg shadow-lg">
+                        🛒 Acquista con Stripe - €14.90
+                    </button>
+                    <button class="btn-paypal text-white font-bold py-4 px-8 rounded-full w-full text-lg shadow-lg">
+                        💳 Acquista con PayPal - €14.90
+                    </button>
+                </div>
+                
+                <p class="text-sm text-gray-400 mt-4 text-center">
+                    Riceverai il link di download via email entro 5 minuti dall'acquisto
+                </p>
+            </div>
+        </section>
+
+        <!-- Descrizione Dettagliata -->
+        <section class="product-card rounded-xl p-8 mb-12">
+            <h2 class="text-4xl font-bold mb-6">Il Sistema di Allenamento Progressivo</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 text-orange-400">🌊 Metodologia WAVE</h3>
+                    <p class="text-gray-300 mb-6">
+                        Il Wave System si basa sulla periodizzazione ondulata, che alterna fasi di carico e 
+                        scarico per massimizzare i risultati e prevenire plateau. Come un'onda che cresce progressivamente.
+                    </p>
+                    
+                    <h3 class="text-2xl font-semibold mb-4 text-orange-400">📈 Progressione Scientifica</h3>
+                    <p class="text-gray-300">
+                        Ogni ciclo aumenta gradualmente intensità e complessità, permettendo al tuo corpo 
+                        di adattarsi senza stress eccessivo. Dai fondamentali agli esercizi avanzati.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 text-orange-400">🏋️ Senza Attrezzi Complessi</h3>
+                    <p class="text-gray-300 mb-6">
+                        Bastano pesi liberi di base e il peso corporeo. Niente macchine costose o 
+                        attrezzature particolari. Alleni forza, resistenza e coordinazione ovunque.
+                    </p>
+                    
+                    <h3 class="text-2xl font-semibold mb-4 text-orange-400">⏰ Efficienza Massima</h3>
+                    <p class="text-gray-300">
+                        Sessioni da 45-60 minuti, 3-4 volte a settimana. Ogni allenamento è strutturato 
+                        per massimizzare il tempo investito con risultati misurabili.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- I 6 Cicli -->
+        <section class="product-card rounded-xl p-8 mb-12">
+            <h2 class="text-4xl font-bold mb-6">I 6 Cicli del WAVE SYSTEM</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-gray-800 rounded-lg p-6">
+                    <h4 class="text-xl font-semibold text-orange-400 mb-3">🚀 CICLO 1: ATTIVAZIONE</h4>
+                    <p class="text-gray-300 text-sm mb-2"><strong>Durata:</strong> 4 settimane</p>
+                    <p class="text-gray-300">
+                        Risveglia il tuo corpo e prepara muscoli e articolazioni. Focus su mobilità, 
+                        stabilità e apprendimento dei movimenti base.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-800 rounded-lg p-6">
+                    <h4 class="text-xl font-semibold text-orange-400 mb-3">💪 CICLO 2: FONDAMENTA</h4>
+                    <p class="text-gray-300 text-sm mb-2"><strong>Durata:</strong> 4 settimane</p>
+                    <p class="text-gray-300">
+                        Costruisci le basi della forza funzionale. Pattern di movimento corretti 
+                        e prime progressioni di carico.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-800 rounded-lg p-6">
+                    <h4 class="text-xl font-semibold text-orange-400 mb-3">🔥 CICLO 3: INTENSITÀ</h4>
+                    <p class="text-gray-300 text-sm mb-2"><strong>Durata:</strong> 4 settimane</p>
+                    <p class="text-gray-300">
+                        Aumenta il carico e la complessità. Sviluppa forza pura e resistenza muscolare 
+                        con tecniche avanzate.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-800 rounded-lg p-6">
+                    <h4 class="text-xl font-semibold text-orange-400 mb-3">⚡ CICLO 4: POTENZA</h4>
+                    <p class="text-gray-300 text-sm mb-2"><strong>Durata:</strong> 4 settimane</p>
+                    <p class="text-gray-300">
+                        Esplosività e velocità. Esercizi pliometrici e movimenti dinamici per 
+                        massimizzare la potenza muscolare.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-800 rounded-lg p-6">
+                    <h4 class="text-xl font-semibold text-orange-400 mb-3">🎯 CICLO 5: SPECIALIZZAZIONE</h4>
+                    <p class="text-gray-300 text-sm mb-2"><strong>Durata:</strong> 4 settimane</p>
+                    <p class="text-gray-300">
+                        Focus su obiettivi specifici: forza massimale, ipertrofia o resistenza. 
+                        Personalizza in base ai tuoi goal.
+                    </p>
+                </div>
+                
+                <div class="bg-gray-800 rounded-lg p-6">
+                    <h4 class="text-xl font-semibold text-orange-400 mb-3">🏆 CICLO 6: PERFORMANCE</h4>
+                    <p class="text-gray-300 text-sm mb-2"><strong>Durata:</strong> 4 settimane</p>
+                    <p class="text-gray-300">
+                        Il culmine del sistema. Integra tutto quello che hai imparato per raggiungere 
+                        la tua forma fisica migliore.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cosa Include -->
+        <section class="product-card rounded-xl p-8 mb-12">
+            <h2 class="text-4xl font-bold mb-6">Cosa Include il WAVE SYSTEM</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h4 class="text-xl font-semibold text-orange-400 mb-3">📋 PROGRAMMI DETTAGLIATI</h4>
+                    <ul class="space-y-2 text-gray-300 mb-6">
+                        <li>• 24 settimane di allenamenti programmati</li>
+                        <li>• Schede tecniche per ogni esercizio</li>
+                        <li>• Progressioni e regressioni</li>
+                        <li>• Tabelle di carico personalizzabili</li>
+                    </ul>
+                    
+                    <h4 class="text-xl font-semibold text-orange-400 mb-3">🎯 OBIETTIVI SPECIFICI</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li>• Test di valutazione iniziale</li>
+                        <li>• Obiettivi per ogni ciclo</li>
+                        <li>• Tracciamento progressi</li>
+                        <li>• Test finali di performance</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-semibold text-orange-400 mb-3">🏋️ ESERCIZI ILLUSTRATI</h4>
+                    <ul class="space-y-2 text-gray-300 mb-6">
+                        <li>• Oltre 100 esercizi con immagini</li>
+                        <li>• Istruzioni passo-passo</li>
+                        <li>• Errori comuni da evitare</li>
+                        <li>• Varianti per tutti i livelli</li>
+                    </ul>
+                    
+                    <h4 class="text-xl font-semibold text-orange-400 mb-3">📊 BONUS INCLUSI</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li>• Diario di allenamento stampabile</li>
+                        <li>• Guida al recupero attivo</li>
+                        <li>• Protocolli di riscaldamento</li>
+                        <li>• Consigli nutrizionali base</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonianze -->
+        <section class="mb-12">
+            <h2 class="text-4xl font-bold text-center mb-8">Risultati Reali</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="product-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center font-bold text-xl">
+                            A
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold">Antonio, 29 anni</h4>
+                            <div class="text-orange-400">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">
+                        "In 6 mesi ho guadagnato 8kg di massa muscolare pulita. Il sistema è perfetto, 
+                        progressivo e mai noioso. Ogni ciclo è una nuova sfida!"
+                    </p>
+                </div>
+                
+                <div class="product-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center font-bold text-xl">
+                            F
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold">Francesca, 34 anni</h4>
+                            <div class="text-orange-400">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">
+                        "Dopo anni di allenamenti casuali, finalmente un metodo che funziona. 
+                        Sono più forte e definita che mai. Lo consiglio a tutte!"
+                    </p>
+                </div>
+                
+                <div class="product-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center font-bold text-xl">
+                            R
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold">Roberto, 45 anni</h4>
+                            <div class="text-orange-400">⭐⭐⭐⭐⭐</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">
+                        "Credevo di essere troppo vecchio per migliorare. Il Wave System mi ha 
+                        dimostrato il contrario. Più energia e forma fisica di quando avevo 30 anni!"
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Finale -->
+        <section class="text-center bg-gradient-to-r from-orange-600 to-red-600 rounded-2xl p-12 mb-12">
+            <h2 class="text-4xl font-bold text-white mb-6">
+                Inizia la Tua Trasformazione Fisica
+            </h2>
+            <p class="text-xl text-orange-100 mb-8 max-w-2xl mx-auto">
+                Non perdere tempo con allenamenti casuali. Segui un sistema scientifico 
+                che garantisce risultati progressivi e duraturi.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+                <button class="bg-white text-orange-600 font-bold py-4 px-8 rounded-full flex-1 hover:bg-gray-100 transition duration-300">
+                    🛒 Acquista Ora - €14.90
+                </button>
+            </div>
+            
+            <p class="text-orange-200 mt-4 text-sm">
+                💰 Garanzia 30 giorni - Se non vedi miglioramenti, ti rimborsiamo completamente
+            </p>
+        </section>
+
+        <!-- Chi Sono -->
+        <section class="product-card rounded-xl p-8 text-center">
+            <img src="../images/andrea-profile.jpg" 
+                 onerror="this.onerror=null;this.src='../images/Padu_tribu040.jpg';"
+                 alt="Andrea Padoan" 
+                 class="w-32 h-32 rounded-full mx-auto mb-6 object-cover">
+            
+            <h2 class="text-3xl font-bold mb-4">Andrea Padoan</h2>
+            <p class="text-xl text-orange-400 mb-6">Personal Trainer & Performance Coach</p>
+            
+            <p class="text-gray-300 max-w-2xl mx-auto mb-6">
+                Ho sviluppato il Wave System dopo anni di esperienza con atleti e appassionati di fitness. 
+                Questo metodo ha trasformato centinaia di persone, permettendo loro di raggiungere risultati 
+                che non credevano possibili. La progressione è la chiave del successo.
+            </p>
+            
+            <a href="https://wa.me/393478881515" target="_blank" 
+               class="inline-flex items-center bg-green-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-green-700 transition duration-300">
+                <img src="../images/whatsapp.png" alt="WhatsApp" class="w-6 h-6 mr-2">
+                Contattami su WhatsApp
+            </a>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 px-4 mt-12">
+        <div class="container mx-auto text-center">
+            <p class="text-sm">&copy; 2025 Andrea Padoan Personal Trainer. Tutti i diritti riservati.</p>
+            <div class="flex justify-center space-x-6 mt-4">
+                <a href="#" class="text-gray-400 hover:text-white transition duration-300">Privacy Policy</a>
+                <a href="#" class="text-gray-400 hover:text-white transition duration-300">Termini e Condizioni</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
