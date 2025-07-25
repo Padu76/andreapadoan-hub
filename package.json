@@ -1,7 +1,6 @@
 {
   "name": "andrea-ebook-store",
   "version": "1.0.0",
-  "type": "module",
   "description": "Sistema di vendita ebook automatizzato con Stripe e Vercel",
   "main": "index.js",
   "scripts": {
