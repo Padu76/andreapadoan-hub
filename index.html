@@ -26,8 +26,35 @@
         .header {
             position: fixed;
             top: 15px;
+            left: 20px;
             right: 20px;
             z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chi-sono-btn {
+            background: rgba(255, 107, 53, 0.9);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chi-sono-btn:hover {
+            background: #ff6b35;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
         }
 
         .dashboard-btn {
@@ -1028,6 +1055,10 @@
 </head>
 <body>
     <div class="header">
+        <a href="./chi-sono.html" class="chi-sono-btn" title="Chi Sono">
+            <i class="fas fa-user"></i>
+            <span>Chi Sono</span>
+        </a>
         <button class="dashboard-btn" onclick="openDashboard()" title="Dashboard">
             <i class="fas fa-cog"></i>
         </button>
@@ -1081,11 +1112,7 @@
             </div>
 
             <div class="project-card nutrition" onclick="openProject('https://pastosano.netlify.app/')">
-                <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400&h=300&fit=crop');"></div>
-                <div class="project-title">Pasto Sano</div>
-                <div class="project-description">Pasti sani e gustosi pronti per il ritiro. Più tempo per te, più energia per la vita</div>
-                <button class="project-btn">Ordina Ora</button>
-            </div>
+                <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop');"></div
 
             <div class="project-card business" onclick="openProject('https://upstarter-tf9x.vercel.app/')">
                 <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=300&fit=crop');"></div>
@@ -1095,10 +1122,10 @@
             </div>
 
             <div class="project-card business" onclick="openProject('https://best-trainer-mvp.vercel.app/')">
-                <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=300&fit=crop');"></div>
+                <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop');"></div>
                 <div class="project-title">Best-Trainer</div>
-                <div class="project-description">Marketplace specializzato per Personal Trainer. Programmi digitali e consulenze</div>
-                <button class="project-btn">Scopri Marketplace</button>
+                <div class="project-description">Centinaia di programmi di allenamento per ogni sport, formulati dai migliori personal trainer</div>
+                <button class="project-btn">Scopri Programmi</button>
             </div>
 
             <div class="project-card business" onclick="openProject('./ebooks.html')">
@@ -1266,14 +1293,14 @@
             <div class="project-list-item" style="--item-color: #6b7280;" onclick="openProject('https://best-trainer-mvp.vercel.app/')">
                 <div class="project-info">
                     <div style="display: flex; align-items: center;">
-                        <div class="project-icon" style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop&crop=center');"></div>
+                        <div class="project-icon" style="background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop&crop=center');"></div>
                         <div>
                             <div class="project-name">Best-Trainer</div>
-                            <div class="project-tagline">Marketplace specializzato per Personal Trainer</div>
+                            <div class="project-tagline">Centinaia di programmi di allenamento per ogni sport</div>
                         </div>
                     </div>
                 </div>
-                <button class="project-cta">Scopri Marketplace</button>
+                <button class="project-cta">Scopri Programmi</button>
             </div>
 
             <div class="project-list-item" style="--item-color: #6b7280;" onclick="openProject('./ebooks.html')">
