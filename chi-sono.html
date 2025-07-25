@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi Sono - Andrea Padoan | Personal Trainer & Lifestyle Coach</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            position: fixed;
+            top: 15px;
+            left: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            background: rgba(255, 107, 53, 0.9);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            background: #ff6b35;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px 50px;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            font-weight: 900;
+            color: #ff6b35;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: #b0b0b0;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        .profile-image-large {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff6b35, #ff8c5a);
+            padding: 8px;
+            margin: 0 auto 40px;
+        }
+
+        .profile-content-large {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-image: url('./images/andrea-profile.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .story-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .story-card {
+            background: rgba(26, 26, 26, 0.8);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .story-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 107, 53, 0.5);
+            box-shadow: 0 15px 35px rgba(255, 107, 53, 0.1);
+        }
+
+        .story-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ff6b35, #ff8533);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+        }
+
+        .story-title {
+            color: #ff6b35;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .story-text {
+            color: #e0e0e0;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .highlight-section {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 133, 51, 0.05));
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            border-radius: 25px;
+            padding: 50px;
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .highlight-title {
+            color: #ff6b35;
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .highlight-text {
+            color: #fff;
+            font-size: 1.3rem;
+            font-weight: 600;
+            line-height: 1.6;
+        }
+
+        .achievements-section {
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            color: #fff;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .achievement-card {
+            background: rgba(26, 26, 26, 0.6);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+
+        .achievement-card:hover {
+            border-color: #ff6b35;
+            transform: translateY(-3px);
+        }
+
+        .achievement-icon {
+            color: #ff6b35;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .achievement-title {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .achievement-text {
+            color: #b0b0b0;
+            font-size: 0.95rem;
+        }
+
+        .values-section {
+            margin-bottom: 80px;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .value-card {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.05), rgba(255, 133, 51, 0.02));
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .value-card:hover {
+            border-color: rgba(255, 107, 53, 0.5);
+            transform: translateY(-3px);
+        }
+
+        .value-emoji {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .value-title {
+            color: #ff6b35;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .value-text {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .cta-section {
+            background: linear-gradient(45deg, #ff6b35, #ff8c5a);
+            border-radius: 25px;
+            padding: 50px;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .cta-title {
+            color: #fff;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .cta-text {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cta-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .questions-section {
+            margin-bottom: 60px;
+        }
+
+        .questions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .question-card {
+            background: rgba(255, 107, 53, 0.05);
+            border-left: 4px solid #ff6b35;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .question-text {
+            color: #e0e0e0;
+            font-size: 1rem;
+            font-style: italic;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 80px 15px 30px;
+            }
+
+            .story-section {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .story-card {
+                padding: 30px 25px;
+            }
+
+            .highlight-section {
+                padding: 35px 25px;
+            }
+
+            .profile-image-large {
+                width: 250px;
+                height: 250px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-btn {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="./index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            <span>Torna alla Home</span>
+        </a>
+    </div>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <h1 class="hero-title">Chi Sono</h1>
+            <p class="hero-subtitle">Andrea Padoan - Da Manager a Personal Trainer</p>
+            
+            <div class="profile-image-large">
+                <div class="profile-content-large"></div>
+            </div>
+        </div>
+
+        <!-- Story Cards -->
+        <div class="story-section">
+            <div class="story-card">
+                <div class="story-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <h3 class="story-title">La Mia Storia</h3>
+                <p class="story-text">
+                    Mi chiamo Andrea Padoan, sono un Lifestyle Coach e Personal Trainer certificato. 
+                    Dopo oltre 12 anni in importanti aziende commerciali ricoprendo cariche manageriali 
+                    nel Marketing e nelle Vendite, ho capito che dovevo lavorare a qualcosa di gratificante 
+                    e salutare per me stesso ed utile per chi mi stava attorno.
+                </p>
+            </div>
+
+            <div class="story-card">
+                <div class="story-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h3 class="story-title">Il Momento di Svolta</h3>
+                <p class="story-text">
+                    Un giorno mi sono guardato allo specchio e dopo 30 anni ho visto ciò che non volevo diventare: 
+                    ero in sovrappeso e intuii che sarei andato incontro a piccoli problemi di salute. 
+                    In quel momento ho deciso che non volevo più percorrere quella strada.
+                </p>
+            </div>
+
+            <div class="story-card">
+                <div class="story-icon">
+                    <i class="fas fa-power-off"></i>
+                </div>
+                <h3 class="story-title">Da "OFF" a "ON"</h3>
+                <p class="story-text">
+                    Sono stato anche io uno come te... che tornato a casa dal lavoro si sentiva così stanco 
+                    da premere il pulsante "OFF" sino al giorno dopo. Oggi la mia vita è cambiata. 
+                    Dove prima la mia giornata finiva, ora inizia davvero! Il pulsante "OFF" è diventato "ON".
+                </p>
+            </div>
+
+            <div class="story-card">
+                <div class="story-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h3 class="story-title">La Trasformazione</h3>
+                <p class="story-text">
+                    Ho migliorato il mio stile di vita: potenziato la resistenza allo stress mentale e fisica, 
+                    ho imparato a costruire qualcosa ogni giorno, ho eliminato farmaci, ho raggiunto una buona 
+                    forma fisica, ho ritrovato in me una energia sepolta che rischiava di rimanere sotterrata per sempre.
+                </p>
+            </div>
+        </div>
+
+        <!-- Highlight Section -->
+        <div class="highlight-section">
+            <h2 class="highlight-title">La Mia Missione</h2>
+            <p class="highlight-text">
+                Quello che avevo iniziato come passione, è diventato oggi il mio lavoro:<br>
+                <strong>AIUTARE LE PERSONE A STARE BENE</strong><br><br>
+                In qualità di Lifestyle Coach & Personal Trainer aiuto, sostengo e motivo i miei clienti 
+                a raggiungere i risultati di benessere fisico e mentale che desiderano.
+            </p>
+        </div>
+
+        <!-- Achievements -->
+        <div class="achievements-section">
+            <h2 class="section-title">Traguardi & Riconoscimenti</h2>
+            <div class="achievements-grid">
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <h3 class="achievement-title">2012</h3>
+                    <p class="achievement-text">Apertura del primo studio di Personal Training a Verona</p>
+                </div>
+
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <i class="fas fa-tv"></i>
+                    </div>
+                    <h3 class="achievement-title">2015</h3>
+                    <p class="achievement-text">Partecipazione a "Best in Town" su Real Time, selezionato tra i migliori PT di Verona</p>
+                </div>
+
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3 class="achievement-title">Autore</h3>
+                    <p class="achievement-text">3 libri pubblicati e diversi articoli per riviste di benessere</p>
+                </div>
+
+                <div class="achievement-card">
+                    <div class="achievement-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="achievement-title">Tribù</h3>
+                    <p class="achievement-text">Fondatore di "Tribù Personal Training Studio" - ambiente esclusivo e personalizzato</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Values -->
+        <div class="values-section">
+            <h2 class="section-title">I Miei Valori</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <span class="value-emoji">💪</span>
+                    <h3 class="value-title">Determinazione</h3>
+                    <p class="value-text">La forza da impiegare ogni volta che ci si allena</p>
+                </div>
+
+                <div class="value-card">
+                    <span class="value-emoji">🎯</span>
+                    <h3 class="value-title">Costanza</h3>
+                    <p class="value-text">Continuità necessaria per ottenere risultati duraturi</p>
+                </div>
+
+                <div class="value-card">
+                    <span class="value-emoji">🔥</span>
+                    <h3 class="value-title">Motivazione</h3>
+                    <p class="value-text">Un grande motivatore che trae linfa dalla tenacia</p>
+                </div>
+
+                <div class="value-card">
+                    <span class="value-emoji">🚀</span>
+                    <h3 class="value-title">Trasformazione</h3>
+                    <p class="value-text">Trasformare qualcosa in qualcos'altro - un sogno in realtà</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Questions Section -->
+        <div class="questions-section">
+            <h2 class="section-title">Ti Riconosci in Queste Situazioni?</h2>
+            <div class="questions-grid">
+                <div class="question-card">
+                    <p class="question-text">"Ti alleni ma non riesci ad ottenere risultati?"</p>
+                </div>
+                <div class="question-card">
+                    <p class="question-text">"Sei un principiante e vuoi iniziare in modo corretto?"</p>
+                </div>
+                <div class="question-card">
+                    <p class="question-text">"Ti manca la motivazione per allenarti?"</p>
+                </div>
+                <div class="question-card">
+                    <p class="question-text">"Hai raggiunto una fase di stallo e non sai come uscirne?"</p>
+                </div>
+                <div class="question-card">
+                    <p class="question-text">"Non riesci ad allenarti perché hai poco tempo?"</p>
+                </div>
+                <div class="question-card">
+                    <p class="question-text">"Desideri cambiare il tuo corpo?"</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2 class="cta-title">Iniziamo Insieme il Tuo Cambiamento</h2>
+            <p class="cta-text">
+                Se hai risposto SÌ ad almeno una domanda, il Personal Trainer è la figura ideale 
+                per avviare un percorso che ti porterà a migliorare salute, ottimismo, relazioni, autostima e benessere.
+            </p>
+            <div class="cta-buttons">
+                <a href="https://wa.me/3478881515?text=Ciao Andrea, ho letto la tua storia e vorrei iniziare un percorso!" 
+                   class="cta-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    Scrivimi su WhatsApp
+                </a>
+                <a href="./index.html#projects" class="cta-btn">
+                    <i class="fas fa-eye"></i>
+                    Scopri i Miei Servizi
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
