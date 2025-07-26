@@ -124,15 +124,15 @@
 
         .story-section {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
             margin-bottom: 80px;
         }
 
         .story-card {
             background: rgba(26, 26, 26, 0.8);
             border-radius: 20px;
-            padding: 40px;
+            padding: 35px;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 107, 53, 0.2);
             transition: all 0.3s ease;
@@ -159,7 +159,7 @@
 
         .story-title {
             color: #ff6b35;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: bold;
             margin-bottom: 20px;
         }
@@ -170,50 +170,6 @@
             font-size: 1rem;
         }
 
-        .highlight-section {
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.15), rgba(255, 133, 51, 0.08));
-            border: 3px solid rgba(255, 107, 53, 0.4);
-            border-radius: 30px;
-            padding: 60px;
-            text-align: center;
-            margin-bottom: 80px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .highlight-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
-            z-index: -1;
-        }
-
-        .highlight-title {
-            color: #ff6b35;
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .highlight-text {
-            color: #fff;
-            font-size: 1.4rem;
-            font-weight: 600;
-            line-height: 1.6;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .experience-section {
-            margin-bottom: 80px;
-        }
-
         .section-title {
             color: #fff;
             font-size: 2.5rem;
@@ -222,83 +178,57 @@
             margin-bottom: 50px;
         }
 
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
+        .method-section {
+            margin-bottom: 80px;
         }
 
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: linear-gradient(to bottom, #ff6b35, #ff8533);
-            transform: translateX(-50%);
+        .method-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
 
-        .timeline-item {
-            position: relative;
-            margin-bottom: 50px;
-            padding: 0 30px;
-        }
-
-        .timeline-item:nth-child(odd) {
-            text-align: right;
-            margin-right: 50%;
-            padding-right: 40px;
-        }
-
-        .timeline-item:nth-child(even) {
-            text-align: left;
-            margin-left: 50%;
-            padding-left: 40px;
-        }
-
-        .timeline-marker {
-            position: absolute;
-            top: 20px;
-            width: 20px;
-            height: 20px;
-            background: #ff6b35;
-            border-radius: 50%;
-            border: 4px solid #1a1a1a;
-        }
-
-        .timeline-item:nth-child(odd) .timeline-marker {
-            right: -10px;
-        }
-
-        .timeline-item:nth-child(even) .timeline-marker {
-            left: -10px;
-        }
-
-        .timeline-content {
+        .method-step {
             background: rgba(26, 26, 26, 0.8);
-            padding: 25px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 20px;
+            padding: 35px;
+            border: 2px solid rgba(255, 107, 53, 0.2);
+            position: relative;
+            transition: all 0.3s ease;
         }
 
-        .timeline-year {
+        .method-step:hover {
+            border-color: rgba(255, 107, 53, 0.5);
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #ff6b35, #ff8533);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .step-title {
             color: #ff6b35;
             font-size: 1.3rem;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            margin-top: 10px;
         }
 
-        .timeline-event {
-            color: #fff;
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .timeline-description {
-            color: #b0b0b0;
-            font-size: 0.95rem;
+        .step-description {
+            color: #e0e0e0;
+            line-height: 1.6;
         }
 
         .philosophy-section {
@@ -482,59 +412,6 @@
             line-height: 1.5;
         }
 
-        .method-section {
-            margin-bottom: 80px;
-        }
-
-        .method-steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .method-step {
-            background: rgba(26, 26, 26, 0.8);
-            border-radius: 20px;
-            padding: 35px;
-            border: 2px solid rgba(255, 107, 53, 0.2);
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .method-step:hover {
-            border-color: rgba(255, 107, 53, 0.5);
-            transform: translateY(-5px);
-        }
-
-        .step-number {
-            position: absolute;
-            top: -15px;
-            left: 30px;
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #ff6b35, #ff8533);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .step-title {
-            color: #ff6b35;
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-            margin-top: 10px;
-        }
-
-        .step-description {
-            color: #e0e0e0;
-            line-height: 1.6;
-        }
-
         .cta-section {
             background: linear-gradient(45deg, #ff6b35, #ff8c5a);
             border-radius: 25px;
@@ -597,37 +474,20 @@
 
             .story-section {
                 grid-template-columns: 1fr;
-                gap: 30px;
+                gap: 25px;
             }
 
             .story-card {
-                padding: 30px 25px;
+                padding: 25px 20px;
             }
 
-            .highlight-section, .intro-section {
+            .intro-section {
                 padding: 35px 25px;
             }
 
             .profile-image-large {
                 width: 250px;
                 height: 250px;
-            }
-
-            .timeline::before {
-                left: 30px;
-            }
-
-            .timeline-item {
-                margin-left: 60px !important;
-                margin-right: 0 !important;
-                text-align: left !important;
-                padding-left: 40px !important;
-                padding-right: 0 !important;
-            }
-
-            .timeline-marker {
-                left: -10px !important;
-                right: auto !important;
             }
 
             .cta-buttons {
@@ -641,8 +501,12 @@
                 justify-content: center;
             }
 
-            .results-section, .method-section {
+            .results-section {
                 padding: 40px 25px;
+            }
+
+            .method-steps {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -678,7 +542,7 @@
             </p>
         </div>
 
-        <!-- Story Cards -->
+        <!-- Story Cards - 8 Box Bilanciati -->
         <div class="story-section">
             <div class="story-card">
                 <div class="story-icon">
@@ -689,7 +553,9 @@
                     Mi chiamo Andrea Padoan, sono un Lifestyle Coach e Personal Trainer certificato. 
                     Dopo oltre 12 anni passati all'interno di importanti aziende commerciali e produttive, 
                     ricoprendo cariche Manageriali nel Marketing e nelle Vendite, ho capito che dovevo lavorare 
-                    a qualcosa di gratificante e salutare per me stesso ed utile per chi mi stava attorno.
+                    a qualcosa di gratificante e salutare per me stesso ed utile per chi mi stava attorno. 
+                    La consapevolezza che nella mia vita la missione è quella di far conoscere alle persone 
+                    che esiste la possibilità, in maniera molto semplice, di vivere meglio.
                 </p>
             </div>
 
@@ -702,7 +568,8 @@
                     Un giorno mi sono guardato allo specchio e dopo 30 anni ho visto ciò che non volevo diventare: 
                     ero in <strong>sovrappeso</strong> e intuii che sarei andato incontro a piccoli problemi di salute. 
                     In quel momento ho deciso che non volevo più percorrere quella strada e mi sono appellato al mio 
-                    passato di sportivo.
+                    passato di sportivo, quando ero istruttore di nuoto, per riportarlo in auge e così ho incominciato 
+                    a fare moto per migliorarmi. Ancora non bastava. Mi mancava l'analisi approfondita dell'alimentazione.
                 </p>
             </div>
 
@@ -713,8 +580,10 @@
                 <h3 class="story-title">Da "OFF" a "ON"</h3>
                 <p class="story-text">
                     Sono stato anche io uno come te e come tanti altri...che tornato a casa dal lavoro si sentiva 
-                    così stanco da premere il pulsante "OFF" sino al giorno dopo. Oggi la mia vita è cambiata. 
-                    Dove prima la mia giornata finiva, ora inizia davvero! Il pulsante "OFF" è diventato "ON".
+                    così stanco da premere il pulsante "OFF" sino al giorno dopo. A riflettere su cosa stavo costruendo, 
+                    a non riuscire a coltivare le mie passioni e lasciare scorrere il tempo con la sensazione di non aver 
+                    concluso niente. Oggi la mia vita è cambiata. Dove prima la mia giornata finiva, ora inizia davvero! 
+                    Il pulsante "OFF" è diventato "ON".
                 </p>
             </div>
 
@@ -726,58 +595,133 @@
                 <p class="story-text">
                     Ho migliorato il mio stile di vita: potenziato la resistenza allo stress mentale e la resistenza fisica; 
                     ho imparato a costruire qualcosa ogni giorno, ho eliminato farmaci, ho raggiunto una buona forma fisica, 
-                    ho ritrovato in me una energia sepolta che rischiava di rimanere sotterrata per sempre.
+                    ho ritrovato in me una energia sepolta che rischiava di rimanere sotterrata per sempre. 
+                    Sport e "mangiare bene" sono un binomio vincente per la buona forma fisica. Stare ore e ore sul tapis roulant 
+                    e mangiare in modo scorretto non porta al risultato atteso.
+                </p>
+            </div>
+
+            <div class="story-card">
+                <div class="story-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3 class="story-title">Il Percorso di Formazione</h3>
+                <p class="story-text">
+                    Ho iniziato un nuovo approccio alle abitudini non solo come attività sportiva e di mero allenamento, 
+                    ma come una vera e propria cultura di vita, associando la formazione e lo studio in ambito motorio, 
+                    nutrizionale e di coaching. Negli ultimi anni ho collaborato come allenatore all'interno di palestre, 
+                    piccoli o grandi centri fitness, e in tutti ho trovato un limite dal punto di vista "umano": 
+                    tanti macchinari tecnologicamente all'avanguardia e schede di allenamento omologate per tutti.
+                </p>
+            </div>
+
+            <div class="story-card">
+                <div class="story-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3 class="story-title">L'Approccio Personalizzato</h3>
+                <p class="story-text">
+                    Il personal trainer segue il cliente dal momento in cui entra nel centro al momento in cui termina la lezione. 
+                    La mia soddisfazione maggiore era seguire i clienti nelle varie attività, accompagnandoli nel loro percorso. 
+                    Una figura di riferimento sempre al proprio fianco con il quale sostenere un colloquio per capire di cosa 
+                    si ha realmente bisogno. Si possono seguire attività individuali con lezione totalmente personalizzata 
+                    su appuntamento, in cui ci si allena solo con il proprio allenatore in una relazione one-to-one o di coppia.
+                </p>
+            </div>
+
+            <div class="story-card">
+                <div class="story-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3 class="story-title">I Valori che Mi Guidano</h3>
+                <p class="story-text">
+                    Il personal trainer o guardando più in grande, il Lifestyle Coach, è uno specialista che mette a disposizione 
+                    la propria professionalità in cambio di <strong>costanza</strong> e <strong>continuità</strong> che il cliente 
+                    deve avere se vuole ottenere risultati. Non è soltanto un "allenatore", bensì un grande "motivatore" che trae 
+                    linfa da valori quali la tenacia, la <strong>determinazione</strong> a proseguire, la forza da impiegare ogni 
+                    volta che ci si allena e la volontà di non mollare.
+                </p>
+            </div>
+
+            <div class="story-card">
+                <div class="story-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h3 class="story-title">Il Vero Significato della Trasformazione</h3>
+                <p class="story-text">
+                    Perché una persona decide di iscriversi in palestra? Di solito si crede che le motivazioni per ognuno siano 
+                    estremamente differenti e soggettive ed apparentemente è così. Ma se invece guardi più a fondo, ti accorgi 
+                    che la motivazione è una sola: <strong>trasformare qualcosa in qualcos'altro!</strong> Un sogno in realtà? 
+                    Un peso in un altro? Un aspetto in un altro? Un rifiuto in una accettazione? Un no in un sì? 
+                    Ciò che ti ha portato ad affidarti ad un personal trainer è una sola cosa: <strong>Trasformazione!</strong>
                 </p>
             </div>
         </div>
 
-        <!-- Experience Timeline -->
-        <div class="experience-section">
-            <h2 class="section-title">Il Mio Percorso Professionale</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-year">2012</div>
-                        <div class="timeline-event">Apertura Primo Studio</div>
-                        <div class="timeline-description">Apertura del primo studio di Personal Training a Verona</div>
-                    </div>
+        <!-- Il Mio Metodo -->
+        <div class="method-section">
+            <h2 class="section-title">Il Mio Metodo</h2>
+            <div class="method-steps">
+                <div class="method-step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Incontro Conoscitivo</h3>
+                    <p class="step-description">
+                        La mia attività inizia con un incontro conoscitivo per capire le tue esigenze. 
+                        Partiamo da un colloquio approfondito per comprendere i tuoi obiettivi, il tuo stile di vita attuale 
+                        e le tue motivazioni più profonde. È fondamentale capire il tuo "perché" per costruire un percorso 
+                        davvero efficace e duraturo.
+                    </p>
                 </div>
 
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-year">2015</div>
-                        <div class="timeline-event">Riconoscimento TV</div>
-                        <div class="timeline-description">Partecipazione a "Best in Town" su Real Time, selezionato tra i migliori PT di Verona</div>
-                    </div>
+                <div class="method-step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Anamnesi e Valutazione</h3>
+                    <p class="step-description">
+                        Si passa poi ad un'anamnesi sulla composizione corporea e valutazione dello stato di salute. 
+                        Analizziamo tutti gli aspetti fisici, posturali e funzionali per creare un profilo completo 
+                        e identificare eventuali criticità o limitazioni da considerare nel programma di allenamento.
+                    </p>
                 </div>
 
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-year">2016-2020</div>
-                        <div class="timeline-event">Autore e Divulgatore</div>
-                        <div class="timeline-description">Pubblicazione di 3 libri e diversi articoli per riviste di benessere</div>
-                    </div>
+                <div class="method-step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Definizione Obiettivi</h3>
+                    <p class="step-description">
+                        La fase successiva è la ricerca degli obiettivi raggiungibili. Insieme definiamo traguardi realistici 
+                        e misurabili, creando un piano d'azione personalizzato che rispetti i tuoi tempi e le tue possibilità, 
+                        ma che ti sfidi costantemente verso il miglioramento.
+                    </p>
                 </div>
 
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-year">2020</div>
-                        <div class="timeline-event">Tribù Personal Training Studio</div>
-                        <div class="timeline-description">Fondazione di "Tribù Personal Training Studio" - ambiente esclusivo e personalizzato</div>
-                    </div>
+                <div class="method-step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Allenamento Personalizzato</h3>
+                    <p class="step-description">
+                        L'allenamento può prevedere qualunque tipo di attività motoria: dall'utilizzo dei sovraccarichi, 
+                        allenamento funzionale, attività aerobiche, in base agli obiettivi. Ogni sessione è completamente 
+                        personalizzata sulle tue caratteristiche e progressi, garantendo la massima efficacia e sicurezza.
+                    </p>
                 </div>
 
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-year">Oggi</div>
-                        <div class="timeline-event">Lifestyle Coach Completo</div>
-                        <div class="timeline-description">Specializzazione in coaching olistico: fitness, nutrizione, mindset e business</div>
-                    </div>
+                <div class="method-step">
+                    <div class="step-number">5</div>
+                    <h3 class="step-title">Monitoraggio e Adattamento</h3>
+                    <p class="step-description">
+                        A intervalli regolari occorrerà verificare quali effetti sono stati raggiunti con l'allenamento, 
+                        provvedendo ad apportare eventuali modifiche o variazioni. Il programma si evolve con te, 
+                        adattandosi ai tuoi progressi e alle nuove sfide che emergono lungo il percorso.
+                    </p>
+                </div>
+
+                <div class="method-step">
+                    <div class="step-number">6</div>
+                    <h3 class="step-title">Supporto Motivazionale Costante</h3>
+                    <p class="step-description">
+                        Per poter svolgere con successo questo ruolo sono oggettivamente necessarie delle particolari doti 
+                        di disponibilità, flessibilità e comprensione non disgiunte da una elevata motivazione all'aggiornamento 
+                        continuo con lo scopo di migliorare il proprio livello di abilità e conoscenze. Ti accompagno 
+                        nel percorso con supporto costante e coaching motivazionale.
+                    </p>
                 </div>
             </div>
         </div>
@@ -790,10 +734,11 @@
                     <div class="philosophy-icon">
                         <i class="fas fa-user-friends"></i>
                     </div>
-                    <h3 class="philosophy-title">Approccio Personalizzato</h3>
+                    <h3 class="philosophy-title">Approccio Umano</h3>
                     <p class="philosophy-text">
-                        Ogni persona è unica. Per questo motivo creo programmi completamente personalizzati 
-                        basati sulle caratteristiche, obiettivi e stile di vita di ciascun cliente.
+                        Ogni persona è unica e merita un approccio completamente personalizzato. 
+                        Non credo nelle soluzioni standard, ma nella creazione di percorsi su misura 
+                        che rispettino le caratteristiche, gli obiettivi e il tempo di ciascun cliente.
                     </p>
                 </div>
 
@@ -803,8 +748,9 @@
                     </div>
                     <h3 class="philosophy-title">Equilibrio Totale</h3>
                     <p class="philosophy-text">
-                        Non credo nell'allenamento isolato. Il vero benessere nasce dall'equilibrio tra 
-                        attività fisica, alimentazione corretta, mindset positivo e abitudini sane.
+                        Un corretto stile di vita comprende attività fisica mirata, alimentazione corretta 
+                        e sane abitudini. L'attività fisica è il più potente mezzo per migliorare la nostra 
+                        vita quotidiana: mente più vigile, migliori capacità decisionali, maggior lucidità.
                     </p>
                 </div>
 
@@ -812,21 +758,23 @@
                     <div class="philosophy-icon">
                         <i class="fas fa-chart-line"></i>
                     </div>
-                    <h3 class="philosophy-title">Risultati Sostenibili</h3>
+                    <h3 class="philosophy-title">Risultati Concreti</h3>
                     <p class="philosophy-text">
-                        Non prometto miracoli, ma risultati concreti e duraturi. Il cambiamento vero 
-                        richiede tempo, costanza e il giusto supporto professionale.
+                        Non prometto miracoli, ma risultati reali e duraturi. INSIEME raggiungeremo risultati 
+                        concreti! Basta che tu ci metta impegno, costanza e mi dimostri che tieni realmente 
+                        a raggiungere gli obiettivi.
                     </p>
                 </div>
 
                 <div class="philosophy-card">
                     <div class="philosophy-icon">
-                        <i class="fas fa-heart"></i>
+                        <i class="fas fa-graduation-cap"></i>
                     </div>
-                    <h3 class="philosophy-title">Motivazione Autentica</h3>
+                    <h3 class="philosophy-title">Formazione Continua</h3>
                     <p class="philosophy-text">
-                        Il mio ruolo non è solo di allenatore, ma di motivatore. Ti aiuto a trovare 
-                        la tua "perché" più profonda e a mantenerla viva durante tutto il percorso.
+                        In ogni campo della vita le persone che vogliono apprendere hanno un insegnante. 
+                        Il personal trainer è utile sia alla persona alle prime armi che a quella con diversi 
+                        anni di allenamento alle spalle, grazie all'esperienza accumulata con tutti i clienti seguiti.
                     </p>
                 </div>
             </div>
@@ -839,19 +787,19 @@
                 <div class="value-card">
                     <span class="value-emoji">💪</span>
                     <h3 class="value-title">Determinazione</h3>
-                    <p class="value-text">La forza da impiegare ogni volta che ci si allena</p>
+                    <p class="value-text">La forza da impiegare ogni volta che ci si allena e la volontà di non mollare mai</p>
                 </div>
 
                 <div class="value-card">
                     <span class="value-emoji">🎯</span>
                     <h3 class="value-title">Costanza</h3>
-                    <p class="value-text">Continuità necessaria per ottenere risultati duraturi</p>
+                    <p class="value-text">Continuità necessaria per ottenere risultati duraturi e trasformazioni reali</p>
                 </div>
 
                 <div class="value-card">
                     <span class="value-emoji">🔥</span>
                     <h3 class="value-title">Motivazione</h3>
-                    <p class="value-text">Un grande motivatore che trae linfa dalla tenacia</p>
+                    <p class="value-text">Un grande motivatore che trae linfa dalla tenacia e dalla passione</p>
                 </div>
 
                 <div class="value-card">
@@ -863,13 +811,13 @@
                 <div class="value-card">
                     <span class="value-emoji">🧠</span>
                     <h3 class="value-title">Crescita</h3>
-                    <p class="value-text">Aggiornamento continuo per migliorare abilità e conoscenze</p>
+                    <p class="value-text">Aggiornamento continuo per migliorare sempre abilità e conoscenze</p>
                 </div>
 
                 <div class="value-card">
                     <span class="value-emoji">🤝</span>
                     <h3 class="value-title">Supporto</h3>
-                    <p class="value-text">Disponibilità, flessibilità e comprensione in ogni momento</p>
+                    <p class="value-text">Disponibilità, flessibilità e comprensione in ogni momento del percorso</p>
                 </div>
             </div>
         </div>
@@ -909,66 +857,6 @@
             </div>
         </div>
 
-        <!-- Method Section -->
-        <div class="method-section">
-            <h2 class="section-title">Il Mio Metodo</h2>
-            <div class="method-steps">
-                <div class="method-step">
-                    <div class="step-number">1</div>
-                    <h3 class="step-title">Incontro Conoscitivo</h3>
-                    <p class="step-description">
-                        Partiamo da un colloquio approfondito per capire le tue esigenze, i tuoi obiettivi 
-                        e il tuo stile di vita attuale.
-                    </p>
-                </div>
-
-                <div class="method-step">
-                    <div class="step-number">2</div>
-                    <h3 class="step-title">Anamnesi Completa</h3>
-                    <p class="step-description">
-                        Analizziamo la composizione corporea e valutiamo il tuo stato di salute generale 
-                        per creare un profilo completo.
-                    </p>
-                </div>
-
-                <div class="method-step">
-                    <div class="step-number">3</div>
-                    <h3 class="step-title">Definizione Obiettivi</h3>
-                    <p class="step-description">
-                        Insieme definiamo obiettivi realistici e raggiungibili, creando un piano d'azione 
-                        personalizzato e scalabile.
-                    </p>
-                </div>
-
-                <div class="method-step">
-                    <div class="step-number">4</div>
-                    <h3 class="step-title">Allenamento Personalizzato</h3>
-                    <p class="step-description">
-                        Programma di allenamento su misura che può includere sovraccarichi, functional training, 
-                        attività aerobiche, in base ai tuoi obiettivi.
-                    </p>
-                </div>
-
-                <div class="method-step">
-                    <div class="step-number">5</div>
-                    <h3 class="step-title">Monitoraggio Continuo</h3>
-                    <p class="step-description">
-                        Verifichiamo regolarmente i progressi raggiunti, apportando modifiche e variazioni 
-                        per ottimizzare sempre i risultati.
-                    </p>
-                </div>
-
-                <div class="method-step">
-                    <div class="step-number">6</div>
-                    <h3 class="step-title">Supporto Motivazionale</h3>
-                    <p class="step-description">
-                        Ti accompagno nel percorso con supporto costante, motivazione e coaching per superare 
-                        ogni difficoltà e raggiungere i tuoi obiettivi.
-                    </p>
-                </div>
-            </div>
-        </div>
-
         <!-- Questions Section -->
         <div class="questions-section">
             <h2 class="section-title">Ti Riconosci in Queste Situazioni?</h2>
@@ -980,25 +868,25 @@
                     <p class="question-text">"Sei un principiante e vuoi iniziare in modo corretto?"</p>
                 </div>
                 <div class="question-card">
-                    <p class="question-text">"Ti manca la motivazione per allenarti?"</p>
+                    <p class="question-text">"Vuoi migliorare la tua performance nello sport che pratichi?"</p>
                 </div>
                 <div class="question-card">
                     <p class="question-text">"Hai raggiunto una fase di stallo e non sai come uscirne?"</p>
                 </div>
                 <div class="question-card">
-                    <p class="question-text">"Non riesci ad allenarti perché hai poco tempo?"</p>
-                </div>
-                <div class="question-card">
-                    <p class="question-text">"Desideri cambiare il tuo corpo?"</p>
+                    <p class="question-text">"Ti manca la motivazione per allenarti?"</p>
                 </div>
                 <div class="question-card">
                     <p class="question-text">"Hai fallito molte diete o non sapresti come iniziare?"</p>
                 </div>
                 <div class="question-card">
+                    <p class="question-text">"Non riesci ad allenarti perché hai poco tempo?"</p>
+                </div>
+                <div class="question-card">
                     <p class="question-text">"Vuoi sperimentare nuovi metodi di allenamento?"</p>
                 </div>
                 <div class="question-card">
-                    <p class="question-text">"Vuoi migliorare la tua performance nello sport che pratichi?"</p>
+                    <p class="question-text">"Desideri cambiare il tuo corpo?"</p>
                 </div>
             </div>
         </div>
