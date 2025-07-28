@@ -1,0 +1,33 @@
+{
+  "name": "andrea-ebook-store",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Sistema di vendita ebook automatizzato con Stripe, PayPal e Resend",
+  "main": "index.js",
+  "scripts": {
+    "build": "echo 'Build complete'",
+    "dev": "vercel dev",
+    "start": "vercel dev"
+  },
+  "dependencies": {
+    "stripe": "^14.21.0",
+    "resend": "^3.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "ebook",
+    "fitness",
+    "stripe",
+    "paypal", 
+    "resend",
+    "email",
+    "automation"
+  ],
+  "author": "Andrea Padoan",
+  "license": "MIT"
+}
