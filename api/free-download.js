@@ -117,7 +117,7 @@ async function sendEbookEmail(email, ebookInfo) {
         const transporter = nodemailer.createTransporter({
             service: 'gmail',
             auth: {
-                user: 'andreapadoan.ebooks@gmail.com', // Email di servizio
+                user: 'andrea.padoan@gmail.com', // La tua email Gmail
                 pass: process.env.GMAIL_APP_PASSWORD || 'dummy' // App Password Gmail
             }
         });
@@ -223,7 +223,7 @@ async function sendEbookEmail(email, ebookInfo) {
 
         // Configurazione email
         const mailOptions = {
-            from: '"Andrea Padoan" <andreapadoan.ebooks@gmail.com>',
+            from: '"Andrea Padoan" <andrea.padoan@gmail.com>',
             to: email,
             subject: `🎁 Il tuo ebook GRATUITO "${ebookInfo.title}" è pronto!`,
             html: htmlTemplate,
