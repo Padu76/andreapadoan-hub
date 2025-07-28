@@ -223,6 +223,37 @@
                     });
                 }
             });
+
+            // AUTO-SEND EMAIL via API when page loads
+            sendPurchaseEmail(productInfo, sessionId);
+        }
+
+        // Function to send purchase email
+        async function sendPurchaseEmail(productInfo, sessionId) {
+            try {
+                console.log('📧 Sending purchase email...');
+                
+                // Call our email API
+                const response = await fetch('/api/send-purchase-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        product: product,
+                        sessionId: sessionId,
+                        productInfo: productInfo
+                    })
+                });
+
+                if (response.ok) {
+                    console.log('✅ Purchase email sent successfully');
+                } else {
+                    console.log('⚠️ Email API failed, but download is still available');
+                }
+            } catch (error) {
+                console.log('⚠️ Email sending failed, but download is still available');
+            }
         }
 
         // Confetti animation
