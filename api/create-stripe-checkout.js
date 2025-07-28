@@ -1,58 +1,80 @@
 // /api/create-stripe-checkout.js
-// API per creare sessioni Stripe Checkout automatiche - Andrea Padoan Ebooks
+// API Stripe fixed per pagamenti automatici
+// Andrea Padoan Ebooks - Versione corretta
 
 import Stripe from 'stripe';
 
-// Inizializza Stripe
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
-    // Solo POST requests
+    // CORS headers
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+    if (req.method === 'OPTIONS') {
+        return res.status(200).end();
+    }
+
     if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Method not allowed' });
+        return res.status(405).json({ 
+            success: false,
+            error: 'Method not allowed' 
+        });
     }
 
     try {
+        console.log('💳 Stripe checkout API called');
+
         const { productId } = req.body;
 
-        // Configurazione prodotti con prezzi (in centesimi per Stripe)
+        if (!productId) {
+            return res.status(400).json({ 
+                success: false,
+                error: 'Product ID è richiesto' 
+            });
+        }
+
+        // Configurazione prodotti con prezzi corretti
         const products = {
             '2-milioni-anni': {
                 name: 'Ebook: 2 Milioni di Anni',
-                price: 990, // €9.90 in centesimi
+                price: 2490, // €24.90 in centesimi
                 description: 'La guida completa per la trasformazione fisica',
-                image: `${process.env.SITE_URL}/ebook-store/forma-2-milioni-anni.jpg`
+                image: 'https://andreapadoan-hub.vercel.app/ebook-store/forma-2-milioni-anni.jpg'
             },
             'body-construction': {
                 name: 'Ebook: Body Under Construction Vol.1',
                 price: 2490, // €24.90 in centesimi
                 description: '100 allenamenti per una forma perfetta 365 giorni all\'anno',
-                image: `${process.env.SITE_URL}/ebook-store/body-under-construction.jpg`
+                image: 'https://andreapadoan-hub.vercel.app/ebook-store/body-under-construction.jpg'
             },
             'wave-system': {
                 name: 'Ebook: Il Wave System',
                 price: 1490, // €14.90 in centesimi
                 description: '6 cicli completi di allenamento progressivo',
-                image: `${process.env.SITE_URL}/ebook-store/wave-system.jpg`
+                image: 'https://andreapadoan-hub.vercel.app/ebook-store/wave-system.jpg'
             }
         };
 
-        // Verifica prodotto valido
-        if (!products[productId]) {
-            return res.status(400).json({ error: 'Prodotto non valido' });
+        const product = products[productId];
+        if (!product) {
+            return res.status(400).json({ 
+                success: false,
+                error: 'Prodotto non valido',
+                availableProducts: Object.keys(products)
+            });
         }
 
-        const product = products[productId];
-
-        console.log('🛒 Creating Stripe checkout:', {
+        console.log('🛒 Creating Stripe checkout for:', {
             productId,
-            price: product.price / 100,
-            name: product.name
+            name: product.name,
+            price: product.price / 100
         });
 
         // Crea sessione Stripe Checkout
         const session = await stripe.checkout.sessions.create({
-            payment_method_types: ['card', 'paypal', 'link'],
+            payment_method_types: ['card'],
             line_items: [
                 {
                     price_data: {
@@ -74,11 +96,11 @@ export default async function handler(req, res) {
             ],
             mode: 'payment',
             
-            // URLs di successo e cancellazione
-            success_url: `${process.env.SITE_URL}/success?product=${productId}&payment=stripe&session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${process.env.SITE_URL}/cancel?product=${productId}`,
+            // URLs corretti
+            success_url: `https://andreapadoan-hub.vercel.app/success?product=${productId}&payment=stripe&session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `https://andreapadoan-hub.vercel.app/ebooks.html?cancelled=${productId}`,
             
-            // Configurazioni aggiuntive
+            // Configurazioni
             billing_address_collection: 'auto',
             customer_creation: 'always',
             
@@ -87,34 +109,30 @@ export default async function handler(req, res) {
                 product_id: productId,
                 product_name: product.name,
                 price_eur: (product.price / 100).toString(),
-                source: 'ebook_store'
+                source: 'ebook_store',
+                timestamp: new Date().toISOString()
             },
             
             // Configurazioni UI
             locale: 'it',
             
-            // Configurazioni business
+            // Payment intent data
             payment_intent_data: {
                 description: `Acquisto ebook: ${product.name}`,
                 metadata: {
                     product_id: productId,
-                    customer_email: '{CUSTOMER_EMAIL}',
-                    order_date: new Date().toISOString()
+                    order_date: new Date().toISOString(),
+                    customer_type: 'ebook_customer'
                 }
             },
             
             // Scadenza sessione (30 minuti)
             expires_at: Math.floor(Date.now() / 1000) + (30 * 60),
             
-            // Opzioni avanzate
+            // Configurazioni avanzate
             allow_promotion_codes: true,
             automatic_tax: {
-                enabled: false, // Gestisci tasse manualmente se necessario
-            },
-            
-            // Configurazione consent collection (GDPR)
-            consent_collection: {
-                terms_of_service: 'required',
+                enabled: false
             },
             
             // Custom text
@@ -125,7 +143,7 @@ export default async function handler(req, res) {
             }
         });
 
-        console.log('✅ Stripe checkout session created:', {
+        console.log('✅ Stripe session created:', {
             sessionId: session.id,
             url: session.url
         });
@@ -143,73 +161,37 @@ export default async function handler(req, res) {
         });
 
     } catch (error) {
-        console.error('❌ Stripe Checkout API Error:', error);
+        console.error('❌ Stripe API Error:', error);
         
-        // Gestione errori specifici Stripe
+        // Gestione errori specifici
+        let errorMessage = 'Errore nella creazione del checkout';
+        let statusCode = 500;
+        
         if (error.type === 'StripeCardError') {
-            return res.status(400).json({
-                success: false,
-                error: 'Errore con la carta di credito',
-                details: error.message
-            });
-        }
-        
-        if (error.type === 'StripeRateLimitError') {
-            return res.status(429).json({
-                success: false,
-                error: 'Troppe richieste, riprova tra poco'
-            });
-        }
-        
-        if (error.type === 'StripeInvalidRequestError') {
-            return res.status(400).json({
-                success: false,
-                error: 'Richiesta non valida',
-                details: process.env.NODE_ENV === 'development' ? error.message : undefined
-            });
-        }
-        
-        if (error.type === 'StripeAPIError') {
-            return res.status(500).json({
-                success: false,
-                error: 'Errore del servizio di pagamento'
-            });
-        }
-        
-        if (error.type === 'StripeConnectionError') {
-            return res.status(500).json({
-                success: false,
-                error: 'Errore di connessione al servizio pagamenti'
-            });
-        }
-        
-        if (error.type === 'StripeAuthenticationError') {
-            return res.status(500).json({
-                success: false,
-                error: 'Errore di autenticazione del servizio'
-            });
+            errorMessage = 'Errore con la carta di credito';
+            statusCode = 400;
+        } else if (error.type === 'StripeRateLimitError') {
+            errorMessage = 'Troppe richieste, riprova tra poco';
+            statusCode = 429;
+        } else if (error.type === 'StripeInvalidRequestError') {
+            errorMessage = 'Richiesta non valida';
+            statusCode = 400;
+        } else if (error.type === 'StripeAPIError') {
+            errorMessage = 'Errore del servizio di pagamento';
+            statusCode = 500;
+        } else if (error.type === 'StripeConnectionError') {
+            errorMessage = 'Errore di connessione';
+            statusCode = 500;
+        } else if (error.type === 'StripeAuthenticationError') {
+            errorMessage = 'Errore di autenticazione';
+            statusCode = 500;
         }
 
-        // Errore generico
-        return res.status(500).json({
+        return res.status(statusCode).json({
             success: false,
-            error: 'Errore nella creazione della sessione di pagamento',
-            details: process.env.NODE_ENV === 'development' ? error.message : undefined
+            error: errorMessage,
+            details: process.env.NODE_ENV === 'development' ? error.message : undefined,
+            type: error.type || 'unknown'
         });
     }
-}
-
-// Funzione helper per validare i dati della richiesta
-function validateRequest(body) {
-    const { productId } = body;
-    
-    if (!productId) {
-        throw new Error('Product ID è richiesto');
-    }
-    
-    if (typeof productId !== 'string') {
-        throw new Error('Product ID deve essere una stringa');
-    }
-    
-    return true;
 }
