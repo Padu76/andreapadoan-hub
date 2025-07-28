@@ -4,7 +4,7 @@
 class EbookPaymentSystem {
     constructor() {
         this.isProcessing = false;
-        this.testMode = true; // 🧪 MODALITÀ TEST ATTIVA
+        this.testMode = false; // 🔴 MODALITÀ REALE ATTIVA
         this.init();
     }
 
