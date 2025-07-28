@@ -1,20 +1,59 @@
-// payment.js - Sistema pagamenti completo con API reali
-// Andrea Padoan Ebooks - Versione Automatizzata
+// payment.js - Sistema pagamenti automatico con TEST MODE
+// Andrea Padoan Ebooks - Versione 3.0 con Email Automatiche
 
 class EbookPaymentSystem {
     constructor() {
         this.isProcessing = false;
+        this.testMode = true; // 🧪 MODALITÀ TEST ATTIVA
         this.init();
     }
 
     init() {
-        console.log('🚀 Ebook Payment System - Inizializzazione con APIs reali');
+        console.log('🚀 Ebook Payment System - Versione 3.0 con Test Mode');
+        console.log(`🧪 Test Mode: ${this.testMode ? 'ATTIVO' : 'DISATTIVO'}`);
         this.setupEventListeners();
         this.logSystemInfo();
+        this.showTestModeWarning();
+    }
+
+    showTestModeWarning() {
+        if (this.testMode) {
+            console.log('⚠️ MODALITÀ TEST ATTIVA - Nessun pagamento reale verrà effettuato');
+            
+            // Mostra banner test mode
+            const testBanner = document.createElement('div');
+            testBanner.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                background: linear-gradient(135deg, #f59e0b, #d97706);
+                color: white;
+                padding: 0.75rem;
+                text-align: center;
+                font-weight: bold;
+                z-index: 9999;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            `;
+            testBanner.innerHTML = `
+                🧪 MODALITÀ TEST ATTIVA - Nessun pagamento reale
+                <button onclick="this.parentElement.remove()" style="
+                    float: right;
+                    background: none;
+                    border: none;
+                    color: white;
+                    cursor: pointer;
+                    font-size: 1.2rem;
+                ">×</button>
+            `;
+            document.body.appendChild(testBanner);
+            
+            // Sposta il body verso il basso
+            document.body.style.paddingTop = '60px';
+        }
     }
 
     setupEventListeners() {
-        // Event listeners per bottoni pagamento
         document.addEventListener('click', (e) => {
             // Bottoni Stripe
             if (e.target.matches('[data-stripe-product]')) {
@@ -42,7 +81,7 @@ class EbookPaymentSystem {
     }
 
     // ===================================
-    // STRIPE PAYMENTS
+    // STRIPE PAYMENTS (TEST MODE)
     // ===================================
 
     async handleStripePayment(productId) {
@@ -57,7 +96,13 @@ class EbookPaymentSystem {
             this.isProcessing = true;
             this.showProcessingState('Preparazione pagamento Stripe...');
 
-            // Chiamata API per creare sessione Stripe
+            if (this.testMode) {
+                // MODALITÀ TEST - Simula pagamento
+                await this.simulateTestPayment('stripe', productId);
+                return;
+            }
+
+            // Chiamata API reale per Stripe
             const response = await fetch('/api/create-stripe-checkout', {
                 method: 'POST',
                 headers: {
@@ -93,7 +138,7 @@ class EbookPaymentSystem {
     }
 
     // ===================================
-    // PAYPAL PAYMENTS
+    // PAYPAL PAYMENTS (TEST MODE)
     // ===================================
 
     async handlePayPalPayment(productId) {
@@ -108,7 +153,13 @@ class EbookPaymentSystem {
             this.isProcessing = true;
             this.showProcessingState('Preparazione pagamento PayPal...');
 
-            // Chiamata API per creare ordine PayPal
+            if (this.testMode) {
+                // MODALITÀ TEST - Simula pagamento
+                await this.simulateTestPayment('paypal', productId);
+                return;
+            }
+
+            // Chiamata API reale per PayPal
             const response = await fetch('/api/create-paypal-order', {
                 method: 'POST',
                 headers: {
@@ -144,15 +195,41 @@ class EbookPaymentSystem {
     }
 
     // ===================================
-    // FREE DOWNLOADS
+    // SIMULAZIONE TEST MODE
+    // ===================================
+
+    async simulateTestPayment(method, productId) {
+        console.log(`🧪 Simulating ${method} payment for:`, productId);
+        
+        const product = EbookPaymentSystem.getProductInfo(productId);
+        
+        // Simula caricamento
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
+        this.hideProcessingState();
+        
+        // Mostra successo simulato
+        this.showSuccessMessage(`
+            🧪 PAGAMENTO TEST SIMULATO<br>
+            <strong>${product.name}</strong><br>
+            Prezzo: €${product.price}<br>
+            Metodo: ${method.toUpperCase()}<br><br>
+            <em>In modalità reale riceveresti l'ebook via email!</em>
+        `);
+        
+        console.log('✅ Test payment simulation completed');
+    }
+
+    // ===================================
+    // FREE DOWNLOADS (SISTEMA EMAIL AUTOMATICO)
     // ===================================
 
     handleFreeDownload(productId) {
         console.log('📥 Handling free download:', productId);
 
-        // Trova l'input email più vicino al bottone cliccato
+        // Trova l'input email
         const clickedButton = event.target;
-        const parentContainer = clickedButton.closest('div, section, form');
+        const parentContainer = clickedButton.closest('div');
         const emailInput = parentContainer.querySelector('input[type="email"]');
 
         if (!emailInput) {
@@ -168,47 +245,74 @@ class EbookPaymentSystem {
             return;
         }
 
-        // Procedi con download gratuito
-        this.processFreeDownload(productId, email);
+        // Procedi con download via API
+        this.processFreeDownloadViaAPI(productId, email);
     }
 
-    async processFreeDownload(productId, email) {
+    async processFreeDownloadViaAPI(productId, email) {
         try {
-            console.log('🎁 Processing free download:', { productId, email });
+            console.log('🎁 Processing free download via API:', { productId, email: email.substring(0, 5) + '***' });
+            
+            this.showProcessingState('Invio ebook gratuito in corso...');
 
-            // Per ora, apri WhatsApp con messaggio precompilato
-            // In futuro potresti salvare l'email e inviare il PDF automaticamente
-            const message = this.createFreeDownloadMessage(productId, email);
-            const whatsappUrl = `https://wa.me/393478881515?text=${encodeURIComponent(message)}`;
-            
-            // Traccia download gratuito
-            this.trackFreeDownload(productId, email);
-            
-            // Apri WhatsApp
-            window.open(whatsappUrl, '_blank');
-            
-            // Mostra messaggio di conferma
-            this.showSuccessMessage('Ti abbiamo reindirizzato su WhatsApp! Andrea ti invierà il PDF gratuito a breve.');
+            if (this.testMode) {
+                // MODALITÀ TEST - Simula invio email
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                this.hideProcessingState();
+                
+                this.showSuccessMessage(`
+                    🧪 TEST MODE - Email simulata inviata a:<br>
+                    <strong>${email}</strong><br><br>
+                    <em>In modalità reale riceveresti l'ebook "50 Workout da Viaggio" via email!</em>
+                `);
+                return;
+            }
+
+            // Chiamata API reale per invio email
+            const response = await fetch('/api/free-download', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    product: productId
+                })
+            });
+
+            const data = await response.json();
+
+            this.hideProcessingState();
+
+            if (!response.ok) {
+                throw new Error(data.error || 'Errore nell\'invio dell\'email');
+            }
+
+            if (data.success) {
+                this.showSuccessMessage(`
+                    ✅ Ebook inviato con successo!<br>
+                    Controlla la tua casella email: <strong>${email}</strong><br><br>
+                    <em>Se non vedi l'email, controlla la cartella spam!</em>
+                `);
+                
+                // Svuota il campo email
+                const emailInput = document.querySelector('input[type="email"]');
+                if (emailInput) emailInput.value = '';
+                
+                // Traccia download gratuito
+                this.trackFreeDownload(productId, email);
+            } else {
+                throw new Error('Risposta API non valida');
+            }
 
         } catch (error) {
             console.error('❌ Free download error:', error);
-            this.showErrorMessage('Errore nel download gratuito');
+            this.hideProcessingState();
+            this.showErrorMessage(
+                'Errore nell\'invio dell\'ebook gratuito',
+                'Riprova o contattaci su WhatsApp'
+            );
         }
-    }
-
-    createFreeDownloadMessage(productId, email) {
-        const products = {
-            '50-workout': '50 WORKOUT DA VIAGGIO (GRATUITO)'
-        };
-
-        const productName = products[productId] || 'Ebook Gratuito';
-
-        return `🎁 RICHIESTA EBOOK GRATUITO
-
-📚 Ebook: ${productName}
-📧 La mia email: ${email}
-
-Ciao Andrea! Vorrei scaricare l'ebook gratuito. Puoi inviarmelo via email? Grazie! 🙏`;
     }
 
     // ===================================
@@ -216,7 +320,6 @@ Ciao Andrea! Vorrei scaricare l'ebook gratuito. Puoi inviarmelo via email? Grazi
     // ===================================
 
     showProcessingState(message) {
-        // Crea overlay di caricamento
         const overlay = document.createElement('div');
         overlay.id = 'paymentProcessingOverlay';
         overlay.style.cssText = `
@@ -253,9 +356,9 @@ Ciao Andrea! Vorrei scaricare l'ebook gratuito. Puoi inviarmelo via email? Grazi
                     margin: 0 auto 1rem;
                 "></div>
                 <h3 style="color: #f97316; margin-bottom: 0.5rem; font-size: 1.2rem;">
-                    Elaborazione Pagamento
+                    ${this.testMode ? '🧪 Test Mode' : 'Elaborazione'}
                 </h3>
-                <p style="color: #e0e0e0; margin: 0;">
+                <p style="color: #e0e0e0; margin: 0; font-size: 0.9rem;">
                     ${message}
                 </p>
             </div>
@@ -268,7 +371,6 @@ Ciao Andrea! Vorrei scaricare l'ebook gratuito. Puoi inviarmelo via email? Grazi
         `;
 
         document.body.appendChild(overlay);
-        
         console.log('⏳ Processing overlay shown');
     }
 
@@ -304,7 +406,9 @@ Ciao Andrea! Vorrei scaricare l'ebook gratuito. Puoi inviarmelo via email? Grazi
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
                 <div>
-                    <div style="font-weight: 600; margin-bottom: 0.25rem;">Errore Pagamento</div>
+                    <div style="font-weight: 600; margin-bottom: 0.25rem;">
+                        ${this.testMode ? '🧪 Test Mode - ' : ''}Errore
+                    </div>
                     <div style="font-size: 0.9rem; opacity: 0.9;">${message}</div>
                     ${details ? `<div style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.25rem;">${details}</div>` : ''}
                 </div>
@@ -320,16 +424,6 @@ Ciao Andrea! Vorrei scaricare l'ebook gratuito. Puoi inviarmelo via email? Grazi
                 ">×</button>
             </div>
         `;
-
-        // Stile animazione
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideInRight {
-                from { transform: translateX(100%); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
-            }
-        `;
-        document.head.appendChild(style);
 
         document.body.appendChild(errorDiv);
 
@@ -355,7 +449,7 @@ Ciao Andrea! Vorrei scaricare l'ebook gratuito. Puoi inviarmelo via email? Grazi
             border-radius: 0.5rem;
             box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
             z-index: 10001;
-            max-width: 400px;
+            max-width: 450px;
             animation: slideInRight 0.3s ease-out;
         `;
 
@@ -365,7 +459,9 @@ Ciao Andrea! Vorrei scaricare l'ebook gratuito. Puoi inviarmelo via email? Grazi
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
                 <div>
-                    <div style="font-weight: 600; margin-bottom: 0.25rem;">Successo!</div>
+                    <div style="font-weight: 600; margin-bottom: 0.25rem;">
+                        ${this.testMode ? '🧪 Test Mode - ' : ''}Successo!
+                    </div>
                     <div style="font-size: 0.9rem; opacity: 0.9;">${message}</div>
                 </div>
                 <button onclick="this.parentElement.parentElement.remove()" style="
@@ -381,16 +477,29 @@ Ciao Andrea! Vorrei scaricare l'ebook gratuito. Puoi inviarmelo via email? Grazi
             </div>
         `;
 
+        // Aggiungi stile animazione se non esiste
+        if (!document.querySelector('#slideInRightStyle')) {
+            const style = document.createElement('style');
+            style.id = 'slideInRightStyle';
+            style.textContent = `
+                @keyframes slideInRight {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
         document.body.appendChild(successDiv);
 
-        // Auto remove dopo 5 secondi
+        // Auto remove dopo 8 secondi per messaggi di successo
         setTimeout(() => {
             if (successDiv.parentElement) {
                 successDiv.remove();
             }
-        }, 5000);
+        }, 8000);
 
-        console.log('✅ Success message shown:', message);
+        console.log('✅ Success message shown:', message.replace(/<[^>]*>/g, ''));
     }
 
     // ===================================
@@ -400,7 +509,6 @@ Ciao Andrea! Vorrei scaricare l'ebook gratuito. Puoi inviarmelo via email? Grazi
     handlePaymentError(method, errorMessage) {
         console.error(`❌ ${method} payment failed:`, errorMessage);
         
-        // Errori specifici con soluzioni
         let userMessage = 'Si è verificato un errore durante il pagamento.';
         let suggestion = '';
 
@@ -410,17 +518,9 @@ Ciao Andrea! Vorrei scaricare l'ebook gratuito. Puoi inviarmelo via email? Grazi
         } else if (errorMessage.includes('timeout')) {
             userMessage = 'Il pagamento è scaduto per timeout.';
             suggestion = 'Riprova con una connessione più stabile.';
-        } else if (errorMessage.includes('declined') || errorMessage.includes('insufficient')) {
-            userMessage = 'Pagamento rifiutato dalla banca.';
-            suggestion = 'Verifica i dati della carta o prova un altro metodo.';
-        } else if (errorMessage.includes('canceled') || errorMessage.includes('cancelled')) {
-            userMessage = 'Pagamento annullato.';
-            suggestion = 'Nessun addebito effettuato. Puoi riprovare quando vuoi.';
         }
 
         this.showErrorMessage(userMessage, suggestion);
-        
-        // Track error per analytics
         this.trackPaymentError(method, errorMessage);
     }
 
@@ -439,23 +539,14 @@ Ciao Andrea! Vorrei scaricare l'ebook gratuito. Puoi inviarmelo via email? Grazi
 
     trackPaymentAttempt(method, productId) {
         try {
-            console.log('📊 Payment attempt tracked:', { method, productId });
+            console.log('📊 Payment attempt tracked:', { method, productId, testMode: this.testMode });
             
-            // Google Analytics 4
             if (typeof gtag !== 'undefined') {
-                gtag('event', 'begin_checkout', {
+                gtag('event', this.testMode ? 'test_checkout' : 'begin_checkout', {
                     currency: 'EUR',
                     payment_method: method,
-                    product_id: productId
-                });
-            }
-
-            // Facebook Pixel
-            if (typeof fbq !== 'undefined') {
-                fbq('track', 'InitiateCheckout', {
-                    content_type: 'product',
-                    content_ids: [productId],
-                    payment_method: method
+                    product_id: productId,
+                    test_mode: this.testMode
                 });
             }
 
@@ -466,12 +557,13 @@ Ciao Andrea! Vorrei scaricare l'ebook gratuito. Puoi inviarmelo via email? Grazi
 
     trackPaymentError(method, error) {
         try {
-            console.log('📊 Payment error tracked:', { method, error });
+            console.log('📊 Payment error tracked:', { method, error, testMode: this.testMode });
             
             if (typeof gtag !== 'undefined') {
                 gtag('event', 'payment_error', {
                     payment_method: method,
-                    error_message: error.substring(0, 100) // Limita lunghezza
+                    error_message: error.substring(0, 100),
+                    test_mode: this.testMode
                 });
             }
 
@@ -482,14 +574,19 @@ Ciao Andrea! Vorrei scaricare l'ebook gratuito. Puoi inviarmelo via email? Grazi
 
     trackFreeDownload(productId, email) {
         try {
-            console.log('📊 Free download tracked:', { productId, email: email.substring(0, 5) + '***' });
+            console.log('📊 Free download tracked:', { 
+                productId, 
+                email: email.substring(0, 5) + '***',
+                testMode: this.testMode 
+            });
             
             if (typeof gtag !== 'undefined') {
-                gtag('event', 'generate_lead', {
+                gtag('event', this.testMode ? 'test_lead' : 'generate_lead', {
                     currency: 'EUR',
                     value: 0,
                     product_id: productId,
-                    method: 'free_download'
+                    method: 'free_download',
+                    test_mode: this.testMode
                 });
             }
 
@@ -499,16 +596,18 @@ Ciao Andrea! Vorrei scaricare l'ebook gratuito. Puoi inviarmelo via email? Grazi
     }
 
     // ===================================
-    // DEBUG & SYSTEM INFO
+    // SYSTEM INFO & CONFIGURATION
     // ===================================
 
     logSystemInfo() {
         console.log('🔧 Payment System Info:', {
-            version: '2.0 - API Integration',
+            version: '3.0 - Test Mode + Email API',
+            testMode: this.testMode,
             features: [
-                'Stripe Checkout Integration',
-                'PayPal Orders API',
-                'Free Download with Email Collection',
+                'Stripe Checkout Integration (Test Mode)',
+                'PayPal Orders API (Test Mode)', 
+                'Free Download via Email API',
+                'Test Payment Simulation',
                 'Error Handling & Recovery',
                 'Analytics Tracking',
                 'Mobile Responsive'
@@ -516,6 +615,26 @@ Ciao Andrea! Vorrei scaricare l'ebook gratuito. Puoi inviarmelo via email? Grazi
             browser: navigator.userAgent.split(' ').pop(),
             timestamp: new Date().toISOString()
         });
+    }
+
+    // Metodo per disabilitare test mode (da console)
+    disableTestMode() {
+        this.testMode = false;
+        console.log('🔴 Test Mode DISABILITATO - Pagamenti reali attivi');
+        
+        // Rimuovi banner se esiste
+        const testBanner = document.querySelector('[style*="linear-gradient(135deg, #f59e0b, #d97706)"]');
+        if (testBanner) {
+            testBanner.remove();
+            document.body.style.paddingTop = '0';
+        }
+    }
+
+    // Metodo per abilitare test mode (da console)
+    enableTestMode() {
+        this.testMode = true;
+        console.log('🧪 Test Mode ABILITATO - Nessun pagamento reale');
+        this.showTestModeWarning();
     }
 
     // ===================================
@@ -526,7 +645,7 @@ Ciao Andrea! Vorrei scaricare l'ebook gratuito. Puoi inviarmelo via email? Grazi
         const products = {
             '2-milioni-anni': {
                 name: 'Ebook: 2 Milioni di Anni',
-                price: 9.90,
+                price: 24.90,
                 currency: 'EUR'
             },
             'body-construction': {
@@ -577,9 +696,19 @@ window.addEventListener('error', function(e) {
     }
 });
 
-// Esporta per testing
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { EbookPaymentSystem };
-}
+// Funzioni console per controllo test mode
+window.disableTestMode = function() {
+    if (window.ebookPaymentSystem) {
+        window.ebookPaymentSystem.disableTestMode();
+    }
+};
 
-console.log('🚀 Payment System Script Loaded - API Integration Active');
+window.enableTestMode = function() {
+    if (window.ebookPaymentSystem) {
+        window.ebookPaymentSystem.enableTestMode();
+    }
+};
+
+console.log('🚀 Payment System Script Loaded - Versione 3.0 con Test Mode e Email API');
+console.log('💡 Per disabilitare test mode: disableTestMode()');
+console.log('💡 Per abilitare test mode: enableTestMode()');
