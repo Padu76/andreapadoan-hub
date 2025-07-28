@@ -3,113 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ebook di Andrea Padoan - Prezzi e Dettagli</title>
+    <title>Ebook di Andrea Padoan - Sistema Automatico</title>
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter for general text, and a more striking font for titles if desired (e.g., Montserrat) -->
+    
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+    
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #121212; /* Very dark gray for a premium feel */
-            color: #e0e0e0; /* Light gray for text */
+            background-color: #121212;
+            color: #e0e0e0;
             line-height: 1.6;
         }
+        
         h1, h2 {
             font-family: 'Montserrat', sans-serif;
-            color: #f97316; /* Orange accent */
+            color: #f97316;
         }
-        /* Custom gradient for main buttons */
-        .btn-primary-gradient {
-            background-image: linear-gradient(to right, #f97316, #ea580c); /* Orange tones */
-            transition: all 0.3s ease-in-out;
-        }
-        .btn-primary-gradient:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
-            background-image: linear-gradient(to right, #fb923c, #f97316); /* Lighter orange on hover */
-        }
-        /* Style for the home button */
-        .home-button {
-            background-color: #3b82f6; /* Blue background */
+        
+        .btn-stripe {
+            background: linear-gradient(135deg, #635bff, #4c46cc);
             color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 9999px; /* Fully rounded */
-            font-weight: 600;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            transition: all 0.3s ease;
         }
-        .home-button:hover {
-            background-color: #2563eb; /* Darker blue on hover */
-            transform: scale(1.05);
+        .btn-stripe:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(99, 91, 255, 0.4);
+            background: linear-gradient(135deg, #7c73ff, #635bff);
         }
-        /* Card styling */
+        
+        .btn-paypal {
+            background: linear-gradient(135deg, #0070ba, #003087);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .btn-paypal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 112, 186, 0.4);
+            background: linear-gradient(135deg, #1a7cbd, #0070ba);
+        }
+        
+        .btn-free {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .btn-free:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+            background: linear-gradient(135deg, #34d399, #10b981);
+        }
+        
         .product-card {
-            background-color: #1f1f1f; /* Slightly lighter dark gray for cards */
+            background-color: #1f1f1f;
             border: 1px solid #333;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
         }
         .product-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
         }
+        
         .price-badge {
-            background-color: #f97316; /* Orange */
+            background-color: #f97316;
             color: white;
             font-weight: bold;
             padding: 0.5rem 1rem;
-            border-radius: 9999px; /* Pill shape */
+            border-radius: 9999px;
             display: inline-block;
             margin-bottom: 0.75rem;
         }
-        .whatsapp-button {
-            background-color: #25D366; /* WhatsApp green */
-            color: white;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            padding: 0.75rem 2rem;
-            border-radius: 9999px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+        
+        .price-badge.free {
+            background-color: #10b981;
         }
-        .whatsapp-button:hover {
-            background-color: #1DA851; /* Darker green */
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
-        }
-        .whatsapp-button img {
-            width: 24px;
-            height: 24px;
-            margin-right: 0.5rem;
-        }
-
-        /* New styles for product details button */
-        .btn-details {
+        
+        .email-input {
             background-color: #374151;
+            border: 2px solid #4b5563;
             color: white;
-            border: 2px solid #6b7280;
-            transition: all 0.3s ease;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            transition: border-color 0.3s ease;
         }
-        .btn-details:hover {
-            background-color: #4b5563;
+        .email-input:focus {
+            outline: none;
             border-color: #f97316;
-            transform: translateY(-1px);
         }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 3rem;
-            }
-            .product-card {
-                padding: 1.5rem;
-            }
+        
+        .processing-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 10000;
+            display: none;
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
+
+    <!-- Processing Overlay -->
+    <div id="processingOverlay" class="processing-overlay">
+        <div class="flex items-center justify-center h-full">
+            <div class="bg-gray-800 p-8 rounded-xl text-center border border-gray-600">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500 mx-auto mb-4"></div>
+                <h3 class="text-orange-500 text-xl font-bold mb-2">Elaborazione Pagamento</h3>
+                <p class="text-gray-300">Attendi mentre prepariamo il tuo ordine...</p>
+            </div>
+        </div>
+    </div>
 
     <!-- Header Section -->
     <header class="bg-gray-900 shadow-lg py-4 border-b-4 border-orange-600">
@@ -117,158 +135,258 @@
             <a href="/" class="text-3xl font-extrabold text-orange-500 hover:text-orange-400 transition duration-300 ease-in-out p-2 rounded-lg">
                 Andrea Padoan Ebook
             </a>
-            <!-- Home Button in Header -->
-            <a href="/" class="home-button">
+            <a href="/" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full font-semibold transition duration-300">
                 Home
             </a>
         </div>
     </header>
 
     <main class="flex-grow container mx-auto px-4 py-12">
-        <section id="prodotti" class="text-center mb-16">
+        <!-- Hero Section -->
+        <section class="text-center mb-16">
             <h1 class="text-6xl md:text-7xl font-extrabold mb-6">I Miei Ebook</h1>
             <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
-                Trasforma il tuo corpo e la tua mente con guide pratiche e programmi di allenamento e alimentazione.
+                Trasforma il tuo corpo e la tua mente con guide pratiche e programmi di allenamento automatizzati.
             </p>
+            <div class="mt-6 bg-green-800 border border-green-600 rounded-lg p-4 max-w-2xl mx-auto">
+                <p class="text-green-100 font-semibold">✅ Sistema di Pagamento Automatico Attivo</p>
+                <p class="text-green-200 text-sm">Download immediato dopo il pagamento!</p>
+            </div>
         </section>
 
-        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-16">
+        <!-- Products Grid -->
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12 mb-16">
+            
             <!-- Ebook 1: IL WAVE SYSTEM -->
-            <div class="product-card rounded-xl overflow-hidden shadow-xl p-6 flex flex-col items-center" onclick="window.location.href='/ebook-store/ebook-wave-system.html'">
-                <img src="/images/wave-system-cover.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/f97316/ffffff?text=IL+WAVE+SYSTEM';" alt="Copertina Ebook Il Wave System" class="w-full h-56 object-cover rounded-lg mb-4 shadow-md">
-                <h2 class="text-3xl font-bold text-center mb-2">IL WAVE SYSTEM</h2>
-                <p class="text-gray-400 text-sm text-center flex-grow mb-4">
+            <div class="product-card rounded-xl overflow-hidden shadow-xl p-8">
+                <img src="/ebook-store/wave-system.jpg" 
+                     onerror="this.onerror=null;this.src='https://placehold.co/600x400/f97316/ffffff?text=IL+WAVE+SYSTEM';" 
+                     alt="Copertina Ebook Il Wave System" 
+                     class="w-full h-64 object-cover rounded-lg mb-6 shadow-md">
+                
+                <h2 class="text-3xl font-bold text-center mb-4">IL WAVE SYSTEM</h2>
+                <p class="text-gray-400 text-center mb-6">
                     6 CICLI COMPLETI DI ALLENAMENTO PER RAGGIUNGERE LA TUA FORMA FISICA MAI RAGGIUNTA.
                 </p>
-                <div class="flex items-baseline mb-4">
+                
+                <div class="text-center mb-6">
                     <span class="price-badge text-2xl">€14.90</span>
                 </div>
-                <div class="flex flex-col gap-2 w-full">
-                    <a href="/ebook-store/ebook-wave-system.html" class="btn-details font-semibold py-2 px-6 rounded-full text-center" onclick="event.stopPropagation()">
-                        Dettagli
-                    </a>
-                    <a href="/ebook-store/ebook-wave-system.html" class="btn-primary-gradient text-white font-semibold py-3 px-8 rounded-full text-center" onclick="event.stopPropagation()">
-                        Acquista Ora
-                    </a>
+                
+                <div class="space-y-3">
+                    <button data-stripe-product="wave-system" 
+                            class="btn-stripe w-full font-semibold py-4 px-6 rounded-full transition-all duration-300 hover:shadow-lg">
+                        💳 Paga con Carta - €14.90
+                    </button>
+                    <button data-paypal-product="wave-system" 
+                            class="btn-paypal w-full font-semibold py-4 px-6 rounded-full transition-all duration-300 hover:shadow-lg">
+                        🅿️ Paga con PayPal - €14.90
+                    </button>
                 </div>
             </div>
 
             <!-- Ebook 2: In Forma da 2 Milioni di Anni -->
-            <div class="product-card rounded-xl overflow-hidden shadow-xl p-6 flex flex-col items-center" onclick="window.location.href='/ebook-store/ebook-2-milioni-anni.html'">
-                <img src="/images/forma-2-milioni-cover.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/ea580c/ffffff?text=IN+FORMA+DA+2+MILIONI+ANNI';" alt="Copertina Ebook In Forma da 2 Milioni di Anni" class="w-full h-56 object-cover rounded-lg mb-4 shadow-md">
-                <h2 class="text-3xl font-bold text-center mb-2">In Forma da 2 Milioni di Anni</h2>
-                <p class="text-gray-400 text-sm text-center flex-grow mb-4">
+            <div class="product-card rounded-xl overflow-hidden shadow-xl p-8">
+                <img src="/ebook-store/forma-2-milioni-anni.jpg" 
+                     onerror="this.onerror=null;this.src='https://placehold.co/600x400/ea580c/ffffff?text=IN+FORMA+DA+2+MILIONI+ANNI';" 
+                     alt="Copertina Ebook In Forma da 2 Milioni di Anni" 
+                     class="w-full h-64 object-cover rounded-lg mb-6 shadow-md">
+                
+                <h2 class="text-3xl font-bold text-center mb-4">In Forma da 2 Milioni di Anni</h2>
+                <p class="text-gray-400 text-center mb-6">
                     IL PROGRAMMA ALIMENTARE PER TRASFORMARE IL TUO CORPO IN UNA MACCHINA BRUCIA GRASSI.
                 </p>
-                <div class="flex items-baseline mb-4">
-                    <span class="price-badge text-2xl">€19.90</span>
+                
+                <div class="text-center mb-6">
+                    <span class="price-badge text-2xl">€9.90</span>
                 </div>
-                <div class="flex flex-col gap-2 w-full">
-                    <a href="/ebook-store/ebook-2-milioni-anni.html" class="btn-details font-semibold py-2 px-6 rounded-full text-center" onclick="event.stopPropagation()">
-                        Dettagli
-                    </a>
-                    <a href="/ebook-store/ebook-2-milioni-anni.html" class="btn-primary-gradient text-white font-semibold py-3 px-8 rounded-full text-center" onclick="event.stopPropagation()">
-                        Acquista Ora
-                    </a>
+                
+                <div class="space-y-3">
+                    <button data-stripe-product="2-milioni-anni" 
+                            class="btn-stripe w-full font-semibold py-4 px-6 rounded-full transition-all duration-300 hover:shadow-lg">
+                        💳 Paga con Carta - €9.90
+                    </button>
+                    <button data-paypal-product="2-milioni-anni" 
+                            class="btn-paypal w-full font-semibold py-4 px-6 rounded-full transition-all duration-300 hover:shadow-lg">
+                        🅿️ Paga con PayPal - €9.90
+                    </button>
                 </div>
             </div>
 
-            <!-- Ebook 3: 50 WORKOUT da viaggio -->
-            <div class="product-card rounded-xl overflow-hidden shadow-xl p-6 flex flex-col items-center" onclick="window.location.href='/ebook-store/ebook-50-workout.html'">
-                <img src="/images/workout-viaggio-cover.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/fbbf24/ffffff?text=50+WORKOUT+DA+VIAGGIO';" alt="Copertina Ebook 50 Workout da Viaggio" class="w-full h-56 object-cover rounded-lg mb-4 shadow-md">
-                <h2 class="text-3xl font-bold text-center mb-2">50 WORKOUT da viaggio</h2>
-                <p class="text-gray-400 text-sm text-center flex-grow mb-4">
+            <!-- Ebook 3: 50 WORKOUT da viaggio (GRATUITO) -->
+            <div class="product-card rounded-xl overflow-hidden shadow-xl p-8 border-2 border-green-500">
+                <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">
+                    🎁 GRATIS
+                </div>
+                
+                <img src="/ebook-store/50-workout-viaggio.jpg" 
+                     onerror="this.onerror=null;this.src='https://placehold.co/600x400/10b981/ffffff?text=50+WORKOUT+DA+VIAGGIO';" 
+                     alt="Copertina Ebook 50 Workout da Viaggio" 
+                     class="w-full h-64 object-cover rounded-lg mb-6 shadow-md">
+                
+                <h2 class="text-3xl font-bold text-center mb-4">50 WORKOUT da viaggio</h2>
+                <p class="text-gray-400 text-center mb-6">
                     50 ALLENAMENTI ESSENZIALI PER MANTENERTI IN FORMA OVUNQUE TU SIA.
                 </p>
-                <div class="flex items-baseline mb-4">
-                    <span class="price-badge text-2xl bg-green-600">GRATIS</span>
+                
+                <div class="text-center mb-6">
+                    <span class="price-badge free text-2xl">GRATIS</span>
                 </div>
-                <div class="flex flex-col gap-2 w-full">
-                    <a href="/ebook-store/ebook-50-workout.html" class="btn-details font-semibold py-2 px-6 rounded-full text-center" onclick="event.stopPropagation()">
-                        Dettagli
-                    </a>
-                    <a href="/ebook-store/ebook-50-workout.html" class="btn-primary-gradient text-white font-semibold py-3 px-8 rounded-full text-center" onclick="event.stopPropagation()">
-                        Scarica Gratis
-                    </a>
+                
+                <div class="space-y-4">
+                    <input type="email" 
+                           placeholder="La tua email per ricevere l'ebook gratis" 
+                           class="email-input w-full"
+                           required>
+                    
+                    <button data-free-download="50-workout" 
+                            class="btn-free w-full font-semibold py-4 px-6 rounded-full transition-all duration-300 hover:shadow-lg">
+                        📥 SCARICA GRATIS ORA!
+                    </button>
+                    
+                    <p class="text-xs text-gray-500 text-center">
+                        Riceverai l'ebook immediatamente via email
+                    </p>
                 </div>
             </div>
 
             <!-- Ebook 4: BODY UNDER CONSTRUCTION VOL: 1 -->
-            <div class="product-card rounded-xl overflow-hidden shadow-xl p-6 flex flex-col items-center" onclick="window.location.href='/ebook-store/ebook-body-construction.html'">
-                <img src="/images/body-construction-cover.jpg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/10b981/ffffff?text=BODY+UNDER+CONSTRUCTION';" alt="Copertina Ebook Body Under Construction Vol 1" class="w-full h-56 object-cover rounded-lg mb-4 shadow-md">
-                <h2 class="text-3xl font-bold text-center mb-2">BODY UNDER CONSTRUCTION VOL: 1</h2>
-                <p class="text-gray-400 text-sm text-center flex-grow mb-4">
+            <div class="product-card rounded-xl overflow-hidden shadow-xl p-8">
+                <img src="/ebook-store/body-under-construction.jpg" 
+                     onerror="this.onerror=null;this.src='https://placehold.co/600x400/dc2626/ffffff?text=BODY+UNDER+CONSTRUCTION';" 
+                     alt="Copertina Ebook Body Under Construction Vol 1" 
+                     class="w-full h-64 object-cover rounded-lg mb-6 shadow-md">
+                
+                <h2 class="text-3xl font-bold text-center mb-4">BODY UNDER CONSTRUCTION VOL: 1</h2>
+                <p class="text-gray-400 text-center mb-6">
                     100 ALLENAMENTI, PER UNA FORMA PERFETTA 365 GIORNI ALL'ANNO.
                 </p>
-                <div class="flex items-baseline mb-4">
-                    <span class="price-badge text-2xl">€29.90</span>
+                
+                <div class="text-center mb-6">
+                    <span class="price-badge text-2xl">€24.90</span>
                 </div>
-                <div class="flex flex-col gap-2 w-full">
-                    <a href="/ebook-store/ebook-body-construction.html" class="btn-details font-semibold py-2 px-6 rounded-full text-center" onclick="event.stopPropagation()">
-                        Dettagli
-                    </a>
-                    <a href="/ebook-store/ebook-body-construction.html" class="btn-primary-gradient text-white font-semibold py-3 px-8 rounded-full text-center" onclick="event.stopPropagation()">
-                        Acquista Ora
-                    </a>
+                
+                <div class="space-y-3">
+                    <button data-stripe-product="body-construction" 
+                            class="btn-stripe w-full font-semibold py-4 px-6 rounded-full transition-all duration-300 hover:shadow-lg">
+                        💳 Paga con Carta - €24.90
+                    </button>
+                    <button data-paypal-product="body-construction" 
+                            class="btn-paypal w-full font-semibold py-4 px-6 rounded-full transition-all duration-300 hover:shadow-lg">
+                        🅿️ Paga con PayPal - €24.90
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Garanzie Section -->
+        <section class="bg-gray-900 rounded-2xl p-8 mb-16">
+            <h2 class="text-4xl font-bold text-center mb-8 text-orange-500">🛡️ Le Tue Garanzie</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div>
+                    <div class="text-4xl mb-4">⚡</div>
+                    <h3 class="text-xl font-bold mb-2 text-orange-400">Download Immediato</h3>
+                    <p class="text-gray-300">Ricevi il link di download subito dopo il pagamento</p>
+                </div>
+                <div>
+                    <div class="text-4xl mb-4">🔒</div>
+                    <h3 class="text-xl font-bold mb-2 text-orange-400">Pagamenti Sicuri</h3>
+                    <p class="text-gray-300">Transazioni protette da Stripe e PayPal</p>
+                </div>
+                <div>
+                    <div class="text-4xl mb-4">💌</div>
+                    <h3 class="text-xl font-bold mb-2 text-orange-400">Supporto Garantito</h3>
+                    <p class="text-gray-300">Assistenza diretta via WhatsApp</p>
                 </div>
             </div>
         </section>
 
-        <!-- Immagine Andrea Padoan al centro -->
+        <!-- Immagine Andrea Padoan -->
         <section class="py-16 px-4 text-center">
             <div class="container mx-auto">
-                <img src="/images/Padu_tribu040.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x500/3b82f6/ffffff?text=Andrea+Padoan';" alt="Andrea Padoan Personal Trainer" class="w-full max-w-2xl mx-auto rounded-xl shadow-2xl">
+                <img src="/ebook-store/Padu_tribu040.jpg" 
+                     onerror="this.onerror=null;this.src='https://placehold.co/800x500/3b82f6/ffffff?text=Andrea+Padoan';" 
+                     alt="Andrea Padoan Personal Trainer" 
+                     class="w-full max-w-2xl mx-auto rounded-xl shadow-2xl">
             </div>
         </section>
 
         <!-- Chi Sono Section -->
-        <section id="chi-sono" class="bg-gray-900 text-white py-20 px-4 text-center my-8 mx-auto max-w-6xl rounded-md shadow-lg">
-            <div class="container mx-auto">
+        <section class="bg-gray-900 text-white py-20 px-8 text-center rounded-2xl shadow-lg">
+            <div class="container mx-auto max-w-4xl">
                 <h2 class="text-4xl font-extrabold mb-6 text-orange-500">Chi Sono</h2>
                 <p class="text-xl md:text-2xl mb-8 opacity-90">
-                    Lo stile di vita sedentario, il disordine alimentare, la vita frenetica mi stavano risucchiando energia. Correvo dalla mattina alla sera tra lavoro e gestione familiare per arrivare il fine settimana distrutto. Era uno stile di vita completamente sbagliato.
+                    Lo stile di vita sedentario, il disordine alimentare, la vita frenetica mi stavano risucchiando energia. Correvo dalla mattina alla sera tra lavoro e gestione familiare per arrivare il fine settimana distrutto.
                 </p>
-                <p class="text-lg opacity-80 max-w-3xl mx-auto mb-8">
-                    Un completo disordine che mi stava portando ad un veloce invecchiamento, sovrappeso, problemi di salute. In tutto questo non riuscivo a trovare uno spazio da dedicare a me stesso. Ad un certo punto la mia vita mi ha obbligato a fermarmi. Una notizia scioccante mi ha imposto di fermarmi e ricominciare da capo.
+                <p class="text-lg opacity-80 mb-8">
+                    Un completo disordine che mi stava portando ad un veloce invecchiamento, sovrappeso, problemi di salute. Una notizia scioccante mi ha imposto di fermarmi e ricominciare da capo.
                 </p>
-                <p class="text-lg opacity-80 max-w-3xl mx-auto mb-8">
-                    Avevo davanti due strade: chiudermi nella depressione o ripartire da zero, da me stesso. Ho scelto la seconda strada. Ho iniziato a fare ordine ed inserire nella mia giornata abitudini sane e positive: corretta alimentazione ed allenamento.
+                <p class="text-lg opacity-80 mb-8">
+                    Ho scelto di ripartire da zero, da me stesso. Ho iniziato a fare ordine ed inserire nella mia giornata abitudini sane: corretta alimentazione ed allenamento.
                 </p>
-                <p class="text-lg opacity-80 max-w-3xl mx-auto">
-                    Nel giro di qualche mese la mia vita è cambiata. Ho ripreso fiducia sul mio futuro, ho studiato come poter migliorare le mie competenze, ho capito che tante persone, come me, hanno l'opportunità di cambiare vita anche quando non sanno da che parte iniziare. Non si tratta soltanto di risultati estetici. Principalmente di benefici psicologici e benessere generale.
-                </p>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contatti" class="py-16 px-4 bg-gray-100">
-            <div class="container mx-auto text-center max-w-2xl">
-                <h2 class="text-4xl font-extrabold text-gray-900 mb-8">Contattami per Maggiori Informazioni</h2>
-                <p class="text-lg text-gray-700 mb-8">
-                    Sono qui per supportarti nel tuo percorso. Se hai domande sui miei ebook o sui miei servizi di personal training, non esitare a scrivermi.
-                </p>
-                <!-- WhatsApp Button -->
-                <a href="https://wa.me/393478881515" target="_blank" class="whatsapp-button">
-                    <img src="/images/whatsapp.png" alt="WhatsApp Icon">
-                    Contattami
-                </a>
-                <p class="text-md text-gray-600 mt-4">
-                    Oppure visita il mio sito principale: <a href="https://www.personaltrainerverona.it" target="_blank" class="text-orange-600 hover:underline">www.personaltrainerverona.it</a>
+                <p class="text-lg opacity-80">
+                    Nel giro di qualche mese la mia vita è cambiata. Ho capito che tante persone, come me, hanno l'opportunità di cambiare vita anche quando non sanno da che parte iniziare.
                 </p>
             </div>
         </section>
 
     </main>
 
-    <footer class="bg-gray-900 text-white py-8 px-4 mt-8 rounded-t-lg">
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 px-4 mt-8">
         <div class="container mx-auto text-center">
             <p class="text-sm">&copy; 2025 Andrea Padoan Personal Trainer. Tutti i diritti riservati.</p>
             <div class="flex justify-center space-x-6 mt-4">
-                <a href="#" class="text-gray-400 hover:text-white transition duration-300 ease-in-out">Privacy Policy</a>
-                <a href="#" class="text-gray-400 hover:text-white transition duration-300 ease-in-out">Termini e Condizioni</a>
+                <a href="#" class="text-gray-400 hover:text-white transition duration-300">Privacy Policy</a>
+                <a href="#" class="text-gray-400 hover:text-white transition duration-300">Termini e Condizioni</a>
             </div>
+            <p class="text-xs text-gray-500 mt-4">
+                💳 Pagamenti sicuri con Stripe e PayPal | 📧 Email automatiche con Resend
+            </p>
         </div>
     </footer>
+
+    <!-- Payment System JavaScript -->
+    <script src="payment.js"></script>
+    
+    <!-- Toast Notifications -->
+    <script>
+        // Override per mostrare notifiche più eleganti
+        window.showNotification = function(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 transform transition-all duration-500 translate-x-full`;
+            
+            const colors = {
+                'success': 'bg-green-600 text-white',
+                'error': 'bg-red-600 text-white',
+                'info': 'bg-blue-600 text-white',
+                'warning': 'bg-yellow-600 text-black'
+            };
+            
+            notification.className += ` ${colors[type] || colors.info}`;
+            notification.innerHTML = `
+                <div class="flex items-center">
+                    <span class="mr-2">${type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️'}</span>
+                    <span>${message}</span>
+                    <button onclick="this.parentElement.parentElement.remove()" class="ml-4 hover:opacity-75">×</button>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Animazione di entrata
+            setTimeout(() => {
+                notification.classList.remove('translate-x-full');
+            }, 100);
+            
+            // Auto-remove dopo 5 secondi
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+                setTimeout(() => notification.remove(), 500);
+            }, 5000);
+        };
+    </script>
 
 </body>
 </html>
