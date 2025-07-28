@@ -96,8 +96,8 @@ export default async function handler(req, res) {
             ],
             mode: 'payment',
             
-            // URLs corretti
-            success_url: `https://andreapadoan-hub.vercel.app/success?product=${productId}&payment=stripe&session_id={CHECKOUT_SESSION_ID}`,
+            // URLs corretti con .html
+            success_url: `https://andreapadoan-hub.vercel.app/success.html?product=${productId}&payment=stripe&session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `https://andreapadoan-hub.vercel.app/ebooks.html?cancelled=${productId}`,
             
             // Configurazioni
