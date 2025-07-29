@@ -28,40 +28,7 @@
             min-height: 100vh;
         }
 
-        /* Header con CTA sticky */
-        .header {
-            position: fixed;
-            top: 15px;
-            left: 20px;
-            right: 20px;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
 
-        .back-btn {
-            background: rgba(255, 107, 53, 0.9);
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            backdrop-filter: blur(10px);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .back-btn:hover {
-            background: #ff6b35;
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
-        }
 
         /* CTA Sticky per mobile */
         .sticky-cta {
@@ -167,7 +134,7 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 100px 20px 50px;
+            padding: 40px 20px 50px;
         }
 
         /* Hero Section Potenziata */
@@ -313,7 +280,266 @@
 
 
 
-        /* Form di Contatto Veloce */
+        /* Video Section */
+        .video-section {
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 50%, #000 100%);
+            border-radius: 25px;
+            padding: 80px 60px;
+            margin-bottom: 80px;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 70%, rgba(255, 107, 53, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .video-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .video-content {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+
+        .video-text {
+            animation: slideInLeft 1s ease-out 0.3s both;
+        }
+
+        .video-title {
+            color: #ff6b35;
+            font-size: clamp(2.2rem, 4vw, 3rem);
+            font-weight: bold;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .video-subtitle {
+            color: #b0b0b0;
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .video-benefits {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .video-benefit {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #4ade80;
+            font-weight: 500;
+        }
+
+        .video-benefit i {
+            font-size: 1.2rem;
+            width: 20px;
+        }
+
+        .video-player-container {
+            position: relative;
+            animation: slideInRight 1s ease-out 0.5s both;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 300px;
+            border-radius: 20px;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 3px solid rgba(255, 107, 53, 0.3);
+        }
+
+        .video-placeholder:hover {
+            transform: scale(1.02);
+            border-color: rgba(255, 107, 53, 0.6);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.8), rgba(255, 133, 51, 0.6)),
+                        url('./images/io-3.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.7);
+            transition: all 0.3s ease;
+        }
+
+        .video-placeholder:hover .video-background {
+            filter: brightness(0.9);
+            transform: scale(1.05);
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 2;
+        }
+
+        .play-button {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff6b35, #ff8533);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+        }
+
+        .play-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.6);
+        }
+
+        .play-button i {
+            margin-left: 3px; /* Centratura visiva del play */
+        }
+
+        .video-info {
+            text-align: center;
+            color: white;
+        }
+
+        .placeholder-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .placeholder-text {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .video-duration {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            display: inline-block;
+        }
+
+        .video-player {
+            width: 100%;
+            height: 300px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid #ff6b35;
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
+        }
+
+        .video-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .video-close:hover {
+            background: rgba(255, 107, 53, 0.8);
+            transform: scale(1.1);
+        }
+
+        /* Video CTA */
+        .video-cta {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(74, 222, 128, 0.05));
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            animation: fadeInUp 1s ease-out 0.7s both;
+        }
+
+        .video-cta-title {
+            color: #ff6b35;
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .video-cta-text {
+            color: #b0b0b0;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            margin-bottom: 25px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .video-cta-btn {
+            background: linear-gradient(45deg, #ff6b35, #ff8c5a);
+            color: #fff;
+            border: none;
+            padding: 18px 35px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        .video-cta-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(255, 107, 53, 0.5);
+        }
         .quick-contact-section {
             background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(74, 222, 128, 0.05));
             border-radius: 25px;
@@ -1145,7 +1371,7 @@
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .container {
-                padding: 80px 15px 30px;
+                padding: 40px 15px 30px;
             }
 
             .hero-content {
@@ -1211,6 +1437,37 @@
 
             .highlight-text {
                 font-size: 1.1rem;
+            }
+
+            .video-section {
+                padding: 50px 25px;
+            }
+
+            .video-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .video-placeholder,
+            .video-player {
+                height: 250px;
+            }
+
+            .play-button {
+                width: 70px;
+                height: 70px;
+                font-size: 1.8rem;
+            }
+
+            .video-cta {
+                padding: 30px 20px;
+            }
+
+            .video-cta-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
             }
 
             .quick-contact-form {
@@ -1554,12 +1811,7 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <a href="./index.html" class="back-btn">
-            <i class="fas fa-arrow-left"></i>
-            <span>Torna alla Home</span>
-        </a>
-    </div>
+
 
     <!-- Navigation Anchors -->
     <div class="nav-anchors">
@@ -1589,8 +1841,8 @@
             <div class="hero-content">
                 <div class="hero-text">
                     <h1 class="hero-title">Andrea Padoan</h1>
-                    <div class="hero-impact">Coach per corpo, mente e business</div>
-                    <p class="hero-subtitle">Trasformo la vita di professionisti e imprenditori che vogliono energia, forma fisica e successo senza sacrificare tempo prezioso</p>
+                    <div class="hero-impact">Personal Trainer e Lifestyle Coach</div>
+                    <p class="hero-subtitle">Aiuto professionisti e imprenditori di Verona a rimettersi in forma e ritrovare energia senza sacrificare tempo prezioso</p>
                     
                     <!-- CTA Hero -->
                     <div class="hero-cta-container">
@@ -2079,6 +2331,43 @@
         function openChat() {
             // Reindirizza alla homepage con anchor alla chat
             window.location.href = './index.html#chat';
+        }
+
+        // Video Player Functions
+        function playVideo() {
+            const placeholder = document.getElementById('videoPlaceholder');
+            const player = document.getElementById('videoPlayer');
+            const frame = document.getElementById('videoFrame');
+            
+            // Nasconde placeholder e mostra player
+            placeholder.style.display = 'none';
+            player.style.display = 'block';
+            
+            // Qui inserisci l'URL del tuo video
+            // Esempi di formato:
+            // YouTube: https://www.youtube.com/embed/VIDEO_ID?autoplay=1
+            // Vimeo: https://player.vimeo.com/video/VIDEO_ID?autoplay=1
+            // Video locale: ./videos/presentazione.mp4
+            
+            const videoUrl = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1'; // SOSTITUIRE CON IL TUO VIDEO
+            frame.src = videoUrl;
+            
+            console.log('🎥 Video player opened');
+        }
+
+        function closeVideo() {
+            const placeholder = document.getElementById('videoPlaceholder');
+            const player = document.getElementById('videoPlayer');
+            const frame = document.getElementById('videoFrame');
+            
+            // Mostra placeholder e nasconde player
+            placeholder.style.display = 'block';
+            player.style.display = 'none';
+            
+            // Ferma il video
+            frame.src = '';
+            
+            console.log('🎥 Video player closed');
         }
 
         // Smooth scrolling per anchor links
