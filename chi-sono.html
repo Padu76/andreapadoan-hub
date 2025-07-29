@@ -1287,12 +1287,19 @@
         .fun-fact-card:nth-child(2) { animation-delay: 0.2s; }
         .fun-fact-card:nth-child(3) { animation-delay: 0.3s; }
 
-        /* Story section migliorata */
+        /* Story section con layout 2x2 per vedere tutte le foto */
         .story-section {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 30px;
             margin-bottom: 80px;
+        }
+
+        @media (max-width: 768px) {
+            .story-section {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
         }
 
         /* Story Cards con immagini VISIBILI in alto */
@@ -1638,11 +1645,11 @@
             gap: 30px;
         }
 
-        /* Philosophy Cards con immagini */
+        /* Philosophy Cards con immagini placeholder */
         .philosophy-card {
             background: rgba(26, 26, 26, 0.6);
             border-radius: 20px;
-            padding: 35px;
+            padding: 0;
             text-align: center;
             border: 1px solid #333;
             transition: all 0.3s ease;
@@ -1651,43 +1658,32 @@
             min-height: 320px;
         }
 
-        .philosophy-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+        .philosophy-card-image {
+            width: 100%;
+            height: 160px;
             background-size: cover;
             background-position: center;
-            opacity: 0.08;
-            transition: opacity 0.3s ease;
-            z-index: 0;
+            border-radius: 20px 20px 0 0;
         }
 
-        .philosophy-card:nth-child(1)::before {
-            background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop&crop=center');
+        .philosophy-card:nth-child(1) .philosophy-card-image {
+            background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop');
         }
 
-        .philosophy-card:nth-child(2)::before {
-            background-image: url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=300&fit=crop&crop=center');
+        .philosophy-card:nth-child(2) .philosophy-card-image {
+            background-image: url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=300&fit=crop');
         }
 
-        .philosophy-card:nth-child(3)::before {
-            background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop&crop=center');
+        .philosophy-card:nth-child(3) .philosophy-card-image {
+            background-image: url('https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=300&fit=crop');
         }
 
-        .philosophy-card:nth-child(4)::before {
-            background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop&crop=center');
+        .philosophy-card:nth-child(4) .philosophy-card-image {
+            background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop');
         }
 
-        .philosophy-card:hover::before {
-            opacity: 0.12;
-        }
-
-        .philosophy-card > * {
-            position: relative;
-            z-index: 2;
+        .philosophy-card-content {
+            padding: 25px;
         }
 
         .philosophy-card::before {
@@ -1822,16 +1818,16 @@
             gap: 30px;
         }
 
-        /* Results Section con immagini VISIBILI in alto */
+        /* Results Section senza immagini - placeholder generiche */
         .result-item {
             background: rgba(255, 107, 53, 0.1);
             border: 1px solid rgba(255, 107, 53, 0.3);
             border-radius: 15px;
-            padding: 0;
+            padding: 25px;
             text-align: center;
             position: relative;
             overflow: hidden;
-            min-height: 220px;
+            min-height: 180px;
         }
 
         .result-item-image {
@@ -1840,35 +1836,27 @@
             background-size: cover;
             background-position: center;
             border-radius: 14px 14px 0 0;
+            margin-bottom: 15px;
         }
 
         .result-item:nth-child(1) .result-item-image {
-            background-image: url('./images/risultato-1.jpg');
+            background-image: url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop');
         }
 
         .result-item:nth-child(2) .result-item-image {
-            background-image: url('./images/risultato-2.jpg');
+            background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop');
         }
 
         .result-item:nth-child(3) .result-item-image {
-            background-image: url('./images/risultato-3.jpg');
+            background-image: url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=400&h=300&fit=crop');
         }
 
         .result-item:nth-child(4) .result-item-image {
-            background-image: url('./images/risultato-4.jpg');
+            background-image: url('https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=300&fit=crop');
         }
 
         .result-item-content {
-            padding: 20px;
-        }
-
-        .result-item::before {
-            display: none;
-        }
-
-        .result-item > * {
-            position: relative;
-            z-index: 2;
+            padding: 0;
         }
 
         .result-icon {
@@ -1962,12 +1950,21 @@
     </a>
 
     <div class="container">
-        <!-- Hero Section Ottimizzata e Più Impattante -->
+        <!-- Hero Section con Citazione Motivazionale in alto -->
         <section class="hero-section" id="hero">
             <div class="hero-content">
                 <div class="hero-text">
                     <h1 class="hero-title">Andrea Padoan</h1>
                     <div class="hero-impact">Personal Trainer e Lifestyle Coach</div>
+                    
+                    <!-- Citazione Motivazionale integrata nell'hero -->
+                    <div style="text-align: center; margin: 40px 0; padding: 30px; background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 133, 51, 0.05)); border-radius: 20px; border: 2px solid rgba(255, 107, 53, 0.3);">
+                        <div style="font-size: clamp(1.3rem, 3vw, 2rem); color: #fff; font-weight: 600; font-style: italic; line-height: 1.4; margin-bottom: 15px;">
+                            "Credo che ognuno possa trasformarsi, basta il metodo giusto e la determinazione per non mollare mai"
+                        </div>
+                        <div style="color: #ff6b35; font-size: 1.1rem; font-weight: bold;">- Andrea Padoan</div>
+                    </div>
+                    
                     <p class="hero-subtitle">Aiuto professionisti e imprenditori di Verona a rimettersi in forma e ritrovare energia senza sacrificare tempo prezioso</p>
                     
                     <!-- CTA Hero -->
@@ -1988,38 +1985,7 @@
             </div>
         </section>
 
-        <!-- Sezione Numeri -->
-        <section class="numbers-section animate-on-scroll" id="numbers">
-            <h2 class="numbers-title">I Risultati Parlano Chiaro</h2>
-            <div class="numbers-grid">
-                <div class="number-item">
-                    <span class="number-value">200+</span>
-                    <div class="number-label">Clienti Trasformati</div>
-                    <div class="number-description">Persone che hanno cambiato vita</div>
-                </div>
-                <div class="number-item">
-                    <span class="number-value">10K+</span>
-                    <div class="number-label">Pasti Consegnati</div>
-                    <div class="number-description">Attraverso il servizio Pasto Sano</div>
-                </div>
-                <div class="number-item">
-                    <span class="number-value">5</span>
-                    <div class="number-label">Anni di Studio</div>
-                    <div class="number-description">Formazione continua nel settore</div>
-                </div>
-                <div class="number-item">
-                    <span class="number-value">100%</span>
-                    <div class="number-label">Approccio Personalizzato</div>
-                    <div class="number-description">Ogni percorso è unico</div>
-                </div>
-            </div>
-        </section>
 
-        <!-- Citazione Motivazionale -->
-        <section class="quote-section animate-on-scroll">
-            <div class="quote-text">Credo che ognuno possa trasformarsi, basta il metodo giusto e la determinazione per non mollare mai</div>
-            <div class="quote-author">- Andrea Padoan</div>
-        </section>
 
         <!-- Introduzione Strutturata in 3 Blocchi -->
         <section class="intro-structured-section animate-on-scroll">
@@ -2305,47 +2271,59 @@
             <h2 class="section-title">La Mia Filosofia</h2>
             <div class="philosophy-grid">
                 <div class="philosophy-card">
-                    <div class="philosophy-icon">
-                        <i class="fas fa-user-friends"></i>
+                    <div class="philosophy-card-image"></div>
+                    <div class="philosophy-card-content">
+                        <div class="philosophy-icon">
+                            <i class="fas fa-user-friends"></i>
+                        </div>
+                        <h3 class="philosophy-title">Approccio Umano</h3>
+                        <p class="philosophy-text">
+                            Ogni persona è unica e merita un approccio completamente personalizzato. 
+                            Non credo nelle soluzioni standard, ma nella creazione di percorsi su misura.
+                        </p>
                     </div>
-                    <h3 class="philosophy-title">Approccio Umano</h3>
-                    <p class="philosophy-text">
-                        Ogni persona è unica e merita un approccio completamente personalizzato. 
-                        Non credo nelle soluzioni standard, ma nella creazione di percorsi su misura.
-                    </p>
                 </div>
 
                 <div class="philosophy-card">
-                    <div class="philosophy-icon">
-                        <i class="fas fa-balance-scale"></i>
+                    <div class="philosophy-card-image"></div>
+                    <div class="philosophy-card-content">
+                        <div class="philosophy-icon">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <h3 class="philosophy-title">Equilibrio Totale</h3>
+                        <p class="philosophy-text">
+                            Un corretto stile di vita comprende attività fisica mirata, alimentazione corretta 
+                            e sane abitudini per una mente più vigile e maggior lucidità.
+                        </p>
                     </div>
-                    <h3 class="philosophy-title">Equilibrio Totale</h3>
-                    <p class="philosophy-text">
-                        Un corretto stile di vita comprende attività fisica mirata, alimentazione corretta 
-                        e sane abitudini per una mente più vigile e maggior lucidità.
-                    </p>
                 </div>
 
                 <div class="philosophy-card">
-                    <div class="philosophy-icon">
-                        <i class="fas fa-chart-line"></i>
+                    <div class="philosophy-card-image"></div>
+                    <div class="philosophy-card-content">
+                        <div class="philosophy-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="philosophy-title">Risultati Concreti</h3>
+                        <p class="philosophy-text">
+                            Non prometto miracoli, ma risultati reali e duraturi. INSIEME raggiungeremo risultati 
+                            concreti con impegno, costanza e determinazione.
+                        </p>
                     </div>
-                    <h3 class="philosophy-title">Risultati Concreti</h3>
-                    <p class="philosophy-text">
-                        Non prometto miracoli, ma risultati reali e duraturi. INSIEME raggiungeremo risultati 
-                        concreti con impegno, costanza e determinazione.
-                    </p>
                 </div>
 
                 <div class="philosophy-card">
-                    <div class="philosophy-icon">
-                        <i class="fas fa-graduation-cap"></i>
+                    <div class="philosophy-card-image"></div>
+                    <div class="philosophy-card-content">
+                        <div class="philosophy-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="philosophy-title">Formazione Continua</h3>
+                        <p class="philosophy-text">
+                            Aggiornamento costante per migliorare sempre le mie abilità e conoscenze, 
+                            utile sia ai principianti che agli esperti.
+                        </p>
                     </div>
-                    <h3 class="philosophy-title">Formazione Continua</h3>
-                    <p class="philosophy-text">
-                        Aggiornamento costante per migliorare sempre le mie abilità e conoscenze, 
-                        utile sia ai principianti che agli esperti.
-                    </p>
                 </div>
             </div>
         </div>
