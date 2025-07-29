@@ -445,50 +445,206 @@
             margin-top: 30px;
         }
 
-        /* Fun Facts */
+        /* Fun Facts Sezione Migliorata */
         .fun-facts-section {
-            margin-bottom: 80px;
+            margin-bottom: 100px;
+            padding: 80px 40px;
+            background: radial-gradient(circle at center, rgba(255, 107, 53, 0.05) 0%, transparent 70%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fun-facts-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(255, 107, 53, 0.03), transparent, rgba(74, 222, 128, 0.03), transparent);
+            animation: rotateBackground 20s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes rotateBackground {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .fun-facts-title {
             text-align: center;
             color: #fff;
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin-bottom: 50px;
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            font-weight: 900;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .fun-facts-subtitle {
+            text-align: center;
+            color: #ff6b35;
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            margin-bottom: 60px;
+            font-weight: 600;
+            position: relative;
+            z-index: 2;
+            font-style: italic;
         }
 
         .fun-facts-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
 
         .fun-fact-card {
-            background: linear-gradient(135deg, rgba(74, 222, 128, 0.1), rgba(34, 211, 238, 0.05));
-            border: 1px solid rgba(74, 222, 128, 0.3);
-            border-radius: 20px;
-            padding: 30px;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(40, 40, 40, 0.8));
+            border: 2px solid transparent;
+            border-radius: 25px;
+            padding: 40px 30px;
             text-align: center;
-            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+        }
+
+        .fun-fact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 25px;
+            padding: 2px;
+            background: linear-gradient(135deg, #ff6b35, #4ade80, #22d3ee, #a855f7);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: xor;
+            -webkit-mask-composite: xor;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .fun-fact-card:hover::before {
+            opacity: 1;
         }
 
         .fun-fact-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(74, 222, 128, 0.5);
-            box-shadow: 0 15px 35px rgba(74, 222, 128, 0.1);
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(255, 107, 53, 0.15);
+        }
+
+        .fun-fact-card:nth-child(2):hover {
+            box-shadow: 0 25px 50px rgba(74, 222, 128, 0.15);
+        }
+
+        .fun-fact-card:nth-child(3):hover {
+            box-shadow: 0 25px 50px rgba(34, 211, 238, 0.15);
+        }
+
+        .fun-fact-card:nth-child(4):hover {
+            box-shadow: 0 25px 50px rgba(168, 85, 247, 0.15);
+        }
+
+        .fun-fact-icon-container {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, #ff6b35, #ff8533);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: all 0.6s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .fun-fact-card:nth-child(2) .fun-fact-icon-container {
+            background: linear-gradient(135deg, #4ade80, #22c55e);
+            box-shadow: 0 10px 30px rgba(74, 222, 128, 0.3);
+        }
+
+        .fun-fact-card:nth-child(3) .fun-fact-icon-container {
+            background: linear-gradient(135deg, #22d3ee, #06b6d4);
+            box-shadow: 0 10px 30px rgba(34, 211, 238, 0.3);
+        }
+
+        .fun-fact-card:nth-child(4) .fun-fact-icon-container {
+            background: linear-gradient(135deg, #a855f7, #7c3aed);
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.3);
+        }
+
+        .fun-fact-card:hover .fun-fact-icon-container {
+            transform: scale(1.15) rotate(10deg);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
+        }
+
+        .fun-fact-card:nth-child(2):hover .fun-fact-icon-container {
+            box-shadow: 0 15px 40px rgba(74, 222, 128, 0.4);
+        }
+
+        .fun-fact-card:nth-child(3):hover .fun-fact-icon-container {
+            box-shadow: 0 15px 40px rgba(34, 211, 238, 0.4);
+        }
+
+        .fun-fact-card:nth-child(4):hover .fun-fact-icon-container {
+            box-shadow: 0 15px 40px rgba(168, 85, 247, 0.4);
         }
 
         .fun-fact-emoji {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            display: block;
+            font-size: 3.5rem;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+            transition: all 0.3s ease;
+        }
+
+        .fun-fact-card:hover .fun-fact-emoji {
+            transform: scale(1.1);
+        }
+
+        .fun-fact-title {
+            color: #fff;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .fun-fact-card:hover .fun-fact-title {
+            color: #ff6b35;
+        }
+
+        .fun-fact-card:nth-child(2):hover .fun-fact-title {
+            color: #4ade80;
+        }
+
+        .fun-fact-card:nth-child(3):hover .fun-fact-title {
+            color: #22d3ee;
+        }
+
+        .fun-fact-card:nth-child(4):hover .fun-fact-title {
+            color: #a855f7;
         }
 
         .fun-fact-text {
             color: #e0e0e0;
             font-size: 1.1rem;
-            line-height: 1.6;
+            line-height: 1.7;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .fun-fact-card:hover .fun-fact-text {
+            color: #f5f5f5;
+            transform: translateY(-2px);
         }
 
         /* Testimonianze */
@@ -826,10 +982,11 @@
             }
         }
 
+        /* Animazioni scroll migliorate */
         .animate-on-scroll {
             opacity: 0;
-            transform: translateY(60px);
-            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: translateY(80px);
+            transition: all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .animate-on-scroll.animated {
@@ -837,10 +994,180 @@
             transform: translateY(0);
         }
 
+        .animate-slide-left {
+            opacity: 0;
+            transform: translateX(-80px);
+            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .animate-slide-left.animated {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .animate-slide-right {
+            opacity: 0;
+            transform: translateX(80px);
+            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .animate-slide-right.animated {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .animate-fade-in {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .animate-fade-in.animated {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .animate-bounce-in {
+            opacity: 0;
+            transform: scale(0.3) rotate(-10deg);
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .animate-bounce-in.animated {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+
         .animate-on-scroll.delay-1 { transition-delay: 0.1s; }
         .animate-on-scroll.delay-2 { transition-delay: 0.2s; }
         .animate-on-scroll.delay-3 { transition-delay: 0.3s; }
         .animate-on-scroll.delay-4 { transition-delay: 0.4s; }
+        .animate-on-scroll.delay-5 { transition-delay: 0.5s; }
+
+        /* Hover effects avanzati per tutti gli elementi */
+        .number-item {
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .number-item:hover {
+            transform: translateY(-15px) scale(1.05);
+            border-color: rgba(255, 107, 53, 0.6);
+            box-shadow: 0 25px 50px rgba(255, 107, 53, 0.2);
+        }
+
+        .testimonial-card {
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-left-width: 8px;
+            box-shadow: 0 20px 40px rgba(74, 222, 128, 0.2);
+            background: rgba(26, 26, 26, 0.95);
+        }
+
+        .story-card {
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .story-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: rgba(255, 107, 53, 0.6);
+            box-shadow: 0 25px 50px rgba(255, 107, 53, 0.15);
+        }
+
+        .story-card:hover .story-icon {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 15px 30px rgba(255, 107, 53, 0.4);
+        }
+
+        .intro-block {
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .intro-block:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .intro-block:hover .block-number {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Effetti pulseanti per CTA */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 20px rgba(255, 107, 53, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 107, 53, 0);
+            }
+        }
+
+        .hero-main-cta {
+            animation: pulse 2s infinite;
+        }
+
+        .cta-inline-btn:hover {
+            animation: pulse 1.5s infinite;
+        }
+
+        /* Parallax semplice per sezioni */
+        .numbers-section,
+        .quote-section,
+        .results-section {
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Micro-interazioni sui link e bottoni */
+        a, button {
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .sticky-cta {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .sticky-cta:hover {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 10px 40px rgba(37, 211, 102, 0.8);
+        }
+
+        /* Effetto magnetico sui bottoni */
+        .hero-main-cta,
+        .cta-inline-btn,
+        .cta-btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-main-cta::before,
+        .cta-inline-btn::before,
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .hero-main-cta:hover::before,
+        .cta-inline-btn:hover::before,
+        .cta-btn:hover::before {
+            left: 100%;
+        }
 
         /* Hover effects migliorati */
         .story-card,
@@ -1551,21 +1878,41 @@
             </div>
         </section>
 
-        <!-- Fun Facts -->
+        <!-- Fun Facts Sezione Completamente Rinnovata -->
         <section class="fun-facts-section animate-on-scroll">
-            <h2 class="fun-facts-title">3 Curiosità su di Me</h2>
+            <h2 class="fun-facts-title">🎯 Curiosità su Andrea</h2>
+            <p class="fun-facts-subtitle">Quello che forse non sai di me...</p>
             <div class="fun-facts-grid">
-                <div class="fun-fact-card">
-                    <span class="fun-fact-emoji">🏊‍♂️</span>
-                    <p class="fun-fact-text">Sono stato istruttore di nuoto prima di diventare manager. L'acqua mi ha sempre dato serenità!</p>
+                <div class="fun-fact-card animate-bounce-in delay-1">
+                    <div class="fun-fact-icon-container">
+                        <span class="fun-fact-emoji">🏊‍♂️</span>
+                    </div>
+                    <h3 class="fun-fact-title">Ex Istruttore di Nuoto</h3>
+                    <p class="fun-fact-text">Prima di diventare manager, ho insegnato nuoto per anni. L'acqua mi ha sempre dato serenità e mi ha insegnato l'importanza della respirazione corretta!</p>
                 </div>
-                <div class="fun-fact-card">
-                    <span class="fun-fact-emoji">⚡</span>
-                    <p class="fun-fact-text">Dove prima la mia giornata finiva alle 18, ora inizia davvero! Il pulsante "OFF" è diventato "ON".</p>
+
+                <div class="fun-fact-card animate-bounce-in delay-2">
+                    <div class="fun-fact-icon-container">
+                        <span class="fun-fact-emoji">⚡</span>
+                    </div>
+                    <h3 class="fun-fact-title">Pulsante "ON" sempre attivo</h3>
+                    <p class="fun-fact-text">Dove prima la mia giornata finiva alle 18, ora inizia davvero! Il mio "pulsante OFF" è diventato permanentemente "ON" - e voglio insegnare anche a te come farlo.</p>
                 </div>
-                <div class="fun-fact-card">
-                    <span class="fun-fact-emoji">🎯</span>
-                    <p class="fun-fact-text">La mia parola preferita? "Trasformazione!" - È quello che cerco di creare nella vita di ogni cliente.</p>
+
+                <div class="fun-fact-card animate-bounce-in delay-3">
+                    <div class="fun-fact-icon-container">
+                        <span class="fun-fact-emoji">🎯</span>
+                    </div>
+                    <h3 class="fun-fact-title">Ossessionato dalla Trasformazione</h3>
+                    <p class="fun-fact-text">La mia parola preferita? "Trasformazione!" È quello che cerco di creare nella vita di ogni cliente. Non mi accontento mai del "va bene così".</p>
+                </div>
+
+                <div class="fun-fact-card animate-bounce-in delay-4">
+                    <div class="fun-fact-icon-container">
+                        <span class="fun-fact-emoji">🌅</span>
+                    </div>
+                    <h3 class="fun-fact-title">Early Bird Estremo</h3>
+                    <p class="fun-fact-text">Mi sveglio alle 5:30 ogni mattina da anni. Le prime ore del giorno sono magiche: zero distrazioni, massima energia, tempo per me. È qui che nasce la vera disciplina!</p>
                 </div>
             </div>
         </section>
@@ -1924,13 +2271,13 @@
             });
         }
 
-        // Animazioni scroll
+        // Animazioni scroll avanzate
         function animateOnScroll() {
-            const elements = document.querySelectorAll('.animate-on-scroll');
+            const elements = document.querySelectorAll('.animate-on-scroll, .animate-slide-left, .animate-slide-right, .animate-fade-in, .animate-bounce-in');
             
             elements.forEach(el => {
                 const elementTop = el.getBoundingClientRect().top;
-                const elementVisible = 150;
+                const elementVisible = 100;
                 
                 if (elementTop < window.innerHeight - elementVisible) {
                     el.classList.add('animated');
@@ -1938,27 +2285,57 @@
             });
         }
 
-        // Counter animation
+        // Parallax semplice per elementi
+        function handleParallax() {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.quote-section, .numbers-section');
+            
+            parallaxElements.forEach(element => {
+                const speed = 0.5;
+                const yPos = -(scrolled * speed);
+                element.style.transform = `translateY(${yPos}px)`;
+            });
+        }
+
+        // Effetto magnetico sui bottoni
+        function addMagneticEffect() {
+            const magneticElements = document.querySelectorAll('.hero-main-cta, .cta-inline-btn, .sticky-cta');
+            
+            magneticElements.forEach(element => {
+                element.addEventListener('mousemove', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    
+                    this.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px) scale(1.05)`;
+                });
+                
+                element.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translate(0px, 0px) scale(1)';
+                });
+            });
+        }
+
+        // Counter animation migliorata
         function animateCounters() {
             const counters = document.querySelectorAll('.number-value');
-            const speed = 200;
+            const speed = 100;
 
             counters.forEach(counter => {
                 const target = parseInt(counter.textContent.replace(/\D/g, ''));
-                const count = +counter.innerText.replace(/\D/g, '');
                 
                 if (counter.getBoundingClientRect().top < window.innerHeight && !counter.classList.contains('animated')) {
                     counter.classList.add('animated');
                     
-                    const increment = target / speed;
                     let current = 0;
+                    const increment = target / speed;
                     
                     const updateCounter = () => {
                         if (current < target) {
                             current += increment;
                             const suffix = counter.textContent.replace(/\d/g, '');
                             counter.textContent = Math.ceil(current) + suffix;
-                            setTimeout(updateCounter, 1);
+                            requestAnimationFrame(updateCounter);
                         } else {
                             counter.textContent = counter.textContent;
                         }
@@ -1969,16 +2346,49 @@
             });
         }
 
-        // Event listeners
+        // Intersection Observer per animazioni più fluide
+        function initIntersectionObserver() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                        
+                        // Aggiungi effetti speciali per alcune sezioni
+                        if (entry.target.classList.contains('numbers-section')) {
+                            setTimeout(() => {
+                                animateCounters();
+                            }, 300);
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            // Osserva tutti gli elementi con animazioni
+            document.querySelectorAll('.animate-on-scroll, .animate-slide-left, .animate-slide-right, .animate-fade-in, .animate-bounce-in').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Event listeners migliorati
         window.addEventListener('scroll', () => {
             updateActiveAnchor();
-            animateOnScroll();
-            animateCounters();
+            handleParallax();
         });
 
         window.addEventListener('load', () => {
-            animateOnScroll();
             updateActiveAnchor();
+            addMagneticEffect();
+            initIntersectionObserver();
+            
+            // Aggiungi un piccolo delay per l'animazione iniziale
+            setTimeout(() => {
+                document.body.classList.add('loaded');
+            }, 100);
         });
 
         // Mobile menu toggle for sticky CTA
