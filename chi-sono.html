@@ -1784,75 +1784,7 @@
             min-height: 300px;
         }
 
-        /* Method Steps con immagini più visibili - debug completo */
-        .method-step {
-            background: rgba(26, 26, 26, 0.8);
-            border-radius: 20px;
-            padding: 0;
-            border: 2px solid rgba(255, 107, 53, 0.2);
-            position: relative;
-            transition: all 0.3s ease;
-            overflow: hidden;
-            min-height: 350px;
-        }
-
-        .method-step-image {
-            width: 100%;
-            height: 200px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 18px 18px 0 0;
-            position: relative;
-            display: block;
-            background-color: #333; /* Fallback per debug */
-        }
-
-        /* Forza il caricamento delle immagini con !important */
-        .method-step:nth-child(1) .method-step-image {
-            background-image: url('./images/metodo-1.jpg') !important;
-        }
-
-        .method-step:nth-child(2) .method-step-image {
-            background-image: url('./images/metodo-2.jpg') !important;
-        }
-
-        .method-step:nth-child(3) .method-step-image {
-            background-image: url('./images/metodo-3.jpg') !important;
-        }
-
-        .method-step:nth-child(4) .method-step-image {
-            background-image: url('./images/metodo-4.jpg') !important;
-        }
-
-        .method-step:nth-child(5) .method-step-image {
-            background-image: url('./images/metodo-5.jpg') !important;
-        }
-
-        .method-step:nth-child(6) .method-step-image {
-            background-image: url('./images/motivazione-6.jpg') !important;
-        }
-
-        .method-step-content {
-            padding: 25px;
-            padding-top: 35px;
-        }
-
-        .step-number {
-            position: absolute;
-            top: -15px;
-            left: 30px;
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #ff6b35, #ff8533);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-            z-index: 3;
-            border: 4px solid #000;
+;
         }
 
         .method-step-content {
@@ -2023,29 +1955,35 @@
             transform: scale(1.05);
         }
 
-        /* Le tue foto personali per i valori */
+        /* Le tue foto personali per i valori - AGGIORNATE */
         .value-card:nth-child(1) .value-image {
             background-image: url('./images/valore-determinazione.jpg');
+            background-color: #333; /* Fallback per debug */
         }
 
         .value-card:nth-child(2) .value-image {
             background-image: url('./images/valore-costanza.jpg');
+            background-color: #333;
         }
 
         .value-card:nth-child(3) .value-image {
             background-image: url('./images/valore-motivazione.jpg');
+            background-color: #333;
         }
 
         .value-card:nth-child(4) .value-image {
             background-image: url('./images/valore-trasformazione.jpg');
+            background-color: #333;
         }
 
         .value-card:nth-child(5) .value-image {
             background-image: url('./images/valore-crescita.jpg');
+            background-color: #333;
         }
 
         .value-card:nth-child(6) .value-image {
             background-image: url('./images/valore-supporto.jpg');
+            background-color: #333;
         }
 
         .value-content {
@@ -2701,6 +2639,7 @@
             <h3 class="results-subtitle">Migliorare la Qualità della Vita, Essere Più Forti e Meno Stanchi</h3>
             <div class="results-content">
                 <div class="result-item">
+                    <div class="result-item-image"></div>
                     <div class="result-item-content">
                         <div class="result-icon">
                             <i class="fas fa-brain"></i>
@@ -2710,6 +2649,7 @@
                 </div>
 
                 <div class="result-item">
+                    <div class="result-item-image"></div>
                     <div class="result-item-content">
                         <div class="result-icon">
                             <i class="fas fa-dumbbell"></i>
@@ -2719,6 +2659,7 @@
                 </div>
 
                 <div class="result-item">
+                    <div class="result-item-image"></div>
                     <div class="result-item-content">
                         <div class="result-icon">
                             <i class="fas fa-moon"></i>
@@ -2773,89 +2714,26 @@
             </div>
         </div>
 
-        <!-- Sezione Contatti Semplificata -->
-        <section class="enhanced-contact-section animate-on-scroll">
-            <h2 class="enhanced-contact-title">📅 Prendiamo un Appuntamento</h2>
-            <p class="enhanced-contact-subtitle">
-                Compila il form qui sotto e ti contatterò personalmente per fissare un appuntamento conoscitivo gratuito nel mio studio. 
-                Potremo conoscerci, parlare dei tuoi obiettivi e vedere se posso aiutarti nel tuo percorso di trasformazione.
-            </p>
-
-            <!-- Personal Note -->
-            <div class="personal-note">
-                <p class="personal-note-text">
-                    "Preferisco sempre parlare di persona con i miei clienti. Un appuntamento faccia a faccia mi permette di conoscerti meglio 
-                    e creare un piano davvero personalizzato per i tuoi obiettivi."
+        <!-- CTA WhatsApp Finale -->
+        <section class="final-whatsapp-cta" style="text-align: center; padding: 80px 20px; background: linear-gradient(135deg, rgba(37, 211, 102, 0.1), rgba(37, 211, 102, 0.05)); border-radius: 25px; margin-bottom: 50px;">
+            <div style="max-width: 600px; margin: 0 auto;">
+                <h2 style="color: #25D366; font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 900; margin-bottom: 20px;">
+                    🚀 Iniziamo la Tua Trasformazione
+                </h2>
+                <p style="color: #b0b0b0; font-size: clamp(1.1rem, 2.5vw, 1.3rem); margin-bottom: 40px; line-height: 1.6;">
+                    Hai letto la mia storia, conosci il mio approccio. Ora è il momento di scrivere la TUA storia di trasformazione.
                 </p>
-                <div class="personal-note-signature">- Andrea</div>
-            </div>
-
-            <!-- Form per Appuntamento -->
-            <div class="appointment-form">
-                <h3>🤝 Richiedi il Tuo Appuntamento Gratuito</h3>
-                <form id="appointmentForm">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <input type="text" class="form-input" name="name" placeholder="Il tuo nome *" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="tel" class="form-input" name="phone" placeholder="Telefono *" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <input type="email" class="form-input" name="email" placeholder="Email (opzionale)">
-                        </div>
-                        <div class="form-group">
-                            <select class="form-input" name="interest" required>
-                                <option value="">Cosa ti interessa? *</option>
-                                <option value="personal-training">Personal Training</option>
-                                <option value="lifestyle-coaching">Lifestyle Coaching</option>
-                                <option value="pasto-sano">Pasto Sano</option>
-                                <option value="valutazione-generale">Valutazione Generale</option>
-                                <option value="altro">Altro</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group full-width">
-                            <textarea class="form-input form-textarea" name="message" placeholder="Dimmi quali sono i tuoi obiettivi e quando preferiresti l'appuntamento..."></textarea>
-                        </div>
-                    </div>
-                    <button type="submit" class="form-submit">
-                        <i class="fas fa-calendar-plus"></i>
-                        Richiedi Appuntamento Gratuito
-                    </button>
-                </form>
-            </div>
-
-            <!-- Vantaggi dell'Appuntamento -->
-            <div class="appointment-benefits">
-                <div class="appointment-benefit">
-                    <i class="fas fa-handshake"></i>
-                    <span>Incontro gratuito di 30 min</span>
-                </div>
-                <div class="appointment-benefit">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>Nel mio studio a Verona</span>
-                </div>
-                <div class="appointment-benefit">
-                    <i class="fas fa-user-check"></i>
-                    <span>Valutazione personalizzata</span>
-                </div>
-                <div class="appointment-benefit">
-                    <i class="fas fa-shield-alt"></i>
-                    <span>Senza impegno</span>
-                </div>
-            </div>
-
-            <!-- CTA WhatsApp Semplificato -->
-            <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1);">
-                <a href="https://wa.me/3478881515?text=Ciao Andrea, vorrei fissare un appuntamento conoscitivo" 
-                   class="whatsapp-cta" target="_blank">
-                    <i class="fab fa-whatsapp"></i>
-                    Scrivimi per fissare un appuntamento conoscitivo
+                
+                <a href="https://wa.me/3478881515?text=Ciao Andrea, ho letto la tua storia e vorrei iniziare il mio percorso di trasformazione!" 
+                   class="final-whatsapp-btn" target="_blank"
+                   style="background: linear-gradient(45deg, #25D366, #20BA5A); color: white; text-decoration: none; padding: 25px 50px; border-radius: 50px; font-size: 1.3rem; font-weight: bold; display: inline-flex; align-items: center; gap: 15px; transition: all 0.4s ease; box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);">
+                    <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i>
+                    <span style="font-size: 1.2rem;">Scrivimi su WhatsApp per iniziare</span>
                 </a>
+                
+                <p style="color: #4ade80; font-size: 1rem; margin-top: 20px; font-weight: 500;">
+                    💬 Risposta garantita entro 2 ore • 🎯 Appuntamento conoscitivo gratuito
+                </p>
             </div>
         </section>
     </div>
