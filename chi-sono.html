@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Andrea Padoan - Personal Trainer Verona | La Mia Storia e Metodo</title>
-    <meta name="description" content="Scopri la storia di Andrea Padoan: da manager a personal trainer e lifestyle coach a Verona. Il mio metodo per trasformare corpo, mente e business. Oltre 200 clienti trasformati.">
-    <meta name="keywords" content="Andrea Padoan, personal trainer Verona, lifestyle coach, trasformazione fisica, benessere mentale, coaching Verona">
+    <title>Chi Sono - Andrea Padoan | Coach & Personal Trainer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
@@ -20,6 +18,31 @@
             color: #fff;
             line-height: 1.6;
             min-height: 100vh;
+        }
+
+        /* Tasto Home in alto a sinistra */
+        .home-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: linear-gradient(45deg, #ff6b35, #ff8533);
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .home-button:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.5);
         }
 
         /* CTA Sticky per mobile */
@@ -131,7 +154,7 @@
 
         /* Hero Section Potenziata */
         .hero-section {
-            padding: 120px 20px 80px;
+            padding: 140px 20px 120px; /* Aumentato spazio per il tasto Home */
             background: linear-gradient(135deg, #000 0%, #1a1a1a 50%, #000 100%);
             min-height: 90vh;
             display: flex;
@@ -275,7 +298,7 @@
             background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 133, 51, 0.05));
             border-radius: 25px;
             padding: 80px 60px;
-            margin-bottom: 80px;
+            margin-bottom: 120px; /* Aumentato margine */
             text-align: center;
             border: 1px solid rgba(255, 107, 53, 0.2);
         }
@@ -404,7 +427,7 @@
         /* Citazione highlight */
         .quote-section {
             text-align: center;
-            margin: 80px 0;
+            margin: 120px 0; /* Aumentato margine */
             padding: 50px 20px;
             position: relative;
         }
@@ -447,7 +470,7 @@
 
         /* Fun Facts Sezione Migliorata */
         .fun-facts-section {
-            margin-bottom: 100px;
+            margin-bottom: 120px; /* Aumentato margine */
             padding: 80px 40px;
             background: radial-gradient(circle at center, rgba(255, 107, 53, 0.05) 0%, transparent 70%);
             position: relative;
@@ -649,7 +672,7 @@
 
         /* Testimonianze */
         .testimonials-section {
-            margin-bottom: 80px;
+            margin-bottom: 120px; /* Aumentato margine */
         }
 
         .testimonials-title {
@@ -757,7 +780,7 @@
 
         /* Introduzione Strutturata in 3 Blocchi */
         .intro-structured-section {
-            margin-bottom: 100px;
+            margin-bottom: 120px; /* Aumentato margine */
             padding: 0 20px;
         }
 
@@ -766,7 +789,18 @@
             margin: 0 auto;
             display: flex;
             flex-direction: column;
-            gap: 80px;
+            gap: 100px; /* Aumentato gap tra blocchi */
+        }
+
+        .intro-block {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.8), rgba(40, 40, 40, 0.6));
+            border-radius: 25px;
+            padding: 50px 40px;
+            position: relative;
+            border-left: 6px solid #ff6b35;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 107, 53, 0.2);
         }
 
         /* Video Section integrata nel primo blocco */
@@ -918,28 +952,6 @@
         .video-close:hover {
             background: rgba(255, 107, 53, 0.8);
             transform: scale(1.1);
-        }
-
-        /* Mobile responsive */
-        @media (max-width: 768px) {
-            .video-placeholder,
-            .video-player {
-                height: 250px;
-            }
-
-            .play-button {
-                width: 70px;
-                height: 70px;
-                font-size: 1.8rem;
-            }
-
-            .video-title {
-                font-size: 1.2rem;
-            }
-
-            .video-description {
-                font-size: 0.9rem;
-            }
         }
 
         .intro-block:nth-child(2) {
@@ -1176,6 +1188,315 @@
             box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
         }
 
+        /* Story Cards con immagini COMPLETE e VISIBILI */
+        .story-section {
+            margin-bottom: 120px; /* Aumentato margine */
+        }
+
+        .story-section-title {
+            color: #ff6b35;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 60px;
+            line-height: 1.3;
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px; /* Aumentato gap */
+        }
+
+        .story-card {
+            background: rgba(26, 26, 26, 0.8);
+            border-radius: 20px;
+            padding: 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out both;
+            position: relative;
+            overflow: hidden;
+            min-height: 450px; /* Aumentata altezza */
+        }
+
+        .story-card-image {
+            width: 100%;
+            height: 250px; /* Aumentata altezza immagine */
+            background-size: contain; /* CONTAIN per vedere immagine completa */
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 20px 20px 0 0;
+            position: relative;
+            background-color: #333; /* Colore di fallback per debug */
+        }
+
+        .story-card:nth-child(1) .story-card-image {
+            background-image: url('./images/storia-1.jpeg');
+        }
+
+        .story-card:nth-child(2) .story-card-image {
+            background-image: url('./images/storia-2.JPG');
+        }
+
+        .story-card:nth-child(3) .story-card-image {
+            background-image: url('./images/storia-3.jpg');
+        }
+
+        .story-card:nth-child(4) .story-card-image {
+            background-image: url('./images/storia-4.jpg');
+        }
+
+        .story-card-content {
+            padding: 30px; /* Aumentato padding */
+        }
+
+        .story-title {
+            color: #ff6b35;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .story-text {
+            color: #e0e0e0;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .story-card:nth-child(1) { animation-delay: 0.1s; }
+        .story-card:nth-child(2) { animation-delay: 0.2s; }
+        .story-card:nth-child(3) { animation-delay: 0.3s; }
+        .story-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .story-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 107, 53, 0.5);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.1);
+        }
+
+        /* Values Section con tue foto personali - IMMAGINI COMPLETE E VISIBILI */
+        .values-section {
+            margin-bottom: 120px; /* Aumentato margine */
+        }
+
+        .values-title {
+            color: #fff;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px; /* Aumentato gap */
+        }
+
+        .value-card {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.05), rgba(255, 133, 51, 0.02));
+            border: 2px solid rgba(255, 107, 53, 0.2);
+            border-radius: 20px;
+            padding: 0;
+            text-align: center;
+            transition: all 0.4s ease;
+            overflow: hidden;
+            min-height: 360px; /* Aumentata altezza */
+            cursor: pointer;
+        }
+
+        .value-card:hover {
+            border-color: rgba(255, 107, 53, 0.6);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
+        }
+
+        .value-image {
+            width: 100%;
+            height: 200px; /* Aumentata altezza */
+            background-size: contain; /* CONTAIN per vedere immagine completa */
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 20px 20px 0 0;
+            transition: all 0.3s ease;
+            background-color: #333; /* Colore di fallback per debug */
+        }
+
+        .value-card:hover .value-image {
+            transform: scale(1.05);
+        }
+
+        /* Le tue foto personali per i valori - TUTTE VISIBILI */
+        .value-card:nth-child(1) .value-image {
+            background-image: url('./images/valore-determinazione.jpg');
+        }
+
+        .value-card:nth-child(2) .value-image {
+            background-image: url('./images/valore-costanza.jpg');
+        }
+
+        .value-card:nth-child(3) .value-image {
+            background-image: url('./images/valore-motivazione.jpg');
+        }
+
+        .value-card:nth-child(4) .value-image {
+            background-image: url('./images/valore-trasformazione.jpg');
+        }
+
+        .value-card:nth-child(5) .value-image {
+            background-image: url('./images/valore-crescita.jpg');
+        }
+
+        .value-card:nth-child(6) .value-image {
+            background-image: url('./images/valore-supporto.jpg');
+        }
+
+        .value-content {
+            padding: 25px;
+        }
+
+        .value-title {
+            color: #ff6b35;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .value-text {
+            color: #ccc;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Questions Section */
+        .questions-section {
+            margin-bottom: 120px; /* Aumentato margine */
+        }
+
+        .questions-title {
+            color: #fff;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .questions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px; /* Aumentato gap */
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .question-card {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 133, 51, 0.05));
+            border-left: 4px solid #ff6b35;
+            padding: 25px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .question-card:hover {
+            transform: translateX(5px);
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.15), rgba(255, 133, 51, 0.08));
+        }
+
+        .question-text {
+            color: #e0e0e0;
+            font-size: 1.1rem;
+            font-style: italic;
+            font-weight: 500;
+        }
+
+        /* Results Section con immagini COMPLETE */
+        .results-section {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.8), rgba(40, 40, 40, 0.8));
+            border-radius: 25px;
+            padding: 60px;
+            margin-bottom: 120px; /* Aumentato margine */
+        }
+
+        .results-title {
+            color: #ff6b35;
+            font-size: 2.3rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .results-subtitle {
+            color: #fff;
+            font-size: 1.4rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .results-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px; /* Aumentato gap */
+        }
+
+        .result-item {
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 15px;
+            padding: 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 220px; /* Aumentata altezza */
+        }
+
+        .result-item-image {
+            width: 100%;
+            height: 120px;
+            background-size: contain; /* CONTAIN per vedere immagine completa */
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 14px 14px 0 0;
+            margin-bottom: 15px;
+            background-color: #333; /* Colore di fallback */
+        }
+
+        .result-item:nth-child(1) .result-item-image {
+            background-image: url('./images/risultato-1.jpg');
+        }
+
+        .result-item:nth-child(2) .result-item-image {
+            background-image: url('./images/risultato-2.jpg');
+        }
+
+        .result-item:nth-child(3) .result-item-image {
+            background-image: url('./images/risultato-3.jpg');
+        }
+
+        .result-item:nth-child(4) .result-item-image {
+            background-image: url('./images/risultato-4.jpg');
+        }
+
+        .result-item-content {
+            padding: 20px;
+        }
+
+        .result-icon {
+            color: #ff6b35;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .result-text {
+            color: #e0e0e0;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
         /* Animazioni migliorate e più fluide */
         @keyframes fadeInUp {
             from {
@@ -1279,60 +1600,6 @@
         .animate-on-scroll.delay-4 { transition-delay: 0.4s; }
         .animate-on-scroll.delay-5 { transition-delay: 0.5s; }
 
-        /* Hover effects avanzati per tutti gli elementi */
-        .number-item {
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-        }
-
-        .number-item:hover {
-            transform: translateY(-15px) scale(1.05);
-            border-color: rgba(255, 107, 53, 0.6);
-            box-shadow: 0 25px 50px rgba(255, 107, 53, 0.2);
-        }
-
-        .testimonial-card {
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-12px) scale(1.02);
-            border-left-width: 8px;
-            box-shadow: 0 20px 40px rgba(74, 222, 128, 0.2);
-            background: rgba(26, 26, 26, 0.95);
-        }
-
-        .story-card {
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-        }
-
-        .story-card:hover {
-            transform: translateY(-12px) scale(1.02);
-            border-color: rgba(255, 107, 53, 0.6);
-            box-shadow: 0 25px 50px rgba(255, 107, 53, 0.15);
-        }
-
-        .story-card:hover .story-icon {
-            transform: scale(1.15) rotate(5deg);
-            box-shadow: 0 15px 30px rgba(255, 107, 53, 0.4);
-        }
-
-        .intro-block {
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-        }
-
-        .intro-block:hover {
-            transform: translateY(-8px) scale(1.01);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
-        }
-
-        .intro-block:hover .block-number {
-            transform: scale(1.1) rotate(5deg);
-        }
-
         /* Effetti pulseanti per CTA */
         @keyframes pulse {
             0% {
@@ -1352,295 +1619,6 @@
 
         .cta-inline-btn:hover {
             animation: pulse 1.5s infinite;
-        }
-
-        /* Parallax semplice per sezioni */
-        .numbers-section,
-        .quote-section,
-        .results-section {
-            background-attachment: fixed;
-            background-size: cover;
-            background-position: center;
-        }
-
-        /* Micro-interazioni sui link e bottoni */
-        a, button {
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .sticky-cta {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .sticky-cta:hover {
-            transform: scale(1.15) rotate(5deg);
-            box-shadow: 0 10px 40px rgba(37, 211, 102, 0.8);
-        }
-
-        /* Effetto magnetico sui bottoni */
-        .hero-main-cta,
-        .cta-inline-btn,
-        .cta-btn {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-main-cta::before,
-        .cta-inline-btn::before,
-        .cta-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .hero-main-cta:hover::before,
-        .cta-inline-btn:hover::before,
-        .cta-btn:hover::before {
-            left: 100%;
-        }
-
-        /* Hover effects migliorati */
-        .story-card,
-        .philosophy-card,
-        .value-card,
-        .testimonial-card,
-        .method-step {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .story-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            border-color: rgba(255, 107, 53, 0.6);
-            box-shadow: 0 25px 50px rgba(255, 107, 53, 0.15);
-        }
-
-        .philosophy-card:hover,
-        .value-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: #ff6b35;
-            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-8px) scale(1.01);
-            border-left-width: 8px;
-            box-shadow: 0 15px 35px rgba(74, 222, 128, 0.15);
-        }
-
-        .method-step:hover {
-            transform: translateY(-8px) scale(1.01);
-            border-color: rgba(255, 107, 53, 0.6);
-            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.1);
-        }
-
-        /* Animazioni per numeri */
-        .number-item {
-            transition: all 0.3s ease;
-        }
-
-        .number-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .number-value {
-            transition: all 0.3s ease;
-        }
-
-        /* Fun facts con animazione bounce */
-        .fun-fact-card {
-            animation: bounceIn 0.8s ease-out both;
-        }
-
-        .fun-fact-card:nth-child(1) { animation-delay: 0.1s; }
-        .fun-fact-card:nth-child(2) { animation-delay: 0.2s; }
-        .fun-fact-card:nth-child(3) { animation-delay: 0.3s; }
-
-        /* Story section con griglia aggiornata */
-        .story-section {
-            margin-bottom: 80px;
-        }
-
-        .story-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-        }
-
-        /* Story Cards senza icone - solo immagini grandi */
-        .story-card {
-            background: rgba(26, 26, 26, 0.8);
-            border-radius: 20px;
-            padding: 0;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 107, 53, 0.2);
-            transition: all 0.3s ease;
-            animation: fadeInUp 1s ease-out both;
-            position: relative;
-            overflow: hidden;
-            min-height: 420px;
-        }
-
-        .story-card-image {
-            width: 100%;
-            height: 280px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            border-radius: 20px 20px 0 0;
-            position: relative;
-            background-color: #1a1a1a;
-        }
-
-        .story-card-content {
-            padding: 25px 25px 25px;
-        }
-
-        .story-title {
-            color: #ff6b35;
-            font-size: 1.4rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .story-text {
-            color: #e0e0e0;
-            line-height: 1.7;
-            font-size: 1rem;
-        }
-
-        @media (max-width: 768px) {
-            .story-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
-            
-            .story-card-image {
-                height: 180px;
-            }
-            
-            .story-card {
-                min-height: 320px;
-            }
-        }
-
-        /* Story Cards con immagini VISIBILI in alto */
-        .story-card {
-            background: rgba(26, 26, 26, 0.8);
-            border-radius: 20px;
-            padding: 0;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 107, 53, 0.2);
-            transition: all 0.3s ease;
-            animation: fadeInUp 1s ease-out both;
-            position: relative;
-            overflow: hidden;
-            min-height: 320px;
-        }
-
-        .story-card-image {
-            width: 100%;
-            height: 180px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 20px 20px 0 0;
-            position: relative;
-        }
-
-        .story-card:nth-child(1) .story-card-image {
-            background-image: url('./images/storia-1.jpeg');
-        }
-
-        .story-card:nth-child(2) .story-card-image {
-            background-image: url('./images/storia-2.JPG');
-        }
-
-        .story-card:nth-child(3) .story-card-image {
-            background-image: url('./images/storia-3.jpg');
-        }
-
-        .story-card:nth-child(4) .story-card-image {
-            background-image: url('./images/storia-4.jpg');
-        }
-
-        .story-card-content {
-            padding: 25px;
-        }
-
-        .story-card::before {
-            display: none;
-        }
-
-        .story-card > * {
-            position: relative;
-            z-index: 2;
-        }
-
-        .story-card:nth-child(1) { animation-delay: 0.1s; }
-        .story-card:nth-child(2) { animation-delay: 0.2s; }
-        .story-card:nth-child(3) { animation-delay: 0.3s; }
-        .story-card:nth-child(4) { animation-delay: 0.4s; }
-
-        .story-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(255, 107, 53, 0.5);
-            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.1);
-        }
-
-        .story-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #ff6b35, #ff8533);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-        }
-
-        .story-title {
-            color: #ff6b35;
-            font-size: 1.4rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .story-text {
-            color: #e0e0e0;
-            line-height: 1.7;
-            font-size: 1rem;
-        }
-
-        /* Resto degli stili esistenti con miglioramenti SEO */
-        .section-title {
-            color: #fff;
-            font-size: 2.5rem;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        /* H2 ottimizzati per SEO */
-        .seo-h2 {
-            color: #ff6b35;
-            font-size: 2.2rem;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 40px;
-            line-height: 1.3;
-        }
-
-        .seo-h3 {
-            color: #4ade80;
-            font-size: 1.6rem;
-            font-weight: 600;
-            margin-bottom: 25px;
         }
 
         /* Mobile Responsive */
@@ -1673,7 +1651,7 @@
             }
 
             .intro-blocks-container {
-                gap: 50px;
+                gap: 60px; /* Ridotto per mobile */
             }
 
             .intro-block {
@@ -1759,409 +1737,55 @@
                 bottom: -20px;
                 right: -15px;
             }
-        }
 
-        /* Resto degli stili esistenti mantenuti... */
-        .method-section, .philosophy-section, .values-section, .questions-section, .results-section, .cta-section {
-            margin-bottom: 80px;
-        }
+            .story-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .story-card-image {
+                height: 180px;
+            }
+            
+            .story-card {
+                min-height: 320px;
+            }
 
-        .method-steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
+            .video-placeholder,
+            .video-player {
+                height: 250px;
+            }
 
-        /* Method Steps con immagini VISIBILI in alto */
-        .method-step {
-            background: rgba(26, 26, 26, 0.8);
-            border-radius: 20px;
-            padding: 0;
-            border: 2px solid rgba(255, 107, 53, 0.2);
-            position: relative;
-            transition: all 0.3s ease;
-            overflow: hidden;
-            min-height: 300px;
-        }
+            .play-button {
+                width: 70px;
+                height: 70px;
+                font-size: 1.8rem;
+            }
 
-;
-        }
+            .video-title {
+                font-size: 1.2rem;
+            }
 
-        .method-step-content {
-            padding: 25px;
-            padding-top: 35px;
-        }
+            .video-description {
+                font-size: 0.9rem;
+            }
 
-        .method-step::before {
-            display: none;
-        }
-
-        .method-step > * {
-            position: relative;
-            z-index: 2;
-        }
-
-        .method-step:hover {
-            border-color: rgba(255, 107, 53, 0.5);
-            transform: translateY(-5px);
-        }
-
-        .step-number {
-            position: absolute;
-            top: -15px;
-            left: 30px;
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #ff6b35, #ff8533);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .step-title {
-            color: #ff6b35;
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-            margin-top: 10px;
-        }
-
-        .step-description {
-            color: #e0e0e0;
-            line-height: 1.6;
-        }
-
-        .philosophy-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        /* Philosophy Cards con immagini placeholder */
-        .philosophy-card {
-            background: rgba(26, 26, 26, 0.6);
-            border-radius: 20px;
-            padding: 0;
-            text-align: center;
-            border: 1px solid #333;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            min-height: 320px;
-        }
-
-        .philosophy-card-image {
-            width: 100%;
-            height: 160px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 20px 20px 0 0;
-        }
-
-        .philosophy-card:nth-child(1) .philosophy-card-image {
-            background-image: url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=400&h=300&fit=crop');
-        }
-
-        .philosophy-card:nth-child(2) .philosophy-card-image {
-            background-image: url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=300&fit=crop');
-        }
-
-        .philosophy-card:nth-child(3) .philosophy-card-image {
-            background-image: url('https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=300&fit=crop');
-        }
-
-        .philosophy-card:nth-child(4) .philosophy-card-image {
-            background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop');
-        }
-
-        .philosophy-card-content {
-            padding: 25px;
-        }
-
-        .philosophy-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #ff6b35, #ff8533);
-        }
-
-        .philosophy-card:hover {
-            border-color: #ff6b35;
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(255, 107, 53, 0.2);
-        }
-
-        .philosophy-icon {
-            color: #ff6b35;
-            font-size: 3rem;
-            margin-bottom: 25px;
-        }
-
-        .philosophy-title {
-            color: #fff;
-            font-size: 1.4rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .philosophy-text {
-            color: #b0b0b0;
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-
-        /* Values Section con tue foto personali */
-        .values-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .value-card {
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.05), rgba(255, 133, 51, 0.02));
-            border: 2px solid rgba(255, 107, 53, 0.2);
-            border-radius: 20px;
-            padding: 0;
-            text-align: center;
-            transition: all 0.4s ease;
-            overflow: hidden;
-            min-height: 320px;
-            cursor: pointer;
-        }
-
-        .value-card:hover {
-            border-color: rgba(255, 107, 53, 0.6);
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
-        }
-
-        .value-image {
-            width: 100%;
-            height: 180px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 20px 20px 0 0;
-            transition: all 0.3s ease;
-        }
-
-        .value-card:hover .value-image {
-            transform: scale(1.05);
-        }
-
-        /* Le tue foto personali per i valori - AGGIORNATE */
-        .value-card:nth-child(1) .value-image {
-            background-image: url('./images/valore-determinazione.jpg');
-            background-color: #333; /* Fallback per debug */
-        }
-
-        .value-card:nth-child(2) .value-image {
-            background-image: url('./images/valore-costanza.jpg');
-            background-color: #333;
-        }
-
-        .value-card:nth-child(3) .value-image {
-            background-image: url('./images/valore-motivazione.jpg');
-            background-color: #333;
-        }
-
-        .value-card:nth-child(4) .value-image {
-            background-image: url('./images/valore-trasformazione.jpg');
-            background-color: #333;
-        }
-
-        .value-card:nth-child(5) .value-image {
-            background-image: url('./images/valore-crescita.jpg');
-            background-color: #333;
-        }
-
-        .value-card:nth-child(6) .value-image {
-            background-image: url('./images/valore-supporto.jpg');
-            background-color: #333;
-        }
-
-        .value-content {
-            padding: 25px;
-        }
-
-        .value-title {
-            color: #ff6b35;
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .value-text {
-            color: #ccc;
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-
-        .questions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .question-card {
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 133, 51, 0.05));
-            border-left: 4px solid #ff6b35;
-            padding: 25px;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .question-card:hover {
-            transform: translateX(5px);
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.15), rgba(255, 133, 51, 0.08));
-        }
-
-        .question-text {
-            color: #e0e0e0;
-            font-size: 1.1rem;
-            font-style: italic;
-            font-weight: 500;
-        }
-
-        .results-section {
-            background: linear-gradient(135deg, rgba(26, 26, 26, 0.8), rgba(40, 40, 40, 0.8));
-            border-radius: 25px;
-            padding: 60px;
-            margin-bottom: 80px;
-        }
-
-        .results-title {
-            color: #ff6b35;
-            font-size: 2.3rem;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .results-subtitle {
-            color: #fff;
-            font-size: 1.4rem;
-            font-weight: 600;
-            text-align: center;
-            margin-bottom: 40px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .results-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        /* Results Section - solo ultimo con immagine */
-        .result-item {
-            background: rgba(255, 107, 53, 0.1);
-            border: 1px solid rgba(255, 107, 53, 0.3);
-            border-radius: 15px;
-            padding: 25px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            min-height: 180px;
-        }
-
-        /* Solo l'ultimo result-item ha l'immagine */
-        .result-item:nth-child(4) {
-            padding: 0;
-            min-height: 220px;
-        }
-
-        .result-item:nth-child(4) .result-item-image {
-            width: 100%;
-            height: 120px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 14px 14px 0 0;
-            margin-bottom: 15px;
-            background-image: url('https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=400&h=300&fit=crop');
-        }
-
-        .result-item:nth-child(4) .result-item-content {
-            padding: 20px;
-        }
-
-        .result-icon {
-            color: #ff6b35;
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-        }
-
-        .result-text {
-            color: #e0e0e0;
-            font-size: 1rem;
-            line-height: 1.5;
-        }
-
-        .cta-section {
-            background: linear-gradient(45deg, #ff6b35, #ff8c5a);
-            border-radius: 25px;
-            padding: 60px;
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .cta-title {
-            color: #fff;
-            font-size: 2.2rem;
-            font-weight: bold;
-            margin-bottom: 25px;
-        }
-
-        .cta-text {
-            color: #fff;
-            font-size: 1.3rem;
-            margin-bottom: 35px;
-            opacity: 0.9;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
-        }
-
-        .cta-btn {
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            padding: 18px 35px;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .cta-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            border-color: rgba(255, 255, 255, 0.5);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            .home-button {
+                top: 15px;
+                left: 15px;
+                padding: 10px 16px;
+                font-size: 12px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Tasto Home -->
+    <a href="https://andreapadoan-hub.vercel.app/" class="home-button">
+        <i class="fas fa-home"></i>
+        Home
+    </a>
+
     <!-- Navigation Anchors -->
     <div class="nav-anchors">
         <div class="anchor-link" data-target="hero">
@@ -2169,9 +1793,6 @@
         </div>
         <div class="anchor-link" data-target="numbers">
             <div class="anchor-tooltip">I Numeri</div>
-        </div>
-        <div class="anchor-link" data-target="method">
-            <div class="anchor-tooltip">Il Mio Metodo</div>
         </div>
         <div class="anchor-link" data-target="testimonials">
             <div class="anchor-tooltip">Testimonianze</div>
@@ -2219,8 +1840,6 @@
                 </div>
             </div>
         </section>
-
-
 
         <!-- Introduzione Strutturata in 3 Blocchi -->
         <section class="intro-structured-section animate-on-scroll">
@@ -2405,9 +2024,9 @@
             </div>
         </section>
 
-        <!-- Storia Cards con Titolo Sopra -->
+        <!-- Story Cards con Titolo Sopra -->
         <section class="story-section animate-on-scroll">
-            <h2 class="seo-h2">Da "OFF" a "ON": La Mia Trasformazione Personale</h2>
+            <h2 class="story-section-title">Da "OFF" a "ON": La Mia Trasformazione Personale</h2>
             <div class="story-grid">
                 <div class="story-card">
                     <div class="story-card-image"></div>
@@ -2455,133 +2074,9 @@
             </div>
         </section>
 
-        <!-- Il Mio Metodo con SEO -->
-        <section class="method-section animate-on-scroll" id="method">
-            <h2 class="seo-h2">Il Metodo Andrea Padoan: 6 Passi per la Trasformazione</h2>
-            <h3 class="seo-h3">Come funziona il mio approccio di coaching e personal training</h3>
-            <div class="method-steps">
-                <div class="method-step">
-                    <div class="step-number">1</div>
-                    <h3 class="step-title">Incontro Conoscitivo Gratuito</h3>
-                    <p class="step-description">
-                        Partiamo da un colloquio approfondito per comprendere i tuoi obiettivi, il tuo stile di vita attuale 
-                        e le tue motivazioni più profonde. È fondamentale capire il tuo "perché" per costruire un percorso 
-                        davvero efficace e duraturo.
-                    </p>
-                </div>
-
-                <div class="method-step">
-                    <div class="step-number">2</div>
-                    <h3 class="step-title">Anamnesi e Valutazione Completa</h3>
-                    <p class="step-description">
-                        Analizziamo composizione corporea, stato di salute, aspetti posturali e funzionali per creare un profilo completo 
-                        e identificare eventuali criticità o limitazioni da considerare nel programma personalizzato.
-                    </p>
-                </div>
-
-                <div class="method-step">
-                    <div class="step-number">3</div>
-                    <h3 class="step-title">Definizione Obiettivi SMART</h3>
-                    <p class="step-description">
-                        Insieme definiamo traguardi realistici e misurabili, creando un piano d'azione personalizzato che rispetti 
-                        i tuoi tempi e le tue possibilità, ma che ti sfidi costantemente verso il miglioramento.
-                    </p>
-                </div>
-
-                <div class="method-step">
-                    <div class="step-number">4</div>
-                    <h3 class="step-title">Allenamento Completamente Personalizzato</h3>
-                    <p class="step-description">
-                        Dall'utilizzo dei sovraccarichi all'allenamento funzionale, dalle attività aerobiche al coaching nutrizionale. 
-                        Ogni sessione è completamente personalizzata sulle tue caratteristiche e progressi.
-                    </p>
-                </div>
-
-                <div class="method-step">
-                    <div class="step-number">5</div>
-                    <h3 class="step-title">Monitoraggio e Adattamento Continuo</h3>
-                    <p class="step-description">
-                        Verifiche regolari dei risultati raggiunti con apporto di modifiche e variazioni. 
-                        Il programma si evolve con te, adattandosi ai tuoi progressi e alle nuove sfide.
-                    </p>
-                </div>
-
-                <div class="method-step">
-                    <div class="step-number">6</div>
-                    <h3 class="step-title">Supporto Motivazionale 24/7</h3>
-                    <p class="step-description">
-                        Ti accompagno nel percorso con supporto costante, coaching motivazionale e disponibilità totale. 
-                        Non sei mai solo nella tua trasformazione.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Philosophy Section -->
-        <div class="philosophy-section animate-on-scroll">
-            <h2 class="section-title">La Mia Filosofia</h2>
-            <div class="philosophy-grid">
-                <div class="philosophy-card">
-                    <div class="philosophy-card-image"></div>
-                    <div class="philosophy-card-content">
-                        <div class="philosophy-icon">
-                            <i class="fas fa-user-friends"></i>
-                        </div>
-                        <h3 class="philosophy-title">Approccio Umano</h3>
-                        <p class="philosophy-text">
-                            Ogni persona è unica e merita un approccio completamente personalizzato. 
-                            Non credo nelle soluzioni standard, ma nella creazione di percorsi su misura.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="philosophy-card">
-                    <div class="philosophy-card-image"></div>
-                    <div class="philosophy-card-content">
-                        <div class="philosophy-icon">
-                            <i class="fas fa-balance-scale"></i>
-                        </div>
-                        <h3 class="philosophy-title">Equilibrio Totale</h3>
-                        <p class="philosophy-text">
-                            Un corretto stile di vita comprende attività fisica mirata, alimentazione corretta 
-                            e sane abitudini per una mente più vigile e maggior lucidità.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="philosophy-card">
-                    <div class="philosophy-card-image"></div>
-                    <div class="philosophy-card-content">
-                        <div class="philosophy-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3 class="philosophy-title">Risultati Concreti</h3>
-                        <p class="philosophy-text">
-                            Non prometto miracoli, ma risultati reali e duraturi. INSIEME raggiungeremo risultati 
-                            concreti con impegno, costanza e determinazione.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="philosophy-card">
-                    <div class="philosophy-card-image"></div>
-                    <div class="philosophy-card-content">
-                        <div class="philosophy-icon">
-                            <i class="fas fa-graduation-cap"></i>
-                        </div>
-                        <h3 class="philosophy-title">Formazione Continua</h3>
-                        <p class="philosophy-text">
-                            Aggiornamento costante per migliorare sempre le mie abilità e conoscenze, 
-                            utile sia ai principianti che agli esperti.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- Values -->
         <div class="values-section animate-on-scroll">
-            <h2 class="section-title">I Miei Valori Fondamentali</h2>
+            <h2 class="values-title">I Miei Valori Fondamentali</h2>
             <div class="values-grid">
                 <div class="value-card">
                     <div class="value-image"></div>
@@ -2682,7 +2177,7 @@
 
         <!-- Questions Section -->
         <div class="questions-section animate-on-scroll">
-            <h2 class="section-title">Ti Riconosci in Queste Situazioni?</h2>
+            <h2 class="questions-title">Ti Riconosci in Queste Situazioni?</h2>
             <div class="questions-grid">
                 <div class="question-card">
                     <p class="question-text">"Ti alleni ma non riesci ad ottenere risultati?"</p>
@@ -2749,16 +2244,11 @@
             placeholder.style.display = 'none';
             player.style.display = 'block';
             
-            // INSERISCI QUI L'URL DEL TUO VIDEO
-            // Esempi di formato:
-            // YouTube: https://www.youtube.com/embed/VIDEO_ID?autoplay=1
-            // Vimeo: https://player.vimeo.com/video/VIDEO_ID?autoplay=1
-            // Video locale: ./videos/presentazione.mp4
-            
-            const videoUrl = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1'; // SOSTITUIRE CON IL TUO VIDEO
+            // IL TUO VIDEO YOUTUBE CORRETTO
+            const videoUrl = 'https://www.youtube.com/embed/vOWTL1Ta8IQ?autoplay=1';
             frame.src = videoUrl;
             
-            console.log('🎥 Video player opened');
+            console.log('🎥 Video player opened with your video');
         }
 
         function closeVideo() {
@@ -2775,48 +2265,12 @@
             
             console.log('🎥 Video player closed');
         }
-        document.getElementById('appointmentForm')?.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const name = this.querySelector('input[name="name"]').value;
-            const phone = this.querySelector('input[name="phone"]').value;
-            const email = this.querySelector('input[name="email"]').value;
-            const interest = this.querySelector('select[name="interest"]').value;
-            const message = this.querySelector('textarea[name="message"]').value;
-            
-            // Create WhatsApp message per appuntamento
-            const whatsappMessage = `Ciao Andrea! 
 
-👤 ${name}
-📞 ${phone}
-${email ? `📧 ${email}` : ''}
-🎯 Interesse: ${interest}
-
-📅 RICHIESTA APPUNTAMENTO CONOSCITIVO
-
-${message ? `📝 Note: ${message}` : ''}
-
-Inviato dalla pagina "Chi sono"`;
-            
-            // Redirect to WhatsApp
-            const whatsappUrl = `https://wa.me/3478881515?text=${encodeURIComponent(whatsappMessage)}`;
+        // Chat function
+        function openChat() {
+            const whatsappUrl = 'https://wa.me/3478881515?text=Ciao Andrea, ho letto la tua storia e vorrei parlare dei miei obiettivi di trasformazione!';
             window.open(whatsappUrl, '_blank');
-            
-            // Reset form
-            this.reset();
-            
-            // Show success message
-            const submitBtn = this.querySelector('.form-submit');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-check"></i> Richiesta Inviata! Ti contatterò presto';
-            submitBtn.style.background = 'linear-gradient(45deg, #4ade80, #22c55e)';
-            
-            setTimeout(() => {
-                submitBtn.innerHTML = originalText;
-                submitBtn.style.background = 'linear-gradient(45deg, #ff6b35, #ff8c5a)';
-            }, 4000);
-        });
+        }
 
         // Smooth scrolling per anchor links
         document.querySelectorAll('.anchor-link').forEach(link => {
@@ -2831,7 +2285,7 @@ Inviato dalla pagina "Chi sono"`;
 
         // Aggiorna anchor links attivi durante lo scroll
         function updateActiveAnchor() {
-            const sections = ['hero', 'numbers', 'method', 'testimonials'];
+            const sections = ['hero', 'testimonials'];
             const scrollPos = window.scrollY + 100;
 
             sections.forEach(sectionId => {
@@ -2864,67 +2318,6 @@ Inviato dalla pagina "Chi sono"`;
             });
         }
 
-        // Parallax semplice per elementi
-        function handleParallax() {
-            const scrolled = window.pageYOffset;
-            const parallaxElements = document.querySelectorAll('.quote-section, .numbers-section');
-            
-            parallaxElements.forEach(element => {
-                const speed = 0.5;
-                const yPos = -(scrolled * speed);
-                element.style.transform = `translateY(${yPos}px)`;
-            });
-        }
-
-        // Effetto magnetico sui bottoni
-        function addMagneticEffect() {
-            const magneticElements = document.querySelectorAll('.hero-main-cta, .cta-inline-btn, .sticky-cta');
-            
-            magneticElements.forEach(element => {
-                element.addEventListener('mousemove', function(e) {
-                    const rect = this.getBoundingClientRect();
-                    const x = e.clientX - rect.left - rect.width / 2;
-                    const y = e.clientY - rect.top - rect.height / 2;
-                    
-                    this.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px) scale(1.05)`;
-                });
-                
-                element.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translate(0px, 0px) scale(1)';
-                });
-            });
-        }
-
-        // Counter animation migliorata
-        function animateCounters() {
-            const counters = document.querySelectorAll('.number-value');
-            const speed = 100;
-
-            counters.forEach(counter => {
-                const target = parseInt(counter.textContent.replace(/\D/g, ''));
-                
-                if (counter.getBoundingClientRect().top < window.innerHeight && !counter.classList.contains('animated')) {
-                    counter.classList.add('animated');
-                    
-                    let current = 0;
-                    const increment = target / speed;
-                    
-                    const updateCounter = () => {
-                        if (current < target) {
-                            current += increment;
-                            const suffix = counter.textContent.replace(/\d/g, '');
-                            counter.textContent = Math.ceil(current) + suffix;
-                            requestAnimationFrame(updateCounter);
-                        } else {
-                            counter.textContent = counter.textContent;
-                        }
-                    };
-                    
-                    updateCounter();
-                }
-            });
-        }
-
         // Intersection Observer per animazioni più fluide
         function initIntersectionObserver() {
             const observerOptions = {
@@ -2936,13 +2329,6 @@ Inviato dalla pagina "Chi sono"`;
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('animated');
-                        
-                        // Aggiungi effetti speciali per alcune sezioni
-                        if (entry.target.classList.contains('numbers-section')) {
-                            setTimeout(() => {
-                                animateCounters();
-                            }, 300);
-                        }
                     }
                 });
             }, observerOptions);
@@ -2953,15 +2339,13 @@ Inviato dalla pagina "Chi sono"`;
             });
         }
 
-        // Event listeners migliorati
+        // Event listeners
         window.addEventListener('scroll', () => {
             updateActiveAnchor();
-            handleParallax();
         });
 
         window.addEventListener('load', () => {
             updateActiveAnchor();
-            addMagneticEffect();
             initIntersectionObserver();
             
             // Aggiungi un piccolo delay per l'animazione iniziale
@@ -2970,49 +2354,7 @@ Inviato dalla pagina "Chi sono"`;
             }, 100);
         });
 
-        // Form submission handler
-        document.getElementById('quickContactForm')?.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const name = this.querySelector('input[type="text"]').value;
-            const email = this.querySelector('input[type="email"]').value;
-            const phone = this.querySelector('input[type="tel"]').value;
-            const interest = this.querySelector('select').value;
-            const message = this.querySelector('textarea').value;
-            
-            // Create WhatsApp message
-            const whatsappMessage = `Ciao Andrea! 
-Mi chiamo ${name}
-Email: ${email}
-${phone ? `Telefono: ${phone}` : ''}
-Interesse: ${interest}
-
-${message}
-
-Inviato dalla pagina "Chi sono"`;
-            
-            // Redirect to WhatsApp
-            const whatsappUrl = `https://wa.me/3478881515?text=${encodeURIComponent(whatsappMessage)}`;
-            window.open(whatsappUrl, '_blank');
-            
-            // Reset form
-            this.reset();
-            
-            // Show success message
-            const submitBtn = this.querySelector('.form-submit');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-check"></i> Messaggio Inviato!';
-            submitBtn.style.background = 'linear-gradient(45deg, #4ade80, #22c55e)';
-            
-            setTimeout(() => {
-                submitBtn.innerHTML = originalText;
-                submitBtn.style.background = 'linear-gradient(45deg, #ff6b35, #ff8c5a)';
-            }, 3000);
-        });
-
-        console.log('✅ Chi Sono page optimized and loaded!');
+        console.log('✅ Chi Sono page - TUTTI I FIX APPLICATI!');
     </script>
 </body>
 </html>
