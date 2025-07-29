@@ -1819,60 +1819,67 @@
             line-height: 1.6;
         }
 
-        /* Values Section con immagini reali invece di emoji */
+        /* Values Section con tue foto personali */
         .values-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
 
         .value-card {
             background: linear-gradient(135deg, rgba(255, 107, 53, 0.05), rgba(255, 133, 51, 0.02));
-            border: 1px solid rgba(255, 107, 53, 0.2);
+            border: 2px solid rgba(255, 107, 53, 0.2);
             border-radius: 20px;
             padding: 0;
             text-align: center;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             overflow: hidden;
-            min-height: 300px;
+            min-height: 320px;
+            cursor: pointer;
         }
 
         .value-card:hover {
-            border-color: rgba(255, 107, 53, 0.5);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(255, 107, 53, 0.2);
+            border-color: rgba(255, 107, 53, 0.6);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
         }
 
         .value-image {
             width: 100%;
-            height: 160px;
+            height: 180px;
             background-size: cover;
             background-position: center;
             border-radius: 20px 20px 0 0;
+            transition: all 0.3s ease;
         }
 
+        .value-card:hover .value-image {
+            transform: scale(1.05);
+        }
+
+        /* Le tue foto personali per i valori */
         .value-card:nth-child(1) .value-image {
-            background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop');
+            background-image: url('./images/valore-determinazione.jpg');
         }
 
         .value-card:nth-child(2) .value-image {
-            background-image: url('https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?w=400&h=300&fit=crop');
+            background-image: url('./images/valore-costanza.jpg');
         }
 
         .value-card:nth-child(3) .value-image {
-            background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&h=300&fit=crop');
+            background-image: url('./images/valore-motivazione.jpg');
         }
 
         .value-card:nth-child(4) .value-image {
-            background-image: url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop');
+            background-image: url('./images/valore-trasformazione.jpg');
         }
 
         .value-card:nth-child(5) .value-image {
-            background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop');
+            background-image: url('./images/valore-crescita.jpg');
         }
 
         .value-card:nth-child(6) .value-image {
-            background-image: url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=400&h=300&fit=crop');
+            background-image: url('./images/valore-supporto.jpg');
         }
 
         .value-content {
@@ -1881,15 +1888,15 @@
 
         .value-title {
             color: #ff6b35;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: bold;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
         }
 
         .value-text {
             color: #ccc;
-            font-size: 0.95rem;
-            line-height: 1.5;
+            font-size: 1rem;
+            line-height: 1.6;
         }
 
         .questions-grid {
@@ -1985,7 +1992,7 @@
         }
 
         .result-item:nth-child(4) .result-item-image {
-            background-image: url('https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?w=400&h=300&fit=crop');
+            background-image: url('https://images.unsplash.com/photo-1494790108755-2616b612b512?w=400&h=300&fit=crop');
         }
 
         .result-item-content {
@@ -2456,39 +2463,51 @@
             <h2 class="section-title">I Miei Valori Fondamentali</h2>
             <div class="values-grid">
                 <div class="value-card">
-                    <span class="value-emoji">💪</span>
-                    <h3 class="value-title">Determinazione</h3>
-                    <p class="value-text">La forza da impiegare ogni volta che ci si allena e la volontà di non mollare mai</p>
+                    <div class="value-image"></div>
+                    <div class="value-content">
+                        <h3 class="value-title">Determinazione</h3>
+                        <p class="value-text">La forza da impiegare ogni volta che ci si allena e la volontà di non mollare mai</p>
+                    </div>
                 </div>
 
                 <div class="value-card">
-                    <span class="value-emoji">🎯</span>
-                    <h3 class="value-title">Costanza</h3>
-                    <p class="value-text">Continuità necessaria per ottenere risultati duraturi e trasformazioni reali</p>
+                    <div class="value-image"></div>
+                    <div class="value-content">
+                        <h3 class="value-title">Costanza</h3>
+                        <p class="value-text">Continuità necessaria per ottenere risultati duraturi e trasformazioni reali</p>
+                    </div>
                 </div>
 
                 <div class="value-card">
-                    <span class="value-emoji">🔥</span>
-                    <h3 class="value-title">Motivazione</h3>
-                    <p class="value-text">Un grande motivatore che trae linfa dalla tenacia e dalla passione</p>
+                    <div class="value-image"></div>
+                    <div class="value-content">
+                        <h3 class="value-title">Motivazione</h3>
+                        <p class="value-text">Un grande motivatore che trae linfa dalla tenacia e dalla passione</p>
+                    </div>
                 </div>
 
                 <div class="value-card">
-                    <span class="value-emoji">🚀</span>
-                    <h3 class="value-title">Trasformazione</h3>
-                    <p class="value-text">Trasformare qualcosa in qualcos'altro - un sogno in realtà</p>
+                    <div class="value-image"></div>
+                    <div class="value-content">
+                        <h3 class="value-title">Trasformazione</h3>
+                        <p class="value-text">Trasformare qualcosa in qualcos'altro - un sogno in realtà</p>
+                    </div>
                 </div>
 
                 <div class="value-card">
-                    <span class="value-emoji">🧠</span>
-                    <h3 class="value-title">Crescita</h3>
-                    <p class="value-text">Aggiornamento continuo per migliorare sempre abilità e conoscenze</p>
+                    <div class="value-image"></div>
+                    <div class="value-content">
+                        <h3 class="value-title">Crescita</h3>
+                        <p class="value-text">Aggiornamento continuo per migliorare sempre abilità e conoscenze</p>
+                    </div>
                 </div>
 
                 <div class="value-card">
-                    <span class="value-emoji">🤝</span>
-                    <h3 class="value-title">Supporto</h3>
-                    <p class="value-text">Disponibilità, flessibilità e comprensione in ogni momento del percorso</p>
+                    <div class="value-image"></div>
+                    <div class="value-content">
+                        <h3 class="value-title">Supporto</h3>
+                        <p class="value-text">Disponibilità, flessiblità e comprensione in ogni momento del percorso</p>
+                    </div>
                 </div>
             </div>
         </div>
