@@ -666,12 +666,74 @@
             gap: 30px;
         }
 
+        /* Testimonial Cards con foto placeholder */
         .testimonial-card {
             background: rgba(26, 26, 26, 0.8);
             border-radius: 20px;
             padding: 30px;
             border-left: 5px solid #4ade80;
             position: relative;
+            overflow: hidden;
+            min-height: 220px;
+        }
+
+        .testimonial-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.04;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .testimonial-card:nth-child(1)::before {
+            background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop&crop=face');
+        }
+
+        .testimonial-card:nth-child(2)::before {
+            background-image: url('https://images.unsplash.com/photo-1494790108755-2616b612b512?w=400&h=300&fit=crop&crop=face');
+        }
+
+        .testimonial-card:nth-child(3)::before {
+            background-image: url('https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=300&fit=crop&crop=face');
+        }
+
+        .testimonial-card:hover::before {
+            opacity: 0.08;
+        }
+
+        .testimonial-card > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Aggiungiamo avatar circolari per le testimonianze */
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid #4ade80;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(74, 222, 128, 0.3);
+        }
+
+        .testimonial-card:nth-child(1) .testimonial-avatar {
+            background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=face');
+        }
+
+        .testimonial-card:nth-child(2) .testimonial-avatar {
+            background-image: url('https://images.unsplash.com/photo-1494790108755-2616b612b512?w=120&h=120&fit=crop&crop=face');
+        }
+
+        .testimonial-card:nth-child(3) .testimonial-avatar {
+            background-image: url('https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&h=120&fit=crop&crop=face');
         }
 
         .testimonial-text {
@@ -1233,6 +1295,7 @@
             margin-bottom: 80px;
         }
 
+        /* Story Cards con immagini di background */
         .story-card {
             background: rgba(26, 26, 26, 0.8);
             border-radius: 20px;
@@ -1241,6 +1304,48 @@
             border: 1px solid rgba(255, 107, 53, 0.2);
             transition: all 0.3s ease;
             animation: fadeInUp 1s ease-out both;
+            position: relative;
+            overflow: hidden;
+            min-height: 280px;
+        }
+
+        .story-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .story-card:nth-child(1)::before {
+            background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop&crop=center');
+        }
+
+        .story-card:nth-child(2)::before {
+            background-image: url('https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=400&h=300&fit=crop&crop=center');
+        }
+
+        .story-card:nth-child(3)::before {
+            background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop&crop=center');
+        }
+
+        .story-card:nth-child(4)::before {
+            background-image: url('https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?w=400&h=300&fit=crop&crop=center');
+        }
+
+        .story-card:hover::before {
+            opacity: 0.15;
+        }
+
+        .story-card > * {
+            position: relative;
+            z-index: 2;
         }
 
         .story-card:nth-child(1) { animation-delay: 0.1s; }
@@ -1435,6 +1540,7 @@
             gap: 30px;
         }
 
+        /* Method Steps con immagini di background */
         .method-step {
             background: rgba(26, 26, 26, 0.8);
             border-radius: 20px;
@@ -1442,6 +1548,55 @@
             border: 2px solid rgba(255, 107, 53, 0.2);
             position: relative;
             transition: all 0.3s ease;
+            overflow: hidden;
+            min-height: 250px;
+        }
+
+        .method-step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.06;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .method-step:nth-child(1)::before {
+            background-image: url('https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=300&fit=crop&crop=center');
+        }
+
+        .method-step:nth-child(2)::before {
+            background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop&crop=center');
+        }
+
+        .method-step:nth-child(3)::before {
+            background-image: url('https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=300&fit=crop&crop=center');
+        }
+
+        .method-step:nth-child(4)::before {
+            background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop&crop=center');
+        }
+
+        .method-step:nth-child(5)::before {
+            background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop&crop=center');
+        }
+
+        .method-step:nth-child(6)::before {
+            background-image: url('https://images.unsplash.com/photo-1552196563-55cd4e45efb3?w=400&h=300&fit=crop&crop=center');
+        }
+
+        .method-step:hover::before {
+            opacity: 0.1;
+        }
+
+        .method-step > * {
+            position: relative;
+            z-index: 2;
         }
 
         .method-step:hover {
@@ -1484,6 +1639,7 @@
             gap: 30px;
         }
 
+        /* Philosophy Cards con immagini */
         .philosophy-card {
             background: rgba(26, 26, 26, 0.6);
             border-radius: 20px;
@@ -1493,6 +1649,46 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            min-height: 320px;
+        }
+
+        .philosophy-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.08;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .philosophy-card:nth-child(1)::before {
+            background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop&crop=center');
+        }
+
+        .philosophy-card:nth-child(2)::before {
+            background-image: url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=300&fit=crop&crop=center');
+        }
+
+        .philosophy-card:nth-child(3)::before {
+            background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop&crop=center');
+        }
+
+        .philosophy-card:nth-child(4)::before {
+            background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop&crop=center');
+        }
+
+        .philosophy-card:hover::before {
+            opacity: 0.12;
+        }
+
+        .philosophy-card > * {
+            position: relative;
+            z-index: 2;
         }
 
         .philosophy-card::before {
@@ -1627,12 +1823,55 @@
             gap: 30px;
         }
 
+        /* Results Section con immagini */
         .result-item {
             background: rgba(255, 107, 53, 0.1);
             border: 1px solid rgba(255, 107, 53, 0.3);
             border-radius: 15px;
             padding: 25px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 180px;
+        }
+
+        .result-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.05;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .result-item:nth-child(1)::before {
+            background-image: url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop&crop=center');
+        }
+
+        .result-item:nth-child(2)::before {
+            background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop&crop=center');
+        }
+
+        .result-item:nth-child(3)::before {
+            background-image: url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=400&h=300&fit=crop&crop=center');
+        }
+
+        .result-item:nth-child(4)::before {
+            background-image: url('https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=300&fit=crop&crop=face');
+        }
+
+        .result-item:hover::before {
+            opacity: 0.08;
+        }
+
+        .result-item > * {
+            position: relative;
+            z-index: 2;
         }
 
         .result-icon {
@@ -1922,16 +2161,19 @@
             <h2 class="testimonials-title">Cosa Dicono i Miei Clienti</h2>
             <div class="testimonials-grid">
                 <div class="testimonial-card">
+                    <div class="testimonial-avatar"></div>
                     <p class="testimonial-text">"Andrea ha cambiato completamente il mio approccio al fitness e alla vita. Non è solo un trainer, è un vero coach di vita."</p>
                     <div class="testimonial-author">Marco R.</div>
                     <div class="testimonial-role">Manager, 38 anni</div>
                 </div>
                 <div class="testimonial-card">
+                    <div class="testimonial-avatar"></div>
                     <p class="testimonial-text">"Grazie ad Andrea ho perso 15 kg e soprattutto ho ritrovato energia e fiducia in me stessa. Un percorso che mi ha trasformata."</p>
                     <div class="testimonial-author">Giulia M.</div>
                     <div class="testimonial-role">Imprenditrice, 42 anni</div>
                 </div>
                 <div class="testimonial-card">
+                    <div class="testimonial-avatar"></div>
                     <p class="testimonial-text">"Il suo metodo funziona perché non ti fa sentire solo. Ti segue passo passo con professionalità e umanità."</p>
                     <div class="testimonial-author">Luca S.</div>
                     <div class="testimonial-role">Avvocato, 45 anni</div>
