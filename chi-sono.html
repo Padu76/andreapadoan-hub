@@ -1295,52 +1295,51 @@
             margin-bottom: 80px;
         }
 
-        /* Story Cards con immagini di background */
+        /* Story Cards con immagini VISIBILI in alto */
         .story-card {
             background: rgba(26, 26, 26, 0.8);
             border-radius: 20px;
-            padding: 35px;
+            padding: 0;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 107, 53, 0.2);
             transition: all 0.3s ease;
             animation: fadeInUp 1s ease-out both;
             position: relative;
             overflow: hidden;
-            min-height: 280px;
+            min-height: 320px;
         }
 
-        .story-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+        .story-card-image {
+            width: 100%;
+            height: 180px;
             background-size: cover;
             background-position: center;
-            opacity: 0.1;
-            transition: opacity 0.3s ease;
-            z-index: 0;
+            border-radius: 20px 20px 0 0;
+            position: relative;
         }
 
-        .story-card:nth-child(1)::before {
+        .story-card:nth-child(1) .story-card-image {
             background-image: url('./images/storia-1.jpeg');
         }
 
-        .story-card:nth-child(2)::before {
+        .story-card:nth-child(2) .story-card-image {
             background-image: url('./images/storia-2.JPG');
         }
 
-        .story-card:nth-child(3)::before {
+        .story-card:nth-child(3) .story-card-image {
             background-image: url('./images/storia-3.jpg');
         }
 
-        .story-card:nth-child(4)::before {
+        .story-card:nth-child(4) .story-card-image {
             background-image: url('./images/storia-4.jpg');
         }
 
-        .story-card:hover::before {
-            opacity: 0.15;
+        .story-card-content {
+            padding: 25px;
+        }
+
+        .story-card::before {
+            display: none;
         }
 
         .story-card > * {
@@ -1540,58 +1539,58 @@
             gap: 30px;
         }
 
-        /* Method Steps con immagini di background */
+        /* Method Steps con immagini VISIBILI in alto */
         .method-step {
             background: rgba(26, 26, 26, 0.8);
             border-radius: 20px;
-            padding: 35px;
+            padding: 0;
             border: 2px solid rgba(255, 107, 53, 0.2);
             position: relative;
             transition: all 0.3s ease;
             overflow: hidden;
-            min-height: 250px;
+            min-height: 300px;
         }
 
-        .method-step::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+        .method-step-image {
+            width: 100%;
+            height: 160px;
             background-size: cover;
             background-position: center;
-            opacity: 0.06;
-            transition: opacity 0.3s ease;
-            z-index: 0;
+            border-radius: 18px 18px 0 0;
+            position: relative;
         }
 
-        .method-step:nth-child(1)::before {
+        .method-step:nth-child(1) .method-step-image {
             background-image: url('./images/metodo-1.jpg');
         }
 
-        .method-step:nth-child(2)::before {
+        .method-step:nth-child(2) .method-step-image {
             background-image: url('./images/metodo-2.jpg');
         }
 
-        .method-step:nth-child(3)::before {
+        .method-step:nth-child(3) .method-step-image {
             background-image: url('./images/metodo-3.jpg');
         }
 
-        .method-step:nth-child(4)::before {
+        .method-step:nth-child(4) .method-step-image {
             background-image: url('./images/metodo-4.jpg');
         }
 
-        .method-step:nth-child(5)::before {
+        .method-step:nth-child(5) .method-step-image {
             background-image: url('./images/metodo-5.jpg');
         }
 
-        .method-step:nth-child(6)::before {
+        .method-step:nth-child(6) .method-step-image {
             background-image: url('./images/motivazione-6.jpg');
         }
 
-        .method-step:hover::before {
-            opacity: 0.1;
+        .method-step-content {
+            padding: 25px;
+            padding-top: 35px;
+        }
+
+        .method-step::before {
+            display: none;
         }
 
         .method-step > * {
@@ -1823,50 +1822,48 @@
             gap: 30px;
         }
 
-        /* Results Section con immagini */
+        /* Results Section con immagini VISIBILI in alto */
         .result-item {
             background: rgba(255, 107, 53, 0.1);
             border: 1px solid rgba(255, 107, 53, 0.3);
             border-radius: 15px;
-            padding: 25px;
+            padding: 0;
             text-align: center;
             position: relative;
             overflow: hidden;
-            min-height: 180px;
+            min-height: 220px;
         }
 
-        .result-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+        .result-item-image {
+            width: 100%;
+            height: 120px;
             background-size: cover;
             background-position: center;
-            opacity: 0.05;
-            transition: opacity 0.3s ease;
-            z-index: 0;
+            border-radius: 14px 14px 0 0;
         }
 
-        .result-item:nth-child(1)::before {
+        .result-item:nth-child(1) .result-item-image {
             background-image: url('./images/risultato-1.jpg');
         }
 
-        .result-item:nth-child(2)::before {
+        .result-item:nth-child(2) .result-item-image {
             background-image: url('./images/risultato-2.jpg');
         }
 
-        .result-item:nth-child(3)::before {
+        .result-item:nth-child(3) .result-item-image {
             background-image: url('./images/risultato-3.jpg');
         }
 
-        .result-item:nth-child(4)::before {
+        .result-item:nth-child(4) .result-item-image {
             background-image: url('./images/risultato-4.jpg');
         }
 
-        .result-item:hover::before {
-            opacity: 0.08;
+        .result-item-content {
+            padding: 20px;
+        }
+
+        .result-item::before {
+            display: none;
         }
 
         .result-item > * {
@@ -2185,47 +2182,59 @@
         <section class="story-section animate-on-scroll">
             <h2 class="seo-h2">Da "OFF" a "ON": La Mia Trasformazione Personale</h2>
             <div class="story-card">
-                <div class="story-icon">
-                    <i class="fas fa-lightbulb"></i>
+                <div class="story-card-image"></div>
+                <div class="story-card-content">
+                    <div class="story-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="story-title">Il Momento di Svolta</h3>
+                    <p class="story-text">
+                        <strong>Quando ho aperto Tribù Studio...</strong> un giorno mi sono guardato allo specchio e dopo 30 anni ho visto ciò che non volevo diventare: 
+                        ero in sovrappeso e intuii che sarei andato incontro a problemi di salute. In quel momento ho deciso che non volevo più percorrere quella strada.
+                    </p>
                 </div>
-                <h3 class="story-title">Il Momento di Svolta</h3>
-                <p class="story-text">
-                    <strong>Quando ho aperto Tribù Studio...</strong> un giorno mi sono guardato allo specchio e dopo 30 anni ho visto ciò che non volevo diventare: 
-                    ero in sovrappeso e intuii che sarei andato incontro a problemi di salute. In quel momento ho deciso che non volevo più percorrere quella strada.
-                </p>
             </div>
 
             <div class="story-card">
-                <div class="story-icon">
-                    <i class="fas fa-power-off"></i>
+                <div class="story-card-image"></div>
+                <div class="story-card-content">
+                    <div class="story-icon">
+                        <i class="fas fa-power-off"></i>
+                    </div>
+                    <h3 class="story-title">Da "OFF" a "ON"</h3>
+                    <p class="story-text">
+                        Sono stato anche io uno come te... che tornato a casa dal lavoro si sentiva così stanco da premere il pulsante "OFF" sino al giorno dopo. 
+                        Oggi la mia vita è cambiata. <strong>Dove prima la mia giornata finiva, ora inizia davvero!</strong>
+                    </p>
                 </div>
-                <h3 class="story-title">Da "OFF" a "ON"</h3>
-                <p class="story-text">
-                    Sono stato anche io uno come te... che tornato a casa dal lavoro si sentiva così stanco da premere il pulsante "OFF" sino al giorno dopo. 
-                    Oggi la mia vita è cambiata. <strong>Dove prima la mia giornata finiva, ora inizia davvero!</strong>
-                </p>
             </div>
 
             <div class="story-card">
-                <div class="story-icon">
-                    <i class="fas fa-rocket"></i>
+                <div class="story-card-image"></div>
+                <div class="story-card-content">
+                    <div class="story-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="story-title">La Trasformazione Completa</h3>
+                    <p class="story-text">
+                        Ho migliorato il mio stile di vita: potenziato la resistenza allo stress, ho eliminato farmaci, ho raggiunto una buona forma fisica. 
+                        Ho ritrovato in me una energia sepolta che rischiava di rimanere sotterrata per sempre.
+                    </p>
                 </div>
-                <h3 class="story-title">La Trasformazione Completa</h3>
-                <p class="story-text">
-                    Ho migliorato il mio stile di vita: potenziato la resistenza allo stress, ho eliminato farmaci, ho raggiunto una buona forma fisica. 
-                    Ho ritrovato in me una energia sepolta che rischiava di rimanere sotterrata per sempre.
-                </p>
             </div>
 
             <div class="story-card">
-                <div class="story-icon">
-                    <i class="fas fa-star"></i>
+                <div class="story-card-image"></div>
+                <div class="story-card-content">
+                    <div class="story-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3 class="story-title">Il Vero Significato</h3>
+                    <p class="story-text">
+                        Perché una persona decide di cambiare? La motivazione è una sola: <strong>trasformare qualcosa in qualcos'altro!</strong> 
+                        Un sogno in realtà, un peso in un altro, un no in un sì. È questo quello che ti offro: <strong>Trasformazione!</strong>
+                    </p>
                 </div>
-                <h3 class="story-title">Il Vero Significato</h3>
-                <p class="story-text">
-                    Perché una persona decide di cambiare? La motivazione è una sola: <strong>trasformare qualcosa in qualcos'altro!</strong> 
-                    Un sogno in realtà, un peso in un altro, un no in un sì. È questo quello che ti offro: <strong>Trasformazione!</strong>
-                </p>
             </div>
         </section>
 
@@ -2389,31 +2398,43 @@
             <h3 class="results-subtitle">Migliorare la Qualità della Vita, Essere Più Forti e Meno Stanchi</h3>
             <div class="results-content">
                 <div class="result-item">
-                    <div class="result-icon">
-                        <i class="fas fa-brain"></i>
+                    <div class="result-item-image"></div>
+                    <div class="result-item-content">
+                        <div class="result-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <p class="result-text">Mente più vigile e attenta, migliori capacità decisionali, maggior lucidità</p>
                     </div>
-                    <p class="result-text">Mente più vigile e attenta, migliori capacità decisionali, maggior lucidità</p>
                 </div>
 
                 <div class="result-item">
-                    <div class="result-icon">
-                        <i class="fas fa-dumbbell"></i>
+                    <div class="result-item-image"></div>
+                    <div class="result-item-content">
+                        <div class="result-icon">
+                            <i class="fas fa-dumbbell"></i>
+                        </div>
+                        <p class="result-text">Maggiore forza ed agilità, migliore postura, migliore respirazione</p>
                     </div>
-                    <p class="result-text">Maggiore forza ed agilità, migliore postura, migliore respirazione</p>
                 </div>
 
                 <div class="result-item">
-                    <div class="result-icon">
-                        <i class="fas fa-moon"></i>
+                    <div class="result-item-image"></div>
+                    <div class="result-item-content">
+                        <div class="result-icon">
+                            <i class="fas fa-moon"></i>
+                        </div>
+                        <p class="result-text">Meno mal di testa, sonno più rilassato e rigenerante</p>
                     </div>
-                    <p class="result-text">Meno mal di testa, sonno più rilassato e rigenerante</p>
                 </div>
 
                 <div class="result-item">
-                    <div class="result-icon">
-                        <i class="fas fa-smile"></i>
+                    <div class="result-item-image"></div>
+                    <div class="result-item-content">
+                        <div class="result-icon">
+                            <i class="fas fa-smile"></i>
+                        </div>
+                        <p class="result-text">Maggiore autostima, migliore aspetto fisico, più fiducia in se stessi</p>
                     </div>
-                    <p class="result-text">Maggiore autostima, migliore aspetto fisico, più fiducia in se stessi</p>
                 </div>
             </div>
         </div>
