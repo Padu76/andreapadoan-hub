@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+                        <p class="block-text">
+                            <strong>Sono Andrea Padoan</strong>, Personal Trainer certificato e Lifestyle Coach specializzato nella trasformazione completa della persona. 
+                            Oggi aiuto professionisti e imprenditori di Verona e provincia a raggiungere il loro massimo potenziale attraverso un approccio integrato che unisce:
+                        </p>
+                        <ul class="block-list">
+                            <li><i class="fas fa-dumbbell"></i> <strong>Fitness personalizzato</strong> - Allenamenti su misura per i tuoi obiettivi</li>
+                            <li><i class="fas fa-heart"></i> <strong>Lifestyle coaching</strong> - Supporto per cambiare abitudini e stile di vita</li><!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
@@ -427,50 +433,135 @@
             font-size: 1.1rem;
         }
 
-        /* Sezione numeri */
+        /* Sezione numeri migliorata */
         .numbers-section {
             background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 133, 51, 0.05));
             border-radius: 25px;
-            padding: 60px;
+            padding: 80px 60px;
             margin-bottom: 80px;
             text-align: center;
+            border: 1px solid rgba(255, 107, 53, 0.2);
         }
 
         .numbers-title {
             color: #ff6b35;
-            font-size: 2.5rem;
+            font-size: clamp(2.5rem, 5vw, 3.2rem);
             font-weight: bold;
-            margin-bottom: 50px;
+            margin-bottom: 20px;
+        }
+
+        .numbers-subtitle {
+            color: #b0b0b0;
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .numbers-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
         .number-item {
+            background: rgba(26, 26, 26, 0.6);
+            border-radius: 20px;
+            padding: 30px 20px;
             text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid rgba(255, 107, 53, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .number-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b35, #ff8533, #4ade80);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .number-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(255, 107, 53, 0.4);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.15);
+        }
+
+        .number-item:hover::before {
+            opacity: 1;
+        }
+
+        .number-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #ff6b35, #ff8533);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            margin: 0 auto 20px;
+            transition: all 0.3s ease;
+        }
+
+        .number-item:nth-child(2n) .number-icon {
+            background: linear-gradient(135deg, #4ade80, #22c55e);
+        }
+
+        .number-item:nth-child(3n) .number-icon {
+            background: linear-gradient(135deg, #22d3ee, #06b6d4);
+        }
+
+        .number-item:nth-child(4n) .number-icon {
+            background: linear-gradient(135deg, #a855f7, #7c3aed);
+        }
+
+        .number-item:hover .number-icon {
+            transform: scale(1.1) rotate(5deg);
         }
 
         .number-value {
-            font-size: 3.5rem;
+            font-size: clamp(2.8rem, 5vw, 3.8rem);
             font-weight: 900;
             color: #ff6b35;
             margin-bottom: 10px;
             display: block;
+            transition: all 0.3s ease;
+        }
+
+        .number-item:nth-child(2n) .number-value {
+            color: #4ade80;
+        }
+
+        .number-item:nth-child(3n) .number-value {
+            color: #22d3ee;
+        }
+
+        .number-item:nth-child(4n) .number-value {
+            color: #a855f7;
         }
 
         .number-label {
             color: #fff;
-            font-size: 1.1rem;
-            font-weight: 600;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 8px;
         }
 
         .number-description {
             color: #b0b0b0;
-            font-size: 0.9rem;
-            margin-top: 5px;
+            font-size: 0.95rem;
+            line-height: 1.4;
         }
 
         /* Citazione highlight */
@@ -1143,11 +1234,29 @@
 
             .numbers-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 30px;
+                gap: 25px;
+            }
+
+            .number-item {
+                padding: 25px 15px;
+            }
+
+            .number-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.8rem;
             }
 
             .number-value {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
+            }
+
+            .number-label {
+                font-size: 1rem;
+            }
+
+            .number-description {
+                font-size: 0.85rem;
             }
 
             .quote-text::before,
