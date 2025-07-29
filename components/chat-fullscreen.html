@@ -1,1 +1,62 @@
+<div class="chat-fullscreen" id="chatFullscreen">
+    <!-- 📱 ENHANCED CHAT HEADER -->
+    <div class="chat-header">
+        <div class="chat-header-info">
+            <div class="chat-header-avatar" id="chatHeaderAvatar"></div>
+            <div class="chat-header-text">
+                <div class="chat-header-name">Andrea Padoan</div>
+                <div class="chat-header-status">
+                    <span class="status-dot-header"></span>
+                    <span id="chatHeaderStatus">Online e pronto ad aiutarti</span>
+                </div>
+            </div>
+        </div>
+        <button class="chat-close" onclick="closeChat()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    
+    <!-- 📱 CONSTRAINED CHAT MESSAGES -->
+    <div class="chat-messages" id="chatMessages">
+        <div class="messages-container" id="messagesContainer">
+            <div class="message andrea">
+                <div class="message-avatar bot-avatar"></div>
+                <div class="message-content bot-message">
+                    🔥 <strong>Ciao! Sono Andrea Padoan!</strong><br><br>
+                    Dimmi pure, come posso aiutarti oggi? Che si tratti di <em>fitness</em>, <em>nutrizione</em>, <em>business</em> o <em>mindset</em>, sono qui per guidarti verso il <strong>cambiamento totale</strong>! 💪
+                    <div class="message-time">Ora</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- 📝 IMPROVED INPUT AREA -->
+    <div class="chat-input-container">
+        <!-- 🎯 COMPACT QUICK ACTIONS -->
+        <div class="quick-actions">
+            <button class="quick-action-btn" onclick="sendQuickMessage('Fammi il quiz per scegliere il servizio giusto')">
+                🎯 Quiz Personalizzato
+            </button>
+            <button class="quick-action-btn" onclick="sendQuickMessage('Quali sono i tuoi prezzi?')">
+                💰 Prezzi
+            </button>
+            <button class="quick-action-btn" onclick="sendQuickMessage('Come funziona il personal training?')">
+                💪 Personal Training
+            </button>
+            <button class="quick-action-btn" onclick="sendQuickMessage('Vorrei prenotare una sessione')">
+                📅 Prenota
+            </button>
+            <button class="quick-action-btn" onclick="sendQuickMessage('Dimmi tutto su Pasto Sano')">
+                🥗 Pasto Sano
+            </button>
+        </div>
+        
+        <!-- 📝 FOCUSED INPUT -->
+        <div class="chat-input-wrapper">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Scrivi qui la tua domanda...">
+            <button class="chat-send" onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+</div>

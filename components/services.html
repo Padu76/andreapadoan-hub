@@ -1,1 +1,97 @@
+<div class="projects-container" id="projects">
+    <h2 class="section-title">Trasforma la Tua Vita</h2>
+    <p class="section-subtitle">Scopri dove puoi migliorare oggi stesso. Ogni servizio è pensato per chi vuole risultati concreti senza perdere tempo.</p>
+    
+    <div class="projects-grid">
+        <!-- Prima riga: 4 progetti -->
+        <div class="project-card fitness">
+            <div class="project-image" style="background-image: url('./images/andrea-personal-training.jpg');"></div>
+            <div class="project-title">Personal Training a Verona</div>
+            <div class="project-description">Allenamenti su misura per chi ha poco tempo ma vuole risultati veri. In studio o online.</div>
+            <div class="project-actions">
+                <button class="project-btn-primary" onclick="openProject('https://www.personaltrainerverona.it')">Vedi Programmi</button>
+                <button class="project-btn-chat" onclick="sendQuickMessage('Dimmi tutto sul personal training')">💬 Chiedimi tutto</button>
+            </div>
+        </div>
 
+        <div class="project-card fitness">
+            <div class="project-image" style="background-image: url('./images/tribu-studio-interior.jpg');"></div>
+            <div class="project-title">Tribù Studio</div>
+            <div class="project-description">Uno studio privato a Verona dove essere seguito in modo esclusivo, senza code o distrazioni.</div>
+            <div class="project-actions">
+                <button class="project-btn-primary" onclick="openProject('https://www.tribuptstudio.it')">Visita Studio</button>
+                <button class="project-btn-chat" onclick="sendQuickMessage('Come funziona Tribù Studio?')">💬 Info Studio</button>
+            </div>
+        </div>
+
+        <div class="project-card fitness">
+            <div class="project-image" style="background-image: url('./images/coaching.jpg');"></div>
+            <div class="project-title">Lifestyle Coaching Online</div>
+            <div class="project-description"><strong>La soluzione completa per il tuo cambiamento</strong> - perché dieta e allenamento non bastano!</div>
+            <div class="project-actions">
+                <button class="project-btn-primary" onclick="openProject('https://tribucoach.vercel.app/')">Inizia Percorso</button>
+                <button class="project-btn-chat" onclick="sendQuickMessage('Spiegami il lifestyle coaching')">💬 Come Funziona</button>
+            </div>
+        </div>
+
+        <div class="project-card nutrition">
+            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=400&h=300&fit=crop');"></div>
+            <div class="project-title">MealPrep Planner</div>
+            <div class="project-description">Organizza i pasti della settimana in 10 minuti e resta in forma senza stress. Web app gratuita.</div>
+            <div class="project-actions">
+                <button class="project-btn-primary" onclick="openProject('https://mealprep-planner.vercel.app/')">Prova Gratis</button>
+                <button class="project-btn-chat" onclick="sendQuickMessage('Come uso il MealPrep Planner?')">💬 Spiegami</button>
+            </div>
+        </div>
+
+        <!-- Seconda riga: 4 progetti -->
+        <div class="project-card nutrition">
+            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop');"></div>
+            <div class="project-title">Pasto Sano - Pasti Freschi Verona</div>
+            <div class="project-description">Piatti freschi pronti in 2 minuti, fatti con ingredienti di qualità. La soluzione per chi vuole mangiare bene senza cucinare.</div>
+            <div class="project-actions">
+                <button class="project-btn-primary" onclick="openProject('https://pastosano.netlify.app/')">Ordina Ora</button>
+                <button class="project-btn-chat" onclick="sendQuickMessage('Quali sono i prezzi di Pasto Sano?')">💬 Prezzi</button>
+            </div>
+        </div>
+
+        <div class="project-card business">
+            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=300&fit=crop');"></div>
+            <div class="project-title">Upstart - Business Coaching</div>
+            <div class="project-description">Testa il potenziale della tua idea di business e ricevi supporto strategico per farla crescere.</div>
+            <div class="project-actions">
+                <button class="project-btn-primary" onclick="openProject('https://upstarter-tf9x.vercel.app/')">Consulenza Gratuita</button>
+                <button class="project-btn-chat" onclick="sendQuickMessage('Come funziona il business coaching?')">💬 Scopri di più</button>
+            </div>
+        </div>
+
+        <div class="project-card business">
+            <div class="project-image" style="background-image: url('./images/best-trainer.jpeg');"></div>
+            <div class="project-title">Best-Trainer</div>
+            <div class="project-description">Centinaia di programmi di allenamento per ogni sport, formulati dai migliori personal trainer.</div>
+            <div class="project-actions">
+                <button class="project-btn-primary" onclick="openProject('https://best-trainer-mvp.vercel.app/')">Scopri Programmi</button>
+                <button class="project-btn-chat" onclick="sendQuickMessage('Che programmi ha Best-Trainer?')">💬 Info Programmi</button>
+            </div>
+        </div>
+
+        <div class="project-card business">
+            <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop');"></div>
+            <div class="project-title">I miei eBook</div>
+            <div class="project-description">Guide complete per trasformare il tuo corpo e mindset. Anni di esperienza in formato digitale.</div>
+            <div class="project-actions">
+                <button class="project-btn-primary" onclick="openProject('./ebooks.html')">Scarica Ora</button>
+                <button class="project-btn-chat" onclick="sendQuickMessage('Quali eBook hai disponibili?')">💬 Vedi eBook</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="global-chat-cta">
+        <h3 class="global-chat-title">Non sai quale servizio fa per te?</h3>
+        <p class="global-chat-text">Chiedimi tutto in chat! Ti aiuto a scegliere il percorso perfetto per i tuoi obiettivi.</p>
+        <button class="global-chat-btn" onclick="openChat()">
+            <i class="fas fa-magic"></i>
+            Fammi il quiz personalizzato
+        </button>
+    </div>
+</div>
