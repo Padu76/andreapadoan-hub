@@ -2460,34 +2460,143 @@
             </div>
         </div>
 
-        <!-- CTA Section -->
-        <div class="cta-section">
-            <h2 class="cta-title">Iniziamo Insieme il Tuo Cambiamento</h2>
-            <p class="cta-text">
-                Se hai risposto SÌ ad almeno una domanda, il Personal Trainer è la figura ideale 
-                per avviare un percorso che ti porterà a migliorare salute, ottimismo, relazioni, autostima e benessere. 
-                <strong>INSIEME raggiungeremo risultati reali e concreti!</strong>
+        <!-- Sezione Contatti - Focus Appuntamento Personale -->
+        <section class="enhanced-contact-section animate-on-scroll">
+            <h2 class="enhanced-contact-title">📅 Prendiamo un Appuntamento</h2>
+            <p class="enhanced-contact-subtitle">
+                Compila il form qui sotto e ti contatterò personalmente per fissare un appuntamento conoscitivo gratuito nel mio studio. 
+                Potremo conoscerci, parlare dei tuoi obiettivi e vedere se posso aiutarti nel tuo percorso di trasformazione.
             </p>
-            <div class="cta-buttons">
-                <a href="https://wa.me/3478881515?text=Ciao Andrea, ho letto la tua storia e vorrei iniziare un percorso!" 
-                   class="cta-btn" target="_blank">
+
+            <!-- Personal Note -->
+            <div class="personal-note">
+                <p class="personal-note-text">
+                    "Preferisco sempre parlare di persona con i miei clienti. Un appuntamento faccia a faccia mi permette di conoscerti meglio 
+                    e creare un piano davvero personalizzato per i tuoi obiettivi."
+                </p>
+                <div class="personal-note-signature">- Andrea</div>
+            </div>
+
+            <!-- Form per Appuntamento -->
+            <div class="appointment-form">
+                <h3>🤝 Richiedi il Tuo Appuntamento Gratuito</h3>
+                <form id="appointmentForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="name" placeholder="Il tuo nome *" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" class="form-input" name="phone" placeholder="Telefono *" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="email" class="form-input" name="email" placeholder="Email (opzionale)">
+                        </div>
+                        <div class="form-group">
+                            <select class="form-input" name="interest" required>
+                                <option value="">Cosa ti interessa? *</option>
+                                <option value="personal-training">Personal Training</option>
+                                <option value="lifestyle-coaching">Lifestyle Coaching</option>
+                                <option value="pasto-sano">Pasto Sano</option>
+                                <option value="valutazione-generale">Valutazione Generale</option>
+                                <option value="altro">Altro</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <textarea class="form-input form-textarea" name="message" placeholder="Dimmi quali sono i tuoi obiettivi e quando preferiresti l'appuntamento..."></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="form-submit">
+                        <i class="fas fa-calendar-plus"></i>
+                        Richiedi Appuntamento Gratuito
+                    </button>
+                </form>
+            </div>
+
+            <!-- Vantaggi dell'Appuntamento -->
+            <div class="appointment-benefits">
+                <div class="appointment-benefit">
+                    <i class="fas fa-handshake"></i>
+                    <span>Incontro gratuito di 30 min</span>
+                </div>
+                <div class="appointment-benefit">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Nel mio studio a Verona</span>
+                </div>
+                <div class="appointment-benefit">
+                    <i class="fas fa-user-check"></i>
+                    <span>Valutazione personalizzata</span>
+                </div>
+                <div class="appointment-benefit">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Senza impegno</span>
+                </div>
+            </div>
+
+            <!-- Contatti Alternativi -->
+            <div class="alternative-contacts">
+                <span style="color: #666; font-size: 0.9rem;">Oppure contattami direttamente:</span>
+                <a href="https://wa.me/3478881515?text=Ciao Andrea, vorrei fissare un appuntamento conoscitivo" 
+                   class="alt-contact-link whatsapp" target="_blank">
                     <i class="fab fa-whatsapp"></i>
-                    Scrivimi su WhatsApp
+                    WhatsApp
                 </a>
-                <a href="./index.html#projects" class="cta-btn">
-                    <i class="fas fa-eye"></i>
-                    Scopri i Miei Servizi
+                <a href="mailto:info@andreapadoan.com?subject=Richiesta appuntamento" 
+                   class="alt-contact-link">
+                    <i class="fas fa-envelope"></i>
+                    Email
                 </a>
             </div>
-        </div>
+        </section>
     </div>
 
     <script>
-        // Funzione per aprire la chat (redirect alla homepage)
-        function openChat() {
-            // Reindirizza alla homepage con anchor alla chat
-            window.location.href = './index.html#chat';
-        }
+        // Form submission handler per appuntamento
+        document.getElementById('appointmentForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const name = this.querySelector('input[name="name"]').value;
+            const phone = this.querySelector('input[name="phone"]').value;
+            const email = this.querySelector('input[name="email"]').value;
+            const interest = this.querySelector('select[name="interest"]').value;
+            const message = this.querySelector('textarea[name="message"]').value;
+            
+            // Create WhatsApp message per appuntamento
+            const whatsappMessage = `Ciao Andrea! 
+
+👤 ${name}
+📞 ${phone}
+${email ? `📧 ${email}` : ''}
+🎯 Interesse: ${interest}
+
+📅 RICHIESTA APPUNTAMENTO CONOSCITIVO
+
+${message ? `📝 Note: ${message}` : ''}
+
+Inviato dalla pagina "Chi sono"`;
+            
+            // Redirect to WhatsApp
+            const whatsappUrl = `https://wa.me/3478881515?text=${encodeURIComponent(whatsappMessage)}`;
+            window.open(whatsappUrl, '_blank');
+            
+            // Reset form
+            this.reset();
+            
+            // Show success message
+            const submitBtn = this.querySelector('.form-submit');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-check"></i> Richiesta Inviata! Ti contatterò presto';
+            submitBtn.style.background = 'linear-gradient(45deg, #4ade80, #22c55e)';
+            
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.style.background = 'linear-gradient(45deg, #ff6b35, #ff8c5a)';
+            }, 4000);
+        });
 
         // Smooth scrolling per anchor links
         document.querySelectorAll('.anchor-link').forEach(link => {
@@ -2641,10 +2750,47 @@
             }, 100);
         });
 
-        // Mobile menu toggle for sticky CTA
-        if (window.innerWidth <= 768) {
-            document.querySelector('.nav-anchors').style.display = 'none';
-        }
+        // Form submission handler
+        document.getElementById('quickContactForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const name = this.querySelector('input[type="text"]').value;
+            const email = this.querySelector('input[type="email"]').value;
+            const phone = this.querySelector('input[type="tel"]').value;
+            const interest = this.querySelector('select').value;
+            const message = this.querySelector('textarea').value;
+            
+            // Create WhatsApp message
+            const whatsappMessage = `Ciao Andrea! 
+Mi chiamo ${name}
+Email: ${email}
+${phone ? `Telefono: ${phone}` : ''}
+Interesse: ${interest}
+
+${message}
+
+Inviato dalla pagina "Chi sono"`;
+            
+            // Redirect to WhatsApp
+            const whatsappUrl = `https://wa.me/3478881515?text=${encodeURIComponent(whatsappMessage)}`;
+            window.open(whatsappUrl, '_blank');
+            
+            // Reset form
+            this.reset();
+            
+            // Show success message
+            const submitBtn = this.querySelector('.form-submit');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-check"></i> Messaggio Inviato!';
+            submitBtn.style.background = 'linear-gradient(45deg, #4ade80, #22c55e)';
+            
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.style.background = 'linear-gradient(45deg, #ff6b35, #ff8c5a)';
+            }, 3000);
+        });
 
         console.log('✅ Chi Sono page optimized and loaded!');
     </script>
