@@ -923,48 +923,57 @@
             margin: 0;
         }
 
-        /* Transformation Grid */
+        /* Transformation Grid Migliorata */
         .transformation-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
             margin: 30px 0;
         }
 
         .transformation-item {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
-            padding: 20px;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(26, 26, 26, 0.6));
+            border-radius: 20px;
+            padding: 30px 20px;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 107, 53, 0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
         }
 
-        .transform-before,
-        .transform-after {
-            font-size: 1.5rem;
+        .transformation-item:hover {
+            border-color: rgba(255, 107, 53, 0.5);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.2);
+        }
+
+        .transform-emoji {
+            font-size: 2.5rem;
+            margin: 5px 0;
+        }
+
+        .transform-label {
+            font-size: 1rem;
             font-weight: bold;
-            margin: 5px;
-        }
-
-        .transform-before {
-            color: #ef4444;
-        }
-
-        .transform-after {
-            color: #4ade80;
-        }
-
-        .transform-arrow {
-            color: #22d3ee;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin: 0 10px;
+            color: #ff6b35;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .transform-text {
-            color: #b0b0b0;
-            font-size: 0.9rem;
-            margin-top: 10px;
+            color: #e0e0e0;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .transform-arrow {
+            color: #4ade80;
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 10px 0;
         }
 
         /* CTA integrata nel contenuto */
@@ -1287,18 +1296,69 @@
         .fun-fact-card:nth-child(2) { animation-delay: 0.2s; }
         .fun-fact-card:nth-child(3) { animation-delay: 0.3s; }
 
-        /* Story section con layout 2x2 per vedere tutte le foto */
+        /* Story section con griglia aggiornata */
         .story-section {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
             margin-bottom: 80px;
         }
 
+        .story-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        /* Story Cards senza icone - solo immagini grandi */
+        .story-card {
+            background: rgba(26, 26, 26, 0.8);
+            border-radius: 20px;
+            padding: 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out both;
+            position: relative;
+            overflow: hidden;
+            min-height: 380px;
+        }
+
+        .story-card-image {
+            width: 100%;
+            height: 220px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px 20px 0 0;
+            position: relative;
+        }
+
+        .story-card-content {
+            padding: 30px 25px 25px;
+        }
+
+        .story-title {
+            color: #ff6b35;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .story-text {
+            color: #e0e0e0;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
         @media (max-width: 768px) {
-            .story-section {
+            .story-grid {
                 grid-template-columns: 1fr;
                 gap: 25px;
+            }
+            
+            .story-card-image {
+                height: 180px;
+            }
+            
+            .story-card {
+                min-height: 320px;
             }
         }
 
@@ -1558,46 +1618,75 @@
             min-height: 300px;
         }
 
-        /* Method Steps: debug per assicurarsi che le immagini siano visibili */
+        /* Method Steps con immagini più visibili - debug completo */
+        .method-step {
+            background: rgba(26, 26, 26, 0.8);
+            border-radius: 20px;
+            padding: 0;
+            border: 2px solid rgba(255, 107, 53, 0.2);
+            position: relative;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            min-height: 350px;
+        }
+
         .method-step-image {
             width: 100%;
-            height: 160px;
+            height: 200px;
             background-size: cover;
             background-position: center;
             border-radius: 18px 18px 0 0;
             position: relative;
-            display: block; /* Forza la visualizzazione */
+            display: block;
+            background-color: #333; /* Fallback per debug */
         }
 
-        /* Debug: verifica che le immagini siano caricate */
+        /* Forza il caricamento delle immagini con !important */
         .method-step:nth-child(1) .method-step-image {
-            background-image: url('./images/metodo-1.jpg');
-            background-color: #333; /* Fallback color per debug */
+            background-image: url('./images/metodo-1.jpg') !important;
         }
 
         .method-step:nth-child(2) .method-step-image {
-            background-image: url('./images/metodo-2.jpg');
-            background-color: #333;
+            background-image: url('./images/metodo-2.jpg') !important;
         }
 
         .method-step:nth-child(3) .method-step-image {
-            background-image: url('./images/metodo-3.jpg');
-            background-color: #333;
+            background-image: url('./images/metodo-3.jpg') !important;
         }
 
         .method-step:nth-child(4) .method-step-image {
-            background-image: url('./images/metodo-4.jpg');
-            background-color: #333;
+            background-image: url('./images/metodo-4.jpg') !important;
         }
 
         .method-step:nth-child(5) .method-step-image {
-            background-image: url('./images/metodo-5.jpg');
-            background-color: #333;
+            background-image: url('./images/metodo-5.jpg') !important;
         }
 
         .method-step:nth-child(6) .method-step-image {
-            background-image: url('./images/motivazione-6.jpg');
-            background-color: #333;
+            background-image: url('./images/motivazione-6.jpg') !important;
+        }
+
+        .method-step-content {
+            padding: 25px;
+            padding-top: 35px;
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #ff6b35, #ff8533);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            z-index: 3;
+            border: 4px solid #000;
         }
 
         .method-step-content {
@@ -1730,42 +1819,77 @@
             line-height: 1.6;
         }
 
+        /* Values Section con immagini reali invece di emoji */
         .values-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
         }
 
         .value-card {
             background: linear-gradient(135deg, rgba(255, 107, 53, 0.05), rgba(255, 133, 51, 0.02));
             border: 1px solid rgba(255, 107, 53, 0.2);
-            border-radius: 15px;
-            padding: 25px;
+            border-radius: 20px;
+            padding: 0;
             text-align: center;
             transition: all 0.3s ease;
+            overflow: hidden;
+            min-height: 300px;
         }
 
         .value-card:hover {
             border-color: rgba(255, 107, 53, 0.5);
-            transform: translateY(-3px);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(255, 107, 53, 0.2);
         }
 
-        .value-emoji {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            display: block;
+        .value-image {
+            width: 100%;
+            height: 160px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .value-card:nth-child(1) .value-image {
+            background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop');
+        }
+
+        .value-card:nth-child(2) .value-image {
+            background-image: url('https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?w=400&h=300&fit=crop');
+        }
+
+        .value-card:nth-child(3) .value-image {
+            background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=400&h=300&fit=crop');
+        }
+
+        .value-card:nth-child(4) .value-image {
+            background-image: url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop');
+        }
+
+        .value-card:nth-child(5) .value-image {
+            background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop');
+        }
+
+        .value-card:nth-child(6) .value-image {
+            background-image: url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=400&h=300&fit=crop');
+        }
+
+        .value-content {
+            padding: 25px;
         }
 
         .value-title {
             color: #ff6b35;
             font-size: 1.2rem;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .value-text {
             color: #ccc;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
 
         .questions-grid {
@@ -2011,7 +2135,6 @@
                         </p>
                         <ul class="block-list">
                             <li><i class="fas fa-dumbbell"></i> <strong>Fitness personalizzato</strong> - Allenamenti su misura per i tuoi obiettivi</li>
-                            <li><i class="fas fa-apple-alt"></i> <strong>Nutrizione applicata</strong> - Piani alimentari sostenibili e gustosi</li>
                             <li><i class="fas fa-brain"></i> <strong>Coaching mentale</strong> - Sviluppo di mindset vincente</li>
                             <li><i class="fas fa-rocket"></i> <strong>Business growth</strong> - Supporto per imprenditori e liberi professionisti</li>
                         </ul>
@@ -2058,22 +2181,31 @@
                         
                         <div class="transformation-grid">
                             <div class="transformation-item">
-                                <div class="transform-before">😴 PRIMA</div>
+                                <div class="transform-emoji">😴</div>
+                                <div class="transform-label">PRIMA</div>
+                                <div class="transform-text">Stanco e spento</div>
                                 <div class="transform-arrow">→</div>
-                                <div class="transform-after">⚡ DOPO</div>
-                                <p class="transform-text">Da stanco e spento a energico e motivato</p>
+                                <div class="transform-emoji">⚡</div>
+                                <div class="transform-label">DOPO</div>
+                                <div class="transform-text">Energico e motivato</div>
                             </div>
                             <div class="transformation-item">
-                                <div class="transform-before">🏃‍♂️ PRIMA</div>
+                                <div class="transform-emoji">🏃‍♂️</div>
+                                <div class="transform-label">PRIMA</div>
+                                <div class="transform-text">Fuori forma</div>
                                 <div class="transform-arrow">→</div>
-                                <div class="transform-after">💪 DOPO</div>
-                                <p class="transform-text">Da fuori forma a fisico tonico e forte</p>
+                                <div class="transform-emoji">💪</div>
+                                <div class="transform-label">DOPO</div>
+                                <div class="transform-text">Fisico tonico e forte</div>
                             </div>
                             <div class="transformation-item">
-                                <div class="transform-before">😰 PRIMA</div>
+                                <div class="transform-emoji">😰</div>
+                                <div class="transform-label">PRIMA</div>
+                                <div class="transform-text">Stressato</div>
                                 <div class="transform-arrow">→</div>
-                                <div class="transform-after">😎 DOPO</div>
-                                <p class="transform-text">Da stressato a equilibrato e sereno</p>
+                                <div class="transform-emoji">😎</div>
+                                <div class="transform-label">DOPO</div>
+                                <div class="transform-text">Equilibrato e sereno</div>
                             </div>
                         </div>
 
@@ -2091,7 +2223,7 @@
 
         <!-- Fun Facts Sezione Completamente Rinnovata -->
         <section class="fun-facts-section animate-on-scroll">
-            <h2 class="fun-facts-title">🎯 Curiosità su Andrea</h2>
+            <h2 class="fun-facts-title">🎯 Curiosità su di Me</h2>
             <p class="fun-facts-subtitle">Quello che forse non sai di me...</p>
             <div class="fun-facts-grid">
                 <div class="fun-fact-card animate-bounce-in delay-1">
@@ -2116,14 +2248,6 @@
                     </div>
                     <h3 class="fun-fact-title">Ossessionato dalla Trasformazione</h3>
                     <p class="fun-fact-text">La mia parola preferita? "Trasformazione!" È quello che cerco di creare nella vita di ogni cliente. Non mi accontento mai del "va bene così".</p>
-                </div>
-
-                <div class="fun-fact-card animate-bounce-in delay-4">
-                    <div class="fun-fact-icon-container">
-                        <span class="fun-fact-emoji">🌅</span>
-                    </div>
-                    <h3 class="fun-fact-title">Early Bird Estremo</h3>
-                    <p class="fun-fact-text">Mi sveglio alle 5:30 ogni mattina da anni. Le prime ore del giorno sono magiche: zero distrazioni, massima energia, tempo per me. È qui che nasce la vera disciplina!</p>
                 </div>
             </div>
         </section>
@@ -2153,62 +2277,52 @@
             </div>
         </section>
 
-        <!-- Storia Cards - Versione Migliorata -->
+        <!-- Storia Cards con Titolo Sopra -->
         <section class="story-section animate-on-scroll">
             <h2 class="seo-h2">Da "OFF" a "ON": La Mia Trasformazione Personale</h2>
-            <div class="story-card">
-                <div class="story-card-image"></div>
-                <div class="story-card-content">
-                    <div class="story-icon">
-                        <i class="fas fa-lightbulb"></i>
+            <div class="story-grid">
+                <div class="story-card">
+                    <div class="story-card-image"></div>
+                    <div class="story-card-content">
+                        <h3 class="story-title">Il Momento di Svolta</h3>
+                        <p class="story-text">
+                            <strong>Quando ho aperto Tribù Studio...</strong> un giorno mi sono guardato allo specchio e dopo 30 anni ho visto ciò che non volevo diventare: 
+                            ero in sovrappeso e intuii che sarei andato incontro a problemi di salute. In quel momento ho deciso che non volevo più percorrere quella strada.
+                        </p>
                     </div>
-                    <h3 class="story-title">Il Momento di Svolta</h3>
-                    <p class="story-text">
-                        <strong>Quando ho aperto Tribù Studio...</strong> un giorno mi sono guardato allo specchio e dopo 30 anni ho visto ciò che non volevo diventare: 
-                        ero in sovrappeso e intuii che sarei andato incontro a problemi di salute. In quel momento ho deciso che non volevo più percorrere quella strada.
-                    </p>
                 </div>
-            </div>
 
-            <div class="story-card">
-                <div class="story-card-image"></div>
-                <div class="story-card-content">
-                    <div class="story-icon">
-                        <i class="fas fa-power-off"></i>
+                <div class="story-card">
+                    <div class="story-card-image"></div>
+                    <div class="story-card-content">
+                        <h3 class="story-title">Da "OFF" a "ON"</h3>
+                        <p class="story-text">
+                            Sono stato anche io uno come te... che tornato a casa dal lavoro si sentiva così stanco da premere il pulsante "OFF" sino al giorno dopo. 
+                            Oggi la mia vita è cambiata. <strong>Dove prima la mia giornata finiva, ora inizia davvero!</strong>
+                        </p>
                     </div>
-                    <h3 class="story-title">Da "OFF" a "ON"</h3>
-                    <p class="story-text">
-                        Sono stato anche io uno come te... che tornato a casa dal lavoro si sentiva così stanco da premere il pulsante "OFF" sino al giorno dopo. 
-                        Oggi la mia vita è cambiata. <strong>Dove prima la mia giornata finiva, ora inizia davvero!</strong>
-                    </p>
                 </div>
-            </div>
 
-            <div class="story-card">
-                <div class="story-card-image"></div>
-                <div class="story-card-content">
-                    <div class="story-icon">
-                        <i class="fas fa-rocket"></i>
+                <div class="story-card">
+                    <div class="story-card-image"></div>
+                    <div class="story-card-content">
+                        <h3 class="story-title">La Trasformazione Completa</h3>
+                        <p class="story-text">
+                            Ho migliorato il mio stile di vita: potenziato la resistenza allo stress, ho eliminato farmaci, ho raggiunto una buona forma fisica. 
+                            Ho ritrovato in me una energia sepolta che rischiava di rimanere sotterrata per sempre.
+                        </p>
                     </div>
-                    <h3 class="story-title">La Trasformazione Completa</h3>
-                    <p class="story-text">
-                        Ho migliorato il mio stile di vita: potenziato la resistenza allo stress, ho eliminato farmaci, ho raggiunto una buona forma fisica. 
-                        Ho ritrovato in me una energia sepolta che rischiava di rimanere sotterrata per sempre.
-                    </p>
                 </div>
-            </div>
 
-            <div class="story-card">
-                <div class="story-card-image"></div>
-                <div class="story-card-content">
-                    <div class="story-icon">
-                        <i class="fas fa-star"></i>
+                <div class="story-card">
+                    <div class="story-card-image"></div>
+                    <div class="story-card-content">
+                        <h3 class="story-title">Il Vero Significato</h3>
+                        <p class="story-text">
+                            Perché una persona decide di cambiare? La motivazione è una sola: <strong>trasformare qualcosa in qualcos'altro!</strong> 
+                            Un sogno in realtà, un peso in un altro, un no in un sì. È questo quello che ti offro: <strong>Trasformazione!</strong>
+                        </p>
                     </div>
-                    <h3 class="story-title">Il Vero Significato</h3>
-                    <p class="story-text">
-                        Perché una persona decide di cambiare? La motivazione è una sola: <strong>trasformare qualcosa in qualcos'altro!</strong> 
-                        Un sogno in realtà, un peso in un altro, un no in un sì. È questo quello che ti offro: <strong>Trasformazione!</strong>
-                    </p>
                 </div>
             </div>
         </section>
