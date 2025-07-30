@@ -54,6 +54,8 @@
         .home-btn:hover {
             transform: translateY(-2px) scale(1.05);
             box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+            text-decoration: none;
+            color: white;
         }
 
         .quiz-logo {
@@ -171,6 +173,85 @@
         .start-quiz-btn:hover {
             transform: translateY(-3px) scale(1.05);
             box-shadow: 0 12px 35px rgba(255, 107, 53, 0.6);
+        }
+
+        /* User Info Screen */
+        .user-info-screen {
+            display: none;
+        }
+
+        .info-title {
+            color: #ff6b35;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .info-subtitle {
+            color: #e0e0e0;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            color: #fff;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #ff6b35;
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .form-group input::placeholder {
+            color: #999;
+        }
+
+        .continue-btn {
+            background: linear-gradient(45deg, #ff6b35, #ff8533);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        }
+
+        .continue-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
         }
 
         /* Quiz Questions */
@@ -365,6 +446,7 @@
             color: #e0e0e0;
             line-height: 1.7;
             font-size: 1rem;
+            white-space: pre-line;
         }
 
         .results-actions {
@@ -388,19 +470,20 @@
         }
 
         .primary-action {
-            background: linear-gradient(45deg, #ff6b35, #ff8533);
+            background: linear-gradient(45deg, #25D366, #128C7E);
             color: white;
         }
 
         .secondary-action {
-            background: transparent;
-            color: #4ade80;
-            border-color: #4ade80;
+            background: linear-gradient(45deg, #ff6b35, #ff8533);
+            color: white;
         }
 
         .action-btn:hover {
             transform: translateY(-3px) scale(1.05);
             box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+            text-decoration: none;
+            color: white;
         }
 
         /* Loading Animation */
@@ -518,9 +601,30 @@
                     </div>
                 </div>
                 
-                <button class="start-quiz-btn" onclick="startQuiz()">
+                <button class="start-quiz-btn" onclick="showUserInfoForm()">
                     <i class="fas fa-play-circle"></i>
                     Inizia il Quiz (3 min)
+                </button>
+            </div>
+
+            <!-- User Info Screen -->
+            <div class="user-info-screen" id="userInfoScreen">
+                <h2 class="info-title">🚀 Iniziamo!</h2>
+                <p class="info-subtitle">Per personalizzare al meglio il tuo report, inserisci i tuoi dati</p>
+                
+                <div class="form-group">
+                    <label for="userName">Il tuo nome *</label>
+                    <input type="text" id="userName" placeholder="Inserisci il tuo nome" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="userPhone">Il tuo numero di telefono *</label>
+                    <input type="tel" id="userPhone" placeholder="Inserisci il tuo numero (es. 3331234567)" required>
+                </div>
+                
+                <button class="continue-btn" id="continueBtn" onclick="startQuizFromForm()" disabled>
+                    <i class="fas fa-arrow-right"></i>
+                    Continua con il Quiz
                 </button>
             </div>
 
@@ -562,13 +666,13 @@
                 </div>
                 
                 <div class="results-actions">
-                    <a href="https://wa.me/3478881515?text=Ciao Andrea! Ho fatto il quiz fitness e vorrei migliorare il mio livello. Puoi aiutarmi?" class="action-btn primary-action" target="_blank">
+                    <a href="#" class="action-btn primary-action" id="whatsappBtn" target="_blank">
                         <i class="fab fa-whatsapp"></i>
-                        Parla con Andrea
+                        📞 Prendi Appuntamento
                     </a>
-                    <a href="./" class="action-btn secondary-action">
-                        <i class="fas fa-home"></i>
-                        Torna alla Home
+                    <a href="#" class="action-btn secondary-action" onclick="openChat()">
+                        <i class="fas fa-comments"></i>
+                        💬 Chiedimi Informazioni
                     </a>
                 </div>
             </div>
@@ -803,11 +907,41 @@
         // Quiz State
         let currentQuestion = 0;
         let answers = {};
-        let totalScore = 0;
+        let userName = '';
+        let userPhone = '';
 
         // Functions
-        function startQuiz() {
+        function showUserInfoForm() {
             document.getElementById('welcomeScreen').style.display = 'none';
+            document.getElementById('userInfoScreen').style.display = 'block';
+            
+            // Enable continue button when both fields are filled
+            const nameInput = document.getElementById('userName');
+            const phoneInput = document.getElementById('userPhone');
+            const continueBtn = document.getElementById('continueBtn');
+            
+            function checkInputs() {
+                if (nameInput.value.trim() && phoneInput.value.trim()) {
+                    continueBtn.disabled = false;
+                } else {
+                    continueBtn.disabled = true;
+                }
+            }
+            
+            nameInput.addEventListener('input', checkInputs);
+            phoneInput.addEventListener('input', checkInputs);
+        }
+
+        function startQuizFromForm() {
+            userName = document.getElementById('userName').value.trim();
+            userPhone = document.getElementById('userPhone').value.trim();
+            
+            if (!userName || !userPhone) {
+                alert('Per favore, inserisci nome e telefono per continuare');
+                return;
+            }
+            
+            document.getElementById('userInfoScreen').style.display = 'none';
             document.getElementById('quizScreen').style.display = 'block';
             showQuestion();
         }
@@ -875,7 +1009,9 @@
         }
 
         function updateProgress() {
-            const progress = ((currentQuestion + 1) / quizQuestions.length) * 100;
+            const totalSteps = quizQuestions.length + 1; // +1 for user info form
+            const currentStep = currentQuestion + 2; // +2 because we start from user info (step 1)
+            const progress = (currentStep / totalSteps) * 100;
             document.getElementById('progressBar').style.width = progress + '%';
         }
 
@@ -964,7 +1100,13 @@
             }
             
             // Generate personalized report
-            generateReport();
+            generateDetailedReport();
+            
+            // Update WhatsApp link with user data
+            updateWhatsAppLink();
+            
+            // Complete progress bar
+            document.getElementById('progressBar').style.width = '100%';
         }
 
         function getScoreDescription(score) {
@@ -978,16 +1120,21 @@
             return descriptions[score] || '';
         }
 
-        function generateReport() {
+        function generateDetailedReport() {
             const scores = window.quizResults;
-            const overallAverage = Object.values(scores)
-                .filter(cat => cat.count > 0)
-                .reduce((sum, cat) => sum + cat.average, 0) / 
-                Object.values(scores).filter(cat => cat.count > 0).length;
+            const categoryNames = {
+                fitness: 'Forma Fisica',
+                alimentazione: 'Alimentazione',
+                abitudini: 'Abitudini Salutari',
+                motivazione: 'Motivazione',
+                stress: 'Gestione Stress'
+            };
             
-            let report = `Ciao! Ho analizzato le tue risposte e il tuo punteggio complessivo è ${overallAverage.toFixed(1)}/5. `;
+            // Calculate overall average
+            const validScores = Object.values(scores).filter(cat => cat.count > 0);
+            const overallAverage = validScores.reduce((sum, cat) => sum + cat.average, 0) / validScores.length;
             
-            // Personalized recommendations based on lowest scores
+            // Sort categories by score to identify strengths and weaknesses
             const sortedCategories = Object.entries(scores)
                 .filter(([_, data]) => data.count > 0)
                 .sort(([_, a], [__, b]) => a.average - b.average);
@@ -995,22 +1142,119 @@
             const weakestArea = sortedCategories[0];
             const strongestArea = sortedCategories[sortedCategories.length - 1];
             
-            if (weakestArea[1].average <= 2) {
-                report += `La tua area che necessita più attenzione è ${getCategoryName(weakestArea[0])} con ${weakestArea[1].average}/5. `;
-                report += getAreaAdvice(weakestArea[0], 'improvement');
-            } else if (overallAverage >= 4) {
-                report += `Complimenti! Hai un ottimo stile di vita. `;
-                report += `Il tuo punto di forza è ${getCategoryName(strongestArea[0])} con ${strongestArea[1].average}/5. `;
-                report += getAreaAdvice(strongestArea[0], 'maintain');
-            } else {
-                report += `Hai una buona base su cui lavorare. `;
-                report += getAreaAdvice(weakestArea[0], 'improvement');
-            }
-            
-            report += ` Per massimizzare i tuoi risultati, ti consiglio di iniziare con piccoli cambiamenti costanti. `;
-            report += `Ricorda: ogni piccolo passo conta verso la trasformazione che desideri!`;
-            
+            let report = `🎯 Ciao ${userName}! Grazie per aver completato il quiz fitness completo.
+
+📊 RISULTATO COMPLESSIVO: ${overallAverage.toFixed(1)}/5.0
+
+Il tuo punteggio generale ti colloca in un livello ${getOverallLevel(overallAverage)}. Questo significa che hai ${getOverallDescription(overallAverage)}
+
+🔍 ANALISI DETTAGLIATA PER AREA:
+
+💪 FORMA FISICA (${scores.fitness.average}/5): ${getDetailedCategoryAnalysis('fitness', scores.fitness.average)}
+
+🥗 ALIMENTAZIONE (${scores.alimentazione.average}/5): ${getDetailedCategoryAnalysis('alimentazione', scores.alimentazione.average)}
+
+🌙 ABITUDINI SALUTARI (${scores.abitudini.average}/5): ${getDetailedCategoryAnalysis('abitudini', scores.abitudini.average)}
+
+🎯 MOTIVAZIONE (${scores.motivazione.average}/5): ${getDetailedCategoryAnalysis('motivazione', scores.motivazione.average)}
+
+🧘‍♂️ GESTIONE STRESS (${scores.stress.average}/5): ${getDetailedCategoryAnalysis('stress', scores.stress.average)}
+
+📈 AREA DI FORZA: La tua area migliore è ${categoryNames[strongestArea[0]]} con ${strongestArea[1].average}/5. Questa è una grande risorsa su cui costruire il tuo percorso di miglioramento.
+
+⚠️ AREA DI MIGLIORAMENTO PRIORITARIA: ${categoryNames[weakestArea[0]]} ha ottenuto ${weakestArea[1].average}/5. Concentrandoti prima su questa area, vedrai miglioramenti significativi in tutto il tuo benessere generale.
+
+🎯 PIANO D'AZIONE PERSONALIZZATO:
+
+${getPersonalizedActionPlan(scores, weakestArea[0], strongestArea[0])}
+
+💡 CONSIGLI PRATICI IMMEDIATI:
+${getImmediateTips(scores)}
+
+🚀 PROSSIMI PASSI:
+Basandoti sui tuoi risultati, il mio consiglio è di iniziare con piccoli cambiamenti nella tua area più debole mentre mantieni i punti di forza che già possiedi. 
+
+Un approccio graduale e sostenibile è la chiave per trasformazioni durature. Non cercare di cambiare tutto insieme, ma concentrati su 1-2 abitudini alla volta.
+
+Con il tuo livello attuale e la giusta strategia personalizzata, puoi raggiungere risultati straordinari in 3-6 mesi.
+
+💪 Ricorda: ogni grande trasformazione inizia con la decisione di fare il primo passo. Tu l'hai già fatto completando questo quiz!
+
+Sono qui per supportarti in questo percorso verso la migliore versione di te stesso.`;
+
             document.getElementById('reportText').textContent = report;
+        }
+
+        function getOverallLevel(score) {
+            if (score >= 4.5) return 'ECCELLENTE';
+            if (score >= 4.0) return 'MOLTO BUONO';
+            if (score >= 3.0) return 'BUONO';
+            if (score >= 2.0) return 'DISCRETO';
+            return 'DA MIGLIORARE';
+        }
+
+        function getOverallDescription(score) {
+            if (score >= 4.5) return 'già ottime abitudini di vita e un approccio molto disciplinato al benessere.';
+            if (score >= 4.0) return 'buone basi solide e alcune aree di eccellenza nel tuo stile di vita.';
+            if (score >= 3.0) return 'una situazione equilibrata con spazio per miglioramenti mirati.';
+            if (score >= 2.0) return 'diverse opportunità di crescita per elevare il tuo livello di benessere.';
+            return 'molto potenziale di miglioramento e la possibilità di trasformare completamente il tuo stile di vita.';
+        }
+
+        function getDetailedCategoryAnalysis(category, score) {
+            const analyses = {
+                fitness: {
+                    1: 'La tua forma fisica necessita attenzione immediata. Probabilmente hai uno stile di vita sedentario e ti senti spesso stanco. È il momento di introdurre movimento nella tua routine quotidiana.',
+                    2: 'La tua forma fisica è sotto la media. Fai qualche attività sporadica ma manca costanza. Con un programma strutturato vedrai miglioramenti rapidi.',
+                    3: 'La tua forma fisica è discreta. Hai alcune buone abitudini ma potresti essere più costante e strutturato negli allenamenti.',
+                    4: 'La tua forma fisica è buona! Sei attivo regolarmente. Ora puoi concentrarti su obiettivi specifici e sfide più avanzate.',
+                    5: 'La tua forma fisica è eccellente! Sei un esempio di costanza e disciplina. Mantieni questo livello e magari inspira altri.'
+                },
+                alimentazione: {
+                    1: 'La tua alimentazione necessita una revisione completa. Probabilmente mangi spesso fuori casa, salti pasti e consumi molti cibi processati.',
+                    2: 'La tua alimentazione è irregolare. Ci sono giorni buoni e giorni meno buoni. Hai bisogno di più struttura e pianificazione.',
+                    3: 'La tua alimentazione è nella media. Fai alcune scelte sane ma ci sono ancora abitudini da migliorare, come la pianificazione dei pasti.',
+                    4: 'La tua alimentazione è buona! Fai scelte consapevoli nella maggior parte dei casi. Puoi perfezionare alcuni dettagli.',
+                    5: 'La tua alimentazione è eccellente! Pianifichi bene, mangi vario e sano. Sei un modello da seguire.'
+                },
+                abitudini: {
+                    1: 'Le tue abitudini quotidiane necessitano una ristrutturazione completa. Sonno irregolare, troppo tempo davanti agli schermi e mancanza di routine.',
+                    2: 'Le tue abitudini sono instabili. Alcuni giorni sono migliori di altri, ma manca una struttura costante nella tua giornata.',
+                    3: 'Le tue abitudini sono discrete. Hai una routine di base ma potresti ottimizzare il sonno e ridurre il tempo davanti agli schermi.',
+                    4: 'Le tue abitudini sono buone! Hai una routine strutturata. Puoi perfezionare alcuni aspetti per massimizzare il benessere.',
+                    5: 'Le tue abitudini sono eccellenti! Hai una routine perfetta che supporta il tuo benessere in ogni aspetto.'
+                },
+                motivazione: {
+                    1: 'La tua motivazione è molto bassa. Probabilmente ti senti sopraffatto e non sai da dove iniziare. Hai bisogno di obiettivi chiari e raggiungibili.',
+                    2: 'La tua motivazione è incostante. Hai momenti di entusiasmo seguiti da periodi di abbandono. Serve una strategia più sostenibile.',
+                    3: 'La tua motivazione è media. Hai buone intenzioni ma a volte ti manca la spinta per agire. Obiettivi più specifici potrebbero aiutarti.',
+                    4: 'La tua motivazione è buona! Sei determinato e hai obiettivi chiari. Continua così e celebra i progressi fatti.',
+                    5: 'La tua motivazione è eccezionale! Sei disciplinato, costante e ispiri gli altri con la tua determinazione.'
+                },
+                stress: {
+                    1: 'Il tuo livello di stress è molto alto e sta probabilmente impattando negativamente su tutti gli altri aspetti della tua vita. È prioritario imparare tecniche di gestione.',
+                    2: 'Il tuo stress è sopra la media. Ti senti spesso sopraffatto e hai bisogno di strategie efficaci per gestire le pressioni quotidiane.',
+                    3: 'Il tuo stress è gestibile nella maggior parte dei casi, ma ci sono momenti in cui ti senti sotto pressione. Potresti beneficiare di tecniche di rilassamento.',
+                    4: 'Gestisci bene lo stress! Hai strategie efficaci e riesci a mantenere l\'equilibrio nella maggior parte delle situazioni.',
+                    5: 'La tua gestione dello stress è eccellente! Rimani calmo e centrato anche nelle situazioni difficili. Le tue tecniche sono un esempio per altri.'
+                }
+            };
+            return analyses[category][score] || '';
+        }
+
+        function getPersonalizedActionPlan(scores, weakestArea, strongestArea) {
+            let plan = `Considerando il tuo profilo specifico, ecco il piano d'azione che ti consiglio:
+
+FASE 1 (Prime 2 settimane): Concentrati su ${getCategoryName(weakestArea)}
+${getAreaSpecificPlan(weakestArea, 'phase1')}
+
+FASE 2 (Settimane 3-6): Mantieni i progressi e aggiungi ${getCategoryName(getSecondWeakestArea(scores))}
+${getAreaSpecificPlan(weakestArea, 'phase2')}
+
+FASE 3 (Settimane 7-12): Integrazione completa
+Ora che hai consolidato le basi, è il momento di integrare tutto e alzare l'asticella. Usa il tuo punto di forza (${getCategoryName(strongestArea)}) come leva per motivarti nelle altre aree.`;
+
+            return plan;
         }
 
         function getCategoryName(category) {
@@ -1024,34 +1268,70 @@
             return names[category] || category;
         }
 
-        function getAreaAdvice(category, type) {
-            const advice = {
-                fitness: {
-                    improvement: 'Inizia con 15-20 minuti di movimento al giorno. Anche una camminata veloce può fare la differenza! ',
-                    maintain: 'Continua con la tua routine e considera di aggiungere varietà agli allenamenti. '
-                },
-                alimentazione: {
-                    improvement: 'Pianifica i pasti in anticipo e aumenta il consumo di frutta e verdura. Piccoli cambiamenti portano grandi risultati! ',
-                    maintain: 'La tua alimentazione è sulla buona strada. Mantieni questa consistenza! '
-                },
-                abitudini: {
-                    improvement: 'Crea una routine mattutina e serale. Dormi 7-8 ore e limita il tempo davanti agli schermi. ',
-                    maintain: 'Le tue abitudini sono ottime. Continua così e magari aggiungi qualche nuova abitudine positiva! '
-                },
-                motivazione: {
-                    improvement: 'Definisci obiettivi chiari e celebra ogni piccolo progresso. La motivazione cresce con l\'azione! ',
-                    maintain: 'La tua motivazione è forte! Usala per ispirare anche altri nel tuo percorso. '
-                },
-                stress: {
-                    improvement: 'Prova tecniche di respirazione o meditazione. Anche 5 minuti al giorno possono ridurre significativamente lo stress. ',
-                    maintain: 'Gestisci molto bene lo stress. Condividi le tue strategie con chi ne ha bisogno! '
-                }
-            };
-            return advice[category]?.[type] || '';
+        function getSecondWeakestArea(scores) {
+            const sorted = Object.entries(scores)
+                .filter(([_, data]) => data.count > 0)
+                .sort(([_, a], [__, b]) => a.average - b.average);
+            return sorted[1] ? sorted[1][0] : sorted[0][0];
         }
 
-        function scrollToQuiz() {
-            window.location.href = './#quiz-section';
+        function getAreaSpecificPlan(area, phase) {
+            const plans = {
+                fitness: {
+                    phase1: '• Inizia con 15-20 minuti di camminata veloce al giorno\n• Fai 2 sessioni di esercizi a corpo libero (10 minuti)\n• Scegli le scale invece dell\'ascensore',
+                    phase2: '• Aumenta a 30 minuti di attività cardiovascolare\n• Aggiungi 3 sessioni di allenamento strutturato\n• Trova un\'attività che ti diverte (danza, sport, ecc.)'
+                },
+                alimentazione: {
+                    phase1: '• Pianifica 3 pasti principali e 2 spuntini sani\n• Aumenta l\'acqua a 2 litri al giorno\n• Aggiungi una porzione di verdura a ogni pasto',
+                    phase2: '• Prepara i pasti della settimana ogni domenica\n• Riduci i cibi processati del 50%\n• Sperimenta con ricette sane che ti piacciono'
+                },
+                abitudini: {
+                    phase1: '• Vai a letto e svegliati alla stessa ora ogni giorno\n• Crea una routine serale rilassante (no schermi 1 ora prima)\n• Limita il tempo sui social a 1 ora al giorno',
+                    phase2: '• Aggiungi una routine mattutina energizzante\n• Implementa pause attive ogni 2 ore di lavoro\n• Crea un ambiente per dormire ottimale'
+                },
+                motivazione: {
+                    phase1: '• Scrivi 3 obiettivi specifici e misurabili\n• Celebra ogni piccolo progresso\n• Trova un partner di accountability',
+                    phase2: '• Traccia i tuoi progressi settimanalmente\n• Premiati per i traguardi raggiunti\n• Visualizza quotidianamente i tuoi obiettivi'
+                },
+                stress: {
+                    phase1: '• Pratica 5 minuti di respirazione profonda al giorno\n• Dedica 15 minuti solo a te stesso ogni giorno\n• Identifica i tuoi principali stressor',
+                    phase2: '• Prova la meditazione guidata (10 minuti)\n• Implementa tecniche di time management\n• Crea confini chiari tra lavoro e vita privata'
+                }
+            };
+            return plans[area][phase] || '';
+        }
+
+        function getImmediateTips(scores) {
+            let tips = [];
+            
+            if (scores.fitness.average <= 2) {
+                tips.push('• OGGI: Fai una camminata di 10 minuti dopo pranzo');
+            }
+            if (scores.alimentazione.average <= 2) {
+                tips.push('• OGGI: Bevi un bicchiere d\'acqua prima di ogni pasto');
+            }
+            if (scores.abitudini.average <= 2) {
+                tips.push('• OGGI: Metti il telefono in modalità aereo 1 ora prima di dormire');
+            }
+            if (scores.motivazione.average <= 2) {
+                tips.push('• OGGI: Scrivi un obiettivo specifico che vuoi raggiungere questa settimana');
+            }
+            if (scores.stress.average <= 2) {
+                tips.push('• OGGI: Pratica 3 respiri profondi ogni volta che ti senti stressato');
+            }
+            
+            return tips.join('\n');
+        }
+
+        function updateWhatsAppLink() {
+            const message = `Ciao Andrea! Ho completato il quiz fitness e sono ${userName} (tel: ${userPhone}). I miei risultati mostrano che devo migliorare soprattutto ${getCategoryName(Object.entries(window.quizResults).filter(([_, data]) => data.count > 0).sort(([_, a], [__, b]) => a.average - b.average)[0][0])}. Mi piacerebbe prenotare una consulenza per creare un piano personalizzato. Grazie!`;
+            
+            document.getElementById('whatsappBtn').href = `https://wa.me/3478881515?text=${encodeURIComponent(message)}`;
+        }
+
+        function openChat() {
+            // Placeholder for chat functionality
+            alert('La funzione chat sarà disponibile a breve! Per ora puoi contattarmi su WhatsApp per qualsiasi domanda 😊');
         }
 
         // Initialize quiz
