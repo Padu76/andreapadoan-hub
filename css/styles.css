@@ -164,7 +164,8 @@ body {
 }
 
 /* 🎯 QUIZ BUTTON STYLES - FIXED */
-.quiz-btn {
+.quiz-btn,
+.quiz-cta {
     background: linear-gradient(45deg, #ff6b35, #ff8c5a);
     color: #fff;
     padding: 18px 40px;
@@ -184,14 +185,25 @@ body {
     text-decoration: none;
 }
 
-.quiz-btn:hover {
+.quiz-btn:hover,
+.quiz-cta:hover {
     transform: translateY(-3px) scale(1.05);
     box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
     background: linear-gradient(45deg, #ff8533, #ff9c5a);
 }
 
-.quiz-btn:active {
+.quiz-btn:active,
+.quiz-cta:active {
     transform: translateY(-1px) scale(1.02);
+}
+
+/* Hero CTA Buttons Container */
+.hero-cta-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
 }
 
 .chat-benefits {
@@ -1210,7 +1222,8 @@ body {
         max-width: 350px;
     }
 
-    .quiz-btn {
+    .quiz-btn,
+    .quiz-cta {
         padding: 16px 35px;
         font-size: 15px;
         max-width: 320px;
