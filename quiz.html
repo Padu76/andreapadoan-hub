@@ -14,14 +14,57 @@
         }
 
         body {
-            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%, #000000 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 20s ease infinite;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             color: #fff;
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* Header con tasto Home */
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating particles background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 107, 53, 0.3);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg); 
+                opacity: 0.3;
+            }
+            50% { 
+                transform: translateY(-30px) rotate(180deg); 
+                opacity: 0.7;
+            }
+        }
+
+        /* Orange glow effects */
+        .glow-orange {
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Header */
         .quiz-header {
             position: fixed;
             top: 0;
@@ -29,77 +72,115 @@
             right: 0;
             z-index: 1000;
             background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
-            padding: 15px 20px;
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid #ff6b35;
+            padding: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255, 107, 53, 0.2);
         }
 
         .home-btn {
             background: linear-gradient(45deg, #ff6b35, #ff8533);
             color: white;
             text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-weight: 600;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 700;
             font-size: 14px;
             display: flex;
             align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
+            gap: 10px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 32px rgba(255, 107, 53, 0.4);
         }
 
         .home-btn:hover {
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.6);
             text-decoration: none;
             color: white;
         }
 
         .quiz-logo {
             color: #ff6b35;
-            font-size: 1.2rem;
-            font-weight: bold;
+            font-size: 1.4rem;
+            font-weight: 800;
+            text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
         }
 
-        .progress-bar {
+        .progress-container {
+            width: 250px;
+            height: 8px;
             background: rgba(255, 255, 255, 0.1);
-            height: 4px;
-            border-radius: 2px;
+            border-radius: 50px;
             overflow: hidden;
-            width: 200px;
+            position: relative;
+            border: 1px solid rgba(255, 107, 53, 0.3);
         }
 
         .progress-fill {
-            background: linear-gradient(90deg, #ff6b35, #4ade80);
             height: 100%;
-            border-radius: 2px;
-            transition: width 0.3s ease;
+            background: linear-gradient(90deg, #ff6b35, #ffaa80);
+            border-radius: 50px;
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             width: 0%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.5);
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
         }
 
         /* Quiz Container */
         .quiz-container {
-            padding-top: 80px;
+            padding-top: 100px;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 100px 20px 50px;
+            padding: 120px 20px 50px;
+            position: relative;
+            z-index: 10;
         }
 
         .quiz-card {
-            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(40, 40, 40, 0.8));
-            border-radius: 25px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(30px);
+            border-radius: 30px;
             padding: 60px 50px;
-            max-width: 800px;
+            max-width: 900px;
             width: 100%;
             text-align: center;
-            border: 2px solid rgba(255, 107, 53, 0.2);
-            backdrop-filter: blur(20px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 50px rgba(255, 107, 53, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quiz-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b35, #ffaa80, #ff6b35);
+            border-radius: 30px 30px 0 0;
         }
 
         /* Welcome Screen */
@@ -109,70 +190,120 @@
 
         .welcome-title {
             color: #ff6b35;
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 900;
             margin-bottom: 25px;
             line-height: 1.2;
+            text-shadow: 0 0 30px rgba(255, 107, 53, 0.5);
+            background: linear-gradient(135deg, #ff6b35, #ffaa80);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .welcome-subtitle {
-            color: #e0e0e0;
-            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-            margin-bottom: 30px;
-            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+            margin-bottom: 40px;
+            line-height: 1.6;
+            font-weight: 500;
         }
 
         .welcome-features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
 
         .welcome-feature {
             background: rgba(255, 107, 53, 0.1);
             border: 1px solid rgba(255, 107, 53, 0.3);
-            border-radius: 15px;
-            padding: 25px 20px;
+            border-radius: 20px;
+            padding: 30px 25px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .welcome-feature:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
+            border-color: #ff6b35;
+            background: rgba(255, 107, 53, 0.15);
+        }
+
+        .welcome-feature:hover::before {
+            left: 100%;
         }
 
         .welcome-feature i {
             color: #ff6b35;
-            font-size: 2rem;
-            margin-bottom: 15px;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(255, 107, 53, 0.5);
         }
 
         .welcome-feature h3 {
             color: #fff;
-            font-size: 1.1rem;
-            margin-bottom: 10px;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 700;
         }
 
         .welcome-feature p {
-            color: #b0b0b0;
-            font-size: 0.9rem;
-            line-height: 1.4;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            line-height: 1.5;
         }
 
         .start-quiz-btn {
-            background: linear-gradient(45deg, #ff6b35, #ff8c5a);
+            background: linear-gradient(135deg, #ff6b35, #ffaa80);
             color: white;
             border: none;
-            padding: 20px 50px;
-            border-radius: 30px;
-            font-size: 1.2rem;
-            font-weight: bold;
+            padding: 25px 60px;
+            border-radius: 50px;
+            font-size: 1.4rem;
+            font-weight: 800;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+            gap: 15px;
+            box-shadow: 0 15px 35px rgba(255, 107, 53, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .start-quiz-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s;
         }
 
         .start-quiz-btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 12px 35px rgba(255, 107, 53, 0.6);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 25px 50px rgba(255, 107, 53, 0.6);
+        }
+
+        .start-quiz-btn:hover::before {
+            left: 100%;
         }
 
         /* User Info Screen */
@@ -182,70 +313,75 @@
 
         .info-title {
             color: #ff6b35;
-            font-size: 2.5rem;
-            font-weight: bold;
+            font-size: 2.8rem;
+            font-weight: 900;
             margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
         }
 
         .info-subtitle {
-            color: #e0e0e0;
-            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.3rem;
             margin-bottom: 40px;
+            font-weight: 500;
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             text-align: left;
         }
 
         .form-group label {
             display: block;
-            color: #fff;
-            font-weight: bold;
-            margin-bottom: 10px;
+            color: #ff6b35;
+            font-weight: 700;
+            margin-bottom: 12px;
             font-size: 1.1rem;
         }
 
         .form-group input {
             width: 100%;
-            padding: 15px 20px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 20px 25px;
+            border: 2px solid rgba(255, 107, 53, 0.3);
             border-radius: 15px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.5);
             color: #fff;
-            font-size: 1rem;
-            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
         }
 
         .form-group input:focus {
             outline: none;
             border-color: #ff6b35;
-            box-shadow: 0 0 15px rgba(255, 107, 53, 0.3);
+            box-shadow: 0 0 25px rgba(255, 107, 53, 0.4);
+            transform: translateY(-2px);
         }
 
         .form-group input::placeholder {
-            color: #999;
+            color: rgba(255, 255, 255, 0.6);
         }
 
         .continue-btn {
-            background: linear-gradient(45deg, #ff6b35, #ff8533);
+            background: linear-gradient(135deg, #ff6b35, #ffaa80);
             color: white;
             border: none;
-            padding: 15px 40px;
-            border-radius: 25px;
-            font-size: 1.1rem;
-            font-weight: bold;
+            padding: 18px 45px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            margin-top: 20px;
+            gap: 12px;
+            margin-top: 25px;
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
         }
 
         .continue-btn:hover {
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(255, 107, 53, 0.5);
         }
 
         .continue-btn:disabled {
@@ -261,37 +397,41 @@
 
         .question-counter {
             color: #ff6b35;
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 20px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            text-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
         }
 
         .question-title {
             color: #fff;
-            font-size: clamp(1.5rem, 3vw, 2.2rem);
-            font-weight: bold;
-            margin-bottom: 40px;
+            font-size: clamp(1.6rem, 3vw, 2.5rem);
+            font-weight: 800;
+            margin-bottom: 45px;
             line-height: 1.3;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         .answers-grid {
             display: grid;
-            gap: 15px;
-            margin-bottom: 40px;
+            gap: 20px;
+            margin-bottom: 45px;
         }
 
         .answer-option {
             background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 20px 25px;
+            border: 2px solid rgba(255, 107, 53, 0.2);
+            border-radius: 20px;
+            padding: 25px 30px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: left;
-            color: #e0e0e0;
-            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            font-weight: 600;
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(10px);
         }
 
         .answer-option::before {
@@ -301,14 +441,15 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.1), transparent);
-            transition: left 0.5s ease;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.2), transparent);
+            transition: left 0.6s;
         }
 
         .answer-option:hover {
-            border-color: rgba(255, 107, 53, 0.5);
-            background: rgba(255, 107, 53, 0.1);
-            transform: translateX(5px);
+            border-color: #ff6b35;
+            background: rgba(255, 107, 53, 0.15);
+            transform: translateX(8px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
         }
 
         .answer-option:hover::before {
@@ -317,8 +458,21 @@
 
         .answer-option.selected {
             border-color: #ff6b35;
-            background: rgba(255, 107, 53, 0.2);
+            background: rgba(255, 107, 53, 0.25);
             color: #fff;
+            transform: scale(1.03);
+            box-shadow: 0 15px 35px rgba(255, 107, 53, 0.4);
+        }
+
+        .answer-option.selected::after {
+            content: '✓';
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 1.5rem;
+            color: #ff6b35;
+            font-weight: 900;
+            text-shadow: 0 0 10px rgba(255, 107, 53, 0.8);
         }
 
         .quiz-navigation {
@@ -328,22 +482,26 @@
         }
 
         .nav-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 107, 53, 0.3);
             color: #fff;
-            padding: 12px 25px;
-            border-radius: 25px;
+            padding: 15px 30px;
+            border-radius: 50px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1.1rem;
+            font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            backdrop-filter: blur(10px);
         }
 
         .nav-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
+            background: rgba(255, 107, 53, 0.2);
+            border-color: #ff6b35;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.3);
         }
 
         .nav-btn:disabled {
@@ -353,13 +511,12 @@
         }
 
         .next-btn {
-            background: linear-gradient(45deg, #ff6b35, #ff8533);
+            background: linear-gradient(135deg, #ff6b35, #ffaa80);
             border: none;
         }
 
         .next-btn:hover {
-            background: linear-gradient(45deg, #ff8533, #ffa366);
-            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.3);
+            box-shadow: 0 15px 35px rgba(255, 107, 53, 0.5);
         }
 
         /* Saving Screen */
@@ -368,20 +525,22 @@
         }
 
         .saving-title {
-            color: #4ade80;
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 20px;
+            color: #ff6b35;
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 25px;
+            text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
         }
 
         .saving-spinner {
-            width: 60px;
-            height: 60px;
-            border: 4px solid rgba(74, 222, 128, 0.2);
-            border-top: 4px solid #4ade80;
+            width: 80px;
+            height: 80px;
+            border: 6px solid rgba(255, 107, 53, 0.2);
+            border-top: 6px solid #ff6b35;
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
+            margin: 0 auto 25px;
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
         }
 
         @keyframes spin {
@@ -389,33 +548,37 @@
             100% { transform: rotate(360deg); }
         }
 
-        .saving-text {
-            color: #b0b0b0;
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-        }
-
         .saving-steps {
             text-align: left;
             max-width: 400px;
-            margin: 20px auto;
+            margin: 25px auto;
         }
 
         .saving-step {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 8px 0;
-            color: #888;
+            gap: 15px;
+            padding: 12px 0;
+            color: rgba(255, 255, 255, 0.6);
             transition: all 0.3s ease;
+            font-size: 1.1rem;
+            font-weight: 600;
         }
 
         .saving-step.completed {
-            color: #4ade80;
+            color: #ff6b35;
+            transform: scale(1.05);
+            text-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
         }
 
         .saving-step.current {
-            color: #ff6b35;
+            color: #ffaa80;
+            transform: scale(1.05);
+        }
+
+        .saving-step i {
+            font-size: 1.2rem;
+            width: 20px;
         }
 
         /* Results Screen */
@@ -423,126 +586,186 @@
             display: none;
         }
 
+        .success-badge {
+            background: rgba(255, 107, 53, 0.2);
+            border: 2px solid #ff6b35;
+            color: #ff6b35;
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
+        }
+
         .results-title {
-            color: #4ade80;
-            font-size: clamp(2.2rem, 4vw, 3rem);
+            color: #ff6b35;
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
             font-weight: 900;
             margin-bottom: 25px;
+            text-shadow: 0 0 30px rgba(255, 107, 53, 0.5);
         }
 
         .results-subtitle {
-            color: #e0e0e0;
-            font-size: 1.3rem;
-            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.4rem;
+            margin-bottom: 45px;
+            font-weight: 500;
         }
 
         .results-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 45px;
         }
 
         .result-category {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 25px 20px;
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 20px;
+            padding: 30px 25px;
             text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(15px);
+        }
+
+        .result-category:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
+            border-color: #ff6b35;
         }
 
         .category-name {
             color: #fff;
-            font-size: 1.1rem;
-            font-weight: bold;
-            margin-bottom: 15px;
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
         }
 
         .score-display {
             display: flex;
             justify-content: center;
-            gap: 5px;
-            margin-bottom: 15px;
+            gap: 8px;
+            margin-bottom: 20px;
         }
 
         .score-star {
-            width: 25px;
-            height: 25px;
-            color: #666;
-            font-size: 1.2rem;
+            width: 30px;
+            height: 30px;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 1.4rem;
+            transition: all 0.3s ease;
         }
 
         .score-star.filled {
-            color: #ffd700;
+            color: #ff6b35;
+            transform: scale(1.2);
+            text-shadow: 0 0 15px rgba(255, 107, 53, 0.8);
         }
 
         .category-description {
-            color: #b0b0b0;
-            font-size: 0.9rem;
-            line-height: 1.4;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            line-height: 1.5;
+            font-weight: 500;
         }
 
         .results-report {
             background: rgba(255, 107, 53, 0.1);
-            border: 1px solid rgba(255, 107, 53, 0.3);
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 40px;
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            border-radius: 25px;
+            padding: 40px;
+            margin-bottom: 45px;
             text-align: left;
+            backdrop-filter: blur(15px);
         }
 
         .report-title {
             color: #ff6b35;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 20px;
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 25px;
             text-align: center;
+            text-shadow: 0 0 15px rgba(255, 107, 53, 0.5);
         }
 
         .report-text {
-            color: #e0e0e0;
-            line-height: 1.7;
-            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            font-size: 1.1rem;
             white-space: pre-line;
+            font-weight: 500;
         }
 
         .results-actions {
             display: flex;
-            gap: 20px;
+            gap: 25px;
             justify-content: center;
             flex-wrap: wrap;
         }
 
         .action-btn {
-            padding: 15px 30px;
-            border-radius: 25px;
+            padding: 20px 40px;
+            border-radius: 50px;
             text-decoration: none;
-            font-weight: bold;
-            font-size: 1rem;
+            font-weight: 800;
+            font-size: 1.2rem;
             display: flex;
             align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
+            gap: 12px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
         }
 
         .primary-action {
-            background: linear-gradient(45deg, #25D366, #128C7E);
+            background: linear-gradient(135deg, #25D366, #128C7E);
             color: white;
+            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.4);
         }
 
         .secondary-action {
-            background: linear-gradient(45deg, #ff6b35, #ff8533);
+            background: linear-gradient(135deg, #ff6b35, #ffaa80);
             color: white;
+            box-shadow: 0 15px 35px rgba(255, 107, 53, 0.4);
         }
 
         .action-btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+            transform: translateY(-5px) scale(1.05);
             text-decoration: none;
             color: white;
         }
 
-        /* Loading Animation */
+        .primary-action:hover {
+            box-shadow: 0 25px 50px rgba(37, 211, 102, 0.6);
+        }
+
+        .secondary-action:hover {
+            box-shadow: 0 25px 50px rgba(255, 107, 53, 0.6);
+        }
+
+        .action-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Loading Screen */
         .loading-screen {
             display: none;
             text-align: center;
@@ -550,38 +773,57 @@
 
         .loading-title {
             color: #ff6b35;
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 20px;
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 25px;
+            text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
         }
 
         .loading-spinner {
-            width: 60px;
-            height: 60px;
-            border: 4px solid rgba(255, 107, 53, 0.2);
-            border-top: 4px solid #ff6b35;
+            width: 80px;
+            height: 80px;
+            border: 6px solid rgba(255, 107, 53, 0.2);
+            border-top: 6px solid #ff6b35;
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
+            margin: 0 auto 25px;
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
         }
 
         .loading-text {
-            color: #b0b0b0;
-            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.3rem;
+            font-weight: 600;
         }
 
-        /* Success Badge */
-        .success-badge {
-            background: rgba(74, 222, 128, 0.1);
-            border: 2px solid #4ade80;
-            color: #4ade80;
-            padding: 10px 20px;
-            border-radius: 25px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 20px;
-            font-weight: bold;
+        /* Confetti Animation */
+        .confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff6b35;
+            animation: confetti-fall 3s linear infinite;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
         }
 
         /* Mobile Responsive */
@@ -593,12 +835,12 @@
 
             .welcome-features {
                 grid-template-columns: 1fr;
-                gap: 15px;
+                gap: 20px;
             }
 
             .quiz-navigation {
                 flex-direction: column;
-                gap: 15px;
+                gap: 20px;
             }
 
             .nav-btn {
@@ -613,17 +855,40 @@
 
             .action-btn {
                 width: 100%;
-                max-width: 300px;
+                max-width: 350px;
                 justify-content: center;
             }
 
-            .progress-bar {
-                width: 150px;
+            .progress-container {
+                width: 200px;
+            }
+
+            .start-quiz-btn {
+                padding: 20px 40px;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .quiz-header {
+                padding: 15px;
+            }
+
+            .home-btn {
+                padding: 10px 20px;
+                font-size: 12px;
+            }
+
+            .quiz-logo {
+                font-size: 1.2rem;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
     <!-- Header -->
     <div class="quiz-header">
         <a href="./" class="home-btn">
@@ -633,7 +898,7 @@
         <div class="quiz-logo">
             🎯 Fitness Quiz
         </div>
-        <div class="progress-bar">
+        <div class="progress-container">
             <div class="progress-fill" id="progressBar"></div>
         </div>
     </div>
@@ -652,22 +917,22 @@
                     <div class="welcome-feature">
                         <i class="fas fa-chart-line"></i>
                         <h3>Analisi Completa</h3>
-                        <p>Valutiamo fitness, alimentazione, abitudini e motivazione</p>
+                        <p>Valutiamo fitness, alimentazione, abitudini e motivazione con algoritmi avanzati</p>
                     </div>
                     <div class="welcome-feature">
                         <i class="fas fa-star"></i>
                         <h3>Score Personalizzato</h3>
-                        <p>Ricevi un punteggio da 1 a 5 per ogni area della tua vita</p>
+                        <p>Ricevi un punteggio da 1 a 5 per ogni area della tua vita con consigli mirati</p>
                     </div>
                     <div class="welcome-feature">
                         <i class="fas fa-lightbulb"></i>
-                        <h3>Consigli Pratici</h3>
-                        <p>Suggerimenti specifici per migliorare immediatamente</p>
+                        <h3>Consigli AI</h3>
+                        <p>Suggerimenti basati su AI per migliorare immediatamente le tue abitudini</p>
                     </div>
                 </div>
                 
                 <button class="start-quiz-btn" onclick="showUserInfoForm()">
-                    <i class="fas fa-play-circle"></i>
+                    <i class="fas fa-rocket"></i>
                     Inizia il Quiz (3 min)
                 </button>
             </div>
@@ -678,12 +943,12 @@
                 <p class="info-subtitle">Per personalizzare al meglio il tuo report, inserisci i tuoi dati</p>
                 
                 <div class="form-group">
-                    <label for="userName">Il tuo nome *</label>
+                    <label for="userName">✨ Il tuo nome</label>
                     <input type="text" id="userName" placeholder="Inserisci il tuo nome" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="userPhone">Il tuo numero di telefono *</label>
+                    <label for="userPhone">📱 Il tuo numero di telefono</label>
                     <input type="tel" id="userPhone" placeholder="Inserisci il tuo numero (es. 3331234567)" required>
                 </div>
                 
@@ -715,7 +980,7 @@
             <div class="loading-screen" id="loadingScreen">
                 <h2 class="loading-title">🧠 Analizzo i tuoi risultati...</h2>
                 <div class="loading-spinner"></div>
-                <p class="loading-text">Sto creando il tuo report personalizzato</p>
+                <p class="loading-text">Sto creando il tuo report personalizzato con AI</p>
             </div>
 
             <!-- Saving Screen -->
@@ -746,12 +1011,12 @@
             <!-- Results Screen -->
             <div class="results-screen" id="resultsScreen">
                 <div class="success-badge">
-                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-trophy"></i>
                     Risultati salvati con successo!
                 </div>
                 
                 <h2 class="results-title">🎉 Ecco il Tuo Report!</h2>
-                <p class="results-subtitle">Analisi completa del tuo stile di vita</p>
+                <p class="results-subtitle">Analisi completa del tuo stile di vita powered by AI</p>
                 
                 <div class="results-grid" id="resultsGrid"></div>
                 
@@ -774,8 +1039,11 @@
         </div>
     </div>
 
+    <!-- Confetti Container -->
+    <div class="confetti" id="confetti"></div>
+
     <script>
-        // Quiz Data
+        // Quiz Data (keeping the same questions)
         const quizQuestions = [
             {
                 id: 1,
@@ -1006,12 +1274,48 @@
         let userPhone = '';
         let quizResults = {};
 
-        // Functions
+        // Initialize floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 15;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 8 + 4 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = Math.random() * 6 + 6 + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Show confetti animation
+        function showConfetti() {
+            const confettiContainer = document.getElementById('confetti');
+            const colors = ['#ff6b35', '#ffaa80', '#ff8533'];
+            
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti-piece';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 3 + 's';
+                    confettiContainer.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 100);
+            }
+        }
+
+        // Functions (keeping all existing functionality)
         function showUserInfoForm() {
             document.getElementById('welcomeScreen').style.display = 'none';
             document.getElementById('userInfoScreen').style.display = 'block';
             
-            // Enable continue button when both fields are filled
             const nameInput = document.getElementById('userName');
             const phoneInput = document.getElementById('userPhone');
             const continueBtn = document.getElementById('continueBtn');
@@ -1066,8 +1370,15 @@
             // Remove previous selection
             document.querySelectorAll('.answer-option').forEach(el => el.classList.remove('selected'));
             
-            // Add selection to clicked answer
-            document.querySelectorAll('.answer-option')[answerIndex].classList.add('selected');
+            // Add selection to clicked answer with animation
+            const selectedOption = document.querySelectorAll('.answer-option')[answerIndex];
+            selectedOption.classList.add('selected');
+            
+            // Add pulse effect
+            selectedOption.style.animation = 'none';
+            setTimeout(() => {
+                selectedOption.style.animation = 'pulse 0.6s ease';
+            }, 10);
             
             // Store answer
             answers[currentQuestion] = {
@@ -1106,8 +1417,8 @@
         }
 
         function updateProgress() {
-            const totalSteps = quizQuestions.length + 1; // +1 for user info form
-            const currentStep = currentQuestion + 2; // +2 because we start from user info (step 1)
+            const totalSteps = quizQuestions.length + 1;
+            const currentStep = currentQuestion + 2;
             const progress = (currentStep / totalSteps) * 100;
             document.getElementById('progressBar').style.width = progress + '%';
         }
@@ -1117,18 +1428,16 @@
             document.getElementById('nextBtn').disabled = !answers[currentQuestion];
             
             if (currentQuestion === quizQuestions.length - 1) {
-                document.getElementById('nextBtn').innerHTML = '<i class="fas fa-check"></i> Completa Quiz';
+                document.getElementById('nextBtn').innerHTML = '<i class="fas fa-trophy"></i> Completa Quiz';
             } else {
                 document.getElementById('nextBtn').innerHTML = 'Prossima <i class="fas fa-arrow-right"></i>';
             }
         }
 
         function finishQuiz() {
-            // Show loading screen
             document.getElementById('quizScreen').style.display = 'none';
             document.getElementById('loadingScreen').style.display = 'block';
             
-            // Simulate AI processing and then save
             setTimeout(() => {
                 calculateResults();
                 saveToAirtable();
@@ -1144,7 +1453,6 @@
                 stress: { total: 0, count: 0 }
             };
             
-            // Calculate category averages
             Object.values(answers).forEach(answer => {
                 if (categoryScores[answer.category]) {
                     categoryScores[answer.category].total += answer.score;
@@ -1152,7 +1460,6 @@
                 }
             });
             
-            // Calculate final scores
             for (let category in categoryScores) {
                 if (categoryScores[category].count > 0) {
                     categoryScores[category].average = Math.round(categoryScores[category].total / categoryScores[category].count);
@@ -1163,11 +1470,10 @@
         }
 
         async function saveToAirtable() {
-            // Show saving screen
             document.getElementById('loadingScreen').style.display = 'none';
             document.getElementById('savingScreen').style.display = 'block';
             
-            // Simulate saving steps
+            // Simulate saving steps with animations
             setTimeout(() => {
                 document.getElementById('step2').classList.remove('current');
                 document.getElementById('step2').classList.add('completed');
@@ -1209,7 +1515,6 @@
             };
             
             try {
-                // Call the save API
                 const response = await fetch('/api/save-quiz-result', {
                     method: 'POST',
                     headers: {
@@ -1226,9 +1531,9 @@
                         document.getElementById('step4').classList.add('completed');
                         document.getElementById('step4').innerHTML = '<i class="fas fa-check"></i><span>Completato!</span>';
                         
-                        // Show results after successful save
                         setTimeout(() => {
                             showResults();
+                            showConfetti(); // Show confetti on success
                         }, 1000);
                     }, 1500);
                 } else {
@@ -1238,7 +1543,6 @@
             } catch (error) {
                 console.error('❌ Error saving to Airtable:', error);
                 
-                // Even if save fails, show results but with a warning
                 setTimeout(() => {
                     document.getElementById('step4').classList.remove('current');
                     document.getElementById('step4').innerHTML = '<i class="fas fa-exclamation-triangle" style="color: #ff6b35;"></i><span>Salvataggio locale</span>';
@@ -1251,9 +1555,9 @@
         }
 
         function calculateLeadPriority(overallScore) {
-            if (overallScore <= 2.0) return 'High';  // Needs most help
+            if (overallScore <= 2.0) return 'High';
             if (overallScore <= 3.5) return 'Medium';
-            return 'Low';  // Already doing well
+            return 'Low';
         }
 
         function showResults() {
@@ -1271,62 +1575,9 @@
                 stress: 'Gestione Stress'
             };
             
-            // Display category scores
-            for (let category in quizResults) {
-                if (quizResults[category].count > 0) {
-                    const score = quizResults[category].average;
-                    const categoryElement = document.createElement('div');
-                    categoryElement.className = 'result-category';
-                    categoryElement.innerHTML = `
-                        <div class="category-name">${categoryNames[category]}</div>
-                        <div class="score-display">
-                            ${Array.from({length: 5}, (_, i) => 
-                                `<i class="fas fa-star score-star ${i < score ? 'filled' : ''}"></i>`
-                            ).join('')}
-                        </div>
-                        <div class="category-description">${getScoreDescription(score)}</div>
-                    `;
-                    resultsGrid.appendChild(categoryElement);
-                }
-            }
-            
-            // Generate and display detailed report
-            const detailedReport = generateDetailedReport();
-            document.getElementById('reportText').textContent = detailedReport;
-            
-            // Update WhatsApp link with user data
-            updateWhatsAppLink();
-            
-            // Complete progress bar
-            document.getElementById('progressBar').style.width = '100%';
-        }
-
-        function getScoreDescription(score) {
-            const descriptions = {
-                1: 'Area che necessita miglioramento immediato',
-                2: 'C\'è spazio per crescere',
-                3: 'Livello discreto, ma migliorabile',
-                4: 'Buon livello, continua così',
-                5: 'Eccellente! Sei un esempio'
-            };
-            return descriptions[score] || '';
-        }
-
-        function generateDetailedReport() {
-            const scores = quizResults;
-            const categoryNames = {
-                fitness: 'Forma Fisica',
-                alimentazione: 'Alimentazione',
-                abitudini: 'Abitudini Salutari',
-                motivazione: 'Motivazione',
-                stress: 'Gestione Stress'
-            };
-            
-            // Calculate overall average
             const validScores = Object.values(scores).filter(cat => cat.count > 0);
             const overallAverage = validScores.reduce((sum, cat) => sum + cat.average, 0) / validScores.length;
             
-            // Sort categories by score to identify strengths and weaknesses
             const sortedCategories = Object.entries(scores)
                 .filter(([_, data]) => data.count > 0)
                 .sort(([_, a], [__, b]) => a.average - b.average);
@@ -1431,49 +1682,6 @@ Sono qui per supportarti in questo percorso verso la migliore versione di te ste
                     5: 'La tua gestione dello stress è eccellente! Rimani calmo e centrato anche nelle situazioni difficili. Le tue tecniche sono un esempio per altri.'
                 }
             };
-            return plans[area][phase] || '';
-        }
-
-        function getImmediateTips(scores) {
-            let tips = [];
-            
-            if (scores.fitness.average <= 2) {
-                tips.push('• OGGI: Fai una camminata di 10 minuti dopo pranzo');
-            }
-            if (scores.alimentazione.average <= 2) {
-                tips.push('• OGGI: Bevi un bicchiere d\'acqua prima di ogni pasto');
-            }
-            if (scores.abitudini.average <= 2) {
-                tips.push('• OGGI: Metti il telefono in modalità aereo 1 ora prima di dormire');
-            }
-            if (scores.motivazione.average <= 2) {
-                tips.push('• OGGI: Scrivi un obiettivo specifico che vuoi raggiungere questa settimana');
-            }
-            if (scores.stress.average <= 2) {
-                tips.push('• OGGI: Pratica 3 respiri profondi ogni volta che ti senti stressato');
-            }
-            
-            return tips.join('\n');
-        }
-
-        function updateWhatsAppLink() {
-            const message = `Ciao Andrea! Ho completato il quiz fitness e sono ${userName} (tel: ${userPhone}). I miei risultati mostrano che devo migliorare soprattutto ${getCategoryName(Object.entries(quizResults).filter(([_, data]) => data.count > 0).sort(([_, a], [__, b]) => a.average - b.average)[0][0])}. Mi piacerebbe prenotare una consulenza per creare un piano personalizzato. Grazie!`;
-            
-            document.getElementById('whatsappBtn').href = `https://wa.me/3478881515?text=${encodeURIComponent(message)}`;
-        }
-
-        function openChat() {
-            // Placeholder for chat functionality
-            alert('La funzione chat sarà disponibile a breve! Per ora puoi contattarmi su WhatsApp per qualsiasi domanda 😊');
-        }
-
-        // Initialize quiz
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🎯 Quiz loaded with', quizQuestions.length, 'questions');
-        });
-    </script>
-</body>
-</html>
             return analyses[category][score] || '';
         }
 
@@ -1531,3 +1739,111 @@ Ora che hai consolidato le basi, è il momento di integrare tutto e alzare l'ast
                 stress: {
                     phase1: '• Pratica 5 minuti di respirazione profonda al giorno\n• Dedica 15 minuti solo a te stesso ogni giorno\n• Identifica i tuoi principali stressor',
                     phase2: '• Prova la meditazione guidata (10 minuti)\n• Implementa tecniche di time management\n• Crea confini chiari tra lavoro e vita privata'
+                }
+            };
+            return plans[area][phase] || '';
+        }
+
+        function getImmediateTips(scores) {
+            let tips = [];
+            
+            if (scores.fitness.average <= 2) {
+                tips.push('• OGGI: Fai una camminata di 10 minuti dopo pranzo');
+            }
+            if (scores.alimentazione.average <= 2) {
+                tips.push('• OGGI: Bevi un bicchiere d\'acqua prima di ogni pasto');
+            }
+            if (scores.abitudini.average <= 2) {
+                tips.push('• OGGI: Metti il telefono in modalità aereo 1 ora prima di dormire');
+            }
+            if (scores.motivazione.average <= 2) {
+                tips.push('• OGGI: Scrivi un obiettivo specifico che vuoi raggiungere questa settimana');
+            }
+            if (scores.stress.average <= 2) {
+                tips.push('• OGGI: Pratica 3 respiri profondi ogni volta che ti senti stressato');
+            }
+            
+            return tips.join('\n');
+        }
+
+        function updateWhatsAppLink() {
+            const message = `Ciao Andrea! Ho completato il quiz fitness e sono ${userName} (tel: ${userPhone}). I miei risultati mostrano che devo migliorare soprattutto ${getCategoryName(Object.entries(quizResults).filter(([_, data]) => data.count > 0).sort(([_, a], [__, b]) => a.average - b.average)[0][0])}. Mi piacerebbe prenotare una consulenza per creare un piano personalizzato. Grazie!`;
+            
+            document.getElementById('whatsappBtn').href = `https://wa.me/3478881515?text=${encodeURIComponent(message)}`;
+        }
+
+        function openChat() {
+            alert('La funzione chat sarà disponibile a breve! Per ora puoi contattarmi su WhatsApp per qualsiasi domanda 😊');
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎯 Quiz loaded with', quizQuestions.length, 'questions');
+            createParticles();
+        });
+
+        // Add CSS animation for pulse effect
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>Gestione Stress'
+            };
+            
+            // Display category scores with animations
+            for (let category in quizResults) {
+                if (quizResults[category].count > 0) {
+                    const score = quizResults[category].average;
+                    const categoryElement = document.createElement('div');
+                    categoryElement.className = 'result-category';
+                    categoryElement.innerHTML = `
+                        <div class="category-name">${categoryNames[category]}</div>
+                        <div class="score-display">
+                            ${Array.from({length: 5}, (_, i) => 
+                                `<i class="fas fa-star score-star ${i < score ? 'filled' : ''}"></i>`
+                            ).join('')}
+                        </div>
+                        <div class="category-description">${getScoreDescription(score)}</div>
+                    `;
+                    resultsGrid.appendChild(categoryElement);
+                }
+            }
+            
+            // Generate and display detailed report
+            const detailedReport = generateDetailedReport();
+            document.getElementById('reportText').textContent = detailedReport;
+            
+            // Update WhatsApp link with user data
+            updateWhatsAppLink();
+            
+            // Complete progress bar
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function getScoreDescription(score) {
+            const descriptions = {
+                1: 'Area che necessita miglioramento immediato',
+                2: 'C\'è spazio per crescere',
+                3: 'Livello discreto, ma migliorabile',
+                4: 'Buon livello, continua così',
+                5: 'Eccellente! Sei un esempio'
+            };
+            return descriptions[score] || '';
+        }
+
+        // Keep all existing report generation functions...
+        function generateDetailedReport() {
+            const scores = quizResults;
+            const categoryNames = {
+                fitness: 'Forma Fisica',
+                alimentazione: 'Alimentazione',
+                abitudini: 'Abitudini Salutari',
+                motivazione: 'Motivazione',
+                stress: '
