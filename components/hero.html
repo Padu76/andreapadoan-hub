@@ -13,7 +13,7 @@
                 <i class="fas fa-comments"></i>
                 Chiedimi tutto sui miei servizi
             </button>
-            <button class="quiz-cta" onclick="scrollToQuiz()">
+            <button class="quiz-cta" onclick="goToQuiz()">
                 <i class="fas fa-clipboard-list"></i>
                 Quiz: Testa il tuo livello fitness
             </button>
@@ -35,3 +35,17 @@
         </div>
     </div>
 </div>
+
+<script>
+// Funzione per andare al quiz
+function goToQuiz() {
+    window.location.href = './quiz.html';
+}
+
+// Fallback function se scrollToQuiz non esiste
+if (typeof scrollToQuiz === 'undefined') {
+    function scrollToQuiz() {
+        goToQuiz();
+    }
+}
+</script>
