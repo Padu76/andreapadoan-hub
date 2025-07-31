@@ -1575,6 +1575,57 @@
                 stress: 'Gestione Stress'
             };
             
+            // Display category scores with animations
+            for (let category in quizResults) {
+                if (quizResults[category].count > 0) {
+                    const score = quizResults[category].average;
+                    const categoryElement = document.createElement('div');
+                    categoryElement.className = 'result-category';
+                    categoryElement.innerHTML = `
+                        <div class="category-name">${categoryNames[category]}</div>
+                        <div class="score-display">
+                            ${Array.from({length: 5}, (_, i) => 
+                                `<i class="fas fa-star score-star ${i < score ? 'filled' : ''}"></i>`
+                            ).join('')}
+                        </div>
+                        <div class="category-description">${getScoreDescription(score)}</div>
+                    `;
+                    resultsGrid.appendChild(categoryElement);
+                }
+            }
+            
+            // Generate and display detailed report
+            const detailedReport = generateDetailedReport();
+            document.getElementById('reportText').textContent = detailedReport;
+            
+            // Update WhatsApp link with user data
+            updateWhatsAppLink();
+            
+            // Complete progress bar
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function getScoreDescription(score) {
+            const descriptions = {
+                1: 'Area che necessita miglioramento immediato',
+                2: 'C\'è spazio per crescere',
+                3: 'Livello discreto, ma migliorabile',
+                4: 'Buon livello, continua così',
+                5: 'Eccellente! Sei un esempio'
+            };
+            return descriptions[score] || '';
+        }
+
+        function generateDetailedReport() {
+            const scores = quizResults;
+            const categoryNames = {
+                fitness: 'Forma Fisica',
+                alimentazione: 'Alimentazione',
+                abitudini: 'Abitudini Salutari',
+                motivazione: 'Motivazione',
+                stress: 'Gestione Stress'
+            };
+            
             const validScores = Object.values(scores).filter(cat => cat.count > 0);
             const overallAverage = validScores.reduce((sum, cat) => sum + cat.average, 0) / validScores.length;
             
@@ -1651,7 +1702,7 @@ Sono qui per supportarti in questo percorso verso la migliore versione di te ste
                     2: 'La tua forma fisica è sotto la media. Fai qualche attività sporadica ma manca costanza. Con un programma strutturato vedrai miglioramenti rapidi.',
                     3: 'La tua forma fisica è discreta. Hai alcune buone abitudini ma potresti essere più costante e strutturato negli allenamenti.',
                     4: 'La tua forma fisica è buona! Sei attivo regolarmente. Ora puoi concentrarti su obiettivi specifici e sfide più avanzate.',
-                    5: 'La tua forma fisica è eccellente! Sei un esempio di costanza e disciplina. Mantieni questo livello e magari inspira altri.'
+                    5: 'La tua forma física è eccellente! Sei un esempio di costanza e disciplina. Mantieni questo livello e magari inspira altri.'
                 },
                 alimentazione: {
                     1: 'La tua alimentazione necessita una revisione completa. Probabilmente mangi spesso fuori casa, salti pasti e consumi molti cibi processati.',
@@ -1767,7 +1818,11 @@ Ora che hai consolidato le basi, è il momento di integrare tutto e alzare l'ast
         }
 
         function updateWhatsAppLink() {
-            const message = `Ciao Andrea! Ho completato il quiz fitness e sono ${userName} (tel: ${userPhone}). I miei risultati mostrano che devo migliorare soprattutto ${getCategoryName(Object.entries(quizResults).filter(([_, data]) => data.count > 0).sort(([_, a], [__, b]) => a.average - b.average)[0][0])}. Mi piacerebbe prenotare una consulenza per creare un piano personalizzato. Grazie!`;
+            const weakestArea = Object.entries(quizResults)
+                .filter(([_, data]) => data.count > 0)
+                .sort(([_, a], [__, b]) => a.average - b.average)[0];
+            
+            const message = `Ciao Andrea! Ho completato il quiz fitness e sono ${userName} (tel: ${userPhone}). I miei risultati mostrano che devo migliorare soprattutto ${getCategoryName(weakestArea[0])}. Mi piacerebbe prenotare una consulenza per creare un piano personalizzato. Grazie!`;
             
             document.getElementById('whatsappBtn').href = `https://wa.me/3478881515?text=${encodeURIComponent(message)}`;
         }
@@ -1794,56 +1849,4 @@ Ora che hai consolidato le basi, è il momento di integrare tutto e alzare l'ast
         document.head.appendChild(style);
     </script>
 </body>
-</html>Gestione Stress'
-            };
-            
-            // Display category scores with animations
-            for (let category in quizResults) {
-                if (quizResults[category].count > 0) {
-                    const score = quizResults[category].average;
-                    const categoryElement = document.createElement('div');
-                    categoryElement.className = 'result-category';
-                    categoryElement.innerHTML = `
-                        <div class="category-name">${categoryNames[category]}</div>
-                        <div class="score-display">
-                            ${Array.from({length: 5}, (_, i) => 
-                                `<i class="fas fa-star score-star ${i < score ? 'filled' : ''}"></i>`
-                            ).join('')}
-                        </div>
-                        <div class="category-description">${getScoreDescription(score)}</div>
-                    `;
-                    resultsGrid.appendChild(categoryElement);
-                }
-            }
-            
-            // Generate and display detailed report
-            const detailedReport = generateDetailedReport();
-            document.getElementById('reportText').textContent = detailedReport;
-            
-            // Update WhatsApp link with user data
-            updateWhatsAppLink();
-            
-            // Complete progress bar
-            document.getElementById('progressBar').style.width = '100%';
-        }
-
-        function getScoreDescription(score) {
-            const descriptions = {
-                1: 'Area che necessita miglioramento immediato',
-                2: 'C\'è spazio per crescere',
-                3: 'Livello discreto, ma migliorabile',
-                4: 'Buon livello, continua così',
-                5: 'Eccellente! Sei un esempio'
-            };
-            return descriptions[score] || '';
-        }
-
-        // Keep all existing report generation functions...
-        function generateDetailedReport() {
-            const scores = quizResults;
-            const categoryNames = {
-                fitness: 'Forma Fisica',
-                alimentazione: 'Alimentazione',
-                abitudini: 'Abitudini Salutari',
-                motivazione: 'Motivazione',
-                stress: '
+</html>
