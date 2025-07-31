@@ -28,6 +28,15 @@ function openProject(url) {
     }
 }
 
+// FIX: Funzione per navigare al quiz
+function goToQuiz() {
+    console.log('🎯 Navigating to quiz...');
+    window.location.href = './quiz.html';
+}
+
+// Rendi la funzione globale per accesso diretto
+window.goToQuiz = goToQuiz;
+
 // Funzione per aprire la chat AI
 function openChat() {
     const chatOverlay = document.getElementById('chatFullscreen');
@@ -530,5 +539,6 @@ console.log('🔧 Available functions:', [
     'sendMessage()',
     'sendQuickMessage()',
     'openContact()',
-    'openDashboard()'
+    'openDashboard()',
+    'goToQuiz()' // AGGIUNTA LA FUNZIONE MANCANTE
 ]);
