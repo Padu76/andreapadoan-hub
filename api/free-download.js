@@ -1,6 +1,6 @@
 // /api/free-download.js
-// API FIXATA con Resend per email automatiche
-// Andrea Padoan Ebooks - Versione CORRETTA anti-spam
+// API FIXATA con Resend per email automatiche + SALVATAGGIO AIRTABLE
+// Andrea Padoan Ebooks - Versione COMPLETA con tracking
 
 import { Resend } from 'resend';
 
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
     }
 
     try {
-        console.log('🎁 Free download API FIXATA - Resend version');
+        console.log('🎁 Free download API FIXATA con Airtable tracking');
 
         const { email, product } = req.body;
 
@@ -62,6 +62,47 @@ export default async function handler(req, res) {
             value: '19.90'
         };
 
+        // DATI PER TRACKING
+        const userAgent = req.headers['user-agent'] || '';
+        const sessionId = generateSessionId();
+        const timestamp = new Date().toISOString();
+        
+        // Determina priorità lead basata su ora e pattern email
+        const leadPriority = determineLead Priority(email, userAgent);
+
+        // SALVA SU AIRTABLE PRIMA di inviare email
+        let airtableSaved = false;
+        let airtableError = null;
+
+        try {
+            await saveToAirtable({
+                email,
+                productId: product,
+                productTitle: ebookInfo.title,
+                transactionType: 'free',
+                amount: 0,
+                paymentMethod: 'email',
+                status: 'pending', // Inizialmente pending, poi completed dopo email
+                timestamp,
+                customerCountry: 'IT', // Default, potrebbe essere migliorato con IP geolocation
+                sessionId,
+                userAgent,
+                downloadCount: 0,
+                leadPriority,
+                followUpStatus: 'New',
+                revenueCategory: 'Lead Generation',
+                marketingSource: determineMarketingSource(req.headers.referer)
+            });
+            
+            airtableSaved = true;
+            console.log('✅ Transaction saved to Airtable');
+
+        } catch (error) {
+            airtableError = error;
+            console.error('❌ Failed to save to Airtable:', error.message);
+            // Non fermiamo il processo, continuiamo con l'invio email
+        }
+
         // INVIO EMAIL AUTOMATICO FIXATO
         let emailSent = false;
         let emailError = null;
@@ -69,11 +110,10 @@ export default async function handler(req, res) {
 
         try {
             const emailResult = await resend.emails.send({
-                from: 'Andrea Padoan Personal Trainer <andrea.padoan@gmail.com>', // FIXATO: mittente Gmail affidabile
+                from: 'Andrea Padoan Personal Trainer <andrea.padoan@gmail.com>',
                 to: email,
                 subject: `🎁 Il tuo ebook GRATUITO "${ebookInfo.title}" è pronto!`,
                 html: createEmailTemplate(ebookInfo),
-                // FIXATO: Headers anti-spam
                 headers: {
                     'X-Priority': '1',
                     'X-MSMail-Priority': 'High',
@@ -82,8 +122,8 @@ export default async function handler(req, res) {
                 },
                 tags: [
                     { name: 'category', value: 'free-ebook' },
-                    { name: 'product', value: '50-workout' },
-                    { name: 'version', value: 'fixed-v1' }
+                    { name: 'product', value: product },
+                    { name: 'version', value: 'airtable-tracking-v1' }
                 ]
             });
 
@@ -91,6 +131,19 @@ export default async function handler(req, res) {
                 emailSent = true;
                 emailId = emailResult.data.id;
                 console.log('✅ Email sent successfully via Resend:', emailId);
+                
+                // AGGIORNA AIRTABLE: transaction completata
+                if (airtableSaved) {
+                    try {
+                        await updateAirtableTransactionStatus(sessionId, 'completed', {
+                            downloadCount: 1,
+                            lastDownload: timestamp
+                        });
+                        console.log('✅ Airtable transaction updated to completed');
+                    } catch (updateError) {
+                        console.error('⚠️ Failed to update Airtable status:', updateError.message);
+                    }
+                }
             } else {
                 throw new Error('No email ID returned from Resend');
             }
@@ -102,12 +155,22 @@ export default async function handler(req, res) {
                 name: error.name,
                 stack: error.stack?.substring(0, 500)
             });
+            
+            // AGGIORNA AIRTABLE: transaction fallita
+            if (airtableSaved) {
+                try {
+                    await updateAirtableTransactionStatus(sessionId, 'failed');
+                    console.log('✅ Airtable transaction updated to failed');
+                } catch (updateError) {
+                    console.error('⚠️ Failed to update Airtable status to failed:', updateError.message);
+                }
+            }
         }
 
-        // Notifica Telegram con dettagli dell'errore
-        await sendTelegramNotification(email, ebookInfo, emailSent, emailError);
+        // Notifica Telegram con dettagli completi
+        await sendTelegramNotification(email, ebookInfo, emailSent, emailError, airtableSaved, airtableError);
 
-        // FIXATO: Risposta basata sul successo reale dell'email
+        // RISPOSTA BASATA SUL SUCCESSO REALE
         if (emailSent) {
             return res.status(200).json({
                 success: true,
@@ -115,10 +178,11 @@ export default async function handler(req, res) {
                 downloadUrl: ebookInfo.fullDownloadUrl,
                 email: email.substring(0, 3) + '***@' + email.split('@')[1],
                 emailId: emailId,
-                sent: true
+                sent: true,
+                tracked: airtableSaved,
+                sessionId: sessionId
             });
         } else {
-            // FIXATO: Se email fallisce, NON dire che è un successo
             console.error('❌ Email delivery failed, providing fallback');
             
             return res.status(200).json({
@@ -127,6 +191,7 @@ export default async function handler(req, res) {
                 downloadUrl: ebookInfo.fullDownloadUrl,
                 fallback: true,
                 sent: false,
+                tracked: airtableSaved,
                 note: 'Email temporaneamente non disponibile. Salva questo link!',
                 warning: 'Controlla la cartella spam o usa il link diretto sopra'
             });
@@ -143,10 +208,11 @@ export default async function handler(req, res) {
             req.body?.email || 'unknown', 
             null, 
             false, 
+            error,
+            false,
             error
         );
 
-        // FIXATO: Fallback finale ma onesto
         return res.status(500).json({
             success: false,
             error: 'Errore temporaneo del server',
@@ -157,7 +223,166 @@ export default async function handler(req, res) {
     }
 }
 
-// Template email HTML MIGLIORATO
+// SALVA TRANSAZIONE SU AIRTABLE
+async function saveToAirtable(transactionData) {
+    const AIRTABLE_BASE_ID = process.env.AIRTABLE_BASE_ID;
+    const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
+    const EBOOK_TABLE = 'ebook_transactions';
+    
+    if (!AIRTABLE_BASE_ID || !AIRTABLE_API_KEY) {
+        throw new Error('Airtable credentials missing');
+    }
+    
+    const airtableUrl = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${EBOOK_TABLE}`;
+    
+    const record = {
+        fields: {
+            Email: transactionData.email,
+            Product_ID: transactionData.productId,
+            Product_Title: transactionData.productTitle,
+            Transaction_Type: transactionData.transactionType,
+            Amount: transactionData.amount,
+            Payment_Method: transactionData.paymentMethod,
+            Status: transactionData.status,
+            Timestamp: transactionData.timestamp,
+            Customer_Country: transactionData.customerCountry,
+            Session_ID: transactionData.sessionId,
+            User_Agent: transactionData.userAgent,
+            Download_Count: transactionData.downloadCount,
+            Lead_Priority: transactionData.leadPriority,
+            Follow_Up_Status: transactionData.followUpStatus,
+            Revenue_Category: transactionData.revenueCategory,
+            Marketing_Source: transactionData.marketingSource
+        }
+    };
+
+    const response = await fetch(airtableUrl, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${AIRTABLE_API_KEY}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(record)
+    });
+
+    if (!response.ok) {
+        const errorData = await response.text();
+        throw new Error(`Airtable API error: ${response.status} - ${errorData}`);
+    }
+
+    return await response.json();
+}
+
+// AGGIORNA STATUS TRANSAZIONE SU AIRTABLE
+async function updateAirtableTransactionStatus(sessionId, status, additionalFields = {}) {
+    const AIRTABLE_BASE_ID = process.env.AIRTABLE_BASE_ID;
+    const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
+    const EBOOK_TABLE = 'ebook_transactions';
+    
+    if (!AIRTABLE_BASE_ID || !AIRTABLE_API_KEY) {
+        console.warn('⚠️ Airtable credentials missing for update');
+        return;
+    }
+    
+    // Prima trova il record con Session_ID
+    const searchUrl = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${EBOOK_TABLE}?filterByFormula={Session_ID}="${sessionId}"`;
+    
+    const searchResponse = await fetch(searchUrl, {
+        headers: {
+            'Authorization': `Bearer ${AIRTABLE_API_KEY}`,
+            'Content-Type': 'application/json'
+        }
+    });
+
+    if (!searchResponse.ok) {
+        throw new Error(`Failed to find record: ${searchResponse.status}`);
+    }
+
+    const searchData = await searchResponse.json();
+    
+    if (searchData.records.length === 0) {
+        throw new Error(`No record found with Session_ID: ${sessionId}`);
+    }
+
+    const recordId = searchData.records[0].id;
+    
+    // Ora aggiorna il record
+    const updateUrl = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${EBOOK_TABLE}/${recordId}`;
+    
+    const updateFields = {
+        Status: status,
+        ...additionalFields
+    };
+    
+    if (status === 'completed' && additionalFields.lastDownload) {
+        updateFields.Last_Download = additionalFields.lastDownload;
+    }
+
+    const updateResponse = await fetch(updateUrl, {
+        method: 'PATCH',
+        headers: {
+            'Authorization': `Bearer ${AIRTABLE_API_KEY}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            fields: updateFields
+        })
+    });
+
+    if (!updateResponse.ok) {
+        const errorData = await updateResponse.text();
+        throw new Error(`Failed to update record: ${updateResponse.status} - ${errorData}`);
+    }
+
+    return await updateResponse.json();
+}
+
+// UTILITY FUNCTIONS
+function generateSessionId() {
+    return 'sess_' + Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
+}
+
+function determineLead Priority(email, userAgent) {
+    let priority = 'Medium'; // Default
+    
+    // Pattern email business/professionali = Higher priority
+    if (email.includes('.com') || email.includes('.it') || email.includes('.org')) {
+        priority = 'Medium';
+    }
+    
+    // Gmail = più comune, priority normale
+    if (email.includes('@gmail.com')) {
+        priority = 'Medium';
+    }
+    
+    // Domini business
+    if (!email.includes('@gmail.com') && !email.includes('@yahoo.') && !email.includes('@hotmail.') && !email.includes('@libero.')) {
+        priority = 'High';
+    }
+    
+    // Mobile vs Desktop (mobile = più engaged)
+    if (userAgent.toLowerCase().includes('mobile')) {
+        if (priority === 'Medium') priority = 'High';
+    }
+    
+    return priority;
+}
+
+function determineMarketingSource(referer) {
+    if (!referer) return 'Direct';
+    
+    if (referer.includes('google.')) return 'Google Search';
+    if (referer.includes('facebook.') || referer.includes('fb.')) return 'Facebook';
+    if (referer.includes('instagram.')) return 'Instagram';
+    if (referer.includes('linkedin.')) return 'LinkedIn';
+    if (referer.includes('youtube.')) return 'YouTube';
+    if (referer.includes('whatsapp.')) return 'WhatsApp';
+    if (referer.includes('andreapadoan-hub.vercel.app')) return 'Website';
+    
+    return 'Referral';
+}
+
+// Template email HTML MIGLIORATO (keeping existing template)
 function createEmailTemplate(ebookInfo) {
     return `
 <!DOCTYPE html>
@@ -176,7 +401,6 @@ function createEmailTemplate(ebookInfo) {
     </noscript>
     <![endif]-->
     <style>
-        /* FIXATO: CSS migliorato per compatibilità email */
         body { 
             font-family: Arial, Helvetica, sans-serif; 
             line-height: 1.6; 
@@ -273,7 +497,6 @@ function createEmailTemplate(ebookInfo) {
             margin: 20px 0; 
         }
 
-        /* FIXATO: Media queries per mobile */
         @media only screen and (max-width: 600px) {
             .container {
                 width: 100% !important;
@@ -311,7 +534,6 @@ function createEmailTemplate(ebookInfo) {
                 ${ebookInfo.description}
             </p>
             
-            <!-- FIXATO: Bottone download più robusto -->
             <div style="text-align: center; margin: 30px 0;">
                 <table cellpadding="0" cellspacing="0" style="margin: 0 auto;">
                     <tr>
@@ -326,7 +548,6 @@ function createEmailTemplate(ebookInfo) {
                 </table>
             </div>
             
-            <!-- FIXATO: Link diretto come backup -->
             <div style="text-align: center; margin: 20px 0; padding: 15px; background: #fff3cd; border-radius: 8px;">
                 <p style="margin: 0; font-size: 14px; color: #856404;">
                     <strong>Link diretto (copia e incolla):</strong><br>
@@ -388,7 +609,6 @@ function createEmailTemplate(ebookInfo) {
                 </p>
             </div>
             
-            <!-- FIXATO: Nota anti-spam -->
             <div style="background: #fef2f2; border: 1px solid #fecaca; padding: 15px; border-radius: 8px; margin: 20px 0;">
                 <p style="margin: 0; font-size: 14px; color: #991b1b;">
                     ⚠️ <strong>Non vedi questa email?</strong> Controlla la cartella SPAM/Promozioni. 
@@ -418,39 +638,54 @@ function createEmailTemplate(ebookInfo) {
 </html>`;
 }
 
-// Notifica Telegram MIGLIORATA con dettagli errore
-async function sendTelegramNotification(email, ebookInfo, emailSent, emailError) {
+// Notifica Telegram COMPLETA con status Airtable
+async function sendTelegramNotification(email, ebookInfo, emailSent, emailError, airtableSaved, airtableError) {
     try {
         if (process.env.TELEGRAM_BOT_TOKEN && process.env.TELEGRAM_CHAT_ID) {
             let message;
             
-            if (emailSent) {
-                message = `✅ EMAIL AUTOMATICA INVIATA CORRETTAMENTE
+            if (emailSent && airtableSaved) {
+                message = `✅ FREE EBOOK - TUTTO OK!
 
 📚 Ebook: ${ebookInfo?.title || 'Unknown'}
 📧 Email: ${email}
 🕐 Ora: ${new Date().toLocaleString('it-IT')}
 
-🎯 Sistema completamente automatico funzionante!`;
-            } else if (emailError) {
-                message = `❌ ERRORE INVIO EMAIL - AZIONE RICHIESTA!
+✅ Email inviata correttamente
+✅ Transazione salvata su Airtable
+🎯 Sistema completamente automatico!`;
+            } else if (emailSent && !airtableSaved) {
+                message = `⚠️ FREE EBOOK - EMAIL OK, AIRTABLE FAIL
 
-📚 Ebook richiesto: ${ebookInfo?.title || 'Unknown'}
+📚 Ebook: ${ebookInfo?.title || 'Unknown'}
 📧 Email: ${email}
 🕐 Ora: ${new Date().toLocaleString('it-IT')}
 
-🚨 ERRORE: ${emailError.message}
-📝 Tipo: ${emailError.name || 'Unknown'}
+✅ Email inviata correttamente
+❌ Airtable fallito: ${airtableError?.message || 'Unknown error'}
 
-⚠️ L'utente ha ricevuto il link diretto ma NON l'email!
-💡 Verifica configurazione Resend e dominio email.`;
+⚠️ L'utente ha ricevuto l'ebook ma non è trackato!`;
+            } else if (!emailSent && airtableSaved) {
+                message = `❌ FREE EBOOK - EMAIL FAIL, AIRTABLE OK
+
+📚 Ebook: ${ebookInfo?.title || 'Unknown'}
+📧 Email: ${email}
+🕐 Ora: ${new Date().toLocaleString('it-IT')}
+
+❌ Email fallita: ${emailError?.message || 'Unknown error'}
+✅ Transazione salvata su Airtable (status: failed)
+
+⚠️ L'utente NON ha ricevuto l'email ma è trackato!`;
             } else {
-                message = `⚠️ ERRORE SCONOSCIUTO SISTEMA EMAIL
+                message = `🚨 FREE EBOOK - TUTTO FALLITO!
 
 📧 Email: ${email}
 🕐 Ora: ${new Date().toLocaleString('it-IT')}
 
-🔍 Controllare logs dettagliati dell'API.`;
+❌ Email fallita: ${emailError?.message || 'Unknown'}
+❌ Airtable fallito: ${airtableError?.message || 'Unknown'}
+
+🔧 AZIONE RICHIESTA: Verificare sistema completo!`;
             }
 
             await fetch(`https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`, {

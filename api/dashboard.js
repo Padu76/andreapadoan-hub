@@ -1,5 +1,6 @@
 // api/dashboard.js
-// TribuCoach Dashboard API - Real Airtable Integration with Quiz Results
+// TribuCoach Dashboard API - Real Airtable Integration with Ebook Tracking
+// AGGIORNATO per includere tabella ebook_transactions
 
 export default async function handler(req, res) {
     // CORS headers
@@ -17,22 +18,23 @@ export default async function handler(req, res) {
     }
 
     try {
-        console.log('🔄 Dashboard API: Fetching data from Airtable...');
+        console.log('🔄 Dashboard API: Fetching data from Airtable with Ebook Tracking...');
 
         // Airtable configuration
         const AIRTABLE_BASE_ID = process.env.AIRTABLE_BASE_ID || 'applozDwnDZOgPvsg';
         const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY || 'your_api_key';
 
-        // Fetch data from multiple tables
-        const [conversationsData, quizResultsData] = await Promise.all([
+        // Fetch data from multiple tables INCLUDING ebook_transactions
+        const [conversationsData, quizResultsData, ebookTransactionsData] = await Promise.all([
             fetchAirtableData(AIRTABLE_BASE_ID, AIRTABLE_API_KEY, 'conversazioni'),
-            fetchAirtableData(AIRTABLE_BASE_ID, AIRTABLE_API_KEY, 'quiz_results')
+            fetchAirtableData(AIRTABLE_BASE_ID, AIRTABLE_API_KEY, 'quiz_results'),
+            fetchAirtableData(AIRTABLE_BASE_ID, AIRTABLE_API_KEY, 'ebook_transactions') // NEW
         ]);
 
-        console.log(`📊 Fetched ${conversationsData.length} conversations and ${quizResultsData.length} quiz results`);
+        console.log(`📊 Fetched ${conversationsData.length} conversations, ${quizResultsData.length} quiz results, and ${ebookTransactionsData.length} ebook transactions`);
 
-        // Process and analyze the data
-        const processedData = processAllData(conversationsData, quizResultsData);
+        // Process and analyze ALL data including ebooks
+        const processedData = processAllDataWithEbooks(conversationsData, quizResultsData, ebookTransactionsData);
 
         // Return dashboard data
         return res.status(200).json(processedData);
@@ -41,7 +43,7 @@ export default async function handler(req, res) {
         console.error('Dashboard API Error:', error);
         
         // Return fallback data in case of error
-        const fallbackData = generateFallbackData();
+        const fallbackData = generateFallbackDataWithEbooks();
         return res.status(200).json(fallbackData);
     }
 }
@@ -72,11 +74,11 @@ async function fetchAirtableData(baseId, apiKey, tableName) {
     }
 }
 
-// Process all data into dashboard format
-function processAllData(conversationRecords, quizRecords) {
-    console.log('🔍 Processing data for dashboard...');
+// Process all data INCLUDING ebook transactions
+function processAllDataWithEbooks(conversationRecords, quizRecords, ebookRecords) {
+    console.log('🔍 Processing data for dashboard with ebook tracking...');
 
-    // Process conversations
+    // Process conversations (existing)
     const conversations = conversationRecords.map(record => ({
         id: record.id,
         userMessage: record.fields.User_Message || '',
@@ -90,7 +92,7 @@ function processAllData(conversationRecords, quizRecords) {
         contactInfo: record.fields.Contact_Info || ''
     }));
 
-    // Process quiz results
+    // Process quiz results (existing)
     const quizResults = quizRecords.map(record => ({
         id: record.id,
         name: record.fields.Name || '',
@@ -108,23 +110,48 @@ function processAllData(conversationRecords, quizRecords) {
         source: record.fields.Source || 'Quiz'
     }));
 
-    // Calculate overview metrics
-    const overview = calculateEnhancedOverviewMetrics(conversations, quizResults);
+    // Process ebook transactions (NEW)
+    const ebookTransactions = ebookRecords.map(record => ({
+        id: record.id,
+        Email: record.fields.Email || '',
+        Product_ID: record.fields.Product_ID || '',
+        Product_Title: record.fields.Product_Title || '',
+        Transaction_Type: record.fields.Transaction_Type || 'free', // free/paid
+        Amount: parseFloat(record.fields.Amount) || 0,
+        Payment_Method: record.fields.Payment_Method || 'email', // email/stripe/paypal
+        Status: record.fields.Status || 'completed', // completed/failed/pending
+        Timestamp: new Date(record.fields.Timestamp || record.createdTime),
+        Customer_Country: record.fields.Customer_Country || 'IT',
+        Session_ID: record.fields.Session_ID || '',
+        User_Agent: record.fields.User_Agent || '',
+        Download_Count: record.fields.Download_Count || 0,
+        Last_Download: record.fields.Last_Download ? new Date(record.fields.Last_Download) : null,
+        Lead_Priority: record.fields.Lead_Priority || 'Medium',
+        Follow_Up_Status: record.fields.Follow_Up_Status || 'New',
+        Revenue_Category: record.fields.Revenue_Category || 'Lead Generation',
+        Marketing_Source: record.fields.Marketing_Source || 'Organic'
+    }));
 
-    // Generate leads from both sources
-    const leads = generateEnhancedLeads(conversations, quizResults);
+    // Calculate enhanced overview metrics WITH ebook data
+    const overview = calculateOverviewWithEbooks(conversations, quizResults, ebookTransactions);
 
-    // Analyze questions
+    // Generate enhanced leads including ebook leads
+    const leads = generateLeadsWithEbooks(conversations, quizResults, ebookTransactions);
+
+    // Analyze questions (existing)
     const questionsAnalysis = analyzeQuestions(conversations);
 
-    // Generate trend data
-    const trends = generateTrendData(conversations, quizResults);
+    // Generate trend data WITH ebook data
+    const trends = generateTrendDataWithEbooks(conversations, quizResults, ebookTransactions);
 
-    // Analyze interests
+    // Analyze interests (existing)
     const interests = analyzeInterests(conversations, quizResults);
 
-    // Quiz analytics
+    // Quiz analytics (existing)
     const quizAnalytics = generateQuizAnalytics(quizResults);
+
+    // NEW: Ebook analytics
+    const ebookAnalytics = generateEbookAnalytics(ebookTransactions);
 
     return {
         overview,
@@ -133,33 +160,36 @@ function processAllData(conversationRecords, quizRecords) {
         trends,
         interests,
         quizAnalytics,
+        ebookAnalytics, // NEW
+        ebookTransactions, // NEW - raw data for detailed view
         lastUpdated: new Date().toISOString(),
-        dataSource: 'airtable_with_quiz'
+        dataSource: 'airtable_with_ebook_tracking'
     };
 }
 
-// Calculate enhanced overview metrics with quiz data
-function calculateEnhancedOverviewMetrics(conversations, quizResults) {
+// Calculate overview metrics INCLUDING ebook data
+function calculateOverviewWithEbooks(conversations, quizResults, ebookTransactions) {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    // Conversations today
+    // Existing calculations
     const todayConversations = conversations.filter(c => 
         new Date(c.timestamp) >= today
     ).length;
 
-    // Quiz completions today
     const todayQuizzes = quizResults.filter(q => 
         new Date(q.timestamp) >= today
     ).length;
 
-    // Total active leads (unique sessions + quiz leads)
     const uniqueSessions = [...new Set(conversations.map(c => c.sessionId))];
     const conversationLeads = uniqueSessions.length;
     const quizLeads = quizResults.length;
-    const activeLeads = conversationLeads + quizLeads;
+    
+    // NEW: Ebook leads
+    const ebookLeads = [...new Set(ebookTransactions.map(t => t.Email))].length;
+    const activeLeads = conversationLeads + quizLeads + ebookLeads;
 
-    // Enhanced conversion rate calculation
+    // Enhanced conversion rate with ebook data
     const highEngagementConversations = conversations.filter(c => 
         c.userMessage.length > 20 && 
         (c.userMessage.toLowerCase().includes('prezzo') || 
@@ -168,12 +198,12 @@ function calculateEnhancedOverviewMetrics(conversations, quizResults) {
          c.userMessage.toLowerCase().includes('informazioni'))
     ).length;
 
-    // Quiz leads count as high engagement
-    const totalHighEngagement = highEngagementConversations + quizResults.length;
+    const completedEbookTransactions = ebookTransactions.filter(t => t.Status === 'completed').length;
+    const totalHighEngagement = highEngagementConversations + quizResults.length + completedEbookTransactions;
     const conversionRate = activeLeads > 0 ? 
         Math.round((totalHighEngagement / activeLeads) * 100) : 0;
 
-    // Hot leads (high priority quiz + recent conversations)
+    // Hot leads calculation WITH ebook data
     const recentThreshold = new Date(Date.now() - 24 * 60 * 60 * 1000);
     const hotQuizLeads = quizResults.filter(q => 
         q.leadPriority === 'High' && new Date(q.timestamp) >= recentThreshold
@@ -187,7 +217,14 @@ function calculateEnhancedOverviewMetrics(conversations, quizResults) {
          c.userMessage.toLowerCase().includes('contatto'))
     ).length;
 
-    const hotLeads = hotQuizLeads + hotConversationLeads;
+    // NEW: Hot ebook leads (recent high-priority ebook customers)
+    const hotEbookLeads = ebookTransactions.filter(t => 
+        t.Lead_Priority === 'High' && 
+        new Date(t.Timestamp) >= recentThreshold &&
+        t.Status === 'completed'
+    ).length;
+
+    const hotLeads = hotQuizLeads + hotConversationLeads + hotEbookLeads;
 
     return {
         todayConversations: todayConversations + todayQuizzes,
@@ -195,15 +232,18 @@ function calculateEnhancedOverviewMetrics(conversations, quizResults) {
         conversionRate,
         hotLeads,
         todayQuizzes,
-        totalQuizCompleted: quizResults.length
+        totalQuizCompleted: quizResults.length,
+        // NEW ebook metrics for overview
+        todayEbookTransactions: ebookTransactions.filter(t => new Date(t.Timestamp) >= today).length,
+        totalEbookLeads: ebookLeads
     };
 }
 
-// Generate enhanced leads from both conversations and quiz
-function generateEnhancedLeads(conversations, quizResults) {
+// Generate leads INCLUDING ebook customers
+function generateLeadsWithEbooks(conversations, quizResults, ebookTransactions) {
     const leads = [];
 
-    // Add quiz leads (higher priority)
+    // Add quiz leads (highest priority)
     quizResults.forEach((quiz, index) => {
         const weakestArea = determineWeakestArea(quiz);
         
@@ -232,7 +272,76 @@ function generateEnhancedLeads(conversations, quizResults) {
         });
     });
 
-    // Add conversation-based leads
+    // Add ebook leads (high priority for paid customers)
+    const ebookLeadsByEmail = {};
+    ebookTransactions.forEach(transaction => {
+        const email = transaction.Email;
+        if (!ebookLeadsByEmail[email]) {
+            ebookLeadsByEmail[email] = {
+                transactions: [],
+                totalSpent: 0,
+                lastTransaction: transaction.Timestamp,
+                highestPriority: transaction.Lead_Priority
+            };
+        }
+        
+        ebookLeadsByEmail[email].transactions.push(transaction);
+        ebookLeadsByEmail[email].totalSpent += transaction.Amount;
+        
+        if (new Date(transaction.Timestamp) > new Date(ebookLeadsByEmail[email].lastTransaction)) {
+            ebookLeadsByEmail[email].lastTransaction = transaction.Timestamp;
+        }
+        
+        // Update priority to highest
+        const priorities = ['Low', 'Medium', 'High'];
+        if (priorities.indexOf(transaction.Lead_Priority) > priorities.indexOf(ebookLeadsByEmail[email].highestPriority)) {
+            ebookLeadsByEmail[email].highestPriority = transaction.Lead_Priority;
+        }
+    });
+
+    Object.entries(ebookLeadsByEmail).forEach(([email, data], index) => {
+        const lastTransaction = data.transactions[data.transactions.length - 1];
+        const paidTransactions = data.transactions.filter(t => t.Transaction_Type === 'paid').length;
+        const freeTransactions = data.transactions.filter(t => t.Transaction_Type === 'free').length;
+        
+        let lastMessage = '';
+        if (paidTransactions > 0 && freeTransactions > 0) {
+            lastMessage = `Cliente: ${paidTransactions} ebook premium + ${freeTransactions} gratuiti - €${data.totalSpent}`;
+        } else if (paidTransactions > 0) {
+            lastMessage = `Cliente premium: ${paidTransactions} ebook acquistati - €${data.totalSpent}`;
+        } else {
+            lastMessage = `Lead: ${freeTransactions} ebook gratuiti scaricati`;
+        }
+
+        const engagementScore = calculateEbookEngagementScore(data);
+        const isHot = data.highestPriority === 'High' && 
+                     (Date.now() - new Date(data.lastTransaction)) < 72 * 60 * 60 * 1000; // 72 hours
+
+        leads.push({
+            id: `ebook_${email.replace(/[^a-zA-Z0-9]/g, '_')}`,
+            name: email.split('@')[0].charAt(0).toUpperCase() + email.split('@')[0].slice(1),
+            lastMessage: lastMessage,
+            timestamp: data.lastTransaction,
+            interest: determineEbookInterest(data.transactions),
+            engagementScore: engagementScore,
+            conversationCount: data.transactions.length,
+            isHot: isHot,
+            phone: '+393478881515', // Default for ebook leads
+            source: 'Ebook',
+            leadPriority: data.highestPriority,
+            followUpStatus: lastTransaction.Follow_Up_Status,
+            ebookData: {
+                totalSpent: data.totalSpent,
+                totalTransactions: data.transactions.length,
+                paidTransactions: paidTransactions,
+                freeTransactions: freeTransactions,
+                products: [...new Set(data.transactions.map(t => t.Product_Title))],
+                lastProduct: lastTransaction.Product_Title
+            }
+        });
+    });
+
+    // Add conversation-based leads (existing logic)
     const sessionGroups = conversations.reduce((groups, conv) => {
         const sessionId = conv.sessionId;
         if (!groups[sessionId]) {
@@ -268,36 +377,263 @@ function generateEnhancedLeads(conversations, quizResults) {
         });
     });
 
-    // Sort by priority: Quiz leads first, then by engagement and recency
+    // Sort by priority: Quiz leads first, then paid ebook customers, then free ebook leads, then conversations
     return leads.sort((a, b) => {
-        if (a.source === 'Quiz' && b.source !== 'Quiz') return -1;
-        if (b.source === 'Quiz' && a.source !== 'Quiz') return 1;
+        // Source priority: Quiz > Ebook (paid) > Ebook (free) > Conversation
+        const sourcePriority = {
+            'Quiz': 4,
+            'Ebook': a.ebookData?.paidTransactions > 0 ? 3 : 2,
+            'Conversation': 1
+        };
+        
+        if (sourcePriority[a.source] !== sourcePriority[b.source]) {
+            return sourcePriority[b.source] - sourcePriority[a.source];
+        }
+        
+        // Then by hot status
         if (a.isHot !== b.isHot) return b.isHot - a.isHot;
+        
+        // Then by engagement score
         return b.engagementScore - a.engagementScore;
     });
 }
 
-// Calculate engagement score for quiz leads
-function calculateQuizEngagementScore(quiz) {
-    let score = 70; // Base score for completing quiz
+// NEW: Generate comprehensive ebook analytics
+function generateEbookAnalytics(ebookTransactions) {
+    if (ebookTransactions.length === 0) {
+        return {
+            totalTransactions: 0,
+            totalFreeDownloads: 0,
+            totalPaidSales: 0,
+            totalRevenue: 0,
+            avgOrderValue: 0,
+            conversionRate: 0,
+            salesGrowth: 0,
+            todayRevenue: 0,
+            productPerformance: {},
+            revenueTrend: { days: [], revenue: [] },
+            topProductsToday: [],
+            paymentMethodBreakdown: {},
+            customerSegmentation: {}
+        };
+    }
+
+    const completed = ebookTransactions.filter(t => t.Status === 'completed');
+    const free = completed.filter(t => t.Transaction_Type === 'free');
+    const paid = completed.filter(t => t.Transaction_Type === 'paid');
     
-    // Bonus for providing contact info
-    if (quiz.phone) score += 15;
+    // Basic metrics
+    const totalTransactions = completed.length;
+    const totalFreeDownloads = free.length;
+    const totalPaidSales = paid.length;
+    const totalRevenue = paid.reduce((sum, t) => sum + t.Amount, 0);
+    const avgOrderValue = totalPaidSales > 0 ? totalRevenue / totalPaidSales : 0;
     
-    // Priority-based scoring
-    if (quiz.leadPriority === 'High') score += 15;
-    else if (quiz.leadPriority === 'Medium') score += 5;
+    // Conversion rate (paid vs total)
+    const conversionRate = totalTransactions > 0 ? 
+        Math.round((totalPaidSales / totalTransactions) * 100) : 0;
+
+    // Today's metrics
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const todayTransactions = completed.filter(t => new Date(t.Timestamp) >= today);
+    const todayRevenue = todayTransactions
+        .filter(t => t.Transaction_Type === 'paid')
+        .reduce((sum, t) => sum + t.Amount, 0);
+
+    // Product performance
+    const productPerformance = {};
+    completed.forEach(transaction => {
+        const productId = transaction.Product_ID;
+        if (!productPerformance[productId]) {
+            productPerformance[productId] = {
+                sales: 0,
+                revenue: 0,
+                title: transaction.Product_Title
+            };
+        }
+        productPerformance[productId].sales++;
+        if (transaction.Transaction_Type === 'paid') {
+            productPerformance[productId].revenue += transaction.Amount;
+        }
+    });
+
+    // Revenue trend (last 7 days)
+    const revenueTrend = { days: [], revenue: [] };
+    for (let i = 6; i >= 0; i--) {
+        const date = new Date();
+        date.setDate(date.getDate() - i);
+        date.setHours(0, 0, 0, 0);
+        
+        const nextDate = new Date(date);
+        nextDate.setDate(nextDate.getDate() + 1);
+        
+        const dayRevenue = paid
+            .filter(t => new Date(t.Timestamp) >= date && new Date(t.Timestamp) < nextDate)
+            .reduce((sum, t) => sum + t.Amount, 0);
+        
+        revenueTrend.days.push(date.toLocaleDateString('it-IT', { day: 'numeric', month: 'short' }));
+        revenueTrend.revenue.push(Math.round(dayRevenue * 100) / 100);
+    }
+
+    // Top products today
+    const todayProducts = {};
+    todayTransactions.forEach(transaction => {
+        const productId = transaction.Product_ID;
+        if (!todayProducts[productId]) {
+            todayProducts[productId] = {
+                count: 0,
+                revenue: 0,
+                title: transaction.Product_Title,
+                type: transaction.Transaction_Type
+            };
+        }
+        todayProducts[productId].count++;
+        if (transaction.Transaction_Type === 'paid') {
+            todayProducts[productId].revenue += transaction.Amount;
+        }
+    });
+
+    const topProductsToday = Object.values(todayProducts)
+        .sort((a, b) => b.count - a.count)
+        .slice(0, 5);
+
+    // Payment method breakdown
+    const paymentMethodBreakdown = {};
+    paid.forEach(transaction => {
+        const method = transaction.Payment_Method;
+        paymentMethodBreakdown[method] = (paymentMethodBreakdown[method] || 0) + 1;
+    });
+
+    // Customer segmentation
+    const customerEmails = [...new Set(completed.map(t => t.Email))];
+    const customerSegmentation = {
+        totalCustomers: customerEmails.length,
+        paidCustomers: [...new Set(paid.map(t => t.Email))].length,
+        freeOnlyCustomers: [...new Set(free.map(t => t.Email))].filter(email => 
+            !paid.some(p => p.Email === email)
+        ).length
+    };
+
+    // Growth calculation (simplified - comparing last 7 days vs previous 7 days)
+    const last7Days = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+    const previous7Days = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000);
     
-    // Recency bonus
-    const hoursSinceQuiz = (Date.now() - new Date(quiz.timestamp)) / (1000 * 60 * 60);
-    if (hoursSinceQuiz < 2) score += 20;
-    else if (hoursSinceQuiz < 24) score += 10;
-    else if (hoursSinceQuiz < 72) score += 5;
+    const recentSales = paid.filter(t => new Date(t.Timestamp) >= last7Days).length;
+    const previousSales = paid.filter(t => 
+        new Date(t.Timestamp) >= previous7Days && new Date(t.Timestamp) < last7Days
+    ).length;
+    
+    const salesGrowth = previousSales > 0 ? 
+        Math.round(((recentSales - previousSales) / previousSales) * 100) : 
+        (recentSales > 0 ? 100 : 0);
+
+    return {
+        totalTransactions,
+        totalFreeDownloads,
+        totalPaidSales,
+        totalRevenue: Math.round(totalRevenue * 100) / 100,
+        avgOrderValue: Math.round(avgOrderValue * 100) / 100,
+        conversionRate,
+        salesGrowth,
+        todayRevenue: Math.round(todayRevenue * 100) / 100,
+        productPerformance,
+        revenueTrend,
+        topProductsToday,
+        paymentMethodBreakdown,
+        customerSegmentation
+    };
+}
+
+// Calculate ebook engagement score
+function calculateEbookEngagementScore(ebookData) {
+    let score = 30; // Base score
+    
+    // Bonus for paid transactions
+    score += ebookData.transactions.filter(t => t.Transaction_Type === 'paid').length * 25;
+    
+    // Bonus for multiple products
+    const uniqueProducts = [...new Set(ebookData.transactions.map(t => t.Product_ID))];
+    score += Math.min(uniqueProducts.length * 10, 30);
+    
+    // Bonus for recent activity
+    const hoursSinceLastTransaction = (Date.now() - new Date(ebookData.lastTransaction)) / (1000 * 60 * 60);
+    if (hoursSinceLastTransaction < 24) score += 20;
+    else if (hoursSinceLastTransaction < 72) score += 10;
+    
+    // Bonus for high priority
+    if (ebookData.highestPriority === 'High') score += 15;
+    else if (ebookData.highestPriority === 'Medium') score += 5;
     
     return Math.min(Math.round(score), 100);
 }
 
-// Determine weakest area from quiz scores
+// Determine interest from ebook purchases
+function determineEbookInterest(transactions) {
+    const productInterests = {
+        '50-workout': 'fitness',
+        'wave-system': 'fitness',
+        '2-milioni-anni': 'nutrition',
+        'body-construction': 'fitness'
+    };
+    
+    const interestCounts = {};
+    transactions.forEach(t => {
+        const interest = productInterests[t.Product_ID] || 'fitness';
+        interestCounts[interest] = (interestCounts[interest] || 0) + 1;
+    });
+    
+    return Object.keys(interestCounts).reduce((a, b) => 
+        interestCounts[a] > interestCounts[b] ? a : b, 'fitness'
+    );
+}
+
+// Enhanced trend data WITH ebook transactions
+function generateTrendDataWithEbooks(conversations, quizResults, ebookTransactions) {
+    const days = [];
+    const conversationCounts = [];
+    const quizCounts = [];
+    const ebookCounts = []; // NEW
+    
+    // Get last 7 days
+    for (let i = 6; i >= 0; i--) {
+        const date = new Date();
+        date.setDate(date.getDate() - i);
+        date.setHours(0, 0, 0, 0);
+        
+        const nextDate = new Date(date);
+        nextDate.setDate(nextDate.getDate() + 1);
+        
+        const dayConversations = conversations.filter(c => 
+            new Date(c.timestamp) >= date && new Date(c.timestamp) < nextDate
+        ).length;
+        
+        const dayQuizzes = quizResults.filter(q => 
+            new Date(q.timestamp) >= date && new Date(q.timestamp) < nextDate
+        ).length;
+        
+        // NEW: Ebook transactions per day
+        const dayEbooks = ebookTransactions.filter(t => 
+            new Date(t.Timestamp) >= date && new Date(t.Timestamp) < nextDate &&
+            t.Status === 'completed'
+        ).length;
+        
+        days.push(date.toLocaleDateString('it-IT', { weekday: 'short' }));
+        conversationCounts.push(dayConversations);
+        quizCounts.push(dayQuizzes);
+        ebookCounts.push(dayEbooks); // NEW
+    }
+    
+    return {
+        days,
+        conversations: conversationCounts,
+        quizzes: quizCounts,
+        ebooks: ebookCounts, // NEW
+        total: conversationCounts.map((conv, i) => conv + quizCounts[i] + ebookCounts[i])
+    };
+}
+
+// EXISTING HELPER FUNCTIONS (keeping all existing functionality)
 function determineWeakestArea(quiz) {
     const scores = {
         fitness: quiz.fitnessScore,
@@ -311,7 +647,6 @@ function determineWeakestArea(quiz) {
     return Object.keys(scores).find(key => scores[key] === lowestScore);
 }
 
-// Map quiz category to interest area
 function mapScoreToInterest(category) {
     const mapping = {
         fitness: 'fitness',
@@ -323,7 +658,22 @@ function mapScoreToInterest(category) {
     return mapping[category] || 'fitness';
 }
 
-// Generate quiz analytics
+function calculateQuizEngagementScore(quiz) {
+    let score = 70; // Base score for completing quiz
+    
+    if (quiz.phone) score += 15;
+    
+    if (quiz.leadPriority === 'High') score += 15;
+    else if (quiz.leadPriority === 'Medium') score += 5;
+    
+    const hoursSinceQuiz = (Date.now() - new Date(quiz.timestamp)) / (1000 * 60 * 60);
+    if (hoursSinceQuiz < 2) score += 20;
+    else if (hoursSinceQuiz < 24) score += 10;
+    else if (hoursSinceQuiz < 72) score += 5;
+    
+    return Math.min(Math.round(score), 100);
+}
+
 function generateQuizAnalytics(quizResults) {
     if (quizResults.length === 0) {
         return {
@@ -334,7 +684,6 @@ function generateQuizAnalytics(quizResults) {
         };
     }
 
-    // Calculate average scores
     const averageScores = {
         overall: 0,
         fitness: 0,
@@ -357,7 +706,6 @@ function generateQuizAnalytics(quizResults) {
         averageScores[key] = Math.round((averageScores[key] / quizResults.length) * 10) / 10;
     });
 
-    // Score distribution
     const scoreRanges = { '1-2': 0, '2-3': 0, '3-4': 0, '4-5': 0 };
     quizResults.forEach(quiz => {
         const score = quiz.overallScore;
@@ -367,7 +715,6 @@ function generateQuizAnalytics(quizResults) {
         else scoreRanges['4-5']++;
     });
 
-    // Priority distribution
     const priorityDistribution = { High: 0, Medium: 0, Low: 0 };
     quizResults.forEach(quiz => {
         priorityDistribution[quiz.leadPriority]++;
@@ -381,43 +728,6 @@ function generateQuizAnalytics(quizResults) {
     };
 }
 
-// Enhanced trend data with quiz results
-function generateTrendData(conversations, quizResults) {
-    const days = [];
-    const conversationCounts = [];
-    const quizCounts = [];
-    
-    // Get last 7 days
-    for (let i = 6; i >= 0; i--) {
-        const date = new Date();
-        date.setDate(date.getDate() - i);
-        date.setHours(0, 0, 0, 0);
-        
-        const nextDate = new Date(date);
-        nextDate.setDate(nextDate.getDate() + 1);
-        
-        const dayConversations = conversations.filter(c => 
-            new Date(c.timestamp) >= date && new Date(c.timestamp) < nextDate
-        ).length;
-        
-        const dayQuizzes = quizResults.filter(q => 
-            new Date(q.timestamp) >= date && new Date(q.timestamp) < nextDate
-        ).length;
-        
-        days.push(date.toLocaleDateString('it-IT', { weekday: 'short' }));
-        conversationCounts.push(dayConversations);
-        quizCounts.push(dayQuizzes);
-    }
-    
-    return {
-        days,
-        conversations: conversationCounts,
-        quizzes: quizCounts,
-        total: conversationCounts.map((conv, i) => conv + quizCounts[i])
-    };
-}
-
-// Enhanced interests analysis
 function analyzeInterests(conversations, quizResults) {
     const interestCounts = {
         fitness: 0,
@@ -426,7 +736,6 @@ function analyzeInterests(conversations, quizResults) {
         lifestyle: 0
     };
     
-    // Count from conversations
     conversations.forEach(conv => {
         const interest = conv.interestArea || 'fitness';
         if (interestCounts.hasOwnProperty(interest)) {
@@ -436,14 +745,12 @@ function analyzeInterests(conversations, quizResults) {
         }
     });
     
-    // Count from quiz results (based on weakest area)
     quizResults.forEach(quiz => {
         const weakestArea = determineWeakestArea(quiz);
         const interest = mapScoreToInterest(weakestArea);
         interestCounts[interest]++;
     });
     
-    // Convert to percentages
     const total = Object.values(interestCounts).reduce((sum, count) => sum + count, 0);
     
     if (total === 0) {
@@ -458,7 +765,6 @@ function analyzeInterests(conversations, quizResults) {
     };
 }
 
-// Helper functions (keeping existing ones)
 function calculateEngagementScore(conversations) {
     let score = 0;
     
@@ -557,9 +863,9 @@ function analyzeQuestions(conversations) {
         .slice(0, 10);
 }
 
-// Fallback data for development/errors
-function generateFallbackData() {
-    console.log('⚠️ Using fallback data - Airtable connection failed');
+// Fallback data WITH ebook analytics
+function generateFallbackDataWithEbooks() {
+    console.log('⚠️ Using fallback data with ebook tracking - Airtable connection failed');
     
     return {
         overview: {
@@ -568,9 +874,31 @@ function generateFallbackData() {
             conversionRate: 28,
             hotLeads: 7,
             todayQuizzes: 4,
-            totalQuizCompleted: 15
+            totalQuizCompleted: 15,
+            todayEbookTransactions: 6,
+            totalEbookLeads: 28
         },
         leads: [
+            {
+                id: 'ebook_premium_1',
+                name: 'Marco Cliente',
+                lastMessage: 'Cliente premium: 2 ebook acquistati - €39.80',
+                timestamp: new Date(Date.now() - 1000 * 60 * 15),
+                interest: 'fitness',
+                engagementScore: 95,
+                isHot: true,
+                phone: '+393478881515',
+                source: 'Ebook',
+                leadPriority: 'High',
+                ebookData: {
+                    totalSpent: 39.80,
+                    totalTransactions: 3,
+                    paidTransactions: 2,
+                    freeTransactions: 1,
+                    products: ['IL WAVE SYSTEM', 'BODY UNDER CONSTRUCTION VOL 1', '50 WORKOUT da viaggio'],
+                    lastProduct: 'BODY UNDER CONSTRUCTION VOL 1'
+                }
+            },
             {
                 id: 'quiz_fallback_1',
                 name: 'Marco Fitness',
@@ -581,27 +909,6 @@ function generateFallbackData() {
                 isHot: true,
                 phone: '+393478881515',
                 source: 'Quiz',
-                leadPriority: 'High',
-                quizData: {
-                    overallScore: 2.3,
-                    weakestArea: 'fitness',
-                    fitnessScore: 1,
-                    alimentazioneScore: 3,
-                    abitudiniScore: 2,
-                    motivazioneScore: 3,
-                    stressScore: 2
-                }
-            },
-            {
-                id: 'conv_fallback_1',
-                name: 'Lead Interessato',
-                lastMessage: 'Quanto costa il personal training?',
-                timestamp: new Date(Date.now() - 1000 * 60 * 60),
-                interest: 'fitness',
-                engagementScore: 85,
-                isHot: true,
-                phone: '+393478881515',
-                source: 'Conversation',
                 leadPriority: 'High'
             }
         ],
@@ -614,7 +921,8 @@ function generateFallbackData() {
             days: ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom'],
             conversations: [3, 5, 8, 12, 6, 4, 2],
             quizzes: [1, 2, 3, 2, 4, 1, 1],
-            total: [4, 7, 11, 14, 10, 5, 3]
+            ebooks: [2, 4, 6, 8, 3, 2, 1],
+            total: [6, 11, 17, 22, 13, 7, 4]
         },
         interests: {
             fitness: 50,
@@ -644,7 +952,103 @@ function generateFallbackData() {
                 Low: 2
             }
         },
+        ebookAnalytics: {
+            totalTransactions: 45,
+            totalFreeDownloads: 32,
+            totalPaidSales: 13,
+            totalRevenue: 287.70,
+            avgOrderValue: 22.13,
+            conversionRate: 29,
+            salesGrowth: 15,
+            todayRevenue: 49.80,
+            productPerformance: {
+                '50-workout': { sales: 32, revenue: 0 },
+                'wave-system': { sales: 8, revenue: 119.20 },
+                '2-milioni-anni': { sales: 3, revenue: 74.70 },
+                'body-construction': { sales: 2, revenue: 49.80 }
+            },
+            revenueTrend: {
+                days: ['24 Gen', '25 Gen', '26 Gen', '27 Gen', '28 Gen', '29 Gen', '30 Gen'],
+                revenue: [32.40, 67.30, 19.90, 74.70, 49.80, 24.90, 18.70]
+            },
+            topProductsToday: [
+                { title: '50 WORKOUT da viaggio', count: 4, revenue: 0, type: 'free' },
+                { title: 'BODY UNDER CONSTRUCTION VOL 1', count: 2, revenue: 49.80, type: 'paid' }
+            ],
+            paymentMethodBreakdown: {
+                stripe: 8,
+                paypal: 5
+            },
+            customerSegmentation: {
+                totalCustomers: 28,
+                paidCustomers: 11,
+                freeOnlyCustomers: 17
+            }
+        },
+        ebookTransactions: [
+            {
+                id: 'rec123',
+                Email: 'marco.rossi@email.it',
+                Product_ID: 'body-construction',
+                Product_Title: 'BODY UNDER CONSTRUCTION VOL 1',
+                Transaction_Type: 'paid',
+                Amount: 24.90,
+                Payment_Method: 'stripe',
+                Status: 'completed',
+                Timestamp: new Date(Date.now() - 1000 * 60 * 15),
+                Customer_Country: 'IT',
+                Session_ID: 'sess_abc123',
+                User_Agent: 'Mozilla/5.0',
+                Download_Count: 1,
+                Last_Download: new Date(Date.now() - 1000 * 60 * 10),
+                Lead_Priority: 'High',
+                Follow_Up_Status: 'New',
+                Revenue_Category: 'Premium Sale',
+                Marketing_Source: 'Website'
+            },
+            {
+                id: 'rec456',
+                Email: 'lucia.verdi@gmail.com',
+                Product_ID: '50-workout',
+                Product_Title: '50 WORKOUT da viaggio',
+                Transaction_Type: 'free',
+                Amount: 0,
+                Payment_Method: 'email',
+                Status: 'completed',
+                Timestamp: new Date(Date.now() - 1000 * 60 * 45),
+                Customer_Country: 'IT',
+                Session_ID: 'sess_def456',
+                User_Agent: 'Mozilla/5.0',
+                Download_Count: 2,
+                Last_Download: new Date(Date.now() - 1000 * 60 * 30),
+                Lead_Priority: 'Medium',
+                Follow_Up_Status: 'New',
+                Revenue_Category: 'Lead Generation',
+                Marketing_Source: 'Social Media'
+            },
+            {
+                id: 'rec789',
+                Email: 'alessandro.bianchi@yahoo.it',
+                Product_ID: 'wave-system',
+                Product_Title: 'IL WAVE SYSTEM',
+                Transaction_Type: 'paid',
+                Amount: 14.90,
+                Payment_Method: 'paypal',
+                Status: 'completed',
+                Timestamp: new Date(Date.now() - 1000 * 60 * 120),
+                Customer_Country: 'IT',
+                Session_ID: 'sess_ghi789',
+                User_Agent: 'Mozilla/5.0',
+                Download_Count: 1,
+                Last_Download: new Date(Date.now() - 1000 * 60 * 115),
+                Lead_Priority: 'High',
+                Follow_Up_Status: 'Contacted',
+                Revenue_Category: 'Premium Sale',
+                Marketing_Source: 'Organic'
+            }
+        ],
         lastUpdated: new Date().toISOString(),
-        dataSource: 'fallback_with_quiz'
+        dataSource: 'fallback_with_ebook_tracking'
     };
 }
+            
