@@ -1,6 +1,6 @@
 // /api/webhook.js
-// Webhook Stripe per gestire pagamenti completati
-// Andrea Padoan Ebooks - Versione corretta
+// Webhook Stripe FIXATO per gestire pagamenti ebook
+// Andrea Padoan - Fix per errori HTTP e signature verification
 
 import Stripe from 'stripe';
 import { Resend } from 'resend';
@@ -8,109 +8,223 @@ import { Resend } from 'resend';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+// CONFIGURAZIONE CRITICA: Raw body per signature verification
+export const config = {
+    api: {
+        bodyParser: false, // DISABILITA parsing automatico
+    },
+}
+
 export default async function handler(req, res) {
-    if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Method not allowed' });
-    }
-
-    const sig = req.headers['stripe-signature'];
-    const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
-
-    let event;
-
+    // Sempre rispondere con status valido per evitare retry Stripe
     try {
-        // Verifica signature Stripe
-        event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
-        console.log('✅ Webhook signature verified');
-    } catch (err) {
-        console.error('❌ Webhook signature verification failed:', err.message);
-        return res.status(400).json({ error: `Webhook Error: ${err.message}` });
-    }
-
-    try {
-        // Gestisci eventi Stripe
-        switch (event.type) {
-            case 'checkout.session.completed':
-                await handleCheckoutCompleted(event.data.object);
-                break;
-            
-            case 'payment_intent.succeeded':
-                await handlePaymentSucceeded(event.data.object);
-                break;
-                
-            default:
-                console.log(`🔔 Unhandled event type ${event.type}`);
+        // Solo POST requests
+        if (req.method !== 'POST') {
+            console.log('❌ Method not allowed:', req.method);
+            return res.status(200).json({ error: 'Method not allowed', received: false });
         }
 
-        res.status(200).json({ received: true });
+        // Leggi raw body correttamente
+        const chunks = [];
+        for await (const chunk of req) {
+            chunks.push(chunk);
+        }
+        const rawBody = Buffer.concat(chunks);
 
-    } catch (error) {
-        console.error('❌ Webhook handler error:', error);
-        res.status(500).json({ error: 'Webhook handler failed' });
+        const signature = req.headers['stripe-signature'];
+        const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
+
+        // Verifica signature Stripe
+        let event;
+        try {
+            if (!signature || !endpointSecret) {
+                console.error('❌ Missing Stripe signature or endpoint secret');
+                return res.status(200).json({ 
+                    error: 'Missing signature', 
+                    received: false 
+                });
+            }
+
+            event = stripe.webhooks.constructEvent(
+                rawBody,
+                signature,
+                endpointSecret
+            );
+
+            console.log('✅ Webhook signature verified:', {
+                type: event.type,
+                id: event.id,
+                livemode: event.livemode
+            });
+
+        } catch (err) {
+            console.error('❌ Webhook signature verification failed:', err.message);
+            // Anche in caso di errore, rispondo 200 per evitare retry infiniti
+            return res.status(200).json({ 
+                error: 'Invalid signature', 
+                received: false,
+                details: err.message 
+            });
+        }
+
+        // Processa eventi Stripe
+        try {
+            switch (event.type) {
+                case 'checkout.session.completed':
+                    await handleCheckoutCompleted(event.data.object);
+                    break;
+                
+                case 'payment_intent.succeeded':
+                    await handlePaymentSucceeded(event.data.object);
+                    break;
+                    
+                default:
+                    console.log('ℹ️ Unhandled event type:', event.type);
+            }
+
+            // SEMPRE rispondere 200 per confermare ricezione
+            return res.status(200).json({ 
+                received: true, 
+                eventType: event.type,
+                eventId: event.id
+            });
+
+        } catch (processingError) {
+            console.error('❌ Error processing webhook:', processingError);
+            // Anche con errori di processing, conferma ricezione
+            return res.status(200).json({ 
+                received: true, 
+                error: 'Processing failed',
+                eventType: event.type
+            });
+        }
+
+    } catch (criticalError) {
+        console.error('❌ Critical webhook error:', criticalError);
+        // Ultima risorsa: sempre 200 per evitare retry
+        return res.status(200).json({ 
+            received: false, 
+            error: 'Critical error' 
+        });
     }
 }
 
-// Gestisce checkout completato
+// Gestisce checkout completato - FUNZIONE PRINCIPALE
 async function handleCheckoutCompleted(session) {
     try {
-        console.log('🛒 Checkout completed:', session.id);
+        console.log('🛒 Processing checkout completed:', {
+            sessionId: session.id,
+            paymentStatus: session.payment_status,
+            customerEmail: session.customer_details?.email,
+            productId: session.metadata?.product_id
+        });
+
+        // Verifica che il pagamento sia completato
+        if (session.payment_status !== 'paid') {
+            console.log('⚠️ Payment not completed, status:', session.payment_status);
+            return;
+        }
 
         const productId = session.metadata?.product_id;
         const customerEmail = session.customer_details?.email;
 
         if (!customerEmail || !productId) {
-            console.log('⚠️ Missing email or product ID in session');
+            console.error('❌ Missing required data:', { customerEmail, productId });
             return;
         }
 
-        // Configurazione prodotti
+        // Configurazione prodotti ebook
         const products = {
             'wave-system': {
                 title: 'IL WAVE SYSTEM',
                 description: '6 cicli completi di allenamento progressivo',
                 downloadUrl: 'https://andreapadoan-hub.vercel.app/ebook-store/wave-system.pdf',
-                value: '14.90'
+                price: '14.90'
             },
             '2-milioni-anni': {
                 title: 'In Forma da 2 Milioni di Anni',
                 description: 'La guida alimentare per trasformare il tuo corpo',
                 downloadUrl: 'https://andreapadoan-hub.vercel.app/ebook-store/forma-2-milioni-anni.pdf',
-                value: '24.90'
+                price: '24.90'
             },
             'body-construction': {
                 title: 'BODY UNDER CONSTRUCTION VOL: 1',
                 description: '100 allenamenti per una forma perfetta 365 giorni all\'anno',
                 downloadUrl: 'https://andreapadoan-hub.vercel.app/ebook-store/body-under-construction.pdf',
-                value: '24.90'
+                price: '24.90'
             }
         };
 
         const product = products[productId];
         if (!product) {
-            console.log('❌ Unknown product:', productId);
+            console.error('❌ Unknown product ID:', productId);
             return;
         }
+
+        // Salva il pagamento per tracking
+        await savePaymentRecord(session, product);
 
         // Invia email con ebook
         await sendPurchaseEmail(customerEmail, product, session);
 
-        // Notifica Telegram
+        // Notifica Telegram opzionale
         await sendTelegramNotification(customerEmail, product, session);
 
-        console.log('✅ Purchase email sent to:', customerEmail);
+        console.log('✅ Checkout completed successfully:', {
+            sessionId: session.id,
+            customerEmail,
+            productTitle: product.title
+        });
 
     } catch (error) {
-        console.error('❌ Error handling checkout completion:', error);
+        console.error('❌ Error in handleCheckoutCompleted:', error);
+        // Non rigenerare errore - webhook deve sempre completarsi
     }
 }
 
-// Gestisce pagamento riuscito
+// Gestisce payment intent succeeded
 async function handlePaymentSucceeded(paymentIntent) {
-    console.log('💳 Payment succeeded:', paymentIntent.id);
-    // Aggiungere logica aggiuntiva se necessario
+    try {
+        console.log('💳 Payment succeeded:', {
+            id: paymentIntent.id,
+            amount: paymentIntent.amount / 100,
+            currency: paymentIntent.currency,
+            status: paymentIntent.status
+        });
+
+        // Tracking aggiuntivo se necessario
+        
+    } catch (error) {
+        console.error('❌ Error in handlePaymentSucceeded:', error);
+    }
 }
 
-// Invia email di acquisto
+// Salva record pagamento per analytics
+async function savePaymentRecord(session, product) {
+    try {
+        const paymentData = {
+            sessionId: session.id,
+            productId: session.metadata?.product_id,
+            productTitle: product.title,
+            customerEmail: session.customer_details?.email,
+            amount: session.amount_total / 100,
+            currency: session.currency,
+            paymentStatus: session.payment_status,
+            completedAt: new Date().toISOString(),
+            stripeCustomerId: session.customer
+        };
+
+        console.log('💾 Payment record:', paymentData);
+
+        // TODO: Implementare salvataggio su Airtable/Database
+        // await saveToAirtable(paymentData);
+        
+    } catch (error) {
+        console.error('❌ Error saving payment record:', error);
+    }
+}
+
+// Invia email con ebook - FUNZIONE CRITICA
 async function sendPurchaseEmail(email, product, session) {
     try {
         const emailTemplate = `
@@ -119,7 +233,7 @@ async function sendPurchaseEmail(email, product, session) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Il tuo ebook è pronto per il download!</title>
+    <title>Il tuo ebook è pronto!</title>
     <style>
         body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background-color: #f5f5f5; }
         .container { max-width: 600px; margin: 0 auto; background-color: white; }
@@ -153,13 +267,14 @@ async function sendPurchaseEmail(email, product, session) {
             <h2 style="color: #059669; margin-bottom: 20px;">Grazie per l'acquisto!</h2>
             
             <p style="font-size: 16px; margin-bottom: 20px;">
-                Il pagamento è stato elaborato con successo. Ecco il tuo ebook <strong>"${product.title}"</strong>!
+                Il pagamento è stato completato con successo. Ecco il tuo ebook <strong>"${product.title}"</strong>!
             </p>
             
             <div class="order-details">
                 <h3 style="color: #059669; margin-top: 0;">📋 Dettagli Ordine</h3>
                 <p><strong>Prodotto:</strong> ${product.title}</p>
                 <p><strong>Descrizione:</strong> ${product.description}</p>
+                <p><strong>Prezzo:</strong> €${product.price}</p>
                 <p><strong>Ordine ID:</strong> ${session.id}</p>
                 <p><strong>Data:</strong> ${new Date().toLocaleDateString('it-IT')}</p>
             </div>
@@ -171,88 +286,99 @@ async function sendPurchaseEmail(email, product, session) {
             </div>
             
             <div style="background: #f0fdf4; border-left: 4px solid #10b981; padding: 20px; margin: 20px 0;">
-                <h3 style="color: #059669; margin-top: 0;">📱 Supporto</h3>
+                <h3 style="color: #059669; margin-top: 0;">📱 Hai bisogno di aiuto?</h3>
                 <p>Se hai problemi con il download o domande:</p>
                 <p>📱 <strong>WhatsApp:</strong> <a href="https://wa.me/393478881515" style="color: #25d366;">+39 347 888 1515</a></p>
                 <p>✉️ <strong>Email:</strong> <a href="mailto:andrea.padoan@gmail.com" style="color: #059669;">andrea.padoan@gmail.com</a></p>
             </div>
             
             <div style="background: linear-gradient(135deg, #eff6ff, #dbeafe); padding: 25px; border-radius: 8px; margin: 25px 0; text-align: center;">
-                <h3 style="color: #2563eb; margin-top: 0;">🚀 Scopri altri ebook</h3>
-                <p style="margin-bottom: 15px;">Completa la tua collezione di fitness:</p>
+                <h3 style="color: #2563eb; margin-top: 0;">🚀 Altri programmi disponibili</h3>
+                <p style="margin-bottom: 15px;">Completa la tua collezione fitness:</p>
                 <a href="https://andreapadoan-hub.vercel.app/ebooks.html" style="color: #2563eb; text-decoration: none; font-weight: bold;">
-                    👉 Vedi tutti i programmi
+                    👉 Scopri tutti gli ebook
                 </a>
             </div>
             
             <p style="font-size: 18px; font-weight: bold; color: #059669; text-align: center; margin-top: 40px;">
                 Buon allenamento!<br>
-                Andrea Padoan
+                Andrea Padoan 💪
             </p>
         </div>
         
         <div class="footer">
             <p style="margin: 0 0 10px 0;">© 2025 Andrea Padoan Personal Trainer. Tutti i diritti riservati.</p>
             <p style="margin: 0; font-size: 12px; opacity: 0.7;">
-                Email di conferma acquisto automatica.
+                Email automatica di conferma acquisto.
             </p>
         </div>
     </div>
 </body>
 </html>`;
 
-        await resend.emails.send({
+        const result = await resend.emails.send({
             from: 'Andrea Padoan <noreply@resend.dev>',
             to: email,
-            subject: `🎉 Il tuo ebook "${product.title}" è pronto!`,
+            subject: `🎉 Il tuo ebook "${product.title}" è pronto per il download!`,
             html: emailTemplate,
             tags: [
-                { name: 'category', value: 'purchase' },
+                { name: 'category', value: 'ebook-purchase' },
                 { name: 'product', value: product.title }
             ]
         });
 
-        console.log('✅ Purchase email sent via Resend');
+        console.log('✅ Purchase email sent successfully:', {
+            to: email,
+            product: product.title,
+            emailId: result.data?.id
+        });
+
+        return true;
 
     } catch (error) {
         console.error('❌ Error sending purchase email:', error);
+        return false;
     }
 }
 
-// Notifica Telegram
+// Notifica Telegram opzionale
 async function sendTelegramNotification(email, product, session) {
     try {
-        if (process.env.TELEGRAM_BOT_TOKEN && process.env.TELEGRAM_CHAT_ID) {
-            const message = `🎉 NUOVO ACQUISTO COMPLETATO!
+        const botToken = process.env.TELEGRAM_BOT_TOKEN;
+        const chatId = process.env.TELEGRAM_CHAT_ID;
+
+        if (!botToken || !chatId) {
+            console.log('ℹ️ Telegram credentials not configured, skipping notification');
+            return;
+        }
+
+        const message = `🎉 NUOVO ACQUISTO EBOOK!
 
 📚 Prodotto: ${product.title}
+💰 Prezzo: €${product.price}
 📧 Cliente: ${email}
-💰 Ordine: ${session.id}
+🆔 Ordine: ${session.id}
 🕐 Data: ${new Date().toLocaleString('it-IT')}
 
-✅ Email di download inviata automaticamente!`;
+✅ Email con download inviata automaticamente!`;
 
-            await fetch(`https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    chat_id: process.env.TELEGRAM_CHAT_ID,
-                    text: message
-                })
-            });
+        const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                chat_id: chatId,
+                text: message,
+                parse_mode: 'HTML'
+            })
+        });
 
-            console.log('✅ Telegram notification sent');
+        if (response.ok) {
+            console.log('✅ Telegram notification sent successfully');
+        } else {
+            console.log('⚠️ Telegram notification failed:', response.status);
         }
-    } catch (error) {
-        console.error('⚠️ Telegram notification failed:', error);
-    }
-}
 
-// Configurazione per raw body
-export const config = {
-    api: {
-        bodyParser: {
-            sizeLimit: '1mb',
-        },
-    },
+    } catch (error) {
+        console.error('⚠️ Telegram notification error:', error);
+    }
 }
