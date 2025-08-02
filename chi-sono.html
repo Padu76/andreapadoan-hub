@@ -152,122 +152,15 @@
             padding: 40px 20px 50px;
         }
 
-        /* Hero Section Potenziata */
-        .hero-section {
-            padding: 140px 20px 120px; /* Aumentato spazio per il tasto Home */
-            background: linear-gradient(135deg, #000 0%, #1a1a1a 50%, #000 100%);
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1fr 400px;
-            gap: 60px;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .hero-text {
-            animation: slideInLeft 1s ease-out 0.2s both;
-        }
-
-        .hero-title {
-            font-size: clamp(3.5rem, 7vw, 5.5rem);
-            font-weight: 900;
-            color: #ff6b35;
-            margin-bottom: 15px;
-            line-height: 1;
-            letter-spacing: -2px;
-        }
-
-        .hero-impact {
-            font-size: clamp(1.8rem, 4vw, 2.8rem);
-            color: #fff;
-            margin-bottom: 20px;
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-            color: #b0b0b0;
-            margin-bottom: 40px;
-            font-weight: 400;
-            line-height: 1.6;
-            max-width: 600px;
-        }
-
-        .hero-cta-container {
-            animation: fadeInUp 1s ease-out 0.6s both;
-        }
-
-        .hero-main-cta {
-            background: linear-gradient(45deg, #ff6b35, #ff8c5a);
-            color: #fff;
-            border: none;
-            padding: 22px 45px;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 15px;
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
-        }
-
-        .hero-main-cta:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.6);
-        }
-
-        .hero-cta-note {
-            color: #4ade80;
-            font-size: 14px;
-            font-weight: 500;
-            text-align: left;
-        }
-
-        .hero-image-container {
-            animation: slideInRight 1s ease-out 0.4s both;
-        }
-
-        .profile-image-hero {
-            width: 400px;
-            height: 400px;
-            border-radius: 20px;
-            background: linear-gradient(45deg, #ff6b35, #ff8c5a, #4ade80);
-            padding: 6px;
-            animation: heroImageGlow 4s ease-in-out infinite;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .profile-content-hero {
-            width: 100%;
-            height: 100%;
-            border-radius: 15px;
-            background-image: url('./images/chi-sono.jpg'); /* 🔥 FOTO CAMBIATA */
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-
-        @keyframes heroImageGlow {
-            0%, 100% { 
-                box-shadow: 0 0 40px rgba(255, 107, 53, 0.3), 0 0 80px rgba(74, 222, 128, 0.1); 
-                transform: rotate(0deg);
+        /* Animazioni base */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
             }
-            50% { 
-                box-shadow: 0 0 60px rgba(255, 107, 53, 0.5), 0 0 100px rgba(74, 222, 128, 0.2); 
-                transform: rotate(1deg);
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
@@ -293,200 +186,27 @@
             }
         }
 
-        /* Sezione numeri migliorata */
-        .numbers-section {
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 133, 51, 0.05));
-            border-radius: 25px;
-            padding: 80px 60px;
-            margin-bottom: 120px; /* Aumentato margine */
-            text-align: center;
-            border: 1px solid rgba(255, 107, 53, 0.2);
+        @keyframes heroImageGlow {
+            0%, 100% { 
+                box-shadow: 0 0 40px rgba(255, 107, 53, 0.3), 0 0 80px rgba(74, 222, 128, 0.1); 
+                transform: rotate(0deg);
+            }
+            50% { 
+                box-shadow: 0 0 60px rgba(255, 107, 53, 0.5), 0 0 100px rgba(74, 222, 128, 0.2); 
+                transform: rotate(1deg);
+            }
         }
 
-        .numbers-title {
-            color: #ff6b35;
-            font-size: clamp(2.5rem, 5vw, 3.2rem);
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .numbers-subtitle {
-            color: #b0b0b0;
-            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-            margin-bottom: 60px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .numbers-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 40px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .number-item {
-            background: rgba(26, 26, 26, 0.6);
-            border-radius: 20px;
-            padding: 30px 20px;
-            text-align: center;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 2px solid rgba(255, 107, 53, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .number-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #ff6b35, #ff8533, #4ade80);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .number-item:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: rgba(255, 107, 53, 0.4);
-            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.15);
-        }
-
-        .number-item:hover::before {
-            opacity: 1;
-        }
-
-        .number-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, #ff6b35, #ff8533);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2rem;
-            margin: 0 auto 20px;
-            transition: all 0.3s ease;
-        }
-
-        .number-item:nth-child(2n) .number-icon {
-            background: linear-gradient(135deg, #4ade80, #22c55e);
-        }
-
-        .number-item:nth-child(3n) .number-icon {
-            background: linear-gradient(135deg, #22d3ee, #06b6d4);
-        }
-
-        .number-item:nth-child(4n) .number-icon {
-            background: linear-gradient(135deg, #a855f7, #7c3aed);
-        }
-
-        .number-item:hover .number-icon {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .number-value {
-            font-size: clamp(2.8rem, 5vw, 3.8rem);
-            font-weight: 900;
-            color: #ff6b35;
-            margin-bottom: 10px;
-            display: block;
-            transition: all 0.3s ease;
-        }
-
-        .number-item:nth-child(2n) .number-value {
-            color: #4ade80;
-        }
-
-        .number-item:nth-child(3n) .number-value {
-            color: #22d3ee;
-        }
-
-        .number-item:nth-child(4n) .number-value {
-            color: #a855f7;
-        }
-
-        .number-label {
-            color: #fff;
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
-        .number-description {
-            color: #b0b0b0;
-            font-size: 0.95rem;
-            line-height: 1.4;
-        }
-
-        /* Citazione highlight */
-        .quote-section {
-            text-align: center;
-            margin: 120px 0; /* Aumentato margine */
-            padding: 50px 20px;
-            position: relative;
-        }
-
-        .quote-text {
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            color: #fff;
-            font-weight: 600;
-            font-style: italic;
-            line-height: 1.4;
-            position: relative;
-            z-index: 2;
-        }
-
-        .quote-text::before,
-        .quote-text::after {
-            content: '"';
-            font-size: 4rem;
-            color: #ff6b35;
-            position: absolute;
-            line-height: 1;
-        }
-
-        .quote-text::before {
-            top: -20px;
-            left: -30px;
-        }
-
-        .quote-text::after {
-            bottom: -40px;
-            right: -30px;
-        }
-
-        .quote-author {
-            color: #ff6b35;
-            font-size: 1.2rem;
-            font-weight: bold;
-            margin-top: 30px;
-        }
-
-        /* Fun Facts Sezione Migliorata */
-        .fun-facts-section {
-            margin-bottom: 120px; /* Aumentato margine */
-            padding: 80px 40px;
-            background: radial-gradient(circle at center, rgba(255, 107, 53, 0.05) 0%, transparent 70%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .fun-facts-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(from 0deg, transparent, rgba(255, 107, 53, 0.03), transparent, rgba(74, 222, 128, 0.03), transparent);
-            animation: rotateBackground 20s linear infinite;
-            z-index: 0;
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 20px rgba(255, 107, 53, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 107, 53, 0);
+            }
         }
 
         @keyframes rotateBackground {
@@ -494,1134 +214,7 @@
             100% { transform: rotate(360deg); }
         }
 
-        .fun-facts-title {
-            text-align: center;
-            color: #fff;
-            font-size: clamp(2.2rem, 5vw, 3.2rem);
-            font-weight: 900;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 2;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .fun-facts-subtitle {
-            text-align: center;
-            color: #ff6b35;
-            font-size: clamp(1rem, 2.5vw, 1.3rem);
-            margin-bottom: 60px;
-            font-weight: 600;
-            position: relative;
-            z-index: 2;
-            font-style: italic;
-        }
-
-        .fun-facts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-        }
-
-        .fun-fact-card {
-            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(40, 40, 40, 0.8));
-            border: 2px solid transparent;
-            border-radius: 25px;
-            padding: 40px 30px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            backdrop-filter: blur(10px);
-            cursor: pointer;
-        }
-
-        .fun-fact-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: 25px;
-            padding: 2px;
-            background: linear-gradient(135deg, #ff6b35, #4ade80, #22d3ee, #a855f7);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask-composite: xor;
-            -webkit-mask-composite: xor;
-            opacity: 0;
-            transition: opacity 0.6s ease;
-        }
-
-        .fun-fact-card:hover::before {
-            opacity: 1;
-        }
-
-        .fun-fact-card:hover {
-            transform: translateY(-15px) scale(1.03);
-            box-shadow: 0 25px 50px rgba(255, 107, 53, 0.15);
-        }
-
-        .fun-fact-card:nth-child(2):hover {
-            box-shadow: 0 25px 50px rgba(74, 222, 128, 0.15);
-        }
-
-        .fun-fact-card:nth-child(3):hover {
-            box-shadow: 0 25px 50px rgba(34, 211, 238, 0.15);
-        }
-
-        .fun-fact-card:nth-child(4):hover {
-            box-shadow: 0 25px 50px rgba(168, 85, 247, 0.15);
-        }
-
-        .fun-fact-icon-container {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 25px;
-            background: linear-gradient(135deg, #ff6b35, #ff8533);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            transition: all 0.6s ease;
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
-        }
-
-        .fun-fact-card:nth-child(2) .fun-fact-icon-container {
-            background: linear-gradient(135deg, #4ade80, #22c55e);
-            box-shadow: 0 10px 30px rgba(74, 222, 128, 0.3);
-        }
-
-        .fun-fact-card:nth-child(3) .fun-fact-icon-container {
-            background: linear-gradient(135deg, #22d3ee, #06b6d4);
-            box-shadow: 0 10px 30px rgba(34, 211, 238, 0.3);
-        }
-
-        .fun-fact-card:nth-child(4) .fun-fact-icon-container {
-            background: linear-gradient(135deg, #a855f7, #7c3aed);
-            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.3);
-        }
-
-        .fun-fact-card:hover .fun-fact-icon-container {
-            transform: scale(1.15) rotate(10deg);
-            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
-        }
-
-        .fun-fact-card:nth-child(2):hover .fun-fact-icon-container {
-            box-shadow: 0 15px 40px rgba(74, 222, 128, 0.4);
-        }
-
-        .fun-fact-card:nth-child(3):hover .fun-fact-icon-container {
-            box-shadow: 0 15px 40px rgba(34, 211, 238, 0.4);
-        }
-
-        .fun-fact-card:nth-child(4):hover .fun-fact-icon-container {
-            box-shadow: 0 15px 40px rgba(168, 85, 247, 0.4);
-        }
-
-        .fun-fact-emoji {
-            font-size: 3.5rem;
-            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
-            transition: all 0.3s ease;
-        }
-
-        .fun-fact-card:hover .fun-fact-emoji {
-            transform: scale(1.1);
-        }
-
-        .fun-fact-title {
-            color: #fff;
-            font-size: 1.4rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-            transition: all 0.3s ease;
-        }
-
-        .fun-fact-card:hover .fun-fact-title {
-            color: #ff6b35;
-        }
-
-        .fun-fact-card:nth-child(2):hover .fun-fact-title {
-            color: #4ade80;
-        }
-
-        .fun-fact-card:nth-child(3):hover .fun-fact-title {
-            color: #22d3ee;
-        }
-
-        .fun-fact-card:nth-child(4):hover .fun-fact-title {
-            color: #a855f7;
-        }
-
-        .fun-fact-text {
-            color: #e0e0e0;
-            font-size: 1.1rem;
-            line-height: 1.7;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .fun-fact-card:hover .fun-fact-text {
-            color: #f5f5f5;
-            transform: translateY(-2px);
-        }
-
-        /* Testimonianze REALI da Google Reviews - Stili Integrati */
-        .testimonials-section {
-            margin-bottom: 120px;
-        }
-
-        .testimonials-title {
-            text-align: center;
-            color: #fff;
-            font-size: clamp(2rem, 4vw, 2.5rem);
-            font-weight: bold;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .testimonials-grid-real {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* Card Recensioni Google */
-        .testimonial-card-real {
-            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(40, 40, 40, 0.8));
-            border-radius: 18px;
-            padding: 20px;
-            border: 2px solid rgba(66, 133, 244, 0.2);
-            transition: all 0.3s ease;
-            position: relative;
-            backdrop-filter: blur(10px);
-        }
-
-        .testimonial-card-real:hover {
-            transform: translateY(-5px);
-            border-color: rgba(66, 133, 244, 0.5);
-            box-shadow: 0 15px 30px rgba(66, 133, 244, 0.15);
-        }
-
-        /* Card Destacata per Umberto */
-        .testimonial-card-featured-pro {
-            background: linear-gradient(135deg, rgba(74, 222, 128, 0.15), rgba(34, 197, 94, 0.1));
-            border: 3px solid rgba(74, 222, 128, 0.4);
-            border-radius: 20px;
-            padding: 25px;
-            grid-column: span 2;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .testimonial-card-featured-pro:hover {
-            transform: translateY(-8px);
-            border-color: rgba(74, 222, 128, 0.7);
-            box-shadow: 0 20px 40px rgba(74, 222, 128, 0.2);
-        }
-
-        /* Header */
-        .testimonial-header-real {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 15px;
-        }
-
-        .testimonial-avatar-google {
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(135deg, #4285f4, #34a853);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.1rem;
-            flex-shrink: 0;
-        }
-
-        .testimonial-avatar-google.professional {
-            background: linear-gradient(135deg, #74d680, #4ade80);
-        }
-
-        .testimonial-info-real {
-            flex: 1;
-        }
-
-        .testimonial-author-google {
-            color: #fff;
-            font-size: 1rem;
-            font-weight: bold;
-            margin-bottom: 4px;
-        }
-
-        .testimonial-role-google {
-            color: #b0b0b0;
-            font-size: 0.85rem;
-            margin-bottom: 6px;
-        }
-
-        .testimonial-stars-google {
-            color: #ffc107;
-            font-size: 0.8rem;
-            display: flex;
-            gap: 1px;
-        }
-
-        .google-badge-review {
-            background: #4285f4;
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            flex-shrink: 0;
-        }
-
-        /* Testo Recensione */
-        .testimonial-text-google {
-            color: #e0e0e0;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            font-style: italic;
-            margin-bottom: 12px;
-        }
-
-        .testimonial-card-featured-pro .testimonial-text-google {
-            font-size: 1rem;
-            color: #f0f0f0;
-        }
-
-        .testimonial-date-google {
-            color: #888;
-            font-size: 0.8rem;
-            text-align: right;
-        }
-
-        /* Badge Professionale */
-        .professional-badge-review {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: linear-gradient(45deg, #4ade80, #22c55e);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 15px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        /* Responsive per Recensioni Google */
-        @media (max-width: 768px) {
-            .testimonials-grid-real {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .testimonial-card-featured-pro {
-                grid-column: span 1;
-                padding: 20px;
-            }
-            
-            .testimonials-title {
-                font-size: 1.6rem;
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .professional-badge-review {
-                position: static;
-                margin-top: 10px;
-                align-self: flex-start;
-            }
-        }
-
-        /* Introduzione Strutturata in 3 Blocchi */
-        .intro-structured-section {
-            margin-bottom: 120px; /* Aumentato margine */
-            padding: 0 20px;
-        }
-
-        .intro-blocks-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 100px; /* Aumentato gap tra blocchi */
-        }
-
-        .intro-block {
-            background: linear-gradient(135deg, rgba(26, 26, 26, 0.8), rgba(40, 40, 40, 0.6));
-            border-radius: 25px;
-            padding: 50px 40px;
-            position: relative;
-            border-left: 6px solid #ff6b35;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 107, 53, 0.2);
-        }
-
-        /* Video Section integrata nel primo blocco */
-        .intro-block.video-block {
-            position: relative;
-            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(40, 40, 40, 0.7));
-            overflow: hidden;
-        }
-
-        .video-container {
-            width: 100%;
-            max-width: 600px;
-            margin: 30px auto;
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-        }
-
-        .video-placeholder {
-            width: 100%;
-            height: 300px;
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.8), rgba(255, 133, 51, 0.6)),
-                        url('./images/chi-sono.jpg'); /* 🔥 ANCHE QUI FOTO CAMBIATA */
-            background-size: cover;
-            background-position: center;
-            border-radius: 15px;
-            position: relative;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            border: 3px solid rgba(255, 107, 53, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .video-placeholder:hover {
-            transform: scale(1.02);
-            border-color: rgba(255, 107, 53, 0.6);
-            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
-        }
-
-        .video-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.4);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .video-placeholder:hover .video-overlay {
-            background: rgba(0, 0, 0, 0.2);
-        }
-
-        .play-button {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #ff6b35, #ff8533);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2rem;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
-        }
-
-        .play-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.6);
-        }
-
-        .play-button i {
-            margin-left: 3px;
-        }
-
-        .video-info {
-            text-align: center;
-            color: white;
-        }
-
-        .video-title {
-            font-size: 1.4rem;
-            font-weight: bold;
-            margin-bottom: 8px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .video-description {
-            font-size: 1rem;
-            opacity: 0.9;
-            margin-bottom: 8px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-        }
-
-        .video-duration {
-            background: rgba(0, 0, 0, 0.6);
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.9rem;
-            display: inline-block;
-        }
-
-        /* Video Player quando attivo */
-        .video-player {
-            width: 100%;
-            height: 300px;
-            border-radius: 15px;
-            position: relative;
-            overflow: hidden;
-            border: 3px solid #ff6b35;
-            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
-            display: none;
-        }
-
-        .video-player iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .video-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(0, 0, 0, 0.7);
-            border: none;
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            z-index: 10;
-        }
-
-        .video-close:hover {
-            background: rgba(255, 107, 53, 0.8);
-            transform: scale(1.1);
-        }
-
-        .intro-block:nth-child(2) {
-            border-left-color: #4ade80;
-        }
-
-        .intro-block:nth-child(3) {
-            border-left-color: #22d3ee;
-        }
-
-        .intro-block:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .block-number {
-            position: absolute;
-            top: -15px;
-            left: 40px;
-            background: linear-gradient(135deg, #ff6b35, #ff8533);
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-            border: 4px solid #000;
-        }
-
-        .intro-block:nth-child(2) .block-number {
-            background: linear-gradient(135deg, #4ade80, #22c55e);
-        }
-
-        .intro-block:nth-child(3) .block-number {
-            background: linear-gradient(135deg, #22d3ee, #06b6d4);
-        }
-
-        .seo-h2 {
-            color: #ff6b35;
-            font-size: clamp(1.8rem, 3.5vw, 2.4rem);
-            font-weight: bold;
-            margin-bottom: 15px;
-            margin-top: 10px;
-            line-height: 1.3;
-        }
-
-        .intro-block:nth-child(2) .seo-h2 {
-            color: #4ade80;
-        }
-
-        .intro-block:nth-child(3) .seo-h2 {
-            color: #22d3ee;
-        }
-
-        .seo-h3 {
-            color: #b0b0b0;
-            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-            font-weight: 600;
-            margin-bottom: 30px;
-            font-style: italic;
-        }
-
-        .block-content {
-            color: #e0e0e0;
-            font-size: 1.05rem;
-            line-height: 1.7;
-        }
-
-        .block-text {
-            margin-bottom: 25px;
-        }
-
-        .block-list {
-            list-style: none;
-            padding: 0;
-            margin: 25px 0;
-        }
-
-        .block-list li {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
-            padding: 15px;
-            background: rgba(255, 107, 53, 0.05);
-            border-radius: 10px;
-            border-left: 3px solid #ff6b35;
-        }
-
-        .block-list i {
-            color: #ff6b35;
-            font-size: 1.2rem;
-            width: 20px;
-        }
-
-        /* Story Highlight Box */
-        .story-highlight {
-            background: linear-gradient(135deg, rgba(74, 222, 128, 0.1), rgba(34, 211, 238, 0.05));
-            border: 2px solid rgba(74, 222, 128, 0.3);
-            border-radius: 20px;
-            padding: 30px;
-            margin: 30px 0;
-            position: relative;
-            text-align: center;
-        }
-
-        .story-highlight i {
-            color: #4ade80;
-            font-size: 2rem;
-            margin-bottom: 15px;
-        }
-
-        .highlight-text {
-            color: #fff;
-            font-size: 1.3rem;
-            font-weight: 600;
-            line-height: 1.5;
-            font-style: italic;
-            margin: 0;
-        }
-
-        /* Mission Statement */
-        .mission-statement {
-            background: rgba(34, 211, 238, 0.1);
-            border: 2px solid rgba(34, 211, 238, 0.3);
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 30px;
-        }
-
-        .mission-title {
-            color: #22d3ee;
-            font-size: 1.4rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .mission-text {
-            color: #e0e0e0;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin: 0;
-        }
-
-        /* Transformation Grid Migliorata */
-        .transformation-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin: 30px 0;
-        }
-
-        .transformation-item {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(26, 26, 26, 0.6));
-            border-radius: 20px;
-            padding: 30px 20px;
-            text-align: center;
-            border: 2px solid rgba(255, 107, 53, 0.2);
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .transformation-item:hover {
-            border-color: rgba(255, 107, 53, 0.5);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.2);
-        }
-
-        .transform-emoji {
-            font-size: 2.5rem;
-            margin: 5px 0;
-        }
-
-        .transform-label {
-            font-size: 1rem;
-            font-weight: bold;
-            color: #ff6b35;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .transform-text {
-            color: #e0e0e0;
-            font-size: 1rem;
-            font-weight: 500;
-        }
-
-        .transform-arrow {
-            color: #4ade80;
-            font-size: 2rem;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-
-        /* CTA integrata nel contenuto */
-        .cta-in-content {
-            text-align: center;
-            margin-top: 40px;
-            padding: 30px;
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 133, 51, 0.05));
-            border-radius: 20px;
-            border: 2px solid rgba(255, 107, 53, 0.3);
-        }
-
-        .cta-text {
-            color: #fff;
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-        }
-
-        .cta-inline-btn {
-            background: linear-gradient(45deg, #ff6b35, #ff8c5a);
-            color: #fff;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 30px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .cta-inline-btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
-        }
-
-        /* Story Cards con immagini COMPLETE e VISIBILI */
-        .story-section {
-            margin-bottom: 120px; /* Aumentato margine */
-        }
-
-        .story-section-title {
-            color: #ff6b35;
-            font-size: clamp(2rem, 4vw, 2.8rem);
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 60px;
-            line-height: 1.3;
-        }
-
-        .story-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 40px; /* Aumentato gap */
-        }
-
-        .story-card {
-            background: rgba(26, 26, 26, 0.8);
-            border-radius: 20px;
-            padding: 0;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 107, 53, 0.2);
-            transition: all 0.3s ease;
-            animation: fadeInUp 1s ease-out both;
-            position: relative;
-            overflow: hidden;
-            min-height: 450px; /* Aumentata altezza */
-        }
-
-        .story-card-image {
-            width: 100%;
-            height: 250px; /* Aumentata altezza immagine */
-            background-size: contain; /* CONTAIN per vedere immagine completa */
-            background-repeat: no-repeat;
-            background-position: center;
-            border-radius: 20px 20px 0 0;
-            position: relative;
-            background-color: #333; /* Colore di fallback per debug */
-        }
-
-        .story-card:nth-child(1) .story-card-image {
-            background-image: url('./images/storia-1.jpeg');
-        }
-
-        .story-card:nth-child(2) .story-card-image {
-            background-image: url('./images/storia-2.JPG');
-        }
-
-        .story-card:nth-child(3) .story-card-image {
-            background-image: url('./images/storia-3.jpg');
-        }
-
-        .story-card:nth-child(4) .story-card-image {
-            background-image: url('./images/storia-4.jpg');
-        }
-
-        .story-card-content {
-            padding: 30px; /* Aumentato padding */
-        }
-
-        .story-title {
-            color: #ff6b35;
-            font-size: 1.4rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .story-text {
-            color: #e0e0e0;
-            line-height: 1.7;
-            font-size: 1rem;
-        }
-
-        .story-card:nth-child(1) { animation-delay: 0.1s; }
-        .story-card:nth-child(2) { animation-delay: 0.2s; }
-        .story-card:nth-child(3) { animation-delay: 0.3s; }
-        .story-card:nth-child(4) { animation-delay: 0.4s; }
-
-        .story-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(255, 107, 53, 0.5);
-            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.1);
-        }
-
-        /* Values Section con tue foto personali - IMMAGINI COMPLETE E VISIBILI */
-        .values-section {
-            margin-bottom: 120px; /* Aumentato margine */
-        }
-
-        .values-title {
-            color: #fff;
-            font-size: clamp(2rem, 4vw, 2.8rem);
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .values-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px; /* Aumentato gap */
-        }
-
-        .value-card {
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.05), rgba(255, 133, 51, 0.02));
-            border: 2px solid rgba(255, 107, 53, 0.2);
-            border-radius: 20px;
-            padding: 0;
-            text-align: center;
-            transition: all 0.4s ease;
-            overflow: hidden;
-            min-height: 360px; /* Aumentata altezza */
-            cursor: pointer;
-        }
-
-        .value-card:hover {
-            border-color: rgba(255, 107, 53, 0.6);
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
-        }
-
-        .value-image {
-            width: 100%;
-            height: 200px; /* Aumentata altezza */
-            background-size: contain; /* CONTAIN per vedere immagine completa */
-            background-repeat: no-repeat;
-            background-position: center;
-            border-radius: 20px 20px 0 0;
-            transition: all 0.3s ease;
-            background-color: #333; /* Colore di fallback per debug */
-        }
-
-        .value-card:hover .value-image {
-            transform: scale(1.05);
-        }
-
-        /* Le tue foto personali per i valori - TUTTE VISIBILI */
-        .value-card:nth-child(1) .value-image {
-            background-image: url('./images/valore-determinazione.jpg');
-        }
-
-        .value-card:nth-child(2) .value-image {
-            background-image: url('./images/valore-costanza.jpg');
-        }
-
-        .value-card:nth-child(3) .value-image {
-            background-image: url('./images/valore-motivazione.jpg');
-        }
-
-        .value-card:nth-child(4) .value-image {
-            background-image: url('./images/valore-trasformazione.jpg');
-        }
-
-        .value-card:nth-child(5) .value-image {
-            background-image: url('./images/valore-crescita.jpg');
-        }
-
-        .value-card:nth-child(6) .value-image {
-            background-image: url('./images/valore-supporto.jpg');
-        }
-
-        .value-content {
-            padding: 25px;
-        }
-
-        .value-title {
-            color: #ff6b35;
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .value-text {
-            color: #ccc;
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-
-        /* Questions Section */
-        .questions-section {
-            margin-bottom: 120px; /* Aumentato margine */
-        }
-
-        .questions-title {
-            color: #fff;
-            font-size: clamp(2rem, 4vw, 2.8rem);
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .questions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px; /* Aumentato gap */
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .question-card {
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 133, 51, 0.05));
-            border-left: 4px solid #ff6b35;
-            padding: 25px;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .question-card:hover {
-            transform: translateX(5px);
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.15), rgba(255, 133, 51, 0.08));
-        }
-
-        .question-text {
-            color: #e0e0e0;
-            font-size: 1.1rem;
-            font-style: italic;
-            font-weight: 500;
-        }
-
-        /* Results Section con immagini MIGLIORATA - SENZA ICONE E IMMAGINI PIÙ GRANDI */
-        .results-section {
-            background: linear-gradient(135deg, rgba(26, 26, 26, 0.8), rgba(40, 40, 40, 0.8));
-            border-radius: 25px;
-            padding: 60px;
-            margin-bottom: 120px; /* Aumentato margine */
-        }
-
-        .results-title {
-            color: #ff6b35;
-            font-size: 2.3rem;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .results-subtitle {
-            color: #fff;
-            font-size: 1.4rem;
-            font-weight: 600;
-            text-align: center;
-            margin-bottom: 40px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .results-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px; /* Aumentato gap */
-        }
-
-        .result-item {
-            background: rgba(255, 107, 53, 0.1);
-            border: 1px solid rgba(255, 107, 53, 0.3);
-            border-radius: 15px;
-            padding: 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            min-height: 300px; /* 🔥 AUMENTATA ALTEZZA */
-            transition: all 0.3s ease;
-        }
-
-        .result-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(255, 107, 53, 0.2);
-            border-color: rgba(255, 107, 53, 0.5);
-        }
-
-        .result-item-image {
-            width: 100%;
-            height: 200px; /* 🔥 AUMENTATA DA 120px A 200px */
-            background-size: cover; /* 🔥 CAMBIATO DA CONTAIN A COVER */
-            background-repeat: no-repeat;
-            background-position: center;
-            border-radius: 14px 14px 0 0;
-            margin-bottom: 0;
-            background-color: #333;
-        }
-
-        .result-item:nth-child(1) .result-item-image {
-            background-image: url('./images/risultato-1.jpg');
-        }
-
-        .result-item:nth-child(2) .result-item-image {
-            background-image: url('./images/risultato-2.jpg');
-        }
-
-        .result-item:nth-child(3) .result-item-image {
-            background-image: url('./images/risultato-3.jpg');
-        }
-
-        .result-item:nth-child(4) .result-item-image {
-            background-image: url('./images/risultato-4.jpg');
-        }
-
-        .result-item-content {
-            padding: 25px 20px; /* 🔥 AUMENTATO PADDING */
-        }
-
-        /* 🔥 RIMOSSA LA SEZIONE ICON - NIENTE PIÙ ICONE */
-        .result-icon {
-            display: none; /* 🔥 NASCOSTA COMPLETAMENTE */
-        }
-
-        .result-text {
-            color: #e0e0e0;
-            font-size: 1.1rem; /* 🔥 AUMENTATA DA 1rem A 1.1rem */
-            line-height: 1.6;
-            font-weight: 500;
-            margin: 0;
-        }
-
-        /* Animazioni migliorate e più fluide */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes bounceIn {
-            0% {
-                opacity: 0;
-                transform: scale(0.3);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.05);
-            }
-            70% {
-                transform: scale(0.95);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        /* Animazioni scroll migliorate */
+        /* Animazioni scroll */
         .animate-on-scroll {
             opacity: 0;
             transform: translateY(80px);
@@ -1683,174 +276,14 @@
         .animate-on-scroll.delay-4 { transition-delay: 0.4s; }
         .animate-on-scroll.delay-5 { transition-delay: 0.5s; }
 
-        /* Effetti pulseanti per CTA */
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.7);
-            }
-            70% {
-                box-shadow: 0 0 0 20px rgba(255, 107, 53, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(255, 107, 53, 0);
-            }
-        }
-
-        .hero-main-cta {
-            animation: pulse 2s infinite;
-        }
-
-        .cta-inline-btn:hover {
-            animation: pulse 1.5s infinite;
-        }
-
-        /* Mobile Responsive */
+        /* Responsive Mobile */
         @media (max-width: 768px) {
             .container {
                 padding: 40px 15px 30px;
             }
 
-            .hero-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
-                text-align: center;
-            }
-
-            .hero-title {
-                font-size: clamp(2.5rem, 8vw, 3.5rem);
-            }
-
-            .profile-image-hero {
-                width: 280px;
-                height: 280px;
-                margin: 0 auto;
-            }
-
-            .hero-main-cta {
-                width: 100%;
-                max-width: 350px;
-                margin: 0 auto 15px;
-                justify-content: center;
-            }
-
-            .intro-blocks-container {
-                gap: 60px; /* Ridotto per mobile */
-            }
-
-            .intro-block {
-                padding: 35px 25px;
-            }
-
-            .block-number {
-                left: 25px;
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
-
-            .seo-h2 {
-                font-size: clamp(1.4rem, 5vw, 1.8rem);
-            }
-
-            .seo-h3 {
-                font-size: clamp(1rem, 3vw, 1.2rem);
-            }
-
-            .block-list li {
-                flex-direction: column;
-                text-align: center;
-                gap: 10px;
-            }
-
-            .transformation-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-
-            .story-highlight {
-                padding: 20px;
-            }
-
-            .highlight-text {
-                font-size: 1.1rem;
-            }
-
             .nav-anchors {
                 display: none;
-            }
-
-            .numbers-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 25px;
-            }
-
-            .number-item {
-                padding: 25px 15px;
-            }
-
-            .number-icon {
-                width: 60px;
-                height: 60px;
-                font-size: 1.8rem;
-            }
-
-            .number-value {
-                font-size: 2.2rem;
-            }
-
-            .number-label {
-                font-size: 1rem;
-            }
-
-            .number-description {
-                font-size: 0.85rem;
-            }
-
-            .quote-text::before,
-            .quote-text::after {
-                font-size: 2.5rem;
-            }
-
-            .quote-text::before {
-                top: -10px;
-                left: -15px;
-            }
-
-            .quote-text::after {
-                bottom: -20px;
-                right: -15px;
-            }
-
-            .story-grid {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
-            
-            .story-card-image {
-                height: 180px;
-            }
-            
-            .story-card {
-                min-height: 320px;
-            }
-
-            .video-placeholder,
-            .video-player {
-                height: 250px;
-            }
-
-            .play-button {
-                width: 70px;
-                height: 70px;
-                font-size: 1.8rem;
-            }
-
-            .video-title {
-                font-size: 1.2rem;
-            }
-
-            .video-description {
-                font-size: 0.9rem;
             }
 
             .home-button {
@@ -1859,23 +292,31 @@
                 padding: 10px 16px;
                 font-size: 12px;
             }
+        }
 
-            .results-content {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
+        /* Loading states per componenti */
+        .component-loading {
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(26, 26, 26, 0.5);
+            border-radius: 15px;
+            margin: 20px 0;
+        }
 
-            .result-item {
-                min-height: 280px;
-            }
+        .component-loading::after {
+            content: '';
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 107, 53, 0.3);
+            border-top-color: #ff6b35;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
 
-            .result-item-image {
-                height: 160px;
-            }
-
-            .result-text {
-                font-size: 1rem;
-            }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -1891,11 +332,11 @@
         <div class="anchor-link" data-target="hero">
             <div class="anchor-tooltip">Chi Sono</div>
         </div>
-        <div class="anchor-link" data-target="numbers">
-            <div class="anchor-tooltip">I Numeri</div>
-        </div>
         <div class="anchor-link" data-target="testimonials">
             <div class="anchor-tooltip">Testimonianze</div>
+        </div>
+        <div class="anchor-link" data-target="values">
+            <div class="anchor-tooltip">I Miei Valori</div>
         </div>
     </div>
 
@@ -1906,653 +347,178 @@
     </a>
 
     <div class="container">
-        <!-- Hero Section con Citazione Motivazionale in alto -->
-        <section class="hero-section" id="hero">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1 class="hero-title">Andrea Padoan</h1>
-                    <div class="hero-impact">Personal Trainer e Lifestyle Coach</div>
-                    
-                    <!-- Citazione Motivazionale integrata nell'hero -->
-                    <div style="text-align: center; margin: 40px 0; padding: 30px; background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 133, 51, 0.05)); border-radius: 20px; border: 2px solid rgba(255, 107, 53, 0.3);">
-                        <div style="font-size: clamp(1.3rem, 3vw, 2rem); color: #fff; font-weight: 600; font-style: italic; line-height: 1.4; margin-bottom: 15px;">
-                            "Credo che ognuno possa trasformarsi, basta il metodo giusto e la determinazione per non mollare mai"
-                        </div>
-                        <div style="color: #ff6b35; font-size: 1.1rem; font-weight: bold;">- Andrea Padoan</div>
-                    </div>
-                    
-                    <p class="hero-subtitle">Aiuto professionisti e imprenditori a rimettersi in forma e ritrovare energia senza sacrificare tempo prezioso</p>
-                    
-                    <!-- CTA Hero -->
-                    <div class="hero-cta-container">
-                        <button class="hero-main-cta" onclick="openChat()">
-                            <i class="fas fa-comments"></i>
-                            Parlami dei tuoi obiettivi
-                        </button>
-                        <p class="hero-cta-note">💬 Chat disponibile 24/7 • Risposta immediata • Consulenza gratuita</p>
-                    </div>
-                </div>
-                
-                <div class="hero-image-container">
-                    <div class="profile-image-hero">
-                        <div class="profile-content-hero"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- Hero Section -->
+        <div id="hero-container" class="component-loading"></div>
 
-        <!-- Introduzione Strutturata in 3 Blocchi -->
-        <section class="intro-structured-section animate-on-scroll">
-            <div class="intro-blocks-container">
-                
-                <!-- Blocco 1: Chi sei oggi - CON VIDEO -->
-                <div class="intro-block video-block delay-1">
-                    <div class="block-number">01</div>
-                    <h2 class="seo-h2">Chi sono – Personal Trainer e Lifestyle Coach</h2>
-                    <h3 class="seo-h3">Il professionista che trasforma corpo, mente e business</h3>
-                    <div class="block-content">
-                        <p class="block-text">
-                            La mia missione è aiutare professionisti e imprenditori a raggiungere il loro massimo potenziale attraverso un approccio integrato che unisce fitness, nutrizione e sviluppo personale.
-                        </p>
+        <!-- Intro Blocks -->
+        <div id="intro-blocks-container" class="component-loading"></div>
 
-                        <!-- Video Container -->
-                        <div class="video-container">
-                            <!-- Video Placeholder -->
-                            <div class="video-placeholder" id="videoPlaceholder" onclick="playVideo()">
-                                <div class="video-overlay">
-                                    <div class="play-button">
-                                        <i class="fas fa-play"></i>
-                                    </div>
-                                    <div class="video-info">
-                                        <div class="video-title">La Mia Storia</div>
-                                        <div class="video-description">Scopri il mio percorso di trasformazione</div>
-                                        <div class="video-duration">⏱️ 45 sec</div>
-                                    </div>
-                                </div>
-                            </div>
+        <!-- Fun Facts -->
+        <div id="fun-facts-container" class="component-loading"></div>
 
-                            <!-- Video Player (nascosto inizialmente) -->
-                            <div class="video-player" id="videoPlayer">
-                                <button class="video-close" onclick="closeVideo()">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                                <iframe id="videoFrame" src="" allowfullscreen></iframe>
-                            </div>
-                        </div>
+        <!-- Testimonianze Google -->
+        <div id="testimonials-container" class="component-loading"></div>
 
-                        <ul class="block-list">
-                            <li><i class="fas fa-dumbbell"></i> <strong>Fitness personalizzato</strong> - Allenamenti su misura per i tuoi obiettivi</li>
-                            <li><i class="fas fa-brain"></i> <strong>Coaching mentale</strong> - Sviluppo di mindset vincente</li>
-                            <li><i class="fas fa-rocket"></i> <strong>Business growth</strong> - Supporto per imprenditori e liberi professionisti</li>
-                        </ul>
-                    </div>
-                </div>
+        <!-- Story Cards -->
+        <div id="story-cards-container" class="component-loading"></div>
 
-                <!-- Blocco 2: Da dove vieni -->
-                <div class="intro-block delay-2">
-                    <div class="block-number">02</div>
-                    <h2 class="seo-h2">Il mio percorso da Manager a imprenditore del benessere</h2>
-                    <h3 class="seo-h3">Dalla crisi personale alla missione di aiutare gli altri</h3>
-                    <div class="block-content">
-                        <div class="story-highlight">
-                            <i class="fas fa-quote-left"></i>
-                            <p class="highlight-text">
-                                "Ero un manager stanco e senza tempo libero: oggi aiuto altri come me a ritrovare energia e passione per la vita"
-                            </p>
-                        </div>
-                        <p class="block-text">
-                            Per oltre 12 anni ho ricoperto ruoli manageriali nel Marketing e nelle Vendite in importanti aziende. 
-                            Apparentemente avevo tutto: carriera, stipendio, responsabilità. Ma <strong>mancava qualcosa di fondamentale</strong>.
-                        </p>
-                        <p class="block-text">
-                            <strong>Il momento di svolta</strong> è arrivato quando mi sono guardato allo specchio: ero in sovrappeso, 
-                            stanco, senza energia. Ho capito che dovevo scegliere tra continuare così o cambiare completamente rotta. 
-                            Ho scelto la trasformazione. Prima per me, poi per aiutare centinaia di persone come me.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Blocco 3: Missione personale -->
-                <div class="intro-block delay-3">
-                    <div class="block-number">03</div>
-                    <h2 class="seo-h2">La mia missione: trasformare il "pulsante OFF" in "ON"</h2>
-                    <h3 class="seo-h3">Perché posso aiutarti a raggiungere i tuoi obiettivi</h3>
-                    <div class="block-content">
-                        <div class="mission-statement">
-                            <h4 class="mission-title">La Mia Promessa</h4>
-                            <p class="mission-text">
-                                <strong>AIUTARE LE PERSONE A STARE BENE</strong> - questa è la mia missione quotidiana. 
-                                Non solo attraverso l'allenamento, ma creando un vero e proprio <em>lifestyle</em> che ti permette di:
-                            </p>
-                        </div>
-                        
-                        <div class="transformation-grid">
-                            <div class="transformation-item">
-                                <div class="transform-emoji">😴</div>
-                                <div class="transform-label">PRIMA</div>
-                                <div class="transform-text">Stanco e spento</div>
-                                <div class="transform-arrow">→</div>
-                                <div class="transform-emoji">⚡</div>
-                                <div class="transform-label">DOPO</div>
-                                <div class="transform-text">Energico e motivato</div>
-                            </div>
-                            <div class="transformation-item">
-                                <div class="transform-emoji">🏃‍♂️</div>
-                                <div class="transform-label">PRIMA</div>
-                                <div class="transform-text">Fuori forma</div>
-                                <div class="transform-arrow">→</div>
-                                <div class="transform-emoji">💪</div>
-                                <div class="transform-label">DOPO</div>
-                                <div class="transform-text">Fisico tonico e forte</div>
-                            </div>
-                            <div class="transformation-item">
-                                <div class="transform-emoji">😰</div>
-                                <div class="transform-label">PRIMA</div>
-                                <div class="transform-text">Stressato</div>
-                                <div class="transform-arrow">→</div>
-                                <div class="transform-emoji">😎</div>
-                                <div class="transform-label">DOPO</div>
-                                <div class="transform-text">Equilibrato e sereno</div>
-                            </div>
-                        </div>
-
-                        <div class="cta-in-content">
-                            <p class="cta-text"><strong>Vuoi iniziare anche tu questa trasformazione?</strong></p>
-                            <button class="cta-inline-btn" onclick="openChat()">
-                                <i class="fas fa-comments"></i>
-                                Parlami dei tuoi obiettivi
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Fun Facts Sezione Completamente Rinnovata -->
-        <section class="fun-facts-section animate-on-scroll">
-            <h2 class="fun-facts-title">🎯 Curiosità su di Me</h2>
-            <p class="fun-facts-subtitle">Quello che forse non sai di me...</p>
-            <div class="fun-facts-grid">
-                <div class="fun-fact-card animate-bounce-in delay-1">
-                    <div class="fun-fact-icon-container">
-                        <span class="fun-fact-emoji">🏊‍♂️</span>
-                    </div>
-                    <h3 class="fun-fact-title">Ex Istruttore di Nuoto</h3>
-                    <p class="fun-fact-text">Prima di diventare manager, ho insegnato nuoto per anni. L'acqua mi ha sempre dato serenità e mi ha insegnato l'importanza della respirazione corretta!</p>
-                </div>
-
-                <div class="fun-fact-card animate-bounce-in delay-2">
-                    <div class="fun-fact-icon-container">
-                        <span class="fun-fact-emoji">⚡</span>
-                    </div>
-                    <h3 class="fun-fact-title">Pulsante "ON" sempre attivo</h3>
-                    <p class="fun-fact-text">Dove prima la mia giornata finiva alle 18, ora inizia davvero! Il mio "pulsante OFF" è diventato permanentemente "ON" - e voglio insegnare anche a te come farlo.</p>
-                </div>
-
-                <div class="fun-fact-card animate-bounce-in delay-3">
-                    <div class="fun-fact-icon-container">
-                        <span class="fun-fact-emoji">🎯</span>
-                    </div>
-                    <h3 class="fun-fact-title">Ossessionato dalla Trasformazione</h3>
-                    <p class="fun-fact-text">La mia parola preferita? "Trasformazione!" È quello che cerco di creare nella vita di ogni cliente. Non mi accontento mai del "va bene così".</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Testimonianze REALI da Google Reviews -->
-        <section class="testimonials-section animate-on-scroll" id="testimonials">
-            <h2 class="testimonials-title">
-                <i class="fab fa-google" style="color: #4285f4; margin-right: 15px;"></i>
-                Cosa Dicono i Miei Clienti su Google
-            </h2>
-            <div style="text-align: center; margin-bottom: 50px;">
-                <div style="display: inline-flex; align-items: center; gap: 10px; background: rgba(66, 133, 244, 0.1); padding: 15px 30px; border-radius: 25px; border: 2px solid rgba(66, 133, 244, 0.3);">
-                    <div style="color: #ffc107; font-size: 1.5rem;">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <span style="color: #4285f4; font-weight: bold; font-size: 1.2rem;">5.0 stelle</span>
-                    <span style="color: #e0e0e0;">su Google Reviews</span>
-                </div>
-            </div>
-            
-            <div class="testimonials-grid-real">
-                <!-- Recensione 1 - Selena Dal Dosso -->
-                <div class="testimonial-card-real">
-                    <div class="testimonial-header-real">
-                        <div class="testimonial-avatar-google">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="testimonial-info-real">
-                            <div class="testimonial-author-google">Selena Dal Dosso</div>
-                            <div class="testimonial-role-google">Architetto • Local Guide</div>
-                            <div class="testimonial-stars-google">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                        <div class="google-badge-review">
-                            <i class="fab fa-google"></i>
-                        </div>
-                    </div>
-                    <p class="testimonial-text-google">
-                        "Non avrai altro Personal Trainer al di fuori di... Andrea Padoan! Vi basterà parlarci soli cinque minuti per capire che Andrea è unico."
-                    </p>
-                    <div class="testimonial-date-google">5 anni fa</div>
-                </div>
-
-                <!-- Recensione 2 - Lara Ligabo -->
-                <div class="testimonial-card-real">
-                    <div class="testimonial-header-real">
-                        <div class="testimonial-avatar-google">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="testimonial-info-real">
-                            <div class="testimonial-author-google">Lara Ligabo</div>
-                            <div class="testimonial-role-google">12 recensioni</div>
-                            <div class="testimonial-stars-google">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                        <div class="google-badge-review">
-                            <i class="fab fa-google"></i>
-                        </div>
-                    </div>
-                    <p class="testimonial-text-google">
-                        "Sei professionale e preparato, e un grande motivatore, fai il tuo lavoro con passione e amore, che sai trasmettere. Posso solo farti i complimenti ed augurarti di continuare così."
-                    </p>
-                    <div class="testimonial-date-google">6 anni fa</div>
-                </div>
-
-                <!-- Recensione 3 - Sabrina Poli -->
-                <div class="testimonial-card-real">
-                    <div class="testimonial-header-real">
-                        <div class="testimonial-avatar-google">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="testimonial-info-real">
-                            <div class="testimonial-author-google">Sabrina Poli</div>
-                            <div class="testimonial-role-google">Cliente verificata</div>
-                            <div class="testimonial-stars-google">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                        <div class="google-badge-review">
-                            <i class="fab fa-google"></i>
-                        </div>
-                    </div>
-                    <p class="testimonial-text-google">
-                        "Se cercate un PT professionale, affidabile e preparato questo è Andrea Padoan. Sono seguita da lui anche dal punto di vista alimentare e in sei mesi ho ottenuto ottimi risultati. Consigliatissimo."
-                    </p>
-                    <div class="testimonial-date-google">6 anni fa</div>
-                </div>
-
-                <!-- Recensione 4 - Giulia Donà -->
-                <div class="testimonial-card-real">
-                    <div class="testimonial-header-real">
-                        <div class="testimonial-avatar-google">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="testimonial-info-real">
-                            <div class="testimonial-author-google">Giulia Donà</div>
-                            <div class="testimonial-role-google">3 recensioni</div>
-                            <div class="testimonial-stars-google">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                        <div class="google-badge-review">
-                            <i class="fab fa-google"></i>
-                        </div>
-                    </div>
-                    <p class="testimonial-text-google">
-                        "Andrea, un ottimo personal trainer! Professionale e affidabile! Sono seguita da lui da 7 settimane circa e ho ottenuto già ottimi risultati... il mio fisico è notevolmente cambiato!"
-                    </p>
-                    <div class="testimonial-date-google">7 anni fa</div>
-                </div>
-
-                <!-- Recensione 5 - Massimo Corsini -->
-                <div class="testimonial-card-real">
-                    <div class="testimonial-header-real">
-                        <div class="testimonial-avatar-google">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="testimonial-info-real">
-                            <div class="testimonial-author-google">Massimo Corsini</div>
-                            <div class="testimonial-role-google">5 recensioni</div>
-                            <div class="testimonial-stars-google">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                        <div class="google-badge-review">
-                            <i class="fab fa-google"></i>
-                        </div>
-                    </div>
-                    <p class="testimonial-text-google">
-                        "Conosco Andrea da poco meno di 2 anni; già al nostro primo incontro ho avuto la certezza che sarebbe diventato il MIO Personal Trainer. Mi hanno conquistato le sue parole, i suoi sorrisi..."
-                    </p>
-                    <div class="testimonial-date-google">7 anni fa</div>
-                </div>
-
-                <!-- Recensione Speciale - Umberto Miletto (Destacata) -->
-                <div class="testimonial-card-featured-pro">
-                    <div class="testimonial-header-real">
-                        <div class="testimonial-avatar-google professional">
-                            <i class="fas fa-dumbbell"></i>
-                        </div>
-                        <div class="testimonial-info-real">
-                            <div class="testimonial-author-google">Umberto Miletto</div>
-                            <div class="testimonial-role-google">Personal Trainer Professionista</div>
-                            <div class="testimonial-stars-google">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                        <div class="google-badge-review">
-                            <i class="fab fa-google"></i>
-                        </div>
-                    </div>
-                    <p class="testimonial-text-google">
-                        "Andrea Padoan è sicuramente un punto di riferimento per l'allenamento personalizzato a Verona. Preciso, professionale, preparato, carismatico, grande motivatore. Il suo centro è all'avanguardia nel proporre le novità del settore fitness. È uno stimato collega."
-                    </p>
-                    <div class="testimonial-date-google">12 anni fa</div>
-                    <div class="professional-badge-review">
-                        <i class="fas fa-certificate"></i>
-                        <span>Recensione da Collega PT</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CTA per Google Reviews -->
-            <div style="text-align: center; margin-top: 50px; padding: 30px; background: linear-gradient(135deg, rgba(66, 133, 244, 0.1), rgba(66, 133, 244, 0.05)); border-radius: 20px; border: 2px solid rgba(66, 133, 244, 0.3);">
-                <h3 style="color: #4285f4; font-size: 1.4rem; margin-bottom: 15px;">
-                    <i class="fab fa-google"></i> Vuoi lasciare anche tu una recensione?
-                </h3>
-                <p style="color: #e0e0e0; margin-bottom: 20px; font-size: 1rem;">
-                    La tua opinione è importante per aiutare altri a trasformare la loro vita
-                </p>
-                <a href="https://share.google/N81GPLujoH9n0CRuY" target="_blank" 
-                   style="background: linear-gradient(45deg, #4285f4, #34a853); color: white; text-decoration: none; padding: 12px 25px; border-radius: 25px; font-weight: bold; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease;">
-                    <i class="fab fa-google"></i>
-                    Scrivi una Recensione
-                </a>
-            </div>
-        </section>
-
-        <!-- Story Cards con Titolo Sopra -->
-        <section class="story-section animate-on-scroll">
-            <h2 class="story-section-title">Da "OFF" a "ON": La Mia Trasformazione Personale</h2>
-            <div class="story-grid">
-                <div class="story-card">
-                    <div class="story-card-image"></div>
-                    <div class="story-card-content">
-                        <h3 class="story-title">Il Momento di Svolta</h3>
-                        <p class="story-text">
-                            <strong>Quando ho aperto Tribù Studio...</strong> un giorno mi sono guardato allo specchio e dopo 30 anni ho visto ciò che non volevo diventare: 
-                            ero in sovrappeso e intuii che sarei andato incontro a problemi di salute. In quel momento ho deciso che non volevo più percorrere quella strada.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="story-card">
-                    <div class="story-card-image"></div>
-                    <div class="story-card-content">
-                        <h3 class="story-title">Da "OFF" a "ON"</h3>
-                        <p class="story-text">
-                            Sono stato anche io uno come te... che tornato a casa dal lavoro si sentiva così stanco da premere il pulsante "OFF" sino al giorno dopo. 
-                            Oggi la mia vita è cambiata. <strong>Dove prima la mia giornata finiva, ora inizia davvero!</strong>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="story-card">
-                    <div class="story-card-image"></div>
-                    <div class="story-card-content">
-                        <h3 class="story-title">La Trasformazione Completa</h3>
-                        <p class="story-text">
-                            Ho migliorato il mio stile di vita: potenziato la resistenza allo stress, ho eliminato farmaci, ho raggiunto una buona forma fisica. 
-                            Ho ritrovato in me una energia sepolta che rischiava di rimanere sotterrata per sempre.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="story-card">
-                    <div class="story-card-image"></div>
-                    <div class="story-card-content">
-                        <h3 class="story-title">Il Vero Significato</h3>
-                        <p class="story-text">
-                            Perché una persona decide di cambiare? La motivazione è una sola: <strong>trasformare qualcosa in qualcos'altro!</strong> 
-                            Un sogno in realtà, un peso in un altro, un no in un sì. È questo quello che ti offro: <strong>Trasformazione!</strong>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Values -->
-        <div class="values-section animate-on-scroll">
-            <h2 class="values-title">I Miei Valori Fondamentali</h2>
-            <div class="values-grid">
-                <div class="value-card">
-                    <div class="value-image"></div>
-                    <div class="value-content">
-                        <h3 class="value-title">Determinazione</h3>
-                        <p class="value-text">La forza da impiegare ogni volta che ci si allena e la volontà di non mollare mai</p>
-                    </div>
-                </div>
-
-                <div class="value-card">
-                    <div class="value-image"></div>
-                    <div class="value-content">
-                        <h3 class="value-title">Costanza</h3>
-                        <p class="value-text">Continuità necessaria per ottenere risultati duraturi e trasformazioni reali</p>
-                    </div>
-                </div>
-
-                <div class="value-card">
-                    <div class="value-image"></div>
-                    <div class="value-content">
-                        <h3 class="value-title">Motivazione</h3>
-                        <p class="value-text">Un grande motivatore che trae linfa dalla tenacia e dalla passione</p>
-                    </div>
-                </div>
-
-                <div class="value-card">
-                    <div class="value-image"></div>
-                    <div class="value-content">
-                        <h3 class="value-title">Trasformazione</h3>
-                        <p class="value-text">Trasformare qualcosa in qualcos'altro - un sogno in realtà</p>
-                    </div>
-                </div>
-
-                <div class="value-card">
-                    <div class="value-image"></div>
-                    <div class="value-content">
-                        <h3 class="value-title">Crescita</h3>
-                        <p class="value-text">Aggiornamento continuo per migliorare sempre abilità e conoscenze</p>
-                    </div>
-                </div>
-
-                <div class="value-card">
-                    <div class="value-image"></div>
-                    <div class="value-content">
-                        <h3 class="value-title">Supporto</h3>
-                        <p class="value-text">Disponibilità, flessiblità e comprensione in ogni momento del percorso</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- Values Section -->
+        <div id="values-container" class="component-loading"></div>
 
         <!-- Results Section -->
-        <div class="results-section animate-on-scroll">
-            <h2 class="results-title">Risultati che Otterrai</h2>
-            <h3 class="results-subtitle">Migliorare la Qualità della Vita, Essere Più Forti e Meno Stanchi</h3>
-            <div class="results-content">
-                <div class="result-item">
-                    <div class="result-item-image"></div>
-                    <div class="result-item-content">
-                        <p class="result-text">Mente più vigile e attenta, migliori capacità decisionali, maggior lucidità</p>
-                    </div>
-                </div>
-
-                <div class="result-item">
-                    <div class="result-item-image"></div>
-                    <div class="result-item-content">
-                        <p class="result-text">Maggiore forza ed agilità, migliore postura, migliore respirazione</p>
-                    </div>
-                </div>
-
-                <div class="result-item">
-                    <div class="result-item-image"></div>
-                    <div class="result-item-content">
-                        <p class="result-text">Meno mal di testa, sonno più rilassato e rigenerante</p>
-                    </div>
-                </div>
-
-                <div class="result-item">
-                    <div class="result-item-image"></div>
-                    <div class="result-item-content">
-                        <p class="result-text">Maggiore autostima, migliore aspetto fisico, più fiducia in se stessi</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div id="results-container" class="component-loading"></div>
 
         <!-- Questions Section -->
-        <div class="questions-section animate-on-scroll">
-            <h2 class="questions-title">Ti Riconosci in Queste Situazioni?</h2>
-            <div class="questions-grid">
-                <div class="question-card">
-                    <p class="question-text">"Ti alleni ma non riesci ad ottenere risultati?"</p>
-                </div>
-                <div class="question-card">
-                    <p class="question-text">"Sei un principiante e vuoi iniziare in modo corretto?"</p>
-                </div>
-                <div class="question-card">
-                    <p class="question-text">"Vuoi migliorare la tua performance nello sport che pratichi?"</p>
-                </div>
-                <div class="question-card">
-                    <p class="question-text">"Hai raggiunto una fase di stallo e non sai come uscirne?"</p>
-                </div>
-                <div class="question-card">
-                    <p class="question-text">"Ti manca la motivazione per allenarti?"</p>
-                </div>
-                <div class="question-card">
-                    <p class="question-text">"Hai fallito molte diete o non sapresti come iniziare?"</p>
-                </div>
-                <div class="question-card">
-                    <p class="question-text">"Non riesci ad allenarti perché hai poco tempo?"</p>
-                </div>
-                <div class="question-card">
-                    <p class="question-text">"Vuoi sperimentare nuovi metodi di allenamento?"</p>
-                </div>
-                <div class="question-card">
-                    <p class="question-text">"Desideri cambiare il tuo corpo?"</p>
-                </div>
-            </div>
-        </div>
+        <div id="questions-container" class="component-loading"></div>
 
-        <!-- CTA WhatsApp Finale -->
-        <section class="final-whatsapp-cta" style="text-align: center; padding: 80px 20px; background: linear-gradient(135deg, rgba(37, 211, 102, 0.1), rgba(37, 211, 102, 0.05)); border-radius: 25px; margin-bottom: 50px;">
-            <div style="max-width: 600px; margin: 0 auto;">
-                <h2 style="color: #25D366; font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 900; margin-bottom: 20px;">
-                    🚀 Iniziamo la Tua Trasformazione
-                </h2>
-                <p style="color: #b0b0b0; font-size: clamp(1.1rem, 2.5vw, 1.3rem); margin-bottom: 40px; line-height: 1.6;">
-                    Hai letto la mia storia, conosci il mio approccio. Ora è il momento di scrivere la TUA storia di trasformazione.
-                </p>
-                
-                <a href="https://wa.me/3478881515?text=Ciao Andrea, ho letto la tua storia e vorrei iniziare il mio percorso di trasformazione!" 
-                   class="final-whatsapp-btn" target="_blank"
-                   style="background: linear-gradient(45deg, #25D366, #20BA5A); color: white; text-decoration: none; padding: 25px 50px; border-radius: 50px; font-size: 1.3rem; font-weight: bold; display: inline-flex; align-items: center; gap: 15px; transition: all 0.4s ease; box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);">
-                    <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i>
-                    <span style="font-size: 1.2rem;">Scrivimi su WhatsApp per iniziare</span>
-                </a>
-                
-                <p style="color: #4ade80; font-size: 1rem; margin-top: 20px; font-weight: 500;">
-                    💬 Risposta garantita entro 2 ore • 🎯 Appuntamento conoscitivo gratuito
-                </p>
-            </div>
-        </section>
+        <!-- Final CTA -->
+        <div id="final-cta-container" class="component-loading"></div>
     </div>
 
     <script>
-        // Video Player Functions
-        function playVideo() {
+        // ======================================
+        // SISTEMA DI CARICAMENTO COMPONENTI OTTIMIZZATO
+        // ======================================
+
+        // Lista componenti da caricare
+        const components = [
+            { id: 'hero-container', file: './components/hero-chisono.html' },
+            { id: 'intro-blocks-container', file: './components/intro-blocks.html' },
+            { id: 'fun-facts-container', file: './components/fun-facts.html' },
+            { id: 'testimonials-container', file: './components/testimonials-google.html' },
+            { id: 'story-cards-container', file: './components/story-cards.html' },
+            { id: 'values-container', file: './components/values-section.html' },
+            { id: 'results-container', file: './components/results-section.html' },
+            { id: 'questions-container', file: './components/questions-section.html' },
+            { id: 'final-cta-container', file: './components/final-cta.html' }
+        ];
+
+        // Funzione caricamento componente singolo
+        async function loadComponent(component) {
+            try {
+                const response = await fetch(component.file);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const html = await response.text();
+                const container = document.getElementById(component.id);
+                
+                if (container) {
+                    container.innerHTML = html;
+                    container.classList.remove('component-loading');
+                    
+                    // Trigger animazioni per il componente caricato
+                    initAnimationsForContainer(container);
+                    
+                    console.log(`✅ Component loaded: ${component.file}`);
+                } else {
+                    console.error(`❌ Container not found: ${component.id}`);
+                }
+            } catch (error) {
+                console.error(`❌ Error loading ${component.file}:`, error);
+                
+                // Fallback per errori
+                const container = document.getElementById(component.id);
+                if (container) {
+                    container.innerHTML = `
+                        <div style="text-align: center; padding: 40px; color: #ff6b35;">
+                            <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 15px;"></i>
+                            <p>Errore nel caricamento del componente</p>
+                            <button onclick="location.reload()" style="background: #ff6b35; color: white; border: none; padding: 10px 20px; border-radius: 20px; margin-top: 10px; cursor: pointer;">Ricarica</button>
+                        </div>
+                    `;
+                    container.classList.remove('component-loading');
+                }
+            }
+        }
+
+        // Caricamento progressivo componenti
+        async function loadAllComponents() {
+            console.log('🚀 Starting component loading...');
+            
+            // Carica hero per primo (above the fold)
+            await loadComponent(components[0]);
+            
+            // Carica il resto con un piccolo delay per performance
+            for (let i = 1; i < components.length; i++) {
+                setTimeout(() => {
+                    loadComponent(components[i]);
+                }, i * 100); // 100ms delay tra componenti
+            }
+        }
+
+        // Inizializza animazioni per un container specifico
+        function initAnimationsForContainer(container) {
+            const elements = container.querySelectorAll('.animate-on-scroll, .animate-slide-left, .animate-slide-right, .animate-fade-in, .animate-bounce-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            elements.forEach(el => observer.observe(el));
+        }
+
+        // Funzioni video (per componente intro-blocks)
+        window.playVideo = function() {
             const placeholder = document.getElementById('videoPlaceholder');
             const player = document.getElementById('videoPlayer');
             const frame = document.getElementById('videoFrame');
             
-            // Nasconde placeholder e mostra player
-            placeholder.style.display = 'none';
-            player.style.display = 'block';
-            
-            // IL TUO VIDEO YOUTUBE CORRETTO
-            const videoUrl = 'https://www.youtube.com/embed/vOWTL1Ta8IQ?autoplay=1';
-            frame.src = videoUrl;
-            
-            console.log('🎥 Video player opened with your video');
-        }
+            if (placeholder && player && frame) {
+                placeholder.style.display = 'none';
+                player.style.display = 'block';
+                
+                const videoUrl = 'https://www.youtube.com/embed/vOWTL1Ta8IQ?autoplay=1';
+                frame.src = videoUrl;
+                
+                console.log('🎥 Video player opened');
+            }
+        };
 
-        function closeVideo() {
+        window.closeVideo = function() {
             const placeholder = document.getElementById('videoPlaceholder');
             const player = document.getElementById('videoPlayer');
             const frame = document.getElementById('videoFrame');
             
-            // Mostra placeholder e nasconde player
-            placeholder.style.display = 'flex';
-            player.style.display = 'none';
-            
-            // Ferma il video
-            frame.src = '';
-            
-            console.log('🎥 Video player closed');
-        }
+            if (placeholder && player && frame) {
+                placeholder.style.display = 'flex';
+                player.style.display = 'none';
+                frame.src = '';
+                
+                console.log('🎥 Video player closed');
+            }
+        };
 
-        // Chat function
-        function openChat() {
+        // Funzione chat globale
+        window.openChat = function() {
             const whatsappUrl = 'https://wa.me/3478881515?text=Ciao Andrea, ho letto la tua storia e vorrei parlare dei miei obiettivi di trasformazione!';
             window.open(whatsappUrl, '_blank');
-        }
+        };
 
         // Smooth scrolling per anchor links
-        document.querySelectorAll('.anchor-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.getElementById(this.dataset.target);
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+        function initAnchorLinks() {
+            document.querySelectorAll('.anchor-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.getElementById(this.dataset.target);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
             });
-        });
+        }
 
         // Aggiorna anchor links attivi durante lo scroll
         function updateActiveAnchor() {
-            const sections = ['hero', 'testimonials'];
+            const sections = ['hero', 'testimonials', 'values'];
             const scrollPos = window.scrollY + 100;
 
             sections.forEach(sectionId => {
@@ -2571,59 +537,27 @@
             });
         }
 
-        // Animazioni scroll avanzate
-        function animateOnScroll() {
-            const elements = document.querySelectorAll('.animate-on-scroll, .animate-slide-left, .animate-slide-right, .animate-fade-in, .animate-bounce-in');
+        // Inizializzazione al caricamento pagina
+        window.addEventListener('load', () => {
+            loadAllComponents();
+            initAnchorLinks();
+            updateActiveAnchor();
             
-            elements.forEach(el => {
-                const elementTop = el.getBoundingClientRect().top;
-                const elementVisible = 100;
-                
-                if (elementTop < window.innerHeight - elementVisible) {
-                    el.classList.add('animated');
-                }
-            });
-        }
-
-        // Intersection Observer per animazioni più fluide
-        function initIntersectionObserver() {
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animated');
-                    }
-                });
-            }, observerOptions);
-
-            // Osserva tutti gli elementi con animazioni
-            document.querySelectorAll('.animate-on-scroll, .animate-slide-left, .animate-slide-right, .animate-fade-in, .animate-bounce-in').forEach(el => {
-                observer.observe(el);
-            });
-        }
+            console.log('✅ Chi Sono page - Split version loaded successfully!');
+        });
 
         // Event listeners
-        window.addEventListener('scroll', () => {
-            updateActiveAnchor();
-        });
+        window.addEventListener('scroll', updateActiveAnchor);
 
-        window.addEventListener('load', () => {
-            updateActiveAnchor();
-            initIntersectionObserver();
-            
-            // Aggiungi un piccolo delay per l'animazione iniziale
-            setTimeout(() => {
-                document.body.classList.add('loaded');
-            }, 100);
-        });
-
-        console.log('✅ Chi Sono page - TUTTI I FIX APPLICATI!');
-        console.log('🔥 Foto cambiata: chi-sono.jpg nella hero e video');
-        console.log('🔥 Sezione risultati: rimosso icone e aumentato immagini');
+        // Performance monitoring
+        if ('performance' in window) {
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    const perfData = performance.getEntriesByType('navigation')[0];
+                    console.log(`⚡ Page load performance: ${Math.round(perfData.loadEventEnd - perfData.loadEventStart)}ms`);
+                }, 1000);
+            });
+        }
     </script>
 </body>
 </html>
