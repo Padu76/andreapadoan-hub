@@ -1,110 +1,811 @@
-<div class="projects-list-section">
-    <div class="projects-list-container">
-        <h2 class="projects-list-title">Le Mie Aree di Competenza</h2>
-        <p class="projects-list-subtitle">Scegli il percorso più adatto ai tuoi obiettivi</p>
-        
-        <div class="project-list-item" style="--item-color: #ff6b35;" onclick="openProject('https://www.personaltrainerverona.it')">
-            <div class="project-info">
-                <div style="display: flex; align-items: center;">
-                    <div class="project-icon" style="background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=200&fit=crop&crop=center');"></div>
-                    <div>
-                        <div class="project-name">Personal Training</div>
-                        <div class="project-tagline">Trasforma il tuo corpo con allenamenti su misura</div>
-                    </div>
+<!-- Sezione Progetti con Fix Mobile Integrato -->
+<div class="projects-container" id="projects">
+    <h2 class="section-title">Trasforma la Tua Vita</h2>
+    <p class="section-subtitle">Scopri dove puoi migliorare oggi stesso. Ogni servizio è pensato per chi vuole risultati concreti senza perdere tempo prezioso</p>
+    
+    <div class="projects-grid">
+        <!-- Personal Training Card -->
+        <div class="project-card" data-project="personal-training">
+            <div class="project-image" style="background-image: url('./images/andrea-personal-training.jpg');"></div>
+            <div class="project-content">
+                <h3 class="project-title">Personal Training a Verona</h3>
+                <p class="project-description">Allenamenti su misura per chi ha poco tempo ma vuole risultati veri. In studio o online.</p>
+                <div class="project-buttons">
+                    <button class="project-btn primary" onclick="openProjectChat('personal-training')">
+                        <i class="fas fa-dumbbell"></i>
+                        Vedi Programmi
+                    </button>
+                    <button class="project-btn secondary" onclick="openChat()">
+                        <i class="fas fa-comments"></i>
+                        Chiedimi tutto
+                    </button>
                 </div>
             </div>
-            <button class="project-cta">Vedi Info</button>
         </div>
 
-        <div class="project-list-item" style="--item-color: #ff6b35;" onclick="openProject('https://www.tribuptstudio.it')">
-            <div class="project-info">
-                <div style="display: flex; align-items: center;">
-                    <div class="project-icon" style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&h=200&fit=crop&crop=center');"></div>
-                    <div>
-                        <div class="project-name">Tribù Studio</div>
-                        <div class="project-tagline">Allenamento esclusivo nel mio studio privato</div>
-                    </div>
+        <!-- Tribù Studio Card -->
+        <div class="project-card" data-project="tribu-studio">
+            <div class="project-image" style="background-image: url('./images/tribu-studio-interior.jpg');"></div>
+            <div class="project-content">
+                <h3 class="project-title">Tribù Studio</h3>
+                <p class="project-description">Uno studio privato a Verona dove essere seguito in modo esclusivo, senza code o distrazioni.</p>
+                <div class="project-buttons">
+                    <button class="project-btn primary" onclick="openProjectChat('tribu-studio')">
+                        <i class="fas fa-home"></i>
+                        Visita Studio
+                    </button>
+                    <button class="project-btn secondary" onclick="openChat()">
+                        <i class="fas fa-comments"></i>
+                        Info Studio
+                    </button>
                 </div>
             </div>
-            <button class="project-cta">Visita Studio</button>
         </div>
 
-        <div class="project-list-item" style="--item-color: #4a7c59;" onclick="openProject('https://mealprep-planner.vercel.app/')">
-            <div class="project-info">
-                <div style="display: flex; align-items: center;">
-                    <div class="project-icon" style="background-image: url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=200&h=200&fit=crop&crop=center');"></div>
-                    <div>
-                        <div class="project-name">MealPrep Planner</div>
-                        <div class="project-tagline">Organizza i tuoi pasti settimanali</div>
-                    </div>
+        <!-- Lifestyle Coaching Card -->
+        <div class="project-card" data-project="lifestyle-coaching">
+            <div class="project-image" style="background-image: url('./images/andrea-lifestyle.jpg');"></div>
+            <div class="project-content">
+                <h3 class="project-title">Lifestyle Coaching Online</h3>
+                <p class="project-description">La soluzione completa per il tuo cambiamento - perché dieta e allenamento non bastano!</p>
+                <div class="project-buttons">
+                    <button class="project-btn primary" onclick="openProjectChat('lifestyle-coaching')">
+                        <i class="fas fa-rocket"></i>
+                        Inizia Percorso
+                    </button>
+                    <button class="project-btn secondary" onclick="openChat()">
+                        <i class="fas fa-comments"></i>
+                        Come Funziona
+                    </button>
                 </div>
             </div>
-            <button class="project-cta">Prova Gratis</button>
         </div>
 
-        <div class="project-list-item" style="--item-color: #4a7c59;" onclick="openProject('https://pastosano.netlify.app/')">
-            <div class="project-info">
-                <div style="display: flex; align-items: center;">
-                    <div class="project-icon" style="background-image: url('https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=200&h=200&fit=crop&crop=center');"></div>
-                    <div>
-                        <div class="project-name">Pasto Sano</div>
-                        <div class="project-tagline">Pasti sani pronti per il ritiro</div>
-                    </div>
+        <!-- MealPrep Planner Card -->
+        <div class="project-card" data-project="mealprep-planner">
+            <div class="project-image" style="background-image: url('./images/metodo-1.jpg');"></div>
+            <div class="project-content">
+                <h3 class="project-title">MealPrep Planner</h3>
+                <p class="project-description">Organizza i pasti della settimana in 10 minuti e resta in forma senza stress. Web app gratuita.</p>
+                <div class="project-buttons">
+                    <button class="project-btn primary" onclick="openProjectChat('mealprep-planner')">
+                        <i class="fas fa-calendar-alt"></i>
+                        Prova Gratis
+                    </button>
+                    <button class="project-btn secondary" onclick="openChat()">
+                        <i class="fas fa-comments"></i>
+                        Spiegami
+                    </button>
                 </div>
             </div>
-            <button class="project-cta">Ordina Ora</button>
         </div>
 
-        <div class="project-list-item" style="--item-color: #6b7280;" onclick="openProject('https://upstarter-tf9x.vercel.app/')">
-            <div class="project-info">
-                <div style="display: flex; align-items: center;">
-                    <div class="project-icon" style="background-image: url('https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=200&h=200&fit=crop&crop=center');"></div>
-                    <div>
-                        <div class="project-name">Upstart</div>
-                        <div class="project-tagline">Testa il potenziale della tua idea</div>
-                    </div>
+        <!-- Pasto Sano Card -->
+        <div class="project-card" data-project="pasto-sano">
+            <div class="project-image" style="background-image: url('./images/coaching.jpg');"></div>
+            <div class="project-content">
+                <h3 class="project-title">Pasto Sano - Pasti Freschi Verona</h3>
+                <p class="project-description">Piatti freschi pronti in 2 minuti, fatti con ingredienti di qualità. La soluzione per chi vuole mangiare bene senza cucinare.</p>
+                <div class="project-buttons">
+                    <button class="project-btn primary" onclick="openProjectChat('pasto-sano')">
+                        <i class="fas fa-utensils"></i>
+                        Ordina Ora
+                    </button>
+                    <button class="project-btn secondary" onclick="openChat()">
+                        <i class="fas fa-comments"></i>
+                        Prezzi
+                    </button>
                 </div>
             </div>
-            <button class="project-cta">Consulenza</button>
         </div>
 
-        <div class="project-list-item" style="--item-color: #6b7280;" onclick="openProject('https://best-trainer-mvp.vercel.app/')">
-            <div class="project-info">
-                <div style="display: flex; align-items: center;">
-                    <div class="project-icon" style="background-image: url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=200&h=200&fit=crop&crop=center');"></div>
-                    <div>
-                        <div class="project-name">Best-Trainer</div>
-                        <div class="project-tagline">Centinaia di programmi di allenamento per ogni sport</div>
-                    </div>
+        <!-- Upstart Business Coaching Card -->
+        <div class="project-card" data-project="upstart-business">
+            <div class="project-image" style="background-image: url('./images/andrea-studying.jpg');"></div>
+            <div class="project-content">
+                <h3 class="project-title">Upstart - Business Coaching</h3>
+                <p class="project-description">Testa il potenziale della tua idea di business e ricevi supporto strategico per farla crescere.</p>
+                <div class="project-buttons">
+                    <button class="project-btn primary" onclick="openProjectChat('upstart-business')">
+                        <i class="fas fa-rocket"></i>
+                        Consulenza Gratuita
+                    </button>
+                    <button class="project-btn secondary" onclick="openChat()">
+                        <i class="fas fa-comments"></i>
+                        Scopri di più
+                    </button>
                 </div>
             </div>
-            <button class="project-cta">Scopri Programmi</button>
         </div>
 
-        <div class="project-list-item" style="--item-color: #6b7280;" onclick="openProject('./ebooks.html')">
-            <div class="project-info">
-                <div style="display: flex; align-items: center;">
-                    <div class="project-icon" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=center');"></div>
-                    <div>
-                        <div class="project-name">eBook Fitness</div>
-                        <div class="project-tagline">Guide complete per il benessere</div>
-                    </div>
+        <!-- Best-Trainer Card -->
+        <div class="project-card" data-project="best-trainer">
+            <div class="project-image" style="background-image: url('./images/best-trainer.jpeg');"></div>
+            <div class="project-content">
+                <h3 class="project-title">Best-Trainer</h3>
+                <p class="project-description">Centinaia di programmi di allenamento per ogni sport, formulati dai migliori personal trainer.</p>
+                <div class="project-buttons">
+                    <button class="project-btn primary" onclick="openProjectChat('best-trainer')">
+                        <i class="fas fa-star"></i>
+                        Scopri Programmi
+                    </button>
+                    <button class="project-btn secondary" onclick="openChat()">
+                        <i class="fas fa-comments"></i>
+                        Info Programmi
+                    </button>
                 </div>
             </div>
-            <button class="project-cta">Scarica</button>
         </div>
 
-        <div class="project-list-item" style="--item-color: #ff6b35;" onclick="openProject('https://tribucoach.vercel.app/')">
-            <div class="project-info">
-                <div style="display: flex; align-items: center;">
-                    <div class="project-icon" style="background-image: url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=200&h=200&fit=crop&crop=center');"></div>
-                    <div>
-                        <div class="project-name">Percorso Lifestyle Coaching Online</div>
-                        <div class="project-tagline">La soluzione completa per il tuo cambiamento...perché dieta e allenamento non bastano!</div>
-                    </div>
+        <!-- eBook Card -->
+        <div class="project-card" data-project="ebooks">
+            <div class="project-image" style="background-image: url('./images/body-construction-cover.jpg');"></div>
+            <div class="project-content">
+                <h3 class="project-title">I miei eBook</h3>
+                <p class="project-description">Guide complete per trasformare il tuo corpo e mindset. Anni di esperienza in formato digitale.</p>
+                <div class="project-buttons">
+                    <button class="project-btn primary" onclick="openProjectChat('ebooks')">
+                        <i class="fas fa-download"></i>
+                        Scarica Ora
+                    </button>
+                    <button class="project-btn secondary" onclick="openChat()">
+                        <i class="fas fa-comments"></i>
+                        Vedi eBook
+                    </button>
                 </div>
             </div>
-            <button class="project-cta">Inizia Percorso</button>
+        </div>
+    </div>
+
+    <!-- Quiz CTA Section -->
+    <div class="quiz-cta-section">
+        <div class="quiz-content">
+            <div class="quiz-icon">
+                <i class="fas fa-magic"></i>
+            </div>
+            <h3 class="quiz-title">Non Sai Quale Servizio Scegliere?</h3>
+            <p class="quiz-description">Rispondi a poche domande e ti dirò qual è il percorso perfetto per i tuoi obiettivi</p>
+            
+            <div class="quiz-benefits">
+                <div class="benefit-item">
+                    <i class="fas fa-target"></i>
+                    <span>Analisi personalizzata</span>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Solo 2 minuti</span>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-gift"></i>
+                    <span>Consigli gratuiti</span>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Piano d'azione</span>
+                </div>
+            </div>
+            
+            <a href="./quiz.html" class="quiz-cta-btn">
+                <i class="fas fa-play"></i>
+                Inizia il Test
+            </a>
         </div>
     </div>
 </div>
+
+<style>
+/* ===== PROGETTI SEZIONE - MOBILE FIRST OTTIMIZZATO ===== */
+
+/* Container progetti */
+.projects-container {
+    padding: 60px 15px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(26, 26, 26, 0.6));
+    border-radius: 25px;
+    margin-bottom: 80px;
+}
+
+.section-title {
+    color: #ff6b35;
+    font-size: clamp(1.8rem, 6vw, 2.8rem);
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 15px;
+    line-height: 1.2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.section-subtitle {
+    color: #b0b0b0;
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    text-align: center;
+    margin-bottom: 50px;
+    line-height: 1.6;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Grid progetti - MOBILE FIRST */
+.projects-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Mobile: 1 colonna */
+    gap: 25px;
+    margin-bottom: 60px;
+}
+
+/* Card progetti ottimizzate mobile */
+.project-card {
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.95), rgba(40, 40, 40, 0.9));
+    border-radius: 20px;
+    padding: 0;
+    border: 2px solid rgba(255, 107, 53, 0.2);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+}
+
+.project-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: rgba(255, 107, 53, 0.6);
+    box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
+}
+
+/* Immagine progetti - DIMENSIONI CORRETTE MOBILE */
+.project-image {
+    width: 100%;
+    height: 180px; /* Altezza ottimale mobile */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 20px 20px 0 0;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.project-card:hover .project-image {
+    transform: scale(1.05);
+}
+
+/* Content progetti - PADDING OTTIMIZZATO */
+.project-content {
+    padding: 25px 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.project-title {
+    color: #ff6b35;
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 12px;
+    line-height: 1.3;
+    word-wrap: break-word;
+}
+
+.project-description {
+    color: #e0e0e0;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex: 1;
+    word-wrap: break-word;
+}
+
+.project-features {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0 20px;
+    display: none; /* Nascondi features, usiamo solo descrizioni */
+}
+
+.project-features li {
+    color: #b0b0b0;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.4;
+}
+
+.project-features li::before {
+    content: '✓';
+    color: #4ade80;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    font-size: 1rem;
+}
+
+/* Container bottoni progetti */
+.project-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: auto;
+}
+
+/* Button progetti - DUE STILI */
+.project-btn {
+    border: none;
+    padding: 12px 16px;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Bottone primario (arancione) */
+.project-btn.primary {
+    background: linear-gradient(45deg, #ff6b35, #ff8533);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+
+.project-btn.primary:hover, .project-btn.primary:active {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
+}
+
+/* Bottone secondario (verde, chat) */
+.project-btn.secondary {
+    background: transparent;
+    color: #4ade80;
+    border: 2px solid #4ade80;
+}
+
+.project-btn.secondary:hover, .project-btn.secondary:active {
+    background: rgba(74, 222, 128, 0.1);
+    transform: translateY(-1px);
+}
+
+.project-btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.project-btn i {
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+}
+
+.project-btn:hover i {
+    transform: scale(1.1);
+}
+
+/* Quiz CTA Section */
+.quiz-cta-section {
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 133, 51, 0.05));
+    border: 2px solid rgba(255, 107, 53, 0.3);
+    border-radius: 25px;
+    padding: 40px 30px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.quiz-cta-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 107, 53, 0.03) 0%, transparent 70%);
+    animation: rotateGlow 10s linear infinite;
+}
+
+@keyframes rotateGlow {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.quiz-content {
+    position: relative;
+    z-index: 2;
+}
+
+.quiz-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #ff6b35, #ff8533);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    color: white;
+    font-size: 2rem;
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+}
+
+.quiz-title {
+    color: #fff;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    font-weight: bold;
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.quiz-description {
+    color: #e0e0e0;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    margin-bottom: 30px;
+    line-height: 1.6;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.quiz-benefits {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 35px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #b0b0b0;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.benefit-item i {
+    color: #4ade80;
+    font-size: 1rem;
+    width: 16px;
+}
+
+.quiz-cta-btn {
+    background: linear-gradient(45deg, #ff6b35, #ff8c5a);
+    color: #fff;
+    text-decoration: none;
+    padding: 18px 40px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+}
+
+.quiz-cta-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(255, 107, 53, 0.6);
+}
+
+.quiz-cta-btn:active {
+    transform: translateY(-1px) scale(1.02);
+}
+
+/* Responsive Breakpoints */
+
+/* Tablet */
+@media (min-width: 640px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+    
+    .project-image {
+        height: 200px;
+    }
+    
+    .project-content {
+        padding: 30px 25px;
+    }
+    
+    .quiz-benefits {
+        grid-template-columns: repeat(4, 1fr);
+        max-width: 600px;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    .projects-container {
+        padding: 80px 40px;
+    }
+    
+    .projects-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 25px;
+    }
+    
+    .project-card {
+        min-height: 460px;
+    }
+    
+    .project-image {
+        height: 160px;
+    }
+    
+    .project-content {
+        padding: 25px 20px;
+    }
+    
+    .project-title {
+        font-size: 1.2rem;
+    }
+    
+    .project-description {
+        font-size: 0.9rem;
+    }
+    
+    .project-btn {
+        padding: 12px 18px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Large Desktop - 8 servizi in 2 righe */
+@media (min-width: 1200px) {
+    .projects-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    .projects-container {
+        padding: 40px 10px;
+        margin-bottom: 60px;
+    }
+    
+    .projects-grid {
+        gap: 20px;
+    }
+    
+    .project-card {
+        min-height: 380px;
+    }
+    
+    .project-content {
+        padding: 20px 15px;
+    }
+    
+    .project-title {
+        font-size: 1.1rem;
+    }
+    
+    .project-description {
+        font-size: 0.9rem;
+    }
+    
+    .project-btn {
+        padding: 12px 15px;
+        font-size: 0.9rem;
+    }
+    
+    .quiz-benefits {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .quiz-cta-section {
+        padding: 30px 20px;
+    }
+}
+
+/* Performance optimizations */
+.project-image {
+    will-change: transform;
+}
+
+.project-card {
+    will-change: transform;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+    .project-card, .project-btn, .project-image {
+        transition: none;
+    }
+    
+    .project-card:hover {
+        transform: none;
+    }
+    
+    @keyframes rotateGlow {
+        0%, 100% { transform: rotate(0deg); }
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .project-card {
+        border-width: 3px;
+    }
+    
+    .project-btn {
+        border: 2px solid currentColor;
+    }
+}
+</style>
+
+<script>
+// ===== PROGETTI FUNCTIONALITY ===== 
+
+// Chat per progetti specifici
+function openProjectChat(projectType) {
+    console.log(`🎯 Opening chat for project: ${projectType}`);
+    
+    // Haptic feedback se disponibile
+    if ('vibrate' in navigator) {
+        navigator.vibrate(20);
+    }
+    
+    // WhatsApp personalizzato per tipo progetto
+    const messages = {
+        'personal-training': 'Ciao Andrea! Sono interessato ai programmi di Personal Training a Verona. Puoi darmi più informazioni sui prezzi e disponibilità?',
+        'tribu-studio': 'Ciao Andrea! Vorrei visitare Tribù Studio e sapere come funzionano le sessioni. Dove siete ubicati esattamente?',
+        'lifestyle-coaching': 'Ciao Andrea! Mi interessa il Lifestyle Coaching online. Come funziona e come posso iniziare il percorso?',
+        'mealprep-planner': 'Ciao Andrea! Vorrei provare MealPrep Planner. Come funziona la web app gratuita?',
+        'pasto-sano': 'Ciao Andrea! Mi interessano i Pasti Sani. Come funziona il servizio e quali sono i prezzi?',
+        'upstart-business': 'Ciao Andrea! Mi interessa Upstart Business Coaching. Come funziona la consulenza gratuita?',
+        'best-trainer': 'Ciao Andrea! Vorrei sapere di più su Best-Trainer e i programmi di allenamento disponibili.',
+        'ebooks': 'Ciao Andrea! Vorrei acquistare i tuoi eBook. Quali sono disponibili e come posso scaricarli?'
+    };
+    
+    const message = messages[projectType] || 'Ciao Andrea! Vorrei più informazioni sui tuoi servizi.';
+    const whatsappUrl = `https://wa.me/3478881515?text=${encodeURIComponent(message)}`;
+    
+    // Analytics tracking
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'project_interest', {
+            'event_category': 'engagement',
+            'event_label': projectType,
+            'value': 1
+        });
+    }
+    
+    // Apri WhatsApp
+    window.open(whatsappUrl, '_blank', 'noopener');
+}
+
+// Lazy loading immagini progetti
+function initProjectImages() {
+    const projectImages = document.querySelectorAll('.project-image');
+    
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                
+                // Simula caricamento
+                img.classList.add('loading');
+                
+                setTimeout(() => {
+                    img.classList.remove('loading');
+                    img.style.opacity = '1';
+                }, 300);
+                
+                observer.unobserve(img);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '50px 0px'
+    });
+    
+    projectImages.forEach(img => {
+        img.style.opacity = '0';
+        img.style.transition = 'opacity 0.5s ease';
+        imageObserver.observe(img);
+    });
+}
+
+// Animazioni scroll per progetti
+function initProjectAnimations() {
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    const cardObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }, index * 150); // Stagger animation
+            }
+        });
+    }, {
+        threshold: 0.2
+    });
+    
+    projectCards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(50px)';
+        card.style.transition = 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        cardObserver.observe(card);
+    });
+}
+
+// Touch gestures per progetti mobile
+function initProjectTouchGestures() {
+    if ('ontouchstart' in window) {
+        const projectCards = document.querySelectorAll('.project-card');
+        
+        projectCards.forEach(card => {
+            let touchStartY = 0;
+            
+            card.addEventListener('touchstart', (e) => {
+                touchStartY = e.touches[0].clientY;
+                card.style.transform = 'scale(0.98)';
+            }, { passive: true });
+            
+            card.addEventListener('touchend', (e) => {
+                const touchEndY = e.changedTouches[0].clientY;
+                const deltaY = touchStartY - touchEndY;
+                
+                card.style.transform = '';
+                
+                // Swipe up per aprire progetto
+                if (deltaY > 30) {
+                    const projectType = card.dataset.project;
+                    if (projectType) {
+                        openProjectChat(projectType);
+                    }
+                }
+            }, { passive: true });
+        });
+    }
+}
+
+// Performance monitoring
+function trackProjectPerformance() {
+    if ('PerformanceObserver' in window) {
+        const observer = new PerformanceObserver((list) => {
+            list.getEntries().forEach((entry) => {
+                if (entry.name.includes('project') && entry.entryType === 'measure') {
+                    console.log(`📊 Project performance: ${entry.name} - ${entry.duration.toFixed(2)}ms`);
+                }
+            });
+        });
+        
+        observer.observe({ entryTypes: ['measure'] });
+    }
+}
+
+// Inizializzazione
+document.addEventListener('DOMContentLoaded', () => {
+    initProjectImages();
+    initProjectAnimations();
+    initProjectTouchGestures();
+    trackProjectPerformance();
+    
+    console.log('✅ Projects section initialized with mobile optimizations');
+});
+
+// Gestione errori immagini
+document.addEventListener('error', (e) => {
+    if (e.target.classList && e.target.classList.contains('project-image')) {
+        console.log('⚠️ Image failed to load:', e.target.style.backgroundImage);
+        e.target.style.backgroundImage = 'linear-gradient(135deg, #333, #555)';
+        e.target.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #888; font-size: 0.9rem;">Immagine non disponibile</div>';
+    }
+}, true);
+</script>
