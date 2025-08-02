@@ -1,0 +1,93 @@
+<!-- Questions Section -->
+<div class="questions-section animate-on-scroll">
+    <h2 class="questions-title">Ti Riconosci in Queste Situazioni?</h2>
+    <div class="questions-grid">
+        <div class="question-card">
+            <p class="question-text">"Ti alleni ma non riesci ad ottenere risultati?"</p>
+        </div>
+        <div class="question-card">
+            <p class="question-text">"Sei un principiante e vuoi iniziare in modo corretto?"</p>
+        </div>
+        <div class="question-card">
+            <p class="question-text">"Vuoi migliorare la tua performance nello sport che pratichi?"</p>
+        </div>
+        <div class="question-card">
+            <p class="question-text">"Hai raggiunto una fase di stallo e non sai come uscirne?"</p>
+        </div>
+        <div class="question-card">
+            <p class="question-text">"Ti manca la motivazione per allenarti?"</p>
+        </div>
+        <div class="question-card">
+            <p class="question-text">"Hai fallito molte diete o non sapresti come iniziare?"</p>
+        </div>
+        <div class="question-card">
+            <p class="question-text">"Non riesci ad allenarti perché hai poco tempo?"</p>
+        </div>
+        <div class="question-card">
+            <p class="question-text">"Vuoi sperimentare nuovi metodi di allenamento?"</p>
+        </div>
+        <div class="question-card">
+            <p class="question-text">"Desideri cambiare il tuo corpo?"</p>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Questions Section */
+.questions-section {
+    margin-bottom: 120px;
+}
+
+.questions-title {
+    color: #fff;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.questions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.question-card {
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 133, 51, 0.05));
+    border-left: 4px solid #ff6b35;
+    padding: 25px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.question-card:hover {
+    transform: translateX(5px);
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.15), rgba(255, 133, 51, 0.08));
+}
+
+.question-text {
+    color: #e0e0e0;
+    font-size: 1.1rem;
+    font-style: italic;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .questions-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .question-card {
+        padding: 20px;
+    }
+
+    .question-text {
+        font-size: 1rem;
+    }
+}
+</style>

@@ -1,0 +1,157 @@
+<!-- Results Section con immagini MIGLIORATA -->
+<div class="results-section animate-on-scroll">
+    <h2 class="results-title">Risultati che Otterrai</h2>
+    <h3 class="results-subtitle">Migliorare la Qualità della Vita, Essere Più Forti e Meno Stanchi</h3>
+    <div class="results-content">
+        <div class="result-item">
+            <div class="result-item-image result-image-1"></div>
+            <div class="result-item-content">
+                <p class="result-text">Mente più vigile e attenta, migliori capacità decisionali, maggior lucidità</p>
+            </div>
+        </div>
+
+        <div class="result-item">
+            <div class="result-item-image result-image-2"></div>
+            <div class="result-item-content">
+                <p class="result-text">Maggiore forza ed agilità, migliore postura, migliore respirazione</p>
+            </div>
+        </div>
+
+        <div class="result-item">
+            <div class="result-item-image result-image-3"></div>
+            <div class="result-item-content">
+                <p class="result-text">Meno mal di testa, sonno più rilassato e rigenerante</p>
+            </div>
+        </div>
+
+        <div class="result-item">
+            <div class="result-item-image result-image-4"></div>
+            <div class="result-item-content">
+                <p class="result-text">Maggiore autostima, migliore aspetto fisico, più fiducia in se stessi</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Results Section con immagini MIGLIORATA - SENZA ICONE E IMMAGINI PIÙ GRANDI */
+.results-section {
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.8), rgba(40, 40, 40, 0.8));
+    border-radius: 25px;
+    padding: 60px;
+    margin-bottom: 120px;
+}
+
+.results-title {
+    color: #ff6b35;
+    font-size: 2.3rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.results-subtitle {
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.results-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+}
+
+.result-item {
+    background: rgba(255, 107, 53, 0.1);
+    border: 1px solid rgba(255, 107, 53, 0.3);
+    border-radius: 15px;
+    padding: 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 300px;
+    transition: all 0.3s ease;
+}
+
+.result-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(255, 107, 53, 0.2);
+    border-color: rgba(255, 107, 53, 0.5);
+}
+
+.result-item-image {
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 14px 14px 0 0;
+    margin-bottom: 0;
+    background-color: #333;
+}
+
+.result-image-1 {
+    background-image: url('./images/risultato-1.jpg');
+}
+
+.result-image-2 {
+    background-image: url('./images/risultato-2.jpg');
+}
+
+.result-image-3 {
+    background-image: url('./images/risultato-3.jpg');
+}
+
+.result-image-4 {
+    background-image: url('./images/risultato-4.jpg');
+}
+
+.result-item-content {
+    padding: 25px 20px;
+}
+
+.result-text {
+    color: #e0e0e0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .results-section {
+        padding: 40px 30px;
+    }
+
+    .results-content {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .result-item {
+        min-height: 280px;
+    }
+
+    .result-item-image {
+        height: 160px;
+    }
+
+    .result-text {
+        font-size: 1rem;
+    }
+
+    .results-title {
+        font-size: 1.8rem;
+    }
+
+    .results-subtitle {
+        font-size: 1.1rem;
+    }
+}
+</style>

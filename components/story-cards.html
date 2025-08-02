@@ -1,0 +1,167 @@
+<!-- Story Cards con Titolo Sopra -->
+<section class="story-section animate-on-scroll">
+    <h2 class="story-section-title">Da "OFF" a "ON": La Mia Trasformazione Personale</h2>
+    <div class="story-grid">
+        <div class="story-card">
+            <div class="story-card-image story-image-1"></div>
+            <div class="story-card-content">
+                <h3 class="story-title">Il Momento di Svolta</h3>
+                <p class="story-text">
+                    <strong>Quando ho aperto Tribù Studio...</strong> un giorno mi sono guardato allo specchio e dopo 30 anni ho visto ciò che non volevo diventare: 
+                    ero in sovrappeso e intuii che sarei andato incontro a problemi di salute. In quel momento ho deciso che non volevo più percorrere quella strada.
+                </p>
+            </div>
+        </div>
+
+        <div class="story-card">
+            <div class="story-card-image story-image-2"></div>
+            <div class="story-card-content">
+                <h3 class="story-title">Da "OFF" a "ON"</h3>
+                <p class="story-text">
+                    Sono stato anche io uno come te... che tornato a casa dal lavoro si sentiva così stanco da premere il pulsante "OFF" sino al giorno dopo. 
+                    Oggi la mia vita è cambiata. <strong>Dove prima la mia giornata finiva, ora inizia davvero!</strong>
+                </p>
+            </div>
+        </div>
+
+        <div class="story-card">
+            <div class="story-card-image story-image-3"></div>
+            <div class="story-card-content">
+                <h3 class="story-title">La Trasformazione Completa</h3>
+                <p class="story-text">
+                    Ho migliorato il mio stile di vita: potenziato la resistenza allo stress, ho eliminato farmaci, ho raggiunto una buona forma fisica. 
+                    Ho ritrovato in me una energia sepolta che rischiava di rimanere sotterrata per sempre.
+                </p>
+            </div>
+        </div>
+
+        <div class="story-card">
+            <div class="story-card-image story-image-4"></div>
+            <div class="story-card-content">
+                <h3 class="story-title">Il Vero Significato</h3>
+                <p class="story-text">
+                    Perché una persona decide di cambiare? La motivazione è una sola: <strong>trasformare qualcosa in qualcos'altro!</strong> 
+                    Un sogno in realtà, un peso in un altro, un no in un sì. È questo quello che ti offro: <strong>Trasformazione!</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* Story Cards con immagini COMPLETE e VISIBILI */
+.story-section {
+    margin-bottom: 120px;
+}
+
+.story-section-title {
+    color: #ff6b35;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 60px;
+    line-height: 1.3;
+}
+
+.story-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+}
+
+.story-card {
+    background: rgba(26, 26, 26, 0.8);
+    border-radius: 20px;
+    padding: 0;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 107, 53, 0.2);
+    transition: all 0.3s ease;
+    animation: fadeInUp 1s ease-out both;
+    position: relative;
+    overflow: hidden;
+    min-height: 450px;
+}
+
+.story-card-image {
+    width: 100%;
+    height: 250px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 20px 20px 0 0;
+    position: relative;
+    background-color: #333;
+}
+
+.story-image-1 {
+    background-image: url('./images/storia-1.jpeg');
+}
+
+.story-image-2 {
+    background-image: url('./images/storia-2.JPG');
+}
+
+.story-image-3 {
+    background-image: url('./images/storia-3.jpg');
+}
+
+.story-image-4 {
+    background-image: url('./images/storia-4.jpg');
+}
+
+.story-card-content {
+    padding: 30px;
+}
+
+.story-title {
+    color: #ff6b35;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.story-text {
+    color: #e0e0e0;
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+.story-card:nth-child(1) { animation-delay: 0.1s; }
+.story-card:nth-child(2) { animation-delay: 0.2s; }
+.story-card:nth-child(3) { animation-delay: 0.3s; }
+.story-card:nth-child(4) { animation-delay: 0.4s; }
+
+.story-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(255, 107, 53, 0.5);
+    box-shadow: 0 20px 40px rgba(255, 107, 53, 0.1);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .story-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .story-card-image {
+        height: 180px;
+    }
+    
+    .story-card {
+        min-height: 320px;
+    }
+
+    .story-card-content {
+        padding: 20px;
+    }
+
+    .story-title {
+        font-size: 1.2rem;
+    }
+
+    .story-text {
+        font-size: 0.95rem;
+    }
+}
+</style>

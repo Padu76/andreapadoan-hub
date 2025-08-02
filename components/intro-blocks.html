@@ -1,0 +1,603 @@
+<!-- Introduzione Strutturata in 3 Blocchi -->
+<section class="intro-structured-section animate-on-scroll">
+    <div class="intro-blocks-container">
+        
+        <!-- Blocco 1: Chi sei oggi - CON VIDEO -->
+        <div class="intro-block video-block delay-1">
+            <div class="block-number">01</div>
+            <h2 class="seo-h2">Chi sono – Personal Trainer e Lifestyle Coach</h2>
+            <h3 class="seo-h3">Il professionista che trasforma corpo, mente e business</h3>
+            <div class="block-content">
+                <p class="block-text">
+                    La mia missione è aiutare professionisti e imprenditori a raggiungere il loro massimo potenziale attraverso un approccio integrato che unisce fitness, nutrizione e sviluppo personale.
+                </p>
+
+                <!-- Video Container -->
+                <div class="video-container">
+                    <!-- Video Placeholder -->
+                    <div class="video-placeholder" id="videoPlaceholder" onclick="playVideo()">
+                        <div class="video-overlay">
+                            <div class="play-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                            <div class="video-info">
+                                <div class="video-title">La Mia Storia</div>
+                                <div class="video-description">Scopri il mio percorso di trasformazione</div>
+                                <div class="video-duration">⏱️ 45 sec</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Video Player (nascosto inizialmente) -->
+                    <div class="video-player" id="videoPlayer">
+                        <button class="video-close" onclick="closeVideo()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        <iframe id="videoFrame" src="" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <ul class="block-list">
+                    <li><i class="fas fa-dumbbell"></i> <strong>Fitness personalizzato</strong> - Allenamenti su misura per i tuoi obiettivi</li>
+                    <li><i class="fas fa-brain"></i> <strong>Coaching mentale</strong> - Sviluppo di mindset vincente</li>
+                    <li><i class="fas fa-rocket"></i> <strong>Business growth</strong> - Supporto per imprenditori e liberi professionisti</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Blocco 2: Da dove vieni -->
+        <div class="intro-block delay-2">
+            <div class="block-number">02</div>
+            <h2 class="seo-h2">Il mio percorso da Manager a imprenditore del benessere</h2>
+            <h3 class="seo-h3">Dalla crisi personale alla missione di aiutare gli altri</h3>
+            <div class="block-content">
+                <div class="story-highlight">
+                    <i class="fas fa-quote-left"></i>
+                    <p class="highlight-text">
+                        "Ero un manager stanco e senza tempo libero: oggi aiuto altri come me a ritrovare energia e passione per la vita"
+                    </p>
+                </div>
+                <p class="block-text">
+                    Per oltre 12 anni ho ricoperto ruoli manageriali nel Marketing e nelle Vendite in importanti aziende. 
+                    Apparentemente avevo tutto: carriera, stipendio, responsabilità. Ma <strong>mancava qualcosa di fondamentale</strong>.
+                </p>
+                <p class="block-text">
+                    <strong>Il momento di svolta</strong> è arrivato quando mi sono guardato allo specchio: ero in sovrappeso, 
+                    stanco, senza energia. Ho capito che dovevo scegliere tra continuare così o cambiare completamente rotta. 
+                    Ho scelto la trasformazione. Prima per me, poi per aiutare centinaia di persone come me.
+                </p>
+            </div>
+        </div>
+
+        <!-- Blocco 3: Missione personale -->
+        <div class="intro-block delay-3">
+            <div class="block-number">03</div>
+            <h2 class="seo-h2">La mia missione: trasformare il "pulsante OFF" in "ON"</h2>
+            <h3 class="seo-h3">Perché posso aiutarti a raggiungere i tuoi obiettivi</h3>
+            <div class="block-content">
+                <div class="mission-statement">
+                    <h4 class="mission-title">La Mia Promessa</h4>
+                    <p class="mission-text">
+                        <strong>AIUTARE LE PERSONE A STARE BENE</strong> - questa è la mia missione quotidiana. 
+                        Non solo attraverso l'allenamento, ma creando un vero e proprio <em>lifestyle</em> che ti permette di:
+                    </p>
+                </div>
+                
+                <div class="transformation-grid">
+                    <div class="transformation-item">
+                        <div class="transform-emoji">😴</div>
+                        <div class="transform-label">PRIMA</div>
+                        <div class="transform-text">Stanco e spento</div>
+                        <div class="transform-arrow">→</div>
+                        <div class="transform-emoji">⚡</div>
+                        <div class="transform-label">DOPO</div>
+                        <div class="transform-text">Energico e motivato</div>
+                    </div>
+                    <div class="transformation-item">
+                        <div class="transform-emoji">🏃‍♂️</div>
+                        <div class="transform-label">PRIMA</div>
+                        <div class="transform-text">Fuori forma</div>
+                        <div class="transform-arrow">→</div>
+                        <div class="transform-emoji">💪</div>
+                        <div class="transform-label">DOPO</div>
+                        <div class="transform-text">Fisico tonico e forte</div>
+                    </div>
+                    <div class="transformation-item">
+                        <div class="transform-emoji">😰</div>
+                        <div class="transform-label">PRIMA</div>
+                        <div class="transform-text">Stressato</div>
+                        <div class="transform-arrow">→</div>
+                        <div class="transform-emoji">😎</div>
+                        <div class="transform-label">DOPO</div>
+                        <div class="transform-text">Equilibrato e sereno</div>
+                    </div>
+                </div>
+
+                <div class="cta-in-content">
+                    <p class="cta-text"><strong>Vuoi iniziare anche tu questa trasformazione?</strong></p>
+                    <button class="cta-inline-btn" onclick="openChat()">
+                        <i class="fas fa-comments"></i>
+                        Parlami dei tuoi obiettivi
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* Introduzione Strutturata in 3 Blocchi */
+.intro-structured-section {
+    margin-bottom: 120px;
+    padding: 0 20px;
+}
+
+.intro-blocks-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+}
+
+.intro-block {
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.8), rgba(40, 40, 40, 0.6));
+    border-radius: 25px;
+    padding: 50px 40px;
+    position: relative;
+    border-left: 6px solid #ff6b35;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 107, 53, 0.2);
+}
+
+/* Video Section integrata nel primo blocco */
+.intro-block.video-block {
+    position: relative;
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(40, 40, 40, 0.7));
+    overflow: hidden;
+}
+
+.video-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 30px auto;
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.video-placeholder {
+    width: 100%;
+    height: 300px;
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.8), rgba(255, 133, 51, 0.6)),
+                url('./images/chi-sono.jpg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    border: 3px solid rgba(255, 107, 53, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-placeholder:hover {
+    transform: scale(1.02);
+    border-color: rgba(255, 107, 53, 0.6);
+    box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.video-placeholder:hover .video-overlay {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.play-button {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #ff6b35, #ff8533);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+}
+
+.play-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 15px 40px rgba(255, 107, 53, 0.6);
+}
+
+.play-button i {
+    margin-left: 3px;
+}
+
+.video-info {
+    text-align: center;
+    color: white;
+}
+
+.video-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.video-description {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-bottom: 8px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.video-duration {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    display: inline-block;
+}
+
+/* Video Player quando attivo */
+.video-player {
+    width: 100%;
+    height: 300px;
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+    border: 3px solid #ff6b35;
+    box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
+    display: none;
+}
+
+.video-player iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.video-close:hover {
+    background: rgba(255, 107, 53, 0.8);
+    transform: scale(1.1);
+}
+
+.intro-block:nth-child(2) {
+    border-left-color: #4ade80;
+}
+
+.intro-block:nth-child(3) {
+    border-left-color: #22d3ee;
+}
+
+.intro-block:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.block-number {
+    position: absolute;
+    top: -15px;
+    left: 40px;
+    background: linear-gradient(135deg, #ff6b35, #ff8533);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    border: 4px solid #000;
+}
+
+.intro-block:nth-child(2) .block-number {
+    background: linear-gradient(135deg, #4ade80, #22c55e);
+}
+
+.intro-block:nth-child(3) .block-number {
+    background: linear-gradient(135deg, #22d3ee, #06b6d4);
+}
+
+.seo-h2 {
+    color: #ff6b35;
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    font-weight: bold;
+    margin-bottom: 15px;
+    margin-top: 10px;
+    line-height: 1.3;
+}
+
+.intro-block:nth-child(2) .seo-h2 {
+    color: #4ade80;
+}
+
+.intro-block:nth-child(3) .seo-h2 {
+    color: #22d3ee;
+}
+
+.seo-h3 {
+    color: #b0b0b0;
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    font-weight: 600;
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+.block-content {
+    color: #e0e0e0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.block-text {
+    margin-bottom: 25px;
+}
+
+.block-list {
+    list-style: none;
+    padding: 0;
+    margin: 25px 0;
+}
+
+.block-list li {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    padding: 15px;
+    background: rgba(255, 107, 53, 0.05);
+    border-radius: 10px;
+    border-left: 3px solid #ff6b35;
+}
+
+.block-list i {
+    color: #ff6b35;
+    font-size: 1.2rem;
+    width: 20px;
+}
+
+/* Story Highlight Box */
+.story-highlight {
+    background: linear-gradient(135deg, rgba(74, 222, 128, 0.1), rgba(34, 211, 238, 0.05));
+    border: 2px solid rgba(74, 222, 128, 0.3);
+    border-radius: 20px;
+    padding: 30px;
+    margin: 30px 0;
+    position: relative;
+    text-align: center;
+}
+
+.story-highlight i {
+    color: #4ade80;
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.highlight-text {
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 600;
+    line-height: 1.5;
+    font-style: italic;
+    margin: 0;
+}
+
+/* Mission Statement */
+.mission-statement {
+    background: rgba(34, 211, 238, 0.1);
+    border: 2px solid rgba(34, 211, 238, 0.3);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 30px;
+}
+
+.mission-title {
+    color: #22d3ee;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.mission-text {
+    color: #e0e0e0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Transformation Grid */
+.transformation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin: 30px 0;
+}
+
+.transformation-item {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(26, 26, 26, 0.6));
+    border-radius: 20px;
+    padding: 30px 20px;
+    text-align: center;
+    border: 2px solid rgba(255, 107, 53, 0.2);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.transformation-item:hover {
+    border-color: rgba(255, 107, 53, 0.5);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(255, 107, 53, 0.2);
+}
+
+.transform-emoji {
+    font-size: 2.5rem;
+    margin: 5px 0;
+}
+
+.transform-label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ff6b35;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.transform-text {
+    color: #e0e0e0;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.transform-arrow {
+    color: #4ade80;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+/* CTA integrata nel contenuto */
+.cta-in-content {
+    text-align: center;
+    margin-top: 40px;
+    padding: 30px;
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 133, 51, 0.05));
+    border-radius: 20px;
+    border: 2px solid rgba(255, 107, 53, 0.3);
+}
+
+.cta-text {
+    color: #fff;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.cta-inline-btn {
+    background: linear-gradient(45deg, #ff6b35, #ff8c5a);
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cta-inline-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
+    animation: pulse 1.5s infinite;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .intro-blocks-container {
+        gap: 60px;
+    }
+
+    .intro-block {
+        padding: 35px 25px;
+    }
+
+    .block-number {
+        left: 25px;
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .seo-h2 {
+        font-size: clamp(1.4rem, 5vw, 1.8rem);
+    }
+
+    .seo-h3 {
+        font-size: clamp(1rem, 3vw, 1.2rem);
+    }
+
+    .block-list li {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .transformation-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .story-highlight {
+        padding: 20px;
+    }
+
+    .highlight-text {
+        font-size: 1.1rem;
+    }
+
+    .video-placeholder,
+    .video-player {
+        height: 250px;
+    }
+
+    .play-button {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+    }
+
+    .video-title {
+        font-size: 1.2rem;
+    }
+
+    .video-description {
+        font-size: 0.9rem;
+    }
+}
+</style>

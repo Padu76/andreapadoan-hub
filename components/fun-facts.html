@@ -1,0 +1,245 @@
+<!-- Fun Facts Sezione Completamente Rinnovata -->
+<section class="fun-facts-section animate-on-scroll">
+    <h2 class="fun-facts-title">🎯 Curiosità su di Me</h2>
+    <p class="fun-facts-subtitle">Quello che forse non sai di me...</p>
+    <div class="fun-facts-grid">
+        <div class="fun-fact-card animate-bounce-in delay-1">
+            <div class="fun-fact-icon-container">
+                <span class="fun-fact-emoji">🏊‍♂️</span>
+            </div>
+            <h3 class="fun-fact-title">Ex Istruttore di Nuoto</h3>
+            <p class="fun-fact-text">Prima di diventare manager, ho insegnato nuoto per anni. L'acqua mi ha sempre dato serenità e mi ha insegnato l'importanza della respirazione corretta!</p>
+        </div>
+
+        <div class="fun-fact-card animate-bounce-in delay-2">
+            <div class="fun-fact-icon-container">
+                <span class="fun-fact-emoji">⚡</span>
+            </div>
+            <h3 class="fun-fact-title">Pulsante "ON" sempre attivo</h3>
+            <p class="fun-fact-text">Dove prima la mia giornata finiva alle 18, ora inizia davvero! Il mio "pulsante OFF" è diventato permanentemente "ON" - e voglio insegnare anche a te come farlo.</p>
+        </div>
+
+        <div class="fun-fact-card animate-bounce-in delay-3">
+            <div class="fun-fact-icon-container">
+                <span class="fun-fact-emoji">🎯</span>
+            </div>
+            <h3 class="fun-fact-title">Ossessionato dalla Trasformazione</h3>
+            <p class="fun-fact-text">La mia parola preferita? "Trasformazione!" È quello che cerco di creare nella vita di ogni cliente. Non mi accontento mai del "va bene così".</p>
+        </div>
+    </div>
+</section>
+
+<style>
+/* Fun Facts Sezione Migliorata */
+.fun-facts-section {
+    margin-bottom: 120px;
+    padding: 80px 40px;
+    background: radial-gradient(circle at center, rgba(255, 107, 53, 0.05) 0%, transparent 70%);
+    position: relative;
+    overflow: hidden;
+}
+
+.fun-facts-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg, transparent, rgba(255, 107, 53, 0.03), transparent, rgba(74, 222, 128, 0.03), transparent);
+    animation: rotateBackground 20s linear infinite;
+    z-index: 0;
+}
+
+.fun-facts-title {
+    text-align: center;
+    color: #fff;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-weight: 900;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.fun-facts-subtitle {
+    text-align: center;
+    color: #ff6b35;
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    margin-bottom: 60px;
+    font-weight: 600;
+    position: relative;
+    z-index: 2;
+    font-style: italic;
+}
+
+.fun-facts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.fun-fact-card {
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(40, 40, 40, 0.8));
+    border: 2px solid transparent;
+    border-radius: 25px;
+    padding: 40px 30px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+}
+
+.fun-fact-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 25px;
+    padding: 2px;
+    background: linear-gradient(135deg, #ff6b35, #4ade80, #22d3ee, #a855f7);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    -webkit-mask-composite: xor;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+.fun-fact-card:hover::before {
+    opacity: 1;
+}
+
+.fun-fact-card:hover {
+    transform: translateY(-15px) scale(1.03);
+    box-shadow: 0 25px 50px rgba(255, 107, 53, 0.15);
+}
+
+.fun-fact-card:nth-child(2):hover {
+    box-shadow: 0 25px 50px rgba(74, 222, 128, 0.15);
+}
+
+.fun-fact-card:nth-child(3):hover {
+    box-shadow: 0 25px 50px rgba(34, 211, 238, 0.15);
+}
+
+.fun-fact-icon-container {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 25px;
+    background: linear-gradient(135deg, #ff6b35, #ff8533);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.6s ease;
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+}
+
+.fun-fact-card:nth-child(2) .fun-fact-icon-container {
+    background: linear-gradient(135deg, #4ade80, #22c55e);
+    box-shadow: 0 10px 30px rgba(74, 222, 128, 0.3);
+}
+
+.fun-fact-card:nth-child(3) .fun-fact-icon-container {
+    background: linear-gradient(135deg, #22d3ee, #06b6d4);
+    box-shadow: 0 10px 30px rgba(34, 211, 238, 0.3);
+}
+
+.fun-fact-card:hover .fun-fact-icon-container {
+    transform: scale(1.15) rotate(10deg);
+    box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
+}
+
+.fun-fact-card:nth-child(2):hover .fun-fact-icon-container {
+    box-shadow: 0 15px 40px rgba(74, 222, 128, 0.4);
+}
+
+.fun-fact-card:nth-child(3):hover .fun-fact-icon-container {
+    box-shadow: 0 15px 40px rgba(34, 211, 238, 0.4);
+}
+
+.fun-fact-emoji {
+    font-size: 3.5rem;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+    transition: all 0.3s ease;
+}
+
+.fun-fact-card:hover .fun-fact-emoji {
+    transform: scale(1.1);
+}
+
+.fun-fact-title {
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.fun-fact-card:hover .fun-fact-title {
+    color: #ff6b35;
+}
+
+.fun-fact-card:nth-child(2):hover .fun-fact-title {
+    color: #4ade80;
+}
+
+.fun-fact-card:nth-child(3):hover .fun-fact-title {
+    color: #22d3ee;
+}
+
+.fun-fact-text {
+    color: #e0e0e0;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.fun-fact-card:hover .fun-fact-text {
+    color: #f5f5f5;
+    transform: translateY(-2px);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .fun-facts-section {
+        padding: 60px 20px;
+    }
+
+    .fun-facts-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .fun-fact-card {
+        padding: 30px 20px;
+    }
+
+    .fun-fact-icon-container {
+        width: 80px;
+        height: 80px;
+    }
+
+    .fun-fact-emoji {
+        font-size: 2.5rem;
+    }
+
+    .fun-fact-title {
+        font-size: 1.2rem;
+    }
+
+    .fun-fact-text {
+        font-size: 1rem;
+    }
+}
+</style>

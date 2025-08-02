@@ -1,0 +1,177 @@
+<!-- Values Section con tue foto personali -->
+<div class="values-section animate-on-scroll" id="values">
+    <h2 class="values-title">I Miei Valori Fondamentali</h2>
+    <div class="values-grid">
+        <div class="value-card">
+            <div class="value-image value-image-1"></div>
+            <div class="value-content">
+                <h3 class="value-title">Determinazione</h3>
+                <p class="value-text">La forza da impiegare ogni volta che ci si allena e la volontà di non mollare mai</p>
+            </div>
+        </div>
+
+        <div class="value-card">
+            <div class="value-image value-image-2"></div>
+            <div class="value-content">
+                <h3 class="value-title">Costanza</h3>
+                <p class="value-text">Continuità necessaria per ottenere risultati duraturi e trasformazioni reali</p>
+            </div>
+        </div>
+
+        <div class="value-card">
+            <div class="value-image value-image-3"></div>
+            <div class="value-content">
+                <h3 class="value-title">Motivazione</h3>
+                <p class="value-text">Un grande motivatore che trae linfa dalla tenacia e dalla passione</p>
+            </div>
+        </div>
+
+        <div class="value-card">
+            <div class="value-image value-image-4"></div>
+            <div class="value-content">
+                <h3 class="value-title">Trasformazione</h3>
+                <p class="value-text">Trasformare qualcosa in qualcos'altro - un sogno in realtà</p>
+            </div>
+        </div>
+
+        <div class="value-card">
+            <div class="value-image value-image-5"></div>
+            <div class="value-content">
+                <h3 class="value-title">Crescita</h3>
+                <p class="value-text">Aggiornamento continuo per migliorare sempre abilità e conoscenze</p>
+            </div>
+        </div>
+
+        <div class="value-card">
+            <div class="value-image value-image-6"></div>
+            <div class="value-content">
+                <h3 class="value-title">Supporto</h3>
+                <p class="value-text">Disponibilità, flessiblità e comprensione in ogni momento del percorso</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Values Section con tue foto personali - IMMAGINI COMPLETE E VISIBILI */
+.values-section {
+    margin-bottom: 120px;
+}
+
+.values-title {
+    color: #fff;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+.value-card {
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.05), rgba(255, 133, 51, 0.02));
+    border: 2px solid rgba(255, 107, 53, 0.2);
+    border-radius: 20px;
+    padding: 0;
+    text-align: center;
+    transition: all 0.4s ease;
+    overflow: hidden;
+    min-height: 360px;
+    cursor: pointer;
+}
+
+.value-card:hover {
+    border-color: rgba(255, 107, 53, 0.6);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
+}
+
+.value-image {
+    width: 100%;
+    height: 200px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 20px 20px 0 0;
+    transition: all 0.3s ease;
+    background-color: #333;
+}
+
+.value-card:hover .value-image {
+    transform: scale(1.05);
+}
+
+/* Le tue foto personali per i valori - TUTTE VISIBILI */
+.value-image-1 {
+    background-image: url('./images/valore-determinazione.jpg');
+}
+
+.value-image-2 {
+    background-image: url('./images/valore-costanza.jpg');
+}
+
+.value-image-3 {
+    background-image: url('./images/valore-motivazione.jpg');
+}
+
+.value-image-4 {
+    background-image: url('./images/valore-trasformazione.jpg');
+}
+
+.value-image-5 {
+    background-image: url('./images/valore-crescita.jpg');
+}
+
+.value-image-6 {
+    background-image: url('./images/valore-supporto.jpg');
+}
+
+.value-content {
+    padding: 25px;
+}
+
+.value-title {
+    color: #ff6b35;
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.value-text {
+    color: #ccc;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .values-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+    }
+
+    .value-card {
+        min-height: 320px;
+    }
+
+    .value-image {
+        height: 160px;
+    }
+
+    .value-content {
+        padding: 20px;
+    }
+
+    .value-title {
+        font-size: 1.2rem;
+    }
+
+    .value-text {
+        font-size: 0.95rem;
+    }
+}
+</style>
