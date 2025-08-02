@@ -23,7 +23,7 @@
     <!-- Hero Section -->
     <div id="hero-container"></div>
     
-    <!-- Services Section -->
+    <!-- Services Section (contiene già i progetti) -->
     <div id="services-container"></div>
     
     <!-- Chat Section -->
@@ -31,9 +31,6 @@
     
     <!-- Chat Fullscreen (always present) -->
     <div id="chat-fullscreen-container"></div>
-    
-    <!-- Projects List -->
-    <div id="projects-list-container"></div>
     
     <!-- Social Section -->
     <div id="social-container"></div>
@@ -47,16 +44,16 @@
     <!-- Load Components -->
     <script>
         // ======================================
-        // 📦 COMPONENT LOADER
+        // 📦 COMPONENT LOADER (FIXED - NO DUPLICATES)
         // ======================================
         
         const components = [
             { id: 'header-container', file: './components/header.html' },
             { id: 'hero-container', file: './components/hero.html' },
-            { id: 'services-container', file: './components/services.html' },
+            { id: 'services-container', file: './components/services.html' }, // Contiene già i progetti
             { id: 'chat-section-container', file: './components/chat-section.html' },
             { id: 'chat-fullscreen-container', file: './components/chat-fullscreen.html' },
-            { id: 'projects-list-container', file: './components/projects-list.html' },
+            // ❌ RIMOSSO: projects-list-container (duplicato in services.html)
             { id: 'social-container', file: './components/social.html' },
             { id: 'contact-container', file: './components/contact.html' }
         ];
@@ -72,11 +69,12 @@
                 const container = document.getElementById(containerId);
                 if (container) {
                     container.innerHTML = html;
+                    console.log(`✅ Loaded: ${filePath}`);
                 } else {
-                    console.warn(`Container ${containerId} not found`);
+                    console.warn(`❌ Container ${containerId} not found`);
                 }
             } catch (error) {
-                console.error(`Error loading component ${filePath}:`, error);
+                console.error(`❌ Error loading component ${filePath}:`, error);
                 // Fallback: show error message
                 const container = document.getElementById(containerId);
                 if (container) {
@@ -96,6 +94,7 @@
             try {
                 await Promise.all(loadPromises);
                 console.log('✅ All components loaded successfully');
+                console.log('🎯 Homepage components: Header, Hero, Services (with projects), Chat, Social, Contact');
                 
                 // Initialize app after components are loaded
                 if (typeof initializeApp === 'function') {
