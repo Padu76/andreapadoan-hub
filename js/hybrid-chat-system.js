@@ -33,9 +33,19 @@ const SERVIZI_DATABASE = {
             email: 'andrea.padoan@gmail.com'
         },
         prezzi: {
-            individuali: 'Da 45€/sessione (pacchetti da 10-30 lezioni)',
-            coppia: 'Da 25€/sessione per persona',
-            miniclassi: 'Da 13€/sessione'
+            individuali: {
+                '10_lezioni': '55€/lezione (totale 550€)',
+                '20_lezioni': '50€/lezione (totale 1000€)', 
+                '30_lezioni': '45€/lezione (totale 1350€)'
+            },
+            coppia: {
+                '10_lezioni': '35€/lezione per persona (totale 350€ cad.)',
+                '20_lezioni': '30€/lezione per persona (totale 600€ cad.)',
+                '30_lezioni': '25€/lezione per persona (totale 750€ cad.)'
+            },
+            miniclassi: '15€/lezione (pacchetto 10 lezioni)',
+            tesseramento: '30€ annuali (assicurazione inclusa)',
+            orari_miniclassi: 'Lun/Mar/Gio 18:00, Sabato 10:00'
         },
         url: 'https://www.personaltrainerverona.it',
         emoji: '💪'
@@ -57,71 +67,68 @@ const SERVIZI_DATABASE = {
     },
     'lifestyle-coaching': {
         nome: 'Lifestyle Coaching Online',
-        descrizione: 'Percorso digitale di trasformazione in 7 settimane - perché dieta e allenamento non bastano!',
+        descrizione: 'Percorso online personalizzato per trasformazione completa',
         punti_chiave: [
-            'Percorso strutturato in 7 settimane progressive',
-            '4 aree fondamentali: Benessere Emotivo, Salute Fisica, Relazioni Sociali, Vita Professionale',
-            'Target: professionisti stressati, manager, chi cerca equilibrio vita-lavoro',
-            'Piattaforma digitale completa su tribucoach.vercel.app',
-            'Sistema avatar personalizzabile e tracking progressi'
+            'Sessioni online personalizzate',
+            'Prima sessione gratuita per conoscerci',
+            'Approccio olistico: mindset + azione',
+            'Supporto continuo tra le sessioni',
+            'Programmi su misura per i tuoi obiettivi'
         ],
-        come_funziona: 'Percorso digitale completo che ti accompagna settimana per settimana. Ogni modulo si sblocca progressivamente per garantire un apprendimento strutturato.',
-        target: 'Professionisti stressati, manager, persone che vogliono migliorare equilibrio vita-lavoro',
-        prezzi: 'Da 197€/mese con coaching personalizzato',
+        come_funziona: 'Percorso di coaching online che ti accompagna step by step verso il cambiamento che desideri. Lavoriamo insieme su obiettivi concreti.',
+        target: 'Persone che vogliono un cambiamento profondo e duraturo',
+        prezzi: {
+            sessione: '50€/sessione',
+            prima_sessione: 'GRATUITA per conoscerci'
+        },
         url: 'https://tribucoach.vercel.app/',
         emoji: '🚀'
     },
     'mealprep-planner': {
         nome: 'MealPrep Planner',
-        descrizione: 'App web gratuita per pianificare i pasti della settimana in modo intelligente',
+        descrizione: 'App web per pianificare i pasti (in sviluppo versione freemium)',
         punti_chiave: [
-            'Completamente gratuita, nessun abbonamento',
             'Pianificazione automatica pasti settimanali',
-            'Lista spesa generata automaticamente',
+            'Lista spesa generata automaticamente', 
             'Calcolo calorie e macronutrienti personalizzato',
-            'Interfaccia semplice e intuitiva'
+            'Interfaccia semplice e intuitiva',
+            'Versione freemium in sviluppo'
         ],
         come_funziona: 'Inserisci i tuoi dati, scegli le preferenze alimentari e l\'app genera automaticamente un piano settimanale completo con lista della spesa.',
         tecnologia: 'Next.js, TypeScript, Tailwind CSS, integrazione AI',
-        stato: 'Versione stabile disponibile online',
-        prezzo: 'Completamente GRATUITA',
+        stato: 'In progress - versione freemium in sviluppo',
+        prezzo: 'Freemium (in sviluppo)',
         url: 'https://mealprep-planner.vercel.app/',
         emoji: '📱'
     },
     'pasto-sano': {
         nome: 'Pasto Sano - Pasti Freschi Verona',
-        descrizione: 'Pasti freschi e bilanciati pronti in 2 minuti, selezionati personalmente da Andrea',
+        descrizione: 'Pasti freschi e bilanciati pronti in 2 minuti',
         punti_chiave: [
-            'Pasti freschi da 330g (100g proteine + 100g carboidrati + verdure)',
-            'Preparati da laboratori selezionati personalmente da Andrea',
-            'Solo ingredienti naturali, senza conservanti',
-            'Cottura a vapore o piastra per mantenere proprietà nutritive',
-            'Durata: 3-4 giorni in frigo, possibilità di congelare',
-            'Ritiro presso Tribù Studio - Via Albere 27/B'
+            'Pasti freschi preparati con ingredienti selezionati',
+            'Pronti in 2 minuti al microonde',
+            'Bilanciati nutrizionalmente',
+            'Ritiro presso Tribù Studio - Via Albere 27/B',
+            'Ideali per chi non ha tempo di cucinare'
         ],
         come_funziona: 'Ordini online, prepariamo fresco, ritiri presso il mio studio. Porta una borsa termica per il trasporto!',
-        story: 'Nasce dalla mia esperienza personale: dopo anni da manager spesso non avevo tempo di cucinare e finivo per mangiare male. Ho testato laboratori per 4 anni prima di trovare quelli giusti.',
         location: 'Ritiro: Tribù Studio - Via Albere 27/B, Verona',
-        preparazione: '2 minuti e mezzo in microonde o 4-5 minuti in forno a 160°',
-        prezzi: 'Da 8€/pasto, pacchetti settimanali da 45€',
+        preparazione: '2 minuti in microonde',
+        prezzi: 'Da 4.50€/pasto',
         url: 'https://pastosano.netlify.app/',
         emoji: '🥗'
     },
     'best-trainer': {
         nome: 'Best-Trainer',
-        descrizione: 'Piattaforma marketplace di programmi di allenamento (in fase di sviluppo e-commerce)',
+        descrizione: 'Piattaforma di programmi di allenamento (sito in progress)',
         punti_chiave: [
-            'Directory completa di Personal Trainer certificati',
-            'Tutorial esercizi gratuiti con video HD',
-            'Sistema di approvazione rigoroso per i PT',
-            'Dashboard per PT per gestire profili e programmi',
-            'Fase attuale: pre-e-commerce (acquisti non ancora attivi)'
+            'Directory di Personal Trainer certificati',
+            'Tutorial esercizi con video',
+            'Vari programmi di allenamento',
+            'Sito e prezzi in fase di sviluppo',
+            'Piattaforma in continua evoluzione'
         ],
-        stato_attuale: 'Piattaforma funzionante con directory PT e tutorial gratuiti. Sistema e-commerce in sviluppo per permettere acquisto/vendita programmi.',
-        tecnologia: 'Next.js, PostgreSQL, Stripe Connect (in integrazione)',
-        timeline: 'E-commerce previsto per settembre 2025',
-        cosa_funziona: 'Directory PT, tutorial gratuiti, sistema approvazione',
-        cosa_non_funziona: 'Acquisto programmi, pagamenti, download automatici',
+        stato_attuale: 'Sito in progress con prezzi vari in definizione',
         url: 'https://best-trainer-mvp.vercel.app/',
         emoji: '🏆'
     },
@@ -144,16 +151,16 @@ const SERVIZI_DATABASE = {
     },
     'ebooks': {
         nome: 'I miei eBook',
-        descrizione: 'Guide digitali complete per trasformazione fisica e mentale',
+        descrizione: 'Guide digitali per trasformazione fisica e mentale',
         punti_chiave: [
-            'Anni di esperienza condensata in formato digitale',
-            'Guide step-by-step testate su clienti reali',
-            'Metodi per trasformazione fisica e mentale',
+            'Guide pratiche basate su esperienza reale',
+            'Metodi testati su clienti',
             'Strategie di motivazione e mindset',
-            'Download immediato dopo acquisto'
+            'Download immediato dopo acquisto',
+            'Prezzi accessibili'
         ],
-        come_funziona: 'Guide pratiche basate sulla mia esperienza personale di trasformazione da manager stressato a coach esperto.',
-        prezzi: 'Da 29€ a ebook, bundle completo a 97€',
+        come_funziona: 'Guide pratiche basate sulla mia esperienza di trasformazione personale e professionale.',
+        prezzi: 'Da 14.90€ per eBook',
         url: './ebooks.html',
         emoji: '📚'
     }
@@ -237,38 +244,60 @@ const localAI = {
         
         const message = userMessage.toLowerCase();
         
-        // PASTO SANO - INFORMAZIONI REALI
+        // PASTO SANO - INFORMAZIONI CORRETTE
         if (message.includes('pasto sano') || message.includes('pasti freschi') || message.includes('pasti pronti')) {
             const servizio = SERVIZI_DATABASE['pasto-sano'];
             return `${servizio.emoji} <strong>${servizio.nome}</strong><br><br>
-            ${servizio.story}<br><br>
+            ${servizio.descrizione}<br><br>
             
             <strong>Come funziona:</strong><br>
-            • ${servizio.punti_chiave.slice(0, 3).map(punto => punto).join('<br>• ')}<br><br>
+            • ${servizio.punti_chiave.map(punto => punto).join('<br>• ')}<br><br>
             
             <strong>📍 Ritiro:</strong> ${servizio.location}<br>
-            <strong>💰 Prezzi:</strong> ${servizio.prezzi}<br><br>
+            <strong>💰 Prezzo:</strong> ${servizio.prezzi}<br>
+            <strong>⏱️ Preparazione:</strong> ${servizio.preparazione}<br><br>
             
-            Vuoi vedere il menu completo? Scrivimi per i dettagli! 🚚`;
+            ${servizio.come_funziona}<br><br>
+            
+            Vuoi vedere il menu disponibile? 🚚`;
         }
         
-        // PERSONAL TRAINING - INFORMAZIONI REALI
-        if (message.includes('personal training') || message.includes('allenamento') || message.includes('palestra')) {
+        // PERSONAL TRAINING - INFORMAZIONI REALI E DETTAGLIATE
+        if (message.includes('personal training') || message.includes('allenamento') || message.includes('tribù studio') || message.includes('palestra')) {
             const servizio = SERVIZI_DATABASE['personal-training'];
             return `${servizio.emoji} <strong>${servizio.nome}</strong><br><br>
             ${servizio.come_funziona}<br><br>
             
-            <strong>💪 Opzioni di allenamento:</strong><br>
-            • Individuali: ${servizio.prezzi.individuali}<br>
-            • Coppia: ${servizio.prezzi.coppia}<br>
-            • Miniclassi: ${servizio.prezzi.miniclassi}<br><br>
+            <strong>🏠 Come funziona presso Tribù Studio:</strong><br>
+            • Allenamenti solo su appuntamento con Personal Trainer<br>
+            • Programmazione personalizzata per i tuoi obiettivi<br>
+            • Durata: 1 ora per sessione<br>
+            • Consigliamo inizialmente 2 sessioni/settimana<br>
+            • Orari: dalle 6:00 alle 21:00<br>
+            • Staff specializzato (posturale, tonificazione, dimagrimento, preparazione atletica)<br><br>
             
-            <strong>📍 Dove:</strong> ${servizio.location}<br><br>
+            <strong>💰 LISTINO PREZZI DETTAGLIATO:</strong><br><br>
             
-            Quale modalità ti interesserebbe di più? 🎯`;
+            <strong>🔸 LEZIONI INDIVIDUALI:</strong><br>
+            • ${servizio.prezzi.individuali['10_lezioni']}<br>
+            • ${servizio.prezzi.individuali['20_lezioni']}<br>
+            • ${servizio.prezzi.individuali['30_lezioni']}<br><br>
+            
+            <strong>🔸 LEZIONI DI COPPIA:</strong><br>
+            • ${servizio.prezzi.coppia['10_lezioni']}<br>
+            • ${servizio.prezzi.coppia['20_lezioni']}<br>
+            • ${servizio.prezzi.coppia['30_lezioni']}<br><br>
+            
+            <strong>🔸 MINICLASSI (3-5 persone):</strong><br>
+            • ${servizio.prezzi.miniclassi}<br>
+            • ${servizio.prezzi.orari_miniclassi}<br><br>
+            
+            <strong>📋 Extra:</strong> ${servizio.prezzi.tesseramento}<br><br>
+            
+            Su quale modalità vorresti più informazioni? 🎯`;
         }
         
-        // MEALPREP PLANNER
+        // MEALPREP PLANNER - STATO CORRETTO
         if (message.includes('mealprep') || message.includes('meal prep') || message.includes('organizzare pasti')) {
             const servizio = SERVIZI_DATABASE['mealprep-planner'];
             return `${servizio.emoji} <strong>${servizio.nome}</strong><br><br>
@@ -277,29 +306,28 @@ const localAI = {
             <strong>✨ Caratteristiche:</strong><br>
             • ${servizio.punti_chiave.slice(0, 3).map(punto => punto).join('<br>• ')}<br><br>
             
-            <strong>💰 Prezzo:</strong> ${servizio.prezzo} 🎁<br><br>
+            <strong>📊 Stato:</strong> ${servizio.stato}<br>
+            <strong>💰 Prezzo:</strong> ${servizio.prezzo}<br><br>
             
-            <strong>🌐 Prova subito:</strong> <a href="${servizio.url}" target="_blank">${servizio.url}</a><br><br>
+            <strong>🌐 Anteprima:</strong> <a href="${servizio.url}" target="_blank">${servizio.url}</a><br><br>
             
-            Hai domande su come usarla? 📱`;
+            Ti terremo aggiornato sui progressi! 📱`;
         }
         
         // BEST-TRAINER - STATO CORRETTO
         if (message.includes('best-trainer') || message.includes('best trainer') || message.includes('programmi allenamento')) {
             const servizio = SERVIZI_DATABASE['best-trainer'];
             return `${servizio.emoji} <strong>${servizio.nome}</strong><br><br>
+            ${servizio.descrizione}<br><br>
+            
             <strong>📊 Stato attuale:</strong> ${servizio.stato_attuale}<br><br>
             
-            <strong>✅ Cosa funziona già:</strong><br>
-            • ${servizio.cosa_funziona}<br><br>
+            <strong>✨ Cosa offre:</strong><br>
+            • ${servizio.punti_chiave.map(punto => punto).join('<br>• ')}<br><br>
             
-            <strong>🚧 In sviluppo:</strong><br>
-            • ${servizio.cosa_non_funziona}<br>
-            • ${servizio.timeline}<br><br>
+            <strong>🌐 Esplora:</strong> <a href="${servizio.url}" target="_blank">${servizio.url}</a><br><br>
             
-            <strong>🌐 Esplora ora:</strong> <a href="${servizio.url}" target="_blank">${servizio.url}</a><br><br>
-            
-            Ti interessano i tutorial gratuiti disponibili? 🏆`;
+            Ti interessano i contenuti disponibili? 🏆`;
         }
         
         // CONTATTI
@@ -317,18 +345,22 @@ const localAI = {
             Il modo più veloce è WhatsApp! Scrivimi quando vuoi. 💪`;
         }
         
-        // PREZZI GENERALI
+        // PREZZI GENERALI - INFORMAZIONI CORRETTE
         if (message.includes('prezzi') || message.includes('costi') || message.includes('quanto costa')) {
-            return `💰 <strong>Panoramica prezzi dei miei servizi:</strong><br><br>
+            return `💰 <strong>Ecco tutti i miei servizi e prezzi:</strong><br><br>
             
-            🏠 <strong>Personal Training Studio:</strong><br>
-            • Individuali: ${SERVIZI_DATABASE['personal-training'].prezzi.individuali}<br>
-            • Coppia: ${SERVIZI_DATABASE['personal-training'].prezzi.coppia}<br>
-            • Miniclassi: ${SERVIZI_DATABASE['personal-training'].prezzi.miniclassi}<br><br>
+            🏠 <strong>Tribù Studio - Personal Training:</strong><br>
+            • Lezioni Individuali: da 45€ a 55€/lezione<br>
+            • Lezioni di Coppia: da 25€ a 35€/persona<br>
+            • Miniclassi: 15€/lezione (pacchetto 10)<br>
+            • Tesseramento annuale: 30€<br><br>
             
-            🚀 <strong>Lifestyle Coaching:</strong> ${SERVIZI_DATABASE['lifestyle-coaching'].prezzi}<br>
-            🥗 <strong>Pasto Sano:</strong> ${SERVIZI_DATABASE['pasto-sano'].prezzi}<br>
-            📱 <strong>MealPrep Planner:</strong> ${SERVIZI_DATABASE['mealprep-planner'].prezzo}<br><br>
+            💻 <strong>Personal Training Online:</strong> Da 70€/mese<br>
+            🚀 <strong>Lifestyle Coaching:</strong> 50€/sessione (prima GRATUITA)<br>
+            🥗 <strong>Pasto Sano:</strong> Da 4.50€/pasto<br>
+            🏆 <strong>Best-Trainer:</strong> Prezzi vari (sito in progress)<br>
+            📱 <strong>MealPrep Planner:</strong> Freemium (in sviluppo)<br>
+            📚 <strong>eBook:</strong> Da 14.90€<br><br>
             
             Su quale servizio vuoi dettagli specifici? 🎯`;
         }
