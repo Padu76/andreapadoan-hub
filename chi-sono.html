@@ -3,7 +3,17 @@
 <head>
     <!-- Meta Tag Base -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Andrea PT">
+    <meta name="application-name" content="Andrea PT">
+    <meta name="msapplication-TileColor" content="#ff6b35">
+    <meta name="theme-color" content="#ff6b35">
+    <meta name="color-scheme" content="dark light">
     
     <!-- SEO Meta Tags Ottimizzati -->
     <title>Andrea Padoan: Personal Trainer e Lifestyle Coach Verona | La Mia Storia</title>
@@ -14,6 +24,16 @@
     <meta name="author" content="Andrea Padoan">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="canonical" href="https://andreapadoan-hub.vercel.app/chi-sono.html">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="./manifest.json">
+    
+    <!-- Favicon PWA -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="./images/icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/icon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/icon-16x16.png">
+    <link rel="mask-icon" href="./images/safari-pinned-tab.svg" color="#ff6b35">
     
     <!-- Open Graph per Social Media -->
     <meta property="og:type" content="profile">
@@ -31,228 +51,24 @@
     <meta name="twitter:description" content="Da manager stanco a Personal Trainer di successo. La mia storia di trasformazione.">
     <meta name="twitter:image" content="https://andreapadoan-hub.vercel.app/images/chi-sono.jpg">
     
-    <!-- Local Business Schema -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Andrea Padoan",
-        "jobTitle": ["Personal Trainer", "Lifestyle Coach"],
-        "description": "Personal Trainer e Lifestyle Coach specializzato nella trasformazione di professionisti e imprenditori a Verona",
-        "url": "https://andreapadoan-hub.vercel.app",
-        "sameAs": [
-            "https://www.personaltrainerverona.it/",
-            "https://www.tribuptstudio.it/",
-            "https://wa.me/3478881515"
-        ],
-        "image": "https://andreapadoan-hub.vercel.app/images/chi-sono.jpg",
-        "telephone": "+393478881515",
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Verona",
-            "addressRegion": "Veneto",
-            "addressCountry": "IT"
-        },
-        "worksFor": {
-            "@type": "LocalBusiness",
-            "name": "Tribù Studio",
-            "url": "https://www.tribuptstudio.it/",
-            "@id": "https://www.tribuptstudio.it/#business"
-        },
-        "knowsAbout": [
-            "Personal Training",
-            "Lifestyle Coaching", 
-            "Trasformazione corporea",
-            "Allenamento personalizzato",
-            "Nutrizione sportiva",
-            "Motivazione e mindset"
-        ],
-        "hasCredential": "Personal Trainer Certificato",
-        "alumniOf": {
-            "@type": "Organization",
-            "name": "Manager Marketing e Vendite"
-        }
-    }
-    </script>
-
-    <!-- Tribù Studio Local Business Schema -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "SportsActivityLocation",
-        "@id": "https://www.tribuptstudio.it/#business",
-        "name": "Tribù Studio",
-        "description": "Centro di Personal Training a Verona specializzato in allenamenti personalizzati con Andrea Padoan",
-        "url": "https://www.tribuptstudio.it/",
-        "telephone": "+393478881515",
-        "priceRange": "€€",
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Verona",
-            "addressRegion": "Veneto", 
-            "addressCountry": "IT"
-        },
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": "45.4384",
-            "longitude": "10.9916"
-        },
-        "openingHours": "Mo-Sa 06:00-21:00",
-        "founder": {
-            "@type": "Person",
-            "name": "Andrea Padoan"
-        },
-        "hasOfferCatalog": {
-            "@type": "OfferCatalog",
-            "name": "Servizi Personal Training",
-            "itemListElement": [
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "Personal Training Individuale",
-                        "description": "Allenamenti personalizzati one-to-one"
-                    }
-                },
-                {
-                    "@type": "Offer", 
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "Personal Training di Coppia",
-                        "description": "Allenamenti personalizzati per coppie"
-                    }
-                },
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service", 
-                        "name": "MiniClass",
-                        "description": "Piccoli gruppi di 3-5 persone"
-                    }
-                }
-            ]
-        }
-    }
-    </script>
-
-    <!-- FAQ Schema per le domande -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-            {
-                "@type": "Question",
-                "name": "Chi è Andrea Padoan?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Andrea Padoan è un Personal Trainer e Lifestyle Coach a Verona, ex manager che ha trasformato la sua vita passando dal burnout aziendale a imprenditore del benessere. Aiuta professionisti e imprenditori a ritrovare forma fisica ed energia."
-                }
-            },
-            {
-                "@type": "Question", 
-                "name": "Dove si trova Tribù Studio?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Tribù Studio è il centro di Personal Training di Andrea Padoan situato a Verona. Offre allenamenti personalizzati, lezioni di coppia e miniclass in piccoli gruppi."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Quali servizi offre Andrea Padoan?",
-                "acceptedAnswer": {
-                    "@type": "Answer", 
-                    "text": "Andrea offre Personal Training presso Tribù Studio, Lifestyle Coaching online, consulenze nutrizionali e programmi di trasformazione completa per professionisti che vogliono migliorare forma fisica e benessere mentale."
-                }
-            }
-        ]
-    }
-    </script>
-
-    <!-- Review Schema per le testimonianze Google -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Andrea Padoan",
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "5.0",
-            "reviewCount": "15",
-            "bestRating": "5",
-            "worstRating": "5"
-        },
-        "review": [
-            {
-                "@type": "Review",
-                "author": {
-                    "@type": "Person",
-                    "name": "Umberto Miletto"
-                },
-                "reviewRating": {
-                    "@type": "Rating",
-                    "ratingValue": "5"
-                },
-                "reviewBody": "Andrea Padoan è sicuramente un punto di riferimento per l'allenamento personalizzato a Verona. Preciso, professionale, preparato, carismatico, grande motivatore."
-            },
-            {
-                "@type": "Review",
-                "author": {
-                    "@type": "Person", 
-                    "name": "Selena Dal Dosso"
-                },
-                "reviewRating": {
-                    "@type": "Rating",
-                    "ratingValue": "5"
-                },
-                "reviewBody": "Non avrai altro Personal Trainer al di fuori di... Andrea Padoan! Vi basterà parlarci soli cinque minuti per capire che Andrea è unico."
-            }
-        ]
-    }
-    </script>
-
-    <!-- Breadcrumb Schema -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Home",
-                "item": "https://andreapadoan-hub.vercel.app/"
-            },
-            {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "Chi Sono",
-                "item": "https://andreapadoan-hub.vercel.app/chi-sono.html"
-            }
-        ]
-    }
-    </script>
-
-    <!-- Preconnect per performance -->
+    <!-- Performance Optimizations -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    
-    <!-- DNS Prefetch -->
     <link rel="dns-prefetch" href="//wa.me">
     <link rel="dns-prefetch" href="//www.google.com">
     <link rel="dns-prefetch" href="//www.youtube.com">
     
-    <!-- Favicon ottimizzato -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <!-- Critical Resources Preload -->
+    <link rel="preload" as="image" href="./images/chi-sono.webp" type="image/webp">
+    <link rel="preload" as="image" href="./images/chi-sono.jpg" type="image/jpeg">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- Font Awesome -->
+    <!-- Font Awesome con preload -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- Preload immagine hero per performance -->
-    <link rel="preload" as="image" href="./images/chi-sono.jpg">
-    
+    <!-- Critical CSS Inlined -->
     <style>
+        /* ===== CRITICAL CSS - Above the fold ===== */
         * {
             margin: 0;
             padding: 0;
@@ -265,50 +81,19 @@
             color: #fff;
             line-height: 1.6;
             min-height: 100vh;
+            overflow-x: hidden;
+            /* PWA Safe Areas */
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
         }
 
-        /* Breadcrumb SEO */
-        .breadcrumb {
-            background: rgba(26, 26, 26, 0.8);
-            padding: 15px 20px;
-            margin-bottom: 20px;
-            backdrop-filter: blur(10px);
-        }
-
-        .breadcrumb-list {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            max-width: 1200px;
-            margin: 0 auto;
-            font-size: 14px;
-        }
-
-        .breadcrumb-item {
-            color: #b0b0b0;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .breadcrumb-item:hover {
-            color: #ff6b35;
-        }
-
-        .breadcrumb-item.active {
-            color: #ff6b35;
-            font-weight: 600;
-        }
-
-        .breadcrumb-separator {
-            color: #666;
-            margin: 0 5px;
-        }
-
-        /* Tasto Home in alto a sinistra */
+        /* Mobile-first critical styles */
         .home-button {
             position: fixed;
-            top: 20px;
-            left: 20px;
+            top: max(20px, env(safe-area-inset-top, 20px));
+            left: max(20px, env(safe-area-inset-left, 20px));
             z-index: 1001;
             background: linear-gradient(45deg, #ff6b35, #ff8533);
             color: white;
@@ -320,278 +105,94 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease;
             box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+            touch-action: manipulation;
         }
 
-        .home-button:hover {
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.5);
+        .home-button:active {
+            transform: scale(0.95);
         }
 
-        /* CTA Sticky per mobile */
+        /* Mobile-optimized sticky CTA */
         .sticky-cta {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: max(20px, env(safe-area-inset-bottom, 20px));
+            right: max(20px, env(safe-area-inset-right, 20px));
             z-index: 1000;
             background: linear-gradient(45deg, #25D366, #20BA5A);
             color: white;
             border: none;
-            width: 60px;
-            height: 60px;
+            width: 64px;
+            height: 64px;
             border-radius: 50%;
-            font-size: 24px;
+            font-size: 28px;
             cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
             text-decoration: none;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        .sticky-cta:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.6);
+        .sticky-cta:active {
+            transform: scale(0.9);
         }
 
-        /* Navigation anchor migliorata */
-        .nav-anchors {
-            position: fixed;
-            top: 50%;
-            right: 30px;
-            transform: translateY(-50%);
-            z-index: 999;
+        /* Hero section mobile-first */
+        .hero-section {
+            padding: max(120px, calc(80px + env(safe-area-inset-top))) 20px 80px;
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 50%, #000 100%);
+            min-height: 100vh;
+            min-height: 100dvh; /* Dynamic viewport height */
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 20px 15px;
-            border-radius: 25px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 107, 53, 0.2);
+            gap: 40px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            text-align: center;
         }
 
-        .anchor-link {
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            background: rgba(255, 107, 53, 0.4);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-            position: relative;
-            border: 2px solid transparent;
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5.5rem);
+            font-weight: 900;
+            color: #ff6b35;
+            margin-bottom: 15px;
+            line-height: 1;
+            letter-spacing: -2px;
         }
 
-        .anchor-link.active {
-            background: #ff6b35;
-            transform: scale(1.4);
-            border-color: rgba(255, 107, 53, 0.3);
-            box-shadow: 0 0 20px rgba(255, 107, 53, 0.4);
+        .hero-impact {
+            font-size: clamp(1.4rem, 5vw, 2.8rem);
+            color: #fff;
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.2;
         }
 
-        .anchor-link:hover {
-            background: #ff6b35;
-            transform: scale(1.2);
-            box-shadow: 0 0 15px rgba(255, 107, 53, 0.3);
-        }
-
-        .anchor-tooltip {
-            position: absolute;
-            right: 25px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: linear-gradient(135deg, #ff6b35, #ff8533);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .anchor-tooltip::after {
-            content: '';
-            position: absolute;
-            left: -5px;
-            top: 50%;
-            transform: translateY(-50%);
-            border: 5px solid transparent;
-            border-right-color: #ff6b35;
-        }
-
-        .anchor-link:hover .anchor-tooltip {
-            opacity: 1;
-            transform: translateY(-50%) translateX(-10px);
-        }
-
+        /* Container mobile-optimized */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px 50px;
+            padding: 20px 15px 50px;
         }
 
-        /* H1 per SEO */
-        .seo-h1 {
-            display: none; /* Nascosto visivamente ma leggibile dai crawler */
+        /* Touch-friendly navigation */
+        .nav-anchors {
+            display: none; /* Hidden on mobile by default */
         }
 
-        /* Animazioni base */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes heroImageGlow {
-            0%, 100% { 
-                box-shadow: 0 0 40px rgba(255, 107, 53, 0.3), 0 0 80px rgba(74, 222, 128, 0.1); 
-                transform: rotate(0deg);
-            }
-            50% { 
-                box-shadow: 0 0 60px rgba(255, 107, 53, 0.5), 0 0 100px rgba(74, 222, 128, 0.2); 
-                transform: rotate(1deg);
-            }
-        }
-
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.7);
-            }
-            70% {
-                box-shadow: 0 0 0 20px rgba(255, 107, 53, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(255, 107, 53, 0);
-            }
-        }
-
-        @keyframes rotateBackground {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Animazioni scroll */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(80px);
-            transition: all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .animate-on-scroll.animated {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .animate-slide-left {
-            opacity: 0;
-            transform: translateX(-80px);
-            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .animate-slide-left.animated {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .animate-slide-right {
-            opacity: 0;
-            transform: translateX(80px);
-            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .animate-slide-right.animated {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .animate-fade-in {
-            opacity: 0;
-            transform: scale(0.8);
-            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .animate-fade-in.animated {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .animate-bounce-in {
-            opacity: 0;
-            transform: scale(0.3) rotate(-10deg);
-            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        .animate-bounce-in.animated {
-            opacity: 1;
-            transform: scale(1) rotate(0deg);
-        }
-
-        .animate-on-scroll.delay-1 { transition-delay: 0.1s; }
-        .animate-on-scroll.delay-2 { transition-delay: 0.2s; }
-        .animate-on-scroll.delay-3 { transition-delay: 0.3s; }
-        .animate-on-scroll.delay-4 { transition-delay: 0.4s; }
-        .animate-on-scroll.delay-5 { transition-delay: 0.5s; }
-
-        /* Responsive Mobile */
-        @media (max-width: 768px) {
-            .container {
-                padding: 40px 15px 30px;
-            }
-
-            .nav-anchors {
-                display: none;
-            }
-
-            .home-button {
-                top: 15px;
-                left: 15px;
-                padding: 10px 16px;
-                font-size: 12px;
-            }
-
-            .breadcrumb {
-                padding: 10px 15px;
-            }
-
-            .breadcrumb-list {
-                font-size: 12px;
-            }
-        }
-
-        /* Loading states per componenti */
+        /* Loading states */
         .component-loading {
             min-height: 200px;
             display: flex;
@@ -616,30 +217,166 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Skip to content per accessibilità */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 6px;
-            background: #ff6b35;
-            color: white;
-            padding: 8px;
-            text-decoration: none;
-            transition: top 0.3s;
-            z-index: 9999;
+        /* Breadcrumb mobile */
+        .breadcrumb {
+            background: rgba(26, 26, 26, 0.8);
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            backdrop-filter: blur(10px);
         }
 
-        .skip-link:focus {
-            top: 6px;
+        .breadcrumb-list {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            max-width: 1200px;
+            margin: 0 auto;
+            font-size: 12px;
+        }
+
+        .breadcrumb-item {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            touch-action: manipulation;
+        }
+
+        .breadcrumb-item:active {
+            color: #ff6b35;
+        }
+
+        .breadcrumb-item.active {
+            color: #ff6b35;
+            font-weight: 600;
+        }
+
+        .breadcrumb-separator {
+            color: #666;
+            margin: 0 3px;
+        }
+
+        /* Performance optimizations */
+        img {
+            max-width: 100%;
+            height: auto;
+            loading: lazy;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Touch improvements */
+        button, a, [role="button"] {
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Desktop optimizations */
+        @media (min-width: 768px) {
+            .hero-content {
+                display: grid;
+                grid-template-columns: 1fr 400px;
+                gap: 60px;
+                text-align: left;
+            }
+
+            .nav-anchors {
+                position: fixed;
+                top: 50%;
+                right: 30px;
+                transform: translateY(-50%);
+                z-index: 999;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                background: rgba(0, 0, 0, 0.8);
+                padding: 20px 15px;
+                border-radius: 25px;
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 107, 53, 0.2);
+            }
+
+            .anchor-link {
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                background: rgba(255, 107, 53, 0.4);
+                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                cursor: pointer;
+                position: relative;
+                border: 2px solid transparent;
+            }
+
+            .container {
+                padding: 40px 20px 50px;
+            }
+
+            .sticky-cta {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            .home-button, .sticky-cta {
+                border: 2px solid currentColor;
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            html {
+                scroll-behavior: auto;
+            }
+        }
+
+        /* Dark mode optimization (already dark by default) */
+        @media (prefers-color-scheme: light) {
+            /* Could add light mode styles here if needed */
         }
     </style>
+
+    <!-- Structured Data (same as before) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Andrea Padoan",
+        "jobTitle": ["Personal Trainer", "Lifestyle Coach"],
+        "description": "Personal Trainer e Lifestyle Coach specializzato nella trasformazione di professionisti e imprenditori a Verona",
+        "url": "https://andreapadoan-hub.vercel.app",
+        "sameAs": [
+            "https://www.personaltrainerverona.it/",
+            "https://www.tribuptstudio.it/",
+            "https://wa.me/3478881515"
+        ],
+        "image": "https://andreapadoan-hub.vercel.app/images/chi-sono.jpg",
+        "telephone": "+393478881515",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Verona",
+            "addressRegion": "Veneto",
+            "addressCountry": "IT"
+        }
+    }
+    </script>
 </head>
 <body>
     <!-- Skip to content per accessibilità -->
-    <a href="#main-content" class="skip-link">Salta al contenuto principale</a>
+    <a href="#main-content" class="skip-link" style="position: absolute; top: -40px; left: 6px; background: #ff6b35; color: white; padding: 8px; text-decoration: none; transition: top 0.3s; z-index: 9999;">Salta al contenuto principale</a>
 
     <!-- H1 nascosto per SEO -->
-    <h1 class="seo-h1">Andrea Padoan - Personal Trainer e Lifestyle Coach Verona | La Mia Storia di Trasformazione</h1>
+    <h1 style="position: absolute; left: -9999px;">Andrea Padoan - Personal Trainer e Lifestyle Coach Verona | La Mia Storia di Trasformazione</h1>
 
     <!-- Breadcrumb Navigation per SEO -->
     <nav class="breadcrumb" aria-label="Breadcrumb">
@@ -656,16 +393,16 @@
         Home
     </a>
 
-    <!-- Navigation Anchors -->
+    <!-- Navigation Anchors (Desktop) -->
     <div class="nav-anchors" role="navigation" aria-label="Navigazione sezioni pagina">
-        <div class="anchor-link" data-target="hero" role="button" tabindex="0" aria-label="Vai alla sezione Chi Sono">
-            <div class="anchor-tooltip">Chi Sono</div>
+        <div class="anchor-link" data-target="hero" role="button" tabindex="0" aria-label="Vai alla sezione Chi Sono" style="position: relative;">
+            <div style="position: absolute; right: 25px; top: 50%; transform: translateY(-50%); background: linear-gradient(135deg, #ff6b35, #ff8533); color: white; padding: 8px 15px; border-radius: 20px; font-size: 13px; font-weight: 600; white-space: nowrap; opacity: 0; pointer-events: none; transition: all 0.3s ease;">Chi Sono</div>
         </div>
-        <div class="anchor-link" data-target="testimonials" role="button" tabindex="0" aria-label="Vai alle testimonianze">
-            <div class="anchor-tooltip">Testimonianze</div>
+        <div class="anchor-link" data-target="testimonials" role="button" tabindex="0" aria-label="Vai alle testimonianze" style="position: relative;">
+            <div style="position: absolute; right: 25px; top: 50%; transform: translateY(-50%); background: linear-gradient(135deg, #ff6b35, #ff8533); color: white; padding: 8px 15px; border-radius: 20px; font-size: 13px; font-weight: 600; white-space: nowrap; opacity: 0; pointer-events: none; transition: all 0.3s ease;">Testimonianze</div>
         </div>
-        <div class="anchor-link" data-target="values" role="button" tabindex="0" aria-label="Vai ai miei valori">
-            <div class="anchor-tooltip">I Miei Valori</div>
+        <div class="anchor-link" data-target="values" role="button" tabindex="0" aria-label="Vai ai miei valori" style="position: relative;">
+            <div style="position: absolute; right: 25px; top: 50%; transform: translateY(-50%); background: linear-gradient(135deg, #ff6b35, #ff8533); color: white; padding: 8px 15px; border-radius: 20px; font-size: 13px; font-weight: 600; white-space: nowrap; opacity: 0; pointer-events: none; transition: all 0.3s ease;">I Miei Valori</div>
         </div>
     </div>
 
@@ -707,12 +444,207 @@
         <div id="final-cta-container" class="component-loading"></div>
     </main>
 
+    <!-- PWA Installation Banner -->
+    <div id="pwa-install-banner" style="display: none; position: fixed; bottom: 80px; left: 20px; right: 20px; background: linear-gradient(135deg, #ff6b35, #ff8533); color: white; padding: 15px 20px; border-radius: 15px; box-shadow: 0 8px 24px rgba(0,0,0,0.3); z-index: 999; text-align: center;">
+        <div style="margin-bottom: 10px; font-weight: 600;">Installa l'app di Andrea Padoan</div>
+        <div style="margin-bottom: 15px; font-size: 14px; opacity: 0.9;">Accesso rapido ai servizi di Personal Training</div>
+        <div style="display: flex; gap: 10px; justify-content: center;">
+            <button id="pwa-install-btn" style="background: white; color: #ff6b35; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600; cursor: pointer;">Installa</button>
+            <button id="pwa-dismiss-btn" style="background: transparent; color: white; border: 1px solid rgba(255,255,255,0.3); padding: 8px 16px; border-radius: 8px; cursor: pointer;">Non ora</button>
+        </div>
+    </div>
+
     <script>
         // ======================================
-        // SISTEMA DI CARICAMENTO COMPONENTI OTTIMIZZATO + SEO
+        // PWA SISTEMA OTTIMIZZATO MOBILE
         // ======================================
 
-        // Lista componenti da caricare
+        // Performance metrics
+        const perfObserver = new PerformanceObserver((list) => {
+            list.getEntries().forEach((entry) => {
+                if (entry.entryType === 'navigation') {
+                    console.log(`📊 Navigation: ${entry.duration.toFixed(2)}ms`);
+                }
+                if (entry.entryType === 'paint') {
+                    console.log(`🎨 ${entry.name}: ${entry.startTime.toFixed(2)}ms`);
+                }
+            });
+        });
+        
+        if ('PerformanceObserver' in window) {
+            perfObserver.observe({ entryTypes: ['navigation', 'paint'] });
+        }
+
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(registration => {
+                        console.log('🚀 SW registered successfully:', registration);
+                        
+                        // Listen for updates
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    showUpdateNotification();
+                                }
+                            });
+                        });
+                    })
+                    .catch(error => {
+                        console.log('❌ SW registration failed:', error);
+                    });
+            });
+        }
+
+        // PWA Install Banner
+        let deferredPrompt;
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Show custom install banner after 3 seconds
+            setTimeout(() => {
+                showInstallBanner();
+            }, 3000);
+        });
+
+        function showInstallBanner() {
+            const banner = document.getElementById('pwa-install-banner');
+            const installBtn = document.getElementById('pwa-install-btn');
+            const dismissBtn = document.getElementById('pwa-dismiss-btn');
+            
+            if (banner && !localStorage.getItem('pwa-install-dismissed')) {
+                banner.style.display = 'block';
+                banner.style.animation = 'slideInUp 0.5s ease-out';
+                
+                installBtn.addEventListener('click', async () => {
+                    banner.style.display = 'none';
+                    
+                    if (deferredPrompt) {
+                        deferredPrompt.prompt();
+                        const { outcome } = await deferredPrompt.userChoice;
+                        console.log(`PWA install ${outcome}`);
+                        deferredPrompt = null;
+                    }
+                });
+                
+                dismissBtn.addEventListener('click', () => {
+                    banner.style.display = 'none';
+                    localStorage.setItem('pwa-install-dismissed', 'true');
+                });
+            }
+        }
+
+        // Touch Gestures
+        let touchStartX = 0;
+        let touchStartY = 0;
+        
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+        
+        document.addEventListener('touchend', (e) => {
+            const touchEndX = e.changedTouches[0].clientX;
+            const touchEndY = e.changedTouches[0].clientY;
+            
+            const deltaX = touchEndX - touchStartX;
+            const deltaY = touchEndY - touchStartY;
+            
+            // Swipe detection
+            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+                if (deltaX > 0) {
+                    // Swipe right - go back
+                    if (window.history.length > 1) {
+                        window.history.back();
+                    }
+                } else {
+                    // Swipe left - scroll to next section
+                    scrollToNextSection();
+                }
+            }
+        }, { passive: true });
+
+        function scrollToNextSection() {
+            const sections = ['hero', 'testimonials', 'values'];
+            const currentSection = getCurrentSection();
+            const currentIndex = sections.indexOf(currentSection);
+            
+            if (currentIndex < sections.length - 1) {
+                const nextSection = sections[currentIndex + 1];
+                const element = document.getElementById(nextSection);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        }
+
+        function getCurrentSection() {
+            const sections = ['hero', 'testimonials', 'values'];
+            const scrollPos = window.scrollY + window.innerHeight / 2;
+            
+            for (const sectionId of sections) {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    const sectionTop = section.offsetTop;
+                    const sectionBottom = sectionTop + section.offsetHeight;
+                    
+                    if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+                        return sectionId;
+                    }
+                }
+            }
+            return 'hero';
+        }
+
+        // Battery API (when available)
+        if ('getBattery' in navigator) {
+            navigator.getBattery().then((battery) => {
+                // Reduce animations when battery is low
+                if (battery.level < 0.2) {
+                    document.body.classList.add('low-battery');
+                    console.log('🔋 Low battery mode activated');
+                }
+            });
+        }
+
+        // Network Information API
+        if ('connection' in navigator) {
+            const connection = navigator.connection;
+            
+            // Adjust quality based on connection
+            if (connection.effectiveType === '2g' || connection.effectiveType === 'slow-2g') {
+                document.body.classList.add('slow-connection');
+                console.log('📶 Slow connection detected');
+            }
+            
+            connection.addEventListener('change', () => {
+                console.log(`📶 Connection changed to: ${connection.effectiveType}`);
+            });
+        }
+
+        // Haptic Feedback (iOS Safari)
+        function hapticFeedback(type = 'light') {
+            if ('vibrate' in navigator) {
+                navigator.vibrate(type === 'light' ? 10 : type === 'medium' ? 20 : 30);
+            }
+        }
+
+        // Enhanced button interactions
+        document.addEventListener('DOMContentLoaded', () => {
+            const buttons = document.querySelectorAll('button, .home-button, .sticky-cta');
+            
+            buttons.forEach(button => {
+                button.addEventListener('touchstart', () => {
+                    hapticFeedback('light');
+                }, { passive: true });
+            });
+        });
+
+        // Lista componenti da caricare (same as before)
         const components = [
             { id: 'hero-container', file: './components/hero-chisono.html' },
             { id: 'intro-blocks-container', file: './components/intro-blocks.html' },
@@ -725,7 +657,7 @@
             { id: 'final-cta-container', file: './components/final-cta.html' }
         ];
 
-        // Funzione caricamento componente singolo
+        // Ottimized component loading with intersection observer
         async function loadComponent(component) {
             try {
                 const response = await fetch(component.file);
@@ -749,38 +681,63 @@
                 }
             } catch (error) {
                 console.error(`❌ Error loading ${component.file}:`, error);
-                
-                // Fallback per errori
-                const container = document.getElementById(component.id);
-                if (container) {
-                    container.innerHTML = `
-                        <div style="text-align: center; padding: 40px; color: #ff6b35;">
-                            <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 15px;"></i>
-                            <p>Errore nel caricamento del componente</p>
-                            <button onclick="location.reload()" style="background: #ff6b35; color: white; border: none; padding: 10px 20px; border-radius: 20px; margin-top: 10px; cursor: pointer;">Ricarica</button>
-                        </div>
-                    `;
-                    container.classList.remove('component-loading');
-                }
+                handleComponentError(component);
             }
         }
 
-        // Caricamento progressivo componenti
+        function handleComponentError(component) {
+            const container = document.getElementById(component.id);
+            if (container) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #ff6b35;">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 15px;"></i>
+                        <p>Errore nel caricamento</p>
+                        <button onclick="retryComponent('${component.id}', '${component.file}')" style="background: #ff6b35; color: white; border: none; padding: 10px 20px; border-radius: 20px; margin-top: 10px; cursor: pointer;">Riprova</button>
+                    </div>
+                `;
+                container.classList.remove('component-loading');
+            }
+        }
+
+        window.retryComponent = async function(id, file) {
+            const container = document.getElementById(id);
+            if (container) {
+                container.classList.add('component-loading');
+                container.innerHTML = '';
+                await loadComponent({ id, file });
+            }
+        };
+
+        // Intersection Observer for lazy loading
+        const componentObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const componentIndex = Array.from(document.querySelectorAll('[id$="-container"]')).indexOf(entry.target);
+                    if (componentIndex !== -1 && componentIndex < components.length) {
+                        loadComponent(components[componentIndex]);
+                        componentObserver.unobserve(entry.target);
+                    }
+                }
+            });
+        }, {
+            rootMargin: '50px 0px'
+        });
+
         async function loadAllComponents() {
-            console.log('🚀 Starting component loading...');
+            console.log('🚀 Starting PWA component loading...');
             
-            // Carica hero per primo (above the fold)
+            // Load hero immediately
             await loadComponent(components[0]);
             
-            // Carica il resto con un piccolo delay per performance
-            for (let i = 1; i < components.length; i++) {
-                setTimeout(() => {
-                    loadComponent(components[i]);
-                }, i * 100); // 100ms delay tra componenti
-            }
+            // Observe other components for lazy loading
+            components.slice(1).forEach((component, index) => {
+                const container = document.getElementById(component.id);
+                if (container) {
+                    componentObserver.observe(container);
+                }
+            });
         }
 
-        // Inizializza animazioni per un container specifico
         function initAnimationsForContainer(container) {
             const elements = container.querySelectorAll('.animate-on-scroll, .animate-slide-left, .animate-slide-right, .animate-fade-in, .animate-bounce-in');
             
@@ -798,7 +755,7 @@
             elements.forEach(el => observer.observe(el));
         }
 
-        // Funzioni video (per componente intro-blocks)
+        // Global functions
         window.playVideo = function() {
             const placeholder = document.getElementById('videoPlaceholder');
             const player = document.getElementById('videoPlayer');
@@ -829,10 +786,18 @@
             }
         };
 
-        // Funzione chat globale
         window.openChat = function() {
+            hapticFeedback('medium');
             const whatsappUrl = 'https://wa.me/3478881515?text=Ciao Andrea, ho letto la tua storia e vorrei parlare dei miei obiettivi di trasformazione!';
             window.open(whatsappUrl, '_blank', 'noopener');
+            
+            // Track conversion
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'whatsapp_contact', {
+                    'event_category': 'engagement',
+                    'event_label': 'chi_sono_page'
+                });
+            }
         };
 
         // Smooth scrolling per anchor links
@@ -851,13 +816,13 @@
 
         function handleAnchorClick(e) {
             e.preventDefault();
+            hapticFeedback('light');
             const target = document.getElementById(this.dataset.target);
             if (target) {
                 target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
 
-        // Aggiorna anchor links attivi durante lo scroll
         function updateActiveAnchor() {
             const sections = ['hero', 'testimonials', 'values'];
             const scrollPos = window.scrollY + 100;
@@ -873,77 +838,85 @@
                     if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
                         document.querySelectorAll('.anchor-link').forEach(a => a.classList.remove('active'));
                         anchor.classList.add('active');
+                        anchor.style.background = '#ff6b35';
+                        anchor.style.transform = 'scale(1.4)';
+                    } else {
+                        anchor.style.background = 'rgba(255, 107, 53, 0.4)';
+                        anchor.style.transform = 'scale(1)';
                     }
                 }
             });
         }
 
-        // SEO: Aggiorna dinamicamente la meta description
-        function updateMetaDescription() {
-            const metaDesc = document.querySelector('meta[name="description"]');
-            if (metaDesc) {
-                // Aggiorna description in base al contenuto caricato
-                console.log('📊 SEO: Meta description updated');
-            }
+        function showUpdateNotification() {
+            const notification = document.createElement('div');
+            notification.innerHTML = `
+                <div style="position: fixed; top: 20px; left: 20px; right: 20px; background: #ff6b35; color: white; padding: 15px; border-radius: 10px; z-index: 9999; text-align: center;">
+                    <div style="margin-bottom: 10px;">Nuova versione disponibile!</div>
+                    <button onclick="location.reload()" style="background: white; color: #ff6b35; border: none; padding: 8px 16px; border-radius: 8px;">Aggiorna</button>
+                </div>
+            `;
+            document.body.appendChild(notification);
         }
 
-        // Performance monitoring SEO
-        function trackPerformance() {
-            if ('performance' in window) {
-                window.addEventListener('load', () => {
-                    setTimeout(() => {
-                        const perfData = performance.getEntriesByType('navigation')[0];
-                        const loadTime = Math.round(perfData.loadEventEnd - perfData.loadEventStart);
-                        
-                        console.log(`⚡ Page load performance: ${loadTime}ms`);
-                        
-                        // Invia dati a Google Analytics se configurato
-                        if (typeof gtag !== 'undefined') {
-                            gtag('event', 'page_load_time', {
-                                'value': loadTime,
-                                'page_title': document.title
-                            });
-                        }
-                    }, 1000);
-                });
-            }
-        }
-
-        // Inizializzazione al caricamento pagina
+        // Initialization
         window.addEventListener('load', () => {
             loadAllComponents();
             initAnchorLinks();
             updateActiveAnchor();
-            updateMetaDescription();
-            trackPerformance();
             
-            console.log('✅ Chi Sono page - SEO Optimized version loaded successfully!');
+            console.log('✅ PWA Chi Sono page loaded successfully!');
         });
 
-        // Event listeners
-        window.addEventListener('scroll', updateActiveAnchor);
+        window.addEventListener('scroll', updateActiveAnchor, { passive: true });
 
-        // Accessibilità: gestione focus
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Tab') {
-                document.body.classList.add('using-keyboard');
+        // CSS animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInUp {
+                from {
+                    transform: translateY(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
             }
-        });
-
-        document.addEventListener('mousedown', function() {
-            document.body.classList.remove('using-keyboard');
-        });
+            
+            .low-battery * {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.1s !important;
+            }
+            
+            .slow-connection img {
+                filter: blur(1px);
+                transition: filter 0.3s ease;
+            }
+            
+            .slow-connection img:hover {
+                filter: none;
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 
-    <!-- Google Analytics (sostituisci con il tuo ID) -->
+    <!-- Google Analytics con eventi PWA -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'GA_MEASUREMENT_ID', {
-            page_title: 'Chi Sono - Andrea Padoan Personal Trainer Verona',
-            page_location: window.location.href
+            page_title: 'Chi Sono PWA - Andrea Padoan Personal Trainer Verona',
+            page_location: window.location.href,
+            custom_map: {'custom_parameter_1': 'pwa_enabled'}
+        });
+        
+        // PWA specific events
+        gtag('event', 'pwa_page_view', {
+            'event_category': 'PWA',
+            'event_label': 'chi_sono_mobile'
         });
     </script>
 </body>
