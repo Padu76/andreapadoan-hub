@@ -254,7 +254,7 @@
             width: 100%;
             height: 100%;
             border-radius: 15px;
-            background-image: url('./images/io-3.jpg');
+            background-image: url('./images/chi-sono.jpg'); /* 🔥 FOTO CAMBIATA */
             background-size: cover;
             background-position: center;
             position: relative;
@@ -823,7 +823,7 @@
             width: 100%;
             height: 300px;
             background: linear-gradient(135deg, rgba(255, 107, 53, 0.8), rgba(255, 133, 51, 0.6)),
-                        url('./images/io-3.jpg');
+                        url('./images/chi-sono.jpg'); /* 🔥 ANCHE QUI FOTO CAMBIATA */
             background-size: cover;
             background-position: center;
             border-radius: 15px;
@@ -1411,7 +1411,7 @@
             font-weight: 500;
         }
 
-        /* Results Section con immagini COMPLETE */
+        /* Results Section con immagini MIGLIORATA - SENZA ICONE E IMMAGINI PIÙ GRANDI */
         .results-section {
             background: linear-gradient(135deg, rgba(26, 26, 26, 0.8), rgba(40, 40, 40, 0.8));
             border-radius: 25px;
@@ -1439,7 +1439,7 @@
 
         .results-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 40px; /* Aumentato gap */
         }
 
@@ -1451,18 +1451,25 @@
             text-align: center;
             position: relative;
             overflow: hidden;
-            min-height: 220px; /* Aumentata altezza */
+            min-height: 300px; /* 🔥 AUMENTATA ALTEZZA */
+            transition: all 0.3s ease;
+        }
+
+        .result-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 107, 53, 0.2);
+            border-color: rgba(255, 107, 53, 0.5);
         }
 
         .result-item-image {
             width: 100%;
-            height: 120px;
-            background-size: contain; /* CONTAIN per vedere immagine completa */
+            height: 200px; /* 🔥 AUMENTATA DA 120px A 200px */
+            background-size: cover; /* 🔥 CAMBIATO DA CONTAIN A COVER */
             background-repeat: no-repeat;
             background-position: center;
             border-radius: 14px 14px 0 0;
-            margin-bottom: 15px;
-            background-color: #333; /* Colore di fallback */
+            margin-bottom: 0;
+            background-color: #333;
         }
 
         .result-item:nth-child(1) .result-item-image {
@@ -1482,19 +1489,20 @@
         }
 
         .result-item-content {
-            padding: 20px;
+            padding: 25px 20px; /* 🔥 AUMENTATO PADDING */
         }
 
+        /* 🔥 RIMOSSA LA SEZIONE ICON - NIENTE PIÙ ICONE */
         .result-icon {
-            color: #ff6b35;
-            font-size: 2.5rem;
-            margin-bottom: 15px;
+            display: none; /* 🔥 NASCOSTA COMPLETAMENTE */
         }
 
         .result-text {
             color: #e0e0e0;
-            font-size: 1rem;
-            line-height: 1.5;
+            font-size: 1.1rem; /* 🔥 AUMENTATA DA 1rem A 1.1rem */
+            line-height: 1.6;
+            font-weight: 500;
+            margin: 0;
         }
 
         /* Animazioni migliorate e più fluide */
@@ -1775,6 +1783,23 @@
                 left: 15px;
                 padding: 10px 16px;
                 font-size: 12px;
+            }
+
+            .results-content {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .result-item {
+                min-height: 280px;
+            }
+
+            .result-item-image {
+                height: 160px;
+            }
+
+            .result-text {
+                font-size: 1rem;
             }
         }
     </style>
@@ -2136,9 +2161,6 @@
                 <div class="result-item">
                     <div class="result-item-image"></div>
                     <div class="result-item-content">
-                        <div class="result-icon">
-                            <i class="fas fa-brain"></i>
-                        </div>
                         <p class="result-text">Mente più vigile e attenta, migliori capacità decisionali, maggior lucidità</p>
                     </div>
                 </div>
@@ -2146,9 +2168,6 @@
                 <div class="result-item">
                     <div class="result-item-image"></div>
                     <div class="result-item-content">
-                        <div class="result-icon">
-                            <i class="fas fa-dumbbell"></i>
-                        </div>
                         <p class="result-text">Maggiore forza ed agilità, migliore postura, migliore respirazione</p>
                     </div>
                 </div>
@@ -2156,9 +2175,6 @@
                 <div class="result-item">
                     <div class="result-item-image"></div>
                     <div class="result-item-content">
-                        <div class="result-icon">
-                            <i class="fas fa-moon"></i>
-                        </div>
                         <p class="result-text">Meno mal di testa, sonno più rilassato e rigenerante</p>
                     </div>
                 </div>
@@ -2166,9 +2182,6 @@
                 <div class="result-item">
                     <div class="result-item-image"></div>
                     <div class="result-item-content">
-                        <div class="result-icon">
-                            <i class="fas fa-smile"></i>
-                        </div>
                         <p class="result-text">Maggiore autostima, migliore aspetto fisico, più fiducia in se stessi</p>
                     </div>
                 </div>
@@ -2355,6 +2368,8 @@
         });
 
         console.log('✅ Chi Sono page - TUTTI I FIX APPLICATI!');
+        console.log('🔥 Foto cambiata: chi-sono.jpg nella hero e video');
+        console.log('🔥 Sezione risultati: rimosso icone e aumentato immagini');
     </script>
 </body>
 </html>
