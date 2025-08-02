@@ -670,112 +670,187 @@
             transform: translateY(-2px);
         }
 
-        /* Testimonianze */
+        /* Testimonianze REALI da Google Reviews - Stili Integrati */
         .testimonials-section {
-            margin-bottom: 120px; /* Aumentato margine */
+            margin-bottom: 120px;
         }
 
         .testimonials-title {
             text-align: center;
             color: #fff;
-            font-size: 2.5rem;
+            font-size: clamp(2rem, 4vw, 2.5rem);
             font-weight: bold;
-            margin-bottom: 50px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
-        .testimonials-grid {
+        .testimonials-grid-real {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        /* Testimonial Cards con foto placeholder */
-        .testimonial-card {
-            background: rgba(26, 26, 26, 0.8);
+        /* Card Recensioni Google */
+        .testimonial-card-real {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(40, 40, 40, 0.8));
+            border-radius: 18px;
+            padding: 20px;
+            border: 2px solid rgba(66, 133, 244, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .testimonial-card-real:hover {
+            transform: translateY(-5px);
+            border-color: rgba(66, 133, 244, 0.5);
+            box-shadow: 0 15px 30px rgba(66, 133, 244, 0.15);
+        }
+
+        /* Card Destacata per Umberto */
+        .testimonial-card-featured-pro {
+            background: linear-gradient(135deg, rgba(74, 222, 128, 0.15), rgba(34, 197, 94, 0.1));
+            border: 3px solid rgba(74, 222, 128, 0.4);
             border-radius: 20px;
-            padding: 30px;
-            border-left: 5px solid #4ade80;
+            padding: 25px;
+            grid-column: span 2;
             position: relative;
-            overflow: hidden;
-            min-height: 220px;
+            transition: all 0.3s ease;
         }
 
-        .testimonial-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-size: cover;
-            background-position: center;
-            opacity: 0.04;
-            transition: opacity 0.3s ease;
-            z-index: 0;
+        .testimonial-card-featured-pro:hover {
+            transform: translateY(-8px);
+            border-color: rgba(74, 222, 128, 0.7);
+            box-shadow: 0 20px 40px rgba(74, 222, 128, 0.2);
         }
 
-        .testimonial-card:nth-child(1)::before {
-            background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop&crop=face');
-        }
-
-        .testimonial-card:nth-child(2)::before {
-            background-image: url('https://images.unsplash.com/photo-1494790108755-2616b612b512?w=400&h=300&fit=crop&crop=face');
-        }
-
-        .testimonial-card:nth-child(3)::before {
-            background-image: url('https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=300&fit=crop&crop=face');
-        }
-
-        .testimonial-card:hover::before {
-            opacity: 0.08;
-        }
-
-        .testimonial-card > * {
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Aggiungiamo avatar circolari per le testimonianze */
-        .testimonial-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-size: cover;
-            background-position: center;
-            border: 3px solid #4ade80;
+        /* Header */
+        .testimonial-header-real {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
             margin-bottom: 15px;
-            box-shadow: 0 4px 15px rgba(74, 222, 128, 0.3);
         }
 
-        .testimonial-card:nth-child(1) .testimonial-avatar {
-            background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=face');
+        .testimonial-avatar-google {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #4285f4, #34a853);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+            flex-shrink: 0;
         }
 
-        .testimonial-card:nth-child(2) .testimonial-avatar {
-            background-image: url('https://images.unsplash.com/photo-1494790108755-2616b612b512?w=120&h=120&fit=crop&crop=face');
+        .testimonial-avatar-google.professional {
+            background: linear-gradient(135deg, #74d680, #4ade80);
         }
 
-        .testimonial-card:nth-child(3) .testimonial-avatar {
-            background-image: url('https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=120&h=120&fit=crop&crop=face');
+        .testimonial-info-real {
+            flex: 1;
         }
 
-        .testimonial-text {
-            color: #e0e0e0;
+        .testimonial-author-google {
+            color: #fff;
             font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .testimonial-role-google {
+            color: #b0b0b0;
+            font-size: 0.85rem;
+            margin-bottom: 6px;
+        }
+
+        .testimonial-stars-google {
+            color: #ffc107;
+            font-size: 0.8rem;
+            display: flex;
+            gap: 1px;
+        }
+
+        .google-badge-review {
+            background: #4285f4;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        /* Testo Recensione */
+        .testimonial-text-google {
+            color: #e0e0e0;
+            font-size: 0.95rem;
             line-height: 1.6;
             font-style: italic;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
         }
 
-        .testimonial-author {
-            color: #4ade80;
-            font-weight: bold;
+        .testimonial-card-featured-pro .testimonial-text-google {
             font-size: 1rem;
+            color: #f0f0f0;
         }
 
-        .testimonial-role {
-            color: #b0b0b0;
-            font-size: 0.9rem;
+        .testimonial-date-google {
+            color: #888;
+            font-size: 0.8rem;
+            text-align: right;
+        }
+
+        /* Badge Professionale */
+        .professional-badge-review {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: linear-gradient(45deg, #4ade80, #22c55e);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Responsive per Recensioni Google */
+        @media (max-width: 768px) {
+            .testimonials-grid-real {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .testimonial-card-featured-pro {
+                grid-column: span 1;
+                padding: 20px;
+            }
+            
+            .testimonials-title {
+                font-size: 1.6rem;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .professional-badge-review {
+                position: static;
+                margin-top: 10px;
+                align-self: flex-start;
+            }
         }
 
         /* Introduzione Strutturata in 3 Blocchi */
@@ -2024,28 +2099,207 @@
             </div>
         </section>
 
-        <!-- Testimonianze -->
+        <!-- Testimonianze REALI da Google Reviews -->
         <section class="testimonials-section animate-on-scroll" id="testimonials">
-            <h2 class="testimonials-title">Cosa Dicono i Miei Clienti</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-avatar"></div>
-                    <p class="testimonial-text">"Andrea ha cambiato completamente il mio approccio al fitness e alla vita. Non è solo un trainer, è un vero coach di vita."</p>
-                    <div class="testimonial-author">Marco R.</div>
-                    <div class="testimonial-role">Manager, 38 anni</div>
+            <h2 class="testimonials-title">
+                <i class="fab fa-google" style="color: #4285f4; margin-right: 15px;"></i>
+                Cosa Dicono i Miei Clienti su Google
+            </h2>
+            <div style="text-align: center; margin-bottom: 50px;">
+                <div style="display: inline-flex; align-items: center; gap: 10px; background: rgba(66, 133, 244, 0.1); padding: 15px 30px; border-radius: 25px; border: 2px solid rgba(66, 133, 244, 0.3);">
+                    <div style="color: #ffc107; font-size: 1.5rem;">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <span style="color: #4285f4; font-weight: bold; font-size: 1.2rem;">5.0 stelle</span>
+                    <span style="color: #e0e0e0;">su Google Reviews</span>
                 </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-avatar"></div>
-                    <p class="testimonial-text">"Grazie ad Andrea ho perso 15 kg e soprattutto ho ritrovato energia e fiducia in me stessa. Un percorso che mi ha trasformata."</p>
-                    <div class="testimonial-author">Giulia M.</div>
-                    <div class="testimonial-role">Imprenditrice, 42 anni</div>
+            </div>
+            
+            <div class="testimonials-grid-real">
+                <!-- Recensione 1 - Selena Dal Dosso -->
+                <div class="testimonial-card-real">
+                    <div class="testimonial-header-real">
+                        <div class="testimonial-avatar-google">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="testimonial-info-real">
+                            <div class="testimonial-author-google">Selena Dal Dosso</div>
+                            <div class="testimonial-role-google">Architetto • Local Guide</div>
+                            <div class="testimonial-stars-google">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="google-badge-review">
+                            <i class="fab fa-google"></i>
+                        </div>
+                    </div>
+                    <p class="testimonial-text-google">
+                        "Non avrai altro Personal Trainer al di fuori di... Andrea Padoan! Vi basterà parlarci soli cinque minuti per capire che Andrea è unico."
+                    </p>
+                    <div class="testimonial-date-google">5 anni fa</div>
                 </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-avatar"></div>
-                    <p class="testimonial-text">"Il suo metodo funziona perché non ti fa sentire solo. Ti segue passo passo con professionalità e umanità."</p>
-                    <div class="testimonial-author">Luca S.</div>
-                    <div class="testimonial-role">Avvocato, 45 anni</div>
+
+                <!-- Recensione 2 - Lara Ligabo -->
+                <div class="testimonial-card-real">
+                    <div class="testimonial-header-real">
+                        <div class="testimonial-avatar-google">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="testimonial-info-real">
+                            <div class="testimonial-author-google">Lara Ligabo</div>
+                            <div class="testimonial-role-google">12 recensioni</div>
+                            <div class="testimonial-stars-google">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="google-badge-review">
+                            <i class="fab fa-google"></i>
+                        </div>
+                    </div>
+                    <p class="testimonial-text-google">
+                        "Sei professionale e preparato, e un grande motivatore, fai il tuo lavoro con passione e amore, che sai trasmettere. Posso solo farti i complimenti ed augurarti di continuare così."
+                    </p>
+                    <div class="testimonial-date-google">6 anni fa</div>
                 </div>
+
+                <!-- Recensione 3 - Sabrina Poli -->
+                <div class="testimonial-card-real">
+                    <div class="testimonial-header-real">
+                        <div class="testimonial-avatar-google">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="testimonial-info-real">
+                            <div class="testimonial-author-google">Sabrina Poli</div>
+                            <div class="testimonial-role-google">Cliente verificata</div>
+                            <div class="testimonial-stars-google">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="google-badge-review">
+                            <i class="fab fa-google"></i>
+                        </div>
+                    </div>
+                    <p class="testimonial-text-google">
+                        "Se cercate un PT professionale, affidabile e preparato questo è Andrea Padoan. Sono seguita da lui anche dal punto di vista alimentare e in sei mesi ho ottenuto ottimi risultati. Consigliatissimo."
+                    </p>
+                    <div class="testimonial-date-google">6 anni fa</div>
+                </div>
+
+                <!-- Recensione 4 - Giulia Donà -->
+                <div class="testimonial-card-real">
+                    <div class="testimonial-header-real">
+                        <div class="testimonial-avatar-google">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="testimonial-info-real">
+                            <div class="testimonial-author-google">Giulia Donà</div>
+                            <div class="testimonial-role-google">3 recensioni</div>
+                            <div class="testimonial-stars-google">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="google-badge-review">
+                            <i class="fab fa-google"></i>
+                        </div>
+                    </div>
+                    <p class="testimonial-text-google">
+                        "Andrea, un ottimo personal trainer! Professionale e affidabile! Sono seguita da lui da 7 settimane circa e ho ottenuto già ottimi risultati... il mio fisico è notevolmente cambiato!"
+                    </p>
+                    <div class="testimonial-date-google">7 anni fa</div>
+                </div>
+
+                <!-- Recensione 5 - Massimo Corsini -->
+                <div class="testimonial-card-real">
+                    <div class="testimonial-header-real">
+                        <div class="testimonial-avatar-google">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="testimonial-info-real">
+                            <div class="testimonial-author-google">Massimo Corsini</div>
+                            <div class="testimonial-role-google">5 recensioni</div>
+                            <div class="testimonial-stars-google">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="google-badge-review">
+                            <i class="fab fa-google"></i>
+                        </div>
+                    </div>
+                    <p class="testimonial-text-google">
+                        "Conosco Andrea da poco meno di 2 anni; già al nostro primo incontro ho avuto la certezza che sarebbe diventato il MIO Personal Trainer. Mi hanno conquistato le sue parole, i suoi sorrisi..."
+                    </p>
+                    <div class="testimonial-date-google">7 anni fa</div>
+                </div>
+
+                <!-- Recensione Speciale - Umberto Miletto (Destacata) -->
+                <div class="testimonial-card-featured-pro">
+                    <div class="testimonial-header-real">
+                        <div class="testimonial-avatar-google professional">
+                            <i class="fas fa-dumbbell"></i>
+                        </div>
+                        <div class="testimonial-info-real">
+                            <div class="testimonial-author-google">Umberto Miletto</div>
+                            <div class="testimonial-role-google">Personal Trainer Professionista</div>
+                            <div class="testimonial-stars-google">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="google-badge-review">
+                            <i class="fab fa-google"></i>
+                        </div>
+                    </div>
+                    <p class="testimonial-text-google">
+                        "Andrea Padoan è sicuramente un punto di riferimento per l'allenamento personalizzato a Verona. Preciso, professionale, preparato, carismatico, grande motivatore. Il suo centro è all'avanguardia nel proporre le novità del settore fitness. È uno stimato collega."
+                    </p>
+                    <div class="testimonial-date-google">12 anni fa</div>
+                    <div class="professional-badge-review">
+                        <i class="fas fa-certificate"></i>
+                        <span>Recensione da Collega PT</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA per Google Reviews -->
+            <div style="text-align: center; margin-top: 50px; padding: 30px; background: linear-gradient(135deg, rgba(66, 133, 244, 0.1), rgba(66, 133, 244, 0.05)); border-radius: 20px; border: 2px solid rgba(66, 133, 244, 0.3);">
+                <h3 style="color: #4285f4; font-size: 1.4rem; margin-bottom: 15px;">
+                    <i class="fab fa-google"></i> Vuoi lasciare anche tu una recensione?
+                </h3>
+                <p style="color: #e0e0e0; margin-bottom: 20px; font-size: 1rem;">
+                    La tua opinione è importante per aiutare altri a trasformare la loro vita
+                </p>
+                <a href="https://share.google/N81GPLujoH9n0CRuY" target="_blank" 
+                   style="background: linear-gradient(45deg, #4285f4, #34a853); color: white; text-decoration: none; padding: 12px 25px; border-radius: 25px; font-weight: bold; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease;">
+                    <i class="fab fa-google"></i>
+                    Scrivi una Recensione
+                </a>
             </div>
         </section>
 
