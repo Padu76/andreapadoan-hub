@@ -191,15 +191,15 @@ body::after {
 }
 
 /* ======================================
-   🌟 HERO SECTION - PARALLAX EFFECT
+   🌟 HERO SECTION - PARALLAX EFFECT (COMPATTA)
    ====================================== */
 
 .hero {
     text-align: center;
-    padding: 120px 20px 80px;
+    padding: 100px 20px 60px;
     background: transparent;
     position: relative;
-    min-height: 100vh;
+    min-height: 70vh; /* RIDOTTO DA 100vh */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -283,23 +283,23 @@ body::after {
     }
 }
 
-/* Profile Image with 3D Effect */
+/* Profile Image with 3D Effect (RIDOTTA) */
 .profile-section {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 50px 0;
+    margin: 30px 0; /* RIDOTTO DA 50px */
     perspective: 1000px;
 }
 
 .profile-image {
-    width: 300px;
-    height: 300px;
+    width: 250px; /* RIDOTTO DA 300px */
+    height: 250px; /* RIDOTTO DA 300px */
     border-radius: 50%;
     background: linear-gradient(45deg, var(--primary-orange), var(--secondary-orange));
     padding: 5px;
-    margin-bottom: 30px;
+    margin-bottom: 25px; /* RIDOTTO DA 30px */
     position: relative;
     animation: profileFloat 6s ease-in-out infinite;
     transform-style: preserve-3d;
@@ -796,7 +796,59 @@ body::after {
 }
 
 /* ======================================
-   💬 CHAT SECTION - MODERN DESIGN
+   🏋️ QUIZ SECTION - CON ATLETA AL TRAMONTO
+   ====================================== */
+
+/* Aggiungi background alla sezione quiz esistente */
+#quiz-section,
+.quiz-section {
+    position: relative;
+    background: #000;
+    overflow: hidden;
+}
+
+/* Background con atleta al tramonto */
+#quiz-section::before,
+.quiz-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://images.unsplash.com/photo-1549060279-7e168fcee0c2?q=80&w=2070');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    opacity: 0.3;
+    z-index: 0;
+}
+
+/* Overlay gradient per quiz section */
+#quiz-section::after,
+.quiz-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        rgba(0, 0, 0, 0.7) 0%, 
+        rgba(255, 107, 53, 0.1) 50%,
+        rgba(0, 0, 0, 0.8) 100%);
+    z-index: 1;
+}
+
+/* Assicura che il contenuto sia sopra il background */
+#quiz-section > *,
+.quiz-section > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* ======================================
+   💬 CHAT SECTION - CON VERONA BACKGROUND
    ====================================== */
 
 .chat-section {
@@ -806,7 +858,24 @@ body::after {
     overflow: hidden;
 }
 
+/* Background Verona per chat section */
 .chat-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?q=80&w=2070');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    opacity: 0.15;
+    z-index: 0;
+}
+
+/* Overlay per chat section */
+.chat-section::after {
     content: '';
     position: absolute;
     top: 0;
@@ -814,9 +883,11 @@ body::after {
     right: 0;
     bottom: 0;
     background: 
-        linear-gradient(135deg, rgba(255, 107, 53, 0.03) 0%, transparent 50%),
-        linear-gradient(225deg, rgba(255, 140, 90, 0.02) 0%, transparent 50%);
-    z-index: -1;
+        radial-gradient(circle at center, 
+            rgba(0, 0, 0, 0.6) 0%, 
+            rgba(0, 0, 0, 0.85) 100%),
+        linear-gradient(135deg, rgba(255, 107, 53, 0.03) 0%, transparent 50%);
+    z-index: 1;
 }
 
 .chat-container {
@@ -1854,10 +1925,10 @@ body::after {
         margin: 10px;
     }
     
-    /* Hero adjustments */
+    /* Hero adjustments - COMPACT */
     .hero {
-        padding: 100px 20px 60px;
-        min-height: auto;
+        padding: 80px 20px 40px;
+        min-height: 60vh;
     }
     
     .hero h1 {
@@ -1866,8 +1937,8 @@ body::after {
     }
     
     .profile-image {
-        width: 240px;
-        height: 240px;
+        width: 200px;
+        height: 200px;
     }
 
     .main-cta {
