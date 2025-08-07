@@ -191,15 +191,15 @@ body::after {
 }
 
 /* ======================================
-   🌟 HERO SECTION - PARALLAX EFFECT (COMPATTA)
+   🌟 HERO SECTION - PARALLAX EFFECT
    ====================================== */
 
 .hero {
     text-align: center;
-    padding: 100px 20px 60px;
+    padding: 120px 20px 80px;
     background: transparent;
     position: relative;
-    min-height: 70vh; /* RIDOTTO DA 100vh */
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -283,23 +283,23 @@ body::after {
     }
 }
 
-/* Profile Image with 3D Effect (RIDOTTA) */
+/* Profile Image with 3D Effect */
 .profile-section {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 30px 0; /* RIDOTTO DA 50px */
+    margin: 50px 0;
     perspective: 1000px;
 }
 
 .profile-image {
-    width: 250px; /* RIDOTTO DA 300px */
-    height: 250px; /* RIDOTTO DA 300px */
+    width: 300px;
+    height: 300px;
     border-radius: 50%;
     background: linear-gradient(45deg, var(--primary-orange), var(--secondary-orange));
     padding: 5px;
-    margin-bottom: 25px; /* RIDOTTO DA 30px */
+    margin-bottom: 30px;
     position: relative;
     animation: profileFloat 6s ease-in-out infinite;
     transform-style: preserve-3d;
@@ -796,69 +796,7 @@ body::after {
 }
 
 /* ======================================
-   🏋️ QUIZ SECTION - CON ATLETA AL TRAMONTO  
-   ====================================== */
-
-/* Background per la sezione quiz in services.html */
-.quiz-intro-section {
-    position: relative;
-    background: #000;
-    overflow: hidden;
-    padding: 100px 20px;
-}
-
-/* Background con atleta al tramonto - PARALLAX FISSO */
-.quiz-intro-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('https://images.unsplash.com/photo-1549060279-7e168fcee0c2?q=80&w=2070');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed; /* EFFETTO PARALLAX */
-    opacity: 0.4;
-    z-index: 0;
-}
-
-/* Overlay gradient arancione stile landing esempio */
-.quiz-intro-section::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, 
-        rgba(0, 0, 0, 0.6) 0%, 
-        rgba(255, 107, 0, 0.2) 40%,  /* #ff6b00 */
-        rgba(255, 152, 0, 0.15) 60%, /* #ff9800 */
-        rgba(0, 0, 0, 0.8) 100%);
-    z-index: 1;
-}
-
-/* Assicura che il contenuto sia sopra il background */
-.quiz-intro-section > * {
-    position: relative;
-    z-index: 2;
-}
-
-/* Stili aggiuntivi per il contenuto della quiz section */
-.quiz-intro-section .section-title {
-    color: #fff;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-}
-
-.quiz-intro-section .quiz-cta {
-    box-shadow: 
-        0 10px 30px rgba(255, 107, 53, 0.4),
-        0 0 50px rgba(255, 107, 53, 0.2);
-}
-
-/* ======================================
-   💬 CHAT SECTION - CON VERONA BACKGROUND
+   💬 CHAT SECTION - MODERN DESIGN
    ====================================== */
 
 .chat-section {
@@ -868,24 +806,7 @@ body::after {
     overflow: hidden;
 }
 
-/* Background Arena di Verona vista dall'alto - PARALLAX FISSO */
 .chat-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('https://images.unsplash.com/photo-1569144381423-becf4f41dc0f?q=80&w=2070');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed; /* EFFETTO PARALLAX */
-    opacity: 0.2;
-    z-index: 0;
-}
-
-/* Overlay per chat section */
-.chat-section::after {
     content: '';
     position: absolute;
     top: 0;
@@ -893,11 +814,9 @@ body::after {
     right: 0;
     bottom: 0;
     background: 
-        radial-gradient(circle at center, 
-            rgba(0, 0, 0, 0.7) 0%, 
-            rgba(0, 0, 0, 0.9) 100%),
-        linear-gradient(135deg, rgba(255, 107, 53, 0.05) 0%, transparent 50%);
-    z-index: 1;
+        linear-gradient(135deg, rgba(255, 107, 53, 0.03) 0%, transparent 50%),
+        linear-gradient(225deg, rgba(255, 140, 90, 0.02) 0%, transparent 50%);
+    z-index: -1;
 }
 
 .chat-container {
@@ -1935,10 +1854,10 @@ body::after {
         margin: 10px;
     }
     
-    /* Hero adjustments - COMPACT */
+    /* Hero adjustments */
     .hero {
-        padding: 80px 20px 40px;
-        min-height: 60vh;
+        padding: 100px 20px 60px;
+        min-height: auto;
     }
     
     .hero h1 {
@@ -1947,8 +1866,8 @@ body::after {
     }
     
     .profile-image {
-        width: 200px;
-        height: 200px;
+        width: 240px;
+        height: 240px;
     }
 
     .main-cta {
