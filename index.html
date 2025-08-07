@@ -19,153 +19,8 @@
     <!-- Preload critical images -->
     <link rel="preload" as="image" href="./images/andrea-profile.jpg">
     <link rel="preload" as="image" href="./images/andrea-training-client.jpg">
-    
-    <!-- Page Loader Styles -->
-    <style>
-        /* Page Loader */
-        #page-loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            z-index: 99999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.5s ease-out;
-        }
-        
-        .loader-container {
-            text-align: center;
-        }
-        
-        /* Loader Animation */
-        .loader-circle {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 30px;
-            position: relative;
-        }
-        
-        .loader-circle::before,
-        .loader-circle::after {
-            content: '';
-            position: absolute;
-            border-radius: 50%;
-            animation: loader-pulse 2s ease-in-out infinite;
-        }
-        
-        .loader-circle::before {
-            width: 100%;
-            height: 100%;
-            border: 3px solid #ff6b35;
-            opacity: 0.3;
-        }
-        
-        .loader-circle::after {
-            width: 60%;
-            height: 60%;
-            top: 20%;
-            left: 20%;
-            background: linear-gradient(135deg, #ff6b35, #ff8c5a);
-            animation-delay: 0.5s;
-        }
-        
-        @keyframes loader-pulse {
-            0% {
-                transform: scale(0.8);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(1.2);
-                opacity: 0.5;
-            }
-            100% {
-                transform: scale(0.8);
-                opacity: 1;
-            }
-        }
-        
-        .loader-text {
-            color: #ff6b35;
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            animation: loader-text-glow 1.5s ease-in-out infinite;
-        }
-        
-        @keyframes loader-text-glow {
-            0%, 100% {
-                opacity: 0.5;
-            }
-            50% {
-                opacity: 1;
-                text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
-            }
-        }
-        
-        .loader-subtext {
-            color: #b0b0b0;
-            font-size: 0.9rem;
-            opacity: 0.7;
-        }
-        
-        /* Loading Progress Bar */
-        .loader-progress {
-            width: 200px;
-            height: 2px;
-            background: rgba(255, 107, 53, 0.1);
-            border-radius: 2px;
-            margin: 20px auto 0;
-            overflow: hidden;
-        }
-        
-        .loader-progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #ff6b35, #ff8c5a);
-            width: 0%;
-            animation: loader-progress-fill 2s ease-out forwards;
-            box-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
-        }
-        
-        @keyframes loader-progress-fill {
-            0% { width: 0%; }
-            50% { width: 70%; }
-            100% { width: 100%; }
-        }
-        
-        /* Hide loader when loaded */
-        #page-loader.loaded {
-            opacity: 0;
-            pointer-events: none;
-        }
-        
-        /* Initial body state */
-        body.loading {
-            overflow: hidden;
-        }
-        
-        /* Prevent FOUC (Flash of Unstyled Content) */
-        .no-js #page-loader {
-            display: none;
-        }
-    </style>
 </head>
-<body class="loading">
-    <!-- Page Loader -->
-    <div id="page-loader">
-        <div class="loader-container">
-            <div class="loader-circle"></div>
-            <div class="loader-text">Andrea Padoan</div>
-            <div class="loader-subtext">Preparazione del tuo percorso...</div>
-            <div class="loader-progress">
-                <div class="loader-progress-bar"></div>
-            </div>
-        </div>
-    </div>
+<body>
     
     <!-- Header -->
     <div id="header-container"></div>
@@ -197,41 +52,7 @@
     <!-- Load Components and Initialize -->
     <script>
         // ======================================
-        // 🚀 PAGE LOADER MANAGER
-        // ======================================
-        
-        class PageLoader {
-            constructor() {
-                this.loader = document.getElementById('page-loader');
-                this.minimumLoadTime = 1500; // Tempo minimo di visualizzazione loader
-                this.startTime = Date.now();
-            }
-            
-            hide() {
-                const elapsedTime = Date.now() - this.startTime;
-                const remainingTime = Math.max(0, this.minimumLoadTime - elapsedTime);
-                
-                setTimeout(() => {
-                    this.loader.classList.add('loaded');
-                    document.body.classList.remove('loading');
-                    
-                    // Rimuovi loader dal DOM dopo l'animazione
-                    setTimeout(() => {
-                        this.loader.remove();
-                    }, 500);
-                    
-                    // Trigger resize per ricalcolare layout
-                    window.dispatchEvent(new Event('resize'));
-                    
-                    console.log('✨ Page fully loaded and ready!');
-                }, remainingTime);
-            }
-        }
-        
-        const pageLoader = new PageLoader();
-        
-        // ======================================
-        // 📦 COMPONENT LOADER (ENHANCED)
+        // 📦 COMPONENT LOADER
         // ======================================
         
         const components = [
@@ -244,7 +65,7 @@
             { id: 'contact-container', file: './components/contact.html' }
         ];
 
-        // Load component function with progress tracking
+        // Load component function
         async function loadComponent(containerId, filePath) {
             try {
                 const response = await fetch(filePath);
@@ -268,7 +89,7 @@
             }
         }
 
-        // Load all components with enhanced initialization
+        // Load all components
         async function loadAllComponents() {
             console.log('🔄 Loading components...');
             
@@ -285,16 +106,13 @@
                     initializeApp();
                 }
                 
-                // Initialize parallax effects (will auto-init when loaded)
-                console.log('🌟 Parallax effects will initialize automatically');
+                // Trigger resize per ricalcolare layout
+                window.dispatchEvent(new Event('resize'));
                 
-                // Hide loader after everything is ready
-                pageLoader.hide();
+                console.log('✨ Page fully loaded and ready!');
                 
             } catch (error) {
                 console.error('❌ Error loading components:', error);
-                // Hide loader even on error
-                pageLoader.hide();
             }
         }
 
@@ -353,6 +171,21 @@
             setTimeout(setupLazyLoading, 1000);
         });
         
+        // Handle scroll events for header
+        let scrolled = false;
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (header) {
+                if (window.scrollY > 50 && !scrolled) {
+                    header.classList.add('scrolled');
+                    scrolled = true;
+                } else if (window.scrollY <= 50 && scrolled) {
+                    header.classList.remove('scrolled');
+                    scrolled = false;
+                }
+            }
+        });
+        
         // Handle page visibility changes
         document.addEventListener('visibilitychange', () => {
             if (!document.hidden) {
@@ -376,16 +209,5 @@
             }
         });
     </script>
-    
-    <!-- No Script Fallback -->
-    <noscript>
-        <style>
-            #page-loader { display: none !important; }
-            body.loading { overflow: auto !important; }
-        </style>
-        <div style="background: #ff6b35; color: white; padding: 20px; text-align: center;">
-            <p>Per una migliore esperienza, abilita JavaScript nel tuo browser.</p>
-        </div>
-    </noscript>
 </body>
 </html>
