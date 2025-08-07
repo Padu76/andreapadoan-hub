@@ -79,9 +79,9 @@
     animation: none !important;
 }
 
-/* SEZIONE HERO SUPER COMPATTA */
+/* SEZIONE HERO COMPATTA */
 .hero {
-    padding-top: 70px !important;
+    padding-top: 60px !important;
     padding-bottom: 30px !important;
     min-height: auto !important;
     height: auto !important;
@@ -97,32 +97,108 @@
 }
 
 .hero-pitch {
-    margin-bottom: 20px !important;
-}
-
-/* Immagine profilo più piccola */
-.profile-image {
-    width: 280px !important;
-    height: 280px !important;
-    margin: 0 auto 20px !important;
-}
-
-/* Pulsanti più vicini */
-.hero-cta-buttons {
     margin-bottom: 15px !important;
-    gap: 12px !important;
+}
+
+/* IMMAGINE PROFILO PIÙ GRANDE E PIÙ IN ALTO */
+.profile-section {
+    margin-top: -10px !important;
+}
+
+.profile-image {
+    width: 320px !important;
+    height: 320px !important;
+    margin: 0 auto 25px !important;
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    border: 4px solid #ff6b35 !important;
+    box-shadow: 0 0 30px rgba(255, 107, 53, 0.3) !important;
+}
+
+.profile-content {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* PULSANTI BEN VISIBILI E PROMINENTI */
+.hero-cta-buttons {
+    display: flex !important;
+    gap: 15px !important;
+    justify-content: center !important;
+    margin-bottom: 20px !important;
+    z-index: 100 !important;
+    position: relative !important;
+}
+
+.main-cta, .quiz-cta {
+    padding: 16px 28px !important;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    border-radius: 30px !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    transition: all 0.3s ease !important;
+    border: none !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    z-index: 100 !important;
+    position: relative !important;
+}
+
+/* Pulsante Chat - Arancione Vivace */
+.main-cta {
+    background: linear-gradient(135deg, #ff6b35, #ff8c42) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4) !important;
+}
+
+.main-cta:hover {
+    background: linear-gradient(135deg, #ff8c42, #ff6b35) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.5) !important;
+}
+
+/* Pulsante Quiz - Verde Acceso */
+.quiz-cta {
+    background: linear-gradient(135deg, #4ade80, #22c55e) !important;
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(74, 222, 128, 0.4) !important;
+}
+
+.quiz-cta:hover {
+    background: linear-gradient(135deg, #22c55e, #4ade80) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(74, 222, 128, 0.5) !important;
 }
 
 /* Chat benefits più compatti */
 .chat-benefits {
-    gap: 15px !important;
+    display: flex !important;
+    gap: 20px !important;
+    justify-content: center !important;
     margin-top: 10px !important;
+    flex-wrap: wrap !important;
+}
+
+.chat-benefit {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    color: #fff !important;
+    font-size: 0.95rem !important;
+}
+
+.chat-benefit i {
+    color: #ff6b35 !important;
+    font-size: 1.1rem !important;
 }
 
 /* RESPONSIVE - Tablet */
 @media (max-width: 768px) {
     .hero {
-        padding-top: 60px !important;
+        padding-top: 50px !important;
         padding-bottom: 20px !important;
     }
     
@@ -138,25 +214,31 @@
     
     .hero-pitch {
         font-size: 1rem !important;
-        margin-bottom: 15px !important;
+        margin-bottom: 12px !important;
     }
     
     .profile-image {
-        width: 240px !important;
-        height: 240px !important;
-        margin-bottom: 15px !important;
+        width: 280px !important;
+        height: 280px !important;
+        margin-bottom: 20px !important;
     }
     
     .hero-cta-buttons {
-        gap: 10px !important;
-        margin-bottom: 12px !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+    
+    .main-cta, .quiz-cta {
+        width: 100% !important;
+        max-width: 300px !important;
+        justify-content: center !important;
     }
 }
 
 /* RESPONSIVE - Mobile */
 @media (max-width: 480px) {
     .hero {
-        padding-top: 50px !important;
+        padding-top: 45px !important;
         padding-bottom: 15px !important;
     }
     
@@ -172,23 +254,22 @@
     
     .hero-pitch {
         font-size: 0.95rem !important;
-        margin-bottom: 12px !important;
-    }
-    
-    .profile-image {
-        width: 200px !important;
-        height: 200px !important;
-        margin-bottom: 12px !important;
-    }
-    
-    .hero-cta-buttons {
-        flex-direction: column;
-        gap: 8px !important;
         margin-bottom: 10px !important;
     }
     
+    .profile-image {
+        width: 240px !important;
+        height: 240px !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .main-cta, .quiz-cta {
+        padding: 14px 24px !important;
+        font-size: 1rem !important;
+    }
+    
     .chat-benefits {
-        gap: 10px !important;
+        gap: 12px !important;
         font-size: 0.85rem !important;
     }
 }
