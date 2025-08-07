@@ -4,7 +4,7 @@
     <p class="hero-pitch">Scopri i miei progetti e trova la soluzione perfetta per te.</p>
     
     <div class="profile-section">
-        <div class="profile-image" style="width: 370px; height: 370px;">
+        <div class="profile-image" style="width: 350px; height: 350px;">
             <div class="profile-content" style="background-image: url('./images/andrea-profile.jpg'); background-size: cover; background-position: center;"></div>
         </div>
         
@@ -36,7 +36,70 @@
     </div>
 </div>
 
+<style>
+/* Override header - rimuove striscia scura */
+.header {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Header quando si scrolla - solo leggermente scuro senza blur */
+.header.scrolled {
+    background: rgba(0, 0, 0, 0.7) !important;
+    backdrop-filter: none !important;
+}
+
+/* Hero section - leggero spostamento in alto */
+.hero {
+    padding-top: 90px !important; /* Ridotto da 120px originale */
+    padding-bottom: 60px !important;
+}
+
+/* Riduzione leggera immagine profilo */
+.profile-image {
+    width: 350px !important; /* Ridotto da 370px */
+    height: 350px !important;
+}
+
+/* Ottimizzazione spazi per mobile */
+@media (max-width: 768px) {
+    .hero {
+        padding-top: 70px !important;
+        padding-bottom: 40px !important;
+    }
+    
+    .profile-image {
+        width: 280px !important;
+        height: 280px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding-top: 60px !important;
+        padding-bottom: 30px !important;
+    }
+    
+    .profile-image {
+        width: 240px !important;
+        height: 240px !important;
+    }
+}
+</style>
+
 <script>
+// Precaricamento immagine per velocizzare
+window.addEventListener('DOMContentLoaded', () => {
+    // Precarica l'immagine profilo
+    const img = new Image();
+    img.src = './images/andrea-profile.jpg';
+    img.onload = () => {
+        console.log('Immagine profilo caricata');
+    };
+});
+
 // Funzione per andare al quiz
 function goToQuiz() {
     window.location.href = './quiz.html';
@@ -46,6 +109,18 @@ function goToQuiz() {
 if (typeof scrollToQuiz === 'undefined') {
     function scrollToQuiz() {
         goToQuiz();
+    }
+}
+
+// Funzione per aprire la chat se non definita
+if (typeof openChat === 'undefined') {
+    function openChat() {
+        const chatFullscreen = document.querySelector('.chat-fullscreen');
+        if (chatFullscreen) {
+            chatFullscreen.style.display = 'flex';
+        } else {
+            window.open('https://wa.me/3478881515?text=Ciao%20Andrea!%20Vorrei%20informazioni%20sui%20tuoi%20servizi', '_blank');
+        }
     }
 }
 </script>
