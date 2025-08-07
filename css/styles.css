@@ -796,20 +796,19 @@ body::after {
 }
 
 /* ======================================
-   🏋️ QUIZ SECTION - CON ATLETA AL TRAMONTO
+   🏋️ QUIZ SECTION - CON ATLETA AL TRAMONTO  
    ====================================== */
 
-/* Aggiungi background alla sezione quiz esistente */
-#quiz-section,
-.quiz-section {
+/* Background per la sezione quiz in services.html */
+.quiz-intro-section {
     position: relative;
     background: #000;
     overflow: hidden;
+    padding: 100px 20px;
 }
 
-/* Background con atleta al tramonto */
-#quiz-section::before,
-.quiz-section::before {
+/* Background con atleta al tramonto - PARALLAX FISSO */
+.quiz-intro-section::before {
     content: '';
     position: absolute;
     top: 0;
@@ -819,14 +818,13 @@ body::after {
     background-image: url('https://images.unsplash.com/photo-1549060279-7e168fcee0c2?q=80&w=2070');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
-    opacity: 0.3;
+    background-attachment: fixed; /* EFFETTO PARALLAX */
+    opacity: 0.4;
     z-index: 0;
 }
 
-/* Overlay gradient per quiz section */
-#quiz-section::after,
-.quiz-section::after {
+/* Overlay gradient arancione stile landing esempio */
+.quiz-intro-section::after {
     content: '';
     position: absolute;
     top: 0;
@@ -834,17 +832,29 @@ body::after {
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, 
-        rgba(0, 0, 0, 0.7) 0%, 
-        rgba(255, 107, 53, 0.1) 50%,
+        rgba(0, 0, 0, 0.6) 0%, 
+        rgba(255, 107, 0, 0.2) 40%,  /* #ff6b00 */
+        rgba(255, 152, 0, 0.15) 60%, /* #ff9800 */
         rgba(0, 0, 0, 0.8) 100%);
     z-index: 1;
 }
 
 /* Assicura che il contenuto sia sopra il background */
-#quiz-section > *,
-.quiz-section > * {
+.quiz-intro-section > * {
     position: relative;
     z-index: 2;
+}
+
+/* Stili aggiuntivi per il contenuto della quiz section */
+.quiz-intro-section .section-title {
+    color: #fff;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.quiz-intro-section .quiz-cta {
+    box-shadow: 
+        0 10px 30px rgba(255, 107, 53, 0.4),
+        0 0 50px rgba(255, 107, 53, 0.2);
 }
 
 /* ======================================
@@ -858,7 +868,7 @@ body::after {
     overflow: hidden;
 }
 
-/* Background Verona per chat section */
+/* Background Arena di Verona vista dall'alto - PARALLAX FISSO */
 .chat-section::before {
     content: '';
     position: absolute;
@@ -866,11 +876,11 @@ body::after {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?q=80&w=2070');
+    background-image: url('https://images.unsplash.com/photo-1569144381423-becf4f41dc0f?q=80&w=2070');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
-    opacity: 0.15;
+    background-attachment: fixed; /* EFFETTO PARALLAX */
+    opacity: 0.2;
     z-index: 0;
 }
 
@@ -884,9 +894,9 @@ body::after {
     bottom: 0;
     background: 
         radial-gradient(circle at center, 
-            rgba(0, 0, 0, 0.6) 0%, 
-            rgba(0, 0, 0, 0.85) 100%),
-        linear-gradient(135deg, rgba(255, 107, 53, 0.03) 0%, transparent 50%);
+            rgba(0, 0, 0, 0.7) 0%, 
+            rgba(0, 0, 0, 0.9) 100%),
+        linear-gradient(135deg, rgba(255, 107, 53, 0.05) 0%, transparent 50%);
     z-index: 1;
 }
 
