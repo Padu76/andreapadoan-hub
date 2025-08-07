@@ -276,6 +276,15 @@
             padding: 40px 25px;
         }
 
+        /* Tab Content Containers */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
         /* Overview Cards */
         .overview-grid {
             display: grid;
@@ -356,21 +365,11 @@
             gap: 5px;
         }
 
-        .card-change.positive {
-            color: #4ade80;
-        }
-
-        .card-change.negative {
-            color: #f87171;
-        }
-
         /* Accent Colors */
         .overview-card:nth-child(1) { --accent-color: #ff6b35; }
         .overview-card:nth-child(2) { --accent-color: #4ade80; }
         .overview-card:nth-child(3) { --accent-color: #60a5fa; }
         .overview-card:nth-child(4) { --accent-color: #a855f7; }
-        .overview-card:nth-child(5) { --accent-color: #f59e0b; }
-        .overview-card:nth-child(6) { --accent-color: #06b6d4; }
 
         /* Dashboard Sections */
         .dashboard-grid {
@@ -441,106 +440,180 @@
             transform: translateY(-2px);
         }
 
-        /* Quiz Results Section */
-        .quiz-result-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid #333;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 20px;
+        /* Quiz Profile Cards */
+        .quiz-profile-card {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.05), rgba(26, 26, 26, 0.95));
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
             transition: all 0.3s;
             cursor: pointer;
         }
 
-        .quiz-result-item:hover {
+        .quiz-profile-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
             border-color: #ff6b35;
-            background: rgba(255, 107, 53, 0.05);
-            transform: translateY(-2px);
         }
 
-        .quiz-header-info {
+        .profile-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
+            align-items: flex-start;
+            margin-bottom: 20px;
         }
 
-        .quiz-user-name {
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
             font-weight: bold;
             color: #fff;
-            font-size: 1.2rem;
+            margin-bottom: 8px;
         }
 
-        .quiz-timestamp {
-            color: #888;
-            font-size: 0.85rem;
-        }
-
-        .quiz-scores {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        .score-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 10px;
-            background: rgba(255, 107, 53, 0.1);
-            border-radius: 10px;
-            border: 1px solid rgba(255, 107, 53, 0.2);
-        }
-
-        .score-label {
-            font-size: 0.75rem;
-            color: #888;
-            text-transform: uppercase;
+        .profile-type {
+            font-size: 1.1rem;
+            color: #ff6b35;
+            font-weight: 600;
             margin-bottom: 5px;
         }
 
-        .score-value {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #ff6b35;
+        .profile-timestamp {
+            font-size: 0.85rem;
+            color: #888;
         }
 
-        .quiz-actions {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            align-items: center;
-            margin-top: 15px;
-        }
-
-        .priority-tag {
-            padding: 6px 15px;
+        .profile-level {
+            padding: 8px 16px;
             border-radius: 25px;
-            font-size: 0.75rem;
+            font-size: 0.9rem;
             font-weight: bold;
             text-transform: uppercase;
         }
 
-        .priority-tag.high {
-            background: rgba(255, 68, 68, 0.2);
-            color: #ff4444;
-            animation: glow 2s ease-in-out infinite alternate;
+        .level-principiante {
+            background: rgba(248, 113, 113, 0.2);
+            color: #f87171;
+            border: 1px solid #f87171;
         }
 
-        .priority-tag.medium {
+        .level-intermedio {
             background: rgba(251, 191, 36, 0.2);
             color: #fbbf24;
+            border: 1px solid #fbbf24;
         }
 
-        .priority-tag.low {
-            background: rgba(156, 163, 175, 0.2);
-            color: #9ca3af;
+        .level-avanzato {
+            background: rgba(74, 222, 128, 0.2);
+            color: #4ade80;
+            border: 1px solid #4ade80;
         }
 
-        @keyframes glow {
-            from { box-shadow: 0 0 5px rgba(255, 68, 68, 0.5); }
-            to { box-shadow: 0 0 20px rgba(255, 68, 68, 0.8); }
+        .profile-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .detail-box {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 15px;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+        }
+
+        .detail-label {
+            font-size: 0.85rem;
+            color: #888;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .detail-value {
+            font-size: 1.1rem;
+            color: #fff;
+            line-height: 1.4;
+        }
+
+        .profile-recommendations {
+            background: rgba(255, 107, 53, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+        }
+
+        .recommendations-title {
+            font-size: 1rem;
+            color: #ff6b35;
+            font-weight: bold;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .recommendation-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .recommendation-item {
+            color: #e0e0e0;
+            padding: 8px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .recommendation-item i {
+            color: #ff6b35;
+            margin-top: 3px;
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .profile-action-btn {
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .whatsapp-action {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            border: none;
+        }
+
+        .whatsapp-action:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+        }
+
+        .view-report-action {
+            background: transparent;
+            color: #ff6b35;
+            border: 2px solid #ff6b35;
+        }
+
+        .view-report-action:hover {
+            background: #ff6b35;
+            color: white;
         }
 
         /* Chart Container */
@@ -550,24 +623,7 @@
             margin-top: 25px;
         }
 
-        /* Loading States */
-        .loading {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 300px;
-            color: #888;
-            font-size: 1.1rem;
-        }
-
-        .loading i {
-            animation: spin 1s linear infinite;
-            margin-bottom: 15px;
-            font-size: 2rem;
-            color: #ff6b35;
-        }
-
+        /* No Data State */
         .no-data {
             display: flex;
             flex-direction: column;
@@ -599,22 +655,6 @@
                 gap: 20px;
             }
 
-            .main-content {
-                padding: 25px 20px;
-            }
-
-            .card-value {
-                font-size: 2rem;
-            }
-
-            .dashboard-section {
-                padding: 25px 20px;
-            }
-
-            .login-box {
-                padding: 30px 25px;
-            }
-
             .nav-tabs {
                 overflow-x: auto;
                 scrollbar-width: none;
@@ -623,6 +663,10 @@
 
             .nav-tabs::-webkit-scrollbar {
                 display: none;
+            }
+
+            .profile-details {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -651,16 +695,6 @@
             z-index: 1000;
             backdrop-filter: blur(10px);
             box-shadow: 0 8px 25px rgba(255, 107, 53, 0.2);
-        }
-
-        .refresh-indicator.updating {
-            animation: pulse-indicator 0.8s ease-in-out;
-        }
-
-        @keyframes pulse-indicator {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
         }
 
         @keyframes spin {
@@ -696,8 +730,11 @@
 
                 <!-- Navigation Tabs -->
                 <nav class="nav-tabs">
-                    <a href="./dashboard.html" class="nav-tab active">
+                    <a href="#" class="nav-tab active" onclick="showTab('overview'); return false;">
                         <i class="fas fa-chart-bar"></i> Overview
+                    </a>
+                    <a href="#" class="nav-tab" onclick="showTab('quiz'); return false;">
+                        <i class="fas fa-clipboard-check"></i> Quiz Fitness
                     </a>
                     <a href="./conversations.html" class="nav-tab">
                         <i class="fas fa-comments"></i> Conversazioni
@@ -727,150 +764,166 @@
 
         <!-- Main Content -->
         <main class="main-content">
-            <!-- Overview Cards -->
-            <div class="overview-grid">
-                <div class="overview-card">
-                    <div class="card-header">
-                        <div class="card-title">Quiz Completati Oggi</div>
-                        <div class="card-icon"><i class="fas fa-clipboard-check"></i></div>
+            <!-- OVERVIEW TAB -->
+            <div id="overviewContent" class="tab-content active">
+                <!-- Overview Cards -->
+                <div class="overview-grid">
+                    <div class="overview-card">
+                        <div class="card-header">
+                            <div class="card-title">Conversazioni Oggi</div>
+                            <div class="card-icon"><i class="fas fa-comments"></i></div>
+                        </div>
+                        <div class="card-value" id="todayConversations">0</div>
+                        <div class="card-change" id="conversationsChange">
+                            In attesa di dati...
+                        </div>
                     </div>
-                    <div class="card-value" id="todayQuizzes">0</div>
-                    <div class="card-change" id="quizzesChange">
-                        In attesa di dati...
+
+                    <div class="overview-card">
+                        <div class="card-header">
+                            <div class="card-title">Lead Attivi</div>
+                            <div class="card-icon"><i class="fas fa-users"></i></div>
+                        </div>
+                        <div class="card-value" id="activeLeads">0</div>
+                        <div class="card-change" id="leadsChange">
+                            In attesa di dati...
+                        </div>
+                    </div>
+
+                    <div class="overview-card">
+                        <div class="card-header">
+                            <div class="card-title">Tasso Conversione</div>
+                            <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                        </div>
+                        <div class="card-value" id="conversionRate">0%</div>
+                        <div class="card-change" id="conversionChange">
+                            In attesa di dati...
+                        </div>
+                    </div>
+
+                    <div class="overview-card">
+                        <div class="card-header">
+                            <div class="card-title">Hot Leads</div>
+                            <div class="card-icon"><i class="fas fa-fire"></i></div>
+                        </div>
+                        <div class="card-value" id="hotLeads">0</div>
+                        <div class="card-change" id="hotLeadsChange">
+                            In attesa di dati...
+                        </div>
                     </div>
                 </div>
 
-                <div class="overview-card">
-                    <div class="card-header">
-                        <div class="card-title">Lead da Quiz</div>
-                        <div class="card-icon"><i class="fas fa-users"></i></div>
+                <!-- Dashboard Grid -->
+                <div class="dashboard-grid">
+                    <!-- Lead Management -->
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <div class="section-title">
+                                <i class="fas fa-user-friends"></i>
+                                Lead Management
+                            </div>
+                            <div class="section-actions">
+                                <a href="./leads.html" class="action-btn">
+                                    <i class="fas fa-external-link-alt"></i> Vai a Pipeline
+                                </a>
+                            </div>
+                        </div>
+                        <div id="leadsList">
+                            <div class="no-data">
+                                <i class="fas fa-users"></i>
+                                <h3>Nessun lead trovato</h3>
+                                <p>I lead appariranno qui quando ci saranno nuove conversazioni</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-value" id="quizLeads">0</div>
-                    <div class="card-change" id="quizLeadsChange">
-                        In attesa di dati...
-                    </div>
-                </div>
 
-                <div class="overview-card">
-                    <div class="card-header">
-                        <div class="card-title">Score Medio</div>
-                        <div class="card-icon"><i class="fas fa-star"></i></div>
-                    </div>
-                    <div class="card-value" id="avgScore">0.0</div>
-                    <div class="card-change" id="scoreChange">
-                        In attesa di dati...
-                    </div>
-                </div>
-
-                <div class="overview-card">
-                    <div class="card-header">
-                        <div class="card-title">Hot Leads</div>
-                        <div class="card-icon"><i class="fas fa-fire"></i></div>
-                    </div>
-                    <div class="card-value" id="hotLeads">0</div>
-                    <div class="card-change" id="hotLeadsChange">
-                        In attesa di dati...
-                    </div>
-                </div>
-
-                <div class="overview-card">
-                    <div class="card-header">
-                        <div class="card-title">Conversazioni Oggi</div>
-                        <div class="card-icon"><i class="fas fa-comments"></i></div>
-                    </div>
-                    <div class="card-value" id="todayConversations">0</div>
-                    <div class="card-change" id="conversationsChange">
-                        In attesa di dati...
-                    </div>
-                </div>
-
-                <div class="overview-card">
-                    <div class="card-header">
-                        <div class="card-title">Tasso Conversione</div>
-                        <div class="card-icon"><i class="fas fa-chart-line"></i></div>
-                    </div>
-                    <div class="card-value" id="conversionRate">0%</div>
-                    <div class="card-change" id="conversionChange">
-                        In attesa di dati...
+                    <!-- Interest Distribution -->
+                    <div class="dashboard-section">
+                        <div class="section-header">
+                            <div class="section-title">
+                                <i class="fas fa-chart-pie"></i>
+                                Distribuzione Interessi
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="interestChart"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Dashboard Grid -->
-            <div class="dashboard-grid">
-                <!-- Quiz Results Section -->
-                <div class="dashboard-section">
-                    <div class="section-header">
-                        <div class="section-title">
-                            <i class="fas fa-clipboard-list"></i>
-                            Risultati Quiz Fitness
+            <!-- QUIZ FITNESS TAB -->
+            <div id="quizContent" class="tab-content">
+                <h2 style="color: #ff6b35; font-size: 2rem; margin-bottom: 30px;">
+                    <i class="fas fa-clipboard-check"></i> Analisi Quiz Fitness
+                </h2>
+
+                <!-- Quiz Stats Cards -->
+                <div class="overview-grid">
+                    <div class="overview-card">
+                        <div class="card-header">
+                            <div class="card-title">Quiz Completati</div>
+                            <div class="card-icon"><i class="fas fa-clipboard-check"></i></div>
                         </div>
-                        <div class="section-actions">
-                            <button class="action-btn active" onclick="filterQuizResults('all')" id="filterAllQuiz">Tutti</button>
-                            <button class="action-btn" onclick="filterQuizResults('high')" id="filterHighQuiz">🔥 High Priority</button>
-                            <button class="action-btn" onclick="filterQuizResults('recent')" id="filterRecentQuiz">📅 Recenti</button>
+                        <div class="card-value" id="totalQuizzes">0</div>
+                        <div class="card-change" id="quizTotalChange">
+                            In attesa di dati...
                         </div>
                     </div>
-                    <div id="quizResultsList">
+
+                    <div class="overview-card">
+                        <div class="card-header">
+                            <div class="card-title">Profili High Priority</div>
+                            <div class="card-icon"><i class="fas fa-fire"></i></div>
+                        </div>
+                        <div class="card-value" id="highPriorityProfiles">0</div>
+                        <div class="card-change" id="highPriorityChange">
+                            In attesa di dati...
+                        </div>
+                    </div>
+
+                    <div class="overview-card">
+                        <div class="card-header">
+                            <div class="card-title">Principianti</div>
+                            <div class="card-icon"><i class="fas fa-seedling"></i></div>
+                        </div>
+                        <div class="card-value" id="beginnerProfiles">0</div>
+                        <div class="card-change" id="beginnerChange">
+                            In attesa di dati...
+                        </div>
+                    </div>
+
+                    <div class="overview-card">
+                        <div class="card-header">
+                            <div class="card-title">Da Contattare</div>
+                            <div class="card-icon"><i class="fas fa-phone"></i></div>
+                        </div>
+                        <div class="card-value" id="toContact">0</div>
+                        <div class="card-change" id="toContactChange">
+                            In attesa di dati...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quiz Profiles Section -->
+                <div class="dashboard-section" style="max-width: 100%; margin-top: 40px;">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <i class="fas fa-users"></i>
+                            Profili Persona Quiz
+                        </div>
+                        <div class="section-actions">
+                            <button class="action-btn active" onclick="filterQuizProfiles('all')" id="filterAllQuiz">Tutti</button>
+                            <button class="action-btn" onclick="filterQuizProfiles('high')" id="filterHighQuiz">🔥 Prioritari</button>
+                            <button class="action-btn" onclick="filterQuizProfiles('today')" id="filterTodayQuiz">📅 Oggi</button>
+                        </div>
+                    </div>
+                    <div id="quizProfilesList">
                         <div class="no-data">
                             <i class="fas fa-clipboard-list"></i>
                             <h3>Nessun quiz completato</h3>
-                            <p>I risultati dei quiz appariranno qui</p>
+                            <p>I profili persona appariranno qui quando qualcuno completerà il quiz</p>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Lead Management -->
-                <div class="dashboard-section">
-                    <div class="section-header">
-                        <div class="section-title">
-                            <i class="fas fa-user-friends"></i>
-                            Lead Management
-                        </div>
-                        <div class="section-actions">
-                            <button class="action-btn active" onclick="filterLeads('all')" id="filterAll">Tutti</button>
-                            <button class="action-btn" onclick="filterLeads('hot')" id="filterHot">🔥 Hot</button>
-                            <button class="action-btn" onclick="filterLeads('recent')" id="filterRecent">📅 Recenti</button>
-                            <a href="./leads.html" class="action-btn">
-                                <i class="fas fa-external-link-alt"></i> Pipeline
-                            </a>
-                        </div>
-                    </div>
-                    <div id="leadsList">
-                        <div class="no-data">
-                            <i class="fas fa-users"></i>
-                            <h3>Nessun lead trovato</h3>
-                            <p>I lead appariranno qui quando ci saranno nuove conversazioni</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Charts Section -->
-            <div class="dashboard-grid">
-                <!-- Score Distribution -->
-                <div class="dashboard-section">
-                    <div class="section-header">
-                        <div class="section-title">
-                            <i class="fas fa-chart-pie"></i>
-                            Distribuzione Score Quiz
-                        </div>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="scoreDistributionChart"></canvas>
-                    </div>
-                </div>
-
-                <!-- Category Analysis -->
-                <div class="dashboard-section">
-                    <div class="section-header">
-                        <div class="section-title">
-                            <i class="fas fa-chart-bar"></i>
-                            Analisi per Categoria
-                        </div>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="categoryAnalysisChart"></canvas>
                     </div>
                 </div>
             </div>
@@ -896,7 +949,6 @@
                     lastActivity: Date.now()
                 };
                 localStorage.setItem(this.LOGIN_KEY, JSON.stringify(sessionData));
-                console.log('🔐 Sessione login impostata:', new Date().toLocaleTimeString());
                 this.startSessionRefresh();
             },
             
@@ -909,7 +961,6 @@
                     const now = Date.now();
                     
                     if (now - session.loginTime > this.SESSION_DURATION) {
-                        console.log('⏰ Sessione scaduta dopo 8 ore');
                         this.clearSession();
                         return false;
                     }
@@ -927,7 +978,6 @@
             
             clearSession() {
                 localStorage.removeItem(this.LOGIN_KEY);
-                console.log('🚪 Sessione cancellata');
                 
                 if (this.refreshTimer) {
                     clearInterval(this.refreshTimer);
@@ -944,7 +994,6 @@
                     if (this.isLoggedIn()) {
                         console.log('🔄 Sessione refreshata:', new Date().toLocaleTimeString());
                     } else {
-                        console.log('❌ Sessione non valida durante refresh');
                         this.forceLogout();
                     }
                 }, this.REFRESH_INTERVAL);
@@ -952,7 +1001,6 @@
             
             forceLogout() {
                 this.clearSession();
-                
                 if (typeof logout === 'function') {
                     logout();
                 } else {
@@ -960,18 +1008,12 @@
                 }
             },
             
-            checkSessionOnFocus() {
+            init() {
                 window.addEventListener('focus', () => {
                     if (!this.isLoggedIn()) {
-                        console.log('👁️ Sessione non valida al focus della finestra');
                         this.forceLogout();
                     }
                 });
-            },
-            
-            init() {
-                this.checkSessionOnFocus();
-                console.log('🔐 Login Manager inizializzato');
             }
         };
 
@@ -981,8 +1023,31 @@
         let refreshTimer;
         let isLoggedIn = false;
         let currentQuizFilter = 'all';
-        let currentLeadFilter = 'all';
         let chartInstances = {};
+        let currentTab = 'overview';
+
+        // TAB NAVIGATION
+        function showTab(tabName) {
+            currentTab = tabName;
+            
+            // Update nav tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Show/hide content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            if (tabName === 'overview') {
+                document.getElementById('overviewContent').classList.add('active');
+            } else if (tabName === 'quiz') {
+                document.getElementById('quizContent').classList.add('active');
+                updateQuizTab();
+            }
+        }
 
         // LOGIN FUNCTIONS
         function login() {
@@ -997,8 +1062,6 @@
                 isLoggedIn = true;
                 initDashboard();
                 errorDiv.style.display = 'none';
-                
-                console.log('✅ Login effettuato con successo - Sessione condivisa attiva');
             } else {
                 errorDiv.textContent = 'Password non corretta';
                 errorDiv.style.display = 'block';
@@ -1020,8 +1083,6 @@
                 if (chart) chart.destroy();
             });
             chartInstances = {};
-            
-            console.log('🚪 Logout effettuato - Sessione condivisa cancellata');
         }
 
         // AUTO-LOGIN CHECK
@@ -1029,13 +1090,10 @@
             LoginManager.init();
             
             if (LoginManager.isLoggedIn()) {
-                console.log('🔐 Utente già loggato - Auto-login attivato');
                 document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('mainDashboard').classList.add('active');
                 isLoggedIn = true;
                 initDashboard();
-            } else {
-                console.log('🔐 Utente non loggato - Mostra schermata login');
             }
         });
 
@@ -1047,7 +1105,7 @@
 
         // DASHBOARD INITIALIZATION
         function initDashboard() {
-            console.log('🚀 Initializing Andrea Padoan Dashboard with Quiz Integration...');
+            console.log('🚀 Initializing Dashboard...');
             
             startRefreshTimer();
             loadDashboardData();
@@ -1056,7 +1114,6 @@
                 if (isLoggedIn && LoginManager.isLoggedIn()) {
                     refreshData();
                 } else {
-                    console.log('❌ Auto-refresh saltato - sessione non valida');
                     LoginManager.forceLogout();
                 }
             }, 30000);
@@ -1064,7 +1121,7 @@
 
         // LOAD DASHBOARD DATA
         async function loadDashboardData() {
-            console.log('📊 Loading real data from /api/dashboard...');
+            console.log('📊 Loading data from API...');
             
             try {
                 updateConnectionStatus('loading', 'Caricamento dati...');
@@ -1078,7 +1135,7 @@
                 
                 if (response.ok) {
                     const data = await response.json();
-                    console.log('✅ Dashboard data loaded:', data);
+                    console.log('✅ Data loaded:', data);
                     dashboardData = data;
                     updateConnectionStatus('connected', 'Connesso ad Airtable');
                     updateDashboard();
@@ -1095,63 +1152,66 @@
 
         // UPDATE DASHBOARD
         function updateDashboard() {
-            console.log('🔄 Updating dashboard with quiz data:', dashboardData);
-            
-            if (!dashboardData || !dashboardData.overview) {
-                console.error('❌ Invalid data structure:', dashboardData);
-                showNoDataState();
-                return;
-            }
-
             updateOverviewCards();
-            updateQuizResultsList();
             updateLeadsList();
             updateCharts();
             
+            if (currentTab === 'quiz') {
+                updateQuizTab();
+            }
+            
             const indicator = document.getElementById('refreshIndicator');
-            indicator.classList.add('updating');
-            setTimeout(() => indicator.classList.remove('updating'), 500);
+            if (indicator) {
+                indicator.style.animation = 'pulse 0.5s';
+                setTimeout(() => indicator.style.animation = '', 500);
+            }
         }
 
         // UPDATE OVERVIEW CARDS
         function updateOverviewCards() {
             const data = dashboardData.overview || {};
-            const quizData = dashboardData.quizAnalytics || {};
             
-            // Quiz specific cards
-            document.getElementById('todayQuizzes').textContent = data.todayQuizzes || 0;
-            document.getElementById('quizLeads').textContent = data.totalQuizCompleted || 0;
-            document.getElementById('avgScore').textContent = (quizData.averageScores?.overall || 0).toFixed(1);
+            document.getElementById('todayConversations').textContent = data.todayConversations || 0;
+            document.getElementById('activeLeads').textContent = data.activeLeads || 0;
+            document.getElementById('conversionRate').textContent = (data.conversionRate || 0) + '%';
             document.getElementById('hotLeads').textContent = data.hotLeads || 0;
             
-            // Conversation cards
-            document.getElementById('todayConversations').textContent = data.todayConversations || 0;
-            document.getElementById('conversionRate').textContent = (data.conversionRate || 0) + '%';
-            
-            // Update change indicators - NO MOCK DATA
-            if (data.todayQuizzes > 0) {
-                document.getElementById('quizzesChange').innerHTML = `<i class="fas fa-chart-line"></i> ${data.todayQuizzes} oggi`;
+            // Update indicators only if we have data
+            if (data.todayConversations > 0) {
+                document.getElementById('conversationsChange').innerHTML = `<i class="fas fa-chart-line"></i> ${data.todayConversations} nuove oggi`;
             }
-            
-            if (data.totalQuizCompleted > 0) {
-                document.getElementById('quizLeadsChange').innerHTML = `<i class="fas fa-users"></i> Totale: ${data.totalQuizCompleted}`;
+            if (data.activeLeads > 0) {
+                document.getElementById('leadsChange').innerHTML = `<i class="fas fa-users"></i> Totale attivi`;
             }
-            
-            if (quizData.averageScores?.overall > 0) {
-                document.getElementById('scoreChange').innerHTML = `<i class="fas fa-star"></i> Media su ${data.totalQuizCompleted || 0} quiz`;
-            }
-            
             if (data.hotLeads > 0) {
-                document.getElementById('hotLeadsChange').innerHTML = `<span style="color: #ff4444;">🔥 ${data.hotLeads} lead prioritari</span>`;
+                document.getElementById('hotLeadsChange').innerHTML = `<span style="color: #ff4444;">🔥 Lead prioritari</span>`;
             }
         }
 
-        // UPDATE QUIZ RESULTS LIST
-        function updateQuizResultsList(filter = null) {
+        // UPDATE QUIZ TAB
+        function updateQuizTab() {
+            const quizResults = dashboardData.leads?.filter(lead => lead.source === 'Quiz') || [];
+            const quizData = dashboardData.quizAnalytics || {};
+            
+            // Update quiz stats
+            document.getElementById('totalQuizzes').textContent = quizResults.length;
+            document.getElementById('highPriorityProfiles').textContent = 
+                quizResults.filter(r => r.leadPriority === 'High').length;
+            document.getElementById('beginnerProfiles').textContent = 
+                quizResults.filter(r => getProfileLevel(r) === 'Principiante').length;
+            document.getElementById('toContact').textContent = 
+                quizResults.filter(r => r.followUpStatus === 'New').length;
+            
+            // Update quiz profiles list
+            updateQuizProfilesList();
+        }
+
+        // UPDATE QUIZ PROFILES LIST
+        function updateQuizProfilesList(filter = null) {
             const filterToUse = filter || currentQuizFilter;
             currentQuizFilter = filterToUse;
             
-            const container = document.getElementById('quizResultsList');
+            const container = document.getElementById('quizProfilesList');
             let quizResults = dashboardData.leads?.filter(lead => lead.source === 'Quiz') || [];
             
             if (quizResults.length === 0) {
@@ -1159,7 +1219,7 @@
                     <div class="no-data">
                         <i class="fas fa-clipboard-list"></i>
                         <h3>Nessun quiz completato</h3>
-                        <p>I risultati dei quiz appariranno qui</p>
+                        <p>I profili persona appariranno qui quando qualcuno completerà il quiz</p>
                     </div>
                 `;
                 return;
@@ -1168,85 +1228,194 @@
             // Apply filters
             switch(filterToUse) {
                 case 'high':
-                    quizResults = quizResults.filter(result => result.leadPriority === 'High');
+                    quizResults = quizResults.filter(r => r.leadPriority === 'High');
                     break;
-                case 'recent':
-                    const last24h = new Date(Date.now() - 24 * 60 * 60 * 1000);
-                    quizResults = quizResults.filter(result => new Date(result.timestamp) >= last24h);
-                    break;
-                case 'all':
-                default:
+                case 'today':
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0);
+                    quizResults = quizResults.filter(r => new Date(r.timestamp) >= today);
                     break;
             }
             
-            // Update filter button states
-            document.querySelectorAll('#quizResultsList').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            const activeBtn = document.getElementById(`filter${filterToUse.charAt(0).toUpperCase() + filterToUse.slice(1)}Quiz`);
-            if (activeBtn) activeBtn.classList.add('active');
-            
-            container.innerHTML = quizResults.slice(0, 5).map(result => {
-                const timeAgo = getTimeAgo(result.timestamp);
-                const quizData = result.quizData || {};
-                const whatsappMessage = `Ciao Andrea! Sono ${result.name}, ho completato il quiz con score ${quizData.overallScore || 0}/5. Vorrei maggiori informazioni sui tuoi servizi.`;
+            container.innerHTML = quizResults.map(result => {
+                const profile = generatePersonaProfile(result);
+                const level = getProfileLevel(result);
+                const whatsappMessage = `Ciao Andrea! Sono ${result.name}, ho completato il quiz. Il mio profilo è "${profile.type}". Vorrei maggiori informazioni sui tuoi servizi.`;
                 const whatsappUrl = `https://wa.me/3478881515?text=${encodeURIComponent(whatsappMessage)}`;
                 
                 return `
-                    <div class="quiz-result-item">
-                        <div class="quiz-header-info">
-                            <div class="quiz-user-name">${escapeHtml(result.name || 'Utente Quiz')}</div>
-                            <div class="quiz-timestamp">${timeAgo}</div>
-                        </div>
-                        <div class="quiz-scores">
-                            <div class="score-item">
-                                <span class="score-label">Fitness</span>
-                                <span class="score-value">${quizData.fitnessScore || 0}/5</span>
+                    <div class="quiz-profile-card">
+                        <div class="profile-header">
+                            <div class="profile-info">
+                                <div class="profile-name">${escapeHtml(result.name || 'Utente Quiz')}</div>
+                                <div class="profile-type">${profile.type}</div>
+                                <div class="profile-timestamp">${getTimeAgo(result.timestamp)}</div>
                             </div>
-                            <div class="score-item">
-                                <span class="score-label">Alimentazione</span>
-                                <span class="score-value">${quizData.alimentazioneScore || 0}/5</span>
-                            </div>
-                            <div class="score-item">
-                                <span class="score-label">Abitudini</span>
-                                <span class="score-value">${quizData.abitudiniScore || 0}/5</span>
-                            </div>
-                            <div class="score-item">
-                                <span class="score-label">Motivazione</span>
-                                <span class="score-value">${quizData.motivazioneScore || 0}/5</span>
-                            </div>
-                            <div class="score-item">
-                                <span class="score-label">Stress</span>
-                                <span class="score-value">${quizData.stressScore || 0}/5</span>
-                            </div>
-                            <div class="score-item">
-                                <span class="score-label">Overall</span>
-                                <span class="score-value" style="color: #4ade80; font-size: 1.4rem;">${quizData.overallScore || 0}/5</span>
+                            <div class="profile-level level-${level.toLowerCase()}">
+                                ${level}
                             </div>
                         </div>
-                        <div class="quiz-actions">
-                            <span class="priority-tag ${(result.leadPriority || 'medium').toLowerCase()}">${result.leadPriority || 'Medium'} Priority</span>
-                            <a href="${whatsappUrl}" target="_blank" style="background: #25D366; color: white; border: none; padding: 8px 16px; border-radius: 10px; font-size: 0.85rem; font-weight: bold; cursor: pointer; text-decoration: none; display: flex; align-items: center; gap: 8px;">
-                                <i class="fab fa-whatsapp"></i> Contatta
+                        
+                        <div class="profile-details">
+                            <div class="detail-box">
+                                <div class="detail-label">Area Critica</div>
+                                <div class="detail-value">${profile.criticalArea}</div>
+                            </div>
+                            <div class="detail-box">
+                                <div class="detail-label">Punto di Forza</div>
+                                <div class="detail-value">${profile.strength}</div>
+                            </div>
+                            <div class="detail-box">
+                                <div class="detail-label">Obiettivo Principale</div>
+                                <div class="detail-value">${profile.mainGoal}</div>
+                            </div>
+                            <div class="detail-box">
+                                <div class="detail-label">Ostacolo Maggiore</div>
+                                <div class="detail-value">${profile.mainObstacle}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-recommendations">
+                            <div class="recommendations-title">Piano d'Azione Consigliato</div>
+                            <ul class="recommendation-list">
+                                ${profile.recommendations.map(rec => `
+                                    <li class="recommendation-item">
+                                        <i class="fas fa-chevron-right"></i>
+                                        <span>${rec}</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                        
+                        <div class="profile-actions">
+                            <a href="${whatsappUrl}" target="_blank" class="profile-action-btn whatsapp-action">
+                                <i class="fab fa-whatsapp"></i>
+                                Contatta su WhatsApp
                             </a>
-                            <span style="color: #888; font-size: 0.85rem;">
-                                <i class="fas fa-phone"></i> ${escapeHtml(result.phone || 'N/A')}
-                            </span>
+                            <button class="profile-action-btn view-report-action" onclick="viewFullReport('${result.id}')">
+                                <i class="fas fa-file-alt"></i>
+                                Vedi Report Completo
+                            </button>
                         </div>
                     </div>
                 `;
             }).join('');
         }
 
-        // UPDATE LEADS LIST
-        function updateLeadsList(filter = null) {
-            const filterToUse = filter || currentLeadFilter;
-            currentLeadFilter = filterToUse;
+        // GENERATE PERSONA PROFILE
+        function generatePersonaProfile(quizResult) {
+            const data = quizResult.quizData || {};
+            const scores = {
+                fitness: data.fitnessScore || 0,
+                alimentazione: data.alimentazioneScore || 0,
+                abitudini: data.abitudiniScore || 0,
+                motivazione: data.motivazioneScore || 0,
+                stress: data.stressScore || 0
+            };
             
+            // Find weakest and strongest areas
+            const sortedAreas = Object.entries(scores).sort((a, b) => a[1] - b[1]);
+            const weakest = sortedAreas[0];
+            const strongest = sortedAreas[sortedAreas.length - 1];
+            
+            // Determine profile type based on pattern
+            let profileType = '';
+            let mainGoal = '';
+            let mainObstacle = '';
+            let recommendations = [];
+            
+            if (scores.motivazione >= 4 && scores.fitness <= 2) {
+                profileType = 'Principiante Motivato';
+                mainGoal = 'Iniziare un percorso fitness strutturato';
+                mainObstacle = 'Mancanza di esperienza e routine';
+                recommendations = [
+                    'Iniziare con 2-3 allenamenti settimanali leggeri',
+                    'Focus su form e tecnica corretta',
+                    'Creare abitudini sostenibili prima di intensificare'
+                ];
+            } else if (scores.stress >= 4 && scores.abitudini <= 2) {
+                profileType = 'Manager Stressato';
+                mainGoal = 'Trovare equilibrio vita-lavoro';
+                mainObstacle = 'Tempo limitato e stress elevato';
+                recommendations = [
+                    'Allenamenti brevi ma intensi (20-30 min)',
+                    'Tecniche di gestione stress integrate',
+                    'Pianificazione pasti per risparmiare tempo'
+                ];
+            } else if (scores.fitness >= 3 && scores.alimentazione <= 2) {
+                profileType = 'Atleta con Dieta Scorretta';
+                mainGoal = 'Ottimizzare alimentazione per performance';
+                mainObstacle = 'Abitudini alimentari consolidate';
+                recommendations = [
+                    'Educazione nutrizionale sportiva',
+                    'Piano alimentare personalizzato',
+                    'Monitoraggio macro e micronutrienti'
+                ];
+            } else if (scores.motivazione <= 2 && scores.stress >= 3) {
+                profileType = 'Demotivato Sotto Pressione';
+                mainGoal = 'Ritrovare motivazione e ridurre stress';
+                mainObstacle = 'Bassa energia e motivazione';
+                recommendations = [
+                    'Obiettivi piccoli e raggiungibili',
+                    'Focus su attività piacevoli',
+                    'Supporto psicologico e accountability'
+                ];
+            } else if (data.overallScore >= 4) {
+                profileType = 'Esperto in Ottimizzazione';
+                mainGoal = 'Raggiungere performance elite';
+                mainObstacle = 'Margini di miglioramento ridotti';
+                recommendations = [
+                    'Programmi avanzati e periodizzati',
+                    'Focus su dettagli e recupero',
+                    'Obiettivi sfidanti specifici'
+                ];
+            } else {
+                profileType = 'In Trasformazione';
+                mainGoal = 'Miglioramento generale dello stile di vita';
+                mainObstacle = 'Mancanza di struttura e costanza';
+                recommendations = [
+                    'Programma completo e bilanciato',
+                    'Focus su consistenza e abitudini',
+                    'Monitoraggio progressi settimanale'
+                ];
+            }
+            
+            return {
+                type: profileType,
+                criticalArea: getCategoryName(weakest[0]),
+                strength: getCategoryName(strongest[0]),
+                mainGoal: mainGoal,
+                mainObstacle: mainObstacle,
+                recommendations: recommendations
+            };
+        }
+
+        // GET PROFILE LEVEL
+        function getProfileLevel(quizResult) {
+            const overallScore = quizResult.quizData?.overallScore || 0;
+            if (overallScore <= 2.5) return 'Principiante';
+            if (overallScore <= 3.5) return 'Intermedio';
+            return 'Avanzato';
+        }
+
+        // GET CATEGORY NAME
+        function getCategoryName(category) {
+            const names = {
+                fitness: 'Forma Fisica',
+                alimentazione: 'Alimentazione',
+                abitudini: 'Abitudini Salutari',
+                motivazione: 'Motivazione',
+                stress: 'Gestione Stress'
+            };
+            return names[category] || category;
+        }
+
+        // UPDATE LEADS LIST
+        function updateLeadsList() {
             const container = document.getElementById('leadsList');
             let leads = dashboardData.leads || [];
             
-            // Remove quiz leads from this section as they have their own
+            // Exclude quiz leads from overview
             leads = leads.filter(lead => lead.source !== 'Quiz');
             
             if (leads.length === 0) {
@@ -1260,44 +1429,58 @@
                 return;
             }
             
-            // Apply filters and display leads...
-            // (rest of the existing lead display logic)
+            // Display first 3 leads
+            container.innerHTML = leads.slice(0, 3).map(lead => {
+                const timeAgo = getTimeAgo(lead.timestamp);
+                return `
+                    <div style="padding: 15px; margin-bottom: 15px; background: rgba(255,255,255,0.03); border-radius: 15px; border: 1px solid #333;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <strong style="color: #fff;">${escapeHtml(lead.name || 'Lead Anonimo')}</strong>
+                            <span style="color: #888; font-size: 0.85rem;">${timeAgo}</span>
+                        </div>
+                        <div style="color: #ccc; font-size: 0.9rem; margin-bottom: 10px;">
+                            ${escapeHtml((lead.lastMessage || 'Nessun messaggio').substring(0, 100))}...
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <span style="background: rgba(255,107,53,0.2); color: #ff6b35; padding: 4px 12px; border-radius: 15px; font-size: 0.8rem;">
+                                ${lead.interest || 'generale'}
+                            </span>
+                            ${lead.isHot ? '<span style="color: #ff4444;">🔥 HOT</span>' : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
         }
 
         // UPDATE CHARTS
         function updateCharts() {
-            updateScoreDistributionChart();
-            updateCategoryAnalysisChart();
+            updateInterestChart();
         }
 
-        function updateScoreDistributionChart() {
-            const ctx = document.getElementById('scoreDistributionChart');
+        function updateInterestChart() {
+            const ctx = document.getElementById('interestChart');
             if (!ctx) return;
             
-            const quizData = dashboardData.quizAnalytics || {};
-            const distribution = quizData.scoreDistribution || {};
+            const interests = dashboardData.interests || {};
             
-            if (chartInstances.scoreDistributionChart) {
-                chartInstances.scoreDistributionChart.destroy();
+            if (chartInstances.interestChart) {
+                chartInstances.interestChart.destroy();
             }
             
-            // Only show chart if we have data
-            if (Object.values(distribution).some(val => val > 0)) {
-                chartInstances.scoreDistributionChart = new Chart(ctx.getContext('2d'), {
+            if (Object.values(interests).some(val => val > 0)) {
+                chartInstances.interestChart = new Chart(ctx.getContext('2d'), {
                     type: 'doughnut',
                     data: {
-                        labels: ['1-2 (Basso)', '2-3 (Medio)', '3-4 (Buono)', '4-5 (Ottimo)'],
+                        labels: ['Fitness', 'Nutrition', 'Business', 'Lifestyle'],
                         datasets: [{
                             data: [
-                                distribution['1-2'] || 0,
-                                distribution['2-3'] || 0,
-                                distribution['3-4'] || 0,
-                                distribution['4-5'] || 0
+                                interests.fitness || 0,
+                                interests.nutrition || 0,
+                                interests.business || 0,
+                                interests.lifestyle || 0
                             ],
-                            backgroundColor: ['#ff4444', '#fbbf24', '#60a5fa', '#4ade80'],
-                            borderWidth: 0,
-                            hoverBorderWidth: 3,
-                            hoverBorderColor: '#fff'
+                            backgroundColor: ['#ff6b35', '#4ade80', '#60a5fa', '#a855f7'],
+                            borderWidth: 0
                         }]
                     },
                     options: {
@@ -1306,96 +1489,7 @@
                         plugins: {
                             legend: {
                                 position: 'bottom',
-                                labels: { 
-                                    color: '#e0e0e0',
-                                    padding: 20,
-                                    usePointStyle: true
-                                }
-                            },
-                            tooltip: {
-                                backgroundColor: 'rgba(26, 26, 26, 0.9)',
-                                titleColor: '#fff',
-                                bodyColor: '#fff',
-                                borderColor: '#ff6b35',
-                                borderWidth: 1
-                            }
-                        }
-                    }
-                });
-            }
-        }
-
-        function updateCategoryAnalysisChart() {
-            const ctx = document.getElementById('categoryAnalysisChart');
-            if (!ctx) return;
-            
-            const quizData = dashboardData.quizAnalytics || {};
-            const averageScores = quizData.averageScores || {};
-            
-            if (chartInstances.categoryAnalysisChart) {
-                chartInstances.categoryAnalysisChart.destroy();
-            }
-            
-            // Only show chart if we have data
-            if (Object.values(averageScores).some(val => val > 0)) {
-                chartInstances.categoryAnalysisChart = new Chart(ctx.getContext('2d'), {
-                    type: 'bar',
-                    data: {
-                        labels: ['Fitness', 'Alimentazione', 'Abitudini', 'Motivazione', 'Stress'],
-                        datasets: [{
-                            label: 'Score Medio',
-                            data: [
-                                averageScores.fitness || 0,
-                                averageScores.alimentazione || 0,
-                                averageScores.abitudini || 0,
-                                averageScores.motivazione || 0,
-                                averageScores.stress || 0
-                            ],
-                            backgroundColor: 'rgba(255, 107, 53, 0.6)',
-                            borderColor: '#ff6b35',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                max: 5,
-                                ticks: {
-                                    color: '#888'
-                                },
-                                grid: {
-                                    color: '#333'
-                                }
-                            },
-                            x: {
-                                ticks: {
-                                    color: '#888'
-                                },
-                                grid: {
-                                    color: '#333'
-                                }
-                            }
-                        },
-                        plugins: {
-                            legend: {
-                                labels: {
-                                    color: '#e0e0e0'
-                                }
-                            },
-                            tooltip: {
-                                backgroundColor: 'rgba(26, 26, 26, 0.9)',
-                                titleColor: '#fff',
-                                bodyColor: '#fff',
-                                borderColor: '#ff6b35',
-                                borderWidth: 1,
-                                callbacks: {
-                                    label: function(context) {
-                                        return 'Score: ' + context.parsed.y.toFixed(1) + '/5';
-                                    }
-                                }
+                                labels: { color: '#e0e0e0' }
                             }
                         }
                     }
@@ -1407,25 +1501,22 @@
         function updateConnectionStatus(status, message) {
             const statusElement = document.getElementById('connectionStatus');
             const statusIndicator = statusElement.parentElement;
+            const dot = statusIndicator.querySelector('.status-dot');
             
             statusElement.textContent = message;
             
-            const dot = statusIndicator.querySelector('.status-dot');
             switch(status) {
                 case 'connected':
-                    statusIndicator.style.background = 'rgba(74, 222, 128, 0.1)';
                     statusIndicator.style.borderColor = '#4ade80';
                     statusIndicator.style.color = '#4ade80';
                     dot.style.background = '#4ade80';
                     break;
                 case 'loading':
-                    statusIndicator.style.background = 'rgba(251, 191, 36, 0.1)';
                     statusIndicator.style.borderColor = '#fbbf24';
                     statusIndicator.style.color = '#fbbf24';
                     dot.style.background = '#fbbf24';
                     break;
                 case 'error':
-                    statusIndicator.style.background = 'rgba(248, 113, 113, 0.1)';
                     statusIndicator.style.borderColor = '#f87171';
                     statusIndicator.style.color = '#f87171';
                     dot.style.background = '#f87171';
@@ -1434,26 +1525,12 @@
         }
 
         function showNoDataState() {
-            // Update overview cards with 0
-            const cardIds = ['todayQuizzes', 'quizLeads', 'avgScore', 'hotLeads', 'todayConversations'];
+            const cardIds = ['todayConversations', 'activeLeads', 'hotLeads', 'totalQuizzes', 'highPriorityProfiles', 'beginnerProfiles', 'toContact'];
             cardIds.forEach(id => {
                 const element = document.getElementById(id);
                 if (element) {
-                    if (id === 'avgScore') {
-                        element.textContent = '0.0';
-                    } else if (id === 'conversionRate') {
-                        element.textContent = '0%';
-                    } else {
-                        element.textContent = '0';
-                    }
+                    element.textContent = id === 'conversionRate' ? '0%' : '0';
                 }
-            });
-            
-            // Update change indicators
-            const changeIds = ['quizzesChange', 'quizLeadsChange', 'scoreChange', 'hotLeadsChange', 'conversationsChange', 'conversionChange'];
-            changeIds.forEach(id => {
-                const element = document.getElementById(id);
-                if (element) element.innerHTML = 'In attesa di dati...';
             });
         }
 
@@ -1484,12 +1561,18 @@
             loadDashboardData();
         }
 
-        function filterQuizResults(type) {
-            updateQuizResultsList(type);
+        function filterQuizProfiles(type) {
+            updateQuizProfilesList(type);
+            
+            // Update button states
+            document.querySelectorAll('.section-actions .action-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(`filter${type.charAt(0).toUpperCase() + type.slice(1)}Quiz`).classList.add('active');
         }
 
-        function filterLeads(type) {
-            updateLeadsList(type);
+        function viewFullReport(leadId) {
+            alert('Report completo sarà disponibile a breve!');
         }
 
         // REFRESH TIMER
@@ -1505,9 +1588,6 @@
                 
                 if (seconds <= 0) {
                     seconds = 30;
-                    if (timerElement) {
-                        timerElement.textContent = '30s';
-                    }
                 }
             }, 1000);
         }
@@ -1519,8 +1599,7 @@
             }
         }
 
-        // Initialize on page load
-        console.log('🎯 Andrea Padoan Dashboard with Quiz Integration - Ready');
+        console.log('🎯 Dashboard Ready - Quiz Profiles Integration Complete');
     </script>
 </body>
 </html>
