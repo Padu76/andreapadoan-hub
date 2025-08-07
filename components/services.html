@@ -156,52 +156,103 @@
         </div>
     </div>
 
-    <!-- Sezione Quiz unica e principale -->
-    <div class="quiz-intro-section">
-        <div class="quiz-content">
-            <h2 class="quiz-title">
-                <i class="fas fa-target"></i>
-                Non sai quale servizio fa per te?
+    <!-- QUIZ SECTION COMPLETAMENTE RIDISEGNATA -->
+    <div class="quiz-intro-section" style="
+        background-image: linear-gradient(135deg, rgba(255, 107, 0, 0.92) 0%, rgba(255, 152, 0, 0.88) 100%), 
+                          url('https://images.unsplash.com/photo-1517963879433-6ad2b056d712?w=1920&h=1080&fit=crop');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        position: relative;
+        padding: 80px 20px;
+        margin: 80px -15px 0;
+        min-height: 600px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    ">
+        <!-- Animated background elements -->
+        <div class="quiz-bg-animation"></div>
+        
+        <div class="quiz-content-redesigned">
+            <!-- Badge animato -->
+            <div class="quiz-badge">
+                <span class="badge-icon">🎯</span>
+                <span class="badge-text">TEST GRATUITO</span>
+            </div>
+            
+            <!-- Titolo principale con animazione -->
+            <h2 class="quiz-main-title">
+                <span class="title-line1">Non sai da dove iniziare?</span>
+                <span class="title-line2">Scopri il percorso perfetto per te!</span>
             </h2>
-            <p class="quiz-description-main">
-                <strong>Fai un breve quiz per ricevere un report personalizzato sul tuo stile di vita</strong>
-            </p>
-            <p class="quiz-description-sub">
-                Riceverai consigli preziosi su come migliorare fin da subito la tua forma fisica, alimentazione e benessere generale
+            
+            <!-- Sottotitolo più engaging -->
+            <p class="quiz-subtitle-redesigned">
+                <strong>3 minuti</strong> per capire esattamente cosa ti serve per raggiungere i tuoi obiettivi
             </p>
             
-            <!-- Benefici del quiz -->
-            <div class="quiz-benefits">
-                <div class="benefit-item">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Report personalizzato</span>
-                </div>
-                <div class="benefit-item">
-                    <i class="fas fa-star"></i>
-                    <span>Score per ogni area</span>
-                </div>
-                <div class="benefit-item">
-                    <i class="fas fa-lightbulb"></i>
-                    <span>Consigli specifici</span>
-                </div>
-                <div class="benefit-item">
-                    <i class="fas fa-clock"></i>
-                    <span>Solo 3 minuti</span>
+            <!-- Cosa otterrai - più visuale -->
+            <div class="quiz-results-preview">
+                <h3 class="preview-title">Cosa scoprirai:</h3>
+                <div class="results-cards">
+                    <div class="result-card">
+                        <div class="result-icon">📊</div>
+                        <div class="result-title">Il tuo punteggio fitness</div>
+                        <div class="result-desc">Valutazione oggettiva del tuo stato attuale</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-icon">🎯</div>
+                        <div class="result-title">Piano personalizzato</div>
+                        <div class="result-desc">I servizi più adatti ai tuoi obiettivi</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-icon">💡</div>
+                        <div class="result-title">Consigli pratici</div>
+                        <div class="result-desc">Azioni immediate per iniziare subito</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-icon">📧</div>
+                        <div class="result-title">Report dettagliato</div>
+                        <div class="result-desc">Ricevi tutto via email in PDF</div>
+                    </div>
                 </div>
             </div>
             
-            <a href="./quiz.html" class="quiz-start-btn">
-                <i class="fas fa-play-circle"></i>
-                Inizia il Test
-            </a>
+            <!-- CTA più prominente -->
+            <div class="quiz-cta-container">
+                <a href="./quiz.html" class="quiz-mega-btn">
+                    <span class="btn-icon">🚀</span>
+                    <span class="btn-text">
+                        <span class="btn-main">Fai il Test Ora</span>
+                        <span class="btn-sub">100% Gratuito • Nessuna registrazione</span>
+                    </span>
+                    <span class="btn-arrow">→</span>
+                </a>
+                
+                <!-- Trust elements -->
+                <div class="quiz-trust">
+                    <div class="trust-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Dati protetti</span>
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-users"></i>
+                        <span>500+ test completati</span>
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-star"></i>
+                        <span>4.9/5 rating</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
 <style>
-/* ===== SERVICES MOBILE-FIRST OTTIMIZZATO ===== */
-
-/* Container principale */
+/* ===== SERVICES BASE STYLES ===== */
 .projects-container {
     padding: 60px 15px;
     max-width: 1200px;
@@ -232,15 +283,15 @@
     margin-right: auto;
 }
 
-/* Grid progetti - MOBILE FIRST */
+/* Grid progetti */
 .projects-grid {
     display: grid;
-    grid-template-columns: 1fr; /* Mobile: 1 colonna */
+    grid-template-columns: 1fr;
     gap: 25px;
     margin-bottom: 60px;
 }
 
-/* Card progetti */
+/* Project cards - manteniamo gli stili esistenti */
 .project-card {
     background: linear-gradient(135deg, rgba(26, 26, 26, 0.95), rgba(40, 40, 40, 0.9));
     border-radius: 20px;
@@ -261,7 +312,6 @@
     box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
 }
 
-/* Immagini progetti - OTTIMIZZATE MOBILE */
 .project-image {
     width: 100%;
     height: 180px;
@@ -277,40 +327,16 @@
     transform: scale(1.05);
 }
 
-/* Immagini specifiche - LOCALI E UNSPLASH */
-.pt-image {
-    background-image: url('./images/andrea-personal-training.jpg');
-}
+/* Immagini specifiche */
+.pt-image { background-image: url('./images/andrea-personal-training.jpg'); }
+.tribu-image { background-image: url('./images/tribu-studio-interior.jpg'); }
+.coaching-image { background-image: url('./images/coaching.jpg'); }
+.mealprep-image { background-image: url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=400&h=300&fit=crop'); }
+.pastosano-image { background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop'); }
+.upstart-image { background-image: url('https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=300&fit=crop'); }
+.besttrainer-image { background-image: url('./images/best-trainer.jpeg'); }
+.ebook-image { background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop'); }
 
-.tribu-image {
-    background-image: url('./images/tribu-studio-interior.jpg');
-}
-
-.coaching-image {
-    background-image: url('./images/coaching.jpg');
-}
-
-.mealprep-image {
-    background-image: url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=400&h=300&fit=crop');
-}
-
-.pastosano-image {
-    background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop');
-}
-
-.upstart-image {
-    background-image: url('https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=300&fit=crop');
-}
-
-.besttrainer-image {
-    background-image: url('./images/best-trainer.jpeg');
-}
-
-.ebook-image {
-    background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop');
-}
-
-/* Content progetti */
 .project-content {
     padding: 25px 20px;
     flex: 1;
@@ -325,7 +351,6 @@
     font-weight: bold;
     margin-bottom: 12px;
     line-height: 1.3;
-    word-wrap: break-word;
 }
 
 .project-description {
@@ -334,10 +359,8 @@
     line-height: 1.6;
     margin-bottom: 20px;
     flex: 1;
-    word-wrap: break-word;
 }
 
-/* Actions container */
 .project-actions {
     display: flex;
     flex-direction: column;
@@ -345,7 +368,6 @@
     margin-top: auto;
 }
 
-/* Bottoni progetti - DUE STILI */
 .project-btn-primary, .project-btn-chat {
     border: none;
     padding: 14px 18px;
@@ -360,198 +382,298 @@
     justify-content: center;
     gap: 10px;
     min-height: 48px;
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
 }
 
-/* Bottone primario (arancione) */
 .project-btn-primary {
     background: linear-gradient(45deg, #ff6b35, #ff8533);
     color: white;
     box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
 }
 
-.project-btn-primary:hover, .project-btn-primary:active {
+.project-btn-primary:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
 }
 
-/* Bottone chat (verde) */
 .project-btn-chat {
     background: transparent;
     color: #4ade80;
     border: 2px solid #4ade80;
 }
 
-.project-btn-chat:hover, .project-btn-chat:active {
+.project-btn-chat:hover {
     background: rgba(74, 222, 128, 0.1);
     transform: translateY(-1px);
 }
 
-.project-btn-primary:active, .project-btn-chat:active {
-    transform: translateY(0) scale(0.98);
-}
+/* ===== QUIZ SECTION RIDISEGNATA ===== */
 
-.project-btn-primary i, .project-btn-chat i {
-    font-size: 0.9rem;
-    transition: transform 0.3s ease;
-}
-
-.project-btn-primary:hover i, .project-btn-chat:hover i {
-    transform: scale(1.1);
-}
-
-/* Quiz Section - OTTIMIZZATA MOBILE */
 .quiz-intro-section {
+    position: relative;
     text-align: center;
-    margin: 80px 0 0;
-    padding: 50px 30px;
-    background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 133, 51, 0.05));
-    border-radius: 25px;
-    border: 2px solid rgba(255, 107, 53, 0.3);
+}
+
+/* Background animation overlay */
+.quiz-bg-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.quiz-bg-animation::before,
+.quiz-bg-animation::after {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: moveGrid 20s linear infinite;
+}
+
+.quiz-bg-animation::after {
+    animation-direction: reverse;
+    opacity: 0.5;
+}
+
+@keyframes moveGrid {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 50px); }
+}
+
+.quiz-content-redesigned {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Badge animato */
+.quiz-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    padding: 8px 20px;
+    border-radius: 30px;
+    margin-bottom: 30px;
+    animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.badge-icon {
+    font-size: 1.2rem;
+    animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.badge-text {
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+/* Titolo principale */
+.quiz-main-title {
+    margin-bottom: 20px;
+}
+
+.title-line1 {
+    display: block;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    color: rgba(255,255,255,0.9);
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.title-line2 {
+    display: block;
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
+    color: #fff;
+    font-weight: 900;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+    to { text-shadow: 2px 2px 20px rgba(255,255,255,0.3); }
+}
+
+/* Sottotitolo */
+.quiz-subtitle-redesigned {
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
+    color: rgba(255,255,255,0.95);
+    margin-bottom: 50px;
+    line-height: 1.6;
+}
+
+/* Results preview cards */
+.quiz-results-preview {
+    margin-bottom: 50px;
+}
+
+.preview-title {
+    color: rgba(255,255,255,0.9);
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.results-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.result-card {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 25px 20px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.result-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255,255,255,0.15);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.result-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.result-title {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+.result-desc {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* Mega CTA Button */
+.quiz-cta-container {
+    margin-top: 40px;
+}
+
+.quiz-mega-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    background: white;
+    color: #ff6b00;
+    padding: 25px 40px;
+    border-radius: 60px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
     position: relative;
     overflow: hidden;
 }
 
-.quiz-intro-section::before {
+.quiz-mega-btn::before {
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255, 107, 53, 0.03) 0%, transparent 70%);
-    animation: rotateGlow 15s linear infinite;
-    z-index: 0;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,107,0,0.1), transparent);
+    transition: left 0.6s;
 }
 
-@keyframes rotateGlow {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+.quiz-mega-btn:hover::before {
+    left: 100%;
 }
 
-.quiz-content {
-    position: relative;
-    z-index: 2;
-    max-width: 700px;
-    margin: 0 auto;
+.quiz-mega-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
 }
 
-.quiz-title {
-    color: #ff6b35;
-    font-size: clamp(1.8rem, 5vw, 2.8rem);
-    font-weight: 900;
-    margin-bottom: 25px;
-    line-height: 1.3;
+.btn-icon {
+    font-size: 2rem;
+}
+
+.btn-text {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.btn-main {
+    font-size: 1.4rem;
+    font-weight: 800;
+}
+
+.btn-sub {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    font-weight: 500;
+}
+
+.btn-arrow {
+    font-size: 1.8rem;
+    font-weight: 700;
+    animation: arrowMove 1s ease-in-out infinite;
+}
+
+@keyframes arrowMove {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
+}
+
+/* Trust elements */
+.quiz-trust {
+    display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 30px;
+    margin-top: 30px;
     flex-wrap: wrap;
 }
 
-.quiz-title i {
-    font-size: 0.9em;
-}
-
-.quiz-description-main {
-    color: #e0e0e0;
-    font-size: clamp(1.1rem, 3vw, 1.3rem);
-    margin-bottom: 15px;
-    line-height: 1.6;
-}
-
-.quiz-description-sub {
-    color: #b0b0b0;
-    font-size: clamp(1rem, 2.5vw, 1.1rem);
-    margin-bottom: 40px;
-    line-height: 1.6;
-}
-
-/* Quiz benefits - MOBILE GRID */
-.quiz-benefits {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin-bottom: 40px;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.benefit-item {
+.trust-item {
     display: flex;
     align-items: center;
-    gap: 10px;
-    justify-content: center;
-    color: #e0e0e0;
-    font-size: 0.9rem;
-    font-weight: 500;
-    padding: 8px;
+    gap: 8px;
+    color: rgba(255,255,255,0.9);
+    font-size: 0.95rem;
 }
 
-.benefit-item i {
+.trust-item i {
     color: #4ade80;
     font-size: 1.1rem;
-    width: 16px;
-    flex-shrink: 0;
 }
 
-/* Quiz CTA button */
-.quiz-start-btn {
-    background: linear-gradient(45deg, #ff6b35, #ff8c5a);
-    color: white;
-    text-decoration: none;
-    padding: 18px 35px;
-    border-radius: 50px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    transition: all 0.4s ease;
-    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
-    touch-action: manipulation;
-}
-
-.quiz-start-btn:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 15px 40px rgba(255, 107, 53, 0.6);
-}
-
-.quiz-start-btn:active {
-    transform: translateY(-1px) scale(1.02);
-}
-
-.quiz-start-btn i {
-    font-size: 1.2rem;
-    transition: transform 0.3s ease;
-}
-
-.quiz-start-btn:hover i {
-    transform: scale(1.1);
-}
-
-/* Responsive Breakpoints */
-
-/* Tablet */
+/* Responsive */
 @media (min-width: 640px) {
     .projects-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 25px;
-    }
-    
-    .project-image {
-        height: 200px;
-    }
-    
-    .project-content {
-        padding: 30px 25px;
-    }
-    
-    .quiz-benefits {
-        grid-template-columns: repeat(4, 1fr);
-        max-width: 600px;
     }
     
     .project-actions {
@@ -564,155 +686,73 @@
     }
 }
 
-/* Desktop */
 @media (min-width: 1024px) {
-    .projects-container {
-        padding: 80px 40px;
-    }
-    
     .projects-grid {
         grid-template-columns: repeat(4, 1fr);
-        gap: 25px;
-    }
-    
-    .project-card {
-        min-height: 460px;
-    }
-    
-    .project-image {
-        height: 160px;
-    }
-    
-    .project-content {
-        padding: 25px 20px;
-    }
-    
-    .project-title {
-        font-size: 1.2rem;
-    }
-    
-    .project-description {
-        font-size: 0.9rem;
-    }
-    
-    .project-btn-primary, .project-btn-chat {
-        padding: 12px 16px;
-        font-size: 0.85rem;
     }
     
     .project-actions {
         flex-direction: column;
         gap: 10px;
     }
-    
-    .quiz-intro-section {
-        padding: 60px 40px;
-    }
 }
 
-/* Extra small devices */
-@media (max-width: 480px) {
-    .projects-container {
-        padding: 40px 10px;
-        margin-bottom: 60px;
+@media (max-width: 768px) {
+    .quiz-intro-section {
+        padding: 60px 15px !important;
+        margin: 60px -10px 0 !important;
     }
     
-    .projects-grid {
+    .results-cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .quiz-mega-btn {
+        flex-direction: column;
+        padding: 20px 30px;
+        gap: 15px;
+        width: 90%;
+        max-width: 350px;
+    }
+    
+    .btn-arrow {
+        display: none;
+    }
+    
+    .quiz-trust {
         gap: 20px;
     }
     
-    .project-card {
-        min-height: 380px;
+    .trust-item {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .results-cards {
+        grid-template-columns: 1fr;
     }
     
-    .project-content {
+    .result-card {
         padding: 20px 15px;
     }
     
-    .project-title {
-        font-size: 1.1rem;
+    .trust-item span {
+        display: none;
     }
     
-    .project-description {
-        font-size: 0.9rem;
-    }
-    
-    .project-btn-primary, .project-btn-chat {
-        padding: 12px 15px;
-        font-size: 0.9rem;
-    }
-    
-    .quiz-benefits {
-        grid-template-columns: 1fr;
-        gap: 10px;
-    }
-    
-    .quiz-intro-section {
-        padding: 30px 20px;
-    }
-    
-    .quiz-title {
-        flex-direction: column;
-        gap: 10px;
-    }
-}
-
-/* Performance optimizations */
-.project-image {
-    will-change: transform;
-}
-
-.project-card {
-    will-change: transform;
-}
-
-/* Accessibility improvements */
-@media (prefers-reduced-motion: reduce) {
-    .project-card, .project-btn-primary, .project-btn-chat, .project-image {
-        transition: none;
-    }
-    
-    .project-card:hover {
-        transform: none;
-    }
-    
-    @keyframes rotateGlow {
-        0%, 100% { transform: rotate(0deg); }
-    }
-}
-
-/* High contrast mode */
-@media (prefers-contrast: high) {
-    .project-card {
-        border-width: 3px;
-    }
-    
-    .project-btn-primary, .project-btn-chat {
-        border-width: 2px;
-    }
-}
-
-/* Dark mode ottimizzazioni */
-@media (prefers-color-scheme: dark) {
-    .project-card {
-        background: linear-gradient(135deg, rgba(15, 15, 15, 0.95), rgba(25, 25, 25, 0.9));
+    .trust-item i {
+        font-size: 1.5rem;
     }
 }
 </style>
 
 <script>
-// ===== SERVICES FUNCTIONALITY OTTIMIZZATA ===== 
-
-// Funzione per aprire progetti esterni
+// Services functionality
 function openProject(url) {
     console.log(`🎯 Opening project: ${url}`);
-    
-    // Haptic feedback se disponibile
-    if ('vibrate' in navigator) {
-        navigator.vibrate(20);
-    }
-    
-    // Analytics tracking
+    if ('vibrate' in navigator) navigator.vibrate(20);
     if (typeof gtag !== 'undefined') {
         gtag('event', 'project_visit', {
             'event_category': 'engagement',
@@ -720,21 +760,12 @@ function openProject(url) {
             'value': 1
         });
     }
-    
-    // Apri progetto
     window.open(url, '_blank', 'noopener');
 }
 
-// Funzione per messaggi chat rapidi
 function sendQuickMessage(message) {
     console.log(`💬 Quick message: ${message}`);
-    
-    // Haptic feedback
-    if ('vibrate' in navigator) {
-        navigator.vibrate(10);
-    }
-    
-    // Analytics tracking
+    if ('vibrate' in navigator) navigator.vibrate(10);
     if (typeof gtag !== 'undefined') {
         gtag('event', 'quick_chat', {
             'event_category': 'engagement',
@@ -742,132 +773,34 @@ function sendQuickMessage(message) {
             'value': 1
         });
     }
-    
-    // Apri chat con messaggio precompilato
     const whatsappUrl = `https://wa.me/3478881515?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank', 'noopener');
 }
 
-// Lazy loading immagini ottimizzato
-function initServiceImages() {
-    const serviceImages = document.querySelectorAll('.project-image');
+// Animazioni on scroll
+document.addEventListener('DOMContentLoaded', () => {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
     
-    const imageObserver = new IntersectionObserver((entries, observer) => {
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                const img = entry.target;
-                
-                // Effetto fade in
-                img.style.opacity = '0';
-                img.style.transition = 'opacity 0.5s ease';
-                
-                setTimeout(() => {
-                    img.style.opacity = '1';
-                }, 100);
-                
-                observer.unobserve(img);
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
             }
         });
-    }, {
-        threshold: 0.1,
-        rootMargin: '50px 0px'
-    });
+    }, observerOptions);
     
-    serviceImages.forEach(img => imageObserver.observe(img));
-}
-
-// Animazioni scroll per servizi
-function initServiceAnimations() {
-    const serviceCards = document.querySelectorAll('.project-card');
-    
-    const cardObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }, index * 100); // Stagger animation
-            }
-        });
-    }, {
-        threshold: 0.2
-    });
-    
-    serviceCards.forEach(card => {
+    // Osserva i result cards
+    document.querySelectorAll('.result-card').forEach((card, index) => {
         card.style.opacity = '0';
         card.style.transform = 'translateY(30px)';
-        card.style.transition = 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-        cardObserver.observe(card);
+        card.style.transition = `all 0.6s ease ${index * 0.1}s`;
+        observer.observe(card);
     });
-}
-
-// Touch gestures per servizi mobile
-function initServiceTouchGestures() {
-    if ('ontouchstart' in window) {
-        const serviceCards = document.querySelectorAll('.project-card');
-        
-        serviceCards.forEach(card => {
-            let touchStartY = 0;
-            
-            card.addEventListener('touchstart', (e) => {
-                touchStartY = e.touches[0].clientY;
-                card.style.transform = 'scale(0.98)';
-            }, { passive: true });
-            
-            card.addEventListener('touchend', (e) => {
-                const touchEndY = e.changedTouches[0].clientY;
-                const deltaY = touchStartY - touchEndY;
-                
-                card.style.transform = '';
-                
-                // Swipe up per aprire primo bottone
-                if (deltaY > 30) {
-                    const primaryBtn = card.querySelector('.project-btn-primary');
-                    if (primaryBtn) {
-                        primaryBtn.click();
-                    }
-                }
-            }, { passive: true });
-        });
-    }
-}
-
-// Performance monitoring
-function trackServicePerformance() {
-    if ('PerformanceObserver' in window) {
-        const observer = new PerformanceObserver((list) => {
-            list.getEntries().forEach((entry) => {
-                if (entry.name.includes('service') && entry.entryType === 'measure') {
-                    console.log(`📊 Service performance: ${entry.name} - ${entry.duration.toFixed(2)}ms`);
-                }
-            });
-        });
-        
-        observer.observe({ entryTypes: ['measure'] });
-    }
-}
-
-// Inizializzazione
-document.addEventListener('DOMContentLoaded', () => {
-    // Piccolo delay per permettere il caricamento del componente
-    setTimeout(() => {
-        initServiceImages();
-        initServiceAnimations();
-        initServiceTouchGestures();
-        trackServicePerformance();
-        
-        console.log('✅ Services section initialized with mobile optimizations');
-    }, 100);
+    
+    console.log('✅ Services with redesigned quiz section loaded');
 });
-
-// Gestione errori immagini
-document.addEventListener('error', (e) => {
-    if (e.target.classList && e.target.classList.contains('project-image')) {
-        console.log('⚠️ Image failed to load:', e.target.style.backgroundImage);
-        e.target.style.backgroundImage = 'linear-gradient(135deg, #333, #555)';
-        e.target.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #888; font-size: 0.9rem;">Immagine non disponibile</div>';
-    }
-}, true);
-
-console.log('🚀 Services component loaded with mobile optimization');
 </script>
