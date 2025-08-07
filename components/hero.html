@@ -8,12 +8,12 @@
             <div class="profile-content" style="background-image: url('./images/andrea-profile.jpg'); background-size: cover; background-position: center;"></div>
         </div>
         
-        <div class="hero-cta-buttons">
-            <button class="main-cta" onclick="openChat()">
+        <div class="hero-cta-buttons" style="display: flex !important; gap: 15px !important; justify-content: center !important; margin: 20px 0 !important; z-index: 999 !important; position: relative !important;">
+            <button class="main-cta hero-main-cta" onclick="openChat()" style="display: inline-flex !important; visibility: visible !important; opacity: 1 !important;">
                 <i class="fas fa-comments"></i>
                 Chiedimi tutto sui miei servizi
             </button>
-            <button class="quiz-cta" onclick="goToQuiz()">
+            <button class="quiz-cta hero-quiz-cta" onclick="goToQuiz()" style="display: inline-flex !important; visibility: visible !important; opacity: 1 !important;">
                 <i class="fas fa-clipboard-list"></i>
                 Quiz: Testa il tuo livello fitness
             </button>
@@ -37,7 +37,7 @@
 </div>
 
 <style>
-/* RIMOZIONE COMPLETA HEADER ARANCIONE E EFFETTI */
+/* RIMOZIONE COMPLETA HEADER ARANCIONE */
 .header {
     background: transparent !important;
     backdrop-filter: none !important;
@@ -46,7 +46,7 @@
     background-color: transparent !important;
 }
 
-/* Header scrollato - minimo cambiamento, NO EFFETTI */
+/* Header scrollato - minimo cambiamento */
 .header.scrolled {
     background: rgba(0, 0, 0, 0.85) !important;
     backdrop-filter: none !important;
@@ -54,7 +54,7 @@
     box-shadow: none !important;
 }
 
-/* BLOCCO TOTALE EFFETTO RIMPICCIOLIMENTO TESTO */
+/* BLOCCO EFFETTO RIMPICCIOLIMENTO */
 .hero h1 {
     font-size: 4.5rem !important;
     transform: none !important;
@@ -73,7 +73,7 @@
     transition: none !important;
 }
 
-/* Blocco animazioni scroll su tutti gli elementi */
+/* Blocco animazioni scroll */
 .hero * {
     transform: none !important;
     animation: none !important;
@@ -81,34 +81,34 @@
 
 /* SEZIONE HERO COMPATTA */
 .hero {
-    padding-top: 60px !important;
-    padding-bottom: 30px !important;
+    padding-top: 50px !important;
+    padding-bottom: 20px !important;
     min-height: auto !important;
     height: auto !important;
 }
 
-/* Riduzione spazi tra elementi */
+/* Spazi ridotti */
 .hero h1 {
-    margin-bottom: 10px !important;
+    margin-bottom: 8px !important;
 }
 
 .hero-subtitle {
-    margin-bottom: 8px !important;
+    margin-bottom: 5px !important;
 }
 
 .hero-pitch {
     margin-bottom: 15px !important;
 }
 
-/* IMMAGINE PROFILO PIÙ GRANDE E PIÙ IN ALTO */
+/* IMMAGINE PROFILO PIÙ GRANDE E IN ALTO */
 .profile-section {
-    margin-top: -10px !important;
+    margin-top: -5px !important;
 }
 
 .profile-image {
     width: 320px !important;
     height: 320px !important;
-    margin: 0 auto 25px !important;
+    margin: 0 auto 20px !important;
     border-radius: 50% !important;
     overflow: hidden !important;
     border: 4px solid #ff6b35 !important;
@@ -120,60 +120,66 @@
     height: 100% !important;
 }
 
-/* PULSANTI BEN VISIBILI E PROMINENTI */
+/* PULSANTI SUPER VISIBILI - OVERRIDE TOTALE */
 .hero-cta-buttons {
     display: flex !important;
     gap: 15px !important;
     justify-content: center !important;
-    margin-bottom: 20px !important;
-    z-index: 100 !important;
+    margin: 20px 0 !important;
+    z-index: 999 !important;
     position: relative !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
-.main-cta, .quiz-cta {
+/* Override specifico per i pulsanti nella hero */
+.hero-main-cta,
+.hero-quiz-cta {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 999 !important;
     padding: 16px 28px !important;
     font-size: 1.1rem !important;
     font-weight: 600 !important;
     border-radius: 30px !important;
     cursor: pointer !important;
-    display: inline-flex !important;
     align-items: center !important;
     gap: 10px !important;
     transition: all 0.3s ease !important;
     border: none !important;
     text-decoration: none !important;
     white-space: nowrap !important;
-    z-index: 100 !important;
-    position: relative !important;
 }
 
-/* Pulsante Chat - Arancione Vivace */
-.main-cta {
+/* Pulsante Chat - Arancione */
+.hero-main-cta {
     background: linear-gradient(135deg, #ff6b35, #ff8c42) !important;
     color: white !important;
     box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4) !important;
 }
 
-.main-cta:hover {
+.hero-main-cta:hover {
     background: linear-gradient(135deg, #ff8c42, #ff6b35) !important;
     transform: translateY(-2px) !important;
     box-shadow: 0 6px 20px rgba(255, 107, 53, 0.5) !important;
 }
 
-/* Pulsante Quiz - Verde Acceso */
-.quiz-cta {
+/* Pulsante Quiz - Verde */
+.hero-quiz-cta {
     background: linear-gradient(135deg, #4ade80, #22c55e) !important;
     color: white !important;
     box-shadow: 0 4px 15px rgba(74, 222, 128, 0.4) !important;
 }
 
-.quiz-cta:hover {
+.hero-quiz-cta:hover {
     background: linear-gradient(135deg, #22c55e, #4ade80) !important;
     transform: translateY(-2px) !important;
     box-shadow: 0 6px 20px rgba(74, 222, 128, 0.5) !important;
 }
 
-/* Chat benefits più compatti */
+/* Chat benefits compatti */
 .chat-benefits {
     display: flex !important;
     gap: 20px !important;
@@ -198,29 +204,25 @@
 /* RESPONSIVE - Tablet */
 @media (max-width: 768px) {
     .hero {
-        padding-top: 50px !important;
-        padding-bottom: 20px !important;
+        padding-top: 45px !important;
+        padding-bottom: 15px !important;
     }
     
     .hero h1 {
         font-size: 3.5rem !important;
-        margin-bottom: 8px !important;
     }
     
     .hero-subtitle {
         font-size: 1.2rem !important;
-        margin-bottom: 5px !important;
     }
     
     .hero-pitch {
         font-size: 1rem !important;
-        margin-bottom: 12px !important;
     }
     
     .profile-image {
         width: 280px !important;
         height: 280px !important;
-        margin-bottom: 20px !important;
     }
     
     .hero-cta-buttons {
@@ -228,7 +230,7 @@
         gap: 12px !important;
     }
     
-    .main-cta, .quiz-cta {
+    .hero-main-cta, .hero-quiz-cta {
         width: 100% !important;
         max-width: 300px !important;
         justify-content: center !important;
@@ -238,60 +240,53 @@
 /* RESPONSIVE - Mobile */
 @media (max-width: 480px) {
     .hero {
-        padding-top: 45px !important;
-        padding-bottom: 15px !important;
+        padding-top: 40px !important;
+        padding-bottom: 10px !important;
     }
     
     .hero h1 {
         font-size: 2.8rem !important;
-        margin-bottom: 5px !important;
     }
     
     .hero-subtitle {
         font-size: 1.1rem !important;
-        margin-bottom: 3px !important;
     }
     
     .hero-pitch {
         font-size: 0.95rem !important;
-        margin-bottom: 10px !important;
     }
     
     .profile-image {
         width: 240px !important;
         height: 240px !important;
-        margin-bottom: 15px !important;
     }
     
-    .main-cta, .quiz-cta {
+    .hero-main-cta, .hero-quiz-cta {
         padding: 14px 24px !important;
         font-size: 1rem !important;
-    }
-    
-    .chat-benefits {
-        gap: 12px !important;
-        font-size: 0.85rem !important;
     }
 }
 </style>
 
 <script>
-// Precaricamento immagine per velocizzare
+// Precaricamento immagine
 window.addEventListener('DOMContentLoaded', () => {
-    // Precarica l'immagine profilo
     const img = new Image();
     img.src = './images/andrea-profile.jpg';
     img.onload = () => {
         console.log('Immagine profilo caricata');
     };
     
-    // FORZA RIMOZIONE CLASSI CHE POTREBBERO CAUSARE EFFETTI
-    const hero = document.querySelector('.hero');
-    if (hero) {
-        hero.classList.remove('animated', 'fade-in', 'scroll-effect');
-    }
+    // FORZA VISIBILITÀ PULSANTI
+    const buttons = document.querySelectorAll('.hero-main-cta, .hero-quiz-cta');
+    buttons.forEach(btn => {
+        btn.style.display = 'inline-flex';
+        btn.style.visibility = 'visible';
+        btn.style.opacity = '1';
+        btn.style.zIndex = '999';
+    });
     
-    // Blocca qualsiasi listener di scroll che modifica la hero
+    // Blocca scroll effects
     window.addEventListener('scroll', (e) => {
         const heroElements = document.querySelectorAll('.hero, .hero h1, .hero-subtitle, .hero-pitch');
         heroElements.forEach(el => {
@@ -306,14 +301,14 @@ function goToQuiz() {
     window.location.href = './quiz.html';
 }
 
-// Fallback function se scrollToQuiz non esiste
+// Fallback function
 if (typeof scrollToQuiz === 'undefined') {
     function scrollToQuiz() {
         goToQuiz();
     }
 }
 
-// Funzione per aprire la chat se non definita
+// Funzione per aprire la chat
 if (typeof openChat === 'undefined') {
     function openChat() {
         const chatFullscreen = document.querySelector('.chat-fullscreen');
