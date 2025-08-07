@@ -11,3 +11,139 @@
         </a>
     </div>
 </div>
+
+<style>
+/* CONTACT SECTION - TESTI ALLINEATI */
+.contact-section {
+    text-align: center !important;
+    padding: 60px 20px 80px !important;
+    background: transparent !important;
+    position: relative !important;
+}
+
+.contact-section h2 {
+    color: #6b7280 !important;
+    margin-bottom: 15px !important;
+    font-size: 2rem !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+    line-height: 1.2 !important;
+}
+
+.contact-section p {
+    color: #b0b0b0 !important;
+    margin-bottom: 40px !important;
+    max-width: 400px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    font-size: 1.1rem !important;
+    text-align: center !important;
+    line-height: 1.5 !important;
+}
+
+.contact-buttons {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 20px !important;
+    flex-wrap: wrap !important;
+}
+
+.contact-btn {
+    padding: 15px 30px !important;
+    border-radius: 30px !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    transition: all 0.4s ease !important;
+    font-size: 16px !important;
+    position: relative !important;
+    overflow: hidden !important;
+    min-width: 140px !important;
+}
+
+.contact-btn i {
+    font-size: 20px !important;
+    vertical-align: middle !important;
+}
+
+.contact-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.contact-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.contact-btn:hover {
+    transform: translateY(-3px) scale(1.05) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+}
+
+.whatsapp-btn {
+    background: linear-gradient(135deg, #25d366, #128c7e) !important;
+    color: white !important;
+    box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3) !important;
+}
+
+.email-btn {
+    background: linear-gradient(135deg, #6b7280, #4b5563) !important;
+    color: white !important;
+    box-shadow: 0 5px 20px rgba(107, 114, 128, 0.3) !important;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .contact-section {
+        padding: 50px 20px 60px !important;
+    }
+    
+    .contact-section h2 {
+        font-size: 1.8rem !important;
+    }
+    
+    .contact-section p {
+        font-size: 1rem !important;
+        max-width: 90% !important;
+    }
+    
+    .contact-buttons {
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+    
+    .contact-btn {
+        width: 100% !important;
+        max-width: 280px !important;
+        justify-content: center !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-section h2 {
+        font-size: 1.6rem !important;
+    }
+    
+    .contact-section p {
+        font-size: 0.95rem !important;
+    }
+    
+    .contact-btn {
+        padding: 14px 28px !important;
+        font-size: 15px !important;
+    }
+}
+</style>
