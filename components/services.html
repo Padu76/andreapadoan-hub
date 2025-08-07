@@ -156,7 +156,7 @@
         </div>
     </div>
 
-    <!-- QUIZ SECTION COMPLETAMENTE RIDISEGNATA -->
+    <!-- QUIZ SECTION COMPATTA E OTTIMIZZATA -->
     <div class="quiz-intro-section" style="
         background-image: linear-gradient(135deg, rgba(255, 107, 0, 0.92) 0%, rgba(255, 152, 0, 0.88) 100%), 
                           url('https://images.unsplash.com/photo-1517963879433-6ad2b056d712?w=1920&h=1080&fit=crop');
@@ -164,87 +164,61 @@
         background-position: center;
         background-attachment: fixed;
         position: relative;
-        padding: 80px 20px;
+        padding: 60px 20px;
         margin: 80px -15px 0;
-        min-height: 600px;
+        min-height: 450px;
         display: flex;
         align-items: center;
         justify-content: center;
         overflow: hidden;
     ">
-        <!-- Animated background elements -->
-        <div class="quiz-bg-animation"></div>
         
-        <div class="quiz-content-redesigned">
-            <!-- Badge animato -->
-            <div class="quiz-badge">
-                <span class="badge-icon">🎯</span>
-                <span class="badge-text">TEST GRATUITO</span>
-            </div>
-            
-            <!-- Titolo principale con animazione -->
-            <h2 class="quiz-main-title">
-                <span class="title-line1">Non sai da dove iniziare?</span>
-                <span class="title-line2">Scopri il percorso perfetto per te!</span>
+        <div class="quiz-content-compact">
+            <!-- Titolo principale più diretto -->
+            <h2 class="quiz-title-compact">
+                <span class="highlight-text">Non sai da dove iniziare?</span>
             </h2>
             
-            <!-- Sottotitolo più engaging -->
-            <p class="quiz-subtitle-redesigned">
-                <strong>3 minuti</strong> per capire esattamente cosa ti serve per raggiungere i tuoi obiettivi
+            <!-- Sottotitolo breve e impattante -->
+            <p class="quiz-subtitle-compact">
+                Scopri in <strong>3 minuti</strong> il percorso perfetto per i tuoi obiettivi
             </p>
             
-            <!-- Cosa otterrai - più visuale -->
-            <div class="quiz-results-preview">
-                <h3 class="preview-title">Cosa scoprirai:</h3>
-                <div class="results-cards">
-                    <div class="result-card">
-                        <div class="result-icon">📊</div>
-                        <div class="result-title">Il tuo punteggio fitness</div>
-                        <div class="result-desc">Valutazione oggettiva del tuo stato attuale</div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-icon">🎯</div>
-                        <div class="result-title">Piano personalizzato</div>
-                        <div class="result-desc">I servizi più adatti ai tuoi obiettivi</div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-icon">💡</div>
-                        <div class="result-title">Consigli pratici</div>
-                        <div class="result-desc">Azioni immediate per iniziare subito</div>
-                    </div>
-                    <div class="result-card">
-                        <div class="result-icon">📧</div>
-                        <div class="result-title">Report dettagliato</div>
-                        <div class="result-desc">Ricevi tutto via email in PDF</div>
-                    </div>
+            <!-- Cards in linea singola -->
+            <div class="quiz-benefits-row">
+                <div class="benefit-compact">
+                    <div class="benefit-emoji">📊</div>
+                    <div class="benefit-label">Analisi<br>Personalizzata</div>
+                </div>
+                <div class="benefit-compact">
+                    <div class="benefit-emoji">🎯</div>
+                    <div class="benefit-label">Piano<br>Su Misura</div>
+                </div>
+                <div class="benefit-compact">
+                    <div class="benefit-emoji">💡</div>
+                    <div class="benefit-label">Consigli<br>Pratici</div>
+                </div>
+                <div class="benefit-compact">
+                    <div class="benefit-emoji">⚡</div>
+                    <div class="benefit-label">Risultati<br>Immediati</div>
                 </div>
             </div>
             
-            <!-- CTA più prominente -->
-            <div class="quiz-cta-container">
-                <a href="./quiz.html" class="quiz-mega-btn">
-                    <span class="btn-icon">🚀</span>
-                    <span class="btn-text">
-                        <span class="btn-main">Fai il Test Ora</span>
-                        <span class="btn-sub">100% Gratuito • Nessuna registrazione</span>
+            <!-- CTA con colori più accattivanti -->
+            <div class="quiz-cta-wrapper">
+                <a href="./quiz.html" class="quiz-action-btn">
+                    <span class="btn-glow"></span>
+                    <span class="btn-content">
+                        <i class="fas fa-play-circle"></i>
+                        <span>INIZIA IL TEST GRATUITO</span>
                     </span>
-                    <span class="btn-arrow">→</span>
                 </a>
                 
-                <!-- Trust elements -->
-                <div class="quiz-trust">
-                    <div class="trust-item">
-                        <i class="fas fa-shield-alt"></i>
-                        <span>Dati protetti</span>
-                    </div>
-                    <div class="trust-item">
-                        <i class="fas fa-users"></i>
-                        <span>500+ test completati</span>
-                    </div>
-                    <div class="trust-item">
-                        <i class="fas fa-star"></i>
-                        <span>4.9/5 rating</span>
-                    </div>
+                <!-- Mini trust -->
+                <div class="quiz-mini-trust">
+                    <span><i class="fas fa-check-circle"></i> 100% Gratuito</span>
+                    <span><i class="fas fa-lock"></i> Dati Protetti</span>
+                    <span><i class="fas fa-users"></i> 500+ Completati</span>
                 </div>
             </div>
         </div>
@@ -252,7 +226,7 @@
 </div>
 
 <style>
-/* ===== SERVICES BASE STYLES ===== */
+/* ===== SERVICES BASE STYLES (manteniamo) ===== */
 .projects-container {
     padding: 60px 15px;
     max-width: 1200px;
@@ -283,7 +257,6 @@
     margin-right: auto;
 }
 
-/* Grid progetti */
 .projects-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -291,7 +264,6 @@
     margin-bottom: 60px;
 }
 
-/* Project cards - manteniamo gli stili esistenti */
 .project-card {
     background: linear-gradient(135deg, rgba(26, 26, 26, 0.95), rgba(40, 40, 40, 0.9));
     border-radius: 20px;
@@ -327,7 +299,6 @@
     transform: scale(1.05);
 }
 
-/* Immagini specifiche */
 .pt-image { background-image: url('./images/andrea-personal-training.jpg'); }
 .tribu-image { background-image: url('./images/tribu-studio-interior.jpg'); }
 .coaching-image { background-image: url('./images/coaching.jpg'); }
@@ -406,268 +377,186 @@
     transform: translateY(-1px);
 }
 
-/* ===== QUIZ SECTION RIDISEGNATA ===== */
+/* ===== QUIZ SECTION COMPATTA ===== */
 
-.quiz-intro-section {
+.quiz-content-compact {
     position: relative;
+    z-index: 2;
+    max-width: 1000px;
+    margin: 0 auto;
     text-align: center;
 }
 
-/* Background animation overlay */
-.quiz-bg-animation {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    pointer-events: none;
+/* Titolo con highlight */
+.quiz-title-compact {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 15px;
+    font-weight: 900;
 }
 
-.quiz-bg-animation::before,
-.quiz-bg-animation::after {
+.highlight-text {
+    color: #fff;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+    position: relative;
+    display: inline-block;
+}
+
+.highlight-text::after {
     content: '';
     position: absolute;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
-    background-size: 50px 50px;
-    animation: moveGrid 20s linear infinite;
+    bottom: -5px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #4ade80, #22d3ee);
+    border-radius: 2px;
+    animation: lineGlow 2s ease-in-out infinite;
 }
 
-.quiz-bg-animation::after {
-    animation-direction: reverse;
-    opacity: 0.5;
-}
-
-@keyframes moveGrid {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(50px, 50px); }
-}
-
-.quiz-content-redesigned {
-    position: relative;
-    z-index: 2;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-/* Badge animato */
-.quiz-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(255,255,255,0.2);
-    backdrop-filter: blur(10px);
-    padding: 8px 20px;
-    border-radius: 30px;
-    margin-bottom: 30px;
-    animation: badgePulse 2s ease-in-out infinite;
-}
-
-@keyframes badgePulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-}
-
-.badge-icon {
-    font-size: 1.2rem;
-    animation: rotate 3s linear infinite;
-}
-
-@keyframes rotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-.badge-text {
-    color: #fff;
-    font-weight: 700;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
-}
-
-/* Titolo principale */
-.quiz-main-title {
-    margin-bottom: 20px;
-}
-
-.title-line1 {
-    display: block;
-    font-size: clamp(1.8rem, 5vw, 2.5rem);
-    color: rgba(255,255,255,0.9);
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-
-.title-line2 {
-    display: block;
-    font-size: clamp(2.2rem, 6vw, 3.5rem);
-    color: #fff;
-    font-weight: 900;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    animation: glow 2s ease-in-out infinite alternate;
-}
-
-@keyframes glow {
-    from { text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-    to { text-shadow: 2px 2px 20px rgba(255,255,255,0.3); }
+@keyframes lineGlow {
+    0%, 100% { opacity: 0.8; transform: scaleX(1); }
+    50% { opacity: 1; transform: scaleX(1.05); }
 }
 
 /* Sottotitolo */
-.quiz-subtitle-redesigned {
-    font-size: clamp(1.1rem, 3vw, 1.4rem);
+.quiz-subtitle-compact {
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
     color: rgba(255,255,255,0.95);
-    margin-bottom: 50px;
-    line-height: 1.6;
+    margin-bottom: 40px;
 }
 
-/* Results preview cards */
-.quiz-results-preview {
-    margin-bottom: 50px;
+.quiz-subtitle-compact strong {
+    color: #4ade80;
+    font-size: 1.1em;
+    text-shadow: 0 0 20px rgba(74, 222, 128, 0.5);
 }
 
-.preview-title {
-    color: rgba(255,255,255,0.9);
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-bottom: 25px;
-}
-
-.results-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.result-card {
-    background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 25px 20px;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(255,255,255,0.2);
-}
-
-.result-card:hover {
-    transform: translateY(-5px);
-    background: rgba(255,255,255,0.15);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-}
-
-.result-icon {
-    font-size: 2.5rem;
-    margin-bottom: 15px;
-}
-
-.result-title {
-    color: #fff;
-    font-weight: 700;
-    font-size: 1.1rem;
-    margin-bottom: 8px;
-}
-
-.result-desc {
-    color: rgba(255,255,255,0.8);
-    font-size: 0.9rem;
-    line-height: 1.4;
-}
-
-/* Mega CTA Button */
-.quiz-cta-container {
-    margin-top: 40px;
-}
-
-.quiz-mega-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 20px;
-    background: white;
-    color: #ff6b00;
-    padding: 25px 40px;
-    border-radius: 60px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-    position: relative;
-    overflow: hidden;
-}
-
-.quiz-mega-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,107,0,0.1), transparent);
-    transition: left 0.6s;
-}
-
-.quiz-mega-btn:hover::before {
-    left: 100%;
-}
-
-.quiz-mega-btn:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
-}
-
-.btn-icon {
-    font-size: 2rem;
-}
-
-.btn-text {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
-}
-
-.btn-main {
-    font-size: 1.4rem;
-    font-weight: 800;
-}
-
-.btn-sub {
-    font-size: 0.9rem;
-    opacity: 0.8;
-    font-weight: 500;
-}
-
-.btn-arrow {
-    font-size: 1.8rem;
-    font-weight: 700;
-    animation: arrowMove 1s ease-in-out infinite;
-}
-
-@keyframes arrowMove {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(5px); }
-}
-
-/* Trust elements */
-.quiz-trust {
+/* Benefits in riga singola */
+.quiz-benefits-row {
     display: flex;
     justify-content: center;
     gap: 30px;
-    margin-top: 30px;
+    margin-bottom: 40px;
     flex-wrap: wrap;
 }
 
-.trust-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: rgba(255,255,255,0.9);
-    font-size: 0.95rem;
+.benefit-compact {
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(74, 222, 128, 0.3);
+    border-radius: 20px;
+    padding: 20px 15px;
+    min-width: 140px;
+    transition: all 0.3s ease;
 }
 
-.trust-item i {
+.benefit-compact:hover {
+    transform: translateY(-5px) scale(1.05);
+    background: rgba(74, 222, 128, 0.1);
+    border-color: #4ade80;
+    box-shadow: 0 10px 30px rgba(74, 222, 128, 0.3);
+}
+
+.benefit-emoji {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+}
+
+.benefit-label {
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    line-height: 1.2;
+}
+
+/* CTA Button con effetto glow */
+.quiz-cta-wrapper {
+    margin-top: 30px;
+}
+
+.quiz-action-btn {
+    display: inline-block;
+    position: relative;
+    padding: 0;
+    text-decoration: none;
+    border-radius: 50px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 40px rgba(74, 222, 128, 0.4);
+}
+
+.btn-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, #4ade80, #22d3ee, #4ade80);
+    background-size: 200% 200%;
+    animation: glowAnimation 3s linear infinite;
+    border-radius: 50px;
+}
+
+@keyframes glowAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.btn-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 40px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+    border-radius: 48px;
+    margin: 2px;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.quiz-action-btn:hover .btn-content {
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    transform: scale(1.02);
+}
+
+.btn-content i {
+    font-size: 1.5rem;
     color: #4ade80;
-    font-size: 1.1rem;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Mini trust elements */
+.quiz-mini-trust {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.quiz-mini-trust span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255,255,255,0.9);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.quiz-mini-trust i {
+    color: #4ade80;
+    font-size: 1rem;
 }
 
 /* Responsive */
@@ -699,51 +588,66 @@
 
 @media (max-width: 768px) {
     .quiz-intro-section {
-        padding: 60px 15px !important;
+        padding: 50px 15px !important;
         margin: 60px -10px 0 !important;
+        min-height: 400px !important;
     }
     
-    .results-cards {
-        grid-template-columns: repeat(2, 1fr);
+    .quiz-benefits-row {
         gap: 15px;
     }
     
-    .quiz-mega-btn {
-        flex-direction: column;
-        padding: 20px 30px;
-        gap: 15px;
-        width: 90%;
-        max-width: 350px;
+    .benefit-compact {
+        min-width: 120px;
+        padding: 15px 10px;
     }
     
-    .btn-arrow {
-        display: none;
+    .benefit-emoji {
+        font-size: 2rem;
     }
     
-    .quiz-trust {
-        gap: 20px;
-    }
-    
-    .trust-item {
+    .benefit-label {
         font-size: 0.85rem;
+    }
+    
+    .btn-content {
+        padding: 18px 30px;
+        font-size: 1rem;
+    }
+    
+    .quiz-mini-trust {
+        gap: 15px;
+    }
+    
+    .quiz-mini-trust span {
+        font-size: 0.8rem;
     }
 }
 
 @media (max-width: 480px) {
-    .results-cards {
-        grid-template-columns: 1fr;
+    .quiz-benefits-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
     }
     
-    .result-card {
-        padding: 20px 15px;
+    .benefit-compact {
+        min-width: auto;
     }
     
-    .trust-item span {
-        display: none;
+    .btn-content {
+        padding: 16px 25px;
+        font-size: 0.95rem;
+        gap: 10px;
     }
     
-    .trust-item i {
-        font-size: 1.5rem;
+    .btn-content i {
+        font-size: 1.2rem;
+    }
+    
+    .quiz-mini-trust {
+        flex-direction: column;
+        gap: 10px;
     }
 }
 </style>
@@ -793,14 +697,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
     
-    // Osserva i result cards
-    document.querySelectorAll('.result-card').forEach((card, index) => {
+    // Osserva i benefit compatti
+    document.querySelectorAll('.benefit-compact').forEach((card, index) => {
         card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-        card.style.transition = `all 0.6s ease ${index * 0.1}s`;
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = `all 0.5s ease ${index * 0.1}s`;
         observer.observe(card);
     });
     
-    console.log('✅ Services with redesigned quiz section loaded');
+    console.log('✅ Services with compact quiz section loaded');
 });
 </script>
