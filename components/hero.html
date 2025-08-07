@@ -4,8 +4,8 @@
     <p class="hero-pitch">Scopri i miei progetti e trova la soluzione perfetta per te.</p>
     
     <div class="profile-section">
-        <div class="profile-image" style="width: 370px; height: 370px;">
-            <div class="profile-content" style="background-image: url('./images/andrea-profile.jpg'); background-size: cover; background-position: center;"></div>
+        <div class="profile-image">
+            <img src="./images/andrea-profile.jpg" alt="Andrea Padoan" class="profile-img" loading="eager" />
         </div>
         
         <div class="hero-cta-buttons">
@@ -36,10 +36,381 @@
     </div>
 </div>
 
+<style>
+/* Hero Section Compatta e Ottimizzata */
+.hero {
+    text-align: center;
+    padding: 60px 20px 40px; /* RIDOTTO: era 120px top, ora 60px */
+    background: transparent;
+    position: relative;
+    min-height: calc(100vh - 100px); /* Altezza ridotta per vedere tutto senza scroll */
+    max-height: 700px; /* Limite massimo */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    animation: heroFadeIn 0.8s ease-out;
+}
+
+@keyframes heroFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Titolo principale */
+.hero h1 {
+    font-size: clamp(2.5rem, 7vw, 5rem); /* Leggermente ridotto */
+    font-weight: 900;
+    background: linear-gradient(135deg, #ff6b35, #ff8c5a, #ff6b35);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 15px;
+    animation: gradientShift 3s ease-in-out infinite;
+    letter-spacing: -2px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.hero-subtitle {
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    color: #fff;
+    margin-bottom: 10px;
+    font-weight: bold;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out 0.2s forwards;
+}
+
+.hero-pitch {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: #b0b0b0;
+    max-width: 600px;
+    margin: 0 auto 25px;
+    line-height: 1.5;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out 0.3s forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+}
+
+/* Profile Section Compatta */
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0 20px; /* Margini ridotti */
+    gap: 25px; /* Spazio tra elementi */
+}
+
+/* Immagine profilo con tag img per caricamento migliore */
+.profile-image {
+    width: 280px; /* Ridotto da 370px */
+    height: 280px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #ff6b35, #ff8c5a);
+    padding: 5px;
+    position: relative;
+    animation: profileFloat 6s ease-in-out infinite;
+    box-shadow: 
+        0 20px 60px rgba(255, 107, 53, 0.4),
+        0 0 100px rgba(255, 107, 53, 0.2);
+    overflow: hidden;
+}
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+@keyframes profileFloat {
+    0%, 100% { 
+        transform: translateY(0);
+        box-shadow: 
+            0 20px 60px rgba(255, 107, 53, 0.4),
+            0 0 100px rgba(255, 107, 53, 0.2);
+    }
+    50% { 
+        transform: translateY(-10px);
+        box-shadow: 
+            0 30px 70px rgba(255, 107, 53, 0.5),
+            0 0 120px rgba(255, 107, 53, 0.3);
+    }
+}
+
+/* CTA Buttons Container */
+.hero-cta-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 450px;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out 0.5s forwards;
+}
+
+/* Main CTA Button */
+.main-cta {
+    background: linear-gradient(135deg, #ff6b35, #ff8c5a);
+    color: #fff;
+    padding: 20px 40px; /* Ridotto */
+    border: none;
+    border-radius: 50px;
+    font-size: 18px; /* Ridotto */
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 10px 30px rgba(255, 107, 53, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.main-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.main-cta:hover::before {
+    left: 100%;
+}
+
+.main-cta:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 
+        0 15px 40px rgba(255, 107, 53, 0.4),
+        0 0 60px rgba(255, 107, 53, 0.2);
+}
+
+/* Quiz Button */
+.quiz-cta {
+    background: rgba(255, 107, 53, 0.1);
+    backdrop-filter: blur(10px);
+    color: #ff6b35;
+    border: 2px solid #ff6b35;
+    padding: 16px 35px; /* Ridotto */
+    border-radius: 40px;
+    font-size: 16px; /* Ridotto */
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 5px 20px rgba(255, 107, 53, 0.2),
+        inset 0 0 20px rgba(255, 107, 53, 0.05);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.quiz-cta:hover {
+    background: #ff6b35;
+    color: #fff;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 
+        0 10px 30px rgba(255, 107, 53, 0.4),
+        0 0 40px rgba(255, 107, 53, 0.3);
+    border-color: #ff8c5a;
+}
+
+/* Chat Benefits */
+.chat-benefits {
+    font-size: 13px;
+    color: #4ade80;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out 0.6s forwards;
+}
+
+.chat-benefit {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: rgba(74, 222, 128, 0.1);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(74, 222, 128, 0.2);
+    transition: all 0.3s;
+}
+
+.chat-benefit:hover {
+    transform: translateY(-2px);
+    background: rgba(74, 222, 128, 0.2);
+    box-shadow: 0 5px 15px rgba(74, 222, 128, 0.2);
+}
+
+.chat-benefit i {
+    font-size: 14px;
+}
+
+.chat-benefit span {
+    font-weight: 500;
+}
+
+/* Header trasparente - override dello stile globale */
+.header {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    border: none !important;
+    padding: 10px 20px;
+}
+
+/* Rimuove blur effect allo scroll */
+.header.scrolled {
+    background: rgba(0, 0, 0, 0.8) !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .hero {
+        padding: 40px 15px 30px; /* Ancora più compatto su mobile */
+        min-height: calc(100vh - 80px);
+    }
+    
+    .hero h1 {
+        font-size: 2.2rem;
+        letter-spacing: -1px;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .hero-pitch {
+        font-size: 0.95rem;
+        margin-bottom: 20px;
+    }
+    
+    .profile-image {
+        width: 220px;
+        height: 220px;
+    }
+    
+    .profile-section {
+        margin: 20px 0 15px;
+        gap: 20px;
+    }
+
+    .main-cta {
+        padding: 18px 30px;
+        font-size: 16px;
+    }
+
+    .quiz-cta {
+        padding: 14px 28px;
+        font-size: 15px;
+    }
+    
+    .chat-benefits {
+        gap: 10px;
+    }
+    
+    .chat-benefit {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 30px 10px 20px;
+    }
+    
+    .profile-image {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .hero-cta-buttons {
+        max-width: 320px;
+    }
+    
+    .chat-benefits {
+        flex-direction: column;
+    }
+}
+
+/* Ottimizzazioni performance */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+</style>
+
 <script>
+// Precarica l'immagine profilo
+document.addEventListener('DOMContentLoaded', () => {
+    const profileImg = document.querySelector('.profile-img');
+    if (profileImg) {
+        // Forza il caricamento dell'immagine
+        profileImg.src = profileImg.src;
+    }
+});
+
 // Funzione per andare al quiz
 function goToQuiz() {
     window.location.href = './quiz.html';
+}
+
+// Funzione per aprire la chat
+if (typeof openChat === 'undefined') {
+    function openChat() {
+        console.log('🚀 Opening chat...');
+        const chatFullscreen = document.querySelector('.chat-fullscreen');
+        if (chatFullscreen) {
+            chatFullscreen.style.display = 'flex';
+        } else {
+            // Fallback a WhatsApp
+            window.open('https://wa.me/3478881515?text=Ciao%20Andrea!%20Vorrei%20informazioni%20sui%20tuoi%20servizi', '_blank');
+        }
+    }
 }
 
 // Fallback function se scrollToQuiz non esiste
