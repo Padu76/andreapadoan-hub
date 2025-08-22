@@ -3,168 +3,160 @@
     <p class="section-subtitle">Scopri dove puoi migliorare oggi stesso. Ogni servizio è pensato per chi vuole risultati concreti senza perdere tempo.</p>
     
     <div class="projects-grid">
-        <!-- Personal Training a Verona -->
-        <div class="project-card" data-category="fitness">
-            <div class="project-image">
-                <img src="./images/personal-training.webp" alt="Personal Training a Verona" loading="lazy">
-                <div class="project-overlay">
-                    <span class="project-category">FITNESS</span>
-                </div>
-            </div>
+        <!-- Personal Training -->
+        <div class="project-card fitness">
+            <div class="project-image pt-image"></div>
             <div class="project-content">
-                <h3>Personal Training a Verona</h3>
-                <p>Allenamenti personalizzati per raggiungere i tuoi obiettivi di forma fisica in modo efficace e duraturo.</p>
-                <div class="project-tags">
-                    <span class="tag">Fitness</span>
-                    <span class="tag">Verona</span>
-                    <span class="tag">1:1</span>
+                <h3 class="project-title">Personal Training a Verona</h3>
+                <p class="project-description">Allenamenti su misura per chi ha poco tempo ma vuole risultati veri. In studio o online.</p>
+                <div class="project-actions">
+                    <button class="project-btn-primary" onclick="openProject('https://www.personaltrainerverona.it')">
+                        <i class="fas fa-dumbbell"></i>
+                        Vedi Programmi
+                    </button>
+                    <button class="project-btn-chat" onclick="sendQuickMessage('Dimmi tutto sul personal training')">
+                        <i class="fas fa-comments"></i>
+                        Chiedimi tutto
+                    </button>
                 </div>
-                <a href="mailto:info@andreapadoan.it?subject=Richiesta Personal Training" class="project-btn">Inizia Ora</a>
             </div>
         </div>
 
         <!-- Tribù Studio -->
-        <div class="project-card" data-category="fitness">
-            <div class="project-image">
-                <img src="./images/tribu-studio.webp" alt="Tribù Studio - Allenamenti di Gruppo" loading="lazy">
-                <div class="project-overlay">
-                    <span class="project-category">GRUPPO</span>
-                </div>
-            </div>
+        <div class="project-card fitness">
+            <div class="project-image tribu-image"></div>
             <div class="project-content">
-                <h3>Tribù Studio</h3>
-                <p>Allenamenti di gruppo in piccoli numeri per massimizzare i risultati in un ambiente motivante e divertente.</p>
-                <div class="project-tags">
-                    <span class="tag">Gruppo</span>
-                    <span class="tag">Motivazione</span>
-                    <span class="tag">Community</span>
+                <h3 class="project-title">Tribù Studio</h3>
+                <p class="project-description">Uno studio privato a Verona dove essere seguito in modo esclusivo, senza code o distrazioni.</p>
+                <div class="project-actions">
+                    <button class="project-btn-primary" onclick="openProject('https://www.tribuptstudio.it')">
+                        <i class="fas fa-home"></i>
+                        Visita Studio
+                    </button>
+                    <button class="project-btn-chat" onclick="sendQuickMessage('Come funziona Tribù Studio?')">
+                        <i class="fas fa-comments"></i>
+                        Info Studio
+                    </button>
                 </div>
-                <a href="https://tribustudio.it" target="_blank" class="project-btn">Scopri di Più</a>
             </div>
         </div>
 
-        <!-- Lifestyle Coaching Online -->
-        <div class="project-card" data-category="coaching">
-            <div class="project-image">
-                <img src="./images/lifestyle-coaching.webp" alt="Lifestyle Coaching Online" loading="lazy">
-                <div class="project-overlay">
-                    <span class="project-category">LIFESTYLE</span>
-                </div>
-            </div>
+        <!-- Lifestyle Coaching -->
+        <div class="project-card fitness">
+            <div class="project-image coaching-image"></div>
             <div class="project-content">
-                <h3>Lifestyle Coaching Online</h3>
-                <p>Trasforma le tue abitudini quotidiane con un percorso di coaching personalizzato per il tuo stile di vita.</p>
-                <div class="project-tags">
-                    <span class="tag">Online</span>
-                    <span class="tag">Abitudini</span>
-                    <span class="tag">Mindset</span>
+                <h3 class="project-title">Lifestyle Coaching Online</h3>
+                <p class="project-description"><strong>La soluzione completa per il tuo cambiamento</strong> - perché dieta e allenamento non bastano!</p>
+                <div class="project-actions">
+                    <button class="project-btn-primary" onclick="openProject('https://tribucoach.vercel.app/')">
+                        <i class="fas fa-rocket"></i>
+                        Inizia Percorso
+                    </button>
+                    <button class="project-btn-chat" onclick="sendQuickMessage('Spiegami il lifestyle coaching')">
+                        <i class="fas fa-comments"></i>
+                        Come Funziona
+                    </button>
                 </div>
-                <a href="mailto:info@andreapadoan.it?subject=Richiesta Lifestyle Coaching" class="project-btn">Inizia Ora</a>
             </div>
         </div>
 
         <!-- MealPrep Planner -->
-        <div class="project-card" data-category="nutrition">
-            <div class="project-image">
-                <img src="./images/mealprep-planner.webp" alt="MealPrep Planner" loading="lazy">
-                <div class="project-overlay">
-                    <span class="project-category">NUTRIZIONE</span>
-                </div>
-            </div>
+        <div class="project-card nutrition">
+            <div class="project-image mealprep-image"></div>
             <div class="project-content">
-                <h3>MealPrep Planner</h3>
-                <p>Pianifica i tuoi pasti settimanali con ricette bilanciate e liste della spesa automatiche per risparmiare tempo.</p>
-                <div class="project-tags">
-                    <span class="tag">Pianificazione</span>
-                    <span class="tag">Ricette</span>
-                    <span class="tag">Tempo</span>
+                <h3 class="project-title">MealPrep Planner</h3>
+                <p class="project-description">Organizza i pasti della settimana in 10 minuti e resta in forma senza stress. Web app gratuita.</p>
+                <div class="project-actions">
+                    <button class="project-btn-primary" onclick="openProject('https://mealprep-planner.vercel.app/')">
+                        <i class="fas fa-calendar-alt"></i>
+                        Prova Gratis
+                    </button>
+                    <button class="project-btn-chat" onclick="sendQuickMessage('Come uso il MealPrep Planner?')">
+                        <i class="fas fa-comments"></i>
+                        Spiegami
+                    </button>
                 </div>
-                <a href="https://mealprep-planner.com" target="_blank" class="project-btn">Prova Gratis</a>
             </div>
         </div>
 
-        <!-- Pasto Sano -->
-        <div class="project-card" data-category="nutrition">
-            <div class="project-image">
-                <img src="./images/pasto-sano.webp" alt="Pasto Sano - Pasti Freschi Verona" loading="lazy">
-                <div class="project-overlay">
-                    <span class="project-category">DELIVERY</span>
-                </div>
-            </div>
+        <!-- Pasto Sano - LINK CORRETTO -->
+        <div class="project-card nutrition">
+            <div class="project-image pastosano-image"></div>
             <div class="project-content">
-                <h3>Pasto Sano - Pasti Freschi Verona</h3>
-                <p>Pasti sani e bilanciati consegnati direttamente a casa tua. Ideali per chi ha poco tempo ma non vuole rinunciare alla qualità.</p>
-                <div class="project-tags">
-                    <span class="tag">Delivery</span>
-                    <span class="tag">Verona</span>
-                    <span class="tag">Healthy</span>
+                <h3 class="project-title">Pasto Sano - Pasti Freschi Verona</h3>
+                <p class="project-description">Piatti freschi pronti in 2 minuti, fatti con ingredienti di qualità. La soluzione per chi vuole mangiare bene senza cucinare.</p>
+                <div class="project-actions">
+                    <button class="project-btn-primary" onclick="openProject('https://www.pastosano.it')">
+                        <i class="fas fa-utensils"></i>
+                        Ordina Ora
+                    </button>
+                    <button class="project-btn-chat" onclick="sendQuickMessage('Quali sono i prezzi di Pasto Sano?')">
+                        <i class="fas fa-comments"></i>
+                        Prezzi
+                    </button>
                 </div>
-                <a href="https://www.pastosano.it" target="_blank" class="project-btn">Ordina Ora</a>
             </div>
         </div>
 
         <!-- Upstart Business Coaching -->
-        <div class="project-card" data-category="business">
-            <div class="project-image">
-                <img src="./images/upstart-coaching.webp" alt="Upstart Business Coaching" loading="lazy">
-                <div class="project-overlay">
-                    <span class="project-category">BUSINESS</span>
-                </div>
-            </div>
+        <div class="project-card business">
+            <div class="project-image upstart-image"></div>
             <div class="project-content">
-                <h3>Upstart Business Coaching</h3>
-                <p>Accelera la crescita del tuo business con strategie di marketing, vendite e gestione team provate sul campo.</p>
-                <div class="project-tags">
-                    <span class="tag">Imprenditori</span>
-                    <span class="tag">Marketing</span>
-                    <span class="tag">Crescita</span>
+                <h3 class="project-title">Upstart - Business Coaching</h3>
+                <p class="project-description">Testa il potenziale della tua idea di business e ricevi supporto strategico per farla crescere.</p>
+                <div class="project-actions">
+                    <button class="project-btn-primary" onclick="openProject('https://upstarter-tf9x.vercel.app/')">
+                        <i class="fas fa-briefcase"></i>
+                        Consulenza Gratuita
+                    </button>
+                    <button class="project-btn-chat" onclick="sendQuickMessage('Come funziona il business coaching?')">
+                        <i class="fas fa-comments"></i>
+                        Scopri di più
+                    </button>
                 </div>
-                <a href="mailto:info@andreapadoan.it?subject=Richiesta Business Coaching" class="project-btn">Prenota Call</a>
             </div>
         </div>
 
         <!-- Best-Trainer -->
-        <div class="project-card" data-category="education">
-            <div class="project-image">
-                <img src="./images/best-trainer.webp" alt="Best-Trainer - Formazione Professionisti" loading="lazy">
-                <div class="project-overlay">
-                    <span class="project-category">FORMAZIONE</span>
-                </div>
-            </div>
+        <div class="project-card business">
+            <div class="project-image besttrainer-image"></div>
             <div class="project-content">
-                <h3>Best-Trainer</h3>
-                <p>Formazione avanzata per personal trainer e professionisti del fitness che vogliono eccellere nel loro campo.</p>
-                <div class="project-tags">
-                    <span class="tag">Professionisti</span>
-                    <span class="tag">Certificazioni</span>
-                    <span class="tag">Excellence</span>
+                <h3 class="project-title">Best-Trainer</h3>
+                <p class="project-description">Centinaia di programmi di allenamento per ogni sport, formulati dai migliori personal trainer.</p>
+                <div class="project-actions">
+                    <button class="project-btn-primary" onclick="openProject('https://best-trainer-mvp.vercel.app/')">
+                        <i class="fas fa-star"></i>
+                        Scopri Programmi
+                    </button>
+                    <button class="project-btn-chat" onclick="sendQuickMessage('Che programmi ha Best-Trainer?')">
+                        <i class="fas fa-comments"></i>
+                        Info Programmi
+                    </button>
                 </div>
-                <a href="https://best-trainer.it" target="_blank" class="project-btn">Scopri Corsi</a>
             </div>
         </div>
 
-        <!-- I miei eBook -->
-        <div class="project-card" data-category="education">
-            <div class="project-image">
-                <img src="./images/ebooks.webp" alt="eBook di Andrea Padoan" loading="lazy">
-                <div class="project-overlay">
-                    <span class="project-category">GUIDE</span>
-                </div>
-            </div>
+        <!-- eBook -->
+        <div class="project-card business">
+            <div class="project-image ebook-image"></div>
             <div class="project-content">
-                <h3>I miei eBook</h3>
-                <p>Guide pratiche e strategie testate per migliorare fitness, alimentazione e mindset. Scaricabili immediatamente.</p>
-                <div class="project-tags">
-                    <span class="tag">Guide</span>
-                    <span class="tag">Download</span>
-                    <span class="tag">Pratico</span>
+                <h3 class="project-title">I miei eBook</h3>
+                <p class="project-description">Guide complete per trasformare il tuo corpo e mindset. Anni di esperienza in formato digitale.</p>
+                <div class="project-actions">
+                    <button class="project-btn-primary" onclick="openProject('./ebooks.html')">
+                        <i class="fas fa-download"></i>
+                        Scarica Ora
+                    </button>
+                    <button class="project-btn-chat" onclick="sendQuickMessage('Quali eBook hai disponibili?')">
+                        <i class="fas fa-comments"></i>
+                        Vedi eBook
+                    </button>
                 </div>
-                <a href="./ebooks.html" class="project-btn">Esplora eBook</a>
             </div>
         </div>
     </div>
 
-    <!-- QUIZ SECTION OTTIMIZZATA - Solo questa è cambiata -->
+    <!-- QUIZ SECTION OTTIMIZZATA - SOLO QUESTA È CAMBIATA -->
     <div class="quiz-discovery-section">
         <div class="quiz-discovery-content">
             <div class="quiz-icon">
@@ -202,147 +194,186 @@
 </div>
 
 <style>
-/* ====================================== 
-   PROJECTS SECTION STYLES - RIPRISTINATI ORIGINALI
-   ====================================== */
-
+/* ===== SERVICES STYLES ORIGINALI - IDENTICI ===== */
 .projects-container {
-    max-width: 1400px;
+    padding: 60px 15px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 60px 20px;
-}
-
-.section-title {
-    text-align: center;
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
-    color: #333;
-    margin-bottom: 20px;
-    font-weight: 900;
-}
-
-.section-subtitle {
-    text-align: center;
-    font-size: 1.2rem;
-    color: #666;
-    margin-bottom: 60px;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.6;
-}
-
-/* GRID ORIGINALE - 2 RIGHE PERFETTE */
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 30px;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(26, 26, 26, 0.6));
+    border-radius: 25px;
     margin-bottom: 80px;
 }
 
+.section-title {
+    color: #ff6b35;
+    font-size: clamp(1.8rem, 6vw, 3rem);
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 15px;
+    line-height: 1.2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.section-subtitle {
+    color: #b0b0b0;
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    text-align: center;
+    margin-bottom: 50px;
+    line-height: 1.6;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
+    margin-bottom: 60px;
+}
+
 .project-card {
-    background: #fff;
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.95), rgba(40, 40, 40, 0.9));
     border-radius: 20px;
+    padding: 0;
+    border: 2px solid rgba(255, 107, 53, 0.2);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     overflow: hidden;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    border: 1px solid rgba(255, 107, 53, 0.1);
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
 }
 
 .project-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 40px rgba(255, 107, 53, 0.2);
+    transform: translateY(-8px) scale(1.02);
+    border-color: rgba(255, 107, 53, 0.6);
+    box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
 }
 
 .project-image {
-    position: relative;
-    height: 200px;
-    overflow: hidden;
-}
-
-.project-image img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 20px 20px 0 0;
+    position: relative;
+    transition: all 0.3s ease;
 }
 
-.project-card:hover .project-image img {
+.project-card:hover .project-image {
     transform: scale(1.05);
 }
 
-.project-overlay {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-}
-
-.project-category {
-    background: rgba(255, 107, 53, 0.9);
-    color: white;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
+.pt-image { background-image: url('./images/andrea-personal-training.jpg'); }
+.tribu-image { background-image: url('./images/tribu-studio-interior.jpg'); }
+.coaching-image { background-image: url('./images/coaching.jpg'); }
+.mealprep-image { background-image: url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=400&h=300&fit=crop'); }
+.pastosano-image { background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop'); }
+.upstart-image { background-image: url('https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=300&fit=crop'); }
+.besttrainer-image { background-image: url('./images/best-trainer.jpeg'); }
+.ebook-image { background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop'); }
 
 .project-content {
-    padding: 25px;
+    padding: 25px 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.project-content h3 {
-    font-size: 1.4rem;
-    color: #333;
+.project-title {
+    color: #ff6b35;
+    font-size: 1.3rem;
+    font-weight: bold;
     margin-bottom: 12px;
-    font-weight: 700;
+    line-height: 1.3;
 }
 
-.project-content p {
-    color: #666;
+.project-description {
+    color: #e0e0e0;
+    font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 20px;
-    font-size: 0.95rem;
+    flex: 1;
 }
 
-.project-tags {
+.project-actions {
     display: flex;
-    gap: 8px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: auto;
 }
 
-.tag {
-    background: rgba(255, 107, 53, 0.1);
-    color: #ff6b35;
-    padding: 4px 10px;
-    border-radius: 15px;
-    font-size: 0.8rem;
-    font-weight: 600;
-}
-
-.project-btn {
-    display: inline-flex;
-    align-items: center;
-    background: linear-gradient(135deg, #ff6b35, #ff8533);
-    color: white;
-    padding: 12px 25px;
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
+.project-btn-primary, .project-btn-chat {
     border: none;
+    padding: 14px 18px;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    font-weight: 600;
     cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 48px;
 }
 
-.project-btn:hover {
+.project-btn-primary {
+    background: linear-gradient(45deg, #ff6b35, #ff8533);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+
+.project-btn-primary:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
 }
 
+.project-btn-chat {
+    background: transparent;
+    color: #4ade80;
+    border: 2px solid #4ade80;
+}
+
+.project-btn-chat:hover {
+    background: rgba(74, 222, 128, 0.1);
+    transform: translateY(-1px);
+}
+
+/* Responsive ORIGINALE */
+@media (min-width: 640px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .project-actions {
+        flex-direction: row;
+        gap: 15px;
+    }
+    
+    .project-btn-primary, .project-btn-chat {
+        flex: 1;
+    }
+}
+
+@media (min-width: 1024px) {
+    .projects-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .project-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
 /* ====================================== 
-   QUIZ DISCOVERY SECTION - OTTIMIZZATA E PULITA
+   QUIZ DISCOVERY SECTION - NUOVA E OTTIMIZZATA
    ====================================== */
 
 .quiz-discovery-section {
@@ -485,25 +516,8 @@
     font-size: 14px;
 }
 
-/* ====================================== 
-   RESPONSIVE DESIGN
-   ====================================== */
-
+/* RESPONSIVE QUIZ */
 @media (max-width: 768px) {
-    .projects-container {
-        padding: 40px 15px;
-    }
-
-    .projects-grid {
-        grid-template-columns: 1fr;
-        gap: 25px;
-        margin-bottom: 60px;
-    }
-
-    .project-card {
-        margin: 0 10px;
-    }
-
     .quiz-discovery-section {
         padding: 35px 20px;
         margin: 40px 0;
@@ -549,3 +563,35 @@
     }
 }
 </style>
+
+<script>
+// Services functionality ORIGINALE
+function openProject(url) {
+    console.log(`🎯 Opening project: ${url}`);
+    if ('vibrate' in navigator) navigator.vibrate(20);
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'project_visit', {
+            'event_category': 'engagement',
+            'event_label': url,
+            'value': 1
+        });
+    }
+    window.open(url, '_blank', 'noopener');
+}
+
+function sendQuickMessage(message) {
+    console.log(`💬 Quick message: ${message}`);
+    if ('vibrate' in navigator) navigator.vibrate(10);
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'quick_chat', {
+            'event_category': 'engagement',
+            'event_label': message,
+            'value': 1
+        });
+    }
+    const whatsappUrl = `https://wa.me/3478881515?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank', 'noopener');
+}
+
+// Tutto il resto del JavaScript ORIGINALE rimane identico
+</script>
