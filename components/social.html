@@ -31,11 +31,11 @@
     </div>
     
     <div class="social-cta-button">
-        <button class="follow-all-btn" onclick="openAllSocials()">
-            <i class="fas fa-rocket"></i>
-            <span>Seguimi su Tutti i Social</span>
+        <a href="https://www.instagram.com/andreapadoancoach/" target="_blank" class="follow-all-btn">
+            <i class="fab fa-instagram"></i>
+            <span>Seguimi su Instagram</span>
             <i class="fas fa-arrow-right"></i>
-        </button>
+        </a>
     </div>
     
     <div class="social-benefits">
@@ -63,7 +63,7 @@
 .social-section {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)),
                 url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920&h=600&fit=crop') center/cover;
-    padding: 100px 20px;
+    padding: 80px 20px; /* Ridotto da 100px */
     text-align: center !important;
     position: relative;
     overflow: hidden;
@@ -94,8 +94,8 @@
 
 .social-title {
     color: #ff6b35;
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
-    margin-bottom: 20px;
+    font-size: clamp(2.2rem, 5vw, 3rem); /* Ridotto */
+    margin-bottom: 15px; /* Ridotto da 20px */
     font-weight: 900;
     text-align: center !important;
     text-shadow: 0 0 30px rgba(255, 107, 53, 0.5);
@@ -109,8 +109,8 @@
 
 .social-call-to-action {
     color: #fff;
-    font-size: 1.4rem;
-    margin-bottom: 10px;
+    font-size: 1.3rem; /* Ridotto */
+    margin-bottom: 8px; /* Ridotto */
     font-weight: 700;
     text-align: center !important;
     margin-left: auto !important;
@@ -119,7 +119,7 @@
 
 .counter {
     color: #ff6b35;
-    font-size: 1.6rem;
+    font-size: 1.5rem; /* Ridotto */
     font-weight: 900;
     text-shadow: 0 0 20px rgba(255, 107, 53, 0.8);
     animation: counterGlow 2s ease-in-out infinite;
@@ -136,8 +136,8 @@
 
 .social-subtitle {
     color: rgba(255, 255, 255, 0.9);
-    font-size: 1.1rem;
-    margin-bottom: 50px;
+    font-size: 1rem; /* Ridotto */
+    margin-bottom: 40px; /* Ridotto da 50px */
     max-width: 600px;
     margin-left: auto !important;
     margin-right: auto !important;
@@ -149,14 +149,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 30px;
+    gap: 25px; /* Ridotto da 30px */
     flex-wrap: wrap;
-    margin-bottom: 50px;
+    margin-bottom: 40px; /* Ridotto da 50px */
 }
 
 .social-link {
-    width: 120px;
-    height: 120px;
+    width: 110px; /* Ridotto da 120px */
+    height: 110px;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -191,7 +191,7 @@
 }
 
 .social-link i {
-    font-size: 40px;
+    font-size: 38px; /* Ridotto */
     z-index: 2;
     transition: transform 0.3s;
 }
@@ -201,8 +201,8 @@
 }
 
 .social-label {
-    font-size: 12px;
-    margin-top: 8px;
+    font-size: 11px; /* Ridotto */
+    margin-top: 6px; /* Ridotto */
     font-weight: 600;
     opacity: 0;
     transform: translateY(10px);
@@ -217,12 +217,12 @@
 
 .follower-count {
     position: absolute;
-    top: 8px;
-    right: 8px;
+    top: 6px; /* Ridotto */
+    right: 6px;
     background: rgba(0, 0, 0, 0.7);
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 11px;
+    padding: 3px 6px; /* Ridotto */
+    border-radius: 10px; /* Ridotto */
+    font-size: 10px; /* Ridotto */
     font-weight: bold;
     opacity: 0;
     transform: scale(0.8);
@@ -292,27 +292,28 @@
     border-color: #FF0000;
 }
 
-/* CTA Button */
+/* CTA Button - INSTAGRAM FOCUSED */
 .social-cta-button {
-    margin-bottom: 50px;
+    margin-bottom: 40px; /* Ridotto da 50px */
 }
 
 .follow-all-btn {
-    background: linear-gradient(135deg, #ff6b35, #ff8533);
+    background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
     color: white;
     border: none;
-    padding: 20px 50px;
+    padding: 18px 45px; /* Ridotto */
     border-radius: 50px;
-    font-size: 1.2rem;
+    font-size: 1.1rem; /* Ridotto */
     font-weight: 800;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px; /* Ridotto */
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+    box-shadow: 0 10px 30px rgba(225, 48, 108, 0.4);
     position: relative;
     overflow: hidden;
+    text-decoration: none;
 }
 
 .follow-all-btn::before {
@@ -328,7 +329,7 @@
 
 .follow-all-btn:hover {
     transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 20px 40px rgba(255, 107, 53, 0.6);
+    box-shadow: 0 20px 40px rgba(225, 48, 108, 0.6);
 }
 
 .follow-all-btn:hover::before {
@@ -347,9 +348,9 @@
 .social-benefits {
     display: flex;
     justify-content: center;
-    gap: 40px;
+    gap: 35px; /* Ridotto */
     flex-wrap: wrap;
-    max-width: 800px;
+    max-width: 700px; /* Ridotto */
     margin: 0 auto;
 }
 
@@ -357,21 +358,21 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 8px; /* Ridotto */
     color: rgba(255, 255, 255, 0.9);
     transition: all 0.3s;
 }
 
 .benefit-item i {
-    width: 50px;
-    height: 50px;
+    width: 45px; /* Ridotto */
+    height: 45px;
     background: rgba(255, 107, 53, 0.2);
     border: 2px solid rgba(255, 107, 53, 0.4);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
+    font-size: 18px; /* Ridotto */
     color: #ff6b35;
     transition: all 0.3s;
 }
@@ -388,7 +389,7 @@
 }
 
 .benefit-item span {
-    font-size: 0.9rem;
+    font-size: 0.85rem; /* Ridotto */
     font-weight: 600;
     text-align: center;
 }
@@ -396,29 +397,29 @@
 /* Mobile Responsive */
 @media (max-width: 768px) {
     .social-section {
-        padding: 80px 20px;
+        padding: 60px 15px; /* Ridotto */
     }
     
     .social-links {
-        gap: 20px;
+        gap: 18px; /* Ridotto */
     }
     
     .social-link {
-        width: 100px;
-        height: 100px;
+        width: 90px; /* Ridotto */
+        height: 90px;
     }
     
     .social-link i {
-        font-size: 32px;
+        font-size: 28px; /* Ridotto */
     }
     
     .follow-all-btn {
-        padding: 16px 35px;
+        padding: 14px 30px; /* Ridotto */
         font-size: 1rem;
     }
     
     .social-benefits {
-        gap: 25px;
+        gap: 20px; /* Ridotto */
     }
     
     .benefit-item {
@@ -428,28 +429,28 @@
 
 @media (max-width: 480px) {
     .social-title {
-        font-size: 2rem;
+        font-size: 1.8rem; /* Ridotto */
     }
     
     .social-call-to-action {
-        font-size: 1.2rem;
+        font-size: 1.1rem; /* Ridotto */
     }
     
     .social-subtitle {
-        font-size: 1rem;
+        font-size: 0.9rem; /* Ridotto */
     }
     
     .social-links {
-        gap: 15px;
+        gap: 12px; /* Ridotto */
     }
     
     .social-link {
-        width: 80px;
-        height: 80px;
+        width: 75px; /* Ridotto */
+        height: 75px;
     }
     
     .social-link i {
-        font-size: 28px;
+        font-size: 24px; /* Ridotto */
     }
 }
 </style>
@@ -486,26 +487,6 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(document.querySelector('.social-section'));
     }
 });
-
-// Open all social media in new tabs
-function openAllSocials() {
-    const socialLinks = [
-        'https://www.instagram.com/andreapadoancoach/',
-        'https://www.facebook.com/andreapadoanpersonaltrainer',
-        'https://www.tiktok.com/@andreapadoanpt',
-        'https://www.youtube.com/@andreapadoanlifestyle'
-    ];
-    
-    // Open first link immediately
-    window.open(socialLinks[0], '_blank');
-    
-    // Open others with small delay to avoid popup blocker
-    socialLinks.slice(1).forEach((link, index) => {
-        setTimeout(() => {
-            window.open(link, '_blank');
-        }, (index + 1) * 100);
-    });
-}
 
 // Add floating animation to social icons on hover
 document.querySelectorAll('.social-link').forEach(link => {
