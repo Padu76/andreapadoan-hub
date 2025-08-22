@@ -8,7 +8,7 @@
             <div class="profile-content" style="background-image: url('./images/andrea-profile.jpg'); background-size: cover; background-position: center;"></div>
         </div>
         
-        <div class="hero-cta-buttons" style="display: flex !important; gap: 15px !important; justify-content: center !important; margin: 20px 0 !important; z-index: 999 !important; position: relative !important;">
+        <div class="hero-cta-buttons" style="display: flex !important; gap: 15px !important; justify-content: center !important; margin: 15px 0 !important; z-index: 999 !important; position: relative !important;">
             <button class="main-cta hero-main-cta" onclick="openChat()" style="display: inline-flex !important; visibility: visible !important; opacity: 1 !important;">
                 <i class="fas fa-comments"></i>
                 Chiedimi tutto sui miei servizi
@@ -37,102 +37,88 @@
 </div>
 
 <style>
-/* RIMOZIONE COMPLETA HEADER ARANCIONE */
-.header {
-    background: transparent !important;
-    backdrop-filter: none !important;
-    border: none !important;
-    box-shadow: none !important;
-    background-color: transparent !important;
-}
-
-/* Header scrollato - minimo cambiamento */
-.header.scrolled {
-    background: rgba(0, 0, 0, 0.85) !important;
-    backdrop-filter: none !important;
-    border: none !important;
-    box-shadow: none !important;
-}
-
-/* BLOCCO EFFETTO RIMPICCIOLIMENTO */
-.hero h1 {
-    font-size: 4.5rem !important;
-    transform: none !important;
-    transition: none !important;
-}
-
-.hero-subtitle {
-    font-size: 1.4rem !important;
-    transform: none !important;
-    transition: none !important;
-}
-
-.hero-pitch {
-    font-size: 1.1rem !important;
-    transform: none !important;
-    transition: none !important;
-}
-
-/* Blocco animazioni scroll */
-.hero * {
-    transform: none !important;
-    animation: none !important;
-}
-
-/* SEZIONE HERO COMPATTA */
+/* HERO SECTION COMPATTA E OTTIMIZZATA */
 .hero {
-    padding-top: 50px !important;
-    padding-bottom: 20px !important;
+    text-align: center;
+    padding: 25px 20px 15px !important; /* Ridotto da 40px/30px a 25px/15px */
+    background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
     min-height: auto !important;
     height: auto !important;
 }
 
-/* Spazi ridotti */
+/* Titoli con dimensioni ridotte */
 .hero h1 {
-    margin-bottom: 8px !important;
+    font-size: clamp(2.2rem, 4.2vw, 3.2rem) !important; /* Ridotto da 2.5-4rem */
+    font-weight: 900;
+    color: #ff6b35;
+    margin-bottom: 10px !important; /* Ridotto da 20px */
+    /* BLOCCO effetti scroll */
+    transform: none !important;
+    transition: none !important;
 }
 
 .hero-subtitle {
-    margin-bottom: 5px !important;
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem) !important; /* Ridotto da 1.4-2rem */
+    color: #fff;
+    margin-bottom: 8px !important; /* Ridotto da 15px */
+    font-weight: bold;
+    /* BLOCCO effetti scroll */
+    transform: none !important;
+    transition: none !important;
 }
 
 .hero-pitch {
-    margin-bottom: 15px !important;
+    font-size: clamp(0.95rem, 2.2vw, 1.2rem) !important; /* Ridotto da 1.1-1.4rem */
+    color: #b0b0b0;
+    max-width: 650px; /* Ridotto da 800px */
+    margin: 0 auto 18px !important; /* Ridotto da 30px */
+    line-height: 1.5;
+    /* BLOCCO effetti scroll */
+    transform: none !important;
+    transition: none !important;
 }
 
-/* IMMAGINE PROFILO PIÙ GRANDE E IN ALTO */
+/* SEZIONE PROFILO COMPATTA */
 .profile-section {
-    margin-top: -5px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 18px 0 !important; /* Ridotto da 30px */
 }
 
+/* IMMAGINE PROFILO RIDOTTA */
 .profile-image {
-    width: 320px !important;
-    height: 320px !important;
-    margin: 0 auto 20px !important;
-    border-radius: 50% !important;
-    overflow: hidden !important;
-    border: 4px solid #ff6b35 !important;
-    box-shadow: 0 0 30px rgba(255, 107, 53, 0.3) !important;
+    width: 220px !important; /* Ridotto da 264px */
+    height: 220px !important; /* Ridotto da 264px */
+    border-radius: 50%;
+    background: linear-gradient(45deg, #ff6b35, #ff8c5a);
+    padding: 4px; /* Ridotto da 5px */
+    margin-bottom: 15px !important; /* Ridotto da 20px */
+    border: 3px solid #ff6b35;
+    box-shadow: 0 0 25px rgba(255, 107, 53, 0.3);
 }
 
 .profile-content {
     width: 100% !important;
     height: 100% !important;
+    border-radius: 50%;
+    background: #000;
 }
 
-/* PULSANTI SUPER VISIBILI - OVERRIDE TOTALE */
+/* PULSANTI OTTIMIZZATI */
 .hero-cta-buttons {
     display: flex !important;
-    gap: 15px !important;
+    gap: 12px !important; /* Ridotto da 15px */
     justify-content: center !important;
-    margin: 20px 0 !important;
+    margin: 15px 0 !important; /* Ridotto da 20px */
     z-index: 999 !important;
     position: relative !important;
     visibility: visible !important;
     opacity: 1 !important;
 }
 
-/* Override specifico per i pulsanti nella hero */
+/* Pulsanti hero specifici */
 .hero-main-cta,
 .hero-quiz-cta {
     display: inline-flex !important;
@@ -140,112 +126,78 @@
     opacity: 1 !important;
     position: relative !important;
     z-index: 999 !important;
-    padding: 16px 28px !important;
-    font-size: 1.1rem !important;
+    padding: 14px 24px !important; /* Ridotto da 16px/28px */
+    font-size: 1rem !important; /* Ridotto da 1.1rem */
     font-weight: 600 !important;
-    border-radius: 30px !important;
+    border-radius: 25px !important; /* Ridotto da 30px */
     cursor: pointer !important;
     align-items: center !important;
-    gap: 10px !important;
+    gap: 8px !important; /* Ridotto da 10px */
     transition: all 0.3s ease !important;
     border: none !important;
     text-decoration: none !important;
     white-space: nowrap !important;
+    min-height: 44px; /* Altezza minima touch-friendly */
 }
 
 /* Pulsante Chat - Arancione */
 .hero-main-cta {
     background: linear-gradient(135deg, #ff6b35, #ff8c42) !important;
     color: white !important;
-    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4) !important;
+    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4) !important;
 }
 
 .hero-main-cta:hover {
     background: linear-gradient(135deg, #ff8c42, #ff6b35) !important;
     transform: translateY(-2px) !important;
-    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.5) !important;
+    box-shadow: 0 6px 18px rgba(255, 107, 53, 0.5) !important;
 }
 
 /* Pulsante Quiz - Verde */
 .hero-quiz-cta {
     background: linear-gradient(135deg, #4ade80, #22c55e) !important;
     color: white !important;
-    box-shadow: 0 4px 15px rgba(74, 222, 128, 0.4) !important;
+    box-shadow: 0 4px 12px rgba(74, 222, 128, 0.4) !important;
 }
 
 .hero-quiz-cta:hover {
     background: linear-gradient(135deg, #22c55e, #4ade80) !important;
     transform: translateY(-2px) !important;
-    box-shadow: 0 6px 20px rgba(74, 222, 128, 0.5) !important;
+    box-shadow: 0 6px 18px rgba(74, 222, 128, 0.5) !important;
 }
 
-/* Chat benefits compatti */
+/* CHAT BENEFITS COMPATTI */
 .chat-benefits {
     display: flex !important;
-    gap: 20px !important;
+    gap: 15px !important; /* Ridotto da 20px */
     justify-content: center !important;
-    margin-top: 10px !important;
+    margin-top: 8px !important; /* Ridotto da 10px */
     flex-wrap: wrap !important;
 }
 
 .chat-benefit {
     display: flex !important;
     align-items: center !important;
-    gap: 8px !important;
+    gap: 6px !important; /* Ridotto da 8px */
     color: #fff !important;
-    font-size: 0.95rem !important;
+    font-size: 0.9rem !important; /* Ridotto da 0.95rem */
 }
 
 .chat-benefit i {
     color: #ff6b35 !important;
-    font-size: 1.1rem !important;
+    font-size: 1rem !important; /* Ridotto da 1.1rem */
 }
 
-/* RESPONSIVE - Tablet */
+/* RESPONSIVE OTTIMIZZATO */
+
+/* Tablet */
 @media (max-width: 768px) {
     .hero {
-        padding-top: 45px !important;
-        padding-bottom: 15px !important;
+        padding: 20px 20px 12px !important; /* Ulteriormente ridotto */
     }
     
     .hero h1 {
-        font-size: 3.5rem !important;
-    }
-    
-    .hero-subtitle {
-        font-size: 1.2rem !important;
-    }
-    
-    .hero-pitch {
-        font-size: 1rem !important;
-    }
-    
-    .profile-image {
-        width: 280px !important;
-        height: 280px !important;
-    }
-    
-    .hero-cta-buttons {
-        flex-direction: column !important;
-        gap: 12px !important;
-    }
-    
-    .hero-main-cta, .hero-quiz-cta {
-        width: 100% !important;
-        max-width: 300px !important;
-        justify-content: center !important;
-    }
-}
-
-/* RESPONSIVE - Mobile */
-@media (max-width: 480px) {
-    .hero {
-        padding-top: 40px !important;
-        padding-bottom: 10px !important;
-    }
-    
-    .hero h1 {
-        font-size: 2.8rem !important;
+        font-size: 2.2rem !important;
     }
     
     .hero-subtitle {
@@ -253,28 +205,109 @@
     }
     
     .hero-pitch {
-        font-size: 0.95rem !important;
+        font-size: 0.9rem !important;
+        margin: 0 auto 15px !important;
     }
     
     .profile-image {
-        width: 240px !important;
-        height: 240px !important;
+        width: 200px !important;
+        height: 200px !important;
+        margin-bottom: 12px !important;
+    }
+    
+    .hero-cta-buttons {
+        flex-direction: column !important;
+        gap: 10px !important;
+        margin: 12px 0 !important;
     }
     
     .hero-main-cta, .hero-quiz-cta {
-        padding: 14px 24px !important;
-        font-size: 1rem !important;
+        width: 100% !important;
+        max-width: 280px !important;
+        justify-content: center !important;
+        padding: 12px 20px !important;
+        font-size: 0.95rem !important;
     }
+    
+    .chat-benefits {
+        gap: 12px !important;
+        margin-top: 6px !important;
+    }
+    
+    .chat-benefit {
+        font-size: 0.85rem !important;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .hero {
+        padding: 15px 15px 10px !important; /* Minimo padding */
+    }
+    
+    .hero h1 {
+        font-size: 1.9rem !important;
+        margin-bottom: 8px !important;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem !important;
+        margin-bottom: 6px !important;
+    }
+    
+    .hero-pitch {
+        font-size: 0.85rem !important;
+        margin: 0 auto 12px !important;
+        max-width: 90%;
+    }
+    
+    .profile-image {
+        width: 180px !important;
+        height: 180px !important;
+        margin-bottom: 10px !important;
+    }
+    
+    .hero-main-cta, .hero-quiz-cta {
+        padding: 11px 18px !important;
+        font-size: 0.9rem !important;
+        max-width: 260px !important;
+    }
+    
+    .chat-benefits {
+        flex-direction: column !important;
+        gap: 8px !important;
+        align-items: center !important;
+    }
+    
+    .chat-benefit {
+        font-size: 0.8rem !important;
+    }
+}
+
+/* BLOCCO ANIMAZIONI SCROLL */
+.hero * {
+    transform: none !important;
+    animation: none !important;
+}
+
+/* Performance optimization */
+.hero {
+    will-change: auto !important;
+}
+
+.hero-main-cta, .hero-quiz-cta {
+    will-change: transform !important;
 }
 </style>
 
 <script>
-// Precaricamento immagine
-window.addEventListener('DOMContentLoaded', () => {
+// Precaricamento immagine ottimizzato
+document.addEventListener('DOMContentLoaded', () => {
+    // Preload immagine profilo
     const img = new Image();
     img.src = './images/andrea-profile.jpg';
     img.onload = () => {
-        console.log('Immagine profilo caricata');
+        console.log('✅ Immagine profilo caricata velocemente');
     };
     
     // FORZA VISIBILITÀ PULSANTI
@@ -286,22 +319,40 @@ window.addEventListener('DOMContentLoaded', () => {
         btn.style.zIndex = '999';
     });
     
-    // Blocca scroll effects
+    // BLOCCA EFFETTI SCROLL nella hero
     window.addEventListener('scroll', (e) => {
         const heroElements = document.querySelectorAll('.hero, .hero h1, .hero-subtitle, .hero-pitch');
         heroElements.forEach(el => {
             el.style.transform = 'none';
             el.style.fontSize = '';
         });
-    }, true);
+    }, { passive: true });
+    
+    console.log('✅ Hero compatta inizializzata');
 });
 
 // Funzione per andare al quiz
 function goToQuiz() {
+    console.log('🎯 Navigating to quiz...');
+    
+    // Haptic feedback
+    if ('vibrate' in navigator) {
+        navigator.vibrate(15);
+    }
+    
+    // Analytics
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'quiz_start', {
+            'event_category': 'engagement',
+            'event_label': 'hero_button',
+            'value': 1
+        });
+    }
+    
     window.location.href = './quiz.html';
 }
 
-// Fallback function
+// Fallback per scrollToQuiz
 if (typeof scrollToQuiz === 'undefined') {
     function scrollToQuiz() {
         goToQuiz();
@@ -311,11 +362,30 @@ if (typeof scrollToQuiz === 'undefined') {
 // Funzione per aprire la chat
 if (typeof openChat === 'undefined') {
     function openChat() {
+        console.log('💬 Opening chat...');
+        
+        // Haptic feedback
+        if ('vibrate' in navigator) {
+            navigator.vibrate(15);
+        }
+        
+        // Analytics
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'chat_open', {
+                'event_category': 'engagement',
+                'event_label': 'hero_button',
+                'value': 1
+            });
+        }
+        
+        // Prova prima chat fullscreen, poi WhatsApp
         const chatFullscreen = document.querySelector('.chat-fullscreen');
         if (chatFullscreen) {
             chatFullscreen.style.display = 'flex';
         } else {
-            window.open('https://wa.me/3478881515?text=Ciao%20Andrea!%20Vorrei%20informazioni%20sui%20tuoi%20servizi', '_blank');
+            const message = 'Ciao Andrea! Vorrei informazioni sui tuoi servizi';
+            const whatsappUrl = `https://wa.me/3478881515?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank', 'noopener');
         }
     }
 }
