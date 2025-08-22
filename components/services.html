@@ -42,38 +42,48 @@
         </div>
 
         <!-- Lifestyle Coaching -->
-        <div class="project-card fitness">
-            <div class="project-image coaching-image"></div>
+        <div class="project-card fitness coming-soon">
+            <div class="project-image coaching-image">
+                <div class="coming-soon-badge">
+                    <i class="fas fa-clock"></i>
+                    Coming Soon
+                </div>
+            </div>
             <div class="project-content">
                 <h3 class="project-title">Lifestyle Coaching Online</h3>
                 <p class="project-description"><strong>La soluzione completa per il tuo cambiamento</strong> - perché dieta e allenamento non bastano!</p>
                 <div class="project-actions">
-                    <button class="project-btn-primary" onclick="openProject('https://tribucoach.vercel.app/')">
-                        <i class="fas fa-rocket"></i>
-                        Inizia Percorso
+                    <button class="project-btn-primary disabled" disabled>
+                        <i class="fas fa-hourglass-half"></i>
+                        Disponibile a Breve
                     </button>
-                    <button class="project-btn-chat" onclick="sendQuickMessage('Spiegami il lifestyle coaching')">
+                    <button class="project-btn-chat" onclick="sendQuickMessage('Quando sarà disponibile il lifestyle coaching?')">
                         <i class="fas fa-comments"></i>
-                        Come Funziona
+                        Info Lancio
                     </button>
                 </div>
             </div>
         </div>
 
         <!-- MealPrep Planner -->
-        <div class="project-card nutrition">
-            <div class="project-image mealprep-image"></div>
+        <div class="project-card nutrition coming-soon">
+            <div class="project-image mealprep-image">
+                <div class="coming-soon-badge">
+                    <i class="fas fa-clock"></i>
+                    Coming Soon
+                </div>
+            </div>
             <div class="project-content">
                 <h3 class="project-title">MealPrep Planner</h3>
                 <p class="project-description">Organizza i pasti della settimana in 10 minuti e resta in forma senza stress. Web app gratuita.</p>
                 <div class="project-actions">
-                    <button class="project-btn-primary" onclick="openProject('https://mealprep-planner.vercel.app/')">
-                        <i class="fas fa-calendar-alt"></i>
-                        Prova Gratis
+                    <button class="project-btn-primary disabled" disabled>
+                        <i class="fas fa-hourglass-half"></i>
+                        Disponibile a Breve
                     </button>
-                    <button class="project-btn-chat" onclick="sendQuickMessage('Come uso il MealPrep Planner?')">
+                    <button class="project-btn-chat" onclick="sendQuickMessage('Quando sarà pronto il MealPrep Planner?')">
                         <i class="fas fa-comments"></i>
-                        Spiegami
+                        Info Lancio
                     </button>
                 </div>
             </div>
@@ -118,19 +128,24 @@
         </div>
 
         <!-- Best-Trainer -->
-        <div class="project-card business">
-            <div class="project-image besttrainer-image"></div>
+        <div class="project-card business coming-soon">
+            <div class="project-image besttrainer-image">
+                <div class="coming-soon-badge">
+                    <i class="fas fa-clock"></i>
+                    Coming Soon
+                </div>
+            </div>
             <div class="project-content">
                 <h3 class="project-title">Best-Trainer</h3>
                 <p class="project-description">Centinaia di programmi di allenamento per ogni sport, formulati dai migliori personal trainer.</p>
                 <div class="project-actions">
-                    <button class="project-btn-primary" onclick="openProject('https://best-trainer-mvp.vercel.app/')">
-                        <i class="fas fa-star"></i>
-                        Scopri Programmi
+                    <button class="project-btn-primary disabled" disabled>
+                        <i class="fas fa-hourglass-half"></i>
+                        Disponibile a Breve
                     </button>
-                    <button class="project-btn-chat" onclick="sendQuickMessage('Che programmi ha Best-Trainer?')">
+                    <button class="project-btn-chat" onclick="sendQuickMessage('Quando sarà disponibile Best-Trainer?')">
                         <i class="fas fa-comments"></i>
-                        Info Programmi
+                        Info Lancio
                     </button>
                 </div>
             </div>
@@ -345,7 +360,61 @@
     transform: translateY(-1px);
 }
 
-/* Responsive ORIGINALE */
+/* ===== COMING SOON STYLES ===== */
+.project-card.coming-soon {
+    position: relative;
+    opacity: 0.8;
+}
+
+.project-card.coming-soon::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255, 107, 53, 0.1), rgba(255, 152, 0, 0.1));
+    pointer-events: none;
+    border-radius: 20px;
+}
+
+.coming-soon-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: linear-gradient(135deg, #ff6b35, #ff8533);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+    z-index: 10;
+    animation: comingSoonPulse 2s ease-in-out infinite;
+}
+
+@keyframes comingSoonPulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4); }
+    50% { transform: scale(1.05); box-shadow: 0 6px 20px rgba(255, 107, 53, 0.6); }
+}
+
+.coming-soon-badge i {
+    font-size: 0.9rem;
+}
+
+.project-btn-primary.disabled {
+    background: linear-gradient(45deg, #888, #aaa);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.project-btn-primary.disabled:hover {
+    transform: none;
+    box-shadow: 0 4px 15px rgba(136, 136, 136, 0.3);
+}
 @media (min-width: 640px) {
     .projects-grid {
         grid-template-columns: repeat(2, 1fr);
