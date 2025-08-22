@@ -1,10 +1,189 @@
-<div class="header">
-    <a href="./chi-sono.html" class="chi-sono-btn" title="Chi Sono">
+<div class="header" style="
+    position: fixed !important;
+    top: 10px !important;
+    left: 20px !important;
+    right: 20px !important;
+    z-index: 1000 !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    height: auto !important;
+">
+    <a href="./chi-sono.html" class="chi-sono-btn" title="Chi Sono" style="
+        background: rgba(255, 107, 53, 0.9) !important;
+        color: #fff !important;
+        border: none !important;
+        padding: 8px 18px !important;
+        border-radius: 22px !important;
+        font-size: 13px !important;
+        font-weight: bold !important;
+        cursor: pointer !important;
+        transition: all 0.3s !important;
+        backdrop-filter: blur(10px) !important;
+        text-decoration: none !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3) !important;
+    ">
         <i class="fas fa-user"></i>
         <span>Chi Sono</span>
     </a>
     
-    <button class="dashboard-btn" onclick="openDashboard()" title="Dashboard">
+    <button class="dashboard-btn" onclick="openDashboard()" title="Dashboard" style="
+        background: rgba(107, 114, 128, 0.9) !important;
+        color: #fff !important;
+        border: none !important;
+        padding: 8px !important;
+        border-radius: 50% !important;
+        font-size: 14px !important;
+        cursor: pointer !important;
+        transition: all 0.3s !important;
+        backdrop-filter: blur(10px) !important;
+        width: 40px !important;
+        height: 40px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        box-shadow: 0 4px 15px rgba(107, 114, 128, 0.2) !important;
+    ">
         <i class="fas fa-cog"></i>
     </button>
 </div>
+
+<style>
+/* OVERRIDE COMPLETO per header trasparente */
+.header {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+    padding: 0 !important;
+}
+
+/* Header scrollato - mantieni trasparente */
+.header.scrolled {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+}
+
+/* Header in qualsiasi stato - sempre trasparente */
+.header:before,
+.header:after {
+    display: none !important;
+}
+
+/* Hover effects per i bottoni */
+.chi-sono-btn:hover {
+    background: #ff6b35 !important;
+    transform: translateY(-2px) scale(1.05) !important;
+    box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4) !important;
+}
+
+.dashboard-btn:hover {
+    background: #6b7280 !important;
+    transform: translateY(-2px) scale(1.1) !important;
+    box-shadow: 0 8px 20px rgba(107, 114, 128, 0.3) !important;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .header {
+        top: 8px !important;
+        left: 15px !important;
+        right: 15px !important;
+    }
+    
+    .chi-sono-btn {
+        padding: 6px 14px !important;
+        font-size: 12px !important;
+        gap: 4px !important;
+    }
+    
+    .dashboard-btn {
+        width: 36px !important;
+        height: 36px !important;
+        font-size: 12px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        top: 5px !important;
+        left: 10px !important;
+        right: 10px !important;
+    }
+    
+    .chi-sono-btn {
+        padding: 5px 12px !important;
+        font-size: 11px !important;
+    }
+    
+    .dashboard-btn {
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 11px !important;
+    }
+}
+</style>
+
+<script>
+// Funzione dashboard
+function openDashboard() {
+    console.log('🔧 Opening dashboard...');
+    
+    // Haptic feedback se disponibile
+    if ('vibrate' in navigator) {
+        navigator.vibrate(10);
+    }
+    
+    // Analytics tracking
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'dashboard_open', {
+            'event_category': 'navigation',
+            'event_label': 'header_button',
+            'value': 1
+        });
+    }
+    
+    // Reindirizza alla dashboard
+    window.location.href = './dashboard.html';
+}
+
+// Forza trasparenza dell'header durante lo scroll
+window.addEventListener('scroll', () => {
+    const header = document.querySelector('.header');
+    if (header) {
+        // Mantieni sempre trasparente
+        header.style.background = 'transparent';
+        header.style.backgroundColor = 'transparent';
+        header.style.backdropFilter = 'none';
+        header.style.border = 'none';
+        header.style.boxShadow = 'none';
+    }
+}, { passive: true });
+
+// Inizializzazione
+document.addEventListener('DOMContentLoaded', () => {
+    const header = document.querySelector('.header');
+    if (header) {
+        // Assicurati che sia trasparente all'avvio
+        header.style.background = 'transparent';
+        header.style.backgroundColor = 'transparent';
+        header.style.backdropFilter = 'none';
+        header.style.border = 'none';
+        header.style.boxShadow = 'none';
+    }
+    
+    console.log('✅ Transparent header initialized');
+});
+</script>
