@@ -3,403 +3,358 @@
     <p class="section-subtitle">Scopri dove puoi migliorare oggi stesso. Ogni servizio è pensato per chi vuole risultati concreti senza perdere tempo.</p>
     
     <div class="projects-grid">
-        <!-- Personal Training -->
-        <div class="project-card fitness">
-            <div class="project-image pt-image"></div>
-            <div class="project-content">
-                <h3 class="project-title">Personal Training a Verona</h3>
-                <p class="project-description">Allenamenti su misura per chi ha poco tempo ma vuole risultati veri. In studio o online.</p>
-                <div class="project-actions">
-                    <button class="project-btn-primary" onclick="openProject('https://www.personaltrainerverona.it')">
-                        <i class="fas fa-dumbbell"></i>
-                        Vedi Programmi
-                    </button>
-                    <button class="project-btn-chat" onclick="sendQuickMessage('Dimmi tutto sul personal training')">
-                        <i class="fas fa-comments"></i>
-                        Chiedimi tutto
-                    </button>
+        <!-- Personal Training a Verona -->
+        <div class="project-card" data-category="fitness">
+            <div class="project-image">
+                <img src="./images/personal-training.webp" alt="Personal Training a Verona" loading="lazy">
+                <div class="project-overlay">
+                    <span class="project-category">FITNESS</span>
                 </div>
+            </div>
+            <div class="project-content">
+                <h3>Personal Training a Verona</h3>
+                <p>Allenamenti personalizzati per raggiungere i tuoi obiettivi di forma fisica in modo efficace e duraturo.</p>
+                <div class="project-tags">
+                    <span class="tag">Fitness</span>
+                    <span class="tag">Verona</span>
+                    <span class="tag">1:1</span>
+                </div>
+                <a href="mailto:info@andreapadoan.it?subject=Richiesta Personal Training" class="project-btn">Inizia Ora</a>
             </div>
         </div>
 
         <!-- Tribù Studio -->
-        <div class="project-card fitness">
-            <div class="project-image tribu-image"></div>
-            <div class="project-content">
-                <h3 class="project-title">Tribù Studio</h3>
-                <p class="project-description">Uno studio privato a Verona dove essere seguito in modo esclusivo, senza code o distrazioni.</p>
-                <div class="project-actions">
-                    <button class="project-btn-primary" onclick="openProject('https://www.tribuptstudio.it')">
-                        <i class="fas fa-home"></i>
-                        Visita Studio
-                    </button>
-                    <button class="project-btn-chat" onclick="sendQuickMessage('Come funziona Tribù Studio?')">
-                        <i class="fas fa-comments"></i>
-                        Info Studio
-                    </button>
+        <div class="project-card" data-category="fitness">
+            <div class="project-image">
+                <img src="./images/tribu-studio.webp" alt="Tribù Studio - Allenamenti di Gruppo" loading="lazy">
+                <div class="project-overlay">
+                    <span class="project-category">GRUPPO</span>
                 </div>
+            </div>
+            <div class="project-content">
+                <h3>Tribù Studio</h3>
+                <p>Allenamenti di gruppo in piccoli numeri per massimizzare i risultati in un ambiente motivante e divertente.</p>
+                <div class="project-tags">
+                    <span class="tag">Gruppo</span>
+                    <span class="tag">Motivazione</span>
+                    <span class="tag">Community</span>
+                </div>
+                <a href="https://tribustudio.it" target="_blank" class="project-btn">Scopri di Più</a>
             </div>
         </div>
 
-        <!-- Lifestyle Coaching -->
-        <div class="project-card fitness">
-            <div class="project-image coaching-image"></div>
-            <div class="project-content">
-                <h3 class="project-title">Lifestyle Coaching Online</h3>
-                <p class="project-description"><strong>La soluzione completa per il tuo cambiamento</strong> - perché dieta e allenamento non bastano!</p>
-                <div class="project-actions">
-                    <button class="project-btn-primary" onclick="openProject('https://tribucoach.vercel.app/')">
-                        <i class="fas fa-rocket"></i>
-                        Inizia Percorso
-                    </button>
-                    <button class="project-btn-chat" onclick="sendQuickMessage('Spiegami il lifestyle coaching')">
-                        <i class="fas fa-comments"></i>
-                        Come Funziona
-                    </button>
+        <!-- Lifestyle Coaching Online -->
+        <div class="project-card" data-category="coaching">
+            <div class="project-image">
+                <img src="./images/lifestyle-coaching.webp" alt="Lifestyle Coaching Online" loading="lazy">
+                <div class="project-overlay">
+                    <span class="project-category">LIFESTYLE</span>
                 </div>
+            </div>
+            <div class="project-content">
+                <h3>Lifestyle Coaching Online</h3>
+                <p>Trasforma le tue abitudini quotidiane con un percorso di coaching personalizzato per il tuo stile di vita.</p>
+                <div class="project-tags">
+                    <span class="tag">Online</span>
+                    <span class="tag">Abitudini</span>
+                    <span class="tag">Mindset</span>
+                </div>
+                <a href="mailto:info@andreapadoan.it?subject=Richiesta Lifestyle Coaching" class="project-btn">Inizia Ora</a>
             </div>
         </div>
 
         <!-- MealPrep Planner -->
-        <div class="project-card nutrition">
-            <div class="project-image mealprep-image"></div>
-            <div class="project-content">
-                <h3 class="project-title">MealPrep Planner</h3>
-                <p class="project-description">Organizza i pasti della settimana in 10 minuti e resta in forma senza stress. Web app gratuita.</p>
-                <div class="project-actions">
-                    <button class="project-btn-primary" onclick="openProject('https://mealprep-planner.vercel.app/')">
-                        <i class="fas fa-calendar-alt"></i>
-                        Prova Gratis
-                    </button>
-                    <button class="project-btn-chat" onclick="sendQuickMessage('Come uso il MealPrep Planner?')">
-                        <i class="fas fa-comments"></i>
-                        Spiegami
-                    </button>
+        <div class="project-card" data-category="nutrition">
+            <div class="project-image">
+                <img src="./images/mealprep-planner.webp" alt="MealPrep Planner" loading="lazy">
+                <div class="project-overlay">
+                    <span class="project-category">NUTRIZIONE</span>
                 </div>
+            </div>
+            <div class="project-content">
+                <h3>MealPrep Planner</h3>
+                <p>Pianifica i tuoi pasti settimanali con ricette bilanciate e liste della spesa automatiche per risparmiare tempo.</p>
+                <div class="project-tags">
+                    <span class="tag">Pianificazione</span>
+                    <span class="tag">Ricette</span>
+                    <span class="tag">Tempo</span>
+                </div>
+                <a href="https://mealprep-planner.com" target="_blank" class="project-btn">Prova Gratis</a>
             </div>
         </div>
 
-        <!-- Pasto Sano - LINK CORRETTO -->
-        <div class="project-card nutrition">
-            <div class="project-image pastosano-image"></div>
-            <div class="project-content">
-                <h3 class="project-title">Pasto Sano - Pasti Freschi Verona</h3>
-                <p class="project-description">Piatti freschi pronti in 2 minuti, fatti con ingredienti di qualità. La soluzione per chi vuole mangiare bene senza cucinare.</p>
-                <div class="project-actions">
-                    <button class="project-btn-primary" onclick="openProject('https://www.pastosano.it')">
-                        <i class="fas fa-utensils"></i>
-                        Ordina Ora
-                    </button>
-                    <button class="project-btn-chat" onclick="sendQuickMessage('Quali sono i prezzi di Pasto Sano?')">
-                        <i class="fas fa-comments"></i>
-                        Prezzi
-                    </button>
+        <!-- Pasto Sano -->
+        <div class="project-card" data-category="nutrition">
+            <div class="project-image">
+                <img src="./images/pasto-sano.webp" alt="Pasto Sano - Pasti Freschi Verona" loading="lazy">
+                <div class="project-overlay">
+                    <span class="project-category">DELIVERY</span>
                 </div>
+            </div>
+            <div class="project-content">
+                <h3>Pasto Sano - Pasti Freschi Verona</h3>
+                <p>Pasti sani e bilanciati consegnati direttamente a casa tua. Ideali per chi ha poco tempo ma non vuole rinunciare alla qualità.</p>
+                <div class="project-tags">
+                    <span class="tag">Delivery</span>
+                    <span class="tag">Verona</span>
+                    <span class="tag">Healthy</span>
+                </div>
+                <a href="https://www.pastosano.it" target="_blank" class="project-btn">Ordina Ora</a>
             </div>
         </div>
 
         <!-- Upstart Business Coaching -->
-        <div class="project-card business">
-            <div class="project-image upstart-image"></div>
-            <div class="project-content">
-                <h3 class="project-title">Upstart - Business Coaching</h3>
-                <p class="project-description">Testa il potenziale della tua idea di business e ricevi supporto strategico per farla crescere.</p>
-                <div class="project-actions">
-                    <button class="project-btn-primary" onclick="openProject('https://upstarter-tf9x.vercel.app/')">
-                        <i class="fas fa-briefcase"></i>
-                        Consulenza Gratuita
-                    </button>
-                    <button class="project-btn-chat" onclick="sendQuickMessage('Come funziona il business coaching?')">
-                        <i class="fas fa-comments"></i>
-                        Scopri di più
-                    </button>
+        <div class="project-card" data-category="business">
+            <div class="project-image">
+                <img src="./images/upstart-coaching.webp" alt="Upstart Business Coaching" loading="lazy">
+                <div class="project-overlay">
+                    <span class="project-category">BUSINESS</span>
                 </div>
+            </div>
+            <div class="project-content">
+                <h3>Upstart Business Coaching</h3>
+                <p>Accelera la crescita del tuo business con strategie di marketing, vendite e gestione team provate sul campo.</p>
+                <div class="project-tags">
+                    <span class="tag">Imprenditori</span>
+                    <span class="tag">Marketing</span>
+                    <span class="tag">Crescita</span>
+                </div>
+                <a href="mailto:info@andreapadoan.it?subject=Richiesta Business Coaching" class="project-btn">Prenota Call</a>
             </div>
         </div>
 
         <!-- Best-Trainer -->
-        <div class="project-card business">
-            <div class="project-image besttrainer-image"></div>
-            <div class="project-content">
-                <h3 class="project-title">Best-Trainer</h3>
-                <p class="project-description">Centinaia di programmi di allenamento per ogni sport, formulati dai migliori personal trainer.</p>
-                <div class="project-actions">
-                    <button class="project-btn-primary" onclick="openProject('https://best-trainer-mvp.vercel.app/')">
-                        <i class="fas fa-star"></i>
-                        Scopri Programmi
-                    </button>
-                    <button class="project-btn-chat" onclick="sendQuickMessage('Che programmi ha Best-Trainer?')">
-                        <i class="fas fa-comments"></i>
-                        Info Programmi
-                    </button>
+        <div class="project-card" data-category="education">
+            <div class="project-image">
+                <img src="./images/best-trainer.webp" alt="Best-Trainer - Formazione Professionisti" loading="lazy">
+                <div class="project-overlay">
+                    <span class="project-category">FORMAZIONE</span>
                 </div>
+            </div>
+            <div class="project-content">
+                <h3>Best-Trainer</h3>
+                <p>Formazione avanzata per personal trainer e professionisti del fitness che vogliono eccellere nel loro campo.</p>
+                <div class="project-tags">
+                    <span class="tag">Professionisti</span>
+                    <span class="tag">Certificazioni</span>
+                    <span class="tag">Excellence</span>
+                </div>
+                <a href="https://best-trainer.it" target="_blank" class="project-btn">Scopri Corsi</a>
             </div>
         </div>
 
-        <!-- eBook -->
-        <div class="project-card business">
-            <div class="project-image ebook-image"></div>
-            <div class="project-content">
-                <h3 class="project-title">I miei eBook</h3>
-                <p class="project-description">Guide complete per trasformare il tuo corpo e mindset. Anni di esperienza in formato digitale.</p>
-                <div class="project-actions">
-                    <button class="project-btn-primary" onclick="openProject('./ebooks.html')">
-                        <i class="fas fa-download"></i>
-                        Scarica Ora
-                    </button>
-                    <button class="project-btn-chat" onclick="sendQuickMessage('Quali eBook hai disponibili?')">
-                        <i class="fas fa-comments"></i>
-                        Vedi eBook
-                    </button>
+        <!-- I miei eBook -->
+        <div class="project-card" data-category="education">
+            <div class="project-image">
+                <img src="./images/ebooks.webp" alt="eBook di Andrea Padoan" loading="lazy">
+                <div class="project-overlay">
+                    <span class="project-category">GUIDE</span>
                 </div>
+            </div>
+            <div class="project-content">
+                <h3>I miei eBook</h3>
+                <p>Guide pratiche e strategie testate per migliorare fitness, alimentazione e mindset. Scaricabili immediatamente.</p>
+                <div class="project-tags">
+                    <span class="tag">Guide</span>
+                    <span class="tag">Download</span>
+                    <span class="tag">Pratico</span>
+                </div>
+                <a href="./ebooks.html" class="project-btn">Esplora eBook</a>
             </div>
         </div>
     </div>
 
-    <!-- QUIZ SECTION DINAMICA CON SFONDO ARANCIONE -->
-    <div class="quiz-professional-section" style="
-        background: linear-gradient(135deg, rgba(255, 107, 53, 0.95) 0%, rgba(255, 152, 0, 0.90) 100%);
-        background-size: cover;
-        background-position: center;
-    ">
-        <div class="quiz-pro-container">
-            <!-- Header compatto -->
-            <div class="quiz-pro-header">
-                <h2 class="quiz-pro-title">Non sai quale servizio scegliere?</h2>
-                <p class="quiz-pro-subtitle">
-                    Rispondi a <strong style="color: #000; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);">5 domande strategiche</strong> e ti guiderò verso la soluzione perfetta per i tuoi obiettivi
-                </p>
+    <!-- QUIZ SECTION RINNOVATA -->
+    <div class="quiz-discovery-section">
+        <div class="quiz-discovery-content">
+            <div class="quiz-icon">
+                <i class="fas fa-search-plus"></i>
             </div>
-
-            <!-- Benefit cards dinamiche - INLINE -->
-            <div class="quiz-pro-benefits">
-                <div class="quiz-benefit-card">
-                    <div class="benefit-icon-wrapper">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
-                    <h4>Analisi Professionale</h4>
-                    <p>Valutazione basata sui metodi che uso con i miei clienti</p>
+            <h2 class="quiz-discovery-title">Non sai da dove iniziare?</h2>
+            <p class="quiz-discovery-subtitle">
+                Scopri dove sei oggi e ricevi un report personalizzato con consigli specifici per migliorare il tuo benessere
+            </p>
+            <div class="quiz-features">
+                <div class="feature-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Solo 2 minuti</span>
                 </div>
-                
-                <div class="quiz-benefit-card">
-                    <div class="benefit-icon-wrapper">
-                        <i class="fas fa-route"></i>
-                    </div>
-                    <h4>Percorso Personalizzato</h4>
-                    <p>Piano d'azione specifico per il tuo livello e obiettivi</p>
+                <div class="feature-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analisi completa</span>
                 </div>
-                
-                <div class="quiz-benefit-card">
-                    <div class="benefit-icon-wrapper">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <h4>Risultati in 2 Minuti</h4>
-                    <p>Consigli immediati senza perdere tempo prezioso</p>
+                <div class="feature-item">
+                    <i class="fas fa-gift"></i>
+                    <span>Report gratuito</span>
                 </div>
             </div>
-
-            <!-- CTA principale -->
-            <div class="quiz-pro-cta">
-                <a href="./quiz.html" class="quiz-start-btn">
-                    <span class="btn-icon">
-                        <i class="fas fa-play"></i>
-                    </span>
-                    <span class="btn-content">
-                        <span class="btn-main-text">INIZIA IL TEST GRATUITO</span>
-                        <span class="btn-sub-text">Scopri il tuo percorso in 2 minuti</span>
-                    </span>
-                    <span class="btn-arrow">
-                        <i class="fas fa-arrow-right"></i>
-                    </span>
-                </a>
-                
-                <!-- Trust elements -->
-                <div class="quiz-trust">
-                    <div class="trust-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>100% Gratuito</span>
-                    </div>
-                    <div class="trust-item">
-                        <i class="fas fa-shield-alt"></i>
-                        <span>Dati Protetti</span>
-                    </div>
-                    <div class="trust-item">
-                        <i class="fas fa-users"></i>
-                        <span>+500 già completato</span>
-                    </div>
-                </div>
-            </div>
+            <a href="./quiz.html" class="quiz-discovery-btn">
+                <span>Inizia il Test Gratuito</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+            <p class="quiz-trust">
+                <i class="fas fa-users"></i>
+                Oltre 2.500 persone hanno già scoperto il loro percorso ideale
+            </p>
         </div>
     </div>
+
 </div>
 
 <style>
-/* ===== SERVICES STYLES (mantieni come prima) ===== */
+/* ====================================== 
+   PROJECTS SECTION STYLES
+   ====================================== */
+
 .projects-container {
-    padding: 60px 15px;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(26, 26, 26, 0.6));
-    border-radius: 25px;
-    margin-bottom: 80px;
+    padding: 60px 20px;
 }
 
 .section-title {
-    color: #ff6b35;
-    font-size: clamp(1.8rem, 6vw, 3rem);
-    font-weight: 900;
     text-align: center;
-    margin-bottom: 15px;
-    line-height: 1.2;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 900;
 }
 
 .section-subtitle {
-    color: #b0b0b0;
-    font-size: clamp(1rem, 3vw, 1.3rem);
     text-align: center;
-    margin-bottom: 50px;
-    line-height: 1.6;
-    max-width: 700px;
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 60px;
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+    line-height: 1.6;
 }
 
 .projects-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 25px;
-    margin-bottom: 60px;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-bottom: 80px;
 }
 
 .project-card {
-    background: linear-gradient(135deg, rgba(26, 26, 26, 0.95), rgba(40, 40, 40, 0.9));
+    background: #fff;
     border-radius: 20px;
-    padding: 0;
-    border: 2px solid rgba(255, 107, 53, 0.2);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     overflow: hidden;
-    min-height: 420px;
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 107, 53, 0.1);
 }
 
 .project-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    border-color: rgba(255, 107, 53, 0.6);
-    box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(255, 107, 53, 0.2);
 }
 
 .project-image {
-    width: 100%;
-    height: 180px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border-radius: 20px 20px 0 0;
     position: relative;
-    transition: all 0.3s ease;
+    height: 200px;
+    overflow: hidden;
 }
 
-.project-card:hover .project-image {
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.project-card:hover .project-image img {
     transform: scale(1.05);
 }
 
-.pt-image { background-image: url('./images/andrea-personal-training.jpg'); }
-.tribu-image { background-image: url('./images/tribu-studio-interior.jpg'); }
-.coaching-image { background-image: url('./images/coaching.jpg'); }
-.mealprep-image { background-image: url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=400&h=300&fit=crop'); }
-.pastosano-image { background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop'); }
-.upstart-image { background-image: url('https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=300&fit=crop'); }
-.besttrainer-image { background-image: url('./images/best-trainer.jpeg'); }
-.ebook-image { background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop'); }
+.project-overlay {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.project-category {
+    background: rgba(255, 107, 53, 0.9);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
 
 .project-content {
-    padding: 25px 20px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    padding: 25px;
 }
 
-.project-title {
-    color: #ff6b35;
-    font-size: 1.3rem;
-    font-weight: bold;
+.project-content h3 {
+    font-size: 1.4rem;
+    color: #333;
     margin-bottom: 12px;
-    line-height: 1.3;
+    font-weight: 700;
 }
 
-.project-description {
-    color: #e0e0e0;
-    font-size: 1rem;
+.project-content p {
+    color: #666;
     line-height: 1.6;
     margin-bottom: 20px;
-    flex: 1;
-}
-
-.project-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: auto;
-}
-
-.project-btn-primary, .project-btn-chat {
-    border: none;
-    padding: 14px 18px;
-    border-radius: 25px;
     font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    width: 100%;
+}
+
+.project-tags {
     display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    background: rgba(255, 107, 53, 0.1);
+    color: #ff6b35;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.project-btn {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
-    min-height: 48px;
-}
-
-.project-btn-primary {
-    background: linear-gradient(45deg, #ff6b35, #ff8533);
+    background: linear-gradient(135deg, #ff6b35, #ff8533);
     color: white;
-    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+    padding: 12px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
 }
 
-.project-btn-primary:hover {
+.project-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
 }
 
-.project-btn-chat {
-    background: transparent;
-    color: #4ade80;
-    border: 2px solid #4ade80;
-}
+/* ====================================== 
+   QUIZ DISCOVERY SECTION - RINNOVATA
+   ====================================== */
 
-.project-btn-chat:hover {
-    background: rgba(74, 222, 128, 0.1);
-    transform: translateY(-1px);
-}
-
-/* ===== QUIZ PROFESSIONALE SECTION ===== */
-
-.quiz-professional-section {
-    position: relative;
+.quiz-discovery-section {
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.95) 0%, rgba(255, 152, 0, 0.90) 100%);
     border-radius: 25px;
-    padding: 50px 30px;
-    margin: 40px 0;
+    padding: 60px 40px;
+    margin: 60px 0;
+    text-align: center;
+    position: relative;
     overflow: hidden;
-    min-height: 450px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-.quiz-professional-section::before {
+.quiz-discovery-section::before {
     content: '';
     position: absolute;
     top: -50%;
@@ -407,492 +362,191 @@
     width: 200%;
     height: 200%;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-    animation: slowRotate 15s linear infinite;
-    pointer-events: none;
+    animation: rotate 20s linear infinite;
 }
 
-@keyframes slowRotate {
+@keyframes rotate {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
 }
-}
 
-.quiz-pro-container {
+.quiz-discovery-content {
     position: relative;
     z-index: 2;
-    max-width: 900px;
+    max-width: 700px;
     margin: 0 auto;
-    text-align: center;
 }
 
-/* Header */
-.quiz-pro-header {
-    margin-bottom: 40px;
-}
-
-.quiz-pro-icon {
+.quiz-icon {
     width: 80px;
     height: 80px;
-    background: linear-gradient(135deg, #ff6b35, #ff8533);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 25px;
-    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
-    animation: gentlePulse 3s ease-in-out infinite;
-}
-
-@keyframes gentlePulse {
-    0%, 100% { transform: scale(1); box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3); }
-    50% { transform: scale(1.05); box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4); }
-}
-
-.quiz-pro-icon i {
-    font-size: 2.2rem;
-    color: white;
-}
-
-.quiz-pro-title {
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
-    color: #fff;
-    font-weight: 900;
-    margin-bottom: 15px;
-    line-height: 1.2;
-}
-
-.quiz-pro-subtitle {
-    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-    color: #e0e0e0;
-    line-height: 1.6;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.quiz-pro-subtitle strong {
-    color: #ff6b35;
-    font-weight: 700;
-}
-
-/* Benefit Cards */
-.quiz-pro-benefits {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
-    margin-bottom: 40px;
-}
-
-.quiz-benefit-card {
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(20px);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 18px;
-    padding: 25px 20px;
-    transition: all 0.3s ease;
-    text-align: center;
-}
-
-.quiz-benefit-card:hover {
-    transform: translateY(-8px) scale(1.05);
-    border-color: rgba(255, 255, 255, 0.6);
-    background: rgba(0, 0, 0, 0.5);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-}
-
-.benefit-icon-wrapper {
-    width: 50px !important; /* Ridotto da 60px */
-    height: 50px !important;
-    background: linear-gradient(135deg, #ffffff, #f0f0f0);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 12px !important; /* Ridotto da 15px */
-    transition: transform 0.3s ease;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-}
-
-.quiz-benefit-card:hover .benefit-icon-wrapper {
-    transform: scale(1.15) rotate(5deg);
-}
-
-.benefit-icon-wrapper i {
-    font-size: 1.1rem !important; /* Ridotto da 1.3rem */
-    color: #ff6b35;
-}
-
-.quiz-benefit-card h4 {
-    color: #fff;
-    font-size: 1rem !important; /* Ridotto da 1.1rem */
-    font-weight: bold;
-    margin-bottom: 6px !important; /* Ridotto da 8px */
-}
-
-.quiz-benefit-card p {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 0.85rem !important; /* Ridotto da 0.9rem */
-    line-height: 1.3;
-}
-
-/* CTA Principale */
-.quiz-pro-cta {
-    margin-bottom: 20px;
-}
-
-.quiz-start-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 15px;
-    background: linear-gradient(135deg, #ff6b35, #ff8533);
-    color: white;
-    text-decoration: none;
-    padding: 20px 30px;
-    border-radius: 50px;
-    font-weight: bold;
-    transition: all 0.4s ease;
-    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
-    margin-bottom: 25px;
-    position: relative;
-    overflow: hidden;
-}
-
-.quiz-start-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: left 0.5s;
-}
-
-.quiz-start-btn:hover::before {
-    left: 100%;
-}
-
-.quiz-start-btn:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 15px 40px rgba(255, 107, 53, 0.5);
-    text-decoration: none;
-    color: white;
-}
-
-.btn-icon {
-    width: 45px;
-    height: 45px;
     background: rgba(255, 255, 255, 0.2);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
+    margin: 0 auto 30px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
-.btn-content {
-    flex: 1;
-    text-align: left;
+.quiz-icon i {
+    font-size: 35px;
+    color: white;
+    animation: pulse 2s ease-in-out infinite;
 }
 
-.btn-main-text {
-    display: block;
-    font-size: 1.1rem;
-    font-weight: 800;
-    letter-spacing: 0.5px;
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
 }
 
-.btn-sub-text {
-    display: block;
-    font-size: 0.85rem;
-    opacity: 0.9;
-    font-weight: 500;
+.quiz-discovery-title {
+    color: white;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    margin-bottom: 20px;
+    font-weight: 900;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-.btn-arrow {
-    font-size: 1.1rem;
-    transition: transform 0.3s ease;
+.quiz-discovery-subtitle {
+    color: white;
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+    line-height: 1.5;
+    font-weight: 600;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 }
 
-.quiz-start-btn:hover .btn-arrow {
-    transform: translateX(5px);
-}
-
-/* Trust Elements */
-.quiz-trust {
+.quiz-features {
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 40px;
+    margin-bottom: 40px;
     flex-wrap: wrap;
 }
 
-.trust-item {
+.feature-item {
     display: flex;
     align-items: center;
-    gap: 6px;
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.9rem;
-    font-weight: 500;
-}
-
-.trust-item i {
-    color: #4ade80;
+    gap: 8px;
+    color: white;
+    font-weight: 600;
     font-size: 1rem;
 }
 
-/* Responsive */
-@media (min-width: 640px) {
-    .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .project-actions {
-        flex-direction: row;
-        gap: 15px;
-    }
-    
-    .project-btn-primary, .project-btn-chat {
-        flex: 1;
-    }
+.feature-item i {
+    font-size: 18px;
+    opacity: 0.9;
 }
 
-@media (min-width: 1024px) {
-    .projects-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-    
-    .project-actions {
-        flex-direction: column;
-        gap: 10px;
-    }
+.quiz-discovery-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: white;
+    color: #ff6b35;
+    padding: 20px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    margin-bottom: 25px;
 }
+
+.quiz-discovery-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.quiz-discovery-btn i {
+    transition: transform 0.3s ease;
+}
+
+.quiz-discovery-btn:hover i {
+    transform: translateX(5px);
+}
+
+.quiz-trust {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.quiz-trust i {
+    font-size: 16px;
+}
+
+/* ====================================== 
+   RESPONSIVE DESIGN
+   ====================================== */
 
 @media (max-width: 768px) {
-    .quiz-professional-section {
-        padding: 40px 20px;
-        margin: 30px 0;
+    .projects-container {
+        padding: 40px 15px;
     }
-    
-    .quiz-pro-benefits {
+
+    .projects-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 25px;
+        margin-bottom: 60px;
     }
-    
-    .quiz-start-btn {
-        flex-direction: column;
-        gap: 10px;
-        padding: 18px 25px;
-        text-align: center;
+
+    .project-card {
+        margin: 0 10px;
     }
-    
-    .btn-content {
-        text-align: center;
+
+    .quiz-discovery-section {
+        padding: 40px 25px;
+        margin: 40px 0;
     }
-    
-    .quiz-trust {
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
+
+    .quiz-discovery-title {
+        font-size: 2rem;
+    }
+
+    .quiz-discovery-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .quiz-features {
+        gap: 25px;
+    }
+
+    .feature-item {
+        font-size: 0.9rem;
+    }
+
+    .quiz-discovery-btn {
+        padding: 16px 30px;
+        font-size: 1.1rem;
     }
 }
 
 @media (max-width: 480px) {
-    .quiz-professional-section {
-        padding: 30px 15px;
-        border-radius: 20px;
-    }
-    
-    .quiz-pro-icon {
+    .quiz-icon {
         width: 60px;
         height: 60px;
     }
-    
-    .quiz-pro-icon i {
-        font-size: 1.8rem;
-    }
-    
-    .preview-questions {
-        gap: 10px;
-    }
-    
-    .preview-question {
-        padding: 10px 12px;
-    }
-    
-    .question-number {
-        width: 22px;
-        height: 22px;
-        font-size: 0.8rem;
-    }
-    
-    .question-text {
-        font-size: 0.9rem;
-    }
-}
 
-/* Performance optimizations */
-.quiz-benefit-card, .preview-question {
-    will-change: transform;
-}
-
-/* Accessibility */
-@media (prefers-reduced-motion: reduce) {
-    .quiz-professional-section::before,
-    .quiz-pro-icon,
-    .quiz-start-btn::before {
-        animation: none;
+    .quiz-icon i {
+        font-size: 25px;
     }
-    
-    .quiz-benefit-card:hover,
-    .preview-question:hover,
-    .quiz-start-btn:hover {
-        transform: none;
+
+    .quiz-features {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .quiz-discovery-btn {
+        padding: 14px 25px;
+        font-size: 1rem;
     }
 }
 </style>
-
-<script>
-// Services functionality
-function openProject(url) {
-    console.log(`🎯 Opening project: ${url}`);
-    if ('vibrate' in navigator) navigator.vibrate(20);
-    if (typeof gtag !== 'undefined') {
-        gtag('event', 'project_visit', {
-            'event_category': 'engagement',
-            'event_label': url,
-            'value': 1
-        });
-    }
-    window.open(url, '_blank', 'noopener');
-}
-
-function sendQuickMessage(message) {
-    console.log(`💬 Quick message: ${message}`);
-    if ('vibrate' in navigator) navigator.vibrate(10);
-    if (typeof gtag !== 'undefined') {
-        gtag('event', 'quick_chat', {
-            'event_category': 'engagement',
-            'event_label': message,
-            'value': 1
-        });
-    }
-    const whatsappUrl = `https://wa.me/3478881515?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank', 'noopener');
-}
-
-// Quiz Professional interactions
-function initQuizProfessional() {
-    // Animate benefit cards on scroll
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Animate benefit cards with stagger
-                const benefitCards = entry.target.querySelectorAll('.quiz-benefit-card');
-                benefitCards.forEach((card, index) => {
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    }, index * 150);
-                });
-                
-                // Animate preview questions
-                const previewQuestions = entry.target.querySelectorAll('.preview-question');
-                previewQuestions.forEach((question, index) => {
-                    setTimeout(() => {
-                        question.style.opacity = '1';
-                        question.style.transform = 'translateX(0)';
-                    }, 500 + (index * 100));
-                });
-                
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-    
-    const quizSection = document.querySelector('.quiz-professional-section');
-    if (quizSection) {
-        observer.observe(quizSection);
-    }
-}
-
-// Hover effects for preview questions
-function initPreviewInteractions() {
-    const previewQuestions = document.querySelectorAll('.preview-question');
-    
-    previewQuestions.forEach((question, index) => {
-        question.addEventListener('mouseenter', () => {
-            // Add subtle sound effect
-            if ('vibrate' in navigator) {
-                navigator.vibrate(5);
-            }
-            
-            // Analytics
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'quiz_preview_hover', {
-                    'event_category': 'engagement',
-                    'event_label': `question_${index + 1}`,
-                    'value': 1
-                });
-            }
-        });
-        
-        question.addEventListener('click', () => {
-            // Navigate to quiz on click
-            window.location.href = './quiz.html';
-        });
-    });
-}
-
-// Enhanced CTA tracking
-document.addEventListener('click', (e) => {
-    if (e.target.closest('.quiz-start-btn')) {
-        e.preventDefault();
-        
-        // Analytics
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'quiz_start_professional', {
-                'event_category': 'conversion',
-                'event_label': 'professional_cta',
-                'value': 1
-            });
-        }
-        
-        // Visual feedback
-        const button = e.target.closest('.quiz-start-btn');
-        button.style.transform = 'scale(0.95)';
-        
-        setTimeout(() => {
-            window.location.href = './quiz.html';
-        }, 150);
-    }
-});
-
-// Initialize everything
-document.addEventListener('DOMContentLoaded', () => {
-    // Set initial states for animations
-    const benefitCards = document.querySelectorAll('.quiz-benefit-card');
-    benefitCards.forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-    });
-    
-    const previewQuestions = document.querySelectorAll('.preview-question');
-    previewQuestions.forEach(question => {
-        question.style.opacity = '0';
-        question.style.transform = 'translateX(-10px)';
-        question.style.transition = 'all 0.5s ease';
-        question.style.cursor = 'pointer';
-    });
-    
-    // Initialize interactions
-    initQuizProfessional();
-    initPreviewInteractions();
-    
-    console.log('✅ Professional quiz section initialized');
-});
-</script>
