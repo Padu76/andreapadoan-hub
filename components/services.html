@@ -1,710 +1,817 @@
-<div class="projects-container" id="projects">
-    <h2 class="section-title">Trasforma la Tua Vita</h2>
-    <p class="section-subtitle">Scopri dove puoi migliorare oggi stesso. Ogni servizio è pensato per chi vuole risultati concreti senza perdere tempo.</p>
+<!-- QUIZ SECTION ULTRA-MODERNA -->
+<div class="quiz-modern-section" style="
+    position: relative;
+    margin: 80px -15px 0;
+    min-height: 500px;
+    overflow: hidden;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+">
     
-    <div class="projects-grid">
-        <!-- Personal Training -->
-        <div class="project-card fitness">
-            <div class="project-image pt-image"></div>
-            <div class="project-content">
-                <h3 class="project-title">Personal Training a Verona</h3>
-                <p class="project-description">Allenamenti su misura per chi ha poco tempo ma vuole risultati veri. In studio o online.</p>
-                <div class="project-actions">
-                    <button class="project-btn-primary" onclick="openProject('https://www.personaltrainerverona.it')">
-                        <i class="fas fa-dumbbell"></i>
-                        Vedi Programmi
-                    </button>
-                    <button class="project-btn-chat" onclick="sendQuickMessage('Dimmi tutto sul personal training')">
-                        <i class="fas fa-comments"></i>
-                        Chiedimi tutto
-                    </button>
-                </div>
-            </div>
+    <!-- Animated Background -->
+    <div class="quiz-bg-animation">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5"></div>
         </div>
-
-        <!-- Tribù Studio -->
-        <div class="project-card fitness">
-            <div class="project-image tribu-image"></div>
-            <div class="project-content">
-                <h3 class="project-title">Tribù Studio</h3>
-                <p class="project-description">Uno studio privato a Verona dove essere seguito in modo esclusivo, senza code o distrazioni.</p>
-                <div class="project-actions">
-                    <button class="project-btn-primary" onclick="openProject('https://www.tribuptstudio.it')">
-                        <i class="fas fa-home"></i>
-                        Visita Studio
-                    </button>
-                    <button class="project-btn-chat" onclick="sendQuickMessage('Come funziona Tribù Studio?')">
-                        <i class="fas fa-comments"></i>
-                        Info Studio
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Lifestyle Coaching -->
-        <div class="project-card fitness">
-            <div class="project-image coaching-image"></div>
-            <div class="project-content">
-                <h3 class="project-title">Lifestyle Coaching Online</h3>
-                <p class="project-description"><strong>La soluzione completa per il tuo cambiamento</strong> - perché dieta e allenamento non bastano!</p>
-                <div class="project-actions">
-                    <button class="project-btn-primary" onclick="openProject('https://tribucoach.vercel.app/')">
-                        <i class="fas fa-rocket"></i>
-                        Inizia Percorso
-                    </button>
-                    <button class="project-btn-chat" onclick="sendQuickMessage('Spiegami il lifestyle coaching')">
-                        <i class="fas fa-comments"></i>
-                        Come Funziona
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- MealPrep Planner -->
-        <div class="project-card nutrition">
-            <div class="project-image mealprep-image"></div>
-            <div class="project-content">
-                <h3 class="project-title">MealPrep Planner</h3>
-                <p class="project-description">Organizza i pasti della settimana in 10 minuti e resta in forma senza stress. Web app gratuita.</p>
-                <div class="project-actions">
-                    <button class="project-btn-primary" onclick="openProject('https://mealprep-planner.vercel.app/')">
-                        <i class="fas fa-calendar-alt"></i>
-                        Prova Gratis
-                    </button>
-                    <button class="project-btn-chat" onclick="sendQuickMessage('Come uso il MealPrep Planner?')">
-                        <i class="fas fa-comments"></i>
-                        Spiegami
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Pasto Sano - LINK CORRETTO -->
-        <div class="project-card nutrition">
-            <div class="project-image pastosano-image"></div>
-            <div class="project-content">
-                <h3 class="project-title">Pasto Sano - Pasti Freschi Verona</h3>
-                <p class="project-description">Piatti freschi pronti in 2 minuti, fatti con ingredienti di qualità. La soluzione per chi vuole mangiare bene senza cucinare.</p>
-                <div class="project-actions">
-                    <button class="project-btn-primary" onclick="openProject('https://www.pastosano.it')">
-                        <i class="fas fa-utensils"></i>
-                        Ordina Ora
-                    </button>
-                    <button class="project-btn-chat" onclick="sendQuickMessage('Quali sono i prezzi di Pasto Sano?')">
-                        <i class="fas fa-comments"></i>
-                        Prezzi
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Upstart Business Coaching -->
-        <div class="project-card business">
-            <div class="project-image upstart-image"></div>
-            <div class="project-content">
-                <h3 class="project-title">Upstart - Business Coaching</h3>
-                <p class="project-description">Testa il potenziale della tua idea di business e ricevi supporto strategico per farla crescere.</p>
-                <div class="project-actions">
-                    <button class="project-btn-primary" onclick="openProject('https://upstarter-tf9x.vercel.app/')">
-                        <i class="fas fa-briefcase"></i>
-                        Consulenza Gratuita
-                    </button>
-                    <button class="project-btn-chat" onclick="sendQuickMessage('Come funziona il business coaching?')">
-                        <i class="fas fa-comments"></i>
-                        Scopri di più
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Best-Trainer -->
-        <div class="project-card business">
-            <div class="project-image besttrainer-image"></div>
-            <div class="project-content">
-                <h3 class="project-title">Best-Trainer</h3>
-                <p class="project-description">Centinaia di programmi di allenamento per ogni sport, formulati dai migliori personal trainer.</p>
-                <div class="project-actions">
-                    <button class="project-btn-primary" onclick="openProject('https://best-trainer-mvp.vercel.app/')">
-                        <i class="fas fa-star"></i>
-                        Scopri Programmi
-                    </button>
-                    <button class="project-btn-chat" onclick="sendQuickMessage('Che programmi ha Best-Trainer?')">
-                        <i class="fas fa-comments"></i>
-                        Info Programmi
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- eBook -->
-        <div class="project-card business">
-            <div class="project-image ebook-image"></div>
-            <div class="project-content">
-                <h3 class="project-title">I miei eBook</h3>
-                <p class="project-description">Guide complete per trasformare il tuo corpo e mindset. Anni di esperienza in formato digitale.</p>
-                <div class="project-actions">
-                    <button class="project-btn-primary" onclick="openProject('./ebooks.html')">
-                        <i class="fas fa-download"></i>
-                        Scarica Ora
-                    </button>
-                    <button class="project-btn-chat" onclick="sendQuickMessage('Quali eBook hai disponibili?')">
-                        <i class="fas fa-comments"></i>
-                        Vedi eBook
-                    </button>
-                </div>
-            </div>
+        
+        <!-- Interactive Grid -->
+        <div class="interactive-grid">
+            <div class="grid-line"></div>
+            <div class="grid-line"></div>
+            <div class="grid-line"></div>
+            <div class="grid-line"></div>
         </div>
     </div>
-
-    <!-- QUIZ SECTION COMPATTA E OTTIMIZZATA -->
-    <div class="quiz-intro-section" style="
-        background-image: linear-gradient(135deg, rgba(255, 107, 0, 0.92) 0%, rgba(255, 152, 0, 0.88) 100%), 
-                          url('https://images.unsplash.com/photo-1517963879433-6ad2b056d712?w=1920&h=1080&fit=crop');
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        position: relative;
-        padding: 60px 20px;
-        margin: 80px -15px 0;
-        min-height: 450px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-    ">
+    
+    <!-- Main Content -->
+    <div class="quiz-content-modern">
+        <!-- Icon Badge -->
+        <div class="quiz-badge">
+            <div class="badge-glow"></div>
+            <i class="fas fa-rocket"></i>
+        </div>
         
-        <div class="quiz-content-compact">
-            <!-- Titolo principale più diretto -->
-            <h2 class="quiz-title-compact">
-                <span class="highlight-text">Non sai da dove iniziare?</span>
-            </h2>
-            
-            <!-- Sottotitolo breve e impattante -->
-            <p class="quiz-subtitle-compact">
-                Scopri in <strong>3 minuti</strong> il percorso perfetto per i tuoi obiettivi
-            </p>
-            
-            <!-- Cards in linea singola -->
-            <div class="quiz-benefits-row">
-                <div class="benefit-compact">
-                    <div class="benefit-emoji">📊</div>
-                    <div class="benefit-label">Analisi<br>Personalizzata</div>
+        <!-- Title with Typewriter Effect -->
+        <h2 class="quiz-title-modern">
+            <span class="typewriter">Non sai da dove iniziare?</span>
+        </h2>
+        
+        <!-- Subtitle with Highlight -->
+        <p class="quiz-subtitle-modern">
+            Scopri il <span class="highlight-word">percorso perfetto</span> per i tuoi obiettivi in soli <span class="highlight-number">3 minuti</span>
+        </p>
+        
+        <!-- Interactive Benefits -->
+        <div class="benefits-interactive">
+            <div class="benefit-modern" data-benefit="personalized">
+                <div class="benefit-icon">
+                    <i class="fas fa-user-cog"></i>
                 </div>
-                <div class="benefit-compact">
-                    <div class="benefit-emoji">🎯</div>
-                    <div class="benefit-label">Piano<br>Su Misura</div>
+                <div class="benefit-content">
+                    <h4>Analisi Personalizzata</h4>
+                    <p>Algoritmo AI per risultati su misura</p>
                 </div>
-                <div class="benefit-compact">
-                    <div class="benefit-emoji">💡</div>
-                    <div class="benefit-label">Consigli<br>Pratici</div>
-                </div>
-                <div class="benefit-compact">
-                    <div class="benefit-emoji">⚡</div>
-                    <div class="benefit-label">Risultati<br>Immediati</div>
-                </div>
+                <div class="benefit-pulse"></div>
             </div>
             
-            <!-- CTA con colori più accattivanti -->
-            <div class="quiz-cta-wrapper">
-                <a href="./quiz.html" class="quiz-action-btn">
-                    <span class="btn-glow"></span>
-                    <span class="btn-content">
-                        <i class="fas fa-play-circle"></i>
-                        <span>INIZIA IL TEST GRATUITO</span>
-                    </span>
-                </a>
-                
-                <!-- Mini trust -->
-                <div class="quiz-mini-trust">
-                    <span><i class="fas fa-check-circle"></i> 100% Gratuito</span>
-                    <span><i class="fas fa-lock"></i> Dati Protetti</span>
-                    <span><i class="fas fa-users"></i> 500+ Completati</span>
+            <div class="benefit-modern" data-benefit="fast">
+                <div class="benefit-icon">
+                    <i class="fas fa-bolt"></i>
                 </div>
+                <div class="benefit-content">
+                    <h4>Risultati Immediati</h4>
+                    <p>Piano d'azione pronto in 180 secondi</p>
+                </div>
+                <div class="benefit-pulse"></div>
+            </div>
+            
+            <div class="benefit-modern" data-benefit="expert">
+                <div class="benefit-icon">
+                    <i class="fas fa-medal"></i>
+                </div>
+                <div class="benefit-content">
+                    <h4>Consigli da Esperti</h4>
+                    <p>Basato su 10+ anni di esperienza</p>
+                </div>
+                <div class="benefit-pulse"></div>
+            </div>
+        </div>
+        
+        <!-- Interactive CTA -->
+        <div class="quiz-cta-modern">
+            <button class="start-quiz-modern" onclick="startModernQuiz()">
+                <span class="btn-bg"></span>
+                <span class="btn-text">
+                    <i class="fas fa-play"></i>
+                    <span>INIZIA IL TEST GRATUITO</span>
+                </span>
+                <div class="btn-particles">
+                    <span class="particle"></span>
+                    <span class="particle"></span>
+                    <span class="particle"></span>
+                    <span class="particle"></span>
+                </div>
+            </button>
+            
+            <!-- Progress Indicator -->
+            <div class="quiz-stats">
+                <div class="stat">
+                    <span class="stat-number" data-count="2847">0</span>
+                    <span class="stat-label">Completati oggi</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" data-count="98">0</span>
+                    <span class="stat-label">% Soddisfazione</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" data-count="3">0</span>
+                    <span class="stat-label">Minuti richiesti</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Trust Badges -->
+        <div class="trust-badges">
+            <div class="trust-item">
+                <i class="fas fa-shield-check"></i>
+                <span>100% Sicuro</span>
+            </div>
+            <div class="trust-item">
+                <i class="fas fa-clock"></i>
+                <span>Risultati Istantanei</span>
+            </div>
+            <div class="trust-item">
+                <i class="fas fa-gift"></i>
+                <span>Completamente Gratuito</span>
             </div>
         </div>
     </div>
 </div>
 
 <style>
-/* ===== SERVICES BASE STYLES (manteniamo) ===== */
-.projects-container {
-    padding: 60px 15px;
-    max-width: 1200px;
+/* ===== QUIZ MODERN SECTION ===== */
+
+.quiz-modern-section {
+    position: relative;
+    padding: 60px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+    overflow: hidden;
+    border-radius: 30px;
+    margin: 80px -15px 0;
+    min-height: 500px;
+}
+
+/* Animated Background */
+.quiz-bg-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.floating-shapes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.shape {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(45deg, rgba(255, 107, 53, 0.1), rgba(74, 222, 128, 0.1));
+    animation: float 8s ease-in-out infinite;
+}
+
+.shape-1 {
+    width: 60px;
+    height: 60px;
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.shape-2 {
+    width: 40px;
+    height: 40px;
+    top: 60%;
+    right: 15%;
+    animation-delay: -2s;
+}
+
+.shape-3 {
+    width: 80px;
+    height: 80px;
+    bottom: 30%;
+    left: 20%;
+    animation-delay: -4s;
+}
+
+.shape-4 {
+    width: 30px;
+    height: 30px;
+    top: 10%;
+    right: 30%;
+    animation-delay: -1s;
+}
+
+.shape-5 {
+    width: 50px;
+    height: 50px;
+    bottom: 10%;
+    right: 10%;
+    animation-delay: -3s;
+}
+
+@keyframes float {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg); 
+        opacity: 0.3;
+    }
+    50% { 
+        transform: translateY(-20px) rotate(180deg); 
+        opacity: 0.8;
+    }
+}
+
+/* Interactive Grid */
+.interactive-grid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+}
+
+.grid-line {
+    background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.1), transparent);
+    animation: gridPulse 3s ease-in-out infinite;
+}
+
+.grid-line:nth-child(2) { animation-delay: 0.5s; }
+.grid-line:nth-child(3) { animation-delay: 1s; }
+.grid-line:nth-child(4) { animation-delay: 1.5s; }
+
+@keyframes gridPulse {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.6; }
+}
+
+/* Main Content */
+.quiz-content-modern {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 800px;
     margin: 0 auto;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(26, 26, 26, 0.6));
-    border-radius: 25px;
-    margin-bottom: 80px;
 }
 
-.section-title {
-    color: #ff6b35;
-    font-size: clamp(1.8rem, 6vw, 3rem);
+/* Icon Badge */
+.quiz-badge {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 30px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff6b35, #4ade80);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: badgePulse 2s ease-in-out infinite;
+}
+
+.badge-glow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff6b35, #4ade80);
+    filter: blur(10px);
+    animation: glowPulse 2s ease-in-out infinite;
+}
+
+.quiz-badge i {
+    font-size: 2rem;
+    color: white;
+    position: relative;
+    z-index: 2;
+}
+
+@keyframes badgePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes glowPulse {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Modern Title with Typewriter */
+.quiz-title-modern {
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
     font-weight: 900;
-    text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    color: #ffffff;
     line-height: 1.2;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.section-subtitle {
-    color: #b0b0b0;
-    font-size: clamp(1rem, 3vw, 1.3rem);
-    text-align: center;
-    margin-bottom: 50px;
+.typewriter {
+    border-right: 3px solid #ff6b35;
+    animation: typewriter 3s steps(22) 1s forwards, blink 1s infinite;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    display: inline-block;
+}
+
+@keyframes typewriter {
+    to { width: 100%; }
+}
+
+@keyframes blink {
+    0%, 50% { border-color: #ff6b35; }
+    51%, 100% { border-color: transparent; }
+}
+
+/* Subtitle with Highlights */
+.quiz-subtitle-modern {
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 40px;
     line-height: 1.6;
-    max-width: 700px;
+}
+
+.highlight-word {
+    background: linear-gradient(45deg, #ff6b35, #4ade80);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: bold;
+    position: relative;
+}
+
+.highlight-number {
+    color: #4ade80;
+    font-weight: bold;
+    font-size: 1.2em;
+    text-shadow: 0 0 20px rgba(74, 222, 128, 0.5);
+}
+
+/* Interactive Benefits */
+.benefits-interactive {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 50px;
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
 }
 
-.projects-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 25px;
-    margin-bottom: 60px;
-}
-
-.project-card {
-    background: linear-gradient(135deg, rgba(26, 26, 26, 0.95), rgba(40, 40, 40, 0.9));
-    border-radius: 20px;
-    padding: 0;
-    border: 2px solid rgba(255, 107, 53, 0.2);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    overflow: hidden;
-    min-height: 420px;
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    backdrop-filter: blur(10px);
-}
-
-.project-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    border-color: rgba(255, 107, 53, 0.6);
-    box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
-}
-
-.project-image {
-    width: 100%;
-    height: 180px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border-radius: 20px 20px 0 0;
+.benefit-modern {
     position: relative;
-    transition: all 0.3s ease;
-}
-
-.project-card:hover .project-image {
-    transform: scale(1.05);
-}
-
-.pt-image { background-image: url('./images/andrea-personal-training.jpg'); }
-.tribu-image { background-image: url('./images/tribu-studio-interior.jpg'); }
-.coaching-image { background-image: url('./images/coaching.jpg'); }
-.mealprep-image { background-image: url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=400&h=300&fit=crop'); }
-.pastosano-image { background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop'); }
-.upstart-image { background-image: url('https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&h=300&fit=crop'); }
-.besttrainer-image { background-image: url('./images/best-trainer.jpeg'); }
-.ebook-image { background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop'); }
-
-.project-content {
-    padding: 25px 20px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.project-title {
-    color: #ff6b35;
-    font-size: 1.3rem;
-    font-weight: bold;
-    margin-bottom: 12px;
-    line-height: 1.3;
-}
-
-.project-description {
-    color: #e0e0e0;
-    font-size: 1rem;
-    line-height: 1.6;
-    margin-bottom: 20px;
-    flex: 1;
-}
-
-.project-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: auto;
-}
-
-.project-btn-primary, .project-btn-chat {
-    border: none;
-    padding: 14px 18px;
-    border-radius: 25px;
-    font-size: 0.95rem;
-    font-weight: 600;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 107, 53, 0.2);
+    border-radius: 20px;
+    padding: 25px;
+    transition: all 0.4s ease;
     cursor: pointer;
-    transition: all 0.3s ease;
-    width: 100%;
+    overflow: hidden;
+}
+
+.benefit-modern:hover {
+    transform: translateY(-10px) scale(1.05);
+    border-color: #ff6b35;
+    background: rgba(255, 107, 53, 0.1);
+    box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
+}
+
+.benefit-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 15px;
+    background: linear-gradient(135deg, #ff6b35, #4ade80);
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    min-height: 48px;
+    transition: all 0.3s ease;
 }
 
-.project-btn-primary {
-    background: linear-gradient(45deg, #ff6b35, #ff8533);
+.benefit-modern:hover .benefit-icon {
+    transform: rotate(360deg) scale(1.1);
+}
+
+.benefit-icon i {
+    font-size: 1.5rem;
     color: white;
-    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
 }
 
-.project-btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
+.benefit-content h4 {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 8px;
 }
 
-.project-btn-chat {
-    background: transparent;
-    color: #4ade80;
-    border: 2px solid #4ade80;
+.benefit-content p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    line-height: 1.4;
 }
 
-.project-btn-chat:hover {
-    background: rgba(74, 222, 128, 0.1);
-    transform: translateY(-1px);
-}
-
-/* ===== QUIZ SECTION COMPATTA ===== */
-
-.quiz-content-compact {
-    position: relative;
-    z-index: 2;
-    max-width: 1000px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-/* Titolo con highlight */
-.quiz-title-compact {
-    font-size: clamp(2rem, 5vw, 3rem);
-    margin-bottom: 15px;
-    font-weight: 900;
-}
-
-.highlight-text {
-    color: #fff;
-    text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
-    position: relative;
-    display: inline-block;
-}
-
-.highlight-text::after {
-    content: '';
+.benefit-pulse {
     position: absolute;
-    bottom: -5px;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #4ade80, #22d3ee);
-    border-radius: 2px;
-    animation: lineGlow 2s ease-in-out infinite;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 107, 53, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.6s ease;
 }
 
-@keyframes lineGlow {
-    0%, 100% { opacity: 0.8; transform: scaleX(1); }
-    50% { opacity: 1; transform: scaleX(1.05); }
+.benefit-modern:hover .benefit-pulse {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
 }
 
-/* Sottotitolo */
-.quiz-subtitle-compact {
-    font-size: clamp(1.1rem, 3vw, 1.5rem);
-    color: rgba(255,255,255,0.95);
+/* Modern CTA Button */
+.quiz-cta-modern {
     margin-bottom: 40px;
 }
 
-.quiz-subtitle-compact strong {
-    color: #4ade80;
-    font-size: 1.1em;
-    text-shadow: 0 0 20px rgba(74, 222, 128, 0.5);
-}
-
-/* Benefits in riga singola */
-.quiz-benefits-row {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-bottom: 40px;
-    flex-wrap: wrap;
-}
-
-.benefit-compact {
-    background: rgba(0,0,0,0.3);
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(74, 222, 128, 0.3);
-    border-radius: 20px;
-    padding: 20px 15px;
-    min-width: 140px;
-    transition: all 0.3s ease;
-}
-
-.benefit-compact:hover {
-    transform: translateY(-5px) scale(1.05);
-    background: rgba(74, 222, 128, 0.1);
-    border-color: #4ade80;
-    box-shadow: 0 10px 30px rgba(74, 222, 128, 0.3);
-}
-
-.benefit-emoji {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-    filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
-}
-
-.benefit-label {
-    color: #fff;
-    font-weight: 700;
-    font-size: 0.95rem;
-    line-height: 1.2;
-}
-
-/* CTA Button con effetto glow */
-.quiz-cta-wrapper {
-    margin-top: 30px;
-}
-
-.quiz-action-btn {
-    display: inline-block;
+.start-quiz-modern {
     position: relative;
+    background: transparent;
+    border: none;
     padding: 0;
-    text-decoration: none;
-    border-radius: 50px;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 40px rgba(74, 222, 128, 0.4);
+    cursor: pointer;
+    outline: none;
+    display: inline-block;
+    margin-bottom: 30px;
 }
 
-.btn-glow {
+.btn-bg {
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, #4ade80, #22d3ee, #4ade80);
-    background-size: 200% 200%;
-    animation: glowAnimation 3s linear infinite;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #ff6b35, #4ade80, #ff6b35);
+    background-size: 300% 300%;
     border-radius: 50px;
+    animation: gradientMove 3s ease infinite;
 }
 
-@keyframes glowAnimation {
-    0% { background-position: 0% 50%; }
+@keyframes gradientMove {
+    0%, 100% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
 }
 
-.btn-content {
+.btn-text {
     position: relative;
     display: flex;
     align-items: center;
     gap: 15px;
     padding: 20px 40px;
-    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+    background: #0f0f23;
     border-radius: 48px;
     margin: 2px;
-    color: #fff;
+    color: white;
     font-size: 1.2rem;
     font-weight: 800;
     letter-spacing: 1px;
     transition: all 0.3s ease;
 }
 
-.quiz-action-btn:hover .btn-content {
-    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
-    transform: scale(1.02);
+.start-quiz-modern:hover .btn-text {
+    background: rgba(15, 15, 35, 0.8);
+    transform: scale(1.05);
 }
 
-.btn-content i {
+.btn-text i {
     font-size: 1.5rem;
     color: #4ade80;
-    animation: pulse 2s ease-in-out infinite;
 }
 
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+.btn-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
 }
 
-/* Mini trust elements */
-.quiz-mini-trust {
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #4ade80;
+    border-radius: 50%;
+    animation: particleFloat 2s infinite ease-in-out;
+}
+
+.particle:nth-child(1) {
+    top: 20%;
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.particle:nth-child(2) {
+    top: 20%;
+    right: 20%;
+    animation-delay: 0.5s;
+}
+
+.particle:nth-child(3) {
+    bottom: 20%;
+    left: 30%;
+    animation-delay: 1s;
+}
+
+.particle:nth-child(4) {
+    bottom: 20%;
+    right: 30%;
+    animation-delay: 1.5s;
+}
+
+@keyframes particleFloat {
+    0%, 100% { 
+        transform: translateY(0) scale(1); 
+        opacity: 0.7; 
+    }
+    50% { 
+        transform: translateY(-10px) scale(1.2); 
+        opacity: 1; 
+    }
+}
+
+/* Quiz Stats */
+.quiz-stats {
     display: flex;
     justify-content: center;
-    gap: 25px;
-    margin-top: 25px;
+    gap: 40px;
     flex-wrap: wrap;
 }
 
-.quiz-mini-trust span {
+.stat {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 900;
+    color: #4ade80;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Trust Badges */
+.trust-badges {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.trust-item {
     display: flex;
     align-items: center;
-    gap: 6px;
-    color: rgba(255,255,255,0.9);
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.8);
     font-size: 0.9rem;
     font-weight: 500;
 }
 
-.quiz-mini-trust i {
+.trust-item i {
     color: #4ade80;
-    font-size: 1rem;
+    font-size: 1.1rem;
 }
 
 /* Responsive */
-@media (min-width: 640px) {
-    .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .project-actions {
-        flex-direction: row;
-        gap: 15px;
-    }
-    
-    .project-btn-primary, .project-btn-chat {
-        flex: 1;
-    }
-}
-
-@media (min-width: 1024px) {
-    .projects-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-    
-    .project-actions {
-        flex-direction: column;
-        gap: 10px;
-    }
-}
-
 @media (max-width: 768px) {
-    .quiz-intro-section {
-        padding: 50px 15px !important;
-        margin: 60px -10px 0 !important;
-        min-height: 400px !important;
+    .quiz-modern-section {
+        padding: 40px 20px;
+        margin: 60px -10px 0;
+        min-height: 450px;
     }
     
-    .quiz-benefits-row {
+    .benefits-interactive {
+        grid-template-columns: 1fr;
         gap: 15px;
     }
     
-    .benefit-compact {
-        min-width: 120px;
-        padding: 15px 10px;
+    .benefit-modern {
+        padding: 20px;
     }
     
-    .benefit-emoji {
-        font-size: 2rem;
-    }
-    
-    .benefit-label {
-        font-size: 0.85rem;
-    }
-    
-    .btn-content {
+    .btn-text {
         padding: 18px 30px;
         font-size: 1rem;
+        gap: 10px;
     }
     
-    .quiz-mini-trust {
+    .quiz-stats {
+        gap: 25px;
+    }
+    
+    .trust-badges {
+        flex-direction: column;
+        align-items: center;
         gap: 15px;
-    }
-    
-    .quiz-mini-trust span {
-        font-size: 0.8rem;
     }
 }
 
 @media (max-width: 480px) {
-    .quiz-benefits-row {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
+    .quiz-modern-section {
+        padding: 30px 15px;
+        border-radius: 20px;
     }
     
-    .benefit-compact {
-        min-width: auto;
+    .quiz-badge {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 20px;
     }
     
-    .btn-content {
+    .quiz-badge i {
+        font-size: 1.5rem;
+    }
+    
+    .btn-text {
         padding: 16px 25px;
         font-size: 0.95rem;
-        gap: 10px;
     }
     
-    .btn-content i {
-        font-size: 1.2rem;
-    }
-    
-    .quiz-mini-trust {
-        flex-direction: column;
-        gap: 10px;
+    .stat-number {
+        font-size: 1.5rem;
     }
 }
+
+/* Animation delays for stagger effect */
+.benefit-modern:nth-child(1) { animation-delay: 0.1s; }
+.benefit-modern:nth-child(2) { animation-delay: 0.2s; }
+.benefit-modern:nth-child(3) { animation-delay: 0.3s; }
 </style>
 
 <script>
-// Services functionality
-function openProject(url) {
-    console.log(`🎯 Opening project: ${url}`);
-    if ('vibrate' in navigator) navigator.vibrate(20);
+// Quiz Modern Functionality
+function startModernQuiz() {
+    console.log('🚀 Starting modern quiz...');
+    
+    // Haptic feedback
+    if ('vibrate' in navigator) {
+        navigator.vibrate([50, 30, 50]);
+    }
+    
+    // Analytics
     if (typeof gtag !== 'undefined') {
-        gtag('event', 'project_visit', {
+        gtag('event', 'modern_quiz_start', {
             'event_category': 'engagement',
-            'event_label': url,
+            'event_label': 'modern_design',
             'value': 1
         });
     }
-    window.open(url, '_blank', 'noopener');
+    
+    // Add click effect
+    const button = event.target.closest('.start-quiz-modern');
+    button.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+        button.style.transform = '';
+        window.location.href = './quiz.html';
+    }, 150);
 }
 
-function sendQuickMessage(message) {
-    console.log(`💬 Quick message: ${message}`);
-    if ('vibrate' in navigator) navigator.vibrate(10);
-    if (typeof gtag !== 'undefined') {
-        gtag('event', 'quick_chat', {
-            'event_category': 'engagement',
-            'event_label': message,
-            'value': 1
-        });
-    }
-    const whatsappUrl = `https://wa.me/3478881515?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank', 'noopener');
+// Counter Animation
+function animateCounters() {
+    const counters = document.querySelectorAll('.stat-number');
+    
+    counters.forEach(counter => {
+        const target = parseInt(counter.dataset.count);
+        const duration = 2000;
+        const step = target / (duration / 16);
+        let current = 0;
+        
+        const updateCounter = () => {
+            current += step;
+            if (current < target) {
+                counter.textContent = Math.floor(current);
+                requestAnimationFrame(updateCounter);
+            } else {
+                counter.textContent = target + (target === 98 ? '%' : '');
+            }
+        };
+        
+        updateCounter();
+    });
 }
 
-// Animazioni on scroll
-document.addEventListener('DOMContentLoaded', () => {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
+// Intersection Observer for animations
+function initQuizAnimations() {
+    if (!window.IntersectionObserver) return;
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+                // Start typewriter effect
+                const typewriter = entry.target.querySelector('.typewriter');
+                if (typewriter) {
+                    typewriter.style.animation = 'typewriter 3s steps(22) 0.5s forwards, blink 1s infinite 3.5s';
+                }
+                
+                // Start counter animation
+                setTimeout(() => {
+                    animateCounters();
+                }, 1000);
+                
+                // Animate benefits with stagger
+                const benefits = entry.target.querySelectorAll('.benefit-modern');
+                benefits.forEach((benefit, index) => {
+                    setTimeout(() => {
+                        benefit.style.opacity = '1';
+                        benefit.style.transform = 'translateY(0)';
+                    }, 500 + (index * 150));
+                });
+                
+                observer.unobserve(entry.target);
             }
         });
-    }, observerOptions);
-    
-    // Osserva i benefit compatti
-    document.querySelectorAll('.benefit-compact').forEach((card, index) => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = `all 0.5s ease ${index * 0.1}s`;
-        observer.observe(card);
+    }, {
+        threshold: 0.3,
+        rootMargin: '0px 0px -50px 0px'
     });
     
-    console.log('✅ Services with compact quiz section loaded');
+    const quizSection = document.querySelector('.quiz-modern-section');
+    if (quizSection) {
+        observer.observe(quizSection);
+    }
+}
+
+// Interactive benefit hover effects
+function initBenefitInteractions() {
+    const benefits = document.querySelectorAll('.benefit-modern');
+    
+    benefits.forEach(benefit => {
+        benefit.addEventListener('mouseenter', () => {
+            // Add pulse effect
+            const pulse = benefit.querySelector('.benefit-pulse');
+            pulse.style.animation = 'none';
+            pulse.offsetHeight; // Trigger reflow
+            pulse.style.animation = 'benefit-pulse 0.6s ease-out';
+            
+            // Sound effect (if available)
+            if ('vibrate' in navigator) {
+                navigator.vibrate(10);
+            }
+        });
+        
+        benefit.addEventListener('click', () => {
+            // Analytics for benefit clicks
+            const benefitType = benefit.dataset.benefit;
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'benefit_click', {
+                    'event_category': 'engagement',
+                    'event_label': benefitType,
+                    'value': 1
+                });
+            }
+            
+            console.log(`📊 Benefit clicked: ${benefitType}`);
+        });
+    });
+}
+
+// Initialize everything
+document.addEventListener('DOMContentLoaded', () => {
+    // Set initial states
+    const benefits = document.querySelectorAll('.benefit-modern');
+    benefits.forEach(benefit => {
+        benefit.style.opacity = '0';
+        benefit.style.transform = 'translateY(20px)';
+        benefit.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+    });
+    
+    // Initialize animations and interactions
+    initQuizAnimations();
+    initBenefitInteractions();
+    
+    console.log('✨ Modern quiz section initialized');
 });
+
+// CSS Animation for benefit pulse
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes benefit-pulse {
+        0% { 
+            width: 0; 
+            height: 0; 
+            opacity: 0.8; 
+        }
+        100% { 
+            width: 200px; 
+            height: 200px; 
+            opacity: 0; 
+        }
+    }
+`;
+document.head.appendChild(style);
 </script>
