@@ -156,21 +156,24 @@
         </div>
     </div>
 
-    <!-- QUIZ SECTION PROFESSIONALE CHE CREA CURIOSITÀ -->
-    <div class="quiz-professional-section">
+    <!-- QUIZ SECTION DINAMICA CON SFONDO ARANCIONE -->
+    <div class="quiz-professional-section" style="
+        background: linear-gradient(135deg, rgba(255, 107, 53, 0.92) 0%, rgba(255, 152, 0, 0.88) 100%), 
+                    url('https://images.unsplash.com/photo-1517963879433-6ad2b056d712?w=1920&h=1080&fit=crop');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    ">
         <div class="quiz-pro-container">
-            <!-- Header con icona -->
+            <!-- Header compatto -->
             <div class="quiz-pro-header">
-                <div class="quiz-pro-icon">
-                    <i class="fas fa-compass"></i>
-                </div>
                 <h2 class="quiz-pro-title">Non sai quale servizio scegliere?</h2>
                 <p class="quiz-pro-subtitle">
                     Rispondi a <strong>5 domande strategiche</strong> e ti guiderò verso la soluzione perfetta per i tuoi obiettivi
                 </p>
             </div>
 
-            <!-- Benefit cards in stile attuale -->
+            <!-- Benefit cards dinamiche -->
             <div class="quiz-pro-benefits">
                 <div class="quiz-benefit-card">
                     <div class="benefit-icon-wrapper">
@@ -194,28 +197,6 @@
                     </div>
                     <h4>Risultati in 2 Minuti</h4>
                     <p>Consigli immediati senza perdere tempo prezioso</p>
-                </div>
-            </div>
-
-            <!-- Preview domande per creare curiosità -->
-            <div class="quiz-preview">
-                <h3 class="preview-title">Ecco alcune delle domande che ti farò:</h3>
-                <div class="preview-questions">
-                    <div class="preview-question">
-                        <span class="question-number">1</span>
-                        <span class="question-text">"Qual è il tuo obiettivo principale?"</span>
-                    </div>
-                    <div class="preview-question">
-                        <span class="question-number">2</span>
-                        <span class="question-text">"Quanto tempo hai a disposizione?"</span>
-                    </div>
-                    <div class="preview-question">
-                        <span class="question-number">3</span>
-                        <span class="question-text">"Che tipo di persona sei?"</span>
-                    </div>
-                    <div class="preview-more">
-                        <span class="more-indicator">+ altre 2 domande</span>
-                    </div>
                 </div>
             </div>
 
@@ -409,13 +390,15 @@
 /* ===== QUIZ PROFESSIONALE SECTION ===== */
 
 .quiz-professional-section {
-    background: linear-gradient(135deg, rgba(255, 107, 53, 0.08), rgba(255, 133, 51, 0.04));
-    border: 2px solid rgba(255, 107, 53, 0.2);
+    position: relative;
     border-radius: 25px;
     padding: 50px 30px;
     margin: 40px 0;
-    position: relative;
     overflow: hidden;
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .quiz-professional-section::before {
@@ -425,14 +408,15 @@
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(255, 107, 53, 0.02) 0%, transparent 70%);
-    animation: slowRotate 20s linear infinite;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    animation: slowRotate 15s linear infinite;
     pointer-events: none;
 }
 
 @keyframes slowRotate {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
+}
 }
 
 .quiz-pro-container {
@@ -501,9 +485,9 @@
 }
 
 .quiz-benefit-card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 107, 53, 0.2);
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 18px;
     padding: 25px 20px;
     transition: all 0.3s ease;
@@ -511,31 +495,32 @@
 }
 
 .quiz-benefit-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(255, 107, 53, 0.5);
-    background: rgba(255, 107, 53, 0.08);
-    box-shadow: 0 10px 25px rgba(255, 107, 53, 0.2);
+    transform: translateY(-8px) scale(1.05);
+    border-color: rgba(255, 255, 255, 0.6);
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
 }
 
 .benefit-icon-wrapper {
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, #ff6b35, #ff8533);
+    background: linear-gradient(135deg, #ffffff, #f0f0f0);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 15px;
     transition: transform 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
 .quiz-benefit-card:hover .benefit-icon-wrapper {
-    transform: scale(1.1);
+    transform: scale(1.15) rotate(5deg);
 }
 
 .benefit-icon-wrapper i {
     font-size: 1.3rem;
-    color: white;
+    color: #ff6b35;
 }
 
 .quiz-benefit-card h4 {
@@ -549,78 +534,6 @@
     color: #b0b0b0;
     font-size: 0.9rem;
     line-height: 1.4;
-}
-
-/* Preview Domande */
-.quiz-preview {
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 20px;
-    padding: 30px 25px;
-    margin-bottom: 40px;
-    border: 1px solid rgba(255, 107, 53, 0.15);
-}
-
-.preview-title {
-    color: #ff6b35;
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.preview-questions {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    max-width: 500px;
-    margin: 0 auto;
-}
-
-.preview-question {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 12px 15px;
-    background: rgba(255, 107, 53, 0.05);
-    border-radius: 12px;
-    border-left: 3px solid #ff6b35;
-    transition: all 0.3s ease;
-}
-
-.preview-question:hover {
-    background: rgba(255, 107, 53, 0.1);
-    transform: translateX(5px);
-}
-
-.question-number {
-    background: #ff6b35;
-    color: white;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.9rem;
-    font-weight: bold;
-    flex-shrink: 0;
-}
-
-.question-text {
-    color: #e0e0e0;
-    font-size: 0.95rem;
-    font-style: italic;
-}
-
-.preview-more {
-    text-align: center;
-    padding: 10px;
-}
-
-.more-indicator {
-    color: #ff6b35;
-    font-size: 0.9rem;
-    font-weight: 600;
-    opacity: 0.8;
 }
 
 /* CTA Principale */
