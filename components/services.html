@@ -164,7 +164,7 @@
         </div>
     </div>
 
-    <!-- QUIZ SECTION RINNOVATA -->
+    <!-- QUIZ SECTION OTTIMIZZATA - Solo questa è cambiata -->
     <div class="quiz-discovery-section">
         <div class="quiz-discovery-content">
             <div class="quiz-icon">
@@ -203,7 +203,7 @@
 
 <style>
 /* ====================================== 
-   PROJECTS SECTION STYLES
+   PROJECTS SECTION STYLES - RIPRISTINATI ORIGINALI
    ====================================== */
 
 .projects-container {
@@ -231,6 +231,7 @@
     line-height: 1.6;
 }
 
+/* GRID ORIGINALE - 2 RIGHE PERFETTE */
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -341,13 +342,13 @@
 }
 
 /* ====================================== 
-   QUIZ DISCOVERY SECTION - RINNOVATA
+   QUIZ DISCOVERY SECTION - OTTIMIZZATA E PULITA
    ====================================== */
 
 .quiz-discovery-section {
     background: linear-gradient(135deg, rgba(255, 107, 53, 0.95) 0%, rgba(255, 152, 0, 0.90) 100%);
     border-radius: 25px;
-    padding: 60px 40px;
+    padding: 50px 30px;
     margin: 60px 0;
     text-align: center;
     position: relative;
@@ -373,25 +374,25 @@
 .quiz-discovery-content {
     position: relative;
     z-index: 2;
-    max-width: 700px;
+    max-width: 600px;
     margin: 0 auto;
 }
 
 .quiz-icon {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     background: rgba(255, 255, 255, 0.2);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 30px;
+    margin: 0 auto 25px;
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .quiz-icon i {
-    font-size: 35px;
+    font-size: 30px;
     color: white;
     animation: pulse 2s ease-in-out infinite;
 }
@@ -403,26 +404,27 @@
 
 .quiz-discovery-title {
     color: white;
-    font-size: clamp(2rem, 4vw, 2.8rem);
-    margin-bottom: 20px;
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    margin-bottom: 18px;
     font-weight: 900;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .quiz-discovery-subtitle {
     color: white;
-    font-size: 1.3rem;
-    margin-bottom: 40px;
-    line-height: 1.5;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    line-height: 1.4;
     font-weight: 600;
     text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
 }
 
+/* FEATURES INLINE - SEMPLICI E PULITE */
 .quiz-features {
     display: flex;
     justify-content: center;
-    gap: 40px;
-    margin-bottom: 40px;
+    gap: 30px;
+    margin-bottom: 35px;
     flex-wrap: wrap;
 }
 
@@ -432,28 +434,28 @@
     gap: 8px;
     color: white;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.95rem;
 }
 
 .feature-item i {
-    font-size: 18px;
+    font-size: 16px;
     opacity: 0.9;
 }
 
 .quiz-discovery-btn {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     background: white;
     color: #ff6b35;
-    padding: 20px 40px;
+    padding: 18px 35px;
     border-radius: 50px;
     text-decoration: none;
     font-weight: 800;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     transition: all 0.3s ease;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 .quiz-discovery-btn:hover {
@@ -471,16 +473,16 @@
 
 .quiz-trust {
     color: rgba(255, 255, 255, 0.9);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 500;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 6px;
 }
 
 .quiz-trust i {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 /* ====================================== 
@@ -503,20 +505,22 @@
     }
 
     .quiz-discovery-section {
-        padding: 40px 25px;
+        padding: 35px 20px;
         margin: 40px 0;
     }
 
     .quiz-discovery-title {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
 
     .quiz-discovery-subtitle {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
 
     .quiz-features {
-        gap: 25px;
+        gap: 20px;
+        flex-direction: column;
+        align-items: center;
     }
 
     .feature-item {
@@ -524,8 +528,8 @@
     }
 
     .quiz-discovery-btn {
-        padding: 16px 30px;
-        font-size: 1.1rem;
+        padding: 15px 30px;
+        font-size: 1rem;
     }
 }
 
@@ -539,14 +543,9 @@
         font-size: 25px;
     }
 
-    .quiz-features {
-        flex-direction: column;
-        gap: 15px;
-    }
-
     .quiz-discovery-btn {
         padding: 14px 25px;
-        font-size: 1rem;
+        font-size: 0.95rem;
     }
 }
 </style>
