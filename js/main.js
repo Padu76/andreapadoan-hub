@@ -1,6 +1,6 @@
 // ======================================
-// ANDREA PADOAN LANDING - MAIN SCRIPT CON DATI REALI
-// Database servizi corretto con informazioni vere
+// ANDREA PADOAN LANDING - MAIN SCRIPT CON DATI REALI AGGIORNATI
+// Database servizi corretto con informazioni verificate
 // ======================================
 
 // 🌟 GLOBAL VARIABLES
@@ -13,56 +13,81 @@ let userInfo = {
     collected: false
 };
 
-// 🎯 SERVIZI DATABASE CORRETTO - SOLO INFORMAZIONI REALI
+// 🎯 SERVIZI DATABASE CORRETTO - SOLO INFORMAZIONI REALI E VERIFICATE
 const SERVIZI_DATABASE = {
     'personal-training': {
         nome: 'Personal Training a Verona',
-        descrizione: 'Allenamenti personalizzati nel mio Tribù Studio privato o online',
+        descrizione: 'Allenamenti personalizzati nel mio Tribù Studio privato a Verona',
         punti_chiave: [
             'Studio privato Tribù Studio a Verona (via Albere 27/B)',
             'Allenamenti su misura per i tuoi obiettivi specifici',
             'Oltre 15 anni di esperienza nel settore fitness',
             'Approccio scientifico ma umano, niente tempo perso',
-            'Opzione online per chi non può venire in studio'
+            'Lezioni individuali, di coppia e miniclass disponibili'
         ],
         come_funziona: 'Dopo 12 anni da manager stressato ho vissuto la trasformazione sulla mia pelle. Ora aiuto persone come te a ritrovare forma fisica e benessere senza perdere tempo.',
+        prezzi: {
+            individuali: 'A partire da 45€/lezione',
+            coppia: 'A partire da 25€/lezione a persona',
+            miniclass: 'A partire da 15€/lezione (gruppi 3-5 persone)'
+        },
         location: 'Tribù Studio - Via Albere 27/B, Verona (zona stadio)',
         contatti: {
             whatsapp: '347 888 1515',
-            email: 'andrea.padoan@gmail.com'
+            email: 'info@tribustudio.it'
         },
-        url: 'https://www.personaltrainerverona.it',
+        url: 'https://tribustudio.it',
         emoji: '💪'
     },
-    'tribu-studio': {
-        nome: 'Tribù Studio',
-        descrizione: 'Il mio studio privato a Verona per allenamenti esclusivi',
+    'coaching-online': {
+        nome: 'Coaching Online - Tornoinforma',
+        descrizione: 'Il tuo personal trainer ovunque tu sia, senza vincoli di orario o luogo',
         punti_chiave: [
-            'Studio privato completamente attrezzato',
-            'Ambiente curato senza code o attese',
-            'Attrezzature professionali sempre disponibili',
-            'Spazio dedicato solo a te durante la sessione',
-            'Parcheggio disponibile in zona stadio'
+            'Allenamenti personalizzati da fare ovunque',
+            'Casa, palestra o viaggio: il programma ti segue sempre',
+            'Senza vincoli di orario o luogo',
+            'Supporto costante e monitoraggio progressi',
+            'Programmi adattabili alle tue esigenze'
         ],
-        come_funziona: 'Non è la solita palestra affollata! Nel mio Tribù Studio sei solo tu, io e l\'obiettivo di trasformare il tuo corpo e la tua mente.',
-        location: 'Via Albere 27/B, Verona (zona stadio)',
-        url: 'https://www.tribuptstudio.it',
-        emoji: '🏠'
-    },
-    'lifestyle-coaching': {
-        nome: 'Lifestyle Coaching Online',
-        descrizione: 'Percorso digitale di trasformazione in 7 settimane - perché dieta e allenamento non bastano!',
-        punti_chiave: [
-            'Percorso strutturato in 7 settimane progressive',
-            '4 aree fondamentali: Benessere Emotivo, Salute Fisica, Relazioni Sociali, Vita Professionale',
-            'Target: professionisti stressati, manager, chi cerca equilibrio vita-lavoro',
-            'Piattaforma digitale completa su tribucoach.vercel.app',
-            'Sistema avatar personalizzabile e tracking progressi'
-        ],
-        come_funziona: 'Percorso digitale completo che ti accompagna settimana per settimana. Ogni modulo si sblocca progressivamente per garantire un apprendimento strutturato.',
-        target: 'Professionisti stressati, manager, persone che vogliono migliorare equilibrio vita-lavoro',
-        url: 'https://tribucoach.vercel.app/',
+        come_funziona: 'Piattaforma online completa che ti permette di allenarti quando vuoi, dove vuoi. Il tuo personal trainer digitale sempre con te.',
+        target: 'Perfetto per chi viaggia, lavora tanto o non può venire in studio',
+        url: 'https://www.tornoinforma.it/',
         emoji: '🚀'
+    },
+    'pasto-sano': {
+        nome: 'Pasto Sano - Pasti Freschi Verona',
+        descrizione: 'Pasti equilibrati pronti in 2 minuti, senza conservanti o additivi',
+        punti_chiave: [
+            'Pasti equilibrati da 330g circa (proteine + carboidrati + verdure)',
+            'Solo ingredienti selezionati, senza conservanti o additivi',
+            'Cottura a vapore per preservare i nutrienti',
+            '2 minuti al microonde e sei pronto',
+            'Menu sempre diverso con piatti bilanciati',
+            'Ritiro presso Tribù Studio - Via Albere 27/B'
+        ],
+        prezzi: {
+            pasto_completo: '8.50€',
+            colazione: '6.50€',
+            sconto_primo_ordine: '5% con codice SCONTO5'
+        },
+        menu_esempi: [
+            'Fusilli integrali con verdure grigliate e manzo magro',
+            'Tagliata di roastbeef con patate e fagiolini',
+            'Hamburger di manzo con riso basmati',
+            'Riso venere con pesce e verdure',
+            'Salmone alla griglia con patate e broccoli',
+            'Filetto di pollo con contorno classico',
+            'Insalata di orzo proteica',
+            'Wrap light con proteine e crema di ceci'
+        ],
+        come_funziona: 'Ordini online su pastosano.it, prepariamo fresco in 2 giorni lavorativi, ritiri presso il mio studio. Porta una borsa termica!',
+        story: 'Nasce dalla mia esperienza: dopo anni da manager spesso non avevo tempo di cucinare sano. Ho testato laboratori per 4 anni prima di trovare quelli giusti.',
+        location: 'Ritiro: Tribù Studio - Via Albere 27/B, Verona',
+        preparazione: '2 minuti al microonde o 4-5 minuti in forno a 160°',
+        durata: '3-4 giorni in frigo, possibilità di congelare',
+        url: 'https://www.pastosano.it/',
+        url_ordini: 'https://www.pastosano.it/ordina',
+        emoji: '🥗'
     },
     'mealprep-planner': {
         nome: 'MealPrep Planner',
@@ -77,49 +102,31 @@ const SERVIZI_DATABASE = {
         come_funziona: 'Inserisci i tuoi dati, scegli le preferenze alimentari e l\'app genera automaticamente un piano settimanale completo con lista della spesa.',
         tecnologia: 'Next.js, TypeScript, Tailwind CSS, integrazione AI',
         stato: 'Versione stabile disponibile online',
-        prezzo: 'Completamente GRATUITA',
+        prezzo: 'Completamente GRATUITA per sempre',
         url: 'https://mealprep-planner.vercel.app/',
         emoji: '📱'
     },
-    'pasto-sano': {
-        nome: 'Pasto Sano - Pasti Freschi Verona',
-        descrizione: 'Pasti freschi e bilanciati pronti in 2 minuti, selezionati personalmente da Andrea',
-        punti_chiave: [
-            'Pasti freschi da 330g (100g proteine + 100g carboidrati + verdure)',
-            'Preparati da laboratori selezionati personalmente da Andrea',
-            'Solo ingredienti naturali, senza conservanti',
-            'Cottura a vapore o piastra per mantenere proprietà nutritive',
-            'Durata: 3-4 giorni in frigo, possibilità di congelare',
-            'Ritiro presso Tribù Studio - Via Albere 27/B'
-        ],
-        come_funziona: 'Ordini online, prepariamo fresco, ritiri presso il mio studio. Porta una borsa termica per il trasporto!',
-        story: 'Nasce dalla mia esperienza personale: dopo anni da manager spesso non avevo tempo di cucinare e finivo per mangiare male. Ho testato laboratori per 4 anni prima di trovare quelli giusti.',
-        location: 'Ritiro: Tribù Studio - Via Albere 27/B, Verona',
-        preparazione: '2 minuti e mezzo in microonde o 4-5 minuti in forno a 160°',
-        url: 'https://pastosano.netlify.app/',
-        emoji: '🥗'
-    },
     'best-trainer': {
         nome: 'Best-Trainer',
-        descrizione: 'Piattaforma marketplace di programmi di allenamento (in fase di sviluppo e-commerce)',
+        descrizione: 'Directory di Personal Trainer certificati con tutorial gratuiti (e-commerce in sviluppo)',
         punti_chiave: [
             'Directory completa di Personal Trainer certificati',
             'Tutorial esercizi gratuiti con video HD',
             'Sistema di approvazione rigoroso per i PT',
-            'Dashboard per PT per gestire profili e programmi',
-            'Fase attuale: pre-e-commerce (acquisti non ancora attivi)'
+            'Dashboard per PT per gestire profili',
+            'Tutorial gratuiti già disponibili'
         ],
         stato_attuale: 'Piattaforma funzionante con directory PT e tutorial gratuiti. Sistema e-commerce in sviluppo per permettere acquisto/vendita programmi.',
-        tecnologia: 'Next.js, PostgreSQL, Stripe Connect (in integrazione)',
+        cosa_funziona: 'Directory PT, tutorial gratuiti, sistema approvazione trainer',
+        cosa_non_funziona: 'Acquisto programmi, pagamenti, download automatici (in sviluppo)',
         timeline: 'E-commerce previsto per settembre 2025',
-        cosa_funziona: 'Directory PT, tutorial gratuiti, sistema approvazione',
-        cosa_non_funziona: 'Acquisto programmi, pagamenti, download automatici',
+        tecnologia: 'Next.js, PostgreSQL, Stripe Connect (in integrazione)',
         url: 'https://best-trainer-mvp.vercel.app/',
         emoji: '🏆'
     },
     'business-coaching': {
-        nome: 'UpStarter - Validazione Idee Startup',
-        descrizione: 'Piattaforma per validare e sviluppare idee di business con intelligenza artificiale',
+        nome: 'UpStarter - Validazione Idee Business',
+        descrizione: 'Piattaforma per validare e sviluppare idee di startup con intelligenza artificiale',
         punti_chiave: [
             'Analisi AI delle idee di business con Claude',
             'Report dettagliato con SWOT analysis e score',
@@ -229,7 +236,7 @@ function openContact() {
     if (contactOptions) {
         window.open('https://wa.me/393478881515?text=Ciao Andrea, ho visto il tuo sito e vorrei maggiori informazioni!', '_blank');
     } else {
-        window.location.href = 'mailto:andrea.padoan@gmail.com?subject=Richiesta informazioni&body=Ciao Andrea, ho visto il tuo sito e vorrei maggiori informazioni sui tuoi servizi.';
+        window.location.href = 'mailto:info@tribustudio.it?subject=Richiesta informazioni&body=Ciao Andrea, ho visto il tuo sito e vorrei maggiori informazioni sui tuoi servizi.';
     }
 }
 
@@ -279,7 +286,7 @@ function showNotification(message, type = 'info') {
 }
 
 // ======================================
-// 💬 CHAT AI FUNCTIONS - POTENZIATE
+// 💬 CHAT AI FUNCTIONS - POTENZIATE CON DATI REALI
 // ======================================
 
 // Scroll automatico al bottom della chat
@@ -425,61 +432,73 @@ function sendQuickMessage(message, servizio = null) {
     }, 800);
 }
 
-// 🤖 ANDREA AI SYSTEM - CON INFORMAZIONI REALI
+// 🤖 ANDREA AI SYSTEM - CON INFORMAZIONI REALI VERIFICATE
 async function getAndreaAIResponse(userMessage) {
     // Simula thinking time dell'AI
     await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000));
     
     const message = userMessage.toLowerCase();
     
-    // 🔍 RICONOSCIMENTO INTENTI CON DATI REALI
+    // 🔍 RICONOSCIMENTO INTENTI CON DATI REALI VERIFICATI
     
-    // PASTO SANO - INFORMAZIONI REALI
-    if (message.includes('pasto sano') || message.includes('pasti freschi') || message.includes('pasti pronti')) {
+    // PASTO SANO - INFORMAZIONI REALI AGGIORNATE
+    if (message.includes('pasto sano') || message.includes('pasti freschi') || message.includes('pasti pronti') || message.includes('mangiare sano')) {
         const servizio = SERVIZI_DATABASE['pasto-sano'];
         return `${servizio.emoji} <strong>${servizio.nome}</strong><br><br>
         Ti racconto la vera storia di Pasto Sano! ${servizio.story}<br><br>
         
+        <strong>💰 Prezzi:</strong><br>
+        • Pasto completo: <strong>${servizio.prezzi.pasto_completo}</strong><br>
+        • Colazione: <strong>${servizio.prezzi.colazione}</strong><br>
+        • 🎁 Primo ordine: <strong>${servizio.prezzi.sconto_primo_ordine}</strong><br><br>
+        
+        <strong>🍽️ Esempi dal menu:</strong><br>
+        ${servizio.menu_esempi.slice(0, 4).map(piatto => `• ${piatto}`).join('<br>')}<br>
+        <em>...e tanti altri piatti sempre diversi!</em><br><br>
+        
         <strong>Come funziona:</strong><br>
         ${servizio.punti_chiave.map(punto => `• ${punto}`).join('<br>')}<br><br>
         
-        <strong>Ritiro e Preparazione:</strong><br>
+        <strong>📍 Ritiro e Info:</strong><br>
         • ${servizio.location}<br>
         • ${servizio.preparazione}<br>
+        • Durata: ${servizio.durata}<br>
         • Porta una borsa termica per il trasporto!<br><br>
         
-        ${servizio.come_funziona}<br><br>
+        <strong>🌐 Ordina online:</strong><br>
+        • Sito principale: <a href="${servizio.url}" target="_blank">pastosano.it</a><br>
+        • Ordina subito: <a href="${servizio.url_ordini}" target="_blank">pastosano.it/ordina</a><br><br>
         
-        Vuoi vedere il menu o hai domande sui pasti? Scrivimi su WhatsApp al <strong>${SERVIZI_DATABASE['personal-training'].contatti.whatsapp}</strong>! 🚚`;
+        Vuoi altre info sui pasti? Scrivimi su WhatsApp al <strong>${SERVIZI_DATABASE['personal-training'].contatti.whatsapp}</strong>! 🚚`;
     }
     
-    // BEST-TRAINER - INFORMAZIONI REALI
-    if (message.includes('best-trainer') || message.includes('best trainer') || message.includes('programmi allenamento')) {
+    // BEST-TRAINER - INFORMAZIONI REALI AGGIORNATE
+    if (message.includes('best-trainer') || message.includes('best trainer') || message.includes('programmi allenamento') || message.includes('trainer certificati')) {
         const servizio = SERVIZI_DATABASE['best-trainer'];
         return `${servizio.emoji} <strong>${servizio.nome}</strong><br><br>
-        Ti spiego la situazione attuale di Best-Trainer:<br><br>
+        Ti spiego esattamente la situazione attuale di Best-Trainer:<br><br>
         
-        <strong>Cosa funziona già:</strong><br>
-        ${servizio.punti_chiave.slice(0, 4).map(punto => `• ${punto}`).join('<br>')}<br><br>
+        <strong>✅ Cosa funziona già:</strong><br>
+        • ${servizio.cosa_funziona}<br><br>
         
-        <strong>⚠️ Stato attuale:</strong> ${servizio.stato_attuale}<br><br>
+        <strong>🚧 In sviluppo (non ancora attivo):</strong><br>
+        • ${servizio.cosa_non_funziona}<br><br>
         
-        <strong>🚧 In sviluppo:</strong><br>
-        • Sistema e-commerce per acquisto programmi<br>
-        • Pagamenti automatici<br>
-        • Download sicuri<br>
-        • ${servizio.timeline}<br><br>
+        <strong>📅 Timeline:</strong> ${servizio.timeline}<br><br>
+        
+        <strong>🔧 Tecnologia:</strong> ${servizio.tecnologia}<br><br>
         
         <strong>Cosa puoi fare ora:</strong><br>
-        • Esplorare la directory dei Personal Trainer certificati<br>
-        • Guardare i tutorial gratuiti<br>
-        • Candidarti come PT se sei certificato<br><br>
+        ${servizio.punti_chiave.slice(0, 3).map(punto => `• ${punto}`).join('<br>')}<br><br>
         
-        Ti interessa essere aggiornato quando sarà pronto l'e-commerce? 💪`;
+        <strong>🌐 Scopri la piattaforma:</strong><br>
+        <a href="${servizio.url}" target="_blank">${servizio.url}</a><br><br>
+        
+        Ti interessa essere aggiornato quando sarà pronto l'e-commerce? Scrivimi su WhatsApp! 💪`;
     }
     
     // PERSONAL TRAINING - INFORMAZIONI REALI
-    if (message.includes('personal training') || message.includes('allenamento') || message.includes('palestra')) {
+    if (message.includes('personal training') || message.includes('allenamento') || message.includes('palestra') || message.includes('tribù studio')) {
         const servizio = SERVIZI_DATABASE['personal-training'];
         return `${servizio.emoji} <strong>${servizio.nome}</strong><br><br>
         ${servizio.come_funziona}<br><br>
@@ -487,58 +506,49 @@ async function getAndreaAIResponse(userMessage) {
         <strong>Cosa otterrai:</strong><br>
         ${servizio.punti_chiave.map(punto => `• ${punto}`).join('<br>')}<br><br>
         
+        <strong>💰 Prezzi Tribù Studio:</strong><br>
+        • Lezioni individuali: <strong>${servizio.prezzi.individuali}</strong><br>
+        • Lezioni di coppia: <strong>${servizio.prezzi.coppia}</strong><br>
+        • Miniclass (3-5 persone): <strong>${servizio.prezzi.miniclass}</strong><br><br>
+        
         <strong>📍 Dove mi trovi:</strong><br>
         ${servizio.location}<br><br>
         
         <strong>📞 Contatti diretti:</strong><br>
-        • WhatsApp: ${servizio.contatti.whatsapp}<br>
+        • WhatsApp: <strong>${servizio.contatti.whatsapp}</strong><br>
         • Email: ${servizio.contatti.email}<br><br>
+        
+        <strong>🌐 Sito completo:</strong> <a href="${servizio.url}" target="_blank">tribustudio.it</a><br><br>
         
         Il mio approccio è scientifico ma umano - non ti faccio perdere tempo con esercizi inutili!<br><br>
         
-        Qual è il tuo obiettivo principale? Scrivimi su WhatsApp e ne parliamo! 🎯`;
+        Qual è il tuo obiettivo principale? Scrivimi su WhatsApp! 🎯`;
     }
     
-    // TRIBÙ STUDIO - INFORMAZIONI REALI
-    if (message.includes('tribù studio') || message.includes('tribu studio') || message.includes('studio privato')) {
-        const servizio = SERVIZI_DATABASE['tribu-studio'];
-        return `${servizio.emoji} <strong>${servizio.nome}</strong><br><br>
-        ${servizio.come_funziona}<br><br>
-        
-        <strong>Perché è speciale:</strong><br>
-        ${servizio.punti_chiave.map(punto => `• ${punto}`).join('<br>')}<br><br>
-        
-        <strong>📍 Dove si trova:</strong><br>
-        ${servizio.location}<br><br>
-        
-        Non è la solita palestra affollata! Ambiente curato, musica giusta, zero distrazioni. Solo tu, io e l'obiettivo di trasformarti.<br><br>
-        
-        Vuoi vedere lo studio? Scrivimi su <strong>${SERVIZI_DATABASE['personal-training'].contatti.whatsapp}</strong> e organizziamo una visita! 🏠✨`;
-    }
-    
-    // LIFESTYLE COACHING - INFORMAZIONI REALI
-    if (message.includes('lifestyle coaching') || message.includes('cambiamento') || message.includes('mindset')) {
-        const servizio = SERVIZI_DATABASE['lifestyle-coaching'];
+    // COACHING ONLINE - INFORMAZIONI AGGIORNATE
+    if (message.includes('coaching online') || message.includes('tornoinforma') || message.includes('allenamento online') || message.includes('ovunque')) {
+        const servizio = SERVIZI_DATABASE['coaching-online'];
         return `${servizio.emoji} <strong>${servizio.nome}</strong><br><br>
         ${servizio.descrizione}<br><br>
         
-        <strong>Il percorso:</strong><br>
+        <strong>Perché scegliere il coaching online:</strong><br>
         ${servizio.punti_chiave.map(punto => `• ${punto}`).join('<br>')}<br><br>
-        
-        <strong>🎯 Perfetto per:</strong> ${servizio.target}<br><br>
         
         <strong>Come funziona:</strong><br>
         ${servizio.come_funziona}<br><br>
         
-        <strong>🌐 Piattaforma:</strong> <a href="${servizio.url}" target="_blank">${servizio.url}</a><br><br>
+        <strong>🎯 Perfetto per:</strong> ${servizio.target}<br><br>
         
-        È per chi ha capito che dieta e palestra non bastano per cambiare davvero vita!<br><br>
+        <strong>🌐 Piattaforma:</strong><br>
+        <a href="${servizio.url}" target="_blank">tornoinforma.it</a><br><br>
         
-        Vuoi saperne di più sul percorso? Ti faccio vedere la piattaforma! 🎯`;
+        È la soluzione ideale se non puoi venire in studio ma vuoi comunque un supporto professionale costante!<br><br>
+        
+        Vuoi saperne di più? Scrivimi su WhatsApp al <strong>${SERVIZI_DATABASE['personal-training'].contatti.whatsapp}</strong>! 📱`;
     }
     
     // MEALPREP PLANNER - INFORMAZIONI REALI
-    if (message.includes('mealprep') || message.includes('meal prep') || message.includes('organizzare pasti')) {
+    if (message.includes('mealprep') || message.includes('meal prep') || message.includes('organizzare pasti') || message.includes('app gratuita')) {
         const servizio = SERVIZI_DATABASE['mealprep-planner'];
         return `${servizio.emoji} <strong>${servizio.nome}</strong><br><br>
         ${servizio.descrizione}<br><br>
@@ -554,13 +564,14 @@ async function getAndreaAIResponse(userMessage) {
         <strong>🛠️ Tecnologia:</strong> ${servizio.tecnologia}<br>
         <strong>📊 Stato:</strong> ${servizio.stato}<br><br>
         
-        È il mio regalo alla community! Provala subito: <a href="${servizio.url}" target="_blank">${servizio.url}</a><br><br>
+        È il mio regalo alla community! Provala subito:<br>
+        <strong>🌐 <a href="${servizio.url}" target="_blank">mealprep-planner.vercel.app</a></strong><br><br>
         
-        Hai domande su come usarla? 📱✨`;
+        Hai domande su come usarla? Scrivimi! 📱✨`;
     }
     
-    // BUSINESS COACHING / UPSTART - INFORMAZIONI REALI
-    if (message.includes('business') || message.includes('upstart') || message.includes('idea') || message.includes('startup')) {
+    // BUSINESS COACHING / UPSTARTER - INFORMAZIONI REALI
+    if (message.includes('business') || message.includes('upstart') || message.includes('idea') || message.includes('startup') || message.includes('validazione')) {
         const servizio = SERVIZI_DATABASE['business-coaching'];
         return `${servizio.emoji} <strong>${servizio.nome}</strong><br><br>
         ${servizio.descrizione}<br><br>
@@ -575,13 +586,14 @@ async function getAndreaAIResponse(userMessage) {
         <strong>📊 Sviluppo:</strong> ${servizio.fasi}<br>
         <strong>🎯 Target:</strong> ${servizio.target}<br><br>
         
-        <strong>🌐 Prova subito:</strong> <a href="${servizio.url}" target="_blank">${servizio.url}</a><br><br>
+        <strong>🌐 Prova subito:</strong><br>
+        <a href="${servizio.url}" target="_blank">upstarter-tf9x.vercel.app</a><br><br>
         
         Hai un'idea di business da validare? Ti aiuto a capire se ha potenziale! 💼🚀`;
     }
     
     // EBOOKS - INFORMAZIONI REALI
-    if (message.includes('ebook') || message.includes('libro') || message.includes('guida')) {
+    if (message.includes('ebook') || message.includes('libro') || message.includes('guida') || message.includes('pdf')) {
         const servizio = SERVIZI_DATABASE['ebooks'];
         return `${servizio.emoji} <strong>${servizio.nome}</strong><br><br>
         ${servizio.descrizione}<br><br>
@@ -599,73 +611,120 @@ async function getAndreaAIResponse(userMessage) {
         Su quale area vorresti iniziare? Fitness, alimentazione o mindset? 📖✨`;
     }
     
-    // INFORMAZIONI GENERALI / CONTATTI
-    if (message.includes('contatt') || message.includes('telefono') || message.includes('whatsapp')) {
-        return `📞 <strong>Ecco come puoi contattarmi:</strong><br><br>
+    // PREZZI - INFORMAZIONI ONESTE E COMPLETE
+    if (message.includes('prezzi') || message.includes('costi') || message.includes('quanto costa') || message.includes('tariffe')) {
+        return `💰 <strong>Ecco tutti i prezzi aggiornati:</strong><br><br>
         
-        <strong>📱 WhatsApp:</strong> ${SERVIZI_DATABASE['personal-training'].contatti.whatsapp}<br>
-        <em>(Rispondo sempre entro 1 ora, anche nei weekend!)</em><br><br>
-        
-        <strong>📧 Email:</strong> ${SERVIZI_DATABASE['personal-training'].contatti.email}<br><br>
-        
-        <strong>📍 Studio:</strong> ${SERVIZI_DATABASE['tribu-studio'].location}<br>
-        <em>(Solo su appuntamento)</em><br><br>
-        
-        <strong>🌐 I miei progetti online:</strong><br>
-        • Personal Training: <a href="${SERVIZI_DATABASE['personal-training'].url}" target="_blank">personaltrainerverona.it</a><br>
-        • Lifestyle Coaching: <a href="${SERVIZI_DATABASE['lifestyle-coaching'].url}" target="_blank">tribucoach.vercel.app</a><br>
-        • MealPrep Planner: <a href="${SERVIZI_DATABASE['mealprep-planner'].url}" target="_blank">mealprep-planner.vercel.app</a><br><br>
-        
-        Il modo più veloce è WhatsApp! Mi piace il contatto diretto e umano. 💪`;
-    }
-    
-    // PREZZI - INFORMAZIONI ONESTE
-    if (message.includes('prezzi') || message.includes('costi') || message.includes('quanto costa')) {
-        return `💰 <strong>Parliamo di investimenti:</strong><br><br>
-        
-        <strong>🏠 Tribù Studio (Personal Training):</strong><br>
-        Contattami per tariffe personalizzate - ogni percorso è su misura!<br><br>
-        
-        <strong>🚀 Lifestyle Coaching:</strong><br>
-        Percorso completo 7 settimane - info dettagliate sulla piattaforma<br><br>
+        <strong>🏠 Personal Training (Tribù Studio):</strong><br>
+        • Individuali: <strong>${SERVIZI_DATABASE['personal-training'].prezzi.individuali}</strong><br>
+        • Coppia: <strong>${SERVIZI_DATABASE['personal-training'].prezzi.coppia}</strong><br>
+        • Miniclass: <strong>${SERVIZI_DATABASE['personal-training'].prezzi.miniclass}</strong><br><br>
         
         <strong>🥗 Pasto Sano:</strong><br>
-        Vedi prezzi aggiornati sul sito - variano per tipo di pasto<br><br>
+        • Pasto completo: <strong>${SERVIZI_DATABASE['pasto-sano'].prezzi.pasto_completo}</strong><br>
+        • Colazione: <strong>${SERVIZI_DATABASE['pasto-sano'].prezzi.colazione}</strong><br>
+        • 🎁 Sconto primo ordine: <strong>${SERVIZI_DATABASE['pasto-sano'].prezzi.sconto_primo_ordine}</strong><br><br>
         
-        <strong>📱 MealPrep Planner:</strong> GRATIS per sempre!<br><br>
+        <strong>📱 App MealPrep Planner:</strong> <strong>GRATIS per sempre!</strong><br><br>
+        
+        <strong>🚀 Coaching Online:</strong> Info su <a href="${SERVIZI_DATABASE['coaching-online'].url}" target="_blank">tornoinforma.it</a><br><br>
         
         <strong>🏆 Best-Trainer:</strong> Directory gratuita, e-commerce in arrivo<br><br>
+        
+        <strong>💼 UpStarter:</strong> Validazione idee business disponibile<br><br>
         
         <strong>💡 Il mio consiglio:</strong> Ogni percorso è personalizzato sulle tue esigenze. Scrivimi su WhatsApp <strong>${SERVIZI_DATABASE['personal-training'].contatti.whatsapp}</strong> e ne parliamo insieme!<br><br>
         
         Quale servizio ti interessa di più? 🎯`;
     }
     
+    // INFORMAZIONI GENERALI / CONTATTI
+    if (message.includes('contatt') || message.includes('telefono') || message.includes('whatsapp') || message.includes('email')) {
+        return `📞 <strong>Ecco come puoi contattarmi:</strong><br><br>
+        
+        <strong>📱 WhatsApp:</strong> <strong>${SERVIZI_DATABASE['personal-training'].contatti.whatsapp}</strong><br>
+        <em>(Rispondo sempre entro 1 ora, anche nei weekend!)</em><br><br>
+        
+        <strong>📧 Email:</strong> ${SERVIZI_DATABASE['personal-training'].contatti.email}<br><br>
+        
+        <strong>📍 Studio:</strong> ${SERVIZI_DATABASE['personal-training'].location}<br>
+        <em>(Solo su appuntamento)</em><br><br>
+        
+        <strong>🌐 I miei progetti online:</strong><br>
+        • Personal Training: <a href="${SERVIZI_DATABASE['personal-training'].url}" target="_blank">tribustudio.it</a><br>
+        • Coaching Online: <a href="${SERVIZI_DATABASE['coaching-online'].url}" target="_blank">tornoinforma.it</a><br>
+        • Pasto Sano: <a href="${SERVIZI_DATABASE['pasto-sano'].url}" target="_blank">pastosano.it</a><br>
+        • MealPrep Planner: <a href="${SERVIZI_DATABASE['mealprep-planner'].url}" target="_blank">mealprep-planner.vercel.app</a><br>
+        • Best-Trainer: <a href="${SERVIZI_DATABASE['best-trainer'].url}" target="_blank">best-trainer-mvp.vercel.app</a><br>
+        • UpStarter: <a href="${SERVIZI_DATABASE['business-coaching'].url}" target="_blank">upstarter-tf9x.vercel.app</a><br><br>
+        
+        Il modo più veloce è WhatsApp! Mi piace il contatto diretto e umano. 💪`;
+    }
+    
     // QUIZ PERSONALIZZATO
-    if (message.includes('quiz') || message.includes('test') || message.includes('quale servizio')) {
+    if (message.includes('quiz') || message.includes('test') || message.includes('quale servizio') || message.includes('consiglio')) {
         return `🎯 <strong>Perfetto! Ti aiuto a scegliere il servizio giusto!</strong><br><br>
         
         Rispondi a queste domande e ti dirò qual è il percorso ideale per te:<br><br>
         
         <strong>1️⃣ Qual è la tua situazione attuale?</strong><br>
         A) Voglio rimettermi in forma fisicamente<br>
-        B) Sono stressato e voglio cambiare vita completamente<br>
-        C) Non ho tempo di cucinare ma voglio mangiare sano<br>
+        B) Non ho tempo di cucinare ma voglio mangiare sano<br>
+        C) Vorrei allenarmi ma non posso venire in studio<br>
         D) Ho un'idea di business da sviluppare<br><br>
         
         <strong>2️⃣ Preferisci:</strong><br>
         A) Supporto in presenza a Verona<br>
-        B) Percorso online strutturato<br>
-        C) Soluzioni pratiche immediate<br>
+        B) Soluzioni pratiche immediate<br>
+        C) Percorso online flessibile<br>
         D) Tools gratuiti per iniziare<br><br>
         
         <strong>3️⃣ Il tuo obiettivo è:</strong><br>
-        A) Trasformazione fisica<br>
-        B) Equilibrio vita-lavoro<br>
-        C) Ottimizzare il tempo<br>
+        A) Trasformazione fisica completa<br>
+        B) Ottimizzare il tempo per mangiare sano<br>
+        C) Allenarmi con flessibilità<br>
         D) Crescita professionale/business<br><br>
         
         Dimmi le tue risposte (es: A-A-A) e ti consiglierò il percorso perfetto! 🚀`;
+    }
+    
+    // GESTIONE RISPOSTE QUIZ
+    if (message.match(/^[a-d]-[a-d]-[a-d]$/i)) {
+        const risposte = message.toUpperCase().split('-');
+        let consiglio = '';
+        
+        // Logica di matching
+        if (risposte.filter(r => r === 'A').length >= 2) {
+            consiglio = `🏠 <strong>Personal Training Tribù Studio</strong><br><br>
+            Perfetto per te! Hai bisogno di trasformazione fisica con supporto diretto.<br><br>
+            • Lezioni individuali personalizzate<br>
+            • Studio privato solo per te<br>
+            • Prezzi da ${SERVIZI_DATABASE['personal-training'].prezzi.individuali}<br><br>
+            📞 Contattami: <strong>${SERVIZI_DATABASE['personal-training'].contatti.whatsapp}</strong>`;
+        } else if (risposte.filter(r => r === 'B').length >= 2) {
+            consiglio = `🥗 <strong>Pasto Sano</strong><br><br>
+            La soluzione ideale per te! Non hai tempo di cucinare ma vuoi mangiare sano.<br><br>
+            • Pasti equilibrati a ${SERVIZI_DATABASE['pasto-sano'].prezzi.pasto_completo}<br>
+            • Pronti in 2 minuti<br>
+            • Ordina su <a href="${SERVIZI_DATABASE['pasto-sano'].url}" target="_blank">pastosano.it</a><br><br>
+            🎁 Primo ordine con sconto del 5%!`;
+        } else if (risposte.filter(r => r === 'C').length >= 2) {
+            consiglio = `🚀 <strong>Coaching Online</strong><br><br>
+            Perfetto per la tua flessibilità! Allenati quando e dove vuoi.<br><br>
+            • Programmi personalizzati<br>
+            • Supporto costante online<br>
+            • Vai su <a href="${SERVIZI_DATABASE['coaching-online'].url}" target="_blank">tornoinforma.it</a><br><br>
+            📱 Il tuo personal trainer sempre con te!`;
+        } else {
+            consiglio = `💼 <strong>UpStarter + Tools Gratuiti</strong><br><br>
+            Inizia con i miei tools gratuiti!<br><br>
+            • <a href="${SERVIZI_DATABASE['mealprep-planner'].url}" target="_blank">MealPrep Planner</a> (GRATIS)<br>
+            • <a href="${SERVIZI_DATABASE['business-coaching'].url}" target="_blank">UpStarter</a> per validare idee<br>
+            • <a href="${SERVIZI_DATABASE['best-trainer'].url}" target="_blank">Best-Trainer</a> per tutorial<br><br>
+            🆓 Tutto gratuito per cominciare!`;
+        }
+        
+        return consiglio + `<br><br>Vuoi approfondire? Scrivimi su WhatsApp al <strong>${SERVIZI_DATABASE['personal-training'].contatti.whatsapp}</strong>! 🎯`;
     }
     
     // RISPOSTA DEFAULT MIGLIORATA
@@ -673,21 +732,21 @@ async function getAndreaAIResponse(userMessage) {
     
     <strong>I miei servizi principali:</strong><br><br>
     
-    💪 <strong>Personal Training</strong> - Nel mio Tribù Studio a Verona<br>
-    🚀 <strong>Lifestyle Coaching</strong> - Percorso digitale 7 settimane<br>
-    🥗 <strong>Pasto Sano</strong> - Pasti freschi pronti<br>
-    📱 <strong>MealPrep Planner</strong> - App gratuita<br>
-    🏆 <strong>Best-Trainer</strong> - Directory PT (e-commerce in arrivo)<br>
+    💪 <strong>Personal Training</strong> - Nel mio Tribù Studio a Verona (da ${SERVIZI_DATABASE['personal-training'].prezzi.individuali})<br>
+    🚀 <strong>Coaching Online</strong> - Il tuo trainer ovunque tu sia<br>
+    🥗 <strong>Pasto Sano</strong> - Pasti freschi pronti (${SERVIZI_DATABASE['pasto-sano'].prezzi.pasto_completo})<br>
+    📱 <strong>MealPrep Planner</strong> - App GRATUITA<br>
+    🏆 <strong>Best-Trainer</strong> - Directory PT e tutorial gratuiti<br>
     💼 <strong>UpStarter</strong> - Validazione idee business<br>
     📚 <strong>eBook</strong> - Guide complete<br><br>
     
     <strong>Cosa ti interessa di più?</strong><br>
-    Dimmi: <em>"Spiegami [nome servizio]"</em> oppure <em>"Fammi il quiz"</em> per trovare quello giusto per te!<br><br>
+    Dimmi: <em>"Spiegami [nome servizio]"</em>, <em>"Fammi il quiz"</em> o <em>"Prezzi"</em><br><br>
     
     📱 WhatsApp diretto: <strong>${SERVIZI_DATABASE['personal-training'].contatti.whatsapp}</strong> 🎯`;
 }
 
-// Chiamata API Claude - SOSTITUITA CON AI LOCALE
+// Chiamata AI locale - SENZA API ESTERNE
 async function callClaudeAPI(userMessage) {
     try {
         console.log('🔄 Chiamata Andrea AI System...', {
@@ -695,7 +754,7 @@ async function callClaudeAPI(userMessage) {
             historyLength: conversationHistory.length
         });
         
-        // Usa il sistema AI locale invece dell'API esterna
+        // Usa il sistema AI locale con dati reali
         const response = await getAndreaAIResponse(userMessage);
         
         console.log('✅ Andrea AI Response:', {
@@ -748,7 +807,7 @@ async function sendMessage() {
         hideTyping();
         
         // Messaggio di errore user-friendly
-        const errorMessage = 'Mi dispiace, ho avuto un problema tecnico. Riprova tra poco o contattami direttamente su WhatsApp al 347 888 1515! 🔧';
+        const errorMessage = `Mi dispiace, ho avuto un problema tecnico. Riprova tra poco o contattami direttamente su WhatsApp al <strong>${SERVIZI_DATABASE['personal-training'].contatti.whatsapp}</strong>! 🔧`;
         addMessage(errorMessage);
         
         console.error('❌ Send message failed:', error);
@@ -914,9 +973,9 @@ function initializeAnimations() {
 // 🚀 INITIALIZATION
 // ======================================
 
-// Funzione di inizializzazione dell'app (chiamata dopo il caricamento dei componenti)
+// Funzione di inizializzazione dell'app
 function initializeApp() {
-    console.log('🚀 Andrea Padoan Landing - Initializing with REAL data...');
+    console.log('🚀 Andrea Padoan Landing - Initializing with VERIFIED data...');
     
     // Avvia stats live (se elementi presenti)
     startLiveStatsUpdates();
@@ -925,7 +984,7 @@ function initializeApp() {
     initializeAnimations();
     
     // Log sessione
-    console.log('✅ Landing page initialized successfully with REAL data!', {
+    console.log('✅ Landing page initialized successfully with VERIFIED data!', {
         sessionId: sessionId,
         timestamp: new Date().toISOString(),
         servizi: Object.keys(SERVIZI_DATABASE).length
@@ -945,7 +1004,7 @@ function initializeApp() {
         }
     });
     
-    console.log('🎯 Real data chat system ready!');
+    console.log('🎯 VERIFIED data chat system ready!');
 }
 
 // ======================================
@@ -961,13 +1020,13 @@ window.addEventListener('error', function(e) {
         const messagesContainer = document.getElementById('messagesContainer');
         if (messagesContainer && isTyping) {
             hideTyping();
-            addMessage('Mi dispiace, ho avuto un problema tecnico. Riprova o contattami su WhatsApp al 347 888 1515! 🔧');
+            addMessage(`Mi dispiace, ho avuto un problema tecnico. Riprova o contattami su WhatsApp al <strong>${SERVIZI_DATABASE['personal-training'].contatti.whatsapp}</strong>! 🔧`);
         }
     }
 });
 
-// Log per debug
-console.log('📁 Andrea Padoan REAL DATA Main Script loaded');
+// Log per debug finale
+console.log('📁 Andrea Padoan VERIFIED DATA Main Script loaded');
 console.log('🔧 Available functions:', [
     'openProject()',
     'openChat()', 
@@ -980,12 +1039,13 @@ console.log('🔧 Available functions:', [
     'showNotification()'
 ]);
 
-console.log('✅ REAL data features:', [
-    '✅ Pasto Sano: Informazioni reali, ritiro studio, 330g pasti',
-    '✅ Best-Trainer: Stato corretto (directory + tutorial, e-commerce in sviluppo)',
-    '✅ Lifestyle Coaching: 7 settimane, tribucoach.vercel.app',
-    '✅ UpStarter: Validazione AI con Claude, tecnologie reali',
-    '✅ Personal Training: Tribù Studio via Albere 27/B',
-    '✅ MealPrep Planner: GRATIS, Next.js app',
-    '✅ Contatti reali: WhatsApp 347 888 1515, email andrea.padoan@gmail.com'
+console.log('✅ VERIFIED data features:', [
+    '✅ Pasto Sano: Prezzi corretti (8.50€), menu reali, pastosano.it',
+    '✅ Personal Training: Prezzi tribustudio.it (45€, 25€, 15€)',
+    '✅ Coaching Online: tornoinforma.it aggiornato',
+    '✅ Best-Trainer: Stato corretto (directory+tutorial, e-commerce in sviluppo)',
+    '✅ MealPrep Planner: GRATIS, app funzionante',
+    '✅ UpStarter: Validazione AI reale',
+    '✅ Contatti reali: WhatsApp 347 888 1515, email info@tribustudio.it',
+    '✅ ZERO informazioni inventate!'
 ]);
